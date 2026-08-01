@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = 'C:/Users/Administrator/WorkBuddy/cesar_agent_fold/kids-books';
-const books = ['seed', 'rocket', 'penguin', 'hsr'];
+const books = ['seed', 'rocket', 'penguin', 'hsr', 'station'];
 let fail = 0;
 
 for (const id of books) {
