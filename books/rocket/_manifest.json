@@ -1,0 +1,426 @@
+{
+  "book": "rocket",
+  "audioDir": "audio",
+  "entries": [
+    {
+      "id": "page_00_en",
+      "text": "How a Rocket Flies to Space",
+      "lang": "en"
+    },
+    {
+      "id": "page_00_zh",
+      "text": "火箭飞向太空",
+      "lang": "zh"
+    },
+    {
+      "id": "page_01_en",
+      "text": "A rocket is made of parts. The pointy nose cone cuts through the air. A window lets us peek outside. The fuel tank holds the fuel, the engine makes fire, and the fins keep it steady.",
+      "lang": "en"
+    },
+    {
+      "id": "page_01_zh",
+      "text": "火箭是由许多部件组成的。尖尖的整流罩帮它穿过空气，舷窗让我们往外看。燃料箱装燃料，发动机生火，尾翼让它飞得稳稳的。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_02_en",
+      "text": "Inside, the rocket carries fuel. The engine burns the fuel into a very hot fire. The hot fire wants to escape, so it shoots out the bottom fast.",
+      "lang": "en"
+    },
+    {
+      "id": "page_02_zh",
+      "text": "火箭里面装着燃料。发动机把燃料烧成炽热的火。火想跑出去，就飞快地从底部喷出来。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_03_en",
+      "text": "Before it leaves the ground, people count down: 3, 2, 1… GO! Everyone checks that the rocket is ready, then presses the launch button.",
+      "lang": "en"
+    },
+    {
+      "id": "page_03_zh",
+      "text": "火箭离地前，人们会倒计时：3、2、1……发射！大家确认火箭准备好了，就按下发射按钮。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_04_en",
+      "text": "Fire blasts down out of the bottom. The rocket goes up, up, up! The push of the fire is stronger than the pull of gravity, so the rocket lifts off.",
+      "lang": "en"
+    },
+    {
+      "id": "page_04_zh",
+      "text": "火焰从底部往下喷。火箭向上、向上飞！火的推力比地球的引力更强，所以火箭就升空了。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_05_en",
+      "text": "Why does it go up? When the engine pushes hot gas DOWN, the rocket is pushed UP. This is a rule of pushing: push one way, and you move the other way. Try letting go of a blown-up balloon!",
+      "lang": "en"
+    },
+    {
+      "id": "page_05_zh",
+      "text": "为什么它会往上飞？当发动机把热气往“下”推，火箭就被推着往“上”走。这是一条用力的规律：往一个方向推，自己就往反方向走。你松开吹饱的气球试试看！",
+      "lang": "zh"
+    },
+    {
+      "id": "page_06_en",
+      "text": "Rockets have stages. When the lower fuel tank is empty, it falls away. The rocket becomes lighter and can fly higher and faster into space.",
+      "lang": "en"
+    },
+    {
+      "id": "page_06_zh",
+      "text": "火箭有好几级。当下方的燃料箱用完，它就掉下去。火箭变轻了，就能飞得更高、更快，冲向太空。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_07_en",
+      "text": "Soon the rocket is above the air, in space. There is no air up here, so everything floats. Earth looks small and beautiful from far away.",
+      "lang": "en"
+    },
+    {
+      "id": "page_07_zh",
+      "text": "很快，火箭飞到了空气之上，进入了太空。这里没有空气，所有东西都漂浮着。从远处看，地球又小又美丽。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_08_en",
+      "text": "High above Earth, the rocket lets go of a satellite. The satellite keeps flying around and around Earth. That round trip is called an orbit.",
+      "lang": "en"
+    },
+    {
+      "id": "page_08_zh",
+      "text": "在地球高空，火箭把卫星放了出来。卫星一直绕着地球飞来飞去。这种绕圈的飞行叫做“轨道”。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_09_en",
+      "text": "What does the satellite do? Its camera takes pictures of Earth. Its antenna sends TV and phone signals. Its solar panels catch sunlight to make power.",
+      "lang": "en"
+    },
+    {
+      "id": "page_09_zh",
+      "text": "卫星是干什么的？它的相机给地球拍照，天线发送电视和电话信号，太阳能板收集阳光来产生能量。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_10_en",
+      "text": "When its job is done, the satellite comes home. It falls back through the air. Rubbing the air makes it very hot, but a heat shield protects it from the flame.",
+      "lang": "en"
+    },
+    {
+      "id": "page_10_zh",
+      "text": "工作完成后，卫星要回家了。它穿过空气往回掉。和空气摩擦会变得很烫，但防热盾保护它不被火焰烤坏。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_11_en",
+      "text": "A parachute opens above it, or soft engines slow it down. The capsule lands gently and safely back on the ground.",
+      "lang": "en"
+    },
+    {
+      "id": "page_11_zh",
+      "text": "头顶打开降落伞，或者用柔和的发动机让它慢下来。返回舱轻轻、稳稳地落回地面。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_12_en",
+      "text": "Welcome home, little satellite! It is back on our blue and green Earth, where it can rest after its big trip to space.",
+      "lang": "en"
+    },
+    {
+      "id": "page_12_zh",
+      "text": "欢迎回家，小卫星！它回到了蓝绿相间的地球，在太空大旅行之后可以好好休息了。",
+      "lang": "zh"
+    },
+    {
+      "id": "page_13_en",
+      "text": "Great job, little explorer! You learned how a rocket is built, how it lifts off, and how a satellite flies home.",
+      "lang": "en"
+    },
+    {
+      "id": "page_13_zh",
+      "text": "做得好，小探险家！你学会了火箭怎么造、怎么升空，还有卫星怎么飞回家。",
+      "lang": "zh"
+    },
+    {
+      "id": "word_nose_cone_en",
+      "text": "Nose cone",
+      "lang": "en"
+    },
+    {
+      "id": "word_nose_cone_zh",
+      "text": "整流罩",
+      "lang": "zh"
+    },
+    {
+      "id": "word_window_en",
+      "text": "Window",
+      "lang": "en"
+    },
+    {
+      "id": "word_window_zh",
+      "text": "舷窗",
+      "lang": "zh"
+    },
+    {
+      "id": "word_fuel_tank_en",
+      "text": "Fuel tank",
+      "lang": "en"
+    },
+    {
+      "id": "word_fuel_tank_zh",
+      "text": "燃料箱",
+      "lang": "zh"
+    },
+    {
+      "id": "word_engine_en",
+      "text": "Engine",
+      "lang": "en"
+    },
+    {
+      "id": "word_engine_zh",
+      "text": "发动机",
+      "lang": "zh"
+    },
+    {
+      "id": "word_fins_en",
+      "text": "Fins",
+      "lang": "en"
+    },
+    {
+      "id": "word_fins_zh",
+      "text": "尾翼",
+      "lang": "zh"
+    },
+    {
+      "id": "word_fuel_en",
+      "text": "Fuel",
+      "lang": "en"
+    },
+    {
+      "id": "word_fuel_zh",
+      "text": "燃料",
+      "lang": "zh"
+    },
+    {
+      "id": "word_flame_en",
+      "text": "Flame",
+      "lang": "en"
+    },
+    {
+      "id": "word_flame_zh",
+      "text": "火焰",
+      "lang": "zh"
+    },
+    {
+      "id": "word_countdown_en",
+      "text": "Countdown",
+      "lang": "en"
+    },
+    {
+      "id": "word_countdown_zh",
+      "text": "倒计时",
+      "lang": "zh"
+    },
+    {
+      "id": "word_launch_button_en",
+      "text": "Launch button",
+      "lang": "en"
+    },
+    {
+      "id": "word_launch_button_zh",
+      "text": "发射按钮",
+      "lang": "zh"
+    },
+    {
+      "id": "word_rocket_en",
+      "text": "Rocket",
+      "lang": "en"
+    },
+    {
+      "id": "word_rocket_zh",
+      "text": "火箭",
+      "lang": "zh"
+    },
+    {
+      "id": "word_hot_gas_en",
+      "text": "Hot gas",
+      "lang": "en"
+    },
+    {
+      "id": "word_hot_gas_zh",
+      "text": "热气",
+      "lang": "zh"
+    },
+    {
+      "id": "word_rocket_flies_up_en",
+      "text": "Rocket flies up",
+      "lang": "en"
+    },
+    {
+      "id": "word_rocket_flies_up_zh",
+      "text": "火箭往上飞",
+      "lang": "zh"
+    },
+    {
+      "id": "word_upper_stage_en",
+      "text": "Upper stage",
+      "lang": "en"
+    },
+    {
+      "id": "word_upper_stage_zh",
+      "text": "上面一级",
+      "lang": "zh"
+    },
+    {
+      "id": "word_empty_tank_en",
+      "text": "Empty tank",
+      "lang": "en"
+    },
+    {
+      "id": "word_empty_tank_zh",
+      "text": "空燃料箱",
+      "lang": "zh"
+    },
+    {
+      "id": "word_earth_en",
+      "text": "Earth",
+      "lang": "en"
+    },
+    {
+      "id": "word_earth_zh",
+      "text": "地球",
+      "lang": "zh"
+    },
+    {
+      "id": "word_stars_en",
+      "text": "Stars",
+      "lang": "en"
+    },
+    {
+      "id": "word_stars_zh",
+      "text": "星星",
+      "lang": "zh"
+    },
+    {
+      "id": "word_satellite_en",
+      "text": "Satellite",
+      "lang": "en"
+    },
+    {
+      "id": "word_satellite_zh",
+      "text": "卫星",
+      "lang": "zh"
+    },
+    {
+      "id": "word_orbit_en",
+      "text": "Orbit",
+      "lang": "en"
+    },
+    {
+      "id": "word_orbit_zh",
+      "text": "轨道",
+      "lang": "zh"
+    },
+    {
+      "id": "word_camera_en",
+      "text": "Camera",
+      "lang": "en"
+    },
+    {
+      "id": "word_camera_zh",
+      "text": "相机",
+      "lang": "zh"
+    },
+    {
+      "id": "word_antenna_en",
+      "text": "Antenna",
+      "lang": "en"
+    },
+    {
+      "id": "word_antenna_zh",
+      "text": "天线",
+      "lang": "zh"
+    },
+    {
+      "id": "word_solar_panel_en",
+      "text": "Solar panel",
+      "lang": "en"
+    },
+    {
+      "id": "word_solar_panel_zh",
+      "text": "太阳能板",
+      "lang": "zh"
+    },
+    {
+      "id": "word_hot_air_en",
+      "text": "Hot air",
+      "lang": "en"
+    },
+    {
+      "id": "word_hot_air_zh",
+      "text": "热空气",
+      "lang": "zh"
+    },
+    {
+      "id": "word_heat_shield_en",
+      "text": "Heat shield",
+      "lang": "en"
+    },
+    {
+      "id": "word_heat_shield_zh",
+      "text": "防热盾",
+      "lang": "zh"
+    },
+    {
+      "id": "word_parachute_en",
+      "text": "Parachute",
+      "lang": "en"
+    },
+    {
+      "id": "word_parachute_zh",
+      "text": "降落伞",
+      "lang": "zh"
+    },
+    {
+      "id": "word_capsule_en",
+      "text": "Capsule",
+      "lang": "en"
+    },
+    {
+      "id": "word_capsule_zh",
+      "text": "返回舱",
+      "lang": "zh"
+    },
+    {
+      "id": "word_home_en",
+      "text": "Home",
+      "lang": "en"
+    },
+    {
+      "id": "word_home_zh",
+      "text": "家",
+      "lang": "zh"
+    },
+    {
+      "id": "word_thrust_en",
+      "text": "Thrust",
+      "lang": "en"
+    },
+    {
+      "id": "word_thrust_zh",
+      "text": "推力",
+      "lang": "zh"
+    },
+    {
+      "id": "word_stage_en",
+      "text": "Stage",
+      "lang": "en"
+    },
+    {
+      "id": "word_stage_zh",
+      "text": "分级",
+      "lang": "zh"
+    }
+  ]
+}
