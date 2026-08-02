@@ -7,3 +7,7 @@ books/*/_manifest.json
 
 # Dependencies (managed runtimes keep these outside the repo)
 node_modules/
+
+# EdgeOne Pages CLI artifacts (build cache / local config, never commit)
+.edgeone/
+.env
