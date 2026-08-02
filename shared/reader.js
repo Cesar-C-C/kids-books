@@ -83,8 +83,19 @@ window.Reader = {
     audioEl.preload = 'auto';
     const pad2 = n => String(n).padStart(2,'0');
     const sanitize = s => (s||'').trim().toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
-    const pageUrl  = (i,lang) => `${BOOK.audioDir}/page_${pad2(i)}_${lang}.mp3`;
-    const wordUrl  = (name,lang) => `${BOOK.audioDir}/word_${sanitize(name)}_${lang}.mp3`;
+
+    /* ---------- CDN acceleration (jsDelivr mirrors GitHub repo) ----------
+       国内访问 github.io 较慢（无国内节点+偶发限速），jsDelivr 在国内有 CDN 节点。
+       资源 URL 改造规则：book.js 里所有相对路径（assets/xx.webp, audio/xx.mp3）
+       拼成 CDN_BASE + 'books/' + BOOK.id + '/' + 相对路径。
+       绝对 URL 原样透传（万一以后要切回或者用混合来源）。
+       注意：jsDelivr 缓存是按 URL 永久缓存（直到 purge），文件名变了天然绕开缓存
+       —— 所以 PNG->WebP 改名后自动用新文件，不会撞 CDN 老缓存。 */
+    const CDN_BASE = 'https://cdn.jsdelivr.net/gh/Cesar-C-C/kids-books@main/';
+    const abs = p => (/^https?:\/\//i.test(p) ? p : (CDN_BASE + 'books/' + BOOK.id + '/' + p));
+
+    const pageUrl  = (i,lang) => abs(`${BOOK.audioDir}/page_${pad2(i)}_${lang}.mp3`);
+    const wordUrl  = (name,lang) => abs(`${BOOK.audioDir}/word_${sanitize(name)}_${lang}.mp3`);
 
     function playAudio(url, lang, fallbackText){ if(settings.muted) return;
       audioEl.playbackRate = settings.speed;
@@ -150,7 +161,7 @@ window.Reader = {
         div.className='page'+(i===0?' active':'');
         const ovSVG = (p.ov && OVL[p.ov]) ? OVL[p.ov]() : '';
         if(p.cover){
-          div.innerHTML = `<div class="art"><img class="base" src="${BOOK.coverImg}" alt=""></div>
+          div.innerHTML = `<div class="art"><img class="base" src="${abs(BOOK.coverImg)}" alt=""></div>
             <div class="cover-text">
               <h1>${BOOK.title}</h1>
               <p class="sub-zh" style="font-size:22px; margin:6px 0 0;">${BOOK.titleZh||''}</p>
@@ -160,7 +171,7 @@ window.Reader = {
             </div>`;
         } else if(p.glossary){
           const cards=p.glossary.map(g=>`<div class="gcard" data-name="${g.en}" data-namezh="${g.zh||''}" data-fact="${g.def||''}" data-factzh="${g.defZh||''}"><b>${g.en}</b><span class="gzh">${g.zh||''}</span><span>${g.def||''}</span></div>`).join('');
-          const art = p.img?`<div class="art"><img class="base" src="${p.img}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
+          const art = p.img?`<div class="art"><img class="base" src="${abs(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
           div.innerHTML = art + `<div class="text">
               <button class="speak" title="朗读">🔊</button>
               <p class="lang-block en" data-lang="en">${p.en}</p>
@@ -168,7 +179,7 @@ window.Reader = {
               <div class="glossary">${cards}</div>
             </div>`;
         } else {
-          const art = p.img?`<div class="art"><img class="base" src="${p.img}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
+          const art = p.img?`<div class="art"><img class="base" src="${abs(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
           const info = p.interactive?`<div class="info">点一点发光的小点，认识它的名字！🌟</div>`:'';
           div.innerHTML = art + info + `<div class="text">
               <button class="speak" title="朗读">🔊</button>

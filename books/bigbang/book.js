@@ -7,58 +7,58 @@ window.BOOK = {
   subtitleZh:'给好奇宝宝看的太空故事',
   age:'4-8 岁',
   audioDir:'audio',
-  coverImg:'assets/00_cover.png'
+  coverImg:'assets/00_cover.webp'
 };
 
 window.PAGES = [
   { cover:true },
 
-  { img:'assets/01_singularity.png',
+  { img:'assets/01_singularity.webp',
     en:"Long, long ago, everything in the whole universe was squeezed into one tiny, super-hot point. We call it a <span class='word'>singularity</span>.",
     zh:"很久很久以前，宇宙里所有的东西都被挤在一个又小又超级热的点里。我们叫它「奇点」。",
     ov:'singularity', interactive:true },
 
-  { img:'assets/03_bang.png',
+  { img:'assets/03_bang.webp',
     en:"Then — BOOM! The universe was born in a giant, fiery explosion we call the <span class='word'>Big Bang</span>.",
     zh:"然后——砰！宇宙在一场巨大的火热爆炸中诞生了，我们叫它「大爆炸」。",
     ov:'bigbang', interactive:true },
 
-  { img:'assets/02_expand.png',
+  { img:'assets/02_expand.webp',
     en:"Space began to stretch, bigger and bigger, like a balloon slowly getting larger. The universe was <span class='word'>expanding</span>.",
     zh:"空间开始拉伸，越变越大，就像一个慢慢吹大的气球。宇宙正在「膨胀」。",
     ov:'expanding', interactive:true },
 
-  { img:'assets/04_light.png',
+  { img:'assets/04_light.webp',
     en:"Tiny bits of energy turned into the first <span class='word'>light</span>, filling space with a warm, gentle glow.",
     zh:"小小的能量变成了最早的「光」，让宇宙充满了温暖柔和的光。",
     ov:'light', interactive:true },
 
-  { img:'assets/05_particles.png',
+  { img:'assets/05_particles.webp',
     en:"As the universe cooled, tiny <span class='word'>particles</span> began to stick together, like cosmic building blocks.",
     zh:"宇宙慢慢变凉，小小的「粒子」开始黏在一起，就像宇宙的积木。",
     ov:'particles', interactive:true },
 
-  { img:'assets/06_star.png',
+  { img:'assets/06_star.webp',
     en:"Those clumps grew hotter and hotter until they shone as bright <span class='word'>stars</span>.",
     zh:"这些团块越变越热，最后变成了明亮发光的「恒星」。",
     ov:'star', interactive:true },
 
-  { img:'assets/07_galaxy.png',
+  { img:'assets/07_galaxy.webp',
     en:"Many stars gathered into beautiful, spinning groups called <span class='word'>galaxies</span>.",
     zh:"许多恒星聚在一起，组成了美丽的旋转大家庭，叫做「星系」。",
     ov:'galaxy', interactive:true },
 
-  { img:'assets/08_solar.png',
+  { img:'assets/08_solar.webp',
     en:"In one galaxy, our <span class='word'>Sun</span> formed, with little worlds like <span class='word'>Earth</span> traveling around it.",
     zh:"在一个星系里，我们的「太阳」形成了，还有像「地球」这样的小星球绕着它转。",
     ov:'solar', interactive:true },
 
-  { img:'assets/09_universe.png',
+  { img:'assets/09_universe.webp',
     en:"Today the <span class='word'>universe</span> is huge and full of stars, galaxies, and wonderful surprises.",
     zh:"今天，「宇宙」浩瀚无垠，充满了恒星、星系和等待发现的奇妙惊喜。",
     ov:'universe', interactive:true },
 
-  { img:'assets/10_vocab.png',
+  { img:'assets/10_vocab.webp',
     en:"Great job! You just learned how the universe began. Tap the cards to hear the space words again!",
     zh:"太棒了！你刚学会了宇宙是怎么开始的。点一点卡片，再听一遍太空词汇吧！",
     ov:null, interactive:false,
