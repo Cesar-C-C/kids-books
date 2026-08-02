@@ -21,7 +21,7 @@ window.OVL = {
   hsr_04: () => svgWrap(
     partSVG({px:410,py:340,lx:120,ly:340,anc:'end',name:'Passengers',nameZh:'乘客',fact:'sit comfortably inside',factZh:'舒适地坐在里面'}) +
     partSVG({px:590,py:270,lx:900,ly:270,anc:'start',name:'Carriage',nameZh:'车厢',fact:'a long connected room',factZh:'一节长长的连接房间'}) +
-    partSVG({px:400,py:420,lx:120,ly:420,anc:'end',name:'Seats',nameZh:'座椅',fact:'soft chairs for riders',factZh:'给乘客坐的软椅'})
+    partSVG({px: 550,py: 460,lx:120,ly:420,anc:'end',name:'Seats',nameZh:'座椅',fact:'soft chairs for riders',factZh:'给乘客坐的软椅'})
   ),
   hsr_05: () => svgWrap(
     partSVG({px:320,py:520,lx:120,ly:520,anc:'end',name:'Track',nameZh:'铁轨',fact:'steel rails for wheels',factZh:'给车轮跑的钢轨'}) +
@@ -34,14 +34,14 @@ window.OVL = {
     partSVG({px:500,py:450,lx:820,ly:450,anc:'start',name:'Train body',nameZh:'车身',fact:'uses the power to move',factZh:'用电力前进'})
   ),
   hsr_07: () => svgWrap(
-    partSVG({px:320,py:470,lx:120,ly:470,anc:'end',name:'Wheels',nameZh:'车轮',fact:'turned by electric motors',factZh:'由电动机带动'}) +
+    partSVG({px: 400,py: 600,lx:120,ly:470,anc:'end',name:'Wheels',nameZh:'车轮',fact:'turned by electric motors',factZh:'由电动机带动'}) +
     partSVG({px:190,py:340,lx:120,ly:340,anc:'end',name:'Lightning',nameZh:'电',fact:'electric energy in motion',factZh:'运动中的电能'}) +
     partSVG({px:800,py:310,lx:920,ly:310,anc:'start',name:'Tunnel',nameZh:'隧道',fact:'a dark mountain passage',factZh:'穿山的黑暗通道'})
   ),
   hsr_08: () => svgWrap(
-    partSVG({px:350,py:430,lx:120,ly:430,anc:'end',name:'Bridge',nameZh:'桥梁',fact:'crosses over the river',factZh:'横跨河流'}) +
+    partSVG({px: 350,py: 500,lx:120,ly:430,anc:'end',name:'Bridge',nameZh:'桥梁',fact:'crosses over the river',factZh:'横跨河流'}) +
     partSVG({px:430,py:545,lx:120,ly:545,anc:'end',name:'River',nameZh:'河流',fact:'flows under the bridge',factZh:'在桥下流淌'}) +
-    partSVG({px:780,py:350,lx:920,ly:350,anc:'start',name:'Tunnel',nameZh:'隧道',fact:'goes through the mountain',factZh:'穿过山体'})
+    partSVG({px: 1000,py: 400,lx:920,ly:350,anc:'start',name:'Tunnel',nameZh:'隧道',fact:'goes through the mountain',factZh:'穿过山体'})
   ),
   hsr_09: () => svgWrap(
     partSVG({px:420,py:480,lx:160,ly:480,anc:'end',name:'Train',nameZh:'高铁',fact:'coming out of the tunnel',factZh:'从隧道里出来'}) +

@@ -67,7 +67,7 @@ window.OVL = {
   station_orbit(){
     return svgWrap(
       partSVG({px:600, py:350, lx:880, ly:280, anc:'start', name:'Space station', nameZh:'太空站', fact:'always falling, but flying so fast it circles Earth', factZh:'一直往下掉，但飞太快，永远绕地球转'}) +
-      partSVG({px:250, py:100, lx:130, ly:140, anc:'end',  name:'Orbit', nameZh:'轨道', fact:'the round path the station follows', factZh:'太空站走的圆圆路线'}) +
+      partSVG({px: 1100, py: 80, lx:130, ly:140, anc:'end',  name:'Orbit', nameZh:'轨道', fact:'the round path the station follows', factZh:'太空站走的圆圆路线'}) +
       partSVG({px:1100, py:700, lx:915, ly:610, anc:'start', name:'Earth', nameZh:'地球', fact:'the planet the station circles around', factZh:'太空站绕着转的星球'})
     );
   },

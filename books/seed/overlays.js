@@ -19,7 +19,7 @@ window.OVL = {
   ),
   seed_04: () => svgWrap(
     partSVG({px:520,py:180,lx:670,ly:180,anc:'start',name:'Roots',nameZh:'根',fact:'grow down to hold the plant',factZh:'往下长，紧紧抓住植物'}) +
-    partSVG({px:420,py:520,lx:280,ly:520,anc:'end',name:'Stone',nameZh:'石头',fact:'roots grow around it',factZh:'根会绕开它生长'}) +
+    partSVG({px: 570,py: 580,lx:280,ly:520,anc:'end',name:'Stone',nameZh:'石头',fact:'roots grow around it',factZh:'根会绕开它生长'}) +
     partSVG({px:700,py:580,lx:840,ly:580,anc:'start',name:'Worm',nameZh:'蚯蚓',fact:'makes tunnels in the soil',factZh:'在土里钻出通道'})
   ),
   seed_05: () => svgWrap(
@@ -50,7 +50,7 @@ window.OVL = {
   ),
   seed_11: () => svgWrap(
     partSVG({px:450,py:300,lx:300,ly:300,anc:'end',name:'Tree',nameZh:'大树',fact:'gives us fresh air',factZh:'给我们新鲜空气'}) +
-    partSVG({px:650,py:550,lx:800,ly:550,anc:'start',name:'Child',nameZh:'小朋友',fact:'loves shade and food from plants',factZh:'喜欢树荫和植物的食物'}) +
+    partSVG({px: 800,py:550,lx:800,ly:550,anc:'start',name:'Child',nameZh:'小朋友',fact:'loves shade and food from plants',factZh:'喜欢树荫和植物的食物'}) +
     partSVG({px:180,py:650,lx:80,ly:650,anc:'end',name:'Vegetables',nameZh:'蔬菜',fact:'plants become yummy food',factZh:'植物变成美味的食物'})
   )
 };

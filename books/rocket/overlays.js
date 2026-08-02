@@ -103,7 +103,7 @@ window.OVL = {
   rocket_home(){
     return svgWrap(
       partSVG({px:500, py:420, lx:730, ly:420, anc:'start', name:'Earth', nameZh:'地球', fact:'our blue and green home', factZh:'我们蓝绿相间的家'}) +
-      partSVG({px:420, py:480, lx:130, ly:520, anc:'end',  name:'Home', nameZh:'家', fact:'the satellite is back where it belongs', factZh:'卫星回到了属于它的地方'})
+      partSVG({px: 770, py: 410, lx:130, ly:520, anc:'end',  name:'Home', nameZh:'家', fact:'the satellite is back where it belongs', factZh:'卫星回到了属于它的地方'})
     );
   }
 };

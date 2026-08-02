@@ -33,7 +33,7 @@ window.OVL = {
   angler(){
     const parts=[
       {name:'Anglerfish', nameZh:'鮟鱇鱼', fact:'A deep-sea fish with a glowing lure to find food.', factZh:'鮟鱇鱼住在深海，用发光的小灯找食物。', px:500,py:460, lx:200,ly:120, anc:'start'},
-      {name:'Lure', nameZh:'小灯', fact:'The glowing dot on its head is like a tiny flashlight.', factZh:'它头上的小灯就像一支小手电筒。', px:530,py:150, lx:800,ly:120, anc:'end'},
+      {name:'Lure', nameZh:'小灯', fact:'The glowing dot on its head is like a tiny flashlight.', factZh:'它头上的小灯就像一支小手电筒。', px: 700,py: 170, lx:800,ly:120, anc:'end'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
   },

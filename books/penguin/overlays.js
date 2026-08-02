@@ -12,7 +12,7 @@ window.OVL = {
   penguin_02: () => svgWrap(
     partSVG({px:320,py:600,lx:130,ly:600,anc:'end',name:'Penguins',nameZh:'企鹅',fact:'a big happy group',factZh:'一个快乐的大家庭'}) +
     partSVG({px:820,py:290,lx:900,ly:290,anc:'start',name:'Iceberg',nameZh:'冰山',fact:'a giant floating ice mountain',factZh:'巨大的漂浮冰山'}) +
-    partSVG({px:480,py:100,lx:350,ly:80,anc:'end',name:'Mountains',nameZh:'雪山',fact:'snowy peaks behind',factZh:'后面的雪峰'})
+    partSVG({px: 480,py: 180,lx:350,ly:80,anc:'end',name:'Mountains',nameZh:'雪山',fact:'snowy peaks behind',factZh:'后面的雪峰'})
   ),
   penguin_03: () => svgWrap(
     partSVG({px:600,py:500,lx:760,ly:500,anc:'start',name:'Chick',nameZh:'企鹅宝宝',fact:'a fluffy baby penguin',factZh:'毛茸茸的小企鹅'}) +
