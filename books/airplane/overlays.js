@@ -13,9 +13,9 @@ window.OVL = {
   },
   fuselage(){
     const parts=[
-      {name:'Cockpit', nameZh:'驾驶舱', fact:'the front room where pilots fly the plane.', factZh:'飞机最前面的驾驶舱，飞行员在这里开飞机。', px:180,py:329, lx:80,ly:80, anc:'start'},
-      {name:'Cabin', nameZh:'客舱', fact:'where passengers sit (above the floor).', factZh:'乘客坐的地方（在地板上层）。', px:500,py:309, lx:500,ly:60, anc:'middle'},
-      {name:'Cargo hold', nameZh:'货舱', fact:'the space below the floor for bags and boxes.', factZh:'地板下面装行李和箱子的空间。', px:752,py:310, lx:900,ly:80, anc:'end'},
+      {name:'Cockpit', nameZh:'驾驶舱', fact:'the front room where pilots fly the plane.', factZh:'飞机最前面的驾驶舱，飞行员在这里开飞机。', px:290,py:460, lx:120,ly:380, anc:'start'},
+      {name:'Cabin', nameZh:'客舱', fact:'where passengers sit (above the floor).', factZh:'乘客坐的地方（在地板上层）。', px:600,py:490, lx:520,ly:60, anc:'middle'},
+      {name:'Cargo hold', nameZh:'货舱', fact:'the space below the floor for bags and boxes.', factZh:'地板下面装行李和箱子的空间。', px:910,py:460, lx:920,ly:380, anc:'end'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
   },
