@@ -2,12 +2,12 @@
 window.OVL = {
   overview(){
     const parts=[
-      {name:'Tail', nameZh:'尾翼', fact:'keeps the plane steady and helps it turn left or right.', factZh:'让飞机保持平稳，并帮助它左右转弯。', px:229,py:230, lx:120,ly:80, anc:'start'},
-      {name:'Fuselage', nameZh:'机身', fact:'the long body that carries pilots, passengers and bags.', factZh:'长长的机身，载着飞行员、乘客和行李。', px:580,py:310, lx:500,ly:60, anc:'middle'},
-      {name:'Cockpit', nameZh:'驾驶舱', fact:'the front room where the pilots fly the plane.', factZh:'飞机最前面的驾驶舱，飞行员在这里开飞机。', px:785,py:318, lx:900,ly:80, anc:'end'},
-      {name:'Wing', nameZh:'机翼', fact:'makes LIFT — the upward push that holds the plane in the sky.', factZh:'产生升力——把飞机托在空中的向上力量。', px:204,py:351, lx:120,ly:620, anc:'start'},
-      {name:'Engine', nameZh:'引擎', fact:'burns fuel and pushes air BACK to make THRUST (forward push).', factZh:'燃烧燃料、把空气向后推，从而产生推力（向前的力量）。', px:503,py:431, lx:500,ly:640, anc:'middle'},
-      {name:'Landing gear', nameZh:'起落架', fact:'the wheels that come DOWN for takeoff and landing, and fold UP in the air.', factZh:'就是轮子，起飞和降落时放下，在空中收起。', px:783,py:443, lx:880,ly:620, anc:'end'},
+      {name:'Tail', nameZh:'尾翼', fact:'keeps the plane steady and helps it turn left or right.', factZh:'让飞机保持平稳，并帮助它左右转弯。', px:310,py:250, lx:140,ly:140, anc:'start'},
+      {name:'Fuselage', nameZh:'机身', fact:'the long body that carries pilots, passengers and bags.', factZh:'长长的机身，载着飞行员、乘客和行李。', px:580,py:400, lx:500,ly:60, anc:'middle'},
+      {name:'Cockpit', nameZh:'驾驶舱', fact:'the front room where the pilots fly the plane.', factZh:'飞机最前面的驾驶舱，飞行员在这里开飞机。', px:960,py:350, lx:880,ly:140, anc:'end'},
+      {name:'Wing', nameZh:'机翼', fact:'makes LIFT — the upward push that holds the plane in the sky.', factZh:'产生升力——把飞机托在空中的向上力量。', px:320,py:420, lx:140,ly:620, anc:'start'},
+      {name:'Engine', nameZh:'引擎', fact:'burns fuel and pushes air BACK to make THRUST (forward push).', factZh:'燃烧燃料、把空气向后推，从而产生推力（向前的力量）。', px:570,py:520, lx:500,ly:640, anc:'middle'},
+      {name:'Landing gear', nameZh:'起落架', fact:'the wheels that come DOWN for takeoff and landing, and fold UP in the air.', factZh:'就是轮子，起飞和降落时放下，在空中收起。', px:920,py:580, lx:880,ly:620, anc:'end'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
   },
@@ -21,8 +21,8 @@ window.OVL = {
   },
   wing(){
     const parts=[
-      {name:'Wing', nameZh:'机翼', fact:'the big surface that holds the plane up in the air.', factZh:'把飞机托在空中的巨大翼面。', px:420,py:350, lx:120,ly:120, anc:'start'},
-      {name:'Aileron', nameZh:'副翼', fact:'a small hinged flap on the back edge that helps the plane roll and turn.', factZh:'机翼后缘的小襟翼，帮助飞机滚转和转弯。', px:720,py:370, lx:880,ly:620, anc:'end'},
+      {name:'Wing', nameZh:'机翼', fact:'the big surface that holds the plane up in the air.', factZh:'把飞机托在空中的巨大翼面。', px:500,py:350, lx:120,ly:120, anc:'start'},
+      {name:'Aileron', nameZh:'副翼', fact:'a small hinged flap on the back edge that helps the plane roll and turn.', factZh:'机翼后缘的小襟翼，帮助飞机滚转和转弯。', px:920,py:400, lx:880,ly:620, anc:'end'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
   },
