@@ -90,16 +90,33 @@ window.Reader = {
        拼成 CDN_BASE + 'books/' + BOOK.id + '/' + 相对路径。
        绝对 URL 原样透传（万一以后要切回或者用混合来源）。
        注意：jsDelivr 缓存是按 URL 永久缓存（直到 purge），文件名变了天然绕开缓存
-       —— 所以 PNG->WebP 改名后自动用新文件，不会撞 CDN 老缓存。 */
+       —— 所以 PNG->WebP 改名后自动用新文件，不会撞 CDN 老缓存。
+       CDN 失败回退：若 CDN 边缘偶发不可达（401/网络抖动），自动回退到同源
+       GitHub Pages（相对路径），保证阅读器永不因 CDN 抽风而白屏。 */
     const CDN_BASE = 'https://cdn.jsdelivr.net/gh/Cesar-C-C/kids-books@main/';
+    const fallbackUrl = p => ('books/' + BOOK.id + '/' + p);
     const abs = p => (/^https?:\/\//i.test(p) ? p : (CDN_BASE + 'books/' + BOOK.id + '/' + p));
+    const absWithFallback = p => {
+      const url = abs(p);
+      const fb = fallbackUrl(p);
+      if (/^https?:\/\//i.test(p)) return url;   // absolute: no fallback possible
+      return `${url}" onerror="this.onerror=null;this.src='${fb}'`;
+    };
 
     const pageUrl  = (i,lang) => abs(`${BOOK.audioDir}/page_${pad2(i)}_${lang}.mp3`);
     const wordUrl  = (name,lang) => abs(`${BOOK.audioDir}/word_${sanitize(name)}_${lang}.mp3`);
 
     function playAudio(url, lang, fallbackText){ if(settings.muted) return;
       audioEl.playbackRate = settings.speed;
-      audioEl.onerror = ()=>{ audioEl.onerror=null; webSpeak(fallbackText, lang); };
+      audioEl.onerror = ()=>{ audioEl.onerror=null;
+        // CDN 失败 → 回退同源相对路径；再失败 → Web Speech 兜底
+        if(url.indexOf(CDN_BASE)===0){
+          const rel = url.slice(CDN_BASE.length + ('books/'+BOOK.id+'/').length);
+          audioEl.onerror = ()=>{ audioEl.onerror=null; webSpeak(fallbackText, lang); };
+          audioEl.src = 'books/' + BOOK.id + '/' + rel;
+          const p2 = audioEl.play(); if(p2 && p2.catch) p2.catch(()=>{ webSpeak(fallbackText, lang); });
+        } else webSpeak(fallbackText, lang);
+      };
       audioEl.pause();
       audioEl.src = url;
       const p = audioEl.play();
@@ -161,7 +178,7 @@ window.Reader = {
         div.className='page'+(i===0?' active':'');
         const ovSVG = (p.ov && OVL[p.ov]) ? OVL[p.ov]() : '';
         if(p.cover){
-          div.innerHTML = `<div class="art"><img class="base" src="${abs(BOOK.coverImg)}" alt=""></div>
+          div.innerHTML = `<div class="art"><img class="base" src="${absWithFallback(BOOK.coverImg)}" alt=""></div>
             <div class="cover-text">
               <h1>${BOOK.title}</h1>
               <p class="sub-zh" style="font-size:22px; margin:6px 0 0;">${BOOK.titleZh||''}</p>
@@ -171,7 +188,7 @@ window.Reader = {
             </div>`;
         } else if(p.glossary){
           const cards=p.glossary.map(g=>`<div class="gcard" data-name="${g.en}" data-namezh="${g.zh||''}" data-fact="${g.def||''}" data-factzh="${g.defZh||''}"><b>${g.en}</b><span class="gzh">${g.zh||''}</span><span>${g.def||''}</span></div>`).join('');
-          const art = p.img?`<div class="art"><img class="base" src="${abs(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
+          const art = p.img?`<div class="art"><img class="base" src="${absWithFallback(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
           div.innerHTML = art + `<div class="text">
               <button class="speak" title="朗读">🔊</button>
               <p class="lang-block en" data-lang="en">${p.en}</p>
@@ -179,7 +196,7 @@ window.Reader = {
               <div class="glossary">${cards}</div>
             </div>`;
         } else {
-          const art = p.img?`<div class="art"><img class="base" src="${abs(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
+          const art = p.img?`<div class="art"><img class="base" src="${absWithFallback(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
           const info = p.interactive?`<div class="info">点一点发光的小点，认识它的名字！🌟</div>`:'';
           div.innerHTML = art + info + `<div class="text">
               <button class="speak" title="朗读">🔊</button>
