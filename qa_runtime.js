@@ -7,7 +7,7 @@ const vm = require('vm');
 const path = require('path');
 
 const root = process.cwd();
-const books = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station'];
+const books = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station', 'steamtrain'];
 let fail = 0;
 
 for (const id of books) {
