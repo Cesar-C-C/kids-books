@@ -9,37 +9,37 @@ window.BOOK = {
   subtitle: 'fire, steam, and wheels working together',
   subtitleZh: '火、蒸汽和轮子齐心合力',
   age: '4-8 岁',
-  coverImg: 'assets/01_cover.webp',
+  coverImg: 'assets/01_cover_v2.webp',
   audioDir: 'audio'
 };
 
 window.PAGES = [
   {
-    img: 'assets/01_cover.webp',
+    img: 'assets/01_cover_v2.webp',
     cover: true,
     en: 'How a Steam Train Works',
     zh: '蒸汽火车怎么跑起来'
   },
   {
-    img: 'assets/02_overview.webp',
+    img: 'assets/02_overview_v2.webp',
     en: 'A steam train is a giant metal machine on wheels. Up front is the engine that makes it go. Behind it rides the tender, full of coal and water. Let us look inside!',
     zh: '蒸汽火车是一台带轮子的巨型金属机器。最前面是让它跑起来的发动机，后面跟着装满煤和水的煤水车。我们进去看看吧！',
     ov: 'st_parts', interactive: true
   },
   {
-    img: 'assets/03_firebox.webp',
+    img: 'assets/03_firebox_v2.webp',
     en: 'Deep inside the engine is the firebox. The fireman shovels coal into the fire. The coal burns with a bright, hot flame — this is where the train’s energy begins!',
     zh: '发动机最里面是炉膛。司炉把煤铲进火里。煤炭烧起明亮炽热的火焰——火车的能量就是从这里开始的！',
     ov: 'st_firebox', interactive: true
   },
   {
-    img: 'assets/04_boiler.webp',
+    img: 'assets/04_boiler_v2.webp',
     en: 'Above the fire sits the boiler, a long tube full of water. The hot fire heats the water until it boils and turns into steam — just like a giant kettle!',
     zh: '火的上面是锅炉，一根装满水的长管子。炽热的火把水加热，直到水沸腾变成蒸汽——就像一把巨大的水壶！',
     ov: 'st_boiler', interactive: true
   },
   {
-    img: 'assets/05_steamdome.webp',
+    img: 'assets/05_steamdome_v2.webp',
     en: 'The steam rises and gathers under a round dome on top. As more steam piles up, it pushes hard. This strong push is called pressure!',
     zh: '蒸汽升起来，聚集在顶部圆圆的蒸汽包里。蒸汽越聚越多，使劲往外挤。这种强大的推力叫“压力”！',
     ov: 'st_steamdome', interactive: true
@@ -69,25 +69,25 @@ window.PAGES = [
     ov: 'st_whistle', interactive: true
   },
   {
-    img: 'assets/10_chimney.webp',
+    img: 'assets/10_chimney_v2.webp',
     en: 'After the steam does its work, the leftover smoke puffs out of the tall funnel. The smoke rolls up into the sky in soft grey clouds.',
     zh: '蒸汽干完活之后，剩下的烟从高高的烟囱里冒出来，变成一团团灰色的云，飘上天空。',
     ov: 'st_chimney', interactive: true
   },
   {
-    img: 'assets/11_tender.webp',
+    img: 'assets/11_tender_v2.webp',
     en: 'Behind the engine rides the tender. It carries the coal to burn and the water to boil — the two things the train needs to keep going all day long.',
     zh: '发动机后面跟着煤水车。它装着要烧的煤和要煮开的水——火车一整天跑下去，就靠这两样！',
     ov: 'st_tender', interactive: true
   },
   {
-    img: 'assets/12_journey.webp',
+    img: 'assets/12_journey_v2.webp',
     en: 'Fire makes steam, steam pushes the piston, the piston turns the wheels, and the train chugs down the track! Every part works together. All aboard!',
     zh: '火生出蒸汽，蒸汽推动活塞，活塞带动车轮，火车就沿着铁轨哐当哐当跑起来！每个部件齐心合力。上车啦！',
     ov: 'st_journey', interactive: true
   },
   {
-    img: 'assets/13_vocab.webp',
+    img: 'assets/13_vocab_v2.webp',
     en: 'Great job, little engineer! You learned how fire, steam, and wheels work together to make a steam train roll. Can you name the parts?',
     zh: '做得好，小工程师！你学会了火、蒸汽和轮子怎么齐心合力，让蒸汽火车跑起来。你能叫出这些部件的名字吗？',
     ov: 'st_vocab', interactive: true,

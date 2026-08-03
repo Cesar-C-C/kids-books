@@ -8,31 +8,28 @@ window.OVL = {
   // 1. 整体部件 — assets/02_overview.png
   st_parts(){
     return svgWrap(
-      partSVG({px:815, py:170, lx:950, ly:150, anc:'start', name:'Chimney', nameZh:'烟囱', fact:'the tall funnel that puffs smoke', factZh:'高高的烟囱，冒烟的地方'}) +
-      partSVG({px:575, py:185, lx:430, ly:130, anc:'end',   name:'Steam dome', nameZh:'蒸汽包', fact:'where steam gathers at the top', factZh:'蒸汽聚集在顶上的圆包'}) +
-      partSVG({px:220, py:310, lx:90,  ly:220, anc:'end',   name:'Cab', nameZh:'司机室', fact:'where the driver sits and steers', factZh:'司机坐着开火车的地方'}) +
-      partSVG({px:460, py:625, lx:460, ly:740, anc:'middle', name:'Driving wheel', nameZh:'动轮', fact:'the big wheel that pulls the train', factZh:'拉着火车跑的大轮子'}) +
-      partSVG({px:1010,py:425, lx:850, ly:510, anc:'end',   name:'Tender', nameZh:'煤水车', fact:'carries coal and water', factZh:'装着煤和水的车厢'})
+      partSVG({px:220, py:300, lx:90,  ly:220, anc:'end',   name:'Chimney', nameZh:'烟囱', fact:'the tall funnel that puffs smoke', factZh:'高高的烟囱，冒烟的地方'}) +
+      partSVG({px:555, py:215, lx:430, ly:145, anc:'end',   name:'Steam dome', nameZh:'蒸汽包', fact:'where steam gathers at the top', factZh:'蒸汽聚集在顶上的圆包'}) +
+      partSVG({px:690, py:340, lx:850, ly:280, anc:'start', name:'Cab', nameZh:'司机室', fact:'where the driver sits and steers', factZh:'司机坐着开火车的地方'}) +
+      partSVG({px:430, py:560, lx:430, ly:660, anc:'middle', name:'Driving wheel', nameZh:'动轮', fact:'the big wheel that pulls the train', factZh:'拉着火车跑的大轮子'}) +
+      partSVG({px:940, py:420, lx:850, ly:500, anc:'end',   name:'Tender', nameZh:'煤水车', fact:'carries coal and water', factZh:'装着煤和水的车厢'})
     );
   },
 
-  // 2. 炉膛 — assets/03_firebox.png
+  // 2. 炉膛 — assets/03_firebox_v2.webp
   st_firebox(){
     return svgWrap(
-      partSVG({px:800, py:350, lx:980, ly:290, anc:'start', name:'Firebox', nameZh:'炉膛', fact:'where the coal burns', factZh:'煤炭燃烧的地方'}) +
-      partSVG({px:700, py:530, lx:880, ly:570, anc:'start', name:'Coal', nameZh:'煤', fact:'shoveled in to feed the fire', factZh:'铲进炉膛喂火的黑色燃料'}) +
-      partSVG({px:600, py:440, lx:380, ly:420, anc:'end',   name:'Fire', nameZh:'火焰', fact:'bright, hot flames heat the water', factZh:'明亮炽热的火，把水加热'}) +
-      partSVG({px:520, py:380, lx:320, ly:320, anc:'end',   name:'Fireman', nameZh:'司炉', fact:'shovels coal into the firebox', factZh:'把煤铲进炉膛的人'})
+      partSVG({px:1050, py:560, lx:1130, ly:500, anc:'start', name:'Firebox', nameZh:'炉膛', fact:'where the coal burns', factZh:'煤炭燃烧的地方'}) +
+      partSVG({px:1110, py:640, lx:1150, ly:700, anc:'start', name:'Coal',   nameZh:'煤',   fact:'shoveled in to feed the fire', factZh:'铲进炉膛喂火的黑色燃料'})
     );
   },
 
-  // 3. 锅炉 — assets/04_boiler.png
+  // 3. 锅炉 — assets/04_boiler_v2.webp
   st_boiler(){
     return svgWrap(
-      partSVG({px:800, py:370, lx:980, ly:310, anc:'start', name:'Boiler', nameZh:'锅炉', fact:'the long tube full of water', factZh:'装满水的长管子'}) +
-      partSVG({px:650, py:400, lx:430, ly:360, anc:'end',   name:'Water', nameZh:'水', fact:'boils and turns into steam', factZh:'烧开后变成蒸汽'}) +
-      partSVG({px:600, py:280, lx:430, ly:240, anc:'end',   name:'Steam', nameZh:'蒸汽', fact:'hot gas rising up', factZh:'升起来的热气'}) +
-      partSVG({px:580, py:510, lx:430, ly:530, anc:'end',   name:'Flames', nameZh:'火焰', fact:'hot fire heating the water', factZh:'把水烧热的火焰'})
+      partSVG({px:520, py:370, lx:760, ly:300, anc:'start', name:'Boiler', nameZh:'锅炉', fact:'the long tube full of water', factZh:'装满水的长管子'}) +
+      partSVG({px:280, py:480, lx:120, ly:540, anc:'end',   name:'Water',  nameZh:'水',   fact:'boils and turns into steam', factZh:'烧开后变成蒸汽'}) +
+      partSVG({px:560, py:240, lx:430, ly:200, anc:'end',   name:'Steam',  nameZh:'蒸汽', fact:'hot gas rising up', factZh:'升起来的热气'})
     );
   },
 
@@ -83,12 +80,12 @@ window.OVL = {
     );
   },
 
-  // 9. 烟囱与烟 — assets/10_chimney.png
+  // 9. 烟囱与烟 — assets/10_chimney_v2.webp
   st_chimney(){
     return svgWrap(
-      partSVG({px:790, py:175, lx:960, ly:150, anc:'start', name:'Chimney', nameZh:'烟囱', fact:'the tall funnel that puffs smoke', factZh:'高高的烟囱，冒烟的地方'}) +
-      partSVG({px:530, py:80,  lx:350, ly:80,  anc:'end',   name:'Smoke', nameZh:'烟', fact:'soft grey clouds floating up', factZh:'飘到天上的灰色云'}) +
-      partSVG({px:550, py:450, lx:320, ly:520, anc:'end',   name:'Engine', nameZh:'发动机', fact:'the whole front of the train', factZh:'火车前面的大机器'})
+      partSVG({px:295, py:280, lx:130, ly:220, anc:'end',   name:'Chimney', nameZh:'烟囱', fact:'the tall funnel that puffs smoke', factZh:'高高的烟囱，冒烟的地方'}) +
+      partSVG({px:400, py:80,  lx:250, ly:80,  anc:'end',   name:'Smoke',   nameZh:'烟',   fact:'soft grey clouds floating up', factZh:'飘到天上的灰色云'}) +
+      partSVG({px:560, py:400, lx:330, ly:460, anc:'end',   name:'Engine',  nameZh:'发动机', fact:'the whole front of the train', factZh:'火车前面的大机器'})
     );
   },
 
@@ -104,18 +101,17 @@ window.OVL = {
   // 11. 一起跑起来 — assets/12_journey.png
   st_journey(){
     return svgWrap(
-      partSVG({px:750, py:450, lx:980, ly:400, anc:'start',  name:'Engine', nameZh:'发动机', fact:'the front part with the boiler', factZh:'前面装锅炉的部分'}) +
-      partSVG({px:700, py:110, lx:450, ly:100, anc:'end',    name:'Steam & smoke', nameZh:'蒸汽与烟', fact:'rises up and puffs out', factZh:'升起来，飘出去'}) +
-      partSVG({px:700, py:640, lx:560, ly:730, anc:'middle', name:'Driving wheels', nameZh:'动轮', fact:'rolling along the rails', factZh:'沿着铁轨滚动'}) +
-      partSVG({px:300, py:500, lx:120, ly:560, anc:'end',    name:'Tender', nameZh:'煤水车', fact:'brings coal and water', factZh:'带来煤和水'})
+      partSVG({px:430, py:440, lx:200,  ly:400, anc:'end',   name:'Engine',         nameZh:'发动机', fact:'the front part with the boiler', factZh:'前面装锅炉的部分'}) +
+      partSVG({px:560, py:110, lx:320,  ly:100, anc:'end',   name:'Steam & smoke',  nameZh:'蒸汽与烟', fact:'rises up and puffs out', factZh:'升起来，飘出去'}) +
+      partSVG({px:430, py:600, lx:200,  ly:680, anc:'end',   name:'Driving wheels', nameZh:'动轮',    fact:'rolling along the rails', factZh:'沿着铁轨滚动'}) +
+      partSVG({px:800, py:440, lx:1000, ly:400, anc:'start', name:'Tender',         nameZh:'煤水车', fact:'brings coal and water', factZh:'带来煤和水'})
     );
   },
 
   // 12. 词汇表图 — assets/13_vocab.png (decorative; main vocab is in cards)
   st_vocab(){
     return svgWrap(
-      partSVG({px:700, py:450, lx:920, ly:420, anc:'start', name:'Engine', nameZh:'发动机', fact:'makes the train go', factZh:'让火车跑起来的部分'}) +
-      partSVG({px:430, py:500, lx:220, ly:560, anc:'end',   name:'Tender', nameZh:'煤水车', fact:'brings fuel and water', factZh:'装着燃料和水'})
+      partSVG({px:700, py:450, lx:920, ly:420, anc:'start', name:'Engine', nameZh:'发动机', fact:'makes the train go', factZh:'让火车跑起来的部分'})
     );
   }
 };
