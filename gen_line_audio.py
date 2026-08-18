@@ -20,9 +20,13 @@ VOICE_EN = "en-US-AriaNeural"
 VOICE_ZH = "zh-CN-XiaoxiaoNeural"
 
 def extract_parts(src):
+    # Match flat object literals (no nested braces) that carry a lineKey.
+    # Handles both inline `partSVG({...})` and array-style `parts=[{...}]`.
     out = []
-    for m in re.finditer(r'partSVG\(\{([^}]*)\}\)', src):
-        body = m.group(1)
+    for m in re.finditer(r'\{[^{}]*\}', src):
+        body = m.group(0)
+        if 'lineKey' not in body:
+            continue
         def g(k):
             mm = re.search(rf"{k}\s*:\s*['\"]([^'\"]*)['\"]", body)
             return mm.group(1) if mm else None
