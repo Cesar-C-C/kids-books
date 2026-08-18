@@ -28,8 +28,13 @@ def extract_parts(src):
         if 'lineKey' not in body:
             continue
         def g(k):
-            mm = re.search(rf"{k}\s*:\s*['\"]([^'\"]*)['\"]", body)
-            return mm.group(1) if mm else None
+            # Quote-aware: allow the opposite quote inside the value, so an
+            # English line like "I'm..." (double-quoted, internal apostrophe)
+            # is captured in full instead of being truncated at the apostrophe.
+            mm = re.search(rf"{k}\s*:\s*(?:\"([^\"]*)\"|'([^']*)')", body)
+            if not mm:
+                return None
+            return mm.group(1) if mm.group(1) is not None else mm.group(2)
         lk = g('lineKey')
         if not lk:
             continue
@@ -58,6 +63,7 @@ async def synth(entries):
 
 async def main():
     books = [a for a in sys.argv[1:] if not a.startswith('--')] or ALL_BOOKS
+    en_only = '--en-only' in sys.argv
     entries = []
     for b in books:
         ov = os.path.join(ROOT, 'books', b, 'overlays.js')
@@ -69,8 +75,9 @@ async def main():
         os.makedirs(out_dir, exist_ok=True)
         for lk, line, lineZh in parts:
             entries.append({'out': os.path.join(out_dir, f'line_{lk}_en.mp3'), 'text': line, 'lang': 'en'})
-            entries.append({'out': os.path.join(out_dir, f'line_{lk}_zh.mp3'), 'text': lineZh, 'lang': 'zh'})
-        print(f"-- {b}: {len(parts)} hotspots -> {len(parts)*2} line mp3s")
+            if not en_only:
+                entries.append({'out': os.path.join(out_dir, f'line_{lk}_zh.mp3'), 'text': lineZh, 'lang': 'zh'})
+        print(f"-- {b}: {len(parts)} hotspots -> {len(parts)*(1 if en_only else 2)} line mp3s")
     print(f"TOTAL line mp3s: {len(entries)}")
     await synth(entries)
 
