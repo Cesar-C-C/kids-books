@@ -197,7 +197,7 @@ img{display:block; max-width:100%;}
 .hot{ cursor:pointer; transform-box:fill-box; transform-origin:50% 50%; animation:hotFloat 3.6s ease-in-out infinite; }
 @keyframes hotFloat{ 0%,100%{ translate:0 0 } 50%{ translate:0 -6px } }
 .hot:hover{ filter:drop-shadow(0 0 4px #3a86ff); }
-.hot.sel{ filter:drop-shadow(0 0 6px #ef476f) drop-shadow(0 0 3px #ef476f); }
+.hot.sel{ filter:drop-shadow(0 0 7px #6fb3ff) drop-shadow(0 0 3px #6fb3ff); }
 .hot.play-pop{ animation:hotPop .75s cubic-bezier(.36,1.6,.5,1); }
 @keyframes hotPop{ 0%{ translate:0 0; scale:1 } 35%{ translate:0 -14px; scale:1.2 } 70%{ translate:0 3px; scale:.94 } 100%{ translate:0 0; scale:1 } }
 

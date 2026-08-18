@@ -44,8 +44,9 @@ function partSVG(p){
     const lineAttr  = p.line   ? ` data-line="${p.line}"`     : '';
     const lineZh    = p.lineZh ? ` data-linezh="${p.lineZh}"` : '';
     return `<g class="hot">
-      <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="22" fill="rgba(255,255,255,.78)" stroke="#ef476f" stroke-width="4"/>
-      <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="9" fill="#ef476f" stroke="#fff" stroke-width="2"/>
+      <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="20" fill="rgba(255,255,255,.26)" stroke="rgba(255,255,255,.9)" stroke-width="2.5"/>
+      <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="8" fill="rgba(190,220,255,.5)"/>
+      <ellipse cx="${(x1-6).toFixed(2)}" cy="${(y1-6).toFixed(2)}" rx="5" ry="3" fill="rgba(255,255,255,.95)" transform="rotate(-38 ${(x1-6).toFixed(2)} ${(y1-6).toFixed(2)})"/>
       <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${p.name}" data-fact="${p.fact}"${factZh}${nmZh}${lineAttr}${lineZh}/>
     </g>`;
   }
