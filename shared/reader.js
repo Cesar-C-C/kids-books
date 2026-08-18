@@ -406,6 +406,17 @@ window.Reader = {
       if(e.target.closest('.speak')){ playPage(cur, settings.primary); }
     });
 
+    /* ---------- tap outside bubble → dismiss immediately ----------
+       When a speech bubble is showing, a tap anywhere that is NOT the bubble
+       itself and NOT a hotspot (which switches to another bubble) closes it
+       right away, instead of waiting for the auto-hide countdown. */
+    document.addEventListener('click', e=>{
+      const b = document.getElementById('bubble');
+      if (!b || !b.classList.contains('show')) return;
+      if (e.target.closest('.bubble') || e.target.closest('.part')) return;
+      clearBubble();
+    }, true);
+
     /* ---------- dots ---------- */
     function buildDots(){
       dotsEl.innerHTML='';
