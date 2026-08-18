@@ -104,7 +104,19 @@ window.Reader = {
        GitHub Pages（相对路径），保证阅读器永不因 CDN 抽风而白屏。 */
     const CDN_BASE = 'https://cdn.jsdelivr.net/gh/Cesar-C-C/kids-books@main/';
     const fallbackUrl = p => ('books/' + BOOK.id + '/' + p);
-    const abs = p => (/^https?:\/\//i.test(p) ? p : (CDN_BASE + 'books/' + BOOK.id + '/' + p));
+    /* AUDIO is served SAME-ORIGIN (GitHub Pages), NOT via jsDelivr.
+       Lesson from the field: jsDelivr caches gh files by PATH and IGNORES the
+       ?v=N query bust, so any in-place audio content change (e.g. the
+       apostrophe-truncation fix that turned a 8640-byte clip into a 22896-byte
+       one) stayed stale on the CDN forever and users kept hearing only "I".
+       Same-origin URLs always reflect the latest committed bytes, so audio is
+       always correct. Images keep the CDN (large files, speed matters, and
+       they bust via filename rename per project convention). */
+    const abs = p => {
+      if (/^https?:\/\//i.test(p)) return p;
+      if (/\.mp3$/i.test(p)) return 'books/' + BOOK.id + '/' + p;   // audio: same-origin
+      return CDN_BASE + 'books/' + BOOK.id + '/' + p;               // images: CDN
+    };
     const absWithFallback = p => {
       const url = abs(p);
       const fb = fallbackUrl(p);
@@ -118,7 +130,7 @@ window.Reader = {
        must bust the browser/CDN cache for the (same-named) files, otherwise users
        keep hearing the stale cached clip. Bump AUDIO_VER whenever audio content
        changes — it appends ?v=N so every client re-fetches fresh. */
-    const AUDIO_VER = 3;
+    const AUDIO_VER = 4;
     const aUrl = p => abs(p) + '?v=' + AUDIO_VER;
 
     function playAudio(url, lang, onDone){ if(settings.muted){ if(onDone) onDone(); return; }
