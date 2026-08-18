@@ -103,7 +103,15 @@ window.Reader = {
        CDN 失败回退：若 CDN 边缘偶发不可达（401/网络抖动），自动回退到同源
        GitHub Pages（相对路径），保证阅读器永不因 CDN 抽风而白屏。 */
     const CDN_BASE = 'https://cdn.jsdelivr.net/gh/Cesar-C-C/kids-books@main/';
-    const fallbackUrl = p => ('books/' + BOOK.id + '/' + p);
+    /* Same-origin base: book pages live at /<repo>/books/<id>/index.html, so a
+       bare relative "books/<id>/..." would resolve against the PAGE url and
+       DOUBLE UP (/books/<id>/books/<id>/... -> 404). Compute the repo root from
+       the current path so every same-origin URL is root-relative and correct
+       from any nested page (also works at a custom domain where /books/ is at
+       the site root). */
+    const REPO_BASE = (location.pathname.match(/^(.*?)\/books\//) || [, ''])[1];
+    const sameOrigin = p => (REPO_BASE + '/books/' + BOOK.id + '/' + p);
+    const fallbackUrl = p => sameOrigin(p);
     /* AUDIO is served SAME-ORIGIN (GitHub Pages), NOT via jsDelivr.
        Lesson from the field: jsDelivr caches gh files by PATH and IGNORES the
        ?v=N query bust, so any in-place audio content change (e.g. the
@@ -114,8 +122,8 @@ window.Reader = {
        they bust via filename rename per project convention). */
     const abs = p => {
       if (/^https?:\/\//i.test(p)) return p;
-      if (/\.mp3$/i.test(p)) return 'books/' + BOOK.id + '/' + p;   // audio: same-origin
-      return CDN_BASE + 'books/' + BOOK.id + '/' + p;               // images: CDN
+      if (/\.mp3$/i.test(p)) return sameOrigin(p);                 // audio: same-origin (root-relative)
+      return CDN_BASE + 'books/' + BOOK.id + '/' + p;             // images: CDN
     };
     const absWithFallback = p => {
       const url = abs(p);
@@ -136,11 +144,11 @@ window.Reader = {
     function playAudio(url, lang, onDone){ if(settings.muted){ if(onDone) onDone(); return; }
       audioEl.playbackRate = settings.speed;
       audioEl.onerror = ()=>{ audioEl.onerror=null;
-        // CDN 失败 → 回退同源相对路径（仍是预制 MP3，绝不回退 TTS）
+        // CDN 失败 → 回退同源根相对路径（仍是预制 MP3，绝不回退 TTS）
         if(url.indexOf(CDN_BASE)===0){
           const rel = url.slice(CDN_BASE.length + ('books/'+BOOK.id+'/').length);
           audioEl.onerror = ()=>{ audioEl.onerror=null; if(onDone) onDone(); };
-          audioEl.src = 'books/' + BOOK.id + '/' + rel;
+          audioEl.src = sameOrigin(rel);
           const p2 = audioEl.play(); if(p2 && p2.catch) p2.catch(()=>{ if(onDone) onDone(); });
         } else { if(onDone) onDone(); }
       };
