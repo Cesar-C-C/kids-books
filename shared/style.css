@@ -80,7 +80,7 @@ img{display:block; max-width:100%;}
 #book{
   width:100%; max-width:560px; margin:0 auto; background:#fff; border-radius:var(--card-radius);
   box-shadow:0 18px 40px rgba(58,134,255,.18), 0 4px 12px rgba(0,0,0,.06);
-  overflow:hidden;
+  position:relative; overflow:visible;
 }
 .page{ display:none; padding:16px 18px 8px; }
 .page.active{ display:block; animation:pop .35s ease; }
@@ -201,9 +201,14 @@ img{display:block; max-width:100%;}
 .hot.play-pop{ animation:hotPop .75s cubic-bezier(.36,1.6,.5,1); }
 @keyframes hotPop{ 0%{ translate:0 0; scale:1 } 35%{ translate:0 -14px; scale:1.2 } 70%{ translate:0 3px; scale:.94 } 100%{ translate:0 0; scale:1 } }
 
-.bubble{ position:absolute; z-index:9; min-width:140px; max-width:min(300px,72%); background:#fff7ef; border:3px solid #3b2f5e; border-radius:18px; box-shadow:0 6px 0 rgba(59,47,94,.18); padding:8px 12px; pointer-events:none; opacity:0; transform:translate(-50%, calc(-100% - 18px)) scale(.88); transition:opacity .22s, transform .26s cubic-bezier(.34,1.4,.5,1); }
-.bubble.show{ opacity:1; transform:translate(-50%, calc(-100% - 18px)) scale(1); }
+.bubble{ position:absolute; z-index:60; min-width:140px; max-width:min(280px,80%); background:#fff7ef; border:3px solid #3b2f5e; border-radius:18px; box-shadow:0 6px 0 rgba(59,47,94,.18); padding:8px 12px; pointer-events:none; opacity:0; transform:translate(-50%, calc(-100% - 16px)) scale(.85); transition:opacity .22s, transform .26s cubic-bezier(.34,1.4,.5,1); }
+.bubble.show{ opacity:1; transform:translate(-50%, calc(-100% - 16px)) scale(1); }
 .bubble::after{ content:""; position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); border:9px solid transparent; border-top-color:#3b2f5e; }
+/* when the hotspot sits in the upper part of the picture, flip the bubble
+   BELOW the dot so it never gets clipped by the top of the frame */
+.bubble.below{ transform:translate(-50%, 16px) scale(.85); }
+.bubble.below.show{ transform:translate(-50%, 16px) scale(1); }
+.bubble.below::after{ top:-14px; bottom:auto; border-top-color:transparent; border-bottom-color:#3b2f5e; }
 .bubble .b-name{ font-size:14px; }
 .bubble .b-name b{ color:#3a86ff; font-size:15px; letter-spacing:.3px; }
 .bubble .b-line-zh{ font-size:15px; font-weight:700; color:#2b2d42; margin-top:3px; line-height:1.35; }

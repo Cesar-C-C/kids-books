@@ -4,7 +4,7 @@
    Features: bilingual display + primary-lang toggle, tap-to-read
    (zh & en), interactive hotspots, page flip + progress dots +
    swipe, parent settings (speed / auto-narrate / auto-page /
-   primary lang), Edge TTS mp3 primary + Web Speech fallback.
+   primary lang), pre-generated MP3 with CDN + same-origin fallback (no TTS).
    ============================================================ */
 window.Reader = {
   init(){
@@ -78,6 +78,15 @@ window.Reader = {
     const titleEl = document.getElementById('bookTitle');
     if(titleEl) titleEl.textContent = BOOK.title + (BOOK.titleZh ? ' · ' + BOOK.titleZh : '');
 
+    /* single shared speech bubble: lives inside #book (position:relative, NOT
+       overflow-clipped) so it can render above OR below the art without being
+       cut off by the frame. showBubble() positions it per hotspot. */
+    const bookEl = document.getElementById('book');
+    const bubbleEl = document.createElement('div');
+    bubbleEl.id = 'bubble'; bubbleEl.className = 'bubble';
+    bubbleEl.innerHTML = '<div class="b-name"></div><div class="b-line-zh"></div><div class="b-line-en"></div><div class="b-fact"></div>';
+    bookEl.appendChild(bubbleEl);
+
     /* ---------- audio engine ---------- */
     const audioEl = new Audio();
     audioEl.preload = 'auto';
@@ -103,85 +112,90 @@ window.Reader = {
       return `${url}" onerror="this.onerror=null;this.src='${fb}'`;
     };
 
-    const pageUrl  = (i,lang) => abs(`${BOOK.audioDir}/page_${pad2(i)}_${lang}.mp3`);
-    const wordUrl  = (name,lang) => abs(`${BOOK.audioDir}/word_${sanitize(name)}_${lang}.mp3`);
+    const pageUrl  = (i,lang) => aUrl(`${BOOK.audioDir}/page_${pad2(i)}_${lang}.mp3`);
+    const wordUrl  = (name,lang) => aUrl(`${BOOK.audioDir}/word_${sanitize(name)}_${lang}.mp3`);
+    /* audio content was once silently truncated by a parser bug; after fixing we
+       must bust the browser/CDN cache for the (same-named) files, otherwise users
+       keep hearing the stale cached clip. Bump AUDIO_VER whenever audio content
+       changes — it appends ?v=N so every client re-fetches fresh. */
+    const AUDIO_VER = 2;
+    const aUrl = p => abs(p) + '?v=' + AUDIO_VER;
 
-    function playAudio(url, lang, fallbackText, onDone){ if(settings.muted){ if(onDone) onDone(); return; }
+    function playAudio(url, lang, onDone){ if(settings.muted){ if(onDone) onDone(); return; }
       audioEl.playbackRate = settings.speed;
       audioEl.onerror = ()=>{ audioEl.onerror=null;
-        // CDN 失败 → 回退同源相对路径；再失败 → Web Speech 兜底
+        // CDN 失败 → 回退同源相对路径（仍是预制 MP3，绝不回退 TTS）
         if(url.indexOf(CDN_BASE)===0){
           const rel = url.slice(CDN_BASE.length + ('books/'+BOOK.id+'/').length);
-          audioEl.onerror = ()=>{ audioEl.onerror=null; webSpeak(fallbackText, lang); if(onDone) onDone(); };
+          audioEl.onerror = ()=>{ audioEl.onerror=null; if(onDone) onDone(); };
           audioEl.src = 'books/' + BOOK.id + '/' + rel;
-          const p2 = audioEl.play(); if(p2 && p2.catch) p2.catch(()=>{ webSpeak(fallbackText, lang); if(onDone) onDone(); });
-        } else { webSpeak(fallbackText, lang); if(onDone) onDone(); }
+          const p2 = audioEl.play(); if(p2 && p2.catch) p2.catch(()=>{ if(onDone) onDone(); });
+        } else { if(onDone) onDone(); }
       };
       audioEl.onended = onDone || null;
       audioEl.pause();
       audioEl.src = url;
       const p = audioEl.play();
-      if(p && p.catch) p.catch(()=>{ webSpeak(fallbackText, lang); if(onDone) onDone(); });
+      if(p && p.catch) p.catch(()=>{ if(onDone) onDone(); });
     }
     function stopAudio(){ try{ audioEl.pause(); audioEl.currentTime=0; }catch(e){} }
 
-    let voices = [];
-    function loadVoices(){ voices = (window.speechSynthesis ? speechSynthesis.getVoices() : []) || []; }
-    if(window.speechSynthesis){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
-    function pickVoice(lang){
-      if(!voices.length) return null;
-      const target = lang==='zh' ? 'zh' : 'en';
-      const same = voices.filter(v=>v.lang && v.lang.toLowerCase().startsWith(target));
-      if(!same.length) return null;
-      if(target==='en'){
-        const quality=['Natural','Neural','Premium','Enhanced','Online'];
-        const names=['Aria','Jenny','Ana','Ryan','Samantha','Google US English','Google UK English','Zira','David','Alex','Victoria','Tessa'];
-        const score=v=>{ let s=(v.lang.toLowerCase()==='en-us')?100:50;
-          const q=quality.findIndex(q=>v.name.includes(q)); if(q>=0)s+=(10-q)*10;
-          const i=names.findIndex(n=>v.name.includes(n)); if(i>=0)s+=(20-i)*2; return s; };
-        return same.slice().sort((a,b)=>score(b)-score(a))[0];
-      } else {
-        const names=['Xiaoxiao','Huihui','Yaoyao','Kangkang','Ting-Ting','Mei','Chinese','普通话'];
-        const score=v=>{ let s=0; const i=names.findIndex(n=>v.name.includes(n)); if(i>=0)s+=(20-i)*3; if(v.lang.toLowerCase()==='zh-cn')s+=30; return s; };
-        return same.slice().sort((a,b)=>score(b)-score(a))[0];
-      }
-    }
-    function webSpeak(raw, lang){
-      if(settings.muted) return;
-      if(!window.speechSynthesis) return;
-      speechSynthesis.cancel();
-      let text=(raw||'').toString().replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
-      if(lang==='en') text=text.replace(/\b[A-Z]{2,}\b/g, m=>m.toLowerCase());
-      const u=new SpeechSynthesisUtterance(text);
-      u.lang = lang==='zh' ? 'zh-CN' : 'en-US';
-      u.rate = settings.speed; u.pitch=1.0; u.volume=1;
-      const v=pickVoice(lang); if(v) u.voice=v;
-      speechSynthesis.speak(u);
-    }
+    /* Web Speech (TTS) has been removed entirely — every narration / word / line
+       clip is a pre-generated MP3. We only keep a cancel helper so a manual mute
+       or page flip can stop any stray OS speech that might still be queued. */
+    function cancelSpeech(){ if(window.speechSynthesis) speechSynthesis.cancel(); }
     function playPage(i, lang){
       const p=PAGES[i]; if(!p) return;
       const text = lang==='zh' ? p.zh : p.en;
       if(!text) return;
       stopAudio();
-      playAudio(pageUrl(i,lang), lang, text);
+      playAudio(pageUrl(i,lang), lang);
     }
     function playWord(name, nameZh, lang, onDone){
-      const fallback = lang==='zh' ? (nameZh||name) : name;
       stopAudio();
-      playAudio(wordUrl(name,lang), lang, fallback, onDone);
+      playAudio(wordUrl(name,lang), lang, onDone);
     }
     /* play a bubble hotspot: name mp3 first, then the line mp3 (by unique key).
-       Falls back to Web Speech only if the line mp3 is missing. */
-    function playBubbleAudio(part, lang, line){
+       Pure pre-generated MP3 — no TTS fallback. */
+    function playBubbleAudio(part, lang){
       playWord(part.dataset.name, part.dataset.namezh, lang, ()=>{
         const key = part.dataset.linekey;
         if(key){
-          const url = abs(`${BOOK.audioDir}/line_${key}_${lang}.mp3`);
-          playAudio(url, lang, line);
-        } else {
-          webSpeak(line, lang);
+          const url = aUrl(`${BOOK.audioDir}/line_${key}_${lang}.mp3`);
+          playAudio(url, lang);
         }
       });
+    }
+    /* ---------- preloading (smoother browsing) ----------
+       Warm the browser cache for the current + next page's audio (page narration,
+       hotspot name + line clips) and the next page's illustration, so taps and
+       page-flips play instantly instead of waiting on the network. */
+    function preload(urls){
+      if(!urls.length) return;
+      if(typeof fetch !== 'function') return;   // jsdom / very old browsers: skip silently
+      const CONC = 6; let i = 0, inFlight = 0;
+      function next(){
+        while(i < urls.length && inFlight < CONC){
+          const u = urls[i++]; inFlight++;
+          fetch(u, {mode:'no-cors', cache:'force-cache'}).catch(()=>{}).finally(()=>{ inFlight--; next(); });
+        }
+      }
+      next();
+    }
+    function preloadPageMedia(idx){
+      const langs = ['en','zh'];
+      const urls = new Set();
+      [idx, idx+1].forEach(k=>{
+        const p = PAGES[k]; if(!p) return;
+        langs.forEach(l => urls.add(pageUrl(k, l)));
+        if(p.img){ const im = new Image(); im.src = abs(p.img); }
+        const pe = pagesEl.children[k];
+        if(pe) pe.querySelectorAll('.part').forEach(part=>{
+          const nm = part.dataset.name, lk = part.dataset.linekey;
+          langs.forEach(l => { if(nm) urls.add(wordUrl(nm, l)); if(lk) urls.add(aUrl(`${BOOK.audioDir}/line_${lk}_${l}.mp3`)); });
+        });
+      });
+      preload([...urls]);
     }
 
     /* ---------- render pages ---------- */
@@ -210,8 +224,7 @@ window.Reader = {
               <div class="glossary">${cards}</div>
             </div>`;
         } else {
-          const bubbleHtml = `<div class="bubble"><div class="b-name"></div><div class="b-line-zh"></div><div class="b-line-en"></div><div class="b-fact"></div></div>`;
-          const art = p.img?`<div class="art"><img class="base" src="${absWithFallback(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div>${bubbleHtml}</div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div>${bubbleHtml}</div>`;
+          const art = p.img?`<div class="art"><img class="base" src="${absWithFallback(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
           const info = p.interactive?`<div class="info">点一点发光的小点，认识它的名字！🌟</div>`:'';
           div.innerHTML = art + info + `<div class="text">
               <button class="speak" title="朗读">🔊</button>
@@ -230,16 +243,14 @@ window.Reader = {
       if (bubbleTimer) { clearTimeout(bubbleTimer); bubbleTimer = null; }
     }
     function showBubble(part){
-      const page = part.closest('.page');
-      const art  = part.closest('.art');
-      const bubble = art && art.querySelector('.bubble');
+      const bubble = document.getElementById('bubble');
       if (!bubble) return;
-      // The whole visible dot group is the <g class="hot"> ancestor; animate
-      // and highlight it as one unit.
+      const book = document.getElementById('book');
       const hot = part.closest('.hot');
+      const page = part.closest('.page');
       if (page) page.querySelectorAll('.hot.sel').forEach(h => h.classList.remove('sel'));
       if (hot)  hot.classList.add('sel');
-      // Fill text
+      // Fill text (primary language first, the other as a soft line)
       const lang = settings.primary;
       const name   = (lang === 'zh' ? (part.dataset.namezh || part.dataset.name) : part.dataset.name) || '';
       const lineEn = part.dataset.line    || '';
@@ -252,18 +263,21 @@ window.Reader = {
       const fact2   = part.dataset.fact   || '';
       const factText = (lang === 'zh' && factZh2) ? factZh2 : (fact2 || factZh2);
       bubble.querySelector('.b-fact').textContent = factText;
-      // Position by the part's center, clamped within art bounds so the bubble
-      // never overflows. SVG coords are stretched to fill .art (preserveAspectRatio=none)
-      // so the percent math maps the dot's screen rect directly.
+      // Position relative to #book (which is position:relative and NOT clipped).
+      // Flip the bubble BELOW the dot when the hotspot sits in the upper part of
+      // the picture, so it can never be cut off by the top of the frame.
       const r = part.getBoundingClientRect();
-      const w = art.getBoundingClientRect();
-      let left = ((r.left + r.width/2 - w.left) / w.width)  * 100;
-      let top  = ((r.top  + r.height/2 - w.top ) / w.height) * 100;
-      left = Math.min(86, Math.max(14, left));
-      top  = Math.min(68, Math.max(26, top));
-      bubble.style.left = left + '%';
-      bubble.style.top  = top  + '%';
-      bubble.classList.add('show');
+      const b = book.getBoundingClientRect();
+      let cx = r.left + r.width/2 - b.left;
+      let cy = r.top  + r.height/2 - b.top;
+      const below = (cy < b.height * 0.45);
+      bubble.classList.toggle('below', below);
+      // keep the (centered) bubble inside the frame given its own width
+      const bw = bubble.offsetWidth || 200;
+      const pad = 6;
+      cx = Math.min(b.width - bw/2 - pad, Math.max(bw/2 + pad, cx));
+      bubble.style.left = cx + 'px';
+      bubble.style.top  = cy + 'px';
       // Bounce animation on the hot dot
       if (hot) {
         hot.classList.remove('play-pop');
@@ -271,10 +285,12 @@ window.Reader = {
         hot.classList.add('play-pop');
         setTimeout(() => hot.classList.remove('play-pop'), 900);
       }
-      // Read the line in the active primary language — play pre-generated MP3
-      // (name then line); fall back to Web Speech only if the MP3 is missing.
-      const line = lang === 'zh' ? (lineZh || lineEn) : (lineEn || lineZh);
-      playBubbleAudio(part, lang, line);
+      // force reflow so the show transition replays cleanly on every tap
+      void bubble.offsetWidth;
+      bubble.classList.add('show');
+      // Read the line in the active primary language — pre-generated MP3 only
+      // (name then line); no TTS fallback.
+      playBubbleAudio(part, lang);
       // Auto-hide after 4.2s
       clearTimeout(bubbleTimer);
       bubbleTimer = setTimeout(() => bubble.classList.remove('show'), 4200);
@@ -299,8 +315,9 @@ window.Reader = {
       pager.textContent=(cur+1)+' / '+total;
       document.querySelectorAll('#dots .dot').forEach((d,idx)=>d.classList.toggle('active', idx===cur));
       stopAudio();
-      if(window.speechSynthesis) speechSynthesis.cancel();
+      cancelSpeech();
       clearBubble();
+      preloadPageMedia(cur);
       const p=PAGES[cur];
       if(p && p.en && settings.autoNarrate){
         setTimeout(()=>{ if(cur===i) playPage(cur, settings.primary); }, 450);
@@ -429,7 +446,7 @@ window.Reader = {
       autoBtn.onclick=()=>{
         settings.muted = !settings.muted; saveSettings();
         updateAutoBtn();
-        if(settings.muted){ stopAudio(); if(window.speechSynthesis) speechSynthesis.cancel(); }
+        if(settings.muted){ stopAudio(); cancelSpeech(); }
       };
     }
 
