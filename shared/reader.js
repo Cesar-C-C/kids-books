@@ -106,21 +106,22 @@ window.Reader = {
     const pageUrl  = (i,lang) => abs(`${BOOK.audioDir}/page_${pad2(i)}_${lang}.mp3`);
     const wordUrl  = (name,lang) => abs(`${BOOK.audioDir}/word_${sanitize(name)}_${lang}.mp3`);
 
-    function playAudio(url, lang, fallbackText){ if(settings.muted) return;
+    function playAudio(url, lang, fallbackText, onDone){ if(settings.muted){ if(onDone) onDone(); return; }
       audioEl.playbackRate = settings.speed;
       audioEl.onerror = ()=>{ audioEl.onerror=null;
         // CDN 失败 → 回退同源相对路径；再失败 → Web Speech 兜底
         if(url.indexOf(CDN_BASE)===0){
           const rel = url.slice(CDN_BASE.length + ('books/'+BOOK.id+'/').length);
-          audioEl.onerror = ()=>{ audioEl.onerror=null; webSpeak(fallbackText, lang); };
+          audioEl.onerror = ()=>{ audioEl.onerror=null; webSpeak(fallbackText, lang); if(onDone) onDone(); };
           audioEl.src = 'books/' + BOOK.id + '/' + rel;
-          const p2 = audioEl.play(); if(p2 && p2.catch) p2.catch(()=>{ webSpeak(fallbackText, lang); });
-        } else webSpeak(fallbackText, lang);
+          const p2 = audioEl.play(); if(p2 && p2.catch) p2.catch(()=>{ webSpeak(fallbackText, lang); if(onDone) onDone(); });
+        } else { webSpeak(fallbackText, lang); if(onDone) onDone(); }
       };
+      audioEl.onended = onDone || null;
       audioEl.pause();
       audioEl.src = url;
       const p = audioEl.play();
-      if(p && p.catch) p.catch(()=>{ webSpeak(fallbackText, lang); });
+      if(p && p.catch) p.catch(()=>{ webSpeak(fallbackText, lang); if(onDone) onDone(); });
     }
     function stopAudio(){ try{ audioEl.pause(); audioEl.currentTime=0; }catch(e){} }
 
@@ -164,10 +165,23 @@ window.Reader = {
       stopAudio();
       playAudio(pageUrl(i,lang), lang, text);
     }
-    function playWord(name, nameZh, lang){
+    function playWord(name, nameZh, lang, onDone){
       const fallback = lang==='zh' ? (nameZh||name) : name;
       stopAudio();
-      playAudio(wordUrl(name,lang), lang, fallback);
+      playAudio(wordUrl(name,lang), lang, fallback, onDone);
+    }
+    /* play a bubble hotspot: name mp3 first, then the line mp3 (by unique key).
+       Falls back to Web Speech only if the line mp3 is missing. */
+    function playBubbleAudio(part, lang, line){
+      playWord(part.dataset.name, part.dataset.namezh, lang, ()=>{
+        const key = part.dataset.linekey;
+        if(key){
+          const url = abs(`${BOOK.audioDir}/line_${key}_${lang}.mp3`);
+          playAudio(url, lang, line);
+        } else {
+          webSpeak(line, lang);
+        }
+      });
     }
 
     /* ---------- render pages ---------- */
@@ -196,7 +210,7 @@ window.Reader = {
               <div class="glossary">${cards}</div>
             </div>`;
         } else {
-          const bubbleHtml = `<div class="bubble"><div class="b-name"></div><div class="b-line-zh"></div><div class="b-line-en"></div></div>`;
+          const bubbleHtml = `<div class="bubble"><div class="b-name"></div><div class="b-line-zh"></div><div class="b-line-en"></div><div class="b-fact"></div></div>`;
           const art = p.img?`<div class="art"><img class="base" src="${absWithFallback(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div>${bubbleHtml}</div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div>${bubbleHtml}</div>`;
           const info = p.interactive?`<div class="info">点一点发光的小点，认识它的名字！🌟</div>`:'';
           div.innerHTML = art + info + `<div class="text">
@@ -233,6 +247,11 @@ window.Reader = {
       bubble.querySelector('.b-name').innerHTML     = `<b>${name}</b>`;
       bubble.querySelector('.b-line-en').textContent = lineEn;
       bubble.querySelector('.b-line-zh').textContent = lineZh;
+      // educational fact line (kept from the original v1 hotspots)
+      const factZh2 = part.dataset.factzh || '';
+      const fact2   = part.dataset.fact   || '';
+      const factText = (lang === 'zh' && factZh2) ? factZh2 : (fact2 || factZh2);
+      bubble.querySelector('.b-fact').textContent = factText;
       // Position by the part's center, clamped within art bounds so the bubble
       // never overflows. SVG coords are stretched to fill .art (preserveAspectRatio=none)
       // so the percent math maps the dot's screen rect directly.
@@ -252,9 +271,10 @@ window.Reader = {
         hot.classList.add('play-pop');
         setTimeout(() => hot.classList.remove('play-pop'), 900);
       }
-      // Read the line in the active primary language (Web Speech; no per-line mp3 needed)
+      // Read the line in the active primary language — play pre-generated MP3
+      // (name then line); fall back to Web Speech only if the MP3 is missing.
       const line = lang === 'zh' ? (lineZh || lineEn) : (lineEn || lineZh);
-      webSpeak(line, lang);
+      playBubbleAudio(part, lang, line);
       // Auto-hide after 4.2s
       clearTimeout(bubbleTimer);
       bubbleTimer = setTimeout(() => bubble.classList.remove('show'), 4200);

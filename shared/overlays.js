@@ -41,13 +41,14 @@ function partSVG(p){
   const isBubble = !!p.line;
   if (isBubble) {
     const x1 = toOvX(p.px), y1 = toOvY(p.py);
-    const lineAttr  = p.line   ? ` data-line="${p.line}"`     : '';
-    const lineZh    = p.lineZh ? ` data-linezh="${p.lineZh}"` : '';
+    const lineAttr  = p.line   ? ` data-line="${p.line}"`      : '';
+    const lineZh    = p.lineZh ? ` data-linezh="${p.lineZh}"`  : '';
+    const lineKey   = p.lineKey? ` data-linekey="${p.lineKey}"`: '';
     return `<g class="hot">
       <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="20" fill="rgba(255,255,255,.26)" stroke="rgba(255,255,255,.9)" stroke-width="2.5"/>
       <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="8" fill="rgba(190,220,255,.5)"/>
-      <ellipse cx="${(x1-6).toFixed(2)}" cy="${(y1-6).toFixed(2)}" rx="5" ry="3" fill="rgba(255,255,255,.95)" transform="rotate(-38 ${(x1-6).toFixed(2)} ${(y1-6).toFixed(2)})"/>
-      <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${p.name}" data-fact="${p.fact}"${factZh}${nmZh}${lineAttr}${lineZh}/>
+      <ellipse cx="${(x1-6).toFixed(2)}" cy="${(y1-6).toFixed(2)}" rx="5" ry="3" fill="rgba(255,255,255,.95)" transform="rotate(-38 ${(x1-6).toFixed(2)} ${(x1-6).toFixed(2)})"/>
+      <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${p.name}" data-fact="${p.fact}"${factZh}${nmZh}${lineAttr}${lineZh}${lineKey}/>
     </g>`;
   }
   const x1 = toOvX(p.px), y1 = toOvY(p.py);

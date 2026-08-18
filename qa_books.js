@@ -97,6 +97,12 @@ for (const id of books) {
           const nameZh = (tag.match(/data-namezh="([^"]*)"/) || [])[1];
           if (name && !exists(path.join(audioDir, `word_${sanitize(name)}_en.mp3`))) errs.push(`page ${idx} word en audio missing: ${name}`);
           if (nameZh && !exists(path.join(audioDir, `word_${sanitize(name)}_zh.mp3`))) errs.push(`page ${idx} word zh audio missing: ${nameZh}`);
+          // bubble-mode hotspot: pre-generated line mp3 must exist
+          const lineKey = (tag.match(/data-linekey="([^"]*)"/) || [])[1];
+          if (lineKey) {
+            if (!exists(path.join(audioDir, `line_${lineKey}_en.mp3`))) errs.push(`page ${idx} line en audio missing: ${lineKey}`);
+            if (!exists(path.join(audioDir, `line_${lineKey}_zh.mp3`))) errs.push(`page ${idx} line zh audio missing: ${lineKey}`);
+          }
         });
       }
     }
