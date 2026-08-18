@@ -196,7 +196,8 @@ window.Reader = {
               <div class="glossary">${cards}</div>
             </div>`;
         } else {
-          const art = p.img?`<div class="art"><img class="base" src="${absWithFallback(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div></div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div></div>`;
+          const bubbleHtml = `<div class="bubble"><div class="b-name"></div><div class="b-line-zh"></div><div class="b-line-en"></div></div>`;
+          const art = p.img?`<div class="art"><img class="base" src="${absWithFallback(p.img)}" alt=""><div class="ovwrap">${ovSVG}</div>${bubbleHtml}</div>`:`<div class="art"><div class="ovwrap">${ovSVG}</div>${bubbleHtml}</div>`;
           const info = p.interactive?`<div class="info">点一点发光的小点，认识它的名字！🌟</div>`:'';
           div.innerHTML = art + info + `<div class="text">
               <button class="speak" title="朗读">🔊</button>
@@ -208,6 +209,57 @@ window.Reader = {
       });
     }
 
+    /* ---------- bubble hotspots (opt-in: only when part has data-line) ---------- */
+    let bubbleTimer = null;
+    function clearBubble(){
+      document.querySelectorAll('.bubble.show').forEach(b => b.classList.remove('show'));
+      if (bubbleTimer) { clearTimeout(bubbleTimer); bubbleTimer = null; }
+    }
+    function showBubble(part){
+      const page = part.closest('.page');
+      const art  = part.closest('.art');
+      const bubble = art && art.querySelector('.bubble');
+      if (!bubble) return;
+      // The whole visible dot group is the <g class="hot"> ancestor; animate
+      // and highlight it as one unit.
+      const hot = part.closest('.hot');
+      if (page) page.querySelectorAll('.hot.sel').forEach(h => h.classList.remove('sel'));
+      if (hot)  hot.classList.add('sel');
+      // Fill text
+      const lang = settings.primary;
+      const name   = (lang === 'zh' ? (part.dataset.namezh || part.dataset.name) : part.dataset.name) || '';
+      const lineEn = part.dataset.line    || '';
+      const lineZh = part.dataset.linezh  || '';
+      bubble.querySelector('.b-name').innerHTML     = `<b>${name}</b>`;
+      bubble.querySelector('.b-line-en').textContent = lineEn;
+      bubble.querySelector('.b-line-zh').textContent = lineZh;
+      // Position by the part's center, clamped within art bounds so the bubble
+      // never overflows. SVG coords are stretched to fill .art (preserveAspectRatio=none)
+      // so the percent math maps the dot's screen rect directly.
+      const r = part.getBoundingClientRect();
+      const w = art.getBoundingClientRect();
+      let left = ((r.left + r.width/2 - w.left) / w.width)  * 100;
+      let top  = ((r.top  + r.height/2 - w.top ) / w.height) * 100;
+      left = Math.min(86, Math.max(14, left));
+      top  = Math.min(68, Math.max(26, top));
+      bubble.style.left = left + '%';
+      bubble.style.top  = top  + '%';
+      bubble.classList.add('show');
+      // Bounce animation on the hot dot
+      if (hot) {
+        hot.classList.remove('play-pop');
+        void hot.getBoundingClientRect();
+        hot.classList.add('play-pop');
+        setTimeout(() => hot.classList.remove('play-pop'), 900);
+      }
+      // Read the line in the active primary language (Web Speech; no per-line mp3 needed)
+      const line = lang === 'zh' ? (lineZh || lineEn) : (lineEn || lineZh);
+      webSpeak(line, lang);
+      // Auto-hide after 4.2s
+      clearTimeout(bubbleTimer);
+      bubbleTimer = setTimeout(() => bubble.classList.remove('show'), 4200);
+    }
+
     /* ---------- navigation ---------- */
     let cur=0; const total=PAGES.length;
     let autoPageTimer=null;
@@ -217,6 +269,7 @@ window.Reader = {
 
     function applyPrimary(){
       document.querySelectorAll('.page').forEach(el=>el.classList.toggle('primary-zh', settings.primary==='zh'));
+      clearBubble();
     }
     function updateLangBtn(){ const b=document.getElementById('langBtn'); if(b) b.classList.toggle('on', true); }
     function show(i){
@@ -227,6 +280,7 @@ window.Reader = {
       document.querySelectorAll('#dots .dot').forEach((d,idx)=>d.classList.toggle('active', idx===cur));
       stopAudio();
       if(window.speechSynthesis) speechSynthesis.cancel();
+      clearBubble();
       const p=PAGES[cur];
       if(p && p.en && settings.autoNarrate){
         setTimeout(()=>{ if(cur===i) playPage(cur, settings.primary); }, 450);
@@ -264,6 +318,11 @@ window.Reader = {
     pagesEl.addEventListener('click', e=>{
       const part=e.target.closest('.part');
       if(part){
+        // BUBBLE mode (opt-in via data-line, e.g. double-decker bus book):
+        // pop a speech bubble next to the dot and read the line. Falls
+        // back to the legacy info-bar mode for all other books so the
+        // change is fully backward-compatible.
+        if(part.dataset.line){ showBubble(part); return; }
         const page=part.closest('.page');
         if(page){
           page.querySelectorAll('.part').forEach(p=>p.classList.remove('sel'));

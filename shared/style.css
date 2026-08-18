@@ -193,6 +193,26 @@ img{display:block; max-width:100%;}
 .modal .close-btn{ margin-top:18px; width:100%; border:none; border-radius:14px; padding:13px; background:var(--blue); color:#fff; font-weight:700; font-size:16px; font-family:'Fredoka',sans-serif; cursor:pointer; box-shadow:0 4px 0 #2a6fd6; }
 .modal .close-btn:active{ transform:translateY(2px); box-shadow:0 2px 0 #2a6fd6; }
 
+/* ===================== BUBBLE HOTSPOTS (opt-in for new books) ===================== */
+.hot{ cursor:pointer; transform-box:fill-box; transform-origin:50% 50%; animation:hotFloat 3.6s ease-in-out infinite; }
+@keyframes hotFloat{ 0%,100%{ translate:0 0 } 50%{ translate:0 -6px } }
+.hot:hover{ filter:drop-shadow(0 0 4px #3a86ff); }
+.hot.sel{ filter:drop-shadow(0 0 6px #ef476f) drop-shadow(0 0 3px #ef476f); }
+.hot.play-pop{ animation:hotPop .75s cubic-bezier(.36,1.6,.5,1); }
+@keyframes hotPop{ 0%{ translate:0 0; scale:1 } 35%{ translate:0 -14px; scale:1.2 } 70%{ translate:0 3px; scale:.94 } 100%{ translate:0 0; scale:1 } }
+
+.bubble{ position:absolute; z-index:9; min-width:140px; max-width:min(300px,72%); background:#fff7ef; border:3px solid #3b2f5e; border-radius:18px; box-shadow:0 6px 0 rgba(59,47,94,.18); padding:8px 12px; pointer-events:none; opacity:0; transform:translate(-50%, calc(-100% - 18px)) scale(.88); transition:opacity .22s, transform .26s cubic-bezier(.34,1.4,.5,1); }
+.bubble.show{ opacity:1; transform:translate(-50%, calc(-100% - 18px)) scale(1); }
+.bubble::after{ content:""; position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); border:9px solid transparent; border-top-color:#3b2f5e; }
+.bubble .b-name{ font-size:14px; }
+.bubble .b-name b{ color:#3a86ff; font-size:15px; letter-spacing:.3px; }
+.bubble .b-line-zh{ font-size:15px; font-weight:700; color:#2b2d42; margin-top:3px; line-height:1.35; }
+.bubble .b-line-en{ font-size:13px; font-weight:600; color:#6c757d; margin-top:2px; line-height:1.35; }
+.page.primary-zh .bubble .b-line-zh{ font-size:16px; }
+.page.primary-zh .bubble .b-line-en{ font-size:12px; opacity:.85; }
+
+@media (prefers-reduced-motion: reduce){ .hot, .hot.play-pop{ animation:none !important; } .bubble{ transition:none !important; } }
+
 /* ===================== RESPONSIVE ===================== */
 @media (min-width:760px){
   .glossary{ grid-template-columns:1fr 1fr 1fr; }

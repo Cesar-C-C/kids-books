@@ -29,10 +29,26 @@ function toOvX(px){ return LEFT_MARGIN + (px/IMG_W) * VISIBLE_W; }
 function toOvY(py){ return (py/IMG_H) * VB_H; }
 
 /* a clickable part: a small red dot + leader line + label + invisible hit circle.
-   Input: px,py,lx,ly in IMAGE pixel coords (auto-converted to SVG viewBox). */
+   Input: px,py,lx,ly in IMAGE pixel coords (auto-converted to SVG viewBox).
+   BUBBLE MODE (new, opt-in): if p.line is set, draw ONLY a larger animated
+   "hot" circle (no leader line, no SVG label) and attach data-line/data-linezh
+   to it. reader.js detects the .hot class and pops up an HTML speech bubble
+   next to the dot — used by books like the double-decker bus that want
+   "character/parts speak" interactions instead of label mode. */
 function partSVG(p){
   const factZh = p.factZh ? ` data-factzh="${p.factZh}"` : '';
   const nmZh = p.nameZh ? ` data-namezh="${p.nameZh}"` : '';
+  const isBubble = !!p.line;
+  if (isBubble) {
+    const x1 = toOvX(p.px), y1 = toOvY(p.py);
+    const lineAttr  = p.line   ? ` data-line="${p.line}"`     : '';
+    const lineZh    = p.lineZh ? ` data-linezh="${p.lineZh}"` : '';
+    return `<g class="hot">
+      <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="22" fill="rgba(255,255,255,.78)" stroke="#ef476f" stroke-width="4"/>
+      <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="9" fill="#ef476f" stroke="#fff" stroke-width="2"/>
+      <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${p.name}" data-fact="${p.fact}"${factZh}${nmZh}${lineAttr}${lineZh}/>
+    </g>`;
+  }
   const x1 = toOvX(p.px), y1 = toOvY(p.py);
   const x2 = toOvX(p.lx), y2 = toOvY(p.ly);
   return `<g>
