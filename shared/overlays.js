@@ -54,7 +54,9 @@ function partSVG(p){
   const x2 = toOvX(p.lx), y2 = toOvY(p.ly);
   return `<g>
     <line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" stroke="#8a96a3" stroke-width="2.5"/>
-    <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="5.5" fill="#ef476f" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="20" fill="rgba(255,255,255,.26)" stroke="rgba(255,255,255,.9)" stroke-width="2.5"/>
+    <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="8" fill="rgba(190,220,255,.5)"/>
+    <ellipse cx="${(x1-6).toFixed(2)}" cy="${(y1-6).toFixed(2)}" rx="5" ry="3" fill="rgba(255,255,255,.95)" transform="rotate(-38 ${(x1-6).toFixed(2)} ${(y1-6).toFixed(2)})"/>
     <text x="${x2.toFixed(2)}" y="${y2.toFixed(2)}" text-anchor="${p.anc}" class="lbltxt">${p.name}</text>
     <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${p.name}" data-fact="${p.fact}"${factZh}${nmZh}/>
   </g>`;

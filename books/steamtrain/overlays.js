@@ -9,7 +9,7 @@ window.OVL = {
   st_parts(){
     return svgWrap(
       partSVG({px:220, py:300, lx:90,  ly:220, anc:'end',   name:'Chimney', nameZh:'烟囱', fact:'the tall funnel that puffs smoke', factZh:'高高的烟囱，冒烟的地方'}) +
-      partSVG({px:555, py:215, lx:430, ly:145, anc:'end',   name:'Steam dome', nameZh:'蒸汽包', fact:'where steam gathers at the top', factZh:'蒸汽聚集在顶上的圆包'}) +
+      partSVG({px:555, py:275, lx:430, ly:145, anc:'end',   name:'Steam dome', nameZh:'蒸汽包', fact:'where steam gathers at the top', factZh:'蒸汽聚集在顶上的圆包'}) +
       partSVG({px:690, py:340, lx:850, ly:280, anc:'start', name:'Cab', nameZh:'司机室', fact:'where the driver sits and steers', factZh:'司机坐着开火车的地方'}) +
       partSVG({px:430, py:560, lx:430, ly:660, anc:'middle', name:'Driving wheel', nameZh:'动轮', fact:'the big wheel that pulls the train', factZh:'拉着火车跑的大轮子'}) +
       partSVG({px:940, py:420, lx:850, ly:500, anc:'end',   name:'Tender', nameZh:'煤水车', fact:'carries coal and water', factZh:'装着煤和水的车厢'})

@@ -127,7 +127,7 @@ def map_keys(book):
             cur.append(ch)
     return out
 
-BOOKS = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station']
+BOOKS = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station', 'capsule', 'steamtrain']
 
 def render_book(book):
     overlays = parse_overlays(os.path.join(ROOT, 'books', book, 'overlays.js'))
