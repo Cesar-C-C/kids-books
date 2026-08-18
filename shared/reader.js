@@ -118,7 +118,7 @@ window.Reader = {
        must bust the browser/CDN cache for the (same-named) files, otherwise users
        keep hearing the stale cached clip. Bump AUDIO_VER whenever audio content
        changes — it appends ?v=N so every client re-fetches fresh. */
-    const AUDIO_VER = 2;
+    const AUDIO_VER = 3;
     const aUrl = p => abs(p) + '?v=' + AUDIO_VER;
 
     function playAudio(url, lang, onDone){ if(settings.muted){ if(onDone) onDone(); return; }
@@ -291,9 +291,10 @@ window.Reader = {
       // Read the line in the active primary language — pre-generated MP3 only
       // (name then line); no TTS fallback.
       playBubbleAudio(part, lang);
-      // Auto-hide after 4.2s
+      // Auto-hide after ~12.6s (3x the original 4.2s) so the speech bubble
+      // stays long enough for the (often longer) line audio to finish.
       clearTimeout(bubbleTimer);
-      bubbleTimer = setTimeout(() => bubble.classList.remove('show'), 4200);
+      bubbleTimer = setTimeout(() => bubble.classList.remove('show'), 12600);
     }
 
     /* ---------- navigation ---------- */
