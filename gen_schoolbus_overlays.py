@@ -132,7 +132,7 @@ HOT = {
         dict(px=1080, py=300, name='Traffic light', nameZh='红绿灯',
              fact='red means stop, green go', factZh='红灯停绿灯行',
              line="Red means stop, green means go!", lineZh='红灯停，绿灯行！', lineKey='sb_road_0'),
-        dict(px=100, py=560, name='Car', nameZh='小汽车',
+        dict(px=1050, py=680, name='Car', nameZh='小汽车',
              fact='shares the road', factZh='一起走的小汽车',
              line="Vroom — sharing the road!", lineZh='呜——一起走！', lineKey='sb_road_1'),
         dict(px=700, py=770, name='Crosswalk', nameZh='斑马线',

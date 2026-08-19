@@ -23,10 +23,10 @@ window.OVL = {
   },
   sb_inside(){
     return svgWrap(
-      partSVG({px:650, py:520, name:'Seats', nameZh:'座位', fact:'cozy seats in rows', factZh:'一排排舒服的座位', line:"Sit here with your friends!", lineZh:'和好朋友坐在这里吧！', lineKey:'sb_inside_0', bg:'dark'}) +
+      partSVG({px:650, py:520, name:'Seats', nameZh:'座位', fact:'cozy seats in rows', factZh:'一排排舒服的座位', line:"Sit here with your friends!", lineZh:'和好朋友坐在这里吧！', lineKey:'sb_inside_0', bg:'light'}) +
       partSVG({px:600, py:560, name:'Aisle', nameZh:'走道', fact:'the walkway in the middle', factZh:'中间的走道', line:"Walk down me to your seat.", lineZh:'沿着我走到你的座位。', lineKey:'sb_inside_1', bg:'light'}) +
       partSVG({px:950, py:420, name:'Window', nameZh:'车窗', fact:'where we look out', factZh:'看外面的窗', line:"Look outside with me!", lineZh:'和我一起看外面！', lineKey:'sb_inside_2', bg:'light'}) +
-      partSVG({px:760, py:500, name:'Friend', nameZh:'小伙伴', fact:'a happy child on board', factZh:'车上的开心小朋友', line:"Hi! I'm riding to school!", lineZh:'嗨！我正坐车去幼儿园！', lineKey:'sb_inside_3', bg:'dark'})
+      partSVG({px:760, py:500, name:'Friend', nameZh:'小伙伴', fact:'a happy child on board', factZh:'车上的开心小朋友', line:"Hi! I'm riding to school!", lineZh:'嗨！我正坐车去幼儿园！', lineKey:'sb_inside_3', bg:'light'})
     );
   },
   sb_wheels(){
@@ -63,8 +63,8 @@ window.OVL = {
   },
   sb_road(){
     return svgWrap(
-      partSVG({px:1080, py:300, name:'Traffic light', nameZh:'红绿灯', fact:'red means stop, green go', factZh:'红灯停绿灯行', line:"Red means stop, green means go!", lineZh:'红灯停，绿灯行！', lineKey:'sb_road_0', bg:'dark'}) +
-      partSVG({px:100, py:560, name:'Car', nameZh:'小汽车', fact:'shares the road', factZh:'一起走的小汽车', line:"Vroom — sharing the road!", lineZh:'呜——一起走！', lineKey:'sb_road_1', bg:'dark'}) +
+      partSVG({px:1080, py:300, name:'Traffic light', nameZh:'红绿灯', fact:'red means stop, green go', factZh:'红灯停绿灯行', line:"Red means stop, green means go!", lineZh:'红灯停，绿灯行！', lineKey:'sb_road_0', bg:'light'}) +
+      partSVG({px:1050, py:680, name:'Car', nameZh:'小汽车', fact:'shares the road', factZh:'一起走的小汽车', line:"Vroom — sharing the road!", lineZh:'呜——一起走！', lineKey:'sb_road_1', bg:'light'}) +
       partSVG({px:700, py:770, name:'Crosswalk', nameZh:'斑马线', fact:'where people cross', factZh:'行人过马路的地方', line:"Walk here, nice and slow.", lineZh:'在这里慢慢走。', lineKey:'sb_road_2', bg:'light'}) +
       partSVG({px:850, py:500, name:'Bus', nameZh:'巴士', fact:'our yellow friend', factZh:'我们的黄色朋友', line:"We follow the rules, too!", lineZh:'我们也守规矩！', lineKey:'sb_road_3', bg:'light'})
     );
