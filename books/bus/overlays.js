@@ -38,22 +38,22 @@ window.OVL = {
   // 2. 上层车厢 剖面 — cross-section of upper deck
   bs_upper(){
     return svgWrap(
-      partSVG({px:520, py:480, name:'Seats',    nameZh:'座位',
+      partSVG({px:260, py:530, name:'Seats',    nameZh:'座位',
                fact:'soft seats in rows on both sides',
                factZh:'两边一排排的软座位',
                line:"Sit here and look out the big windows!",
                lineZh:'坐在这里看大窗户外面吧！', lineKey:'bs_upper_0'}) +
-      partSVG({px:460, py:310, name:'Windows',  nameZh:'窗户',
+      partSVG({px:360, py:290, name:'Windows',  nameZh:'窗户',
                fact:'high windows with a great view',
                factZh:'高高的窗户，风景好',
                line:"Up high, we see the whole street!",
                lineZh:'我们在高处，能看完整条街。', lineKey:'bs_upper_1'}) +
-      partSVG({px:700, py:600, name:'Walkway',  nameZh:'走道',
+      partSVG({px:560, py:560, name:'Walkway',  nameZh:'走道',
                fact:'the aisle in the middle',
                factZh:'中间的通道',
                line:"Walk down me to find your seat.",
                lineZh:'沿着我走，就能找到座位。', lineKey:'bs_upper_2'}) +
-      partSVG({px:560, py:200, name:'Ceiling',  nameZh:'车顶',
+      partSVG({px:580, py:180, name:'Ceiling',  nameZh:'车顶',
                fact:'the roof that keeps rain out',
                factZh:'挡雨的车顶',
                line:"I keep the rain out of the bus.",

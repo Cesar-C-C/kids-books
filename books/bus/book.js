@@ -30,7 +30,7 @@ window.PAGES = [
     ov: 'bs_parts', interactive: true
   },
   {
-    img: 'assets/02_upper.webp',
+    img: 'assets/02_upper_v2.webp',
     en: 'Upstairs is the upper deck. Passengers love to sit here because the windows are high and the view is wonderful. Rows of soft seats line both sides, with a walkway in the middle.',
     zh: '楼上是上层车厢。乘客最爱坐这里，因为窗户高、风景好。一排排软软的座位分列两边，中间是走道。',
     ov: 'bs_upper', interactive: true
