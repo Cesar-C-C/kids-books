@@ -17,12 +17,12 @@ OUT = os.path.join(ROOT, "books", BOOK, "overlays.js")
 IMG = {
     'sb_parts':    '01_parts.webp',
     'sb_driver':   '02_driver.webp',
-    'sb_inside':   '03_inside.webp',
+    'sb_inside':   '03_inside_v2.webp',
     'sb_wheels':   '04_wheels.webp',
     'sb_stopsign': '05_stopsign.webp',
     'sb_doors':    '06_doors.webp',
     'sb_aide':     '07_aide.webp',
-    'sb_road':     '08_road.webp',
+    'sb_road':     '08_road_v2.webp',
     'sb_arrive':   '09_arrive.webp',
     'sb_vocab':    '10_vocab.webp',
 }
