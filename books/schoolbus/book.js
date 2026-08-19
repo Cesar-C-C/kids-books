@@ -35,13 +35,13 @@ window.PAGES = [
     ov: 'sb_driver', interactive: true
   },
   {
-    img: 'assets/03_inside_v3.webp',
+    img: 'assets/03_inside_v2.webp',
     en: 'Inside, there are rows of cozy seats and a wide aisle down the middle. Friends sit together, talk, and sing on the way to school!',
     zh: '车里有一排排舒服的座位，中间是一条宽宽的走道。小伙伴们坐在一起，聊天、唱歌，开开心心去幼儿园！',
     ov: 'sb_inside', interactive: true
   },
   {
-    img: 'assets/04_wheels_v3.webp',
+    img: 'assets/04_wheels.webp',
     en: 'Look at the wheels! Thick black tires grip the road, and shiny hubcaps spin round and round. The wheels roll the bus all the way to school.',
     zh: '看车轮！厚厚的黑色轮胎抓住路面，亮亮的轮毂转呀转。车轮带着巴士一路开到幼儿园。',
     ov: 'sb_wheels', interactive: true
@@ -65,7 +65,7 @@ window.PAGES = [
     ov: 'sb_aide', interactive: true
   },
   {
-    img: 'assets/08_road_v3.webp',
+    img: 'assets/08_road_v2.webp',
     en: 'On the road, the bus follows the rules. It waits at red lights, slows at the crosswalk, and shares the street with cars and people.',
     zh: '在路上，巴士遵守规则。红灯前停下，斑马线前放慢，和小汽车、行人一起走。',
     ov: 'sb_road', interactive: true
