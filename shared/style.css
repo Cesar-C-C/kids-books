@@ -218,6 +218,25 @@ img{display:block; max-width:100%;}
 .page.primary-zh .bubble .b-line-en{ font-size:12px; opacity:.85; }
 .page.primary-zh .bubble .b-fact{ font-size:13px; }
 
+/* ===================== ADAPTIVE BUBBLE THEME =====================
+   Default above = LIGHT cream bubble (dark text) for DARK/medium
+   backgrounds. When a hotspot sits on a BRIGHT area (yellow bus body,
+   light-blue sky, white), showBubble adds `.on-light` and we render a
+   DARK navy bubble with WHITE text + light-blue border so it stays
+   high-contrast and always readable. The connector arrow matches the
+   border color in both themes. */
+.bubble.on-light{
+  background:#1f2942;
+  border-color:#9ec5ff;
+  box-shadow:0 6px 0 rgba(0,0,0,.30);
+}
+.bubble.on-light::after{ border-top-color:#9ec5ff; }
+.bubble.below.on-light::after{ border-bottom-color:#9ec5ff; border-top-color:transparent; }
+.bubble.on-light .b-name b{ color:#ffd166; }
+.bubble.on-light .b-line-zh{ color:#ffffff; }
+.bubble.on-light .b-line-en{ color:#c3d4f5; }
+.bubble.on-light .b-fact{ color:#c9d3ec; border-top:1px dashed #3a4a6e; }
+
 @media (prefers-reduced-motion: reduce){ .hot, .hot.play-pop{ animation:none !important; } .bubble{ transition:none !important; } }
 
 /* ===================== RESPONSIVE ===================== */

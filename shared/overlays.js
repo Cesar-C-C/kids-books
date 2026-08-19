@@ -44,11 +44,20 @@ function partSVG(p){
     const lineAttr  = p.line   ? ` data-line="${p.line}"`      : '';
     const lineZh    = p.lineZh ? ` data-linezh="${p.lineZh}"`  : '';
     const lineKey   = p.lineKey? ` data-linekey="${p.lineKey}"`: '';
+    /* ADAPTIVE BUBBLE: data-bg tells reader.js which bubble theme to use so the
+       speech bubble stays legible against the illustration behind it.
+         bg:'light' -> hotspot sits on a BRIGHT area (yellow bus, light-blue sky,
+                       white) -> reader.js renders a DARK navy bubble w/ white text.
+         bg:'dark'  -> hotspot sits on a DARK area (tire, window, shadow) ->
+                       reader.js keeps the LIGHT cream bubble w/ dark text.
+       The value is computed at authoring time (PIL samples the illustration), so
+       the bubble is always correct on CDN, local, and file:// — no runtime CORS. */
+    const bgAttr    = p.bg     ? ` data-bg="${p.bg}"`          : '';
     return `<g class="hot">
       <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="20" fill="rgba(255,255,255,.26)" stroke="rgba(255,255,255,.9)" stroke-width="2.5"/>
       <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="8" fill="rgba(190,220,255,.5)"/>
-      <ellipse cx="${(x1-6).toFixed(2)}" cy="${(y1-6).toFixed(2)}" rx="5" ry="3" fill="rgba(255,255,255,.95)" transform="rotate(-38 ${(x1-6).toFixed(2)} ${(x1-6).toFixed(2)})"/>
-      <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${p.name}" data-fact="${p.fact}"${factZh}${nmZh}${lineAttr}${lineZh}${lineKey}/>
+      <ellipse cx="${(x1-6).toFixed(2)}" cy="${(y1-6).toFixed(2)}" rx="5" ry="3" fill="rgba(255,255,255,.95)" transform="rotate(-38 ${(x1-6).toFixed(2)} ${(y1-6).toFixed(2)})"/>
+      <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${p.name}" data-fact="${p.fact}"${factZh}${nmZh}${lineAttr}${lineZh}${lineKey}${bgAttr}/>
     </g>`;
   }
   const x1 = toOvX(p.px), y1 = toOvY(p.py);

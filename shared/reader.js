@@ -259,7 +259,7 @@ window.Reader = {
     /* ---------- bubble hotspots (opt-in: only when part has data-line) ---------- */
     let bubbleTimer = null;
     function clearBubble(){
-      document.querySelectorAll('.bubble.show').forEach(b => b.classList.remove('show'));
+      document.querySelectorAll('.bubble.show').forEach(b => { b.classList.remove('show'); b.classList.remove('on-light'); });
       if (bubbleTimer) { clearTimeout(bubbleTimer); bubbleTimer = null; }
     }
     function showBubble(part){
@@ -275,6 +275,11 @@ window.Reader = {
       const name   = (lang === 'zh' ? (part.dataset.namezh || part.dataset.name) : part.dataset.name) || '';
       const lineEn = part.dataset.line    || '';
       const lineZh = part.dataset.linezh  || '';
+      /* ADAPTIVE BUBBLE: choose the theme that stays legible against the
+         illustration behind this hotspot. bg:'light' -> dark navy bubble
+         (white text) for bright backgrounds; otherwise the default cream
+         bubble (dark text). Computed at authoring time from the image. */
+      bubble.classList.toggle('on-light', part.dataset.bg === 'light');
       bubble.querySelector('.b-name').innerHTML     = `<b>${name}</b>`;
       bubble.querySelector('.b-line-en').textContent = lineEn;
       bubble.querySelector('.b-line-zh').textContent = lineZh;
