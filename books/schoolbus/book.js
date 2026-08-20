@@ -29,7 +29,7 @@ window.PAGES = [
     ov: 'sb_parts', interactive: true
   },
   {
-    img: 'assets/02_driver_v2.webp',
+    img: 'assets/02_driver_v3.webp',
     en: 'The driver sits up front and holds the big steering wheel. The driver watches the road carefully and keeps every child safe on the trip.',
     zh: '司机坐在最前面，握着大方向盘。司机认真看着路，一路上保护每个小朋友的安全。',
     ov: 'sb_driver', interactive: true

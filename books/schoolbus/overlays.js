@@ -15,10 +15,10 @@ window.OVL = {
   },
   sb_driver(){
     return svgWrap(
-      partSVG({px:820, py:470, name:'Driver', nameZh:'司机', fact:'the person who drives', factZh:'开车的人', line:"I keep everyone safe on the road.", lineZh:'我保证大家在路上都安全。', lineKey:'sb_driver_0', bg:'dark'}) +
+      partSVG({px:820, py:470, name:'Driver', nameZh:'司机', fact:'the person who drives', factZh:'开车的人', line:"I keep everyone safe on the road.", lineZh:'我保证大家在路上都安全。', lineKey:'sb_driver_0', bg:'light'}) +
       partSVG({px:620, py:590, name:'Steering wheel', nameZh:'方向盘', fact:'turns the bus', factZh:'转动巴士', line:"Turn me to steer the bus!", lineZh:'转我，巴士就转弯！', lineKey:'sb_driver_1', bg:'dark'}) +
       partSVG({px:420, py:260, name:'Windshield', nameZh:'挡风玻璃', fact:'the big front window', factZh:'前面的大窗', line:"I show the driver the road ahead.", lineZh:'我让司机看到前面的路。', lineKey:'sb_driver_2', bg:'light'}) +
-      partSVG({px:520, py:620, name:'Dashboard', nameZh:'仪表盘', fact:'dials that show speed', factZh:'显示速度的仪表', line:"My dials show how fast we go.", lineZh:'我的仪表显示开多快。', lineKey:'sb_driver_3', bg:'light'})
+      partSVG({px:520, py:620, name:'Dashboard', nameZh:'仪表盘', fact:'dials that show speed', factZh:'显示速度的仪表', line:"My dials show how fast we go.", lineZh:'我的仪表显示开多快。', lineKey:'sb_driver_3', bg:'dark'})
     );
   },
   sb_inside(){
