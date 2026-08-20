@@ -11,73 +11,73 @@ window.BOOK = {
   subtitle: 'a happy yellow bus that brings children to school',
   subtitleZh: '一辆快乐的黄色巴士，接送小朋友上幼儿园',
   age: '4-8 岁',
-  coverImg: 'assets/00_cover.webp',
+  coverImg: 'assets/00_cover_c.webp',
   audioDir: 'audio'
 };
 
 window.PAGES = [
   {
-    img: 'assets/00_cover.webp',
+    img: 'assets/00_cover_c.webp',
     cover: true,
     en: 'The Kindergarten School Bus',
     zh: '幼儿园校车'
   },
   {
-    img: 'assets/01_parts.webp',
+    img: 'assets/01_parts_c.webp',
     en: 'This is our kindergarten school bus! It is a happy yellow bus that picks children up and brings them safely to school. Big windows let us watch the world go by.',
     zh: '这是我们的幼儿园校车！它是一辆快乐的黄色巴士，接上小朋友，把他们安全送到幼儿园。大大的车窗让我们看外面的世界。',
     ov: 'sb_parts', interactive: true
   },
   {
-    img: 'assets/02_driver_v3.webp',
+    img: 'assets/02_driver_c.webp',
     en: 'The driver sits up front and holds the big steering wheel. The driver watches the road carefully and keeps every child safe on the trip.',
     zh: '司机坐在最前面，握着大方向盘。司机认真看着路，一路上保护每个小朋友的安全。',
     ov: 'sb_driver', interactive: true
   },
   {
-    img: 'assets/03_inside_v6.webp',
+    img: 'assets/03_inside_c.webp',
     en: 'Inside, there are rows of cozy seats and a wide aisle down the middle. Friends sit together, talk, and sing on the way to school!',
     zh: '车里有一排排舒服的座位，中间是一条宽宽的走道。小伙伴们坐在一起，聊天、唱歌，开开心心去幼儿园！',
     ov: 'sb_inside', interactive: true
   },
   {
-    img: 'assets/04_wheels.webp',
+    img: 'assets/04_wheels_c.webp',
     en: 'Look at the wheels! Thick black tires grip the road, and shiny hubcaps spin round and round. The wheels roll the bus all the way to school.',
     zh: '看车轮！厚厚的黑色轮胎抓住路面，亮亮的轮毂转呀转。车轮带着巴士一路开到幼儿园。',
     ov: 'sb_wheels', interactive: true
   },
   {
-    img: 'assets/05_stopsign.webp',
+    img: 'assets/05_stopsign_c.webp',
     en: 'When the bus stops, the red stop sign swings out and the yellow lights flash. Cars must wait. Then children can cross the road safely.',
     zh: '巴士一停下，红色停车牌就伸出来，黄灯一闪一闪。小汽车必须等着。这样小朋友才能安全过马路。',
     ov: 'sb_stopsign', interactive: true
   },
   {
-    img: 'assets/06_doors.webp',
+    img: 'assets/06_doors_c.webp',
     en: 'At the kindergarten, the door opens with a friendly beep. One by one, children hop down the steps and wave goodbye to the driver.',
     zh: '到了幼儿园，车门"哔"的一声打开。小朋友一个接一个跳下台阶，跟司机挥手说再见。',
     ov: 'sb_doors', interactive: true
   },
   {
-    img: 'assets/07_aide.webp',
+    img: 'assets/07_aide_c.webp',
     en: 'A kind bus aide rides along to help. The aide finds each child a seat, fastens a belt, and makes sure everyone is happy and safe.',
     zh: '一位亲切的随车老师也坐车上帮忙。她帮每个小朋友找到座位、系好安全带，让大家又开心又安全。',
     ov: 'sb_aide', interactive: true
   },
   {
-    img: 'assets/08_road_v2.webp',
+    img: 'assets/08_road_c.webp',
     en: 'On the road, the bus follows the rules. It waits at red lights, slows at the crosswalk, and shares the street with cars and people.',
     zh: '在路上，巴士遵守规则。红灯前停下，斑马线前放慢，和小汽车、行人一起走。',
     ov: 'sb_road', interactive: true
   },
   {
-    img: 'assets/09_arrive.webp',
+    img: 'assets/09_arrive_c.webp',
     en: 'Here we are! The bus arrives at the kindergarten gate. Children run to the slide and swings, ready for a fun day of play and learning.',
     zh: '到啦！巴士停在幼儿园门口。小朋友跑向滑梯和秋千，准备开始快乐的一天——玩耍和学本领。',
     ov: 'sb_arrive', interactive: true
   },
   {
-    img: 'assets/10_vocab.webp',
+    img: 'assets/10_vocab_c.webp',
     en: 'Great job, little rider! You learned the parts of the school bus. Can you name them all?',
     zh: '做得好，小车友！你认识了校车的各个部件。你能叫出它们的名字吗？',
     ov: 'sb_vocab', interactive: true,

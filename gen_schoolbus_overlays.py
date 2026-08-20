@@ -15,16 +15,16 @@ OUT = os.path.join(ROOT, "books", BOOK, "overlays.js")
 
 # key -> illustration filename
 IMG = {
-    'sb_parts':    '01_parts.webp',
-    'sb_driver':   '02_driver_v3.webp',
-    'sb_inside':   '03_inside_v6.webp',
-    'sb_wheels':   '04_wheels.webp',
-    'sb_stopsign': '05_stopsign.webp',
-    'sb_doors':    '06_doors.webp',
-    'sb_aide':     '07_aide.webp',
-    'sb_road':     '08_road_v2.webp',
-    'sb_arrive':   '09_arrive.webp',
-    'sb_vocab':    '10_vocab.webp',
+    'sb_parts':    '01_parts_c.webp',
+    'sb_driver':   '02_driver_c.webp',
+    'sb_inside':   '03_inside_c.webp',
+    'sb_wheels':   '04_wheels_c.webp',
+    'sb_stopsign': '05_stopsign_c.webp',
+    'sb_doors':    '06_doors_c.webp',
+    'sb_aide':     '07_aide_c.webp',
+    'sb_road':     '08_road_c.webp',
+    'sb_arrive':   '09_arrive_c.webp',
+    'sb_vocab':    '10_vocab_c.webp',
 }
 
 # hotspot data per page. px,py = IMAGE pixel coords (1216x832).
@@ -62,7 +62,7 @@ HOT = {
         dict(px=650, py=520, name='Seats', nameZh='座位',
              fact='cozy seats in rows', factZh='一排排舒服的座位',
              line="Sit here with your friends!", lineZh='和好朋友坐在这里吧！', lineKey='sb_inside_0'),
-        dict(px=600, py=560, name='Aisle', nameZh='走道',
+        dict(px=590, py=760, name='Aisle', nameZh='走道',
              fact='the walkway in the middle', factZh='中间的走道',
              line="Walk down me to your seat.", lineZh='沿着我走到你的座位。', lineKey='sb_inside_1'),
         dict(px=950, py=420, name='Window', nameZh='车窗',
