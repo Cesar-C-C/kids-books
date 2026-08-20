@@ -35,7 +35,7 @@ window.PAGES = [
     ov: 'sb_driver', interactive: true
   },
   {
-    img: 'assets/03_inside_v5.webp',
+    img: 'assets/03_inside_v6.webp',
     en: 'Inside, there are rows of cozy seats and a wide aisle down the middle. Friends sit together, talk, and sing on the way to school!',
     zh: '车里有一排排舒服的座位，中间是一条宽宽的走道。小伙伴们坐在一起，聊天、唱歌，开开心心去幼儿园！',
     ov: 'sb_inside', interactive: true
