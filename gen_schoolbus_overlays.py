@@ -17,7 +17,7 @@ OUT = os.path.join(ROOT, "books", BOOK, "overlays.js")
 IMG = {
     'sb_parts':    '01_parts.webp',
     'sb_driver':   '02_driver.webp',
-    'sb_inside':   '03_inside_v4.webp',
+    'sb_inside':   '03_inside_v5.webp',
     'sb_wheels':   '04_wheels.webp',
     'sb_stopsign': '05_stopsign.webp',
     'sb_doors':    '06_doors.webp',
@@ -68,7 +68,7 @@ HOT = {
         dict(px=950, py=420, name='Window', nameZh='车窗',
              fact='where we look out', factZh='看外面的窗',
              line="Look outside with me!", lineZh='和我一起看外面！', lineKey='sb_inside_2'),
-        dict(px=760, py=500, name='Friend', nameZh='小伙伴',
+        dict(px=540, py=500, name='Friend', nameZh='小伙伴',
              fact='a happy child on board', factZh='车上的开心小朋友',
              line="Hi! I'm riding to school!", lineZh='嗨！我正坐车去幼儿园！', lineKey='sb_inside_3'),
     ],

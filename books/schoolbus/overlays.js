@@ -26,7 +26,7 @@ window.OVL = {
       partSVG({px:650, py:520, name:'Seats', nameZh:'座位', fact:'cozy seats in rows', factZh:'一排排舒服的座位', line:"Sit here with your friends!", lineZh:'和好朋友坐在这里吧！', lineKey:'sb_inside_0', bg:'light'}) +
       partSVG({px:600, py:560, name:'Aisle', nameZh:'走道', fact:'the walkway in the middle', factZh:'中间的走道', line:"Walk down me to your seat.", lineZh:'沿着我走到你的座位。', lineKey:'sb_inside_1', bg:'light'}) +
       partSVG({px:950, py:420, name:'Window', nameZh:'车窗', fact:'where we look out', factZh:'看外面的窗', line:"Look outside with me!", lineZh:'和我一起看外面！', lineKey:'sb_inside_2', bg:'dark'}) +
-      partSVG({px:760, py:500, name:'Friend', nameZh:'小伙伴', fact:'a happy child on board', factZh:'车上的开心小朋友', line:"Hi! I'm riding to school!", lineZh:'嗨！我正坐车去幼儿园！', lineKey:'sb_inside_3', bg:'light'})
+      partSVG({px:540, py:500, name:'Friend', nameZh:'小伙伴', fact:'a happy child on board', factZh:'车上的开心小朋友', line:"Hi! I'm riding to school!", lineZh:'嗨！我正坐车去幼儿园！', lineKey:'sb_inside_3', bg:'light'})
     );
   },
   sb_wheels(){
