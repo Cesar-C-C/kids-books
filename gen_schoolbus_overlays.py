@@ -16,7 +16,7 @@ OUT = os.path.join(ROOT, "books", BOOK, "overlays.js")
 # key -> illustration filename
 IMG = {
     'sb_parts':    '01_parts.webp',
-    'sb_driver':   '02_driver.webp',
+    'sb_driver':   '02_driver_v2.webp',
     'sb_inside':   '03_inside_v6.webp',
     'sb_wheels':   '04_wheels.webp',
     'sb_stopsign': '05_stopsign.webp',
