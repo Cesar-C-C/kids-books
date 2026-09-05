@@ -8,7 +8,7 @@ const { JSDOM } = require('jsdom');
 const fs = require('fs');
 const path = require('path');
 
-const root = 'C:/Users/Administrator/WorkBuddy/cesar_agent_fold/kids-books';
+const root = __dirname;
 const books = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station', 'steamtrain', 'capsule', 'bus', 'schoolbus'];
 let fail = 0;
 

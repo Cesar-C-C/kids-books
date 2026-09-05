@@ -1,0 +1,50 @@
+{
+  "style": "Use case: illustration-story / scientific-educational. ONE children's science picture book illustration, landscape aspect 1216:832. Warm watercolor and colored pencils on fine cream paper, friendly refined rounded shapes, clear educational detail and believable construction, age 4-8. No text, letters, numbers, labels, logos, watermarks or panel borders. Leave important objects comfortably inside margins. ",
+  "anchor": "C:\\Users\\Administrator\\.codex\\generated_images\\01a06d87-039e-7d52-bd19-08f93485f82e\\exec-f09a41c7-56e0-4b7f-b7f9-a35d5bff07b7.png",
+  "jobs": [
+    [
+      "01_parts",
+      "A clear SIDE CUTAWAY of the referenced bus front RIGHT, its near wall selectively removed to reveal TWO separate passenger floors and a staircase connecting them just behind driver. Rows of teal seats on both decks, yellow handrails, red structural pillars, two large wheels visible below. Off-white simple background. Upper deck occupies y25-43%, lower deck y50-70%; complete whole bus inside image. Seat people only on actual floors, staircase leads through floor opening."
+    ],
+    [
+      "02_upper",
+      "INTERIOR upper deck from front looking back down central unobstructed aisle. Teal upholstered seat rows on both sides, yellow grab rails, cream curved ceiling clearly visible at top, big high windows both sides showing treetops and nearby upper building floors. Two seated families enjoying view. No steering wheel on upper deck. Focus on seats, high windows, aisle, and ceiling."
+    ],
+    [
+      "03_lower",
+      "INTERIOR LOWER DECK viewed obliquely: open front boarding door on left, generous wheelchair bay at center with wheelchair passenger safely parked and separate stroller space, yellow handrails, priority teal seat on right with yellow pictogram-only sign above. Wide level non-slip floor. Driver compartment partly visible far left. Clear objects for hotspots: front door, yellow priority-seat pictogram, wheelchair area and handrail. No written signs."
+    ],
+    [
+      "04_stairs",
+      "Close CUTAWAY of staircase connecting lower and upper bus decks. Lower landing lower-left, staircase rises towards upper-right through actual floor opening. Child in yellow top ascending one step holding yellow continuous handrail, parent supervising below. Teal upper seats visible at right beyond upper landing. Distinct floor levels, sensible step dimensions, warm sunlight. Main subject stair treads, handrail, child and upper seats."
+    ],
+    [
+      "05_cab",
+      "Close view inside bus driver cabin from slightly behind and beside driver. Navy-uniformed driver at left with both hands on large black steering wheel near center, dashboard gauges to right of wheel; broad front windshield fills upper-right showing safe lane and sunny street. Driver seated in LOWER deck only. Accurate reachable steering wheel and dashboard, simple unlettered instrument dials."
+    ],
+    [
+      "06_engine",
+      "Educational close cutaway of REAR lower compartment of red bus, not front. Red service hatch lifted, engine block center, radiator cooling fan left, distinct fuel tank in adjacent compartment right, pipes and hoses above engine connecting logically, rear wheel partially visible below. No people touching hot machinery, no fire, no floating pieces. Clearly separate fan, engine, pipes, fuel tank for teaching."
+    ],
+    [
+      "07_wheel",
+      "Ground-level macro THREE-QUARTER closeup of one wheel mounted beneath red bus fender. Huge black rubber tire with visible curved tread grooves on left shoulder, silver hub at center, firm contact patch on gray road at bottom. Warm city reflected in hubcap. Wheel fills middle 70% of image, leave gray road lower quarter. Show rubber, metal hub, tread texture and street separately."
+    ],
+    [
+      "08_doors",
+      "Wide street-level scene of red bus parked at curb, front faces RIGHT. TWO OPEN DOORS on near side: front boarding door just behind driver at right, middle exit door toward left. A parent at front door tapping a plain card reader, a child beside parent; one adult steps from middle exit onto sidewalk. Driver visible front-right. Small waiting queue at sidewalk right, no people standing in road. Doors must not overlap wheels."
+    ],
+    [
+      "09_opentop",
+      "Bird's-eye three-quarter view of OPEN-TOP sightseeing version of same red double-decker bus. ONLY upper roof removed, upper floor intact. Tourists seated safely in rows of teal seats, smiling in breeze, yellow safety rails. Ground floor red bus body visible below, sunny charming city street at lower-right. No standing on seat backs or leaning outside. Vehicle angled toward viewer, no text."
+    ],
+    [
+      "10_street",
+      "Wide city scene: red double-decker bus stopped BEFORE zebra crossing at a clearly RED traffic light on left. Separate bus-stop pole with simple bus pictogram near curb, small blue car stopped behind bus, pedestrians WALK ON SIDEWALK at right. Show shared orderly street and generous space, no vehicle on crosswalk. Three traffic lamp lenses, top red illuminated only. Bus full visible but secondary to street context."
+    ],
+    [
+      "11_vocab",
+      "Single educational recap composition on cream paper: medium red double-decker bus centered. Around it seven separated realistic watercolor object studies: black tire upper-left, red-framed window middle-left, teal seat lower-left, steering wheel upper-center-right, compact engine upper-right, staircase middle-right, double bus door lower-right. No panels, no labels, no lines or arrows. Each of eight subjects clear separated and uncluttered, no duplicated objects. Consistent bus design and object colors."
+    ]
+  ]
+}

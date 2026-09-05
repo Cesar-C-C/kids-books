@@ -1,0 +1,181 @@
+{
+  "imageSize": [
+    1216,
+    832
+  ],
+  "method": "Visual inspection of generated WebP scenes, by stable audio lineKey.",
+  "coordinates": {
+    "cp_parts_0": [
+      605,
+      130
+    ],
+    "cp_parts_1": [
+      500,
+      420
+    ],
+    "cp_parts_2": [
+      720,
+      435
+    ],
+    "cp_parts_3": [
+      610,
+      685
+    ],
+    "cp_layers_0": [
+      330,
+      410
+    ],
+    "cp_layers_1": [
+      570,
+      470
+    ],
+    "cp_layers_2": [
+      725,
+      485
+    ],
+    "cp_heatshield_0": [
+      550,
+      560
+    ],
+    "cp_heatshield_1": [
+      350,
+      490
+    ],
+    "cp_cabin_0": [
+      405,
+      250
+    ],
+    "cp_cabin_1": [
+      820,
+      235
+    ],
+    "cp_cabin_2": [
+      605,
+      460
+    ],
+    "cp_cabin_3": [
+      850,
+      655
+    ],
+    "cp_parachute_0": [
+      275,
+      225
+    ],
+    "cp_parachute_1": [
+      870,
+      575
+    ],
+    "cp_parachute_2": [
+      600,
+      425
+    ],
+    "cp_parachute_3": [
+      895,
+      380
+    ],
+    "cp_retro_0": [
+      468,
+      625
+    ],
+    "cp_retro_1": [
+      720,
+      660
+    ],
+    "cp_window_0": [
+      975,
+      630
+    ],
+    "cp_window_1": [
+      800,
+      350
+    ],
+    "cp_window_2": [
+      310,
+      420
+    ],
+    "cp_dock_0": [
+      440,
+      410
+    ],
+    "cp_dock_1": [
+      675,
+      410
+    ],
+    "cp_dock_2": [
+      885,
+      380
+    ],
+    "cp_dock_3": [
+      800,
+      115
+    ],
+    "cp_reentry_0": [
+      530,
+      395
+    ],
+    "cp_reentry_1": [
+      430,
+      500
+    ],
+    "cp_reentry_2": [
+      690,
+      220
+    ],
+    "cp_parachute_open_0": [
+      610,
+      180
+    ],
+    "cp_parachute_open_1": [
+      625,
+      625
+    ],
+    "cp_parachute_open_2": [
+      975,
+      760
+    ],
+    "cp_landing_0": [
+      760,
+      410
+    ],
+    "cp_landing_1": [
+      640,
+      515
+    ],
+    "cp_landing_2": [
+      470,
+      550
+    ],
+    "cp_landing_3": [
+      300,
+      745
+    ],
+    "cp_vocab_0": [
+      250,
+      290
+    ],
+    "cp_vocab_1": [
+      610,
+      130
+    ],
+    "cp_vocab_2": [
+      270,
+      610
+    ],
+    "cp_vocab_3": [
+      625,
+      435
+    ],
+    "cp_vocab_4": [
+      620,
+      700
+    ],
+    "cp_vocab_5": [
+      1000,
+      300
+    ],
+    "cp_vocab_6": [
+      985,
+      600
+    ]
+  }
+}

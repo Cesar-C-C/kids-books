@@ -1,0 +1,1372 @@
+[
+  {
+    "book": "airplane",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/01_cover_c.webp",
+    "newAsset": "assets/01_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/02_overview_c.webp",
+    "newAsset": "assets/02_overview_c_r2.webp",
+    "en": "An airplane has many parts that work together. Tap a part to learn its name!",
+    "zh": "飞机由许多部件协同工作。点一点零件，听听它的名字！",
+    "overlayKey": "overview"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/03_fuselage_c.webp",
+    "newAsset": "assets/03_fuselage_c_r2.webp",
+    "en": "The <span class='word'>FUSELAGE</span> is the body. The cockpit is for pilots. The cabin carries passengers. The cargo hold carries bags.",
+    "zh": "机身是主体。驾驶舱给飞行员用，客舱载乘客，货舱装行李。",
+    "overlayKey": "fuselage"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/04_wing_c.webp",
+    "newAsset": "assets/04_wing_c_r2.webp",
+    "en": "The <span class='word'>WING</span> makes LIFT — the upward push that holds the plane in the sky. A small flap, the <span class='word'>AILERON</span>, helps it roll and turn.",
+    "zh": "机翼产生升力——把飞机托在空中的向上力量。小襟翼（副翼）帮助飞机滚转和转弯。",
+    "overlayKey": "wing"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/05_lift_c.webp",
+    "newAsset": "assets/05_lift_c_r2.webp",
+    "en": "Air flows FAST over the curved top and SLOW under the bottom. Fast air presses less, so the wing is pushed UP. That push is <span class='word'>LIFT</span>.",
+    "zh": "气流在弯曲的机翼上方流得快、下方流得慢。上方流速快、压力小，于是机翼被向上推——这股推力就是升力。",
+    "overlayKey": "lift"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/06_tail_c.webp",
+    "newAsset": "assets/06_tail_c_r2.webp",
+    "en": "The <span class='word'>TAIL</span> keeps the plane steady. The RUDDER turns it left or right. The ELEVATOR tips the nose up or down.",
+    "zh": "尾翼让飞机保持平稳。方向舵控制左右转向，升降舵控制机头上仰或下俯。",
+    "overlayKey": "tail"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/07_engine_c.webp",
+    "newAsset": "assets/07_engine_c_r2.webp",
+    "en": "The <span class='word'>ENGINE</span> sucks in air, burns fuel, and shoots hot air BACKWARD. That push makes <span class='word'>THRUST</span>, moving the plane FORWARD.",
+    "zh": "引擎吸入空气、燃烧燃料，把热气向后喷出。这股推力就是推力，推动飞机向前。",
+    "overlayKey": "engine"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/08_forces_c.webp",
+    "newAsset": "assets/08_forces_c_r2.webp",
+    "en": "Four forces act on a plane: <span class='word'>LIFT</span> up, WEIGHT down, <span class='word'>THRUST</span> forward, DRAG back. When lift = weight and thrust = drag, it flies straight.",
+    "zh": "作用在飞机上有四种力：升力向上、重力向下、推力向前、阻力向后。当升力=重力、推力=阻力时，飞机平稳直线飞行。",
+    "overlayKey": "forces"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/09_gear_c.webp",
+    "newAsset": "assets/09_gear_c_r2.webp",
+    "en": "<span class='word'>LANDING GEAR</span> are the wheels. They come DOWN for takeoff and landing, and fold UP in the air to go faster.",
+    "zh": "起落架就是轮子。起飞和降落时放下，在空中收起以飞得更快。",
+    "overlayKey": "gear"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/10_takeoff_c.webp",
+    "newAsset": "assets/10_takeoff_c_r2.webp",
+    "en": "The plane speeds up the runway. When <span class='word'>LIFT</span> grows bigger than WEIGHT, it leaves the ground — TAKEOFF!",
+    "zh": "飞机在跑道上加速。当升力大于重力时，它就离开地面——起飞！",
+    "overlayKey": "takeoff"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/11_cruise_c.webp",
+    "newAsset": "assets/11_cruise_c_r2.webp",
+    "en": "Up high, <span class='word'>LIFT</span> balances WEIGHT and <span class='word'>THRUST</span> balances DRAG. The plane flies smooth and steady.",
+    "zh": "在高空，升力平衡重力、推力平衡阻力，飞机平稳飞行。",
+    "overlayKey": "cruise"
+  },
+  {
+    "book": "airplane",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/12_landing_c.webp",
+    "newAsset": "assets/12_landing_c_r2.webp",
+    "en": "To land, the plane slows down and drops its wheels. It touches the ground gently. Welcome back!",
+    "zh": "降落时，飞机减速并放下轮子，轻轻接触地面。欢迎回家！",
+    "overlayKey": "landing"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/00_cover_c.webp",
+    "newAsset": "assets/00_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/01_singularity_c.webp",
+    "newAsset": "assets/01_singularity_c_r2.webp",
+    "en": "Long, long ago, everything in the whole universe was squeezed into one tiny, super-hot point. We call it a <span class='word'>singularity</span>.",
+    "zh": "很久很久以前，宇宙里所有的东西都被挤在一个又小又超级热的点里。我们叫它「奇点」。",
+    "overlayKey": "singularity"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/03_bang_c.webp",
+    "newAsset": "assets/03_bang_c_r2.webp",
+    "en": "Then — BOOM! The universe was born in a giant, fiery explosion we call the <span class='word'>Big Bang</span>.",
+    "zh": "然后——砰！宇宙在一场巨大的火热爆炸中诞生了，我们叫它「大爆炸」。",
+    "overlayKey": "bigbang"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/02_expand_c.webp",
+    "newAsset": "assets/02_expand_c_r2.webp",
+    "en": "Space began to stretch, bigger and bigger, like a balloon slowly getting larger. The universe was <span class='word'>expanding</span>.",
+    "zh": "空间开始拉伸，越变越大，就像一个慢慢吹大的气球。宇宙正在「膨胀」。",
+    "overlayKey": "expanding"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/04_light_c.webp",
+    "newAsset": "assets/04_light_c_r2.webp",
+    "en": "Tiny bits of energy turned into the first <span class='word'>light</span>, filling space with a warm, gentle glow.",
+    "zh": "小小的能量变成了最早的「光」，让宇宙充满了温暖柔和的光。",
+    "overlayKey": "light"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/05_particles_c.webp",
+    "newAsset": "assets/05_particles_c_r2.webp",
+    "en": "As the universe cooled, tiny <span class='word'>particles</span> began to stick together, like cosmic building blocks.",
+    "zh": "宇宙慢慢变凉，小小的「粒子」开始黏在一起，就像宇宙的积木。",
+    "overlayKey": "particles"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/06_star_c.webp",
+    "newAsset": "assets/06_star_c_r2.webp",
+    "en": "Those clumps grew hotter and hotter until they shone as bright <span class='word'>stars</span>.",
+    "zh": "这些团块越变越热，最后变成了明亮发光的「恒星」。",
+    "overlayKey": "star"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/07_galaxy_c.webp",
+    "newAsset": "assets/07_galaxy_c_r2.webp",
+    "en": "Many stars gathered into beautiful, spinning groups called <span class='word'>galaxies</span>.",
+    "zh": "许多恒星聚在一起，组成了美丽的旋转大家庭，叫做「星系」。",
+    "overlayKey": "galaxy"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/08_solar_c.webp",
+    "newAsset": "assets/08_solar_c_r2.webp",
+    "en": "In one galaxy, our <span class='word'>Sun</span> formed, with little worlds like <span class='word'>Earth</span> traveling around it.",
+    "zh": "在一个星系里，我们的「太阳」形成了，还有像「地球」这样的小星球绕着它转。",
+    "overlayKey": "solar"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/09_universe_c.webp",
+    "newAsset": "assets/09_universe_c_r2.webp",
+    "en": "Today the <span class='word'>universe</span> is huge and full of stars, galaxies, and wonderful surprises.",
+    "zh": "今天，「宇宙」浩瀚无垠，充满了恒星、星系和等待发现的奇妙惊喜。",
+    "overlayKey": "universe"
+  },
+  {
+    "book": "bigbang",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/10_vocab_c.webp",
+    "newAsset": "assets/10_vocab_c_r2.webp",
+    "en": "Great job! You just learned how the universe began. Tap the cards to hear the space words again!",
+    "zh": "太棒了！你刚学会了宇宙是怎么开始的。点一点卡片，再听一遍太空词汇吧！",
+    "overlayKey": null
+  },
+  {
+    "book": "bus",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/00_cover_c.webp",
+    "newAsset": "assets/00_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "bus",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/01_parts_c.webp",
+    "newAsset": "assets/01_parts_c_r2.webp",
+    "en": "Meet the double-decker bus! It is a bus with two floors — an upper deck on top and a lower deck below. A staircase inside joins the two. It carries lots of passengers around the city.",
+    "zh": "来认识双层巴士吧！它是有两层车厢的巴士——上面是上层，下面是下层。里面有一段楼梯把两层连起来。它能载着好多乘客在城市里跑。",
+    "overlayKey": "bs_parts"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/02_upper_c.webp",
+    "newAsset": "assets/02_upper_c_r2.webp",
+    "en": "Upstairs is the upper deck. Passengers love to sit here because the windows are high and the view is wonderful. Rows of soft seats line both sides, with a walkway in the middle.",
+    "zh": "楼上是上层车厢。乘客最爱坐这里，因为窗户高、风景好。一排排软软的座位分列两边，中间是走道。",
+    "overlayKey": "bs_upper"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/03_lower_c.webp",
+    "newAsset": "assets/03_lower_c_r2.webp",
+    "en": "Downstairs is the lower deck. The doors are here, so passengers get on and off easily. There is a wide open space for a wheelchair or stroller, and a special seat for people who need it most.",
+    "zh": "楼下是下层车厢。车门在这里，乘客上下车很方便。这里有一片空地放轮椅或婴儿车，还有一个留给最需要的人的爱心座。",
+    "overlayKey": "bs_lower"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/04_stairs_c.webp",
+    "newAsset": "assets/04_stairs_c_r2.webp",
+    "en": "A staircase connects the two decks. Hold the handrail and climb up step by step! At the top you pop out onto the upper deck — what a fun ride!",
+    "zh": "一段楼梯把两层连起来。扶着扶手，一步一步爬上去！到了顶上你就来到上层车厢——多有趣的旅程啊！",
+    "overlayKey": "bs_stairs"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/05_cab_c.webp",
+    "newAsset": "assets/05_cab_c_r2.webp",
+    "en": "The driver sits in the cab at the front. A big steering wheel turns the bus, and a dashboard full of dials helps the driver stay safe and on time.",
+    "zh": "司机坐在最前面的驾驶室里。一个大方向盘转动巴士，一排仪表帮助司机安全准点地开车。",
+    "overlayKey": "bs_cab"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/06_engine_c.webp",
+    "newAsset": "assets/06_engine_c_r2.webp",
+    "en": "At the back of the bus hides the engine. It is the strong heart that makes the wheels turn and pushes the heavy bus along the road. PUM-PUM, goes the engine!",
+    "zh": "巴士尾部藏着发动机。它是强壮的心脏，让车轮转动，推动沉重的巴士在路上跑。咚——咚——发动机响起来！",
+    "overlayKey": "bs_engine"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/07_wheel_c.webp",
+    "newAsset": "assets/07_wheel_c_r2.webp",
+    "en": "Look at the wheel! The double-decker bus has big black rubber tires with shiny silver hubcaps. The thick rubber grips the road so the heavy bus does not slip.",
+    "zh": "看车轮！双层巴士有黑色大橡胶轮胎，配着亮亮的银色轮毂。厚厚的橡胶抓紧路面，让沉重的巴士不打滑。",
+    "overlayKey": "bs_wheel"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/08_doors_c.webp",
+    "newAsset": "assets/08_doors_c_r2.webp",
+    "en": "At the bus stop, the doors open! Passengers hop on at the front and tap their card. When the bus stops again, people hop off at the back. On and off, all day long!",
+    "zh": "到站了，车门打开！乘客在前门上车，刷一下卡。巴士再停，人们在后面下车。上上下下，一整天！",
+    "overlayKey": "bs_doors"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/09_opentop_c.webp",
+    "newAsset": "assets/09_opentop_c_r2.webp",
+    "en": "Some double-decker buses have an open top! Tourists love to ride up here in the sunshine, looking at all the sights of the city. What a fun way to travel!",
+    "zh": "有些双层巴士的车顶是敞开的！游客最爱在阳光下坐在这里，看遍城市的风景。多有趣的旅行方式啊！",
+    "overlayKey": "bs_opentop"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/10_street_c.webp",
+    "newAsset": "assets/10_street_c_r2.webp",
+    "en": "Off we go! The bus rumbles down the street. It stops for red lights, opens its doors at the bus stop, and shares the road with cars and people.",
+    "zh": "出发啦！巴士轰隆隆驶过街道。它在红灯前停下，在公交站开门，和小汽车、行人一起走。",
+    "overlayKey": "bs_street"
+  },
+  {
+    "book": "bus",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/11_vocab_c.webp",
+    "newAsset": "assets/11_vocab_c_r2.webp",
+    "en": "Great job, little conductor! You learned the parts of a double-decker bus. Can you name them all?",
+    "zh": "做得好，小小列车员！你学会了双层巴士的部件。你能叫出它们的名字吗？",
+    "overlayKey": "bs_vocab"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/00_cover_c.webp",
+    "newAsset": "assets/00_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/01_parts_c.webp",
+    "newAsset": "assets/01_parts_c_r2.webp",
+    "en": "This is the return capsule — the little spaceship astronauts ride back to Earth. It looks like a big bell! At the bottom is a thick black heat shield. On top hides the parachute. Round windows let astronauts see out.",
+    "zh": "这是返回舱——航天员坐着回地球的小飞船。它像一个大铃铛！底部是厚厚的黑色防热盾，顶部藏着降落伞，圆圆的舷窗让航天员能看到外面。",
+    "overlayKey": "cp_parts"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/02_layers_c.webp",
+    "newAsset": "assets/02_layers_c_r2.webp",
+    "en": "The capsule wall has three layers. Outside is the black heat shield. In the middle is the brown ablative layer that slowly burns away. Inside is the silver metal hull that keeps the cabin safe.",
+    "zh": "返回舱的外壳有三层。最外面是黑色防热盾，中间是棕色烧蚀层——它会被慢慢烧掉，最里面是银色的金属舱壁，保护着舱内安全。",
+    "overlayKey": "cp_layers"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/03_heatshield_c.webp",
+    "newAsset": "assets/03_heatshield_c_r2.webp",
+    "en": "Watch the heat shield at the bottom! When the capsule races through the air, friction makes everything glow and burn. The heat shield takes the heat — it gets charred and black, but the astronauts stay cool and safe inside.",
+    "zh": "看底部的防热盾！返回舱冲过空气时，摩擦会让一切都发烫燃烧。防热盾挡下这些热量——它被烧得焦黑，但里面的航天员依然凉爽安全。",
+    "overlayKey": "cp_heatshield"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/04_cabin_c.webp",
+    "newAsset": "assets/04_cabin_c_r2.webp",
+    "en": "Inside the cabin, three soft seats wait for the astronauts. They strap in tightly for the bumpy ride home. A round window shows the sky, and a control panel helps them fly the capsule.",
+    "zh": "舱内有三个柔软的座椅等着航天员。回家之路颠颠簸簸，他们要紧紧系好安全带。圆圆的舷窗可以看到天空，控制面板帮助他们驾驶返回舱。",
+    "overlayKey": "cp_cabin"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/05_parachute_c.webp",
+    "newAsset": "assets/05_parachute_c_r2.webp",
+    "en": "On top of the capsule hides a secret: the parachute bay! Inside, a big orange-and-white parachute is folded up tight, waiting for the ride home. When it opens, it slows the capsule down like a giant umbrella.",
+    "zh": "返回舱顶部藏着一个秘密：伞舱！里面折叠着一顶橙白相间的大降落伞，等着回家时打开。它张开时就像一把巨伞，让返回舱慢慢减速。",
+    "overlayKey": "cp_parachute"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/06_retro_c.webp",
+    "newAsset": "assets/06_retro_c_r2.webp",
+    "en": "Just before landing, small retro rockets fire downward. WHOOSH! They give one last push against the ground, making the capsule land softly — not with a big BANG!",
+    "zh": "就在着陆前，反推火箭向下点火。呼——！它们最后推一把，让返回舱轻轻落地，而不是“砰”地砸下来！",
+    "overlayKey": "cp_retro"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/07_window_c.webp",
+    "newAsset": "assets/07_window_c_r2.webp",
+    "en": "Through the round window, astronauts see planet Earth — blue oceans, green lands, and fluffy white clouds. Home is getting closer!",
+    "zh": "透过圆圆的舷窗，航天员看到地球——蓝色的海洋、绿色的陆地、蓬松的白云。家越来越近啦！",
+    "overlayKey": "cp_window"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/08_dock_c.webp",
+    "newAsset": "assets/08_dock_c_r2.webp",
+    "en": "On the way home, the capsule docks with the space station. The round hatch connects to the docking port with a click. Astronauts pass through this door between the capsule and the station.",
+    "zh": "回家路上，返回舱要和空间站对接。圆圆的舱门“咔哒”一声与对接端口相连。航天员就从这扇门在返回舱和空间站之间进出。",
+    "overlayKey": "cp_dock"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/09_reentry_c.webp",
+    "newAsset": "assets/09_reentry_c_r2.webp",
+    "en": "Now comes the scary part! The capsule plunges back into the atmosphere, wrapped in a giant ball of fire. It looks scary, but the heat shield protects everything inside. On we go!",
+    "zh": "惊险的时刻来了！返回舱冲回大气层，被一团巨大的火球包裹。看起来好吓人，但防热盾保护着里面的一切。继续前进！",
+    "overlayKey": "cp_reentry"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/10_parachute_c.webp",
+    "newAsset": "assets/10_parachute_c_r2.webp",
+    "en": "POP! The parachute bursts open above the capsule. It billows like a huge umbrella, catching the air and slowing the fall. The capsule sways gently in the sky like a leaf.",
+    "zh": "砰！降落伞在返回舱上方打开。它像一把大伞迎风鼓起来，兜住空气，让下降变慢。返回舱像一片叶子一样在天空中轻轻摇晃。",
+    "overlayKey": "cp_parachute_open"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/11_landing_c.webp",
+    "newAsset": "assets/11_landing_c_r2.webp",
+    "en": "Touchdown! The capsule lands on a green meadow, and the astronauts climb out with big smiles. Welcome home, space heroes! Mission accomplished!",
+    "zh": "着陆啦！返回舱降落在绿色草地上，航天员们带着大大的笑容走出来。欢迎回家，太空英雄！任务完成！",
+    "overlayKey": "cp_landing"
+  },
+  {
+    "book": "capsule",
+    "pageIndex": 12,
+    "kind": "page",
+    "oldAsset": "assets/12_vocab_c.webp",
+    "newAsset": "assets/12_vocab_c_r2.webp",
+    "en": "Great job, little astronaut! You learned how the return capsule brings astronauts home. Can you name all the parts?",
+    "zh": "做得好，小小航天员！你学会了返回舱怎么把航天员安全带回家。你能叫出这些部件的名字吗？",
+    "overlayKey": "cp_vocab"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/01_cover_c.webp",
+    "newAsset": "assets/01_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/02_train_c.webp",
+    "newAsset": "assets/02_train_c_r2.webp",
+    "en": "This is a high-speed train. It is long, clean, and very fast. People wait on the platform and step inside when the doors open.",
+    "zh": "这是高铁。它很长、很干净、非常快。人们在站台上等待，门打开时走进车厢。",
+    "overlayKey": "hsr_02"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/03_nose_c.webp",
+    "newAsset": "assets/03_nose_c_r2.webp",
+    "en": "Look at the front of the train. Its nose is smooth and pointy like a bullet. This shape helps the train cut through the wind.",
+    "zh": "看火车的前端。它的车头光滑又尖尖的，像子弹一样。这种外形帮助火车切开风。",
+    "overlayKey": "hsr_03"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/04_carriage_c.webp",
+    "newAsset": "assets/04_carriage_c_r2.webp",
+    "en": "The train has many carriages, like long rooms connected together. Inside, passengers sit in soft seats and look out the windows.",
+    "zh": "高铁有很多节车厢，就像连在一起的长房间。乘客坐在软椅上，看着窗外。",
+    "overlayKey": "hsr_04"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/05_track_c.webp",
+    "newAsset": "assets/05_track_c_r2.webp",
+    "en": "High-speed trains run on special tracks made of strong steel. The tracks are smooth and straight so the train can go fast safely.",
+    "zh": "高铁在特制的轨道上运行，轨道由坚固的钢铁制成。轨道又平又直，火车才能又快又安全。",
+    "overlayKey": "hsr_05"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/06_pantograph_c.webp",
+    "newAsset": "assets/06_pantograph_c_r2.webp",
+    "en": "On top of the train is a metal bow called a pantograph. It touches the overhead wire and brings electricity to the train.",
+    "zh": "火车顶上有一个金属弓，叫受电弓。它接触上面的电线，把电带给火车。",
+    "overlayKey": "hsr_06"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/07_power_c.webp",
+    "newAsset": "assets/07_power_c_r2.webp",
+    "en": "The electricity powers motors under the train. The motors turn the wheels, and the wheels push the train forward.",
+    "zh": "电驱动火车下方的电动机。电动机带动车轮，车轮推动火车前进。",
+    "overlayKey": "hsr_07"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/08_bridge_c.webp",
+    "newAsset": "assets/08_bridge_c_r2.webp",
+    "en": "When the land has rivers or valleys, the railway is built on tall bridges. This keeps the track straight and level.",
+    "zh": "当遇到河流或山谷时，铁路会建在高高的桥梁上。这让轨道保持平直。",
+    "overlayKey": "hsr_08"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/09_tunnel_c.webp",
+    "newAsset": "assets/09_tunnel_c_r2.webp",
+    "en": "When there is a big mountain, the train goes through a tunnel. A tunnel is a long, dark hole dug right through the rock.",
+    "zh": "当有大山时，火车会穿过隧道。隧道是在岩石中开凿的一条又长又黑的通道。",
+    "overlayKey": "hsr_09"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/10_driver_c.webp",
+    "newAsset": "assets/10_driver_c_r2.webp",
+    "en": "The driver sits in the front cab. They watch the track, press buttons, and use a control panel to keep everyone safe.",
+    "zh": "司机坐在前端的驾驶室里。他们观察轨道、按按钮，用控制台保证大家的安全。",
+    "overlayKey": "hsr_10"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/11_speed_c.webp",
+    "newAsset": "assets/11_speed_c_r2.webp",
+    "en": "High-speed trains can travel up to 350 kilometers per hour. That is much faster than cars on a highway!",
+    "zh": "高铁最高时速可达 350 公里。这比高速公路上的汽车快得多！",
+    "overlayKey": "hsr_11"
+  },
+  {
+    "book": "hsr",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/12_vocab_c.webp",
+    "newAsset": "assets/12_vocab_c_r2.webp",
+    "en": "Great job! You learned how a high-speed train uses tracks, electricity, bridges, and tunnels to zoom across the country.",
+    "zh": "真棒！你学到了高铁如何利用轨道、电力、桥梁和隧道在全国各地飞驰。",
+    "overlayKey": "hsr_12"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/01_cover_c.webp",
+    "newAsset": "assets/01_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/02_sunlight_c.webp",
+    "newAsset": "assets/02_sunlight_c_r2.webp",
+    "en": "The ocean has layers. The top layer is called the <span class='word'>SUNLIGHT ZONE</span>. It is bright and warm, and many fish play here.",
+    "zh": "海洋有很多层。最上面一层叫「阳光区」。这里明亮又温暖，许多小鱼在这里玩耍。",
+    "overlayKey": "sunlight"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/03_coral_c.webp",
+    "newAsset": "assets/03_coral_c_r2.webp",
+    "en": "Under the waves, you can find a <span class='word'>CORAL REEF</span>. It is a colorful city made of tiny animals. Clownfish and turtles love to live here.",
+    "zh": "海浪下面，你会发现「珊瑚礁」。它是一座由小动物组成的彩色城市。小丑鱼和海龟喜欢住在这里。",
+    "overlayKey": "coral"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/04_kelp_c.webp",
+    "newAsset": "assets/04_kelp_c_r2.webp",
+    "en": "Tall green <span class='word'>KELP</span> grows like an underwater forest. Tiny seahorses hold on tight so they do not float away.",
+    "zh": "高高的绿色「海藻」像水下的森林一样生长。小海马紧紧抓着海藻，这样就不会漂走。",
+    "overlayKey": "kelp"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/05_twilight_c.webp",
+    "newAsset": "assets/05_twilight_c_r2.webp",
+    "en": "Deeper down, we enter the <span class='word'>TWILIGHT ZONE</span>. The water gets darker, but a big gentle whale shark and glowing jellyfish still swim here.",
+    "zh": "再往下，我们来到「微光区」。水变得更暗了，但巨大的鲸鲨和发光的水母还在这里游动。",
+    "overlayKey": "twilight"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/06_angler_c.webp",
+    "newAsset": "assets/06_angler_c_r2.webp",
+    "en": "In the deep, dark sea lives the funny <span class='word'>ANGLERFISH</span>. It has a tiny glowing lure on its head, like a built-in flashlight!",
+    "zh": "在又深又暗的大海里，住着滑稽的「鮟鱇鱼」。它头上有一个发光的小灯，就像自带的手电筒！",
+    "overlayKey": "angler"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/07_midnight_c.webp",
+    "newAsset": "assets/07_midnight_c_r2.webp",
+    "en": "Now we are in the <span class='word'>MIDNIGHT ZONE</span>, where it is almost totally dark. Some animals make their own light—bioluminescence!",
+    "zh": "现在我们到了「午夜区」，这里几乎一片漆黑。有些动物会自己发光——这就是生物发光！",
+    "overlayKey": "midnight"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/08_abyss_c.webp",
+    "newAsset": "assets/08_abyss_c_r2.webp",
+    "en": "The <span class='word'>ABYSS</span> is near the very bottom. It is cold and dark, but soft sea cucumbers and red tube worms still call it home.",
+    "zh": "「深渊」靠近海底。这里又冷又黑，但柔软的海参和红色的管虫仍然把这里当家。",
+    "overlayKey": "abyss"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/09_vents_c.webp",
+    "newAsset": "assets/09_vents_c_r2.webp",
+    "en": "Look! A <span class='word'>HYDROTHERMAL VENT</span> is like a hot chimney on the seafloor. Warm bubbles rise up, and special crabs live nearby.",
+    "zh": "看！「热泉」就像海底的一个热烟囱。温暖的气泡升上来，特殊的螃蟹住在旁边。",
+    "overlayKey": "vents"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/10_trench_c.webp",
+    "newAsset": "assets/10_trench_c_r2.webp",
+    "en": "The <span class='word'>MARIANA TRENCH</span> is the deepest part of the ocean. Even here, a tiny snailfish can live. It is shaped to handle great pressure.",
+    "zh": "「马里亚纳海沟」是海洋最深的地方。即使在这里，小小的狮子鱼也能生存。它的身体能适应巨大的压力。",
+    "overlayKey": "trench"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/11_matters_c.webp",
+    "newAsset": "assets/11_matters_c_r2.webp",
+    "en": "The ocean is very important. It gives us air to breathe, food to eat, and a beautiful world to explore. Let's protect it together!",
+    "zh": "海洋非常重要。它给我们呼吸的空气、吃的食物，还有美丽的世界去探索。让我们一起保护海洋吧！",
+    "overlayKey": "matters"
+  },
+  {
+    "book": "ocean",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/12_vocab_c.webp",
+    "newAsset": "assets/12_vocab_c_r2.webp",
+    "en": "You did it! You explored from the sunny surface to the deep trench. Tap the cards to hear the ocean words again!",
+    "zh": "太棒了！你从阳光明媚的海面一路探索到了深深的海沟。点一点卡片，再听一遍海洋词汇吧！",
+    "overlayKey": null
+  },
+  {
+    "book": "penguin",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/01_cover_c.webp",
+    "newAsset": "assets/01_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/02_home_c.webp",
+    "newAsset": "assets/02_home_c_r2.webp",
+    "en": "Penguins live in Antarctica, the coldest place on Earth. Everything is white and blue, and giant icebergs float in the water.",
+    "zh": "企鹅生活在南极洲，地球上最冷的地方。到处都是白色和蓝色，巨大的冰山漂浮在水中。",
+    "overlayKey": "penguin_02"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/03_baby_c.webp",
+    "newAsset": "assets/03_baby_c_r2.webp",
+    "en": "A penguin family has a mama, a papa, and a fluffy chick. They stand close together to stay warm and safe.",
+    "zh": "企鹅家庭有妈妈、爸爸和毛茸茸的宝宝。它们紧紧靠在一起取暖，保证安全。",
+    "overlayKey": "penguin_03"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/04_egg_c.webp",
+    "newAsset": "assets/04_egg_c_r2.webp",
+    "en": "Papa penguin keeps the egg warm on top of his feet. He tucks it under his soft belly so it does not freeze.",
+    "zh": "企鹅爸爸把蛋放在脚背上保暖。他用柔软的肚皮把蛋盖住，这样蛋就不会冻坏。",
+    "overlayKey": "penguin_04"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/05_hatch_c.webp",
+    "newAsset": "assets/05_hatch_c_r2.webp",
+    "en": "Tap, tap, tap! The chick breaks the eggshell. Mama and papa are so happy to meet their little baby.",
+    "zh": "笃、笃、笃！企鹅宝宝啄破蛋壳。妈妈和爸爸见到小宝宝非常开心。",
+    "overlayKey": "penguin_05"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/06_fish_c.webp",
+    "newAsset": "assets/06_fish_c_r2.webp",
+    "en": "Penguins are excellent swimmers. They glide through the cold water and catch small fish to eat.",
+    "zh": "企鹅是游泳高手。它们在冰冷的水中滑行，捕食小鱼当食物。",
+    "overlayKey": "penguin_06"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/07_slide_c.webp",
+    "newAsset": "assets/07_slide_c_r2.webp",
+    "en": "Sometimes penguins slide on their bellies down snowy hills. It is faster than walking and a lot of fun!",
+    "zh": "有时候企鹅会趴在肚子上从雪坡上滑下来。这比走路快，也很好玩！",
+    "overlayKey": "penguin_07"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/08_feathers_c.webp",
+    "newAsset": "assets/08_feathers_c_r2.webp",
+    "en": "Penguins have thick, waterproof feathers. The feathers keep the cold water out and the warm air in.",
+    "zh": "企鹅有厚厚的防水羽毛。羽毛能挡住冷水，留住温暖的空气。",
+    "overlayKey": "penguin_08"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/09_waddle_c.webp",
+    "newAsset": "assets/09_waddle_c_r2.webp",
+    "en": "Penguins waddle when they walk. They walk in a long line with friends so everyone stays safe.",
+    "zh": "企鹅走路时摇摇摆摆。它们和朋友们排成一长队走，这样大家都安全。",
+    "overlayKey": "penguin_09"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/10_aurora_c.webp",
+    "newAsset": "assets/10_aurora_c_r2.webp",
+    "en": "At night, colorful lights dance across the sky. It is called the aurora, and penguins look up in wonder.",
+    "zh": "夜晚，彩色的光在天空中跳舞。这叫做极光，企鹅们惊奇地抬头看着。",
+    "overlayKey": "penguin_10"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/11_help_c.webp",
+    "newAsset": "assets/11_help_c_r2.webp",
+    "en": "We can help penguins by keeping the ocean clean. When we take care of nature, penguins stay happy and healthy.",
+    "zh": "我们可以通过保持海洋清洁来帮助企鹅。当我们爱护自然时，企鹅就会健康快乐。",
+    "overlayKey": "penguin_11"
+  },
+  {
+    "book": "penguin",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/12_vocab_c.webp",
+    "newAsset": "assets/12_vocab_c_r2.webp",
+    "en": "Great job! You learned how penguins hatch, swim, slide, and keep warm in their icy home.",
+    "zh": "真棒！你学到了企鹅如何在冰雪家园里孵化、游泳、滑行和保暖。",
+    "overlayKey": "penguin_12"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/01_cover_c.webp",
+    "newAsset": "assets/01_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/13_parts_c.webp",
+    "newAsset": "assets/13_parts_c_r2.webp",
+    "en": "A rocket is made of parts. The pointy nose cone cuts through the air. A window lets us peek outside. The fuel tank holds the fuel, the engine makes fire, and the fins keep it steady.",
+    "zh": "火箭是由许多部件组成的。尖尖的整流罩帮它穿过空气，舷窗让我们往外看。燃料箱装燃料，发动机生火，尾翼让它飞得稳稳的。",
+    "overlayKey": "rocket_parts"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/05_thrust_c.webp",
+    "newAsset": "assets/05_thrust_c_r2.webp",
+    "en": "Inside, the rocket carries fuel. The engine burns the fuel into a very hot fire. The hot fire wants to escape, so it shoots out the bottom fast.",
+    "zh": "火箭里面装着燃料。发动机把燃料烧成炽热的火。火想跑出去，就飞快地从底部喷出来。",
+    "overlayKey": "rocket_fuel"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/03_countdown_c.webp",
+    "newAsset": "assets/03_countdown_c_r2.webp",
+    "en": "Before it leaves the ground, people count down: 3, 2, 1… GO! Everyone checks that the rocket is ready, then presses the launch button.",
+    "zh": "火箭离地前，人们会倒计时：3、2、1……发射！大家确认火箭准备好了，就按下发射按钮。",
+    "overlayKey": "rocket_countdown"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/04_launch_c.webp",
+    "newAsset": "assets/04_launch_c_r2.webp",
+    "en": "Fire blasts down out of the bottom. The rocket goes up, up, up! The push of the fire is stronger than the pull of gravity, so the rocket lifts off.",
+    "zh": "火焰从底部往下喷。火箭向上、向上飞！火的推力比地球的引力更强，所以火箭就升空了。",
+    "overlayKey": "rocket_launch"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/17_thrust_c.webp",
+    "newAsset": "assets/17_thrust_c_r2.webp",
+    "en": "Why does it go up? When the engine pushes hot gas DOWN, the rocket is pushed UP. This is a rule of pushing: push one way, and you move the other way. Try letting go of a blown-up balloon!",
+    "zh": "为什么它会往上飞？当发动机把热气往“下”推，火箭就被推着往“上”走。这是一条用力的规律：往一个方向推，自己就往反方向走。你松开吹饱的气球试试看！",
+    "overlayKey": "rocket_thrust"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/14_stage_c.webp",
+    "newAsset": "assets/14_stage_c_r2.webp",
+    "en": "Rockets have stages. When the lower fuel tank is empty, it falls away. The rocket becomes lighter and can fly higher and faster into space.",
+    "zh": "火箭有好几级。当下方的燃料箱用完，它就掉下去。火箭变轻了，就能飞得更高、更快，冲向太空。",
+    "overlayKey": "rocket_stage"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/06_space_c.webp",
+    "newAsset": "assets/06_space_c_r2.webp",
+    "en": "Soon the rocket is above the air, in space. There is no air up here, so everything floats. Earth looks small and beautiful from far away.",
+    "zh": "很快，火箭飞到了空气之上，进入了太空。这里没有空气，所有东西都漂浮着。从远处看，地球又小又美丽。",
+    "overlayKey": "rocket_space"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/15_orbit_c.webp",
+    "newAsset": "assets/15_orbit_c_r2.webp",
+    "en": "High above Earth, the rocket lets go of a satellite. The satellite keeps flying around and around Earth. That round trip is called an orbit.",
+    "zh": "在地球高空，火箭把卫星放了出来。卫星一直绕着地球飞来飞去。这种绕圈的飞行叫做“轨道”。",
+    "overlayKey": "rocket_orbit"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/18_satellite_c.webp",
+    "newAsset": "assets/18_satellite_c_r2.webp",
+    "en": "What does the satellite do? Its camera takes pictures of Earth. Its antenna sends TV and phone signals. Its solar panels catch sunlight to make power.",
+    "zh": "卫星是干什么的？它的相机给地球拍照，天线发送电视和电话信号，太阳能板收集阳光来产生能量。",
+    "overlayKey": "rocket_satellite"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/16_reentry_c.webp",
+    "newAsset": "assets/16_reentry_c_r2.webp",
+    "en": "When its job is done, the satellite comes home. It falls back through the air. Rubbing the air makes it very hot, but a heat shield protects it from the flame.",
+    "zh": "工作完成后，卫星要回家了。它穿过空气往回掉。和空气摩擦会变得很烫，但防热盾保护它不被火焰烤坏。",
+    "overlayKey": "rocket_reentry"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/11_return_c.webp",
+    "newAsset": "assets/11_return_c_r2.webp",
+    "en": "A parachute opens above it, or soft engines slow it down. The capsule lands gently and safely back on the ground.",
+    "zh": "头顶打开降落伞，或者用柔和的发动机让它慢下来。返回舱轻轻、稳稳地落回地面。",
+    "overlayKey": "rocket_return"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 12,
+    "kind": "page",
+    "oldAsset": "assets/02_earth_c.webp",
+    "newAsset": "assets/02_earth_c_r2.webp",
+    "en": "Welcome home, little satellite! It is back on our blue and green Earth, where it can rest after its big trip to space.",
+    "zh": "欢迎回家，小卫星！它回到了蓝绿相间的地球，在太空大旅行之后可以好好休息了。",
+    "overlayKey": "rocket_home"
+  },
+  {
+    "book": "rocket",
+    "pageIndex": 13,
+    "kind": "page",
+    "oldAsset": "assets/12_vocab_c.webp",
+    "newAsset": "assets/12_vocab_c_r2.webp",
+    "en": "Great job, little explorer! You learned how a rocket is built, how it lifts off, and how a satellite flies home.",
+    "zh": "做得好，小探险家！你学会了火箭怎么造、怎么升空，还有卫星怎么飞回家。",
+    "overlayKey": "rocket_home"
+  },
+  {
+    "book": "seed",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/01_cover_c.webp",
+    "newAsset": "assets/01_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "seed",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/02_sleep_c.webp",
+    "newAsset": "assets/02_sleep_c_r2.webp",
+    "en": "A tiny seed sleeps in the warm, cozy soil. It dreams of sunshine and gentle rain.",
+    "zh": "一颗小小的种子睡在温暖又舒服的泥土里。它梦见阳光和温柔的雨水。",
+    "overlayKey": "seed_02"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/03_sprout_c.webp",
+    "newAsset": "assets/03_sprout_c_r2.webp",
+    "en": "Pitter-patter! Raindrops wake the seed up. A little green sprout peeks out and says hello!",
+    "zh": "滴答滴答！雨点叫醒了种子。一个小小的绿芽探出头来，跟大家打招呼！",
+    "overlayKey": "seed_03"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/04_root_c.webp",
+    "newAsset": "assets/04_root_c_r2.webp",
+    "en": "The roots grow down, down, down. They meet a friendly worm and hold the plant tight.",
+    "zh": "根往下长呀长。它们遇到了一条友好的蚯蚓，紧紧抓住泥土。",
+    "overlayKey": "seed_04"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/05_stem_c.webp",
+    "newAsset": "assets/05_stem_c_r2.webp",
+    "en": "The stem grows up, up, up. Two round leaves reach for the smiling sun.",
+    "zh": "茎往上长呀长。两片圆圆的叶子伸向微笑的太阳。",
+    "overlayKey": "seed_05"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/06_flower_c.webp",
+    "newAsset": "assets/06_flower_c_r2.webp",
+    "en": "Look! A pretty pink flower opens. A happy butterfly comes to visit.",
+    "zh": "看！一朵漂亮的粉花开放了。一只开心的蝴蝶飞来拜访。",
+    "overlayKey": "seed_06"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/07_pollinate_c.webp",
+    "newAsset": "assets/07_pollinate_c_r2.webp",
+    "en": "A busy bee lands on the flower. It carries tiny yellow pollen from flower to flower.",
+    "zh": "一只勤劳的小蜜蜂落在花上。它把小小的黄色花粉从一朵花带到另一朵花。",
+    "overlayKey": "seed_07"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/08_fruit_c.webp",
+    "newAsset": "assets/08_fruit_c_r2.webp",
+    "en": "The flower turns into a juicy red apple. New seeds hide inside, waiting for their own journey.",
+    "zh": "花变成了一个多汁的红苹果。新的种子藏在里面，等待自己的旅程。",
+    "overlayKey": "seed_08"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/09_spread_c.webp",
+    "newAsset": "assets/09_spread_c_r2.webp",
+    "en": "Whoosh! The wind blows fluffy seeds away. A little bird helps carry one far, far away.",
+    "zh": "呼——风吹走了毛茸茸的种子。一只小鸟帮忙把一颗种子带到很远很远的地方。",
+    "overlayKey": "seed_09"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/10_newgrowth_c.webp",
+    "newAsset": "assets/10_newgrowth_c_r2.webp",
+    "en": "In a new green field, the seed grows into a little plant. The journey begins again!",
+    "zh": "在一片新的绿草地上，种子长成了一棵小苗。旅程又开始啦！",
+    "overlayKey": "seed_10"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/11_important_c.webp",
+    "newAsset": "assets/11_important_c_r2.webp",
+    "en": "Plants give us fresh air to breathe and yummy food to eat. Thank you, green friends!",
+    "zh": "植物给我们新鲜空气呼吸，还有美味的食物吃。谢谢你，绿色的朋友！",
+    "overlayKey": "seed_11"
+  },
+  {
+    "book": "seed",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/12_vocab_c.webp",
+    "newAsset": "assets/12_vocab_c_r2.webp",
+    "en": "Words from our garden",
+    "zh": "我们的花园词汇表",
+    "overlayKey": null
+  },
+  {
+    "book": "station",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/00_cover_c.webp",
+    "newAsset": "assets/00_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "station",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/01_what_c.webp",
+    "newAsset": "assets/01_what_c_r2.webp",
+    "en": "A space station is a big house in space where astronauts live and work. It flies high above our Earth.",
+    "zh": "太空站是建在太空里的大房子，宇航员在这里生活、做实验。它高高地飞行在地球之上。",
+    "overlayKey": "station_what"
+  },
+  {
+    "book": "station",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/02_overview_c.webp",
+    "newAsset": "assets/02_overview_c_r2.webp",
+    "en": "The station is made of round modules joined together, with big wings and a long arm. It is like a little town in space.",
+    "zh": "太空站由几个圆筒舱段连在一起，还有大翅膀和一条长手臂。它就像太空里的一座小城市。",
+    "overlayKey": "station_overview"
+  },
+  {
+    "book": "station",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/03_living_c.webp",
+    "newAsset": "assets/03_living_c_r2.webp",
+    "en": "In the living module, astronauts sleep in bags, eat at a table, and run on a treadmill to stay strong.",
+    "zh": "在生活舱里，宇航员睡在睡袋里、在餐桌吃饭、在跑步机上锻炼，保持身体健康。",
+    "overlayKey": "station_living"
+  },
+  {
+    "book": "station",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/04_lab_c.webp",
+    "newAsset": "assets/04_lab_c_r2.webp",
+    "en": "In the lab module, scientists grow plants, make crystals, and study how our bodies work up high.",
+    "zh": "在实验舱里，科学家种植物、造晶体，研究人体在太空中是怎么运作的。",
+    "overlayKey": "station_lab"
+  },
+  {
+    "book": "station",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/05_solar_c.webp",
+    "newAsset": "assets/05_solar_c_r2.webp",
+    "en": "Huge solar panels catch sunlight and turn it into electricity — that is the power for the whole station.",
+    "zh": "巨大的太阳能板像翅膀，把阳光变成电，给整个太空站供电。",
+    "overlayKey": "station_solar"
+  },
+  {
+    "book": "station",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/06_arm_c.webp",
+    "newAsset": "assets/06_arm_c_r2.webp",
+    "en": "The robot arm is like a long hand. It reaches out and catches visiting spacecraft to hold them safe.",
+    "zh": "机械臂像一条长手臂，伸出去抓住来访的飞船，把它们稳稳地接住。",
+    "overlayKey": "station_arm"
+  },
+  {
+    "book": "station",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/07_docking_c.webp",
+    "newAsset": "assets/07_docking_c_r2.webp",
+    "en": "Cargo and crew ships fly up and dock — clicking together with the station so people and food can come aboard.",
+    "zh": "货运飞船和载人飞船飞上来，和太空站“对接”连在一起，人和补给就能进入站内。",
+    "overlayKey": "station_docking"
+  },
+  {
+    "book": "station",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/08_orbit_c.webp",
+    "newAsset": "assets/08_orbit_c_r2.webp",
+    "en": "The station is always falling — but it moves so fast it keeps circling Earth and never lands! That round path is its orbit.",
+    "zh": "太空站其实一直在“往下掉”，只是它飞得很快，永远绕地球转圈，所以掉不下来！这条圆圆的路线就是轨道。",
+    "overlayKey": "station_orbit"
+  },
+  {
+    "book": "station",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/09_float_c.webp",
+    "newAsset": "assets/09_float_c_r2.webp",
+    "en": "Because it is always falling, everything floats — even the astronauts sleep while floating in the air!",
+    "zh": "因为一直在自由下落，舱里东西都飘起来了，宇航员也飘在半空中睡觉呢！",
+    "overlayKey": "station_float"
+  },
+  {
+    "book": "station",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/10_life_c.webp",
+    "newAsset": "assets/10_life_c_r2.webp",
+    "en": "The station makes oxygen to breathe and recycles water to drink, so astronauts can live far from home.",
+    "zh": "太空站会制造氧气让人呼吸，还会回收水让人喝，这样宇航员就能远离地球生活。",
+    "overlayKey": "station_life"
+  },
+  {
+    "book": "station",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/11_earth_c.webp",
+    "newAsset": "assets/11_earth_c_r2.webp",
+    "en": "From the station, you can see blue Earth, white clouds, and glowing ribbons of aurora far below.",
+    "zh": "从太空站往下看，能看见蓝色的地球、白云，还有远处发光的一条条极光。",
+    "overlayKey": "station_earth"
+  },
+  {
+    "book": "station",
+    "pageIndex": 12,
+    "kind": "page",
+    "oldAsset": "assets/12_return_c.webp",
+    "newAsset": "assets/12_return_c_r2.webp",
+    "en": "When the mission ends, astronauts ride a spacecraft away from the station and fly back down to Earth.",
+    "zh": "任务结束，宇航员坐飞船离开太空站，飞回地球家园。",
+    "overlayKey": "station_return"
+  },
+  {
+    "book": "station",
+    "pageIndex": 13,
+    "kind": "page",
+    "oldAsset": "assets/13_glossary_c.webp",
+    "newAsset": "assets/13_glossary_c_r2.webp",
+    "en": "Great job, little explorer! You learned what a space station is, how it stays up, and how astronauts live among the stars.",
+    "zh": "做得好，小探险家！你学会了太空站是什么、怎么不掉下来，还有宇航员怎么在星星之间生活。",
+    "overlayKey": "station_glossary"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": -1,
+    "kind": "cover",
+    "oldAsset": "assets/01_cover_c.webp",
+    "newAsset": "assets/01_cover_c_r2.webp",
+    "en": "",
+    "zh": "",
+    "overlayKey": null
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 1,
+    "kind": "page",
+    "oldAsset": "assets/02_overview_c.webp",
+    "newAsset": "assets/02_overview_c_r2.webp",
+    "en": "A steam train is a giant metal machine on wheels. Up front is the engine that makes it go. Behind it rides the tender, full of coal and water. Let us look inside!",
+    "zh": "蒸汽火车是一台带轮子的巨型金属机器。最前面是让它跑起来的发动机，后面跟着装满煤和水的煤水车。我们进去看看吧！",
+    "overlayKey": "st_parts"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 2,
+    "kind": "page",
+    "oldAsset": "assets/03_firebox_c.webp",
+    "newAsset": "assets/03_firebox_c_r2.webp",
+    "en": "Deep inside the engine is the firebox. The fireman shovels coal into the fire. The coal burns with a bright, hot flame — this is where the train’s energy begins!",
+    "zh": "发动机最里面是炉膛。司炉把煤铲进火里。煤炭烧起明亮炽热的火焰——火车的能量就是从这里开始的！",
+    "overlayKey": "st_firebox"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 3,
+    "kind": "page",
+    "oldAsset": "assets/04_boiler_c.webp",
+    "newAsset": "assets/04_boiler_c_r2.webp",
+    "en": "Above the fire sits the boiler, a long tube full of water. The hot fire heats the water until it boils and turns into steam — just like a giant kettle!",
+    "zh": "火的上面是锅炉，一根装满水的长管子。炽热的火把水加热，直到水沸腾变成蒸汽——就像一把巨大的水壶！",
+    "overlayKey": "st_boiler"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 4,
+    "kind": "page",
+    "oldAsset": "assets/05_steamdome_c.webp",
+    "newAsset": "assets/05_steamdome_c_r2.webp",
+    "en": "The steam rises and gathers under a round dome on top. As more steam piles up, it pushes hard. This strong push is called pressure!",
+    "zh": "蒸汽升起来，聚集在顶部圆圆的蒸汽包里。蒸汽越聚越多，使劲往外挤。这种强大的推力叫“压力”！",
+    "overlayKey": "st_steamdome"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 5,
+    "kind": "page",
+    "oldAsset": "assets/06_piston_c.webp",
+    "newAsset": "assets/06_piston_c_r2.webp",
+    "en": "The strong steam rushes into a cylinder and pushes a sliding rod called a piston. Push — it slides one way. More steam — it slides back. Back and forth!",
+    "zh": "强大的蒸汽冲进气缸，推动一根叫活塞的滑杆。推一下，活塞滑过去；再来蒸汽，又滑回来。一来一回！",
+    "overlayKey": "st_piston"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 6,
+    "kind": "page",
+    "oldAsset": "assets/07_rod_c.webp",
+    "newAsset": "assets/07_rod_c_r2.webp",
+    "en": "The piston is linked to a long connecting rod. As the piston slides, the rod swings the big driving wheel around and around. The wheel turns, and the train rolls forward!",
+    "zh": "活塞连着一根长长的连杆。活塞一滑，连杆就带着大动轮转啊转。轮子转起来，火车就往前开啦！",
+    "overlayKey": "st_rod"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 7,
+    "kind": "page",
+    "oldAsset": "assets/08_wheels_c.webp",
+    "newAsset": "assets/08_wheels_c_r2.webp",
+    "en": "The big driving wheels grip the steel rails. The heavier the train, the more wheels help it hold on and pull the cars behind. Chug, chug, forward!",
+    "zh": "大大的动轮紧紧咬住钢轨。火车越重，就需要更多轮子帮忙抓牢轨道、拉动后面的车厢。哐当，哐当，前进！",
+    "overlayKey": "st_wheels"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 8,
+    "kind": "page",
+    "oldAsset": "assets/09_whistle_c.webp",
+    "newAsset": "assets/09_whistle_c_r2.webp",
+    "en": "On top of the cab is a shiny steam whistle. The driver pulls a cord, and a puff of steam makes a loud TOOT! to say “here comes the train!”",
+    "zh": "司机室顶上有一只亮亮的汽笛。司机拉一下绳子，一团蒸汽就发出响亮的“呜——！”，好像在说“火车来啦！”",
+    "overlayKey": "st_whistle"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 9,
+    "kind": "page",
+    "oldAsset": "assets/10_chimney_c.webp",
+    "newAsset": "assets/10_chimney_c_r2.webp",
+    "en": "After the steam does its work, the leftover smoke puffs out of the tall funnel. The smoke rolls up into the sky in soft grey clouds.",
+    "zh": "蒸汽干完活之后，剩下的烟从高高的烟囱里冒出来，变成一团团灰色的云，飘上天空。",
+    "overlayKey": "st_chimney"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 10,
+    "kind": "page",
+    "oldAsset": "assets/11_tender_c.webp",
+    "newAsset": "assets/11_tender_c_r2.webp",
+    "en": "Behind the engine rides the tender. It carries the coal to burn and the water to boil — the two things the train needs to keep going all day long.",
+    "zh": "发动机后面跟着煤水车。它装着要烧的煤和要煮开的水——火车一整天跑下去，就靠这两样！",
+    "overlayKey": "st_tender"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 11,
+    "kind": "page",
+    "oldAsset": "assets/12_journey_c.webp",
+    "newAsset": "assets/12_journey_c_r2.webp",
+    "en": "Fire makes steam, steam pushes the piston, the piston turns the wheels, and the train chugs down the track! Every part works together. All aboard!",
+    "zh": "火生出蒸汽，蒸汽推动活塞，活塞带动车轮，火车就沿着铁轨哐当哐当跑起来！每个部件齐心合力。上车啦！",
+    "overlayKey": "st_journey"
+  },
+  {
+    "book": "steamtrain",
+    "pageIndex": 12,
+    "kind": "page",
+    "oldAsset": "assets/13_vocab_c.webp",
+    "newAsset": "assets/13_vocab_c_r2.webp",
+    "en": "Great job, little engineer! You learned how fire, steam, and wheels work together to make a steam train roll. Can you name the parts?",
+    "zh": "做得好，小工程师！你学会了火、蒸汽和轮子怎么齐心合力，让蒸汽火车跑起来。你能叫出这些部件的名字吗？",
+    "overlayKey": "st_vocab"
+  }
+]
