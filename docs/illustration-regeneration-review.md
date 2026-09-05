@@ -18,4 +18,10 @@
 - 修正巴士提示文案内部直引号导致的 SVG 属性解析问题，含义不变。
 - `python qa_library_r2_assets.py --books bus capsule` 通过。
 - `node qa_books.js`、`node qa_runtime.js`、`node qa_render.js`：全库通过。DOM 检查使用 jsdom，视觉检查使用生产 SVG 叠加诊断图。
-- 发布结果以 GitHub PR、Pages 构建和公网探测为准；尚未发布的候选不计入完成量。
+- PR #3 已合并，Pages 构建成功；25 张图片的 Pages 与 jsDelivr 响应均与本地 SHA-256 一致。一次瞬时响应异常经重试恢复。
+
+## 第二批：海洋、企鹅
+
+- 24 张 WebP 新图，已校准并检查逐页热点，更新内页与首页封面版本路径。
+- 企鹅南极滑行页移除错误的“小树”热点；正文及现有音频文件不改动。其余热点仍使用原有音频键。
+- 继续保留旧文件供回退；未完成候选不随本批次发布。
