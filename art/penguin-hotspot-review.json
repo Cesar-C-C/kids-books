@@ -1,0 +1,133 @@
+{
+  "coordinates": {
+    "penguin_02_0": [
+      350,
+      600
+    ],
+    "penguin_02_1": [
+      900,
+      330
+    ],
+    "penguin_02_2": [
+      450,
+      290
+    ],
+    "penguin_03_0": [
+      600,
+      510
+    ],
+    "penguin_03_1": [
+      420,
+      430
+    ],
+    "penguin_03_2": [
+      780,
+      430
+    ],
+    "penguin_04_0": [
+      570,
+      590
+    ],
+    "penguin_04_1": [
+      470,
+      380
+    ],
+    "penguin_04_2": [
+      1090,
+      245
+    ],
+    "penguin_05_0": [
+      610,
+      535
+    ],
+    "penguin_05_1": [
+      350,
+      390
+    ],
+    "penguin_05_2": [
+      720,
+      710
+    ],
+    "penguin_06_0": [
+      470,
+      445
+    ],
+    "penguin_06_1": [
+      1020,
+      595
+    ],
+    "penguin_06_2": [
+      110,
+      395
+    ],
+    "penguin_07_0": [
+      490,
+      440
+    ],
+    "penguin_07_1": [
+      340,
+      185
+    ],
+    "penguin_08_0": [
+      650,
+      420
+    ],
+    "penguin_08_1": [
+      1090,
+      720
+    ],
+    "penguin_08_2": [
+      1050,
+      260
+    ],
+    "penguin_09_0": [
+      420,
+      490
+    ],
+    "penguin_09_1": [
+      870,
+      160
+    ],
+    "penguin_09_2": [
+      520,
+      740
+    ],
+    "penguin_10_0": [
+      650,
+      200
+    ],
+    "penguin_10_1": [
+      240,
+      600
+    ],
+    "penguin_10_2": [
+      960,
+      620
+    ],
+    "penguin_11_0": [
+      570,
+      440
+    ],
+    "penguin_11_1": [
+      1000,
+      405
+    ],
+    "penguin_11_2": [
+      320,
+      570
+    ],
+    "penguin_12_0": [
+      330,
+      450
+    ],
+    "penguin_12_1": [
+      375,
+      650
+    ],
+    "penguin_12_2": [
+      770,
+      230
+    ]
+  },
+  "notes": "Coordinates reviewed against generated artwork; removed Antarctic trees hotspot, preserved story and audio files."
+}
