@@ -3,6 +3,8 @@ books/*/_manifest.json
 
 # Temp / verification artifacts
 .deploy_verify/
+.qa-deps/
+.art-review/
 *.tmp
 
 # Dependencies (managed runtimes keep these outside the repo)

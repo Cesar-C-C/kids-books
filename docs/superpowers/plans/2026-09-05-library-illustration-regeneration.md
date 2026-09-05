@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Replace the 137 active illustration assets used by the eleven non-schoolbus books with validated, cache-busted WebP r2 assets in one branch and one pull-request update.
+**Goal:** Replace the 137 active illustration assets used by the eleven non-schoolbus books with validated, cache-busted WebP r2 assets. User instruction updated 2026-09-05: publish completed, independently verified books in successive batches while continuing generation. This supersedes the single-delivery and draft-only steps below; merge each approved-by-QA batch and verify GitHub Pages/CDN delivery. Schoolbus remains unchanged.
 
 **Architecture:** A repository-local manifest records every active book image and its narrative context. Each book is regenerated from one visual anchor, then its `book.js` paths and image-dependent SVG hotspot coordinates are updated only after visual acceptance. The shared reader remains unchanged: versioned relative image paths are automatically served by jsDelivr and retain same-origin fallback.
 
