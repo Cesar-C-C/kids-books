@@ -87,7 +87,7 @@ window.PAGES = [
     ov: 'rocket_return', interactive: true
   },
   {
-    img: 'assets/02_earth_c_r2.webp',
+    img: 'assets/02_earth_c_r2.webp?v=6aea572',
     en: 'Welcome home, little satellite! It is back on our blue and green Earth, where it can rest after its big trip to space.',
     zh: '欢迎回家，小卫星！它回到了蓝绿相间的地球，在太空大旅行之后可以好好休息了。',
     ov: 'rocket_landing', interactive: true

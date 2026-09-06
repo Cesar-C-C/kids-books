@@ -32,6 +32,7 @@ function loadBook(id) {
 }
 
 function exists(p) { return fs.existsSync(p); }
+function assetPath(assetUrl) { return (assetUrl || '').split('?')[0]; }
 
 for (const id of books) {
   const errs = [];
@@ -84,7 +85,7 @@ for (const id of books) {
     const idx = pad2(i);
     // image
     if (p.img) {
-      if (!exists(path.join(dir, p.img))) errs.push(`page ${idx} img missing: ${p.img}`);
+      if (!exists(path.join(dir, assetPath(p.img)))) errs.push(`page ${idx} img missing: ${p.img}`);
     } else if (!p.cover) {
       warns.push(`page ${idx} has no img (non-cover)`);
     }
@@ -125,6 +126,12 @@ for (const id of books) {
       });
     }
   });
+
+  // Replacing a published image under the same filename needs a versioned URL,
+  // otherwise a reader can be served an old browser/CDN cache entry.
+  if (id === 'rocket' && PAGES[12]?.img !== 'assets/02_earth_c_r2.webp?v=6aea572') {
+    errs.push('page 13 landing illustration must use the cache-busted 6aea572 image URL');
+  }
 
   totalErrors += errs.length;
   console.log(`\n=== ${id} (${BOOK.title} / ${BOOK.titleZh}) ===`);
