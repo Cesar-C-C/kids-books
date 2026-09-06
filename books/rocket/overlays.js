@@ -117,6 +117,13 @@ window.OVL = {
     );
   },
 
+  rocket_landing(){
+    return svgWrap(
+      partSVG({px:682, py:520, name:'Home', nameZh:'家', fact:'the return capsule is safely home', factZh:'返回舱平安回家了',
+        line:"I'm Home — the satellite is back where it belongs!", lineZh:'我是家，卫星回到了属于它的地方！', lineKey:'rocket_home_1'})
+    );
+  },
+
   rocket_home(){
     return svgWrap(
       partSVG({px:500, py:420, name:'Earth', nameZh:'地球', fact:'our blue and green home', factZh:'我们蓝绿相间的家',

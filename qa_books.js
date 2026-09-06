@@ -7,6 +7,7 @@ const path = require('path');
 
 const books = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station', 'steamtrain', 'capsule', 'bus', 'schoolbus'];
 const root = process.cwd();
+const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const pad2 = n => String(n).padStart(2, '0');
 const sanitize = s => (s || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 const decodeEntity = s => (s || '').replaceAll('&amp;','&').replaceAll('&quot;','"').replaceAll('&lt;','<').replaceAll('&gt;','>');
@@ -37,6 +38,14 @@ for (const id of books) {
   const warns = [];
   const { BOOK, PAGES, OVL, dir } = loadBook(id);
   if (!BOOK || !PAGES) { console.log(`\n[${id}] FATAL: cannot load BOOK/PAGES`); totalErrors++; continue; }
+
+  // The library card must preview the same cover that opens in the book.
+  const card = homepage.match(new RegExp(`<a class="book-card" href="books/${id}/index\\.html">[\\s\\S]*?<img class="cover" src="([^"]+)"`));
+  if (!card) {
+    errs.push('homepage card missing');
+  } else if (!card[1].split('?')[0].endsWith(`books/${id}/${BOOK.coverImg}`)) {
+    errs.push(`homepage cover differs from BOOK.coverImg: ${card[1]} != books/${id}/${BOOK.coverImg}`);
+  }
 
   // ---- index.html STRUCTURAL check (catches missing #reader mount point) ----
   // This is the #1 cause of "book renders blank": reader.js does
