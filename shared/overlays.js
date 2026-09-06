@@ -27,6 +27,9 @@ const LEFT_MARGIN = 12.6;                                  // letterbox on each 
 const VISIBLE_W   = 974.8;                                 // image width inside viewBox
 function toOvX(px){ return LEFT_MARGIN + (px/IMG_W) * VISIBLE_W; }
 function toOvY(py){ return (py/IMG_H) * VB_H; }
+function escAttr(value){
+  return String(value).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+}
 
 /* a clickable part: a small red dot + leader line + label + invisible hit circle.
    Input: px,py,lx,ly in IMAGE pixel coords (auto-converted to SVG viewBox).
@@ -36,14 +39,14 @@ function toOvY(py){ return (py/IMG_H) * VB_H; }
    next to the dot — used by books like the double-decker bus that want
    "character/parts speak" interactions instead of label mode. */
 function partSVG(p){
-  const factZh = p.factZh ? ` data-factzh="${p.factZh}"` : '';
-  const nmZh = p.nameZh ? ` data-namezh="${p.nameZh}"` : '';
+  const factZh = p.factZh ? ` data-factzh="${escAttr(p.factZh)}"` : '';
+  const nmZh = p.nameZh ? ` data-namezh="${escAttr(p.nameZh)}"` : '';
   const isBubble = !!p.line;
   if (isBubble) {
     const x1 = toOvX(p.px), y1 = toOvY(p.py);
-    const lineAttr  = p.line   ? ` data-line="${p.line}"`      : '';
-    const lineZh    = p.lineZh ? ` data-linezh="${p.lineZh}"`  : '';
-    const lineKey   = p.lineKey? ` data-linekey="${p.lineKey}"`: '';
+    const lineAttr  = p.line   ? ` data-line="${escAttr(p.line)}"`      : '';
+    const lineZh    = p.lineZh ? ` data-linezh="${escAttr(p.lineZh)}"`  : '';
+    const lineKey   = p.lineKey? ` data-linekey="${escAttr(p.lineKey)}"`: '';
     /* ADAPTIVE BUBBLE: data-bg tells reader.js which bubble theme to use so the
        speech bubble stays legible against the illustration behind it.
          bg:'light' -> hotspot sits on a BRIGHT area (yellow bus, light-blue sky,
@@ -52,12 +55,12 @@ function partSVG(p){
                        reader.js keeps the LIGHT cream bubble w/ dark text.
        The value is computed at authoring time (PIL samples the illustration), so
        the bubble is always correct on CDN, local, and file:// — no runtime CORS. */
-    const bgAttr    = p.bg     ? ` data-bg="${p.bg}"`          : '';
+    const bgAttr    = p.bg     ? ` data-bg="${escAttr(p.bg)}"`          : '';
     return `<g class="hot">
       <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="20" fill="rgba(255,255,255,.26)" stroke="rgba(255,255,255,.9)" stroke-width="2.5"/>
       <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="8" fill="rgba(190,220,255,.5)"/>
       <ellipse cx="${(x1-6).toFixed(2)}" cy="${(y1-6).toFixed(2)}" rx="5" ry="3" fill="rgba(255,255,255,.95)" transform="rotate(-38 ${(x1-6).toFixed(2)} ${(y1-6).toFixed(2)})"/>
-      <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${p.name}" data-fact="${p.fact}"${factZh}${nmZh}${lineAttr}${lineZh}${lineKey}${bgAttr}/>
+      <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${escAttr(p.name)}" data-fact="${escAttr(p.fact)}"${factZh}${nmZh}${lineAttr}${lineZh}${lineKey}${bgAttr}/>
     </g>`;
   }
   const x1 = toOvX(p.px), y1 = toOvY(p.py);
@@ -68,18 +71,18 @@ function partSVG(p){
     <circle cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="8" fill="rgba(190,220,255,.5)"/>
     <ellipse cx="${(x1-6).toFixed(2)}" cy="${(y1-6).toFixed(2)}" rx="5" ry="3" fill="rgba(255,255,255,.95)" transform="rotate(-38 ${(x1-6).toFixed(2)} ${(y1-6).toFixed(2)})"/>
     <text x="${x2.toFixed(2)}" y="${y2.toFixed(2)}" text-anchor="${p.anc}" class="lbltxt">${p.name}</text>
-    <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${p.name}" data-fact="${p.fact}"${factZh}${nmZh}/>
+    <circle class="part" cx="${x1.toFixed(2)}" cy="${y1.toFixed(2)}" r="40" fill="transparent" data-name="${escAttr(p.name)}" data-fact="${escAttr(p.fact)}"${factZh}${nmZh}/>
   </g>`;
 }
 
 /* a labeled animated arrow (also clickable). Input coordinates are image pixels. */
 function arrowSVG(a){
-  const factZh = a.factZh ? ` data-factzh="${a.factZh}"` : '';
-  const nmZh = a.nameZh ? ` data-namezh="${a.nameZh}"` : '';
+  const factZh = a.factZh ? ` data-factzh="${escAttr(a.factZh)}"` : '';
+  const nmZh = a.nameZh ? ` data-namezh="${escAttr(a.nameZh)}"` : '';
   const x1 = toOvX(a.x1), y1 = toOvY(a.y1);
   const x2 = toOvX(a.x2), y2 = toOvY(a.y2);
   const tx = toOvX(a.tx), ty = toOvY(a.ty);
-  return `<g class="part" data-name="${a.name}" data-fact="${a.fact}"${factZh}${nmZh}>
+  return `<g class="part" data-name="${escAttr(a.name)}" data-fact="${escAttr(a.fact)}"${factZh}${nmZh}>
     <line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" stroke="${a.col}" stroke-width="8" marker-end="url(#${a.mk})" class="pulse"/>
     <text x="${tx.toFixed(2)}" y="${ty.toFixed(2)}" text-anchor="${a.anc}" class="cap" fill="${a.col}">${a.name}</text>
   </g>`;
