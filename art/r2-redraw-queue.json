@@ -1,0 +1,26 @@
+[
+  {
+    "asset": "books/airplane/assets/05_lift_c_r2.webp",
+    "issue": "Remove baked-in arrows; preserve correct isolated airfoil. Add flow and lift in overlay."
+  },
+  {
+    "asset": "books/airplane/assets/07_engine_c_r2.webp",
+    "issue": "Visible orange exhaust flame inappropriate for airliner turbofan; replace with colorless heat haze."
+  },
+  {
+    "asset": "books/bigbang/assets/05_particles_c_r2.webp",
+    "issue": "Remove background mature starfield; use plain indigo behind conceptual particle clusters."
+  },
+  {
+    "asset": "books/bigbang/assets/06_star_c_r2.webp",
+    "issue": "Looks like a galaxy instead of one round star; use round sphere with gas cloud, no spiral arms."
+  },
+  {
+    "asset": "books/bigbang/assets/10_vocab_c_r2.webp",
+    "issue": "Solar-system vignette appears geocentric; replace with separated objects, no orbital paths."
+  },
+  {
+    "asset": "books/hsr/assets/09_tunnel_c_r2.webp",
+    "issue": "Cutaway appears to show two separate tunnel levels; replace with one clearly continuous passage."
+  }
+]
