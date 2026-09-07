@@ -4,6 +4,7 @@ books/*/_manifest.json
 # Temp / verification artifacts
 .deploy_verify/
 .qa-deps/
+.qa-labs/
 .art-review/
 *.tmp
 
