@@ -10,14 +10,20 @@ window.LABS_CATALOG = [
   },
   {
     id: 'rocket', title: '火箭 3D 实验室', englishTitle: 'Rocket Lab',
-    description: '下一站，太空！未来一起探索火箭的结构与飞向太空的秘密。',
-    icon: '🚀', status: 'planned', href: null, image: null, bookId: 'rocket', age: '4–8 岁',
-    features: []
+    description: '打开整流罩，发现卫星、贮箱和发动机，认识 9 类火箭关键部件。',
+    icon: '🚀', status: 'ready', href: 'rocket/index.html', image: 'rocket/preview.png', bookId: 'rocket', age: '4–8 岁',
+    features: ['360° 观察', '内部拆解', '英文点读', '找部件挑战']
   },
   {
     id: 'hsr', title: '高铁 3D 实验室', englishTitle: 'High-Speed Train Lab',
-    description: '未来一起走进高速列车，认识车头、车厢和更多有趣的部件。',
-    icon: '🚄', status: 'planned', href: null, image: null, bookId: 'hsr', age: '4–8 岁',
-    features: []
+    description: '抬起车顶看看座椅，寻找受电弓、转向架和牵引电机，探索 10 类部件。',
+    icon: '🚄', status: 'ready', href: 'hsr/index.html', image: 'hsr/preview.png', bookId: 'hsr', age: '4–8 岁',
+    features: ['360° 观察', '车厢拆解', '英文点读', '找部件挑战']
+  },
+  {
+    id: 'schoolbus', title: '校车 3D 实验室', englishTitle: 'School Bus Lab',
+    description: '拆开黄色校车，找到座椅、安全带和驾驶区，认识 10 类部件的小秘密。',
+    icon: '🚌', status: 'ready', href: 'schoolbus/index.html', image: 'schoolbus/preview.png', bookId: 'schoolbus', age: '4–8 岁',
+    features: ['360° 观察', '车厢拆解', '英文点读', '找部件挑战']
   }
 ];
