@@ -102,16 +102,17 @@ const server=http.createServer((req,res)=>{
     await page.setViewportSize({width:1440,height:1000});
     await page.locator('.lab-navigation a').first().click();
     assert.ok(page.url().endsWith('/labs/index.html'));
-    assert.equal(await page.locator('.lab-card.ready').count(),1);
-    assert.equal(await page.locator('.lab-card.planned').count(),2);
+    const catalog=await page.evaluate(()=>window.LABS_CATALOG);
+    assert.equal(await page.locator('.lab-card.ready').count(),catalog.filter(l=>l.status==='ready').length);
+    assert.equal(await page.locator('.lab-card.planned').count(),catalog.filter(l=>l.status==='planned').length);
     assert.equal(await page.locator('.lab-card.planned a').count(),0);
     assert.equal(await page.locator('canvas').count(),0);
-    assert.ok(await page.locator('.lab-cover img').evaluate(img=>img.complete&&img.naturalWidth>0));
+    for(const img of await page.locator('.lab-cover img').all())assert.ok(await img.evaluate(img=>img.complete&&img.naturalWidth>0));
     await page.screenshot({path:path.join(output,'directory.png'),fullPage:true});
     await page.setViewportSize({width:390,height:844});
     await page.screenshot({path:path.join(output,'directory-mobile.png'),fullPage:true});
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-    await page.locator('.enter-lab').click();
+    await page.locator('[data-lab-id="airplane"] .enter-lab').click();
     await page.waitForFunction(()=>window.airplaneLab?.snapshot().renderer.calls>0);
     // Existing cover CDN is unrelated to navigation; avoid downloading all books.
     await page.route('https://**',route=>route.abort());
@@ -119,7 +120,7 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator('.book-card').count(),12);
     await page.locator('.labs-banner').click();
     assert.ok(page.url().endsWith('/labs/index.html'));
-    await page.locator('.enter-lab').click();
+    await page.locator('[data-lab-id="airplane"] .enter-lab').click();
     await page.locator('.lab-navigation a').last().click();
     assert.ok(page.url().endsWith('/books/airplane/index.html'));
     await page.locator('.book-lab-link').click();

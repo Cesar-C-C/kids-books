@@ -1,7 +1,8 @@
 (() => {
   const grid = document.getElementById('labs-grid');
   const labs = window.LABS_CATALOG || [];
-  document.getElementById('lab-count').textContent = `${labs.filter(l => l.status === 'ready').length} 个已开放 · ${labs.filter(l => l.status === 'planned').length} 个筹备中`;
+  const readyCount=labs.filter(l=>l.status==='ready').length, plannedCount=labs.filter(l=>l.status==='planned').length;
+  document.getElementById('lab-count').textContent = `${readyCount} 个已开放${plannedCount ? ` · ${plannedCount} 个筹备中` : ' · 一起动手探索'}`;
   const element = (tag, className, text) => {
     const node = document.createElement(tag); node.className = className;
     if (text) node.textContent = text; return node;
