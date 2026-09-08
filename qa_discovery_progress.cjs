@@ -1,0 +1,17 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const file=__dirname+'/labs/shared/discovery-progress.js';
+assert.ok(fs.existsSync(file),'Discovery progress module must exist');
+const context={window:{}};vm.runInNewContext(fs.readFileSync(file,'utf8'),context);
+const values=new Map(),storage={getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};
+const create=()=>context.window.DiscoveryProgress.create(storage,'engine-v1',{parts:['fan','shaft'],actions:['open','spin'],tasks:['find','connect']});
+let journal=create();journal.mark('found','fan');journal.mark('found','fan');journal.mark('found','alien');
+assert.deepEqual([...journal.read().found],['fan']);
+journal.mark('operated','open');journal.mark('explained','connect');journal.saveView({part:'shaft',open:0.8,flow:'core'});
+journal=create();assert.equal(journal.read().view.part,'shaft');assert.deepEqual([...journal.read().explained],['connect']);
+values.set('engine-v1','{"found":null,"operated":["open","bad"],"explained":"connect","view":{"part":"bad","open":900,"flow":"bad"}}');
+journal=create();assert.equal(journal.read().found.length,0);assert.deepEqual([...journal.read().operated],['open']);assert.equal(journal.read().explained.length,0);assert.equal(journal.read().view.part,'fan');assert.equal(journal.read().view.open,1);assert.equal(journal.read().view.flow,'both');
+values.set('engine-v1','invalid JSON');assert.equal(create().read().found.length,0);
+const broken=context.window.DiscoveryProgress.create({getItem(){throw Error('blocked')},setItem(){throw Error('full')},removeItem(){throw Error('blocked')}},'x',{parts:['fan'],actions:[],tasks:[]});
+broken.mark('found','fan');assert.equal(broken.read().found.length,1);assert.equal(broken.persistent,false);
+journal=create();journal.mark('found','fan');journal.reset();assert.equal(create().read().found.length,0);
+console.log('PASS: unique validated progress, reload, malformed data, unavailable storage, reset');

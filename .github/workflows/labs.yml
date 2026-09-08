@@ -1,10 +1,10 @@
 name: Validate 3D labs
 on:
   pull_request:
-    paths: ['labs/**', 'qa_labs.cjs', 'qa_models.cjs', 'index.html', 'books/**/index.html', 'shared/library-sections.css', '.github/workflows/labs.yml']
+    paths: ['labs/**', 'qa_*.cjs', 'index.html', 'books/**/index.html', 'shared/library-sections.css', '.github/workflows/labs.yml']
   push:
     branches: [main]
-    paths: ['labs/**', 'qa_labs.cjs', 'qa_models.cjs', 'index.html', 'books/**/index.html', 'shared/library-sections.css', '.github/workflows/labs.yml']
+    paths: ['labs/**', 'qa_*.cjs', 'index.html', 'books/**/index.html', 'shared/library-sections.css', '.github/workflows/labs.yml']
 permissions:
   contents: read
 jobs:
@@ -17,3 +17,5 @@ jobs:
           node-version: '22'
       - run: node qa_labs.cjs
       - run: node qa_models.cjs
+      - run: node qa_engine_model.cjs
+      - run: node qa_discovery_progress.cjs
