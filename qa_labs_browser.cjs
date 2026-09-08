@@ -102,6 +102,7 @@ const server=http.createServer((req,res)=>{
     await page.setViewportSize({width:1440,height:1000});
     await page.locator('.lab-navigation a').first().click();
     assert.ok(page.url().endsWith('/labs/index.html'));
+    await page.waitForFunction(()=>Array.isArray(window.LABS_CATALOG)&&document.querySelector('.lab-card'));
     const catalog=await page.evaluate(()=>window.LABS_CATALOG);
     assert.equal(await page.locator('.lab-card.ready').count(),catalog.filter(l=>l.status==='ready').length);
     assert.equal(await page.locator('.lab-card.planned').count(),catalog.filter(l=>l.status==='planned').length);

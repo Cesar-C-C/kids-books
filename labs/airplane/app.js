@@ -349,5 +349,6 @@
   $('quiz-dialog').addEventListener('close',stopSpeech);
   window.addEventListener('pagehide',stopSpeech);
   try{init3D();}catch(e){console.error('Airplane 3D:',e);$('load-error').hidden=false;}
-  selectPart(0);
+  const requestedPart = new URLSearchParams(location.search).get('part');
+  selectPart(Math.max(0, lessons.findIndex(p => p.id === requestedPart)));
 })();
