@@ -5,7 +5,8 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const visited = new Set();
   let selected = 0, explosion = 0, targetExplosion = 0, showLabels = false;
-  let autoRotate = false, scene, camera, renderer, model, raycaster;
+  let autoRotate = false, scene, camera, renderer, model, raycaster, suspended = false;
+  const look = {x:0,y:-.25,z:0}, lookTarget = {...look};
   const nodes = [], pickables = [], labels = [];
   let yaw = -0.45, pitch = 0.48, distance = 13.8;
   const cameraTarget = {yaw, pitch, distance};
@@ -18,12 +19,14 @@
     button.dataset.part = p.id;
     button.innerHTML = `<span class="dot"></span><span>${p.name}</span><span class="zh">${p.zhName}</span>`;
     button.addEventListener('click', () => selectPart(i));
+    if(p.id==='engines')button.addEventListener('dblclick',()=>window.dispatchEvent(new Event('airplane:enter-engine')));
     $('part-list').append(button);
     const label = document.createElement('button');
     label.className = 'model-label';
     label.style.setProperty('--part-color', p.color);
     label.innerHTML = `<b></b>${p.name}`;
     label.addEventListener('click', () => selectPart(i));
+    if(p.id==='engines')label.addEventListener('dblclick',()=>window.dispatchEvent(new Event('airplane:enter-engine')));
     $('labels').append(label);
     labels.push(label);
   });
@@ -44,6 +47,7 @@
     $('part-en').textContent = p.en;
     $('part-zh').textContent = p.zh;
     $('part-tip').textContent = p.tip;
+    if($('selected-engine-entry'))$('selected-engine-entry').hidden=p.id!=='engines';
     $('progress-text').textContent = `${visited.size} / 10`;
     document.querySelectorAll('.part-button').forEach((b, n) => {
       b.setAttribute('aria-pressed', n === selected);
@@ -225,18 +229,19 @@
 
     function resize() {
       const rect = $('viewport').getBoundingClientRect();
+      if(!rect.width||!rect.height)return;
       renderer.setSize(rect.width,rect.height,false);
       camera.aspect = rect.width/rect.height;
       camera.fov = camera.aspect < 1 ? 48 : 39;
       camera.updateProjectionMatrix();
     }
     new ResizeObserver(resize).observe($('viewport')); resize();
-    const pointers = new Map(); let pointerStart = null, dragDistance = 0, pinchDistance = 0;
+    const pointers = new Map(); let pointerStart = null, dragDistance = 0, pinchDistance = 0, lastTap = null;
     const canvas = renderer.domElement;
     function pointerDown(e) {
       canvas.setPointerCapture(e.pointerId); pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
       pointerStart={x:e.clientX,y:e.clientY}; dragDistance=0;
-      if(pointers.size===2){const a=[...pointers.values()];pinchDistance=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);dragDistance=99;}
+      if(pointers.size===2){const a=[...pointers.values()];pinchDistance=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);dragDistance=99;lastTap=null;}
       autoRotate=false;$('auto-rotate').setAttribute('aria-pressed',false);
     }
     canvas.addEventListener('pointerdown',pointerDown);
@@ -255,11 +260,22 @@
       if(pointers.size===1&&dragDistance<6&&pointerStart){
         const r=canvas.getBoundingClientRect(); raycaster.setFromCamera(new T.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),camera);
         const hit=raycaster.intersectObjects(pickables,false)[0];
-        if(hit)selectPart(lessons.findIndex(p=>p.id===hit.object.userData.part));
-      }
+        if(hit){
+          const id=hit.object.userData.part;selectPart(lessons.findIndex(p=>p.id===id));
+          const now=performance.now();
+          if(e.pointerType!=='mouse'&&id==='engines'&&lastTap&&now-lastTap.time<380&&Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<25){lastTap=null;window.dispatchEvent(new Event('airplane:enter-engine'));}
+          else lastTap=e.pointerType!=='mouse'&&id==='engines'?{time:now,x:e.clientX,y:e.clientY}:null;
+        }else lastTap=null;
+      }else lastTap=null;
       pointers.delete(e.pointerId);pinchDistance=0;pointerStart=null;
     });
     canvas.addEventListener('pointercancel',e=>{pointers.delete(e.pointerId);pointerStart=null;pinchDistance=0;});
+    canvas.addEventListener('dblclick',e=>{
+      if(dragDistance>=6)return;
+      const r=canvas.getBoundingClientRect();raycaster.setFromCamera(new T.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),camera);
+      const hit=raycaster.intersectObjects(pickables,false)[0];
+      if(hit?.object.userData.part==='engines')window.dispatchEvent(new Event('airplane:enter-engine'));
+    });
     canvas.addEventListener('wheel',e=>{e.preventDefault();cameraTarget.distance=Math.max(8,Math.min(24,cameraTarget.distance+e.deltaY*.01));},{passive:false});
     $('viewport').addEventListener('keydown',e=>{
       const keys=['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-'];if(!keys.includes(e.key))return;e.preventDefault();
@@ -271,7 +287,7 @@
     let previousTime = performance.now();
     function frame(time) {
       requestAnimationFrame(frame);
-      if(document.hidden){previousTime=time;return;}
+      if(document.hidden||suspended){previousTime=time;return;}
       const dt=Math.min((time-previousTime)/1000,.05);previousTime=time;
       const ease=reduced?1:1-Math.exp(-dt*9);
       if(autoRotate)cameraTarget.yaw+=dt*.22;
@@ -279,7 +295,9 @@
       explosion+=(targetExplosion-explosion)*ease;
       const fittedDistance=distance*Math.max(1,1.15/camera.aspect);
       camera.position.set(Math.sin(yaw)*Math.cos(pitch)*fittedDistance,Math.sin(pitch)*fittedDistance,Math.cos(yaw)*Math.cos(pitch)*fittedDistance);
-      camera.lookAt(0,-.25,0);
+      for(const key of ['x','y','z'])look[key]+=(lookTarget[key]-look[key])*ease;
+      camera.position.x+=look.x;camera.position.y+=look.y+.25;camera.position.z+=look.z;
+      camera.lookAt(look.x,look.y,look.z);
       nodes.forEach(n=>{
         n.group.position.copy(n.base).addScaledVector(n.offset,explosion);
         n.line.visible=explosion>.02&&n.offset.lengthSq()>.1;
@@ -307,6 +325,11 @@
     }
     requestAnimationFrame(frame);
     window.airplaneLab = {
+      select:id=>{const i=lessons.findIndex(p=>p.id===id);if(i>=0)selectPart(i);},
+      setActive:active=>{suspended=!active;if(active)resize();else stopSpeech();},
+      capture:()=>({yaw,pitch,distance,cameraTarget:{...cameraTarget},look:{...look},lookTarget:{...lookTarget},selected,autoRotate,explosion,targetExplosion}),
+      restore:s=>{yaw=s.yaw;pitch=s.pitch;distance=s.distance;Object.assign(cameraTarget,s.cameraTarget);Object.assign(look,s.look);Object.assign(lookTarget,s.lookTarget);autoRotate=s.autoRotate;explosion=s.explosion;targetExplosion=s.targetExplosion;selectPart(s.selected);},
+      approachEngine:()=>{stopSpeech();autoRotate=false;const n=nodes.filter(n=>n.id==='engines').sort((a,b)=>a.group.getWorldPosition(new T.Vector3()).distanceToSquared(camera.position)-b.group.getWorldPosition(new T.Vector3()).distanceToSquared(camera.position))[0];if(n){const v=n.group.getWorldPosition(new T.Vector3());Object.assign(lookTarget,{x:v.x,y:v.y,z:v.z});cameraTarget.distance=5.8;}},
       snapshot:()=>({selected:lessons[selected].id,explosion,targetExplosion,visited:[...visited],meshCount:pickables.length,position:nodes.map(n=>({id:n.id,position:n.group.position.toArray(),base:n.base.toArray()})),camera:{yaw,pitch,distance},renderer:renderer.info.render}),
       projectPart:id=>{
         const n=nodes.filter(n=>n.id===id).sort((a,b)=>a.group.getWorldPosition(new T.Vector3()).distanceToSquared(camera.position)-b.group.getWorldPosition(new T.Vector3()).distanceToSquared(camera.position))[0];if(!n)return null;

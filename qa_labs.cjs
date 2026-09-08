@@ -26,7 +26,7 @@ for(const page of ['index.html','labs/index.html','labs/airplane/engine/index.ht
 assert.ok(fs.readFileSync(path.join(root,'index.html'),'utf8').includes('labs/index.html'));
 for(const file of ['labs/catalog.js','labs/directory.js','labs/shared/navigation.js','labs/shared/speech.js','labs/shared/page.js','labs/shared/explorer.js','labs/airplane/app.js','labs/airplane/parts.js'])new vm.Script(fs.readFileSync(path.join(root,file),'utf8'));
 const partsContext={window:{}};
-for(const file of ['labs/shared/discovery-progress.js','labs/airplane/engine/app.js','labs/airplane/engine/model.js','labs/airplane/engine/content.js'])new vm.Script(fs.readFileSync(path.join(root,file),'utf8'));
+for(const file of ['labs/shared/discovery-progress.js','labs/airplane/discovery.js','labs/airplane/engine/app.js','labs/airplane/engine/model.js','labs/airplane/engine/content.js'])new vm.Script(fs.readFileSync(path.join(root,file),'utf8'));
 vm.runInNewContext(fs.readFileSync(path.join(root,'labs/airplane/parts.js'),'utf8'),partsContext);
 assert.equal(partsContext.window.PLANE_PARTS.length,10);
 console.log(`PASS: ${labs.length} registered labs, ready/planned routes, related books, shared assets, 10 airplane lessons, script syntax.`);

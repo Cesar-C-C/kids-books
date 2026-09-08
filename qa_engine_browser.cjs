@@ -7,9 +7,9 @@ const server=http.createServer((req,res)=>{let pathname=decodeURIComponent(new U
  try{
   const page=await browser.newPage({viewport:{width:1440,height:1050}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   const base=process.env.LAB_LIVE_BASE||`http://127.0.0.1:${server.address().port}/kids-books/`;
-  await page.goto(base+'labs/airplane/');
-  assert.equal(await page.locator('a[href="engine/index.html"]').count()>0,true,'Airplane must link into engine discovery');
-  await page.locator('a[href="engine/index.html"]').first().click();
+  // The primary airplane entry is exercised by qa_inline_engine.cjs.
+  // Keep the previously shared standalone URL usable as well.
+  await page.goto(base+'labs/airplane/engine/');
   await page.waitForFunction(()=>window.engineDiscovery?.snapshot().rendered);
   assert.equal(await page.locator('[data-engine-part]').count(),8);
   await page.locator('#front-view').click();await page.waitForTimeout(150);

@@ -11,9 +11,9 @@
     <div class="header-right"><span class="age">适合 4–8 岁</span><button id="language" class="quiet" aria-pressed="true">中英双语</button></div>
   </header>
   <nav class="lab-navigation" data-lab-id="airplane" aria-label="实验室导航"></nav>
-  <main>
+  <main id="aircraft-overview">
     <section class="intro"><div><p class="eyebrow">LET’S DISCOVER · 01</p><h1>一架飞机，<span>藏着多少小秘密？</span></h1><p class="subtitle">转一转，拆一拆。和我们一起认识飞向天空的好伙伴。</p></div><div class="progress"><span class="progress-star">✦</span><div><strong id="progress-text">0 / 10</strong><small>已探索的部件</small></div></div></section>
-    <section class="challenge-strip" style="margin:0 0 20px"><span class="challenge-icon">◉</span><div><strong>新发现：跟着空气，去发动机里面旅行</strong><p>打开发动机 · 追踪两条气流 · 看转轴连接 · 收集 4 个发现</p></div><a class="primary" href="engine/index.html">进入发动机 →</a></section>
+    <section class="challenge-strip" style="margin:0 0 20px"><span class="challenge-icon">◉</span><div><strong>双击机翼下的发动机，继续向里面探索</strong><p>也可以点右侧按钮 · 在同一架飞机里逐层发现秘密</p></div><button class="primary" data-enter-engine>深入发动机 →</button></section>
     <div class="workspace">
       <section class="model-panel" aria-label="飞机三维模型交互区域">
         <div class="stage-heading"><span class="live-dot"></span> YOUR AIRPLANE <span class="stage-mode" id="stage-mode">整机观察</span></div>
@@ -36,7 +36,11 @@
     <section class="challenge-strip"><span class="challenge-icon">☆</span><div><strong>准备好当一名小小飞机专家了吗？</strong><p>听一听，找一找，看看你认识了多少部件。</p></div><button id="quiz" class="secondary">找部件挑战 <span>→</span></button></section>
     <footer><span>MADE FOR CURIOUS LITTLE MINDS</span><span>教学示意模型 · 拆解仅用于展示部件关系 <a href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/airplane-parts-function/" target="_blank" rel="noreferrer">科普参考：NASA ↗</a></span></footer>
   </main>
+  <div id="discovery-loading" hidden role="status">正在靠近发动机… <button id="cancel-discovery" class="quiet">返回整机</button></div>
+  <div id="discovery-error" hidden role="status">内部构造暂时没有加载成功，请再试一次。<button class="quiet" data-enter-engine>重新打开</button></div>
+  <section id="engine-depth" hidden aria-label="飞机内部：发动机深度探索"></section>
+  <style>#discovery-loading,#discovery-error{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:20;background:#fffdf0;padding:15px 20px;border:1px solid #cbdcc9;border-radius:16px;box-shadow:0 8px 35px #24433322;max-width:94vw;min-width:280px;font-size:13px}#discovery-loading button,#discovery-error button{margin-left:10px}#engine-depth{display:block}.depth-enter{animation:depth-enter .4s ease-out}@keyframes depth-enter{from{opacity:0;transform:scale(.975)}to{opacity:1;transform:scale(1)}}@media(prefers-reduced-motion:reduce){.depth-enter{animation:none}}</style>
   <dialog id="quiz-dialog"><form method="dialog"><button class="dialog-close" aria-label="关闭挑战">×</button></form><p class="eyebrow">LITTLE PILOT CHALLENGE</p><h2>找到它，你就是小专家！</h2><p id="quiz-count"></p><p id="quiz-question" class="quiz-question"></p><button id="quiz-speak" class="secondary">听题目 ♪</button><div id="quiz-options"></div><p id="quiz-feedback" role="status"></p><button id="quiz-next" class="primary" hidden>下一题 →</button></dialog>
-  <script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="app.js"></script>
+  <script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="app.js?v=inline-20260909"></script><script src="discovery.js"></script>
 </body>
 </html>
