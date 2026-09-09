@@ -2,8 +2,16 @@
   'use strict';
   const $ = id => document.getElementById(id);
   const lessons = window.PLANE_PARTS;
+  const detailLessons = window.AIRPLANE_DETAILS;
+  let storage;try{storage=localStorage;}catch{storage={getItem(){return null;},setItem(){throw Error('unavailable');}};}
+  const journal=DiscoveryProgress.create(storage,'little-wings:whole-airplane:v1',{parts:[...lessons.map(p=>p.id),...detailLessons.map(p=>p.id)],actions:['open','spin','bypass','core','shaft'],tasks:ENGINE_CONTENT.tasks.map(t=>t.id)});
+  // Preserve discoveries made in the previously published engine explorer.
+  const previousJournal=DiscoveryProgress.create(storage,'little-wings:engine-discovery:v1',{parts:ENGINE_CONTENT.parts.map(p=>p.id),actions:['open','spin','bypass','core','shaft'],tasks:ENGINE_CONTENT.tasks.map(t=>t.id)}).read();
+  previousJournal.found.forEach(id=>journal.mark('found','engine.'+id));
+  for(const kind of ['operated','explained'])previousJournal[kind].forEach(id=>journal.mark(kind,id));
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const visited = new Set();
+  const visited = new Set(journal.read().found);
+  let detailId=null,detailsModel=null,manualCutaway=0,effectiveCutaway=0,mechanism=0,simulationTime=0,mechanismPlaying=false;
   let selected = 0, explosion = 0, targetExplosion = 0, showLabels = false;
   let autoRotate = false, scene, camera, renderer, model, raycaster, suspended = false;
   const look = {x:0,y:-.25,z:0}, lookTarget = {...look};
@@ -19,14 +27,14 @@
     button.dataset.part = p.id;
     button.innerHTML = `<span class="dot"></span><span>${p.name}</span><span class="zh">${p.zhName}</span>`;
     button.addEventListener('click', () => selectPart(i));
-    if(p.id==='engines')button.addEventListener('dblclick',()=>window.dispatchEvent(new Event('airplane:enter-engine')));
+    button.addEventListener('dblclick',()=>focusCurrent());
     $('part-list').append(button);
     const label = document.createElement('button');
     label.className = 'model-label';
     label.style.setProperty('--part-color', p.color);
     label.innerHTML = `<b></b>${p.name}`;
     label.addEventListener('click', () => selectPart(i));
-    if(p.id==='engines')label.addEventListener('dblclick',()=>window.dispatchEvent(new Event('airplane:enter-engine')));
+    label.addEventListener('dblclick',()=>focusCurrent());
     $('labels').append(label);
     labels.push(label);
   });
@@ -36,8 +44,10 @@
   const say = (text, main = false) => speech.say(text, main);
   function selectPart(i) {
     selected = (i + lessons.length) % lessons.length;
+    detailId=null;
     const p = lessons[selected];
     visited.add(p.id);
+    journal.mark('found',p.id);
     stopSpeech();
     $('part-number').textContent = `${String(selected + 1).padStart(2, '0')} / 10`;
     $('part-symbol').textContent = String(selected + 1).padStart(2, '0');
@@ -48,7 +58,13 @@
     $('part-zh').textContent = p.zh;
     $('part-tip').textContent = p.tip;
     if($('selected-engine-entry'))$('selected-engine-entry').hidden=p.id!=='engines';
-    $('progress-text').textContent = `${visited.size} / 10`;
+    $('progress-text').textContent = `${visited.size} / ${lessons.length+detailLessons.length}`;
+    $('stage-region').textContent=p.zhName;$('stage-detail').textContent='';
+    $('part-principle').textContent=principles[p.id]||p.tip;
+    $('detail-list').replaceChildren();const children=detailLessons.filter(d=>d.region===p.id);$('detail-count').textContent=children.length?children.length+' 个细节':'可操作部件';
+    children.forEach(d=>{const b=document.createElement('button');b.dataset.detail=d.id;b.setAttribute('aria-pressed','false');b.innerHTML=`${d.name}<small>${d.zhName}</small>`;b.addEventListener('click',()=>selectDetail(d.id,true));$('detail-list').append(b);});
+    $('engine-missions').hidden=p.id!=='engines';$('mechanism-help').textContent=mechanismHelp[p.id]||'拖动机构滑杆，观察活动面绕连接处转动。';
+    labels.forEach((l,n)=>l.innerHTML=`<b></b>${lessons[n].name}`);
     document.querySelectorAll('.part-button').forEach((b, n) => {
       b.setAttribute('aria-pressed', n === selected);
       b.classList.toggle('explored', visited.has(lessons[n].id));
@@ -62,17 +78,47 @@
     });
   }
 
+  const principles={fuselage:'外壳包住机身骨架。客舱在地板上方，行李货舱在下方。',cockpit:'驾驶舱里有座椅、仪表与控制器。这里展示它们的位置，不模拟真实驾驶程序。',wings:'翼梁和翼肋支撑机翼；不同活动翼面帮助改变飞机的运动和气流。',engines:'风扇与核心共同推动空气向后。单轴结构、叶片级数与气流速度为教学简化。',gear:'轮子承受地面载荷，支柱传递载荷并缓冲触地。这里以轮轴、支柱和刹车包为重点。',ailerons:'两侧副翼相反偏转，帮助飞机滚转。动作幅度为定性示意。',elevators:'升降舵位于水平尾翼后缘，帮助改变飞机的俯仰。',rudder:'方向舵位于垂直尾翼后缘，帮助改变机头左右偏转。'};
+  const mechanismHelp={fuselage:'剖切看客舱骨架、座椅与下层行李；这个区域没有播放动画。',cockpit:'放大座椅、仪表与控制器；这里以内部位置为重点。',engines:'拖动机构滑杆转动叶片；演示时跟随气流。选择转轴可突出连接。',wings:'机构滑杆演示襟翼、缝翼与扰流板的不同动作；这是并列比较，非真实飞行构型。',gear:'机构滑杆转动车轮，放大看轮轴和刹车包；不模拟起落架收放。'};
+  function selectDetail(id,focus=false){const d=detailLessons.find(d=>d.id===id);if(!d)return;if(lessons[selected].id!==d.region)selectPart(lessons.findIndex(p=>p.id===d.region));detailId=id;visited.add(id);journal.mark('found',id);stopSpeech();$('part-name').textContent=d.name;$('part-zh-name').textContent=d.zhName;$('part-en').textContent=d.en;$('part-zh').textContent=d.zh;$('part-tip').textContent=d.tip;$('part-principle').textContent=d.principle;$('stage-detail').textContent='› '+d.zhName;$('progress-text').textContent=`${visited.size} / ${lessons.length+detailLessons.length}`;document.querySelectorAll('[data-detail]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.detail===id));labels[selected].innerHTML=`<b></b>${d.name}`;if(focus){manualCutaway=.95;$('cutaway').value='95';focusCurrent();}}
+  function nearestNode(id){return nodes.filter(n=>n.id===id).sort((a,b)=>a.group.getWorldPosition(new THREE.Vector3()).distanceToSquared(camera.position)-b.group.getWorldPosition(new THREE.Vector3()).distanceToSquared(camera.position))[0];}
+  function focusPoint(point,d){Object.assign(lookTarget,{x:point.x,y:point.y,z:point.z});cameraTarget.distance=d;autoRotate=false;$('auto-rotate').setAttribute('aria-pressed',false);}
+  function focusCurrent(){
+    if(!model)return;
+    const region=lessons[selected].id;model.updateMatrixWorld(true);
+    const node=nearestNode(region),point=detailId?detailsModel.anchor(detailId,camera.position):node.group.localToWorld(node.anchor.clone());
+    if(point){
+      const side=point.z<0?-1:1;
+      // Approach from outside the selected side; see wheels below the wing.
+      const angles={gear:[side>0?0:Math.PI,-.12],wings:[side>0?-.3:Math.PI+.3,.8],engines:[side>0?-.65:Math.PI+.65,.12],fuselage:[side>0?-.3:Math.PI+.3,.18],cockpit:[side>0?.7:Math.PI-.7,.22]};
+      if(angles[region])view(...angles[region]);
+      focusPoint(point,detailId?(region==='wings'?3.1:region==='fuselage'?2.8:1.65):({fuselage:7,cockpit:3,wings:5,engines:3,gear:2.8}[region]||4));
+    }
+    if(innerWidth<781)$('viewport').scrollIntoView({block:'start',behavior:'instant'});
+  }
+  function homeView(){view(-.45,.48);Object.assign(lookTarget,{x:0,y:-.25,z:0});cameraTarget.distance=targetExplosion>.5?17:13.8;manualCutaway=0;$('cutaway').value='0';mechanism=0;$('mechanism').value='0';mechanismPlaying=false;$('mechanism-play').setAttribute('aria-pressed',false);$('mechanism-play').textContent='▶ 演示';}
+  $('focus-part').addEventListener('click',focusCurrent);$('whole-airplane').addEventListener('click',homeView);
+  $('controls-toggle').addEventListener('click',()=>{const open=document.querySelector('.model-panel').classList.toggle('controls-open');$('controls-toggle').setAttribute('aria-expanded',open);});
+  $('cutaway').addEventListener('input',e=>{manualCutaway=Number(e.target.value)/100;$('auto-reveal').checked=false;});
+  $('mechanism').addEventListener('input',e=>{mechanism=Number(e.target.value)/100;simulationTime=mechanism*4;recordObservation();});
+  $('mechanism-play').addEventListener('click',()=>{mechanismPlaying=!mechanismPlaying;$('mechanism-play').setAttribute('aria-pressed',mechanismPlaying);$('mechanism-play').textContent=mechanismPlaying?'Ⅱ 暂停':'▶ 演示';});
+  $('mechanism-step').addEventListener('click',()=>{mechanismPlaying=false;$('mechanism-play').setAttribute('aria-pressed',false);$('mechanism-play').textContent='▶ 演示';simulationTime+=.25;mechanism=(mechanism+.08)%1;$('mechanism').value=Math.round(mechanism*100);recordObservation();});
+  function recordObservation(){if(!renderer||lessons[selected].id!=='engines')return;if(effectiveCutaway>.6)journal.mark('operated','open');if(mechanism>.05){journal.mark('operated','spin');if(effectiveCutaway>.6){if(detailId==='engine.bypass')journal.mark('operated','bypass');if(['engine.compressor','engine.combustor','engine.turbine'].includes(detailId))journal.mark('operated','core');if(detailId==='engine.shaft')journal.mark('operated','shaft');}}}
+  ENGINE_CONTENT.tasks.forEach(t=>{const o=document.createElement('option');o.value=t.id;o.textContent=t.title;$('engine-task').append(o);});
+  function renderEngineTask(){const t=ENGINE_CONTENT.tasks.find(t=>t.id===$('engine-task').value);$('engine-task-question').textContent=t.question;$('engine-task-zh').textContent=t.zh;$('engine-task-feedback').textContent=journal.read().explained.includes(t.id)?'✓ 这个发现已保存，可继续观察。':'先放大对应零件，打开剖切并操作机构。两条路线分别选择外涵道和燃烧室观察。';$('engine-task-answers').replaceChildren();t.answers.forEach(([id,en,zh])=>{const b=document.createElement('button');b.textContent=en+' · '+zh;b.addEventListener('click',()=>{const state=journal.read();const found=!t.found||state.found.includes('engine.'+t.found);if(!found||!t.needs.every(n=>state.operated.includes(n))){$('engine-task-feedback').textContent='先观察对应零件并操作机构，再解释你的发现。';return;}if(id===t.correct){journal.mark('explained',t.id);$('engine-task-feedback').textContent='✓ 已保存：'+t.discovery;}else $('engine-task-feedback').textContent=t.hint;});$('engine-task-answers').append(b);});}
+  $('engine-task').addEventListener('change',renderEngineTask);$('engine-task-speak').addEventListener('click',()=>say(ENGINE_CONTENT.tasks.find(t=>t.id===$('engine-task').value).question));renderEngineTask();
+
   function setExplosion(value) {
     targetExplosion = Math.max(0, Math.min(1, value));
     $('explode').value = Math.round(targetExplosion * 100);
     $('explode-value').textContent = `${Math.round(targetExplosion * 100)}%`;
     $('stage-mode').textContent = targetExplosion > 0 ? '拆解探索' : '整机观察';
     $('explode-button').textContent = targetExplosion > 0.95 ? '✓ 已全部拆解' : '◈ 一键拆解';
-    if (targetExplosion > 0.5) cameraTarget.distance = Math.max(cameraTarget.distance, 17);
+    if (targetExplosion > 0.5) {cameraTarget.distance = Math.max(cameraTarget.distance, 17);Object.assign(lookTarget,{x:0,y:-.25,z:0});}
   }
   $('explode').addEventListener('input', e => setExplosion(Number(e.target.value) / 100));
   $('explode-button').addEventListener('click', () => setExplosion(1));
-  $('assemble').addEventListener('click', () => { setExplosion(0); cameraTarget.distance = 13.8; });
+  $('assemble').addEventListener('click', () => { setExplosion(0); homeView(); });
   $('toggle-labels').addEventListener('click', () => {
     showLabels = !showLabels;
     $('toggle-labels').setAttribute('aria-pressed', showLabels);
@@ -81,7 +127,7 @@
   $('next-part').addEventListener('click', () => selectPart(selected + 1));
   $('speak').addEventListener('click', () => {
     if ('speechSynthesis' in window && (speechSynthesis.speaking || speechSynthesis.pending)) stopSpeech();
-    else say(`${lessons[selected].name}. ${lessons[selected].en}`, true);
+    else say(`${$('part-name').textContent}. ${$('part-en').textContent}`, true);
   });
   $('language').addEventListener('click', () => {
     const onlyEnglish = document.body.classList.toggle('english-only');
@@ -89,18 +135,18 @@
     $('language').textContent = onlyEnglish ? 'English only' : '中英双语';
   });
   function view(y, p) { cameraTarget.yaw = y; cameraTarget.pitch = p; autoRotate = false; $('auto-rotate').setAttribute('aria-pressed', false); }
-  $('home-view').addEventListener('click', () => { view(-0.45, 0.48); cameraTarget.distance = targetExplosion > 0.5 ? 17 : 13.8; });
+  $('home-view').addEventListener('click', homeView);
   $('top-view').addEventListener('click', () => view(0, 1.52));
   $('side-view').addEventListener('click', () => view(0, 0.06));
-  $('zoom-in').addEventListener('click', () => cameraTarget.distance = Math.max(8, cameraTarget.distance - 1.5));
-  $('zoom-out').addEventListener('click', () => cameraTarget.distance = Math.min(24, cameraTarget.distance + 1.5));
+  $('zoom-in').addEventListener('click', () => {if(cameraTarget.distance>8)focusCurrent();else cameraTarget.distance=Math.max(.65,cameraTarget.distance*.8);});
+  $('zoom-out').addEventListener('click', () => cameraTarget.distance = Math.min(30, cameraTarget.distance*1.25));
   $('auto-rotate').addEventListener('click', () => { autoRotate = !autoRotate; $('auto-rotate').setAttribute('aria-pressed', autoRotate); });
 
   function init3D() {
     const T = window.THREE;
     if (!T) throw Error('THREE could not load');
     scene = new T.Scene();
-    camera = new T.PerspectiveCamera(39, 1, 0.1, 100);
+    camera = new T.PerspectiveCamera(39, 1, 0.015, 100);
     renderer = new T.WebGLRenderer({antialias:true, alpha:true});
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setClearColor(0x000000, 0);
@@ -227,6 +273,7 @@
       line.position.set(Math.sin(a)*6.16,-3.37,Math.cos(a)*6.16);line.rotation.y=a;scene.add(line);
     }
 
+    detailsModel=window.AirplaneDetails.install({THREE:T,model,nodes,pickables});
     function resize() {
       const rect = $('viewport').getBoundingClientRect();
       if(!rect.width||!rect.height)return;
@@ -238,10 +285,14 @@
     new ResizeObserver(resize).observe($('viewport')); resize();
     const pointers = new Map(); let pointerStart = null, dragDistance = 0, pinchDistance = 0, lastTap = null;
     const canvas = renderer.domElement;
+    function pickAt(x,y){const r=canvas.getBoundingClientRect();raycaster.setFromCamera(new T.Vector2((x-r.left)/r.width*2-1,-(y-r.top)/r.height*2+1),camera);return raycaster.intersectObjects(pickables,false).find(h=>{for(let o=h.object;o;o=o.parent)if(!o.visible)return false;return h.object.material.opacity>.18;});}
+    function chooseHit(hit,focus=false){if(!hit)return;const id=hit.object.userData.part,i=lessons.findIndex(p=>p.id===id);if(i<0)return;if(hit.object.userData.detail)selectDetail(hit.object.userData.detail,false);else selectPart(i);if(focus){focusPoint(hit.point,hit.object.userData.detail?1.7:3);if(innerWidth<781)$('viewport').scrollIntoView({block:'center'});}}
+    function pan(dx,dy){const scale=distance*.0014,right=new T.Vector3(1,0,0).applyQuaternion(camera.quaternion),up=new T.Vector3(0,1,0).applyQuaternion(camera.quaternion),v=right.multiplyScalar(-dx*scale).addScaledVector(up,dy*scale);lookTarget.x+=v.x;lookTarget.y+=v.y;lookTarget.z+=v.z;}
+    canvas.addEventListener('contextmenu',e=>e.preventDefault());
     function pointerDown(e) {
       canvas.setPointerCapture(e.pointerId); pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
       pointerStart={x:e.clientX,y:e.clientY}; dragDistance=0;
-      if(pointers.size===2){const a=[...pointers.values()];pinchDistance=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);dragDistance=99;lastTap=null;}
+      if(pointers.size===2){const a=[...pointers.values()];pinchDistance=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);dragDistance=99;lastTap=null;const hit=pickAt((a[0].x+a[1].x)/2,(a[0].y+a[1].y)/2);if(hit&&cameraTarget.distance>3){chooseHit(hit);Object.assign(lookTarget,{x:hit.point.x,y:hit.point.y,z:hit.point.z});}}
       autoRotate=false;$('auto-rotate').setAttribute('aria-pressed',false);
     }
     canvas.addEventListener('pointerdown',pointerDown);
@@ -252,19 +303,19 @@
       dragDistance += Math.abs(dx)+Math.abs(dy);
       if(pointers.size===2){
         const a=[...pointers.values()],d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);
-        if(pinchDistance>0)cameraTarget.distance=Math.max(8,Math.min(24,cameraTarget.distance*pinchDistance/Math.max(1,d)));
+        if(pinchDistance>0)cameraTarget.distance=Math.max(.65,Math.min(30,cameraTarget.distance*pinchDistance/Math.max(1,d)));
         pinchDistance=d;
-      }else{cameraTarget.yaw-=dx*.006;cameraTarget.pitch=Math.max(-1.2,Math.min(1.52,cameraTarget.pitch+dy*.005));}
+        pan(dx*.5,dy*.5);
+      }else if(e.buttons===2||e.shiftKey){pan(dx,dy);}else{cameraTarget.yaw-=dx*.006;cameraTarget.pitch=Math.max(-1.2,Math.min(1.52,cameraTarget.pitch+dy*.005));}
     });
     canvas.addEventListener('pointerup',e=>{
       if(pointers.size===1&&dragDistance<6&&pointerStart){
-        const r=canvas.getBoundingClientRect(); raycaster.setFromCamera(new T.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),camera);
-        const hit=raycaster.intersectObjects(pickables,false)[0];
+        const hit=pickAt(e.clientX,e.clientY);
         if(hit){
-          const id=hit.object.userData.part;selectPart(lessons.findIndex(p=>p.id===id));
+          const id=hit.object.userData.part;chooseHit(hit);
           const now=performance.now();
-          if(e.pointerType!=='mouse'&&id==='engines'&&lastTap&&now-lastTap.time<380&&Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<25){lastTap=null;window.dispatchEvent(new Event('airplane:enter-engine'));}
-          else lastTap=e.pointerType!=='mouse'&&id==='engines'?{time:now,x:e.clientX,y:e.clientY}:null;
+          if(e.pointerType!=='mouse'&&lastTap&&now-lastTap.time<380&&Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<25){lastTap=null;chooseHit(hit,true);}
+          else lastTap=e.pointerType!=='mouse'?{time:now,x:e.clientX,y:e.clientY}:null;
         }else lastTap=null;
       }else lastTap=null;
       pointers.delete(e.pointerId);pinchDistance=0;pointerStart=null;
@@ -272,16 +323,14 @@
     canvas.addEventListener('pointercancel',e=>{pointers.delete(e.pointerId);pointerStart=null;pinchDistance=0;});
     canvas.addEventListener('dblclick',e=>{
       if(dragDistance>=6)return;
-      const r=canvas.getBoundingClientRect();raycaster.setFromCamera(new T.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1),camera);
-      const hit=raycaster.intersectObjects(pickables,false)[0];
-      if(hit?.object.userData.part==='engines')window.dispatchEvent(new Event('airplane:enter-engine'));
+      chooseHit(pickAt(e.clientX,e.clientY),true);
     });
-    canvas.addEventListener('wheel',e=>{e.preventDefault();cameraTarget.distance=Math.max(8,Math.min(24,cameraTarget.distance+e.deltaY*.01));},{passive:false});
+    canvas.addEventListener('wheel',e=>{e.preventDefault();const hit=pickAt(e.clientX,e.clientY);if(e.deltaY<0&&hit&&cameraTarget.distance>3){const region=hit.object.userData.part;if(region!==lessons[selected].id)selectPart(lessons.findIndex(p=>p.id===region));Object.assign(lookTarget,{x:hit.point.x,y:hit.point.y,z:hit.point.z});}cameraTarget.distance=Math.max(.65,Math.min(30,cameraTarget.distance*Math.exp(e.deltaY*.0015)));},{passive:false});
     $('viewport').addEventListener('keydown',e=>{
       const keys=['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-'];if(!keys.includes(e.key))return;e.preventDefault();
       if(e.key==='ArrowLeft')cameraTarget.yaw-=.15;if(e.key==='ArrowRight')cameraTarget.yaw+=.15;
       if(e.key==='ArrowUp')cameraTarget.pitch=Math.min(1.52,cameraTarget.pitch+.12);if(e.key==='ArrowDown')cameraTarget.pitch=Math.max(-1.2,cameraTarget.pitch-.12);
-      if(e.key==='+'||e.key==='=')cameraTarget.distance=Math.max(8,cameraTarget.distance-1);if(e.key==='-')cameraTarget.distance=Math.min(24,cameraTarget.distance+1);
+      if(e.key==='+'||e.key==='=')cameraTarget.distance=Math.max(.65,cameraTarget.distance*.8);if(e.key==='-')cameraTarget.distance=Math.min(30,cameraTarget.distance*1.25);
     });
     const world = new T.Vector3(), projected = new T.Vector3();
     let previousTime = performance.now();
@@ -293,6 +342,11 @@
       if(autoRotate)cameraTarget.yaw+=dt*.22;
       yaw+=(cameraTarget.yaw-yaw)*ease;pitch+=(cameraTarget.pitch-pitch)*ease;distance+=(cameraTarget.distance-distance)*ease;
       explosion+=(targetExplosion-explosion)*ease;
+      const automatic=$('auto-reveal').checked?Math.max(0,Math.min(1,(4.5-distance)/2.6)):0;
+      effectiveCutaway=Math.max(manualCutaway,automatic);
+      $('cutaway-value').textContent=(automatic>manualCutaway?'自动 ':'')+Math.round(effectiveCutaway*100)+'%';
+      $('stage-mode').textContent=effectiveCutaway>.3?'局部内部':'外观观察';
+      if(mechanismPlaying){simulationTime+=dt;mechanism=.5-.5*Math.cos(simulationTime);$('mechanism').value=Math.round(mechanism*100);recordObservation();}
       const fittedDistance=distance*Math.max(1,1.15/camera.aspect);
       camera.position.set(Math.sin(yaw)*Math.cos(pitch)*fittedDistance,Math.sin(pitch)*fittedDistance,Math.cos(yaw)*Math.cos(pitch)*fittedDistance);
       for(const key of ['x','y','z'])look[key]+=(lookTarget[key]-look[key])*ease;
@@ -303,6 +357,7 @@
         n.line.visible=explosion>.02&&n.offset.lengthSq()>.1;
         const a=n.line.geometry.attributes.position;a.setXYZ(0,n.base.x,n.base.y,n.base.z);a.setXYZ(1,n.group.position.x,n.group.position.y,n.group.position.z);a.needsUpdate=true;n.line.computeLineDistances();
       });
+      detailsModel.update({time:simulationTime,cutaway:effectiveCutaway,region:lessons[selected].id,mechanism,selected:detailId});
       model.updateMatrixWorld(true);camera.updateMatrixWorld(true);
       const width=canvas.clientWidth,height=canvas.clientHeight;
       // Labels stay attached to their 3D part; avoid overlaps when all are shown.
@@ -313,7 +368,7 @@
         if(!showLabels&&i!==selected){label.hidden=true;return;}
         const candidates=nodes.filter(n=>n.id===lessons[i].id);
         const n=candidates.sort((a,b)=>a.group.localToWorld(a.anchor.clone()).distanceToSquared(camera.position)-b.group.localToWorld(b.anchor.clone()).distanceToSquared(camera.position))[0];if(!n){label.hidden=true;return;}
-        world.copy(n.anchor);n.group.localToWorld(world);projected.copy(world).project(camera);
+        if(i===selected&&detailId){world.copy(detailsModel.anchor(detailId,camera.position));}else{world.copy(n.anchor);n.group.localToWorld(world);}projected.copy(world).project(camera);
         if(projected.z>1||projected.z<-1){label.hidden=true;return;}
         let x=Math.max(65,Math.min(width-75,(projected.x*.5+.5)*width));
         let y=Math.max(65,Math.min(height-24,(-projected.y*.5+.5)*height-20));
@@ -330,7 +385,7 @@
       capture:()=>({yaw,pitch,distance,cameraTarget:{...cameraTarget},look:{...look},lookTarget:{...lookTarget},selected,autoRotate,explosion,targetExplosion}),
       restore:s=>{yaw=s.yaw;pitch=s.pitch;distance=s.distance;Object.assign(cameraTarget,s.cameraTarget);Object.assign(look,s.look);Object.assign(lookTarget,s.lookTarget);autoRotate=s.autoRotate;explosion=s.explosion;targetExplosion=s.targetExplosion;selectPart(s.selected);},
       approachEngine:()=>{stopSpeech();autoRotate=false;const n=nodes.filter(n=>n.id==='engines').sort((a,b)=>a.group.getWorldPosition(new T.Vector3()).distanceToSquared(camera.position)-b.group.getWorldPosition(new T.Vector3()).distanceToSquared(camera.position))[0];if(n){const v=n.group.getWorldPosition(new T.Vector3());Object.assign(lookTarget,{x:v.x,y:v.y,z:v.z});cameraTarget.distance=5.8;}},
-      snapshot:()=>({selected:lessons[selected].id,explosion,targetExplosion,visited:[...visited],meshCount:pickables.length,position:nodes.map(n=>({id:n.id,position:n.group.position.toArray(),base:n.base.toArray()})),camera:{yaw,pitch,distance},renderer:renderer.info.render}),
+      snapshot:()=>({selected:lessons[selected].id,detail:detailId,cutaway:effectiveCutaway,mechanism,simulationTime,modelId:model.uuid,detailCount:detailsModel.ids.length,explosion,targetExplosion,visited:[...visited],meshCount:pickables.length,position:nodes.map(n=>({id:n.id,position:n.group.position.toArray(),base:n.base.toArray()})),camera:{yaw,pitch,distance,target:{...look}},renderer:renderer.info.render}),
       projectPart:id=>{
         const n=nodes.filter(n=>n.id===id).sort((a,b)=>a.group.getWorldPosition(new T.Vector3()).distanceToSquared(camera.position)-b.group.getWorldPosition(new T.Vector3()).distanceToSquared(camera.position))[0];if(!n)return null;
         const v=n.group.getWorldPosition(new T.Vector3()).project(camera),r=canvas.getBoundingClientRect();return {x:r.left+(v.x*.5+.5)*r.width,y:r.top+(-v.y*.5+.5)*r.height};
@@ -370,8 +425,10 @@
     }else{quizRound++;quizQuestion();}
   });
   $('quiz-dialog').addEventListener('close',stopSpeech);
-  window.addEventListener('pagehide',stopSpeech);
+  window.addEventListener('pagehide',()=>{mechanismPlaying=false;stopSpeech();});
   try{init3D();}catch(e){console.error('Airplane 3D:',e);$('load-error').hidden=false;}
   const requestedPart = new URLSearchParams(location.search).get('part');
   selectPart(Math.max(0, lessons.findIndex(p => p.id === requestedPart)));
+  function followDetailLink(){if(location.hash==='#engine'){selectPart(lessons.findIndex(p=>p.id==='engines'));focusCurrent();}}
+  window.addEventListener('hashchange',followDetailLink);followDetailLink();
 })();

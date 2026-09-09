@@ -9,3 +9,6 @@
 验证：`qa_inline_engine.cjs` 覆盖真实模型双击、不导航/不使用iframe、全部任务、视角与拆解恢复、再次进入、历史前进后退、暂停隐藏动画、全局双语、返回机翼、手机布局和触屏入口、深链接刷新、模态框优先处理Escape、失败重试及取消加载。`qa_engine_browser.cjs` 保留旧地址完整功能检查；`qa_labs_browser.cjs` 验证原有整机交互。
 
 运行浏览器检查需要 Playwright 和 Chrome。设置 `LAB_LIVE_BASE=https://cesar-c-c.github.io/kids-books/` 可验证公开版本。沿用本地Three.js与现有教学内容，不增加外部运行依赖。
+# 后续实现
+
+此文记录前一版同页详情场景。当前主页面已由 `detailed-airplane-model.md` 所述的单一飞机模型实现替代；`qa_inline_engine.cjs` 保留为新场景连续性验证的兼容入口。

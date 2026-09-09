@@ -3,10 +3,10 @@
 window.LABS_CATALOG = [
   {
     id: 'airplane', title: '飞机 3D 实验室', englishTitle: 'Airplane Lab',
-    description: '认识 10 类飞机部件，再打开发动机，追踪空气、观察转轴，收集 4 个新发现。',
+    description: '放大同一架飞机，探索 24 个内部细节：发动机、驾驶舱、客舱、机翼与起落架。',
     icon: '✈', status: 'ready', href: 'airplane/index.html',
     image: 'airplane/preview.png', bookId: 'airplane', age: '4–8 岁',
-    features: ['360° 观察', '发动机内部', '英文点读', '连续探索任务']
+    features: ['连续放大', '24 个内部细节', '英文点读', '剖视与机构演示']
   },
   {
     id: 'rocket', title: '火箭 3D 实验室', englishTitle: 'Rocket Lab',

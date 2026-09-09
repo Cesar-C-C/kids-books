@@ -39,6 +39,7 @@ const server=http.createServer((req,res)=>{
       assert.equal(await page.evaluate(()=>window.airplaneLab.snapshot().selected),p.id);
       assert.equal(await page.locator('#part-en').textContent(),p.en);
     }
+    await page.locator('#assembly-options > summary').click();
     await page.locator('#explode-button').click();
     await page.waitForFunction(()=>window.airplaneLab.snapshot().explosion>.995);
     const exploded=await page.evaluate(()=>window.airplaneLab.snapshot());
