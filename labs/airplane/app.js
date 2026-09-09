@@ -98,7 +98,7 @@
   }
   function homeView(){view(-.45,.48);Object.assign(lookTarget,{x:0,y:-.25,z:0});cameraTarget.distance=targetExplosion>.5?17:13.8;manualCutaway=0;$('cutaway').value='0';mechanism=0;$('mechanism').value='0';mechanismPlaying=false;$('mechanism-play').setAttribute('aria-pressed',false);$('mechanism-play').textContent='▶ 演示';}
   $('focus-part').addEventListener('click',focusCurrent);$('whole-airplane').addEventListener('click',homeView);
-  $('controls-toggle').addEventListener('click',()=>{const open=document.querySelector('.model-panel').classList.toggle('controls-open');$('controls-toggle').setAttribute('aria-expanded',open);});
+  $('controls-toggle').addEventListener('click',()=>{const open=document.querySelector('.learning-panel').classList.toggle('controls-open');$('controls-toggle').setAttribute('aria-expanded',open);});
   $('cutaway').addEventListener('input',e=>{manualCutaway=Number(e.target.value)/100;$('auto-reveal').checked=false;});
   $('mechanism').addEventListener('input',e=>{mechanism=Number(e.target.value)/100;simulationTime=mechanism*4;recordObservation();});
   $('mechanism-play').addEventListener('click',()=>{mechanismPlaying=!mechanismPlaying;$('mechanism-play').setAttribute('aria-pressed',mechanismPlaying);$('mechanism-play').textContent=mechanismPlaying?'Ⅱ 暂停':'▶ 演示';});
@@ -357,7 +357,7 @@
         n.line.visible=explosion>.02&&n.offset.lengthSq()>.1;
         const a=n.line.geometry.attributes.position;a.setXYZ(0,n.base.x,n.base.y,n.base.z);a.setXYZ(1,n.group.position.x,n.group.position.y,n.group.position.z);a.needsUpdate=true;n.line.computeLineDistances();
       });
-      detailsModel.update({time:simulationTime,cutaway:effectiveCutaway,region:lessons[selected].id,mechanism,selected:detailId});
+      detailsModel.update({time:simulationTime,cutaway:effectiveCutaway,region:lessons[selected].id,mechanism,selected:detailId,focus:explosion>.05?0:Math.max(0,Math.min(1,(10-distance)/5)),focusPosition:lookTarget});
       model.updateMatrixWorld(true);camera.updateMatrixWorld(true);
       const width=canvas.clientWidth,height=canvas.clientHeight;
       // Labels stay attached to their 3D part; avoid overlaps when all are shown.
