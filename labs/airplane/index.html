@@ -1,46 +1,28 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f7f8f2"><title>Little Wings · 飞机 3D 实验室</title>
-  <link rel="icon" href="data:,"><link rel="stylesheet" href="../shared/lab.css">
-</head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="../index.html" aria-label="返回 3D 实验室目录"><span class="brand-icon">✈</span><span>LITTLE WINGS<small>小小飞行家 · 探索实验室</small></span></a>
-    <div class="header-right"><span class="age">适合 4–8 岁</span><button id="language" class="quiet" aria-pressed="true">中英双语</button></div>
-  </header>
-  <nav class="lab-navigation" data-lab-id="airplane" aria-label="实验室导航"></nav>
-  <main id="aircraft-overview">
-    <section class="intro"><div><p class="eyebrow">LET’S DISCOVER · 01</p><h1>一架飞机，<span>藏着多少小秘密？</span></h1><p class="subtitle">转一转，拆一拆。和我们一起认识飞向天空的好伙伴。</p></div><div class="progress"><span class="progress-star">✦</span><div><strong id="progress-text">0 / 10</strong><small>已探索的部件</small></div></div></section>
-    <section class="challenge-strip" style="margin:0 0 20px"><span class="challenge-icon">◉</span><div><strong>双击机翼下的发动机，继续向里面探索</strong><p>也可以点右侧按钮 · 在同一架飞机里逐层发现秘密</p></div><button class="primary" data-enter-engine>深入发动机 →</button></section>
-    <div class="workspace">
-      <section class="model-panel" aria-label="飞机三维模型交互区域">
-        <div class="stage-heading"><span class="live-dot"></span> YOUR AIRPLANE <span class="stage-mode" id="stage-mode">整机观察</span></div>
-        <div id="viewport" tabindex="0" role="img" aria-label="可旋转飞机模型。拖动旋转，滚轮缩放。也可以使用下方视角按钮和右侧部件按钮。">
-          <div class="stage-watermark" aria-hidden="true">HELLO,<br> AIRPLANE.</div>
-          <div id="labels" aria-label="模型上的部件标签"></div>
-          <div id="load-error" hidden>3D 模型暂时无法显示。请使用支持 WebGL 的 Chrome 或 Edge 浏览器，并开启图形加速。右侧英文学习卡仍可使用。</div>
-        </div>
-        <div class="view-tools" aria-label="视角控制"><button id="home-view" title="回到初始视角" aria-label="回到初始视角">⌂</button><button id="top-view">俯视</button><button id="side-view">侧视</button><span></span><button id="zoom-out" aria-label="缩小">−</button><button id="zoom-in" aria-label="放大">＋</button><button id="auto-rotate" aria-pressed="false" aria-label="自动旋转">↻</button></div>
-        <p class="gesture"><span>↔ 拖动旋转</span><span>⊕ 滚轮 / 双指缩放</span><span>☝ 点击部件</span></p>
-        <div class="assembly-controls"><div class="assembly-title"><span class="control-icon">◈</span><div><strong>看看飞机里面的秘密</strong><small>EXPLORE EVERY LITTLE PART</small></div><output id="explode-value" for="explode">0%</output></div><div class="slider-row"><span>合体</span><input id="explode" type="range" min="0" max="100" value="0" aria-label="飞机拆解程度"><span>拆解</span></div><div class="assembly-actions"><button id="explode-button" class="primary">◈ 一键拆解</button><button id="assemble" class="secondary">↺ 重新组装</button><button id="toggle-labels" class="label-toggle" aria-pressed="false">Aa 部件名称</button></div></div>
-      </section>
-      <aside class="learning-panel">
-        <div class="lesson-top"><span class="eyebrow">MEET THE PARTS</span><span id="part-number">01 / 10</span></div>
-        <div id="part-list" class="part-list" aria-label="选择飞机部件"></div>
-        <article class="lesson" aria-live="polite"><div class="lesson-kicker"><span id="part-symbol">01</span><span id="part-category">THE BODY</span><span id="visited-tag">已探索 ✓</span></div><h2 id="part-name">Fuselage</h2><p class="chinese-name" id="part-zh-name">机身</p><p class="english" id="part-en"></p><p class="translation" id="part-zh"></p><button id="speak" class="speak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 8a6 6 0 0 1 0 8M18 4a11 11 0 0 1 0 16"/></svg><span>听英文 · Listen</span></button><p id="speech-status" class="speech-status" role="status"></p><div class="try-card"><span>✦</span><div><strong>小小观察员</strong><p id="part-tip"></p></div></div></article>
-        <div class="lesson-nav"><button id="prev-part" aria-label="上一个部件">←</button><span>每个部件，都有自己的任务</span><button id="next-part" aria-label="下一个部件">→</button></div>
-      </aside>
-    </div>
-    <section class="challenge-strip"><span class="challenge-icon">☆</span><div><strong>准备好当一名小小飞机专家了吗？</strong><p>听一听，找一找，看看你认识了多少部件。</p></div><button id="quiz" class="secondary">找部件挑战 <span>→</span></button></section>
-    <footer><span>MADE FOR CURIOUS LITTLE MINDS</span><span>教学示意模型 · 拆解仅用于展示部件关系 <a href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/airplane-parts-function/" target="_blank" rel="noreferrer">科普参考：NASA ↗</a></span></footer>
-  </main>
-  <div id="discovery-loading" hidden role="status">正在靠近发动机… <button id="cancel-discovery" class="quiet">返回整机</button></div>
-  <div id="discovery-error" hidden role="status">内部构造暂时没有加载成功，请再试一次。<button class="quiet" data-enter-engine>重新打开</button></div>
-  <section id="engine-depth" hidden aria-label="飞机内部：发动机深度探索"></section>
-  <style>#discovery-loading,#discovery-error{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:20;background:#fffdf0;padding:15px 20px;border:1px solid #cbdcc9;border-radius:16px;box-shadow:0 8px 35px #24433322;max-width:94vw;min-width:280px;font-size:13px}#discovery-loading button,#discovery-error button{margin-left:10px}#engine-depth{display:block}.depth-enter{animation:depth-enter .4s ease-out}@keyframes depth-enter{from{opacity:0;transform:scale(.975)}to{opacity:1;transform:scale(1)}}@media(prefers-reduced-motion:reduce){.depth-enter{animation:none}}</style>
-  <dialog id="quiz-dialog"><form method="dialog"><button class="dialog-close" aria-label="关闭挑战">×</button></form><p class="eyebrow">LITTLE PILOT CHALLENGE</p><h2>找到它，你就是小专家！</h2><p id="quiz-count"></p><p id="quiz-question" class="quiz-question"></p><button id="quiz-speak" class="secondary">听题目 ♪</button><div id="quiz-options"></div><p id="quiz-feedback" role="status"></p><button id="quiz-next" class="primary" hidden>下一题 →</button></dialog>
-  <script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="app.js?v=inline-20260909"></script><script src="discovery.js"></script>
-</body>
-</html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f8f2"><title>Little Wings · 一架飞机的秘密</title><link rel="icon" href="data:,"><link rel="stylesheet" href="../shared/lab.css"><link rel="stylesheet" href="studio.css"></head>
+<body class="airplane-studio">
+<header class="topbar"><a class="brand" href="../index.html"><span class="brand-icon">✈</span><span>LITTLE WINGS<small>一架飞机 · 无限好奇</small></span></a><div class="header-right"><span id="progress-text">0 / 34</span><button id="language" class="quiet" aria-pressed="true">中英双语</button></div></header>
+<nav class="lab-navigation" data-lab-id="airplane" aria-label="实验室导航"></nav>
+<main><section class="intro"><div><p class="eyebrow">LOOK CLOSER · DISCOVER MORE</p><h1>每放大一点，<span>就多发现一点。</span></h1></div><p class="subtitle">滚轮放大 · 双击靠近 · 右键拖动平移<br>所有结构，都在这一架飞机里。</p></section>
+<div class="workspace">
+ <section class="model-panel" aria-label="精细飞机三维模型">
+  <div class="stage-heading"><button id="whole-airplane">✈ 整架飞机</button><span>›</span><span id="stage-region">机身</span><span id="stage-detail"></span><span id="stage-mode" class="stage-mode">整体观察</span></div>
+  <div id="viewport" tabindex="0" aria-label="同一架可放大、剖切的飞机模型。拖动旋转，滚轮缩放，右键拖动平移，双击部件靠近。"><div class="stage-watermark" aria-hidden="true">A LITTLE<br>CLOSER.</div><div id="labels"></div><div id="load-error" hidden>3D 暂不可用。可以继续选择部件阅读英文；请使用支持 WebGL 的浏览器显示模型。</div></div>
+  <div class="view-tools"><button id="home-view" aria-label="恢复整架飞机视角">⌂ 整机</button><button id="top-view">俯视</button><button id="side-view">侧视</button><button id="zoom-out" aria-label="缩小">−</button><button id="zoom-in" aria-label="放大">＋</button><button id="auto-rotate" aria-label="自动旋转" aria-pressed="false">↻</button></div>
+  <button id="controls-toggle" aria-expanded="false" aria-controls="exploration-controls">剖视与动作 ⌄</button>
+  <div id="exploration-controls" class="exploration-controls"><div class="reveal-heading"><label><input id="auto-reveal" type="checkbox" checked> 放大后自动显露内部</label><button id="toggle-labels" aria-pressed="false">Aa 名称</button></div>
+   <div class="control-row"><label for="cutaway">剖切滑杆 <small>外壳 → 内部</small></label><input id="cutaway" type="range" min="0" max="100" value="0" aria-label="剖切滑杆"><output id="cutaway-value">0%</output></div>
+   <div class="control-row"><label for="mechanism">机构滑杆 <small>观察动作</small></label><input id="mechanism" type="range" min="0" max="100" value="0" aria-label="机构滑杆"><button id="mechanism-play" aria-pressed="false">▶ 演示</button><button id="mechanism-step">单步</button></div>
+   <p id="mechanism-help">打开机身，看看地板上下分别有什么。</p>
+   <details id="assembly-options"><summary>整机拆解与组装</summary><div class="slider-row"><span>合体</span><input id="explode" type="range" min="0" max="100" value="0" aria-label="飞机拆解程度"><span>拆解</span><output id="explode-value">0%</output></div><div class="assembly-actions"><button id="explode-button" class="secondary">一键拆解</button><button id="assemble" class="secondary">重新组装</button></div></details>
+  </div>
+ </section>
+ <aside class="learning-panel" aria-label="当前观察部件的说明"><div class="lesson-top"><span class="eyebrow">EXPLORE YOUR AIRPLANE</span><span id="part-number">01 / 10</span></div><div id="part-list" class="part-list" aria-label="选择飞机区域"></div>
+  <div class="detail-heading"><strong>这个部位里面还有…</strong><span id="detail-count"></span></div><div id="detail-list" aria-label="选择内部结构"></div>
+  <article class="lesson" aria-live="polite"><div class="lesson-kicker"><span id="part-symbol">01</span><span id="part-category">THE BODY</span><span id="visited-tag">已发现 ✓</span></div><h2 id="part-name">Fuselage</h2><p id="part-zh-name" class="chinese-name">机身</p><button id="focus-part" class="focus-button">⊕ 靠近观察</button><p id="part-en" class="english"></p><p id="part-zh" class="translation"></p><button id="speak" class="speak"><span>听英文 · Listen</span></button><p id="speech-status" class="speech-status" role="status"></p><div class="try-card"><span>✦</span><div><strong>动手看一看</strong><p id="part-tip"></p></div></div><details id="principle-box"><summary>它是怎样工作的？</summary><p id="part-principle"></p></details></article>
+  <section id="engine-missions" hidden><details><summary>4 个发动机探索任务</summary><select id="engine-task" aria-label="选择探索任务"></select><p id="engine-task-question"></p><p id="engine-task-zh" class="translation"></p><button id="engine-task-speak">♪ 听题目</button><div id="engine-task-answers"></div><p id="engine-task-feedback" role="status"></p></details></section>
+  <div class="lesson-nav"><button id="prev-part" aria-label="上一个区域">←</button><button id="quiz">找部件挑战 ☆</button><button id="next-part" aria-label="下一个区域">→</button></div></aside>
+</div><footer><span>MADE FOR CURIOUS LITTLE MINDS</span><span>通用客机教学示意 · 结构比例、机构行程与气流为简化展示，非真实飞行模拟。<a href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/airplane-parts-function/" target="_blank" rel="noreferrer">NASA 科普参考 ↗</a></span></footer></main>
+<dialog id="quiz-dialog"><form method="dialog"><button class="dialog-close" aria-label="关闭挑战">×</button></form><p class="eyebrow">LITTLE PILOT CHALLENGE</p><h2>找到它，你就是小专家！</h2><p id="quiz-count"></p><p id="quiz-question" class="quiz-question"></p><button id="quiz-speak" class="secondary">听题目 ♪</button><div id="quiz-options"></div><p id="quiz-feedback" role="status"></p><button id="quiz-next" class="primary" hidden>下一题 →</button></dialog>
+<script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/discovery-progress.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="engine/content.js"></script><script src="engine/model.js"></script><script src="detail-parts.js"></script><script src="details-model.js"></script><script src="app.js?v=rich-airframe-1"></script>
+</body></html>

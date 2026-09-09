@@ -18,4 +18,5 @@ jobs:
       - run: node qa_labs.cjs
       - run: node qa_models.cjs
       - run: node qa_engine_model.cjs
+      - run: node qa_airframe_details.cjs
       - run: node qa_discovery_progress.cjs
