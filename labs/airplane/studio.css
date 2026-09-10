@@ -5,3 +5,17 @@
 /* Keep the observation stage and controls readable at both screen sizes. */
 .airplane-studio .stage-heading{inset:auto;pointer-events:auto;flex-wrap:wrap;min-height:42px;padding:10px 14px}.airplane-studio #viewport{height:calc(100dvh - 455px);min-height:330px}.airplane-studio #controls-toggle{display:none}
 @media(max-width:780px){.airplane-studio .model-panel{position:sticky;top:0;z-index:8;overflow:visible;box-shadow:0 5px 18px #233f3b12}.airplane-studio #viewport{height:28dvh;min-height:205px;max-height:270px}.airplane-studio .stage-heading{font-size:9px;min-height:36px;gap:4px;padding:7px 9px}.airplane-studio .stage-mode{display:none}.airplane-studio .view-tools{top:40px;right:5px;padding:3px;gap:3px}.airplane-studio .view-tools button{height:29px;min-width:29px;padding:3px}.airplane-studio #controls-toggle{display:block;font-size:12px;min-height:36px;border-top:1px solid #d8e3d4;width:100%;color:#257969}.airplane-studio .exploration-controls{display:none;max-height:33dvh;overflow:auto}.airplane-studio .controls-open .exploration-controls{display:block}.airplane-studio .learning-panel{scroll-margin-top:300px}.airplane-studio .model-label{max-width:125px}.airplane-studio .part-button{min-height:39px}}
+/* The canvas owns its full rectangle; every control lives outside it. */
+.airplane-studio .model-panel{height:calc(100dvh - 205px);min-height:420px;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.airplane-studio #viewport{height:100%;min-height:0;max-height:none}
+.airplane-studio .view-tools{position:static;inset:auto;display:flex;flex-direction:row;justify-content:center;flex-wrap:wrap;gap:8px;border:0;border-top:1px solid #d9e3d7;border-radius:0;padding:9px;background:#f8faf2;box-shadow:none;backdrop-filter:none}
+.airplane-studio .view-tools button{min-width:43px;min-height:36px}
+.airplane-studio .learning-panel{min-height:420px;height:calc(100dvh - 205px)}
+.airplane-studio .learning-panel>*{flex-shrink:0}
+.airplane-studio .exploration-controls{margin:0 0 16px;padding:12px;background:#f4f7ec;border:1px solid #dce5d3;max-height:none}
+.airplane-studio .control-row{display:grid;grid-template-columns:60px minmax(0,1fr) auto auto;gap:6px}
+.airplane-studio .control-row>label{min-width:0}
+.airplane-studio .control-row input{width:100%;min-width:0}
+.airplane-studio .reveal-heading{flex-wrap:wrap;gap:3px}
+.airplane-studio .exploration-controls>p{font-size:10px}
+@media(max-width:780px){.airplane-studio .model-panel{height:37dvh;min-height:275px;max-height:355px;position:sticky;top:0}.airplane-studio #viewport{height:100%;min-height:0;max-height:none}.airplane-studio .view-tools{padding:5px;gap:5px}.airplane-studio .view-tools button{min-height:34px;height:34px}.airplane-studio .learning-panel{height:auto;min-height:0;scroll-margin-top:360px}.airplane-studio #controls-toggle{margin-bottom:10px;background:#edf4e6;border:1px solid #d4e0c9;border-radius:9px;min-height:42px}.airplane-studio .controls-open .exploration-controls{display:block;max-height:none;overflow:visible}.airplane-studio .exploration-controls{display:none}}

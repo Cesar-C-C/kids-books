@@ -207,7 +207,18 @@
         }
       }
 
-      function update({time=0,cutaway=0,region='',mechanism=0,selected=null}={}) {
+      // Restore material baselines before composing cutaway and focus opacity.
+      // Engine blades share materials: apply each opacity factor only once.
+      const surfaces=[],baseline=new Map(),renderedTransparency=new Map();
+      for(const node of nodes)node.group.traverse(object=>{
+        if(!object.material)return;
+        const materials=Array.isArray(object.material)?object.material:[object.material];
+        surfaces.push({object,node,materials,castShadow:object.castShadow});
+        for(const m of materials)if(!baseline.has(m)){baseline.set(m,{opacity:m.opacity,transparent:m.transparent,depthWrite:m.depthWrite});renderedTransparency.set(m,m.transparent);}
+      });
+      function update({time=0,cutaway=0,region='',mechanism=0,selected=null,focus=0,focusPosition=null}={}) {
+        for(const [m,original] of baseline)Object.assign(m,original);
+        for(const s of surfaces)s.object.castShadow=s.castShadow;
         const reveal=clamp(cutaway),amount=clamp(mechanism);
         for(const f of finishes){f.m.emissive.copy(f.color);f.m.emissiveIntensity=f.intensity;if(f.id===selected){f.m.emissive.set(0x2b7b7b);f.m.emissiveIntensity=.5;}}
         for(const s of skins){
@@ -225,6 +236,26 @@
         }
         for(const h of hinges)h.holder.quaternion.setFromAxisAngle(h.axis,h.regions.includes(region)?amount*h.angle:0);
         for(const wheel of wheels)wheel.rotation.z=region==='gear'?amount*Math.PI*3:0;
+        const strength=clamp(focus);
+        if(strength>0){
+          const target=focusPosition?new T.Vector3(focusPosition.x,focusPosition.y,focusPosition.z):null;
+          const candidates=nodes.filter(n=>n.id===region);
+          model.updateMatrixWorld(true);
+          const activeNode=target?candidates.sort((a,b)=>a.group.localToWorld(a.anchor.clone()).distanceToSquared(target)-b.group.localToWorld(b.anchor.clone()).distanceToSquared(target))[0]:candidates[0];
+          const factors=new Map();
+          for(const s of surfaces){
+            const active=s.node===activeNode,detail=s.object.userData.detail;
+            const end=active?(!selected||detail===selected?1:.14):.055;
+            const factor=1-strength*(1-end);
+            for(const m of s.materials)factors.set(m,Math.min(factors.get(m)??1,factor));
+            s.object.userData.focusGhost=factor<.4;
+            if(factor<.4)s.object.castShadow=false;
+          }
+          for(const [m,factor] of factors)if(factor<1){m.opacity*=factor;m.transparent=true;m.depthWrite=false;}
+        }else for(const s of surfaces)s.object.userData.focusGhost=false;
+        // Three's opaque shader writes alpha=1. Recompile on transparency
+        // transitions so numeric opacity also becomes visible on the GPU.
+        for(const m of baseline.keys())if(renderedTransparency.get(m)!==m.transparent){m.needsUpdate=true;renderedTransparency.set(m,m.transparent);}
       }
       function anchor(id,cameraPosition) {
         const options=refs.get(id);if(!options?.length)return null;
