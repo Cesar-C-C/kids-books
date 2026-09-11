@@ -1,0 +1,742 @@
+[
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p00_cover_full_en.wav",
+    "text": "The Kindergarten School Bus",
+    "lang": "EN",
+    "page": 0,
+    "slug": "cover",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p00_cover_s1_en.wav",
+    "text": "The Kindergarten School Bus",
+    "lang": "EN",
+    "page": 0,
+    "slug": "cover",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p00_cover_full_zh.wav",
+    "text": "幼儿园校车",
+    "lang": "ZH",
+    "page": 0,
+    "slug": "cover",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p00_cover_s1_zh.wav",
+    "text": "幼儿园校车",
+    "lang": "ZH",
+    "page": 0,
+    "slug": "cover",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p01_parts_full_en.wav",
+    "text": "This is our kindergarten school bus! It is a happy yellow bus that picks children up and brings them safely to school. Big windows let us watch the world go by.",
+    "lang": "EN",
+    "page": 1,
+    "slug": "parts",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p01_parts_s1_en.wav",
+    "text": "This is our kindergarten school bus!",
+    "lang": "EN",
+    "page": 1,
+    "slug": "parts",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p01_parts_s2_en.wav",
+    "text": "It is a happy yellow bus that picks children up and brings them safely to school.",
+    "lang": "EN",
+    "page": 1,
+    "slug": "parts",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p01_parts_s3_en.wav",
+    "text": "Big windows let us watch the world go by.",
+    "lang": "EN",
+    "page": 1,
+    "slug": "parts",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 3
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p01_parts_full_zh.wav",
+    "text": "这是我们的幼儿园校车！它是一辆快乐的黄色巴士，接上小朋友，把他们安全送到幼儿园。大大的车窗让我们看外面的世界。",
+    "lang": "ZH",
+    "page": 1,
+    "slug": "parts",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p01_parts_s1_zh.wav",
+    "text": "这是我们的幼儿园校车！",
+    "lang": "ZH",
+    "page": 1,
+    "slug": "parts",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p01_parts_s2_zh.wav",
+    "text": "它是一辆快乐的黄色巴士，接上小朋友，把他们安全送到幼儿园。",
+    "lang": "ZH",
+    "page": 1,
+    "slug": "parts",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p01_parts_s3_zh.wav",
+    "text": "大大的车窗让我们看外面的世界。",
+    "lang": "ZH",
+    "page": 1,
+    "slug": "parts",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 3
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p02_driver_full_en.wav",
+    "text": "The driver sits up front and holds the big steering wheel. The driver watches the road carefully and keeps every child safe on the trip.",
+    "lang": "EN",
+    "page": 2,
+    "slug": "driver",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p02_driver_s1_en.wav",
+    "text": "The driver sits up front and holds the big steering wheel.",
+    "lang": "EN",
+    "page": 2,
+    "slug": "driver",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p02_driver_s2_en.wav",
+    "text": "The driver watches the road carefully and keeps every child safe on the trip.",
+    "lang": "EN",
+    "page": 2,
+    "slug": "driver",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p02_driver_full_zh.wav",
+    "text": "司机坐在最前面，握着大方向盘。司机认真看着路，一路上保护每个小朋友的安全。",
+    "lang": "ZH",
+    "page": 2,
+    "slug": "driver",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p02_driver_s1_zh.wav",
+    "text": "司机坐在最前面，握着大方向盘。",
+    "lang": "ZH",
+    "page": 2,
+    "slug": "driver",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p02_driver_s2_zh.wav",
+    "text": "司机认真看着路，一路上保护每个小朋友的安全。",
+    "lang": "ZH",
+    "page": 2,
+    "slug": "driver",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p03_inside_full_en.wav",
+    "text": "Inside, there are rows of cozy seats and a wide aisle down the middle. Friends sit together, talk, and sing on the way to school!",
+    "lang": "EN",
+    "page": 3,
+    "slug": "inside",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p03_inside_s1_en.wav",
+    "text": "Inside, there are rows of cozy seats and a wide aisle down the middle.",
+    "lang": "EN",
+    "page": 3,
+    "slug": "inside",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p03_inside_s2_en.wav",
+    "text": "Friends sit together, talk, and sing on the way to school!",
+    "lang": "EN",
+    "page": 3,
+    "slug": "inside",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p03_inside_full_zh.wav",
+    "text": "车里有一排排舒服的座位，中间是一条宽宽的走道。小伙伴们坐在一起，聊天、唱歌，开开心心去幼儿园！",
+    "lang": "ZH",
+    "page": 3,
+    "slug": "inside",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p03_inside_s1_zh.wav",
+    "text": "车里有一排排舒服的座位，中间是一条宽宽的走道。",
+    "lang": "ZH",
+    "page": 3,
+    "slug": "inside",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p03_inside_s2_zh.wav",
+    "text": "小伙伴们坐在一起，聊天、唱歌，开开心心去幼儿园！",
+    "lang": "ZH",
+    "page": 3,
+    "slug": "inside",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p04_wheels_full_en.wav",
+    "text": "Look at the wheels! Thick black tires grip the road, and shiny hubcaps spin round and round. The wheels roll the bus all the way to school.",
+    "lang": "EN",
+    "page": 4,
+    "slug": "wheels",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p04_wheels_s1_en.wav",
+    "text": "Look at the wheels!",
+    "lang": "EN",
+    "page": 4,
+    "slug": "wheels",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p04_wheels_s2_en.wav",
+    "text": "Thick black tires grip the road, and shiny hubcaps spin round and round.",
+    "lang": "EN",
+    "page": 4,
+    "slug": "wheels",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p04_wheels_s3_en.wav",
+    "text": "The wheels roll the bus all the way to school.",
+    "lang": "EN",
+    "page": 4,
+    "slug": "wheels",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 3
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p04_wheels_full_zh.wav",
+    "text": "看车轮！厚厚的黑色轮胎抓住路面，亮亮的轮毂转呀转。车轮带着巴士一路开到幼儿园。",
+    "lang": "ZH",
+    "page": 4,
+    "slug": "wheels",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p04_wheels_s1_zh.wav",
+    "text": "看车轮！",
+    "lang": "ZH",
+    "page": 4,
+    "slug": "wheels",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p04_wheels_s2_zh.wav",
+    "text": "厚厚的黑色轮胎抓住路面，亮亮的轮毂转呀转。",
+    "lang": "ZH",
+    "page": 4,
+    "slug": "wheels",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p04_wheels_s3_zh.wav",
+    "text": "车轮带着巴士一路开到幼儿园。",
+    "lang": "ZH",
+    "page": 4,
+    "slug": "wheels",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 3
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p05_stopsign_full_en.wav",
+    "text": "When the bus stops, the red stop sign swings out and the yellow lights flash. Cars must wait. Then children can cross the road safely.",
+    "lang": "EN",
+    "page": 5,
+    "slug": "stopsign",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p05_stopsign_s1_en.wav",
+    "text": "When the bus stops, the red stop sign swings out and the yellow lights flash.",
+    "lang": "EN",
+    "page": 5,
+    "slug": "stopsign",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p05_stopsign_s2_en.wav",
+    "text": "Cars must wait.",
+    "lang": "EN",
+    "page": 5,
+    "slug": "stopsign",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p05_stopsign_s3_en.wav",
+    "text": "Then children can cross the road safely.",
+    "lang": "EN",
+    "page": 5,
+    "slug": "stopsign",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 3
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p05_stopsign_full_zh.wav",
+    "text": "巴士一停下，红色停车牌就伸出来，黄灯一闪一闪。小汽车必须等着。这样小朋友才能安全过马路。",
+    "lang": "ZH",
+    "page": 5,
+    "slug": "stopsign",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p05_stopsign_s1_zh.wav",
+    "text": "巴士一停下，红色停车牌就伸出来，黄灯一闪一闪。",
+    "lang": "ZH",
+    "page": 5,
+    "slug": "stopsign",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p05_stopsign_s2_zh.wav",
+    "text": "小汽车必须等着。",
+    "lang": "ZH",
+    "page": 5,
+    "slug": "stopsign",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p05_stopsign_s3_zh.wav",
+    "text": "这样小朋友才能安全过马路。",
+    "lang": "ZH",
+    "page": 5,
+    "slug": "stopsign",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 3
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p06_doors_full_en.wav",
+    "text": "At the kindergarten, the door opens with a friendly beep. One by one, children hop down the steps and wave goodbye to the driver.",
+    "lang": "EN",
+    "page": 6,
+    "slug": "doors",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p06_doors_s1_en.wav",
+    "text": "At the kindergarten, the door opens with a friendly beep.",
+    "lang": "EN",
+    "page": 6,
+    "slug": "doors",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p06_doors_s2_en.wav",
+    "text": "One by one, children hop down the steps and wave goodbye to the driver.",
+    "lang": "EN",
+    "page": 6,
+    "slug": "doors",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p06_doors_full_zh.wav",
+    "text": "到了幼儿园，车门\"哔\"的一声打开。小朋友一个接一个跳下台阶，跟司机挥手说再见。",
+    "lang": "ZH",
+    "page": 6,
+    "slug": "doors",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p06_doors_s1_zh.wav",
+    "text": "到了幼儿园，车门\"哔\"的一声打开。",
+    "lang": "ZH",
+    "page": 6,
+    "slug": "doors",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p06_doors_s2_zh.wav",
+    "text": "小朋友一个接一个跳下台阶，跟司机挥手说再见。",
+    "lang": "ZH",
+    "page": 6,
+    "slug": "doors",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p07_aide_full_en.wav",
+    "text": "A kind bus aide rides along to help. The aide finds each child a seat, fastens a belt, and makes sure everyone is happy and safe.",
+    "lang": "EN",
+    "page": 7,
+    "slug": "aide",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p07_aide_s1_en.wav",
+    "text": "A kind bus aide rides along to help.",
+    "lang": "EN",
+    "page": 7,
+    "slug": "aide",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p07_aide_s2_en.wav",
+    "text": "The aide finds each child a seat, fastens a belt, and makes sure everyone is happy and safe.",
+    "lang": "EN",
+    "page": 7,
+    "slug": "aide",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p07_aide_full_zh.wav",
+    "text": "一位亲切的随车老师也坐车上帮忙。她帮每个小朋友找到座位、系好安全带，让大家又开心又安全。",
+    "lang": "ZH",
+    "page": 7,
+    "slug": "aide",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p07_aide_s1_zh.wav",
+    "text": "一位亲切的随车老师也坐车上帮忙。",
+    "lang": "ZH",
+    "page": 7,
+    "slug": "aide",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p07_aide_s2_zh.wav",
+    "text": "她帮每个小朋友找到座位、系好安全带，让大家又开心又安全。",
+    "lang": "ZH",
+    "page": 7,
+    "slug": "aide",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p08_road_full_en.wav",
+    "text": "On the road, the bus follows the rules. It waits at red lights, slows at the crosswalk, and shares the street with cars and people.",
+    "lang": "EN",
+    "page": 8,
+    "slug": "road",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p08_road_s1_en.wav",
+    "text": "On the road, the bus follows the rules.",
+    "lang": "EN",
+    "page": 8,
+    "slug": "road",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p08_road_s2_en.wav",
+    "text": "It waits at red lights, slows at the crosswalk, and shares the street with cars and people.",
+    "lang": "EN",
+    "page": 8,
+    "slug": "road",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p08_road_full_zh.wav",
+    "text": "在路上，巴士遵守规则。红灯前停下，斑马线前放慢，和小汽车、行人一起走。",
+    "lang": "ZH",
+    "page": 8,
+    "slug": "road",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p08_road_s1_zh.wav",
+    "text": "在路上，巴士遵守规则。",
+    "lang": "ZH",
+    "page": 8,
+    "slug": "road",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p08_road_s2_zh.wav",
+    "text": "红灯前停下，斑马线前放慢，和小汽车、行人一起走。",
+    "lang": "ZH",
+    "page": 8,
+    "slug": "road",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p09_arrive_full_en.wav",
+    "text": "Here we are! The bus arrives at the kindergarten gate. Children run to the slide and swings, ready for a fun day of play and learning.",
+    "lang": "EN",
+    "page": 9,
+    "slug": "arrive",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p09_arrive_s1_en.wav",
+    "text": "Here we are!",
+    "lang": "EN",
+    "page": 9,
+    "slug": "arrive",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p09_arrive_s2_en.wav",
+    "text": "The bus arrives at the kindergarten gate.",
+    "lang": "EN",
+    "page": 9,
+    "slug": "arrive",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p09_arrive_s3_en.wav",
+    "text": "Children run to the slide and swings, ready for a fun day of play and learning.",
+    "lang": "EN",
+    "page": 9,
+    "slug": "arrive",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 3
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p09_arrive_full_zh.wav",
+    "text": "到啦！巴士停在幼儿园门口。小朋友跑向滑梯和秋千，准备开始快乐的一天——玩耍和学本领。",
+    "lang": "ZH",
+    "page": 9,
+    "slug": "arrive",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p09_arrive_s1_zh.wav",
+    "text": "到啦！",
+    "lang": "ZH",
+    "page": 9,
+    "slug": "arrive",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p09_arrive_s2_zh.wav",
+    "text": "巴士停在幼儿园门口。",
+    "lang": "ZH",
+    "page": 9,
+    "slug": "arrive",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p09_arrive_s3_zh.wav",
+    "text": "小朋友跑向滑梯和秋千，准备开始快乐的一天——玩耍和学本领。",
+    "lang": "ZH",
+    "page": 9,
+    "slug": "arrive",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 3
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p10_vocab_full_en.wav",
+    "text": "Great job, little rider! You learned the parts of the school bus. Can you name them all?",
+    "lang": "EN",
+    "page": 10,
+    "slug": "vocab",
+    "kind": "full",
+    "langTag": "en",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p10_vocab_s1_en.wav",
+    "text": "Great job, little rider!",
+    "lang": "EN",
+    "page": 10,
+    "slug": "vocab",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p10_vocab_s2_en.wav",
+    "text": "You learned the parts of the school bus.",
+    "lang": "EN",
+    "page": 10,
+    "slug": "vocab",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p10_vocab_s3_en.wav",
+    "text": "Can you name them all?",
+    "lang": "EN",
+    "page": 10,
+    "slug": "vocab",
+    "kind": "sentence",
+    "langTag": "en",
+    "sentence": 3
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p10_vocab_full_zh.wav",
+    "text": "做得好，小车友！你认识了校车的各个部件。你能叫出它们的名字吗？",
+    "lang": "ZH",
+    "page": 10,
+    "slug": "vocab",
+    "kind": "full",
+    "langTag": "zh",
+    "sentence": null
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p10_vocab_s1_zh.wav",
+    "text": "做得好，小车友！",
+    "lang": "ZH",
+    "page": 10,
+    "slug": "vocab",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 1
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p10_vocab_s2_zh.wav",
+    "text": "你认识了校车的各个部件。",
+    "lang": "ZH",
+    "page": 10,
+    "slug": "vocab",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 2
+  },
+  {
+    "out": "C:\\Users\\Cesar\\Documents\\ChatGPT\\儿童绘本开发\\kids-books\\books\\schoolbus\\audio\\narration\\p10_vocab_s3_zh.wav",
+    "text": "你能叫出它们的名字吗？",
+    "lang": "ZH",
+    "page": 10,
+    "slug": "vocab",
+    "kind": "sentence",
+    "langTag": "zh",
+    "sentence": 3
+  }
+]

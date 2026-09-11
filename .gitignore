@@ -14,3 +14,9 @@ node_modules/
 # EdgeOne Pages CLI artifacts (build cache / local config, never commit)
 .edgeone/
 .env
+
+# Schoolbus narration: WAV are local lossless masters, NOT the deliverable.
+# The committed audio is the 192kbps MP3 set (regenerate WAVs with
+# `python gen_schoolbus_voiceover.py --run`, then `--mp3` to transcode).
+books/schoolbus/audio/narration/*.wav
+books/schoolbus/audio/narration/_pending.json

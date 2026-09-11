@@ -1,0 +1,1970 @@
+
+===== run 2026-09-11 12:28:51 | 74 items =====
+>> loading IndexTTS-2.5 (chunk=40 steps=12 cfg=0.7 serial_cfg=False) ...
+GPT2InferenceModel has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+W0911 12:30:10.005000 21876 .venv\Lib\site-packages\torch\utils\cpp_extension.py:466] Error checking compiler version for cl: [WinError 2] 系统找不到指定的文件。
+[safe-delete][SAFE_DELETE_FAIL_CLOSED] {"target": "C:\\Users\\Cesar\\WorkBuddy\\index-tts\\indextts\\s2mel\\modules\\bigvgan\\alias_free_activation\\cuda\\build\\lock", "reason": "trash-failed", "detail": "SHFileOperationW 失败: 0x2"}
+>> Low-VRAM mode enabled (4.0 GB < 10 GB), text will be split into chunks of 40 chars
+>> QwenEmotion not loaded (use_qwen_emo=False)
+>> GPT weights restored from: checkpoints\gpt.pth
+>> Failed to load custom CUDA kernel for BigVGAN. Falling back to torch.
+OSError('SHFileOperationW 失败: 0x2')
+>> w2v-bert feature extractor on: cpu
+>> semantic_codec weights restored from: checkpoints\codec.pth
+>> semantic_codec weights restored cost:  1.9159614999989572
+cfm loaded
+length_regulator loaded
+>> s2mel weights restored from: checkpoints\s2mel.pth
+>> campplus_model weights restored from: checkpoints\hf_cache\campplus_cn_common.bin
+Loading config.json from local directory
+Loading weights from local directory
+Removing weight norm...
+>> bigvgan weights restored from: checkpoints\hf_cache\bigvgan
+>> model ready in 38s | VRAM 2.77G
+
+>> [1/74] lang=EN chars=27 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_full_en.wav
+>> starting inference...
+text after normalization: The Kindergarten School Bus
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Passing a tuple of `past_key_values` is deprecated and will be removed in Transformers v4.53.0. You should pass an instance of `Cache` instead, e.g. `past_key_values=DynamicCache.from_legacy_cache(past_key_values)`.
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s]  8%|▊         | 1/12 [00:07<01:19,  7.20s/it] 25%|██▌       | 3/12 [00:11<00:30,  3.34s/it] 33%|███▎      | 4/12 [00:20<00:42,  5.32s/it] 42%|████▏     | 5/12 [00:30<00:49,  7.07s/it] 50%|█████     | 6/12 [00:41<00:50,  8.36s/it] 58%|█████▊    | 7/12 [00:51<00:43,  8.70s/it] 67%|██████▋   | 8/12 [01:02<00:38,  9.50s/it] 75%|███████▌  | 9/12 [01:12<00:28,  9.45s/it] 83%|████████▎ | 10/12 [01:21<00:18,  9.42s/it] 92%|█████████▏| 11/12 [01:32<00:09,  9.90s/it]100%|██████████| 12/12 [01:41<00:00,  9.75s/it]100%|██████████| 12/12 [01:41<00:00,  8.48s/it]
+torch.Size([1, 74752])
+>> gpt_gen_time: 11.74 seconds
+>> s2mel_time: 101.80 seconds
+>> bigvgan_time: 20.63 seconds
+>> Total inference time: 151.25 seconds
+>> Generated audio length: 3.39 seconds
+>> RTF: 44.6150
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_full_en.wav
+DURATION=3.39
+SIZE=149548
+TIME=151.3
+
+>> [2/74] lang=EN chars=27 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_s1_en.wav
+>> starting inference...
+text after normalization: The Kindergarten School Bus
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s]  8%|▊         | 1/12 [00:03<00:36,  3.34s/it] 25%|██▌       | 3/12 [00:16<00:51,  5.71s/it] 33%|███▎      | 4/12 [00:28<01:03,  7.89s/it] 42%|████▏     | 5/12 [00:44<01:14, 10.70s/it] 50%|█████     | 6/12 [00:58<01:09, 11.62s/it] 58%|█████▊    | 7/12 [01:09<00:57, 11.60s/it] 67%|██████▋   | 8/12 [01:20<00:45, 11.31s/it] 75%|███████▌  | 9/12 [01:31<00:33, 11.11s/it] 83%|████████▎ | 10/12 [01:43<00:23, 11.58s/it] 92%|█████████▏| 11/12 [01:56<00:11, 11.96s/it]100%|██████████| 12/12 [02:11<00:00, 12.69s/it]100%|██████████| 12/12 [02:11<00:00, 10.93s/it]
+torch.Size([1, 68608])
+>> gpt_gen_time: 8.44 seconds
+>> s2mel_time: 131.13 seconds
+>> bigvgan_time: 19.42 seconds
+>> Total inference time: 160.22 seconds
+>> Generated audio length: 3.11 seconds
+>> RTF: 51.4943
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_s1_en.wav
+DURATION=3.111
+SIZE=137260
+TIME=160.2
+
+>> [3/74] lang=ZH chars=5 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_full_zh.wav
+>> starting inference...
+text after normalization: 幼儿园校车
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s]  8%|▊         | 1/12 [00:05<01:05,  5.97s/it] 25%|██▌       | 3/12 [00:14<00:43,  4.80s/it] 33%|███▎      | 4/12 [00:26<00:56,  7.08s/it] 42%|████▏     | 5/12 [00:36<00:56,  8.14s/it] 50%|█████     | 6/12 [00:45<00:51,  8.55s/it] 58%|█████▊    | 7/12 [00:57<00:47,  9.54s/it] 67%|██████▋   | 8/12 [01:05<00:36,  9.14s/it] 75%|███████▌  | 9/12 [01:16<00:29,  9.71s/it] 83%|████████▎ | 10/12 [01:24<00:18,  9.24s/it] 92%|█████████▏| 11/12 [01:36<00:09,  9.89s/it]100%|██████████| 12/12 [01:44<00:00,  9.44s/it]100%|██████████| 12/12 [01:44<00:00,  8.73s/it]
+torch.Size([1, 59648])
+>> gpt_gen_time: 7.58 seconds
+>> s2mel_time: 104.77 seconds
+>> bigvgan_time: 22.88 seconds
+>> Total inference time: 135.67 seconds
+>> Generated audio length: 2.71 seconds
+>> RTF: 50.1523
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_full_zh.wav
+DURATION=2.705
+SIZE=119340
+TIME=135.7
+
+>> [4/74] lang=ZH chars=5 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_s1_zh.wav
+>> starting inference...
+text after normalization: 幼儿园校车
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:01<00:06,  1.43it/s] 25%|██▌       | 3/12 [00:11<00:42,  4.68s/it] 33%|███▎      | 4/12 [00:21<00:52,  6.54s/it] 42%|████▏     | 5/12 [00:30<00:52,  7.43s/it] 50%|█████     | 6/12 [00:38<00:45,  7.53s/it] 58%|█████▊    | 7/12 [00:48<00:41,  8.38s/it] 67%|██████▋   | 8/12 [00:55<00:31,  7.95s/it] 75%|███████▌  | 9/12 [01:07<00:27,  9.32s/it] 83%|████████▎ | 10/12 [01:15<00:17,  8.93s/it] 92%|█████████▏| 11/12 [01:24<00:08,  8.78s/it]100%|██████████| 12/12 [01:32<00:00,  8.55s/it]100%|██████████| 12/12 [01:32<00:00,  7.69s/it]
+torch.Size([1, 53504])
+>> gpt_gen_time: 7.90 seconds
+>> s2mel_time: 92.26 seconds
+>> bigvgan_time: 18.91 seconds
+>> Total inference time: 119.57 seconds
+>> Generated audio length: 2.43 seconds
+>> RTF: 49.2786
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p00_cover_s1_zh.wav
+DURATION=2.426
+SIZE=107052
+TIME=119.6
+
+>> [5/74] lang=EN chars=160 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_full_en.wav
+>> starting inference...
+text after normalization: This is our kindergarten school bus!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:34,  3.40s/it] 25%|██▌       | 3/12 [00:17<00:57,  6.34s/it] 33%|███▎      | 4/12 [00:29<01:09,  8.66s/it] 42%|████▏     | 5/12 [00:42<01:09,  9.96s/it] 50%|█████     | 6/12 [00:56<01:08, 11.46s/it] 58%|█████▊    | 7/12 [01:10<01:00, 12.07s/it] 67%|██████▋   | 8/12 [01:21<00:47, 12.00s/it] 75%|███████▌  | 9/12 [01:34<00:36, 12.10s/it] 83%|████████▎ | 10/12 [01:46<00:24, 12.24s/it] 92%|█████████▏| 11/12 [01:59<00:12, 12.33s/it]100%|██████████| 12/12 [02:13<00:00, 12.83s/it]100%|██████████| 12/12 [02:13<00:00, 11.11s/it]
+torch.Size([1, 83456])
+>> gpt_gen_time: 10.08 seconds
+>> s2mel_time: 133.33 seconds
+>> bigvgan_time: 20.66 seconds
+>> Total inference time: 164.79 seconds
+>> Generated audio length: 3.78 seconds
+>> RTF: 43.5392
+>> starting inference...
+text after normalization: It is a happy yellow bus that picks children up and brings them safely to school.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:27,  2.71s/it] 25%|██▌       | 3/12 [00:16<00:54,  6.04s/it] 33%|███▎      | 4/12 [00:25<00:59,  7.42s/it] 42%|████▏     | 5/12 [00:37<01:01,  8.81s/it] 50%|█████     | 6/12 [00:48<00:57,  9.66s/it] 58%|█████▊    | 7/12 [01:02<00:55, 11.09s/it] 67%|██████▋   | 8/12 [01:14<00:44, 11.19s/it] 75%|███████▌  | 9/12 [01:23<00:31, 10.52s/it] 83%|████████▎ | 10/12 [01:34<00:21, 10.91s/it] 92%|█████████▏| 11/12 [01:46<00:11, 11.25s/it]100%|██████████| 12/12 [01:58<00:00, 11.19s/it]100%|██████████| 12/12 [01:58<00:00,  9.84s/it]
+torch.Size([1, 128512])
+>> gpt_gen_time: 15.23 seconds
+>> s2mel_time: 118.14 seconds
+>> bigvgan_time: 29.27 seconds
+>> Total inference time: 163.44 seconds
+>> Generated audio length: 5.83 seconds
+>> RTF: 28.0421
+>> starting inference...
+text after normalization: Big windows let us watch the world go by.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:24,  2.40s/it] 25%|██▌       | 3/12 [00:16<00:56,  6.32s/it] 33%|███▎      | 4/12 [00:33<01:23, 10.42s/it] 42%|████▏     | 5/12 [00:39<01:00,  8.66s/it] 50%|█████     | 6/12 [00:51<00:59,  9.88s/it] 58%|█████▊    | 7/12 [01:02<00:51, 10.28s/it] 67%|██████▋   | 8/12 [01:13<00:41, 10.48s/it] 75%|███████▌  | 9/12 [01:24<00:31, 10.51s/it] 83%|████████▎ | 10/12 [01:38<00:23, 11.57s/it] 92%|█████████▏| 11/12 [01:51<00:11, 11.98s/it]100%|██████████| 12/12 [02:02<00:00, 11.93s/it]100%|██████████| 12/12 [02:02<00:00, 10.24s/it]
+torch.Size([1, 96768])
+>> gpt_gen_time: 11.19 seconds
+>> s2mel_time: 122.98 seconds
+>> bigvgan_time: 23.32 seconds
+>> Total inference time: 158.09 seconds
+>> Generated audio length: 4.39 seconds
+>> RTF: 36.0224
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_full_en.wav
+DURATION=14.402
+SIZE=635156
+TIME=486.3
+
+>> [6/74] lang=EN chars=36 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s1_en.wav
+>> starting inference...
+text after normalization: This is our kindergarten school bus!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:19,  1.92s/it] 25%|██▌       | 3/12 [00:17<01:02,  6.94s/it] 33%|███▎      | 4/12 [00:27<01:04,  8.01s/it] 42%|████▏     | 5/12 [00:38<01:02,  8.98s/it] 50%|█████     | 6/12 [00:49<00:58,  9.82s/it] 58%|█████▊    | 7/12 [01:01<00:51, 10.29s/it] 67%|██████▋   | 8/12 [01:11<00:40, 10.16s/it] 75%|███████▌  | 9/12 [01:21<00:30, 10.24s/it] 83%|████████▎ | 10/12 [01:29<00:19,  9.64s/it] 92%|█████████▏| 11/12 [01:39<00:09,  9.53s/it]100%|██████████| 12/12 [01:48<00:00,  9.65s/it]100%|██████████| 12/12 [01:48<00:00,  9.08s/it]
+torch.Size([1, 85248])
+>> gpt_gen_time: 10.92 seconds
+>> s2mel_time: 109.05 seconds
+>> bigvgan_time: 23.23 seconds
+>> Total inference time: 143.70 seconds
+>> Generated audio length: 3.87 seconds
+>> RTF: 37.1703
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s1_en.wav
+DURATION=3.866
+SIZE=170540
+TIME=143.7
+
+>> [7/74] lang=EN chars=81 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s2_en.wav
+>> starting inference...
+text after normalization: It is a happy yellow bus that picks children up and brings them safely to school.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:17,  1.73s/it] 25%|██▌       | 3/12 [00:13<00:45,  5.06s/it] 33%|███▎      | 4/12 [00:24<00:58,  7.36s/it] 42%|████▏     | 5/12 [00:35<00:59,  8.51s/it] 50%|█████     | 6/12 [00:47<00:59,  9.95s/it] 58%|█████▊    | 7/12 [00:59<00:51, 10.33s/it] 67%|██████▋   | 8/12 [33:55<41:57, 629.37s/it] 75%|███████▌  | 9/12 [52:14<38:44, 774.97s/it] 83%|████████▎ | 10/12 [52:15<17:54, 537.35s/it] 92%|█████████▏| 11/12 [52:35<06:19, 379.41s/it]100%|██████████| 12/12 [52:37<00:00, 265.17s/it]100%|██████████| 12/12 [52:37<00:00, 263.16s/it]
+torch.Size([1, 143360])
+>> gpt_gen_time: 20.87 seconds
+>> s2mel_time: 3179.60 seconds
+>> bigvgan_time: 31.03 seconds
+>> Total inference time: 3233.33 seconds
+>> Generated audio length: 6.50 seconds
+>> RTF: 497.3138
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s2_en.wav
+DURATION=6.502
+SIZE=286764
+TIME=3211.8
+
+>> [8/74] lang=EN chars=41 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s3_en.wav
+>> starting inference...
+text after normalization: Big windows let us watch the world go by.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:22,  2.30s/it] 25%|██▌       | 3/12 [00:16<00:57,  6.41s/it] 33%|███▎      | 4/12 [00:30<01:11,  8.97s/it] 42%|████▏     | 5/12 [00:42<01:10, 10.14s/it] 50%|█████     | 6/12 [00:54<01:04, 10.74s/it] 58%|█████▊    | 7/12 [01:08<00:58, 11.74s/it] 67%|██████▋   | 8/12 [01:18<00:45, 11.30s/it] 75%|███████▌  | 9/12 [01:29<00:33, 11.26s/it] 83%|████████▎ | 10/12 [01:44<00:24, 12.35s/it] 92%|█████████▏| 11/12 [01:54<00:11, 11.70s/it]100%|██████████| 12/12 [02:03<00:00, 10.88s/it]100%|██████████| 12/12 [02:03<00:00, 10.31s/it]
+torch.Size([1, 99328])
+>> gpt_gen_time: 18.19 seconds
+>> s2mel_time: 123.81 seconds
+>> bigvgan_time: 20.82 seconds
+>> Total inference time: 163.45 seconds
+>> Generated audio length: 4.50 seconds
+>> RTF: 36.2837
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s3_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s3_en.wav
+DURATION=4.505
+SIZE=198700
+TIME=163.5
+
+>> [9/74] lang=ZH chars=55 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_full_zh.wav
+>> starting inference...
+text after normalization: 这是我们的幼儿园校车!它是一辆快乐的黄色巴士,接上小朋友,把他们安全送到幼儿园.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:14,  1.49s/it] 25%|██▌       | 3/12 [00:15<00:53,  5.99s/it] 33%|███▎      | 4/12 [00:25<01:01,  7.67s/it] 42%|████▏     | 5/12 [00:35<00:58,  8.30s/it] 50%|█████     | 6/12 [00:45<00:52,  8.79s/it] 58%|█████▊    | 7/12 [00:57<00:50, 10.01s/it] 67%|██████▋   | 8/12 [01:08<00:41, 10.42s/it] 75%|███████▌  | 9/12 [01:21<00:33, 11.23s/it] 83%|████████▎ | 10/12 [01:34<00:23, 11.67s/it] 92%|█████████▏| 11/12 [01:46<00:11, 11.60s/it]100%|██████████| 12/12 [01:57<00:00, 11.60s/it]100%|██████████| 12/12 [01:57<00:00,  9.80s/it]
+torch.Size([1, 174336])
+>> gpt_gen_time: 23.93 seconds
+>> s2mel_time: 117.72 seconds
+>> bigvgan_time: 33.81 seconds
+>> Total inference time: 176.62 seconds
+>> Generated audio length: 7.91 seconds
+>> RTF: 22.3387
+>> starting inference...
+text after normalization: 大大的车窗让我们看外面的世界.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:23,  2.32s/it] 25%|██▌       | 3/12 [00:13<00:47,  5.24s/it] 33%|███▎      | 4/12 [00:24<00:58,  7.30s/it] 42%|████▏     | 5/12 [00:33<00:55,  7.91s/it] 50%|█████     | 6/12 [00:42<00:48,  8.15s/it] 58%|█████▊    | 7/12 [00:53<00:46,  9.21s/it] 67%|██████▋   | 8/12 [01:06<00:41, 10.43s/it] 75%|███████▌  | 9/12 [01:15<00:29,  9.73s/it] 83%|████████▎ | 10/12 [01:25<00:20, 10.05s/it] 92%|█████████▏| 11/12 [01:36<00:10, 10.18s/it]100%|██████████| 12/12 [01:45<00:00,  9.92s/it]100%|██████████| 12/12 [01:45<00:00,  8.81s/it]
+torch.Size([1, 90624])
+>> gpt_gen_time: 12.88 seconds
+>> s2mel_time: 105.74 seconds
+>> bigvgan_time: 21.72 seconds
+>> Total inference time: 140.80 seconds
+>> Generated audio length: 4.11 seconds
+>> RTF: 34.2592
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_full_zh.wav
+DURATION=12.216
+SIZE=538784
+TIME=317.4
+
+>> [10/74] lang=ZH chars=11 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s1_zh.wav
+>> starting inference...
+text after normalization: 这是我们的幼儿园校车!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:26,  2.62s/it] 25%|██▌       | 3/12 [00:13<00:44,  4.94s/it] 33%|███▎      | 4/12 [00:25<01:00,  7.60s/it] 42%|████▏     | 5/12 [00:36<01:02,  8.87s/it] 50%|█████     | 6/12 [00:46<00:54,  9.11s/it] 58%|█████▊    | 7/12 [00:59<00:52, 10.46s/it] 67%|██████▋   | 8/12 [01:10<00:42, 10.54s/it] 75%|███████▌  | 9/12 [01:25<00:35, 11.87s/it] 83%|████████▎ | 10/12 [01:35<00:22, 11.38s/it] 92%|█████████▏| 11/12 [01:47<00:11, 11.59s/it]100%|██████████| 12/12 [02:00<00:00, 11.94s/it]100%|██████████| 12/12 [02:00<00:00, 10.02s/it]
+torch.Size([1, 84480])
+>> gpt_gen_time: 12.58 seconds
+>> s2mel_time: 120.33 seconds
+>> bigvgan_time: 24.49 seconds
+>> Total inference time: 158.87 seconds
+>> Generated audio length: 3.83 seconds
+>> RTF: 41.4677
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s1_zh.wav
+DURATION=3.831
+SIZE=169004
+TIME=158.9
+
+>> [11/74] lang=ZH chars=29 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s2_zh.wav
+>> starting inference...
+text after normalization: 它是一辆快乐的黄色巴士,接上小朋友,把他们安全送到幼儿园.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:16,  1.68s/it] 25%|██▌       | 3/12 [00:12<00:43,  4.87s/it] 33%|███▎      | 4/12 [00:21<00:50,  6.31s/it] 42%|████▏     | 5/12 [00:32<00:55,  7.86s/it] 50%|█████     | 6/12 [00:45<00:57,  9.53s/it] 58%|█████▊    | 7/12 [00:56<00:51, 10.30s/it] 67%|██████▋   | 8/12 [01:08<00:42, 10.53s/it] 75%|███████▌  | 9/12 [01:19<00:32, 10.80s/it] 83%|████████▎ | 10/12 [01:28<00:20, 10.38s/it] 92%|█████████▏| 11/12 [01:39<00:10, 10.47s/it]100%|██████████| 12/12 [01:51<00:00, 10.91s/it]100%|██████████| 12/12 [01:51<00:00,  9.29s/it]
+torch.Size([1, 139776])
+>> gpt_gen_time: 18.78 seconds
+>> s2mel_time: 111.54 seconds
+>> bigvgan_time: 28.79 seconds
+>> Total inference time: 159.95 seconds
+>> Generated audio length: 6.34 seconds
+>> RTF: 25.2321
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s2_zh.wav
+DURATION=6.339
+SIZE=279596
+TIME=160.0
+
+>> [12/74] lang=ZH chars=15 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s3_zh.wav
+>> starting inference...
+text after normalization: 大大的车窗让我们看外面的世界.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:14,  1.46s/it] 25%|██▌       | 3/12 [00:13<00:46,  5.21s/it] 33%|███▎      | 4/12 [00:24<00:57,  7.23s/it] 42%|████▏     | 5/12 [00:33<00:54,  7.85s/it] 50%|█████     | 6/12 [00:42<00:49,  8.28s/it] 58%|█████▊    | 7/12 [00:52<00:45,  9.03s/it] 67%|██████▋   | 8/12 [01:01<00:35,  8.99s/it] 75%|███████▌  | 9/12 [01:19<00:35, 11.80s/it] 83%|████████▎ | 10/12 [01:23<00:18,  9.26s/it] 92%|█████████▏| 11/12 [01:33<00:09,  9.57s/it]100%|██████████| 12/12 [01:43<00:00,  9.82s/it]100%|██████████| 12/12 [01:43<00:00,  8.66s/it]
+torch.Size([1, 90624])
+>> gpt_gen_time: 12.08 seconds
+>> s2mel_time: 103.96 seconds
+>> bigvgan_time: 22.27 seconds
+>> Total inference time: 139.35 seconds
+>> Generated audio length: 4.11 seconds
+>> RTF: 33.9063
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s3_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p01_parts_s3_zh.wav
+DURATION=4.11
+SIZE=181292
+TIME=139.4
+
+>> [13/74] lang=EN chars=136 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_full_en.wav
+>> starting inference...
+text after normalization: The driver sits up front and holds the big steering wheel.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:26,  2.64s/it] 25%|██▌       | 3/12 [00:17<00:57,  6.43s/it] 33%|███▎      | 4/12 [00:28<01:06,  8.26s/it] 42%|████▏     | 5/12 [00:39<01:05,  9.32s/it] 50%|█████     | 6/12 [00:53<01:05, 10.88s/it] 58%|█████▊    | 7/12 [01:08<00:59, 11.99s/it] 67%|██████▋   | 8/12 [01:19<00:47, 11.92s/it] 75%|███████▌  | 9/12 [01:41<00:44, 14.86s/it] 83%|████████▎ | 10/12 [01:41<00:20, 10.39s/it] 92%|█████████▏| 11/12 [01:53<00:10, 10.83s/it]100%|██████████| 12/12 [02:03<00:00, 10.78s/it]100%|██████████| 12/12 [02:03<00:00, 10.33s/it]
+torch.Size([1, 103680])
+>> gpt_gen_time: 15.29 seconds
+>> s2mel_time: 124.09 seconds
+>> bigvgan_time: 22.14 seconds
+>> Total inference time: 162.79 seconds
+>> Generated audio length: 4.70 seconds
+>> RTF: 34.6213
+>> starting inference...
+text after normalization: The driver watches the road carefully and keeps every child safe on the trip.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:22,  2.29s/it] 25%|██▌       | 3/12 [00:17<00:58,  6.54s/it] 33%|███▎      | 4/12 [00:28<01:06,  8.30s/it] 42%|████▏     | 5/12 [00:38<01:02,  8.88s/it] 50%|█████     | 6/12 [00:48<00:56,  9.39s/it] 58%|█████▊    | 7/12 [00:59<00:49,  9.95s/it] 67%|██████▋   | 8/12 [01:12<00:42, 10.71s/it] 75%|███████▌  | 9/12 [01:24<00:33, 11.09s/it] 83%|████████▎ | 10/12 [01:39<00:24, 12.47s/it] 92%|█████████▏| 11/12 [01:43<00:09,  9.72s/it]100%|██████████| 12/12 [01:52<00:00,  9.67s/it]100%|██████████| 12/12 [01:52<00:00,  9.39s/it]
+torch.Size([1, 146944])
+>> gpt_gen_time: 20.14 seconds
+>> s2mel_time: 112.80 seconds
+>> bigvgan_time: 32.01 seconds
+>> Total inference time: 166.11 seconds
+>> Generated audio length: 6.66 seconds
+>> RTF: 24.9259
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_full_en.wav
+DURATION=11.566
+SIZE=510112
+TIME=328.9
+
+>> [14/74] lang=EN chars=58 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s1_en.wav
+>> starting inference...
+text after normalization: The driver sits up front and holds the big steering wheel.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:11,  1.14s/it] 25%|██▌       | 3/12 [00:13<00:48,  5.34s/it] 33%|███▎      | 4/12 [00:24<00:58,  7.29s/it] 42%|████▏     | 5/12 [00:32<00:53,  7.68s/it] 50%|█████     | 6/12 [00:41<00:48,  8.03s/it] 58%|█████▊    | 7/12 [00:51<00:44,  8.89s/it] 67%|██████▋   | 8/12 [01:03<00:38,  9.70s/it] 75%|███████▌  | 9/12 [01:12<00:28,  9.40s/it] 83%|████████▎ | 10/12 [01:23<00:20, 10.13s/it] 92%|█████████▏| 11/12 [01:35<00:10, 10.62s/it]100%|██████████| 12/12 [01:44<00:00, 10.03s/it]100%|██████████| 12/12 [01:44<00:00,  8.69s/it]
+torch.Size([1, 114432])
+>> gpt_gen_time: 15.09 seconds
+>> s2mel_time: 104.34 seconds
+>> bigvgan_time: 28.70 seconds
+>> Total inference time: 149.25 seconds
+>> Generated audio length: 5.19 seconds
+>> RTF: 28.7601
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s1_en.wav
+DURATION=5.19
+SIZE=228908
+TIME=149.3
+
+>> [15/74] lang=EN chars=77 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s2_en.wav
+>> starting inference...
+text after normalization: The driver watches the road carefully and keeps every child safe on the trip.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:26,  2.67s/it] 25%|██▌       | 3/12 [00:16<00:56,  6.23s/it] 33%|███▎      | 4/12 [00:30<01:13,  9.13s/it] 42%|████▏     | 5/12 [00:41<01:07,  9.59s/it] 50%|█████     | 6/12 [00:57<01:11, 11.89s/it] 58%|█████▊    | 7/12 [01:10<01:00, 12.08s/it] 67%|██████▋   | 8/12 [01:22<00:49, 12.33s/it] 75%|███████▌  | 9/12 [01:34<00:36, 12.07s/it] 83%|████████▎ | 10/12 [01:48<00:25, 12.76s/it] 92%|█████████▏| 11/12 [02:01<00:12, 12.90s/it]100%|██████████| 12/12 [02:12<00:00, 12.22s/it]100%|██████████| 12/12 [02:12<00:00, 11.05s/it]
+torch.Size([1, 125696])
+>> gpt_gen_time: 16.97 seconds
+>> s2mel_time: 132.66 seconds
+>> bigvgan_time: 30.63 seconds
+>> Total inference time: 181.59 seconds
+>> Generated audio length: 5.70 seconds
+>> RTF: 31.8559
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s2_en.wav
+DURATION=5.7
+SIZE=251436
+TIME=181.6
+
+>> [16/74] lang=ZH chars=37 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_full_zh.wav
+>> starting inference...
+text after normalization: 司机坐在最前面,握着大方向盘.司机认真看着路,一路上保护每个小朋友的安全.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:31,  3.13s/it] 25%|██▌       | 3/12 [00:19<01:06,  7.40s/it] 33%|███▎      | 4/12 [00:32<01:14,  9.34s/it] 42%|████▏     | 5/12 [00:42<01:07,  9.65s/it] 50%|█████     | 6/12 [00:56<01:07, 11.20s/it] 58%|█████▊    | 7/12 [01:13<01:04, 12.90s/it] 67%|██████▋   | 8/12 [01:24<00:49, 12.46s/it] 75%|███████▌  | 9/12 [01:40<00:40, 13.61s/it] 83%|████████▎ | 10/12 [01:54<00:26, 13.46s/it] 92%|█████████▏| 11/12 [02:07<00:13, 13.54s/it]100%|██████████| 12/12 [02:20<00:00, 13.14s/it]100%|██████████| 12/12 [02:20<00:00, 11.67s/it]
+torch.Size([1, 202496])
+>> gpt_gen_time: 26.93 seconds
+>> s2mel_time: 140.07 seconds
+>> bigvgan_time: 42.67 seconds
+>> Total inference time: 211.45 seconds
+>> Generated audio length: 9.18 seconds
+>> RTF: 23.0245
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_full_zh.wav
+DURATION=9.183
+SIZE=405036
+TIME=211.5
+
+>> [17/74] lang=ZH chars=15 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s1_zh.wav
+>> starting inference...
+text after normalization: 司机坐在最前面,握着大方向盘.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:07<00:35,  3.59s/it] 25%|██▌       | 3/12 [00:20<01:10,  7.83s/it] 33%|███▎      | 4/12 [00:32<01:12,  9.12s/it] 42%|████▏     | 5/12 [00:43<01:09, 10.00s/it] 50%|█████     | 6/12 [00:55<01:03, 10.63s/it] 58%|█████▊    | 7/12 [01:07<00:54, 11.00s/it] 67%|██████▋   | 8/12 [01:20<00:46, 11.52s/it] 75%|███████▌  | 9/12 [01:31<00:34, 11.38s/it] 83%|████████▎ | 10/12 [01:45<00:24, 12.26s/it] 92%|█████████▏| 11/12 [01:57<00:12, 12.12s/it]100%|██████████| 12/12 [02:11<00:00, 12.66s/it]100%|██████████| 12/12 [02:11<00:00, 10.93s/it]
+torch.Size([1, 104704])
+>> gpt_gen_time: 18835.27 seconds
+>> s2mel_time: 131.32 seconds
+>> bigvgan_time: 25.16 seconds
+>> Total inference time: 18992.56 seconds
+>> Generated audio length: 4.75 seconds
+>> RTF: 3999.7123
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s1_zh.wav
+DURATION=4.748
+SIZE=209452
+TIME=18971.6
+
+>> [18/74] lang=ZH chars=22 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s2_zh.wav
+>> starting inference...
+text after normalization: 司机认真看着路,一路上保护每个小朋友的安全.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:19,  1.94s/it] 25%|██▌       | 3/12 [00:17<01:00,  6.71s/it] 33%|███▎      | 4/12 [00:30<01:11,  8.99s/it] 42%|████▏     | 5/12 [00:44<01:16, 10.95s/it] 50%|█████     | 6/12 [00:55<01:05, 10.94s/it] 58%|█████▊    | 7/12 [01:10<01:00, 12.04s/it] 67%|██████▋   | 8/12 [01:21<00:47, 11.97s/it] 75%|███████▌  | 9/12 [01:34<00:36, 12.23s/it] 83%|████████▎ | 10/12 [01:47<00:24, 12.31s/it] 92%|█████████▏| 11/12 [01:59<00:12, 12.24s/it]100%|██████████| 12/12 [02:10<00:00, 11.91s/it]100%|██████████| 12/12 [02:10<00:00, 10.86s/it]
+torch.Size([1, 121344])
+>> gpt_gen_time: 13.72 seconds
+>> s2mel_time: 130.40 seconds
+>> bigvgan_time: 29.32 seconds
+>> Total inference time: 175.10 seconds
+>> Generated audio length: 5.50 seconds
+>> RTF: 31.8174
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p02_driver_s2_zh.wav
+DURATION=5.503
+SIZE=242732
+TIME=175.1
+
+>> [19/74] lang=EN chars=129 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_full_en.wav
+>> starting inference...
+text after normalization: Inside,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:01<00:09,  1.03it/s] 25%|██▌       | 3/12 [00:10<00:36,  4.09s/it] 33%|███▎      | 4/12 [00:20<00:50,  6.34s/it] 42%|████▏     | 5/12 [00:29<00:51,  7.38s/it] 50%|█████     | 6/12 [00:37<00:45,  7.54s/it] 58%|█████▊    | 7/12 [00:47<00:41,  8.25s/it] 67%|██████▋   | 8/12 [00:55<00:32,  8.05s/it] 75%|███████▌  | 9/12 [01:04<00:25,  8.48s/it] 83%|████████▎ | 10/12 [01:13<00:17,  8.78s/it] 92%|█████████▏| 11/12 [01:21<00:08,  8.53s/it]100%|██████████| 12/12 [01:29<00:00,  8.33s/it]100%|██████████| 12/12 [01:29<00:00,  7.48s/it]
+torch.Size([1, 52736])
+>> gpt_gen_time: 6.28 seconds
+>> s2mel_time: 89.85 seconds
+>> bigvgan_time: 17.83 seconds
+>> Total inference time: 114.88 seconds
+>> Generated audio length: 2.39 seconds
+>> RTF: 48.0324
+>> starting inference...
+text after normalization: there are rows of cozy seats and a wide aisle down the middle.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:19,  1.93s/it] 25%|██▌       | 3/12 [00:15<00:55,  6.15s/it] 33%|███▎      | 4/12 [00:24<00:57,  7.19s/it] 42%|████▏     | 5/12 [00:36<01:01,  8.83s/it] 50%|█████     | 6/12 [00:48<00:59,  9.90s/it] 58%|█████▊    | 7/12 [01:00<00:51, 10.35s/it] 67%|██████▋   | 8/12 [01:13<00:45, 11.41s/it] 75%|███████▌  | 9/12 [01:24<00:33, 11.19s/it] 83%|████████▎ | 10/12 [01:34<00:21, 10.86s/it] 92%|█████████▏| 11/12 [01:44<00:10, 10.52s/it]100%|██████████| 12/12 [01:57<00:00, 11.40s/it]100%|██████████| 12/12 [01:57<00:00,  9.82s/it]
+torch.Size([1, 115200])
+>> gpt_gen_time: 11.86 seconds
+>> s2mel_time: 117.88 seconds
+>> bigvgan_time: 33.01 seconds
+>> Total inference time: 163.34 seconds
+>> Generated audio length: 5.22 seconds
+>> RTF: 31.2647
+>> starting inference...
+text after normalization: Friends sit together, talk,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:01<00:05,  1.70it/s] 25%|██▌       | 3/12 [00:12<00:43,  4.89s/it] 33%|███▎      | 4/12 [00:25<01:03,  7.95s/it] 42%|████▏     | 5/12 [00:35<01:01,  8.79s/it] 50%|█████     | 6/12 [00:46<00:58,  9.67s/it] 58%|█████▊    | 7/12 [00:58<00:50, 10.20s/it] 67%|██████▋   | 8/12 [01:10<00:43, 10.92s/it] 75%|███████▌  | 9/12 [01:21<00:32, 10.99s/it] 83%|████████▎ | 10/12 [01:30<00:20, 10.19s/it] 92%|█████████▏| 11/12 [01:41<00:10, 10.52s/it]100%|██████████| 12/12 [01:54<00:00, 11.24s/it]100%|██████████| 12/12 [01:54<00:00,  9.54s/it]
+torch.Size([1, 63232])
+>> gpt_gen_time: 7.66 seconds
+>> s2mel_time: 114.54 seconds
+>> bigvgan_time: 19.46 seconds
+>> Total inference time: 141.90 seconds
+>> Generated audio length: 2.87 seconds
+>> RTF: 49.4840
+>> starting inference...
+text after normalization: and sing on the way to school!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:31,  3.14s/it] 25%|██▌       | 3/12 [00:16<00:53,  5.98s/it] 33%|███▎      | 4/12 [00:26<01:01,  7.63s/it] 42%|████▏     | 5/12 [00:38<01:02,  8.95s/it] 50%|█████     | 6/12 [00:48<00:57,  9.59s/it] 58%|█████▊    | 7/12 [00:59<00:50, 10.03s/it] 67%|██████▋   | 8/12 [01:12<00:43, 10.84s/it] 75%|███████▌  | 9/12 [01:25<00:34, 11.37s/it] 83%|████████▎ | 10/12 [01:36<00:22, 11.35s/it] 92%|█████████▏| 11/12 [01:48<00:11, 11.70s/it]100%|██████████| 12/12 [01:58<00:00, 11.18s/it]100%|██████████| 12/12 [01:58<00:00,  9.90s/it]
+torch.Size([1, 66048])
+>> gpt_gen_time: 7.47 seconds
+>> s2mel_time: 118.89 seconds
+>> bigvgan_time: 20.20 seconds
+>> Total inference time: 147.52 seconds
+>> Generated audio length: 3.00 seconds
+>> RTF: 49.2483
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_full_en.wav
+DURATION=14.079
+SIZE=620936
+TIME=567.7
+
+>> [20/74] lang=EN chars=70 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s1_en.wav
+>> starting inference...
+text after normalization: Inside,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:22,  2.21s/it] 25%|██▌       | 3/12 [00:16<00:55,  6.12s/it] 33%|███▎      | 4/12 [00:29<01:10,  8.77s/it] 42%|████▏     | 5/12 [00:43<01:13, 10.52s/it] 50%|█████     | 6/12 [00:52<01:00, 10.12s/it] 58%|█████▊    | 7/12 [01:05<00:54, 10.95s/it] 67%|██████▋   | 8/12 [01:15<00:43, 10.84s/it] 75%|███████▌  | 9/12 [01:31<00:37, 12.34s/it] 83%|████████▎ | 10/12 [01:44<00:25, 12.60s/it] 92%|█████████▏| 11/12 [01:56<00:12, 12.41s/it]100%|██████████| 12/12 [02:08<00:00, 12.33s/it]100%|██████████| 12/12 [02:08<00:00, 10.72s/it]
+torch.Size([1, 63232])
+>> gpt_gen_time: 7.14 seconds
+>> s2mel_time: 128.67 seconds
+>> bigvgan_time: 20.06 seconds
+>> Total inference time: 156.63 seconds
+>> Generated audio length: 2.87 seconds
+>> RTF: 54.6192
+>> starting inference...
+text after normalization: there are rows of cozy seats and a wide aisle down the middle.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:19,  1.95s/it] 25%|██▌       | 3/12 [00:16<00:57,  6.39s/it] 33%|███▎      | 4/12 [00:28<01:07,  8.50s/it] 42%|████▏     | 5/12 [00:36<00:57,  8.24s/it] 50%|█████     | 6/12 [00:48<00:56,  9.47s/it] 58%|█████▊    | 7/12 [01:00<00:51, 10.28s/it] 67%|██████▋   | 8/12 [01:13<00:45, 11.25s/it] 75%|███████▌  | 9/12 [01:25<00:34, 11.41s/it] 83%|████████▎ | 10/12 [01:35<00:22, 11.15s/it] 92%|█████████▏| 11/12 [01:45<00:10, 10.75s/it]100%|██████████| 12/12 [01:57<00:00, 10.94s/it]100%|██████████| 12/12 [01:57<00:00,  9.76s/it]
+torch.Size([1, 110080])
+>> gpt_gen_time: 12.64 seconds
+>> s2mel_time: 117.23 seconds
+>> bigvgan_time: 27.07 seconds
+>> Total inference time: 158.00 seconds
+>> Generated audio length: 4.99 seconds
+>> RTF: 31.6497
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s1_en.wav
+DURATION=8.06
+SIZE=355488
+TIME=314.6
+
+>> [21/74] lang=EN chars=58 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s2_en.wav
+>> starting inference...
+text after normalization: Friends sit together, talk,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:13,  1.37s/it] 25%|██▌       | 3/12 [00:12<00:42,  4.76s/it] 33%|███▎      | 4/12 [00:24<01:01,  7.63s/it] 42%|████▏     | 5/12 [00:34<00:58,  8.39s/it] 50%|█████     | 6/12 [00:43<00:51,  8.65s/it] 58%|█████▊    | 7/12 [00:54<00:46,  9.38s/it] 67%|██████▋   | 8/12 [01:04<00:37,  9.42s/it] 75%|███████▌  | 9/12 [01:13<00:28,  9.34s/it] 83%|████████▎ | 10/12 [01:23<00:18,  9.48s/it] 92%|█████████▏| 11/12 [01:33<00:09,  9.87s/it]100%|██████████| 12/12 [01:44<00:00, 10.11s/it]100%|██████████| 12/12 [01:44<00:00,  8.71s/it]
+torch.Size([1, 61440])
+>> gpt_gen_time: 7.01 seconds
+>> s2mel_time: 104.52 seconds
+>> bigvgan_time: 19.46 seconds
+>> Total inference time: 131.60 seconds
+>> Generated audio length: 2.79 seconds
+>> RTF: 47.2309
+>> starting inference...
+text after normalization: and sing on the way to school!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:12,  1.28s/it] 25%|██▌       | 3/12 [00:14<00:52,  5.81s/it] 33%|███▎      | 4/12 [00:23<00:56,  7.04s/it] 42%|████▏     | 5/12 [00:37<01:04,  9.21s/it] 50%|█████     | 6/12 [00:47<00:58,  9.74s/it] 58%|█████▊    | 7/12 [00:59<00:52, 10.45s/it] 67%|██████▋   | 8/12 [01:10<00:41, 10.48s/it] 75%|███████▌  | 9/12 [01:20<00:31, 10.40s/it] 83%|████████▎ | 10/12 [01:31<00:21, 10.57s/it] 92%|█████████▏| 11/12 [01:42<00:10, 10.74s/it]100%|██████████| 12/12 [01:53<00:00, 10.84s/it]100%|██████████| 12/12 [01:53<00:00,  9.48s/it]
+torch.Size([1, 66816])
+>> gpt_gen_time: 7.61 seconds
+>> s2mel_time: 113.82 seconds
+>> bigvgan_time: 24.24 seconds
+>> Total inference time: 146.43 seconds
+>> Generated audio length: 3.03 seconds
+>> RTF: 48.3230
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s2_en.wav
+DURATION=6.017
+SIZE=265376
+TIME=278.0
+
+>> [22/74] lang=ZH chars=47 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_full_zh.wav
+>> starting inference...
+text after normalization: 车里有一排排舒服的座位,中间是一条宽宽的走道.小伙伴们坐在一起,聊天,唱歌,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:25,  2.56s/it] 25%|██▌       | 3/12 [00:18<01:03,  7.05s/it] 33%|███▎      | 4/12 [00:43<01:49, 13.70s/it] 42%|████▏     | 5/12 [01:06<01:58, 16.92s/it] 50%|█████     | 6/12 [01:18<01:32, 15.40s/it] 58%|█████▊    | 7/12 [01:28<01:08, 13.77s/it] 67%|██████▋   | 8/12 [01:41<00:53, 13.45s/it] 75%|███████▌  | 9/12 [01:54<00:39, 13.10s/it] 83%|████████▎ | 10/12 [02:15<00:31, 15.78s/it] 92%|█████████▏| 11/12 [02:20<00:12, 12.27s/it]100%|██████████| 12/12 [02:34<00:00, 12.89s/it]100%|██████████| 12/12 [02:34<00:00, 12.87s/it]
+torch.Size([1, 202496])
+>> gpt_gen_time: 24.14 seconds
+>> s2mel_time: 154.64 seconds
+>> bigvgan_time: 37.79 seconds
+>> Total inference time: 217.34 seconds
+>> Generated audio length: 9.18 seconds
+>> RTF: 23.6665
+>> starting inference...
+text after normalization: 开开心心去幼儿园!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:19,  1.92s/it] 25%|██▌       | 3/12 [00:15<00:53,  6.00s/it] 33%|███▎      | 4/12 [00:28<01:07,  8.41s/it] 42%|████▏     | 5/12 [00:39<01:07,  9.63s/it] 50%|█████     | 6/12 [00:52<01:03, 10.61s/it] 58%|█████▊    | 7/12 [01:05<00:56, 11.26s/it] 67%|██████▋   | 8/12 [01:17<00:46, 11.51s/it] 75%|███████▌  | 9/12 [01:28<00:34, 11.46s/it] 83%|████████▎ | 10/12 [01:40<00:22, 11.48s/it] 92%|█████████▏| 11/12 [01:48<00:10, 10.48s/it]100%|██████████| 12/12 [01:59<00:00, 10.63s/it]100%|██████████| 12/12 [01:59<00:00,  9.94s/it]
+torch.Size([1, 70400])
+>> gpt_gen_time: 7.99 seconds
+>> s2mel_time: 119.28 seconds
+>> bigvgan_time: 21.85 seconds
+>> Total inference time: 149.99 seconds
+>> Generated audio length: 3.19 seconds
+>> RTF: 46.9770
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_full_zh.wav
+DURATION=12.576
+SIZE=554656
+TIME=367.3
+
+>> [23/74] lang=ZH chars=23 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s1_zh.wav
+>> starting inference...
+text after normalization: 车里有一排排舒服的座位,中间是一条宽宽的走道.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:12,  1.29s/it] 25%|██▌       | 3/12 [00:15<00:54,  6.01s/it] 33%|███▎      | 4/12 [00:25<01:02,  7.76s/it] 42%|████▏     | 5/12 [00:36<01:00,  8.58s/it] 50%|█████     | 6/12 [00:48<00:58,  9.73s/it] 58%|█████▊    | 7/12 [00:56<00:47,  9.40s/it] 67%|██████▋   | 8/12 [01:06<00:37,  9.37s/it] 75%|███████▌  | 9/12 [01:15<00:27,  9.30s/it] 83%|████████▎ | 10/12 [01:24<00:18,  9.36s/it] 92%|█████████▏| 11/12 [01:34<00:09,  9.40s/it]100%|██████████| 12/12 [01:43<00:00,  9.50s/it]100%|██████████| 12/12 [01:43<00:00,  8.66s/it]
+torch.Size([1, 138240])
+>> gpt_gen_time: 14.75 seconds
+>> s2mel_time: 103.98 seconds
+>> bigvgan_time: 28.55 seconds
+>> Total inference time: 148.18 seconds
+>> Generated audio length: 6.27 seconds
+>> RTF: 23.6354
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s1_zh.wav
+DURATION=6.269
+SIZE=276524
+TIME=148.2
+
+>> [24/74] lang=ZH chars=24 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s2_zh.wav
+>> starting inference...
+text after normalization: 小伙伴们坐在一起,聊天,唱歌,开开心心去幼儿园!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:15,  1.60s/it] 25%|██▌       | 3/12 [00:12<00:41,  4.61s/it] 33%|███▎      | 4/12 [00:22<00:52,  6.61s/it] 42%|████▏     | 5/12 [00:34<01:00,  8.70s/it] 50%|█████     | 6/12 [00:44<00:54,  9.06s/it] 58%|█████▊    | 7/12 [00:53<00:44,  9.00s/it] 67%|██████▋   | 8/12 [01:02<00:36,  9.18s/it] 75%|███████▌  | 9/12 [01:15<00:30, 10.11s/it] 83%|████████▎ | 10/12 [01:26<00:21, 10.62s/it] 92%|█████████▏| 11/12 [01:35<00:10, 10.14s/it]100%|██████████| 12/12 [01:46<00:00, 10.33s/it]100%|██████████| 12/12 [01:46<00:00,  8.88s/it]
+torch.Size([1, 143360])
+>> gpt_gen_time: 14.93 seconds
+>> s2mel_time: 106.65 seconds
+>> bigvgan_time: 29.06 seconds
+>> Total inference time: 151.69 seconds
+>> Generated audio length: 6.50 seconds
+>> RTF: 23.3319
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p03_inside_s2_zh.wav
+DURATION=6.502
+SIZE=286764
+TIME=151.7
+
+>> [25/74] lang=EN chars=139 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_full_en.wav
+>> starting inference...
+text after normalization: Look at the wheels!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:10,  1.05s/it] 25%|██▌       | 3/12 [00:09<00:31,  3.50s/it] 33%|███▎      | 4/12 [00:18<00:44,  5.62s/it] 42%|████▏     | 5/12 [00:28<00:51,  7.36s/it] 50%|█████     | 6/12 [00:37<00:47,  7.93s/it] 58%|█████▊    | 7/12 [00:45<00:38,  7.69s/it] 67%|██████▋   | 8/12 [00:54<00:32,  8.14s/it] 75%|███████▌  | 9/12 [01:03<00:25,  8.53s/it] 83%|████████▎ | 10/12 [01:12<00:16,  8.49s/it] 92%|█████████▏| 11/12 [01:21<00:08,  8.78s/it]100%|██████████| 12/12 [01:31<00:00,  9.10s/it]100%|██████████| 12/12 [01:31<00:00,  7.61s/it]
+torch.Size([1, 55296])
+>> gpt_gen_time: 6.58 seconds
+>> s2mel_time: 91.32 seconds
+>> bigvgan_time: 17.58 seconds
+>> Total inference time: 116.43 seconds
+>> Generated audio length: 2.51 seconds
+>> RTF: 46.4280
+>> starting inference...
+text after normalization: Thick black tires grip the road,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:10,  1.06s/it] 25%|██▌       | 3/12 [00:11<00:42,  4.72s/it] 33%|███▎      | 4/12 [00:21<00:51,  6.49s/it] 42%|████▏     | 5/12 [00:30<00:52,  7.52s/it] 50%|█████     | 6/12 [00:38<00:45,  7.59s/it] 58%|█████▊    | 7/12 [00:49<00:43,  8.73s/it] 67%|██████▋   | 8/12 [01:00<00:37,  9.34s/it] 75%|███████▌  | 9/12 [01:10<00:28,  9.55s/it] 83%|████████▎ | 10/12 [01:18<00:18,  9.23s/it] 92%|█████████▏| 11/12 [01:27<00:08,  8.91s/it]100%|██████████| 12/12 [01:36<00:00,  9.14s/it]100%|██████████| 12/12 [01:36<00:00,  8.07s/it]
+torch.Size([1, 72192])
+>> gpt_gen_time: 7.68 seconds
+>> s2mel_time: 96.87 seconds
+>> bigvgan_time: 21.85 seconds
+>> Total inference time: 127.18 seconds
+>> Generated audio length: 3.27 seconds
+>> RTF: 38.8462
+>> starting inference...
+text after normalization: and shiny hubcaps spin round and round.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:23,  2.37s/it] 25%|██▌       | 3/12 [00:15<00:53,  5.99s/it] 33%|███▎      | 4/12 [00:26<01:03,  7.93s/it] 42%|████▏     | 5/12 [00:41<01:12, 10.36s/it] 50%|█████     | 6/12 [00:52<01:02, 10.38s/it] 58%|█████▊    | 7/12 [01:05<00:55, 11.13s/it] 67%|██████▋   | 8/12 [01:15<00:43, 10.91s/it] 75%|███████▌  | 9/12 [01:27<00:33, 11.33s/it] 83%|████████▎ | 10/12 [01:39<00:23, 11.53s/it] 92%|█████████▏| 11/12 [01:52<00:11, 11.92s/it]100%|██████████| 12/12 [02:02<00:00, 11.47s/it]100%|██████████| 12/12 [02:02<00:00, 10.25s/it]
+torch.Size([1, 95744])
+>> gpt_gen_time: 10.20 seconds
+>> s2mel_time: 123.02 seconds
+>> bigvgan_time: 25.05 seconds
+>> Total inference time: 159.13 seconds
+>> Generated audio length: 4.34 seconds
+>> RTF: 36.6474
+>> starting inference...
+text after normalization: The wheels roll the bus all the way to school.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:23,  2.32s/it] 25%|██▌       | 3/12 [00:13<00:47,  5.25s/it] 33%|███▎      | 4/12 [00:23<00:55,  6.96s/it] 42%|████▏     | 5/12 [00:32<00:53,  7.61s/it] 50%|█████     | 6/12 [00:42<00:50,  8.50s/it] 58%|█████▊    | 7/12 [00:52<00:44,  8.86s/it] 67%|██████▋   | 8/12 [01:01<00:35,  8.90s/it] 75%|███████▌  | 9/12 [01:11<00:27,  9.20s/it] 83%|████████▎ | 10/12 [01:20<00:18,  9.04s/it] 92%|█████████▏| 11/12 [01:32<00:10, 10.19s/it]100%|██████████| 12/12 [01:41<00:00,  9.65s/it]100%|██████████| 12/12 [01:41<00:00,  8.44s/it]
+torch.Size([1, 92416])
+>> gpt_gen_time: 10.40 seconds
+>> s2mel_time: 101.37 seconds
+>> bigvgan_time: 20.28 seconds
+>> Total inference time: 133.12 seconds
+>> Generated audio length: 4.19 seconds
+>> RTF: 31.7619
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_full_en.wav
+DURATION=14.915
+SIZE=657800
+TIME=535.9
+
+>> [26/74] lang=EN chars=19 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s1_en.wav
+>> starting inference...
+text after normalization: Look at the wheels!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:16,  1.65s/it] 25%|██▌       | 3/12 [00:12<00:42,  4.70s/it] 33%|███▎      | 4/12 [00:20<00:48,  6.10s/it] 42%|████▏     | 5/12 [00:29<00:49,  7.08s/it] 50%|█████     | 6/12 [00:40<00:49,  8.21s/it] 58%|█████▊    | 7/12 [00:47<00:39,  7.96s/it] 67%|██████▋   | 8/12 [00:58<00:35,  8.88s/it] 75%|███████▌  | 9/12 [01:06<00:26,  8.76s/it] 83%|████████▎ | 10/12 [01:16<00:17,  8.92s/it] 92%|█████████▏| 11/12 [01:26<00:09,  9.20s/it]100%|██████████| 12/12 [01:36<00:00,  9.48s/it]100%|██████████| 12/12 [01:36<00:00,  8.02s/it]
+torch.Size([1, 58880])
+>> gpt_gen_time: 6.64 seconds
+>> s2mel_time: 96.24 seconds
+>> bigvgan_time: 19.43 seconds
+>> Total inference time: 123.01 seconds
+>> Generated audio length: 2.67 seconds
+>> RTF: 46.0662
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s1_en.wav
+DURATION=2.67
+SIZE=117804
+TIME=123.0
+
+>> [27/74] lang=EN chars=72 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s2_en.wav
+>> starting inference...
+text after normalization: Thick black tires grip the road,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:22,  2.23s/it] 25%|██▌       | 3/12 [00:12<00:43,  4.84s/it] 33%|███▎      | 4/12 [00:22<00:53,  6.74s/it] 42%|████▏     | 5/12 [00:32<00:54,  7.79s/it] 50%|█████     | 6/12 [00:42<00:51,  8.58s/it] 58%|█████▊    | 7/12 [00:51<00:43,  8.67s/it] 67%|██████▋   | 8/12 [01:00<00:34,  8.68s/it] 75%|███████▌  | 9/12 [01:08<00:25,  8.59s/it] 83%|████████▎ | 10/12 [01:18<00:17,  8.88s/it] 92%|█████████▏| 11/12 [01:26<00:08,  8.70s/it]100%|██████████| 12/12 [01:34<00:00,  8.50s/it]100%|██████████| 12/12 [01:34<00:00,  7.88s/it]
+torch.Size([1, 72960])
+>> gpt_gen_time: 7.75 seconds
+>> s2mel_time: 94.66 seconds
+>> bigvgan_time: 18.46 seconds
+>> Total inference time: 121.37 seconds
+>> Generated audio length: 3.31 seconds
+>> RTF: 36.6817
+>> starting inference...
+text after normalization: and shiny hubcaps spin round and round.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:11,  1.18s/it] 25%|██▌       | 3/12 [00:13<00:46,  5.18s/it] 33%|███▎      | 4/12 [00:23<00:56,  7.08s/it] 42%|████▏     | 5/12 [00:34<00:59,  8.44s/it] 50%|█████     | 6/12 [00:44<00:54,  9.14s/it] 58%|█████▊    | 7/12 [00:54<00:46,  9.27s/it] 67%|██████▋   | 8/12 [01:05<00:39,  9.87s/it] 75%|███████▌  | 9/12 [01:18<00:32, 10.69s/it] 83%|████████▎ | 10/12 [01:31<00:23, 11.54s/it] 92%|█████████▏| 11/12 [01:42<00:11, 11.19s/it]100%|██████████| 12/12 [01:52<00:00, 11.10s/it]100%|██████████| 12/12 [01:52<00:00,  9.41s/it]
+torch.Size([1, 80896])
+>> gpt_gen_time: 8.76 seconds
+>> s2mel_time: 113.00 seconds
+>> bigvgan_time: 20.85 seconds
+>> Total inference time: 143.71 seconds
+>> Generated audio length: 3.67 seconds
+>> RTF: 39.1713
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s2_en.wav
+DURATION=7.178
+SIZE=316576
+TIME=265.1
+
+>> [28/74] lang=EN chars=46 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s3_en.wav
+>> starting inference...
+text after normalization: The wheels roll the bus all the way to school.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:18,  1.86s/it] 25%|██▌       | 3/12 [00:12<00:43,  4.89s/it] 33%|███▎      | 4/12 [00:21<00:50,  6.27s/it] 42%|████▏     | 5/12 [00:30<00:49,  7.14s/it] 50%|█████     | 6/12 [00:40<00:49,  8.25s/it] 58%|█████▊    | 7/12 [00:51<00:44,  8.92s/it] 67%|██████▋   | 8/12 [01:01<00:37,  9.40s/it] 75%|███████▌  | 9/12 [01:08<00:26,  8.74s/it] 83%|████████▎ | 10/12 [01:18<00:18,  9.17s/it] 92%|█████████▏| 11/12 [01:28<00:09,  9.26s/it]100%|██████████| 12/12 [01:37<00:00,  9.18s/it]100%|██████████| 12/12 [01:37<00:00,  8.11s/it]
+torch.Size([1, 88832])
+>> gpt_gen_time: 9.23 seconds
+>> s2mel_time: 97.40 seconds
+>> bigvgan_time: 21.38 seconds
+>> Total inference time: 128.43 seconds
+>> Generated audio length: 4.03 seconds
+>> RTF: 31.8798
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s3_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s3_en.wav
+DURATION=4.029
+SIZE=177708
+TIME=128.4
+
+>> [29/74] lang=ZH chars=39 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_full_zh.wav
+>> starting inference...
+text after normalization: 看车轮!厚厚的黑色轮胎抓住路面,亮亮的轮毂转呀转.车轮带着巴士一路开到幼儿园.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:01<00:05,  1.70it/s] 25%|██▌       | 3/12 [00:11<00:42,  4.68s/it] 33%|███▎      | 4/12 [00:25<01:04,  8.07s/it] 42%|████▏     | 5/12 [00:38<01:07,  9.71s/it] 50%|█████     | 6/12 [00:49<01:00, 10.13s/it] 58%|█████▊    | 7/12 [01:04<00:58, 11.67s/it] 67%|██████▋   | 8/12 [01:16<00:48, 12.05s/it] 75%|███████▌  | 9/12 [01:28<00:36, 12.03s/it] 83%|████████▎ | 10/12 [01:43<00:25, 12.73s/it] 92%|█████████▏| 11/12 [01:55<00:12, 12.71s/it]100%|██████████| 12/12 [02:08<00:00, 12.63s/it]100%|██████████| 12/12 [02:08<00:00, 10.69s/it]
+torch.Size([1, 198144])
+>> gpt_gen_time: 22.47 seconds
+>> s2mel_time: 128.41 seconds
+>> bigvgan_time: 38.74 seconds
+>> Total inference time: 190.70 seconds
+>> Generated audio length: 8.99 seconds
+>> RTF: 21.2211
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_full_zh.wav
+DURATION=8.986
+SIZE=396332
+TIME=190.7
+
+>> [30/74] lang=ZH chars=4 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s1_zh.wav
+>> starting inference...
+text after normalization: 看车轮!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:31,  3.16s/it] 25%|██▌       | 3/12 [00:12<00:38,  4.33s/it] 33%|███▎      | 4/12 [00:18<00:40,  5.10s/it] 42%|████▏     | 5/12 [00:25<00:38,  5.52s/it] 50%|█████     | 6/12 [00:32<00:36,  6.04s/it] 58%|█████▊    | 7/12 [00:39<00:32,  6.58s/it] 67%|██████▋   | 8/12 [00:49<00:29,  7.43s/it] 75%|███████▌  | 9/12 [00:59<00:24,  8.27s/it] 83%|████████▎ | 10/12 [01:08<00:17,  8.68s/it] 92%|█████████▏| 11/12 [01:17<00:08,  8.82s/it]100%|██████████| 12/12 [01:28<00:00,  9.41s/it]100%|██████████| 12/12 [01:28<00:00,  7.39s/it]
+torch.Size([1, 44032])
+>> gpt_gen_time: 5.93 seconds
+>> s2mel_time: 88.79 seconds
+>> bigvgan_time: 20.62 seconds
+>> Total inference time: 115.88 seconds
+>> Generated audio length: 2.00 seconds
+>> RTF: 58.0281
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s1_zh.wav
+DURATION=1.997
+SIZE=88108
+TIME=115.9
+
+>> [31/74] lang=ZH chars=21 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s2_zh.wav
+>> starting inference...
+text after normalization: 厚厚的黑色轮胎抓住路面,亮亮的轮毂转呀转.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:07<00:37,  3.79s/it] 25%|██▌       | 3/12 [00:21<01:10,  7.85s/it] 33%|███▎      | 4/12 [00:31<01:09,  8.75s/it] 42%|████▏     | 5/12 [00:42<01:08,  9.73s/it] 50%|█████     | 6/12 [01:00<01:13, 12.26s/it] 58%|█████▊    | 7/12 [01:15<01:05, 13.08s/it] 67%|██████▋   | 8/12 [01:31<00:57, 14.27s/it] 75%|███████▌  | 9/12 [01:42<00:39, 13.16s/it] 83%|████████▎ | 10/12 [01:58<00:28, 14.12s/it] 92%|█████████▏| 11/12 [02:13<00:14, 14.25s/it]100%|██████████| 12/12 [02:28<00:00, 14.45s/it]100%|██████████| 12/12 [02:28<00:00, 12.37s/it]
+torch.Size([1, 125696])
+>> gpt_gen_time: 13.90 seconds
+>> s2mel_time: 148.52 seconds
+>> bigvgan_time: 30.68 seconds
+>> Total inference time: 193.66 seconds
+>> Generated audio length: 5.70 seconds
+>> RTF: 33.9725
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s2_zh.wav
+DURATION=5.7
+SIZE=251436
+TIME=193.7
+
+>> [32/74] lang=ZH chars=14 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s3_zh.wav
+>> starting inference...
+text after normalization: 车轮带着巴士一路开到幼儿园.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:12,  1.20s/it] 25%|██▌       | 3/12 [00:12<00:45,  5.03s/it] 33%|███▎      | 4/12 [00:21<00:49,  6.23s/it] 42%|████▏     | 5/12 [00:34<01:00,  8.68s/it] 50%|█████     | 6/12 [00:44<00:54,  9.04s/it] 58%|█████▊    | 7/12 [00:52<00:44,  8.91s/it] 67%|██████▋   | 8/12 [01:01<00:35,  8.87s/it] 75%|███████▌  | 9/12 [01:10<00:27,  9.01s/it] 83%|████████▎ | 10/12 [01:18<00:17,  8.64s/it] 92%|█████████▏| 11/12 [01:27<00:08,  8.61s/it]100%|██████████| 12/12 [01:36<00:00,  8.97s/it]100%|██████████| 12/12 [01:36<00:00,  8.08s/it]
+torch.Size([1, 93184])
+>> gpt_gen_time: 11.01 seconds
+>> s2mel_time: 97.05 seconds
+>> bigvgan_time: 20.44 seconds
+>> Total inference time: 129.33 seconds
+>> Generated audio length: 4.23 seconds
+>> RTF: 30.6026
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s3_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p04_wheels_s3_zh.wav
+DURATION=4.226
+SIZE=186412
+TIME=129.3
+
+>> [33/74] lang=EN chars=134 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_full_en.wav
+>> starting inference...
+text after normalization: When the bus stops,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:18,  1.84s/it] 25%|██▌       | 3/12 [00:15<00:53,  5.99s/it] 33%|███▎      | 4/12 [00:24<00:58,  7.28s/it] 42%|████▏     | 5/12 [00:44<01:20, 11.56s/it] 50%|█████     | 6/12 [00:46<00:50,  8.37s/it] 58%|█████▊    | 7/12 [00:57<00:46,  9.26s/it] 67%|██████▋   | 8/12 [01:09<00:40, 10.06s/it] 75%|███████▌  | 9/12 [01:24<00:34, 11.63s/it] 83%|████████▎ | 10/12 [01:34<00:22, 11.25s/it] 92%|█████████▏| 11/12 [01:48<00:11, 11.98s/it]100%|██████████| 12/12 [02:02<00:00, 12.53s/it]100%|██████████| 12/12 [02:02<00:00, 10.19s/it]
+torch.Size([1, 63232])
+>> gpt_gen_time: 7.10 seconds
+>> s2mel_time: 122.37 seconds
+>> bigvgan_time: 22.12 seconds
+>> Total inference time: 152.45 seconds
+>> Generated audio length: 2.87 seconds
+>> RTF: 53.1609
+>> starting inference...
+text after normalization: the red stop sign swings out and the yellow lights flash.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:10,  1.09s/it] 25%|██▌       | 3/12 [00:12<00:44,  4.99s/it] 33%|███▎      | 4/12 [00:21<00:51,  6.48s/it] 42%|████▏     | 5/12 [00:31<00:54,  7.76s/it] 50%|█████     | 6/12 [00:42<00:53,  8.85s/it] 58%|█████▊    | 7/12 [00:52<00:45,  9.01s/it] 67%|██████▋   | 8/12 [01:01<00:35,  8.99s/it] 75%|███████▌  | 9/12 [01:11<00:28,  9.52s/it] 83%|████████▎ | 10/12 [01:22<00:19,  9.92s/it] 92%|█████████▏| 11/12 [01:30<00:09,  9.43s/it]100%|██████████| 12/12 [01:40<00:00,  9.59s/it]100%|██████████| 12/12 [01:40<00:00,  8.41s/it]
+torch.Size([1, 117760])
+>> gpt_gen_time: 12.36 seconds
+>> s2mel_time: 100.96 seconds
+>> bigvgan_time: 27.97 seconds
+>> Total inference time: 142.45 seconds
+>> Generated audio length: 5.34 seconds
+>> RTF: 26.6729
+>> starting inference...
+text after normalization: Cars must wait.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:18,  1.84s/it] 25%|██▌       | 3/12 [00:12<00:41,  4.58s/it] 33%|███▎      | 4/12 [00:19<00:46,  5.75s/it] 42%|████▏     | 5/12 [00:28<00:48,  6.87s/it] 50%|█████     | 6/12 [00:35<00:40,  6.73s/it] 58%|█████▊    | 7/12 [00:44<00:37,  7.56s/it] 67%|██████▋   | 8/12 [00:51<00:30,  7.53s/it] 75%|███████▌  | 9/12 [00:59<00:22,  7.56s/it] 83%|████████▎ | 10/12 [01:08<00:15,  7.99s/it] 92%|█████████▏| 11/12 [01:17<00:08,  8.23s/it]100%|██████████| 12/12 [01:26<00:00,  8.54s/it]100%|██████████| 12/12 [01:26<00:00,  7.22s/it]
+torch.Size([1, 52736])
+>> gpt_gen_time: 6.18 seconds
+>> s2mel_time: 86.62 seconds
+>> bigvgan_time: 19.21 seconds
+>> Total inference time: 112.81 seconds
+>> Generated audio length: 2.39 seconds
+>> RTF: 47.1693
+>> starting inference...
+text after normalization: Then children can cross the road safely.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:28,  2.83s/it] 25%|██▌       | 3/12 [00:16<00:57,  6.37s/it] 33%|███▎      | 4/12 [00:28<01:07,  8.47s/it] 42%|████▏     | 5/12 [00:42<01:10, 10.06s/it] 50%|█████     | 6/12 [00:54<01:05, 10.97s/it] 58%|█████▊    | 7/12 [01:08<00:58, 11.76s/it] 67%|██████▋   | 8/12 [01:20<00:47, 11.93s/it] 75%|███████▌  | 9/12 [01:33<00:36, 12.19s/it] 83%|████████▎ | 10/12 [01:44<00:23, 11.77s/it] 92%|█████████▏| 11/12 [01:57<00:12, 12.20s/it]100%|██████████| 12/12 [02:07<00:00, 11.70s/it]100%|██████████| 12/12 [02:07<00:00, 10.65s/it]
+torch.Size([1, 86272])
+>> gpt_gen_time: 9.90 seconds
+>> s2mel_time: 127.95 seconds
+>> bigvgan_time: 22.55 seconds
+>> Total inference time: 161.14 seconds
+>> Generated audio length: 3.91 seconds
+>> RTF: 41.1863
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_full_en.wav
+DURATION=15.112
+SIZE=666504
+TIME=568.9
+
+>> [34/74] lang=EN chars=77 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s1_en.wav
+>> starting inference...
+text after normalization: When the bus stops,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:29,  2.94s/it] 25%|██▌       | 3/12 [00:16<00:55,  6.19s/it] 33%|███▎      | 4/12 [00:28<01:07,  8.46s/it] 42%|████▏     | 5/12 [00:42<01:10, 10.14s/it] 50%|█████     | 6/12 [00:53<01:03, 10.56s/it] 58%|█████▊    | 7/12 [01:02<00:50, 10.18s/it] 67%|██████▋   | 8/12 [01:11<00:38,  9.70s/it] 75%|███████▌  | 9/12 [01:23<00:31, 10.43s/it] 83%|████████▎ | 10/12 [01:33<00:20, 10.17s/it] 92%|█████████▏| 11/12 [01:45<00:10, 10.79s/it]100%|██████████| 12/12 [01:58<00:00, 11.33s/it]100%|██████████| 12/12 [01:58<00:00,  9.84s/it]
+torch.Size([1, 67584])
+>> gpt_gen_time: 7.54 seconds
+>> s2mel_time: 118.07 seconds
+>> bigvgan_time: 23.88 seconds
+>> Total inference time: 149.96 seconds
+>> Generated audio length: 3.07 seconds
+>> RTF: 48.9245
+>> starting inference...
+text after normalization: the red stop sign swings out and the yellow lights flash.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:24,  2.42s/it] 25%|██▌       | 3/12 [00:17<01:01,  6.87s/it] 33%|███▎      | 4/12 [00:27<01:02,  7.80s/it] 42%|████▏     | 5/12 [00:38<01:03,  9.13s/it] 50%|█████     | 6/12 [00:50<01:00, 10.06s/it] 58%|█████▊    | 7/12 [01:05<00:57, 11.41s/it] 67%|██████▋   | 8/12 [01:15<00:44, 11.07s/it] 75%|███████▌  | 9/12 [01:25<00:31, 10.61s/it] 83%|████████▎ | 10/12 [01:35<00:20, 10.44s/it] 92%|█████████▏| 11/12 [01:47<00:11, 11.03s/it]100%|██████████| 12/12 [01:58<00:00, 11.14s/it]100%|██████████| 12/12 [01:58<00:00,  9.90s/it]
+torch.Size([1, 108288])
+>> gpt_gen_time: 11.97 seconds
+>> s2mel_time: 118.92 seconds
+>> bigvgan_time: 22.31 seconds
+>> Total inference time: 154.52 seconds
+>> Generated audio length: 4.91 seconds
+>> RTF: 31.4647
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s1_en.wav
+DURATION=8.176
+SIZE=360608
+TIME=304.5
+
+>> [35/74] lang=EN chars=15 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s2_en.wav
+>> starting inference...
+text after normalization: Cars must wait.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:01<00:09,  1.05it/s] 25%|██▌       | 3/12 [00:11<00:41,  4.60s/it] 33%|███▎      | 4/12 [00:19<00:47,  5.98s/it] 42%|████▏     | 5/12 [00:28<00:48,  6.90s/it] 50%|█████     | 6/12 [00:36<00:44,  7.34s/it] 58%|█████▊    | 7/12 [00:45<00:39,  7.93s/it] 67%|██████▋   | 8/12 [00:54<00:32,  8.09s/it] 75%|███████▌  | 9/12 [01:03<00:25,  8.33s/it] 83%|████████▎ | 10/12 [01:11<00:16,  8.37s/it] 92%|█████████▏| 11/12 [01:19<00:08,  8.26s/it]100%|██████████| 12/12 [01:28<00:00,  8.51s/it]100%|██████████| 12/12 [01:28<00:00,  7.40s/it]
+torch.Size([1, 57088])
+>> gpt_gen_time: 6.67 seconds
+>> s2mel_time: 88.83 seconds
+>> bigvgan_time: 17.78 seconds
+>> Total inference time: 113.86 seconds
+>> Generated audio length: 2.59 seconds
+>> RTF: 43.9792
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s2_en.wav
+DURATION=2.589
+SIZE=114220
+TIME=113.9
+
+>> [36/74] lang=EN chars=40 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s3_en.wav
+>> starting inference...
+text after normalization: Then children can cross the road safely.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:15,  1.52s/it] 25%|██▌       | 3/12 [00:12<00:44,  4.92s/it] 33%|███▎      | 4/12 [00:21<00:50,  6.31s/it] 42%|████▏     | 5/12 [00:33<00:58,  8.41s/it] 50%|█████     | 6/12 [00:42<00:51,  8.58s/it] 58%|█████▊    | 7/12 [00:51<00:43,  8.71s/it] 67%|██████▋   | 8/12 [01:00<00:35,  8.80s/it] 75%|███████▌  | 9/12 [01:10<00:27,  9.26s/it] 83%|████████▎ | 10/12 [01:20<00:18,  9.33s/it] 92%|█████████▏| 11/12 [01:31<00:09,  9.76s/it]100%|██████████| 12/12 [01:41<00:00,  9.85s/it]100%|██████████| 12/12 [01:41<00:00,  8.43s/it]
+torch.Size([1, 91392])
+>> gpt_gen_time: 9.15 seconds
+>> s2mel_time: 101.21 seconds
+>> bigvgan_time: 20.25 seconds
+>> Total inference time: 131.75 seconds
+>> Generated audio length: 4.14 seconds
+>> RTF: 31.7865
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s3_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s3_en.wav
+DURATION=4.145
+SIZE=182828
+TIME=131.8
+
+>> [37/74] lang=ZH chars=44 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_full_zh.wav
+>> starting inference...
+text after normalization: 巴士一停下,红色停车牌就伸出来,黄灯一闪一闪.小汽车必须等着.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:08<00:41,  4.16s/it] 25%|██▌       | 3/12 [00:22<01:13,  8.15s/it] 33%|███▎      | 4/12 [00:38<01:30, 11.33s/it] 42%|████▏     | 5/12 [00:50<01:20, 11.47s/it] 50%|█████     | 6/12 [01:08<01:21, 13.58s/it] 58%|█████▊    | 7/12 [01:21<01:07, 13.51s/it] 67%|██████▋   | 8/12 [01:36<00:55, 13.85s/it] 75%|███████▌  | 9/12 [01:47<00:39, 13.12s/it] 83%|████████▎ | 10/12 [02:05<00:28, 14.49s/it] 92%|█████████▏| 11/12 [02:16<00:13, 13.47s/it]100%|██████████| 12/12 [02:30<00:00, 13.78s/it]100%|██████████| 12/12 [02:30<00:00, 12.58s/it]
+torch.Size([1, 180480])
+>> gpt_gen_time: 19.18 seconds
+>> s2mel_time: 151.06 seconds
+>> bigvgan_time: 34.40 seconds
+>> Total inference time: 205.72 seconds
+>> Generated audio length: 8.19 seconds
+>> RTF: 25.1341
+>> starting inference...
+text after normalization: 这样小朋友才能安全过马路.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:18,  1.88s/it] 25%|██▌       | 3/12 [00:20<01:10,  7.89s/it] 33%|███▎      | 4/12 [00:25<00:54,  6.85s/it] 42%|████▏     | 5/12 [00:36<00:58,  8.36s/it] 50%|█████     | 6/12 [00:49<00:59,  9.98s/it] 58%|█████▊    | 7/12 [01:01<00:53, 10.70s/it] 67%|██████▋   | 8/12 [01:13<00:43, 10.86s/it] 75%|███████▌  | 9/12 [01:25<00:33, 11.24s/it] 83%|████████▎ | 10/12 [01:43<00:26, 13.36s/it] 92%|█████████▏| 11/12 [01:47<00:10, 10.70s/it]100%|██████████| 12/12 [01:57<00:00, 10.42s/it]100%|██████████| 12/12 [01:57<00:00,  9.81s/it]
+torch.Size([1, 88064])
+>> gpt_gen_time: 10.10 seconds
+>> s2mel_time: 117.72 seconds
+>> bigvgan_time: 23.35 seconds
+>> Total inference time: 152.75 seconds
+>> Generated audio length: 3.99 seconds
+>> RTF: 38.2459
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_full_zh.wav
+DURATION=12.379
+SIZE=545952
+TIME=358.5
+
+>> [38/74] lang=ZH chars=23 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s1_zh.wav
+>> starting inference...
+text after normalization: 巴士一停下,红色停车牌就伸出来,黄灯一闪一闪.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:07<00:37,  3.72s/it] 25%|██▌       | 3/12 [00:21<01:11,  7.96s/it] 33%|███▎      | 4/12 [00:33<01:15,  9.47s/it] 42%|████▏     | 5/12 [00:47<01:16, 10.94s/it] 50%|█████     | 6/12 [01:00<01:11, 11.87s/it] 58%|█████▊    | 7/12 [01:14<01:01, 12.38s/it] 67%|██████▋   | 8/12 [01:36<01:01, 15.48s/it] 75%|███████▌  | 9/12 [01:39<00:34, 11.62s/it] 83%|████████▎ | 10/12 [01:51<00:23, 11.63s/it] 92%|█████████▏| 11/12 [02:01<00:11, 11.19s/it]100%|██████████| 12/12 [02:16<00:00, 12.43s/it]100%|██████████| 12/12 [02:16<00:00, 11.38s/it]
+torch.Size([1, 123136])
+>> gpt_gen_time: 13.99 seconds
+>> s2mel_time: 136.66 seconds
+>> bigvgan_time: 28.83 seconds
+>> Total inference time: 180.99 seconds
+>> Generated audio length: 5.58 seconds
+>> RTF: 32.4108
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s1_zh.wav
+DURATION=5.584
+SIZE=246316
+TIME=181.0
+
+>> [39/74] lang=ZH chars=8 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s2_zh.wav
+>> starting inference...
+text after normalization: 小汽车必须等着.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:13,  1.36s/it] 25%|██▌       | 3/12 [00:13<00:46,  5.16s/it] 33%|███▎      | 4/12 [00:23<00:56,  7.00s/it] 42%|████▏     | 5/12 [00:34<00:58,  8.31s/it] 50%|█████     | 6/12 [00:43<00:51,  8.52s/it] 58%|█████▊    | 7/12 [00:51<00:42,  8.59s/it] 67%|██████▋   | 8/12 [01:02<00:37,  9.28s/it] 75%|███████▌  | 9/12 [01:12<00:28,  9.64s/it] 83%|████████▎ | 10/12 [01:21<00:18,  9.43s/it] 92%|█████████▏| 11/12 [01:32<00:09,  9.65s/it]100%|██████████| 12/12 [01:41<00:00,  9.48s/it]100%|██████████| 12/12 [01:41<00:00,  8.43s/it]
+torch.Size([1, 61440])
+>> gpt_gen_time: 7.14 seconds
+>> s2mel_time: 101.21 seconds
+>> bigvgan_time: 20.62 seconds
+>> Total inference time: 130.15 seconds
+>> Generated audio length: 2.79 seconds
+>> RTF: 46.7086
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s2_zh.wav
+DURATION=2.786
+SIZE=122924
+TIME=130.2
+
+>> [40/74] lang=ZH chars=13 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s3_zh.wav
+>> starting inference...
+text after normalization: 这样小朋友才能安全过马路.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:15,  1.54s/it] 25%|██▌       | 3/12 [00:12<00:44,  4.95s/it] 33%|███▎      | 4/12 [00:23<00:55,  6.94s/it] 42%|████▏     | 5/12 [00:33<00:58,  8.29s/it] 50%|█████     | 6/12 [00:44<00:54,  9.14s/it] 58%|█████▊    | 7/12 [00:53<00:45,  9.00s/it] 67%|██████▋   | 8/12 [01:04<00:38,  9.62s/it] 75%|███████▌  | 9/12 [01:14<00:29,  9.80s/it] 83%|████████▎ | 10/12 [01:25<00:20, 10.22s/it] 92%|█████████▏| 11/12 [01:34<00:09,  9.78s/it]100%|██████████| 12/12 [01:44<00:00,  9.79s/it]100%|██████████| 12/12 [01:44<00:00,  8.70s/it]
+torch.Size([1, 89600])
+>> gpt_gen_time: 10.33 seconds
+>> s2mel_time: 104.44 seconds
+>> bigvgan_time: 21.22 seconds
+>> Total inference time: 137.13 seconds
+>> Generated audio length: 4.06 seconds
+>> RTF: 33.7457
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s3_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p05_stopsign_s3_zh.wav
+DURATION=4.063
+SIZE=179244
+TIME=137.1
+
+>> [41/74] lang=EN chars=129 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_full_en.wav
+>> starting inference...
+text after normalization: At the kindergarten,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s]
+===== run 2026-09-11 21:20:26 | 74 items =====
+>> loading IndexTTS-2.5 (chunk=40 steps=12 cfg=0.7 serial_cfg=False) ...
+GPT2InferenceModel has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+W0911 21:21:14.341000 20932 .venv\Lib\site-packages\torch\utils\cpp_extension.py:466] Error checking compiler version for cl: [WinError 2] 系统找不到指定的文件。
+>> Low-VRAM mode enabled (4.0 GB < 10 GB), text will be split into chunks of 40 chars
+>> QwenEmotion not loaded (use_qwen_emo=False)
+>> GPT weights restored from: checkpoints\gpt.pth
+>> Failed to load custom CUDA kernel for BigVGAN. Falling back to torch.
+OSError('CUDA_HOME environment variable is not set. Please set it to your CUDA install root.')
+>> w2v-bert feature extractor on: cpu
+>> semantic_codec weights restored from: checkpoints\codec.pth
+>> semantic_codec weights restored cost:  1.462389800006349
+cfm loaded
+length_regulator loaded
+>> s2mel weights restored from: checkpoints\s2mel.pth
+>> campplus_model weights restored from: checkpoints\hf_cache\campplus_cn_common.bin
+Loading config.json from local directory
+Loading weights from local directory
+Removing weight norm...
+>> bigvgan weights restored from: checkpoints\hf_cache\bigvgan
+>> model ready in 26s | VRAM 2.77G
+
+>> [1/34] lang=EN chars=129 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_full_en.wav
+>> starting inference...
+text after normalization: At the kindergarten,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Passing a tuple of `past_key_values` is deprecated and will be removed in Transformers v4.53.0. You should pass an instance of `Cache` instead, e.g. `past_key_values=DynamicCache.from_legacy_cache(past_key_values)`.
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s]  8%|▊         | 1/12 [00:06<01:07,  6.12s/it] 25%|██▌       | 3/12 [00:09<00:24,  2.77s/it] 33%|███▎      | 4/12 [00:18<00:39,  4.93s/it] 42%|████▏     | 5/12 [00:25<00:40,  5.80s/it] 50%|█████     | 6/12 [00:35<00:42,  7.13s/it] 58%|█████▊    | 7/12 [00:45<00:39,  7.84s/it] 67%|██████▋   | 8/12 [00:55<00:33,  8.49s/it] 75%|███████▌  | 9/12 [01:05<00:27,  9.12s/it] 83%|████████▎ | 10/12 [01:14<00:18,  9.10s/it] 92%|█████████▏| 11/12 [01:31<00:11, 11.34s/it]100%|██████████| 12/12 [01:31<00:00,  7.61s/it]
+torch.Size([1, 49152])
+>> gpt_gen_time: 5.82 seconds
+>> s2mel_time: 91.31 seconds
+>> bigvgan_time: 17.33 seconds
+>> Total inference time: 127.19 seconds
+>> Generated audio length: 2.23 seconds
+>> RTF: 57.0590
+>> starting inference...
+text after normalization: the door opens with a friendly beep.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s]  8%|▊         | 1/12 [00:03<00:33,  3.08s/it] 25%|██▌       | 3/12 [00:10<00:32,  3.56s/it] 33%|███▎      | 4/12 [00:21<00:48,  6.08s/it] 42%|████▏     | 5/12 [00:29<00:48,  6.87s/it] 50%|█████     | 6/12 [00:38<00:44,  7.42s/it] 58%|█████▊    | 7/12 [00:48<00:41,  8.27s/it] 67%|██████▋   | 8/12 [00:59<00:36,  9.21s/it] 75%|███████▌  | 9/12 [01:07<00:26,  8.75s/it] 83%|████████▎ | 10/12 [01:19<00:19,  9.66s/it] 92%|█████████▏| 11/12 [01:29<00:09,  9.79s/it]100%|██████████| 12/12 [01:38<00:00,  9.68s/it]100%|██████████| 12/12 [01:38<00:00,  8.23s/it]
+torch.Size([1, 73728])
+>> gpt_gen_time: 6.50 seconds
+>> s2mel_time: 98.89 seconds
+>> bigvgan_time: 20.48 seconds
+>> Total inference time: 126.41 seconds
+>> Generated audio length: 3.34 seconds
+>> RTF: 37.8056
+>> starting inference...
+text after normalization: One by one,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s]  8%|▊         | 1/12 [00:05<01:02,  5.64s/it] 25%|██▌       | 3/12 [00:16<00:49,  5.47s/it] 33%|███▎      | 4/12 [00:26<00:55,  6.92s/it] 42%|████▏     | 5/12 [00:33<00:50,  7.16s/it] 50%|█████     | 6/12 [00:43<00:48,  8.13s/it] 58%|█████▊    | 7/12 [00:52<00:40,  8.12s/it] 67%|██████▋   | 8/12 [01:04<00:37,  9.31s/it] 75%|███████▌  | 9/12 [01:13<00:27,  9.29s/it] 83%|████████▎ | 10/12 [01:24<00:19,  9.91s/it] 92%|█████████▏| 11/12 [01:34<00:09,  9.98s/it]100%|██████████| 12/12 [01:44<00:00,  9.79s/it]100%|██████████| 12/12 [01:44<00:00,  8.67s/it]
+torch.Size([1, 45568])
+>> gpt_gen_time: 4.33 seconds
+>> s2mel_time: 104.11 seconds
+>> bigvgan_time: 19.97 seconds
+>> Total inference time: 129.04 seconds
+>> Generated audio length: 2.07 seconds
+>> RTF: 62.4436
+>> starting inference...
+text after normalization: children hop down the steps and wave goodbye to the driver.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:07<00:38,  3.89s/it] 25%|██▌       | 3/12 [00:21<01:11,  7.90s/it] 33%|███▎      | 4/12 [00:33<01:16,  9.54s/it] 42%|████▏     | 5/12 [00:46<01:16, 10.88s/it] 50%|█████     | 6/12 [01:00<01:11, 11.88s/it] 58%|█████▊    | 7/12 [01:13<01:00, 12.15s/it] 67%|██████▋   | 8/12 [01:26<00:49, 12.25s/it] 75%|███████▌  | 9/12 [01:40<00:38, 12.87s/it] 83%|████████▎ | 10/12 [01:52<00:25, 12.53s/it] 92%|█████████▏| 11/12 [02:05<00:12, 12.69s/it]100%|██████████| 12/12 [02:17<00:00, 12.53s/it]100%|██████████| 12/12 [02:17<00:00, 11.44s/it]
+torch.Size([1, 117760])
+>> gpt_gen_time: 10.65 seconds
+>> s2mel_time: 137.40 seconds
+>> bigvgan_time: 29.64 seconds
+>> Total inference time: 179.83 seconds
+>> Generated audio length: 5.34 seconds
+>> RTF: 33.6725
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_full_en.wav
+DURATION=13.58
+SIZE=598920
+TIME=562.5
+
+>> [2/34] lang=EN chars=57 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s1_en.wav
+>> starting inference...
+text after normalization: At the kindergarten,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:23,  2.34s/it] 25%|██▌       | 3/12 [00:12<00:40,  4.53s/it] 33%|███▎      | 4/12 [00:21<00:48,  6.12s/it] 42%|████▏     | 5/12 [00:29<00:49,  7.00s/it] 50%|█████     | 6/12 [00:38<00:44,  7.46s/it] 58%|█████▊    | 7/12 [00:47<00:39,  7.95s/it] 67%|██████▋   | 8/12 [00:55<00:32,  8.24s/it] 75%|███████▌  | 9/12 [01:04<00:25,  8.40s/it] 83%|████████▎ | 10/12 [01:19<00:20, 10.46s/it] 92%|█████████▏| 11/12 [01:21<00:07,  7.84s/it]100%|██████████| 12/12 [01:32<00:00,  8.76s/it]100%|██████████| 12/12 [01:32<00:00,  7.71s/it]
+torch.Size([1, 56320])
+>> gpt_gen_time: 5.28 seconds
+>> s2mel_time: 92.61 seconds
+>> bigvgan_time: 20.73 seconds
+>> Total inference time: 119.33 seconds
+>> Generated audio length: 2.55 seconds
+>> RTF: 46.7205
+>> starting inference...
+text after normalization: the door opens with a friendly beep.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:15,  1.58s/it] 25%|██▌       | 3/12 [00:12<00:44,  4.96s/it] 33%|███▎      | 4/12 [00:23<00:57,  7.16s/it] 42%|████▏     | 5/12 [00:34<00:59,  8.53s/it] 50%|█████     | 6/12 [00:43<00:52,  8.72s/it] 58%|█████▊    | 7/12 [00:53<00:45,  9.12s/it] 67%|██████▋   | 8/12 [01:03<00:37,  9.25s/it] 75%|███████▌  | 9/12 [01:13<00:28,  9.55s/it] 83%|████████▎ | 10/12 [01:22<00:18,  9.47s/it] 92%|█████████▏| 11/12 [01:34<00:10, 10.15s/it]100%|██████████| 12/12 [01:45<00:00, 10.29s/it]100%|██████████| 12/12 [01:45<00:00,  8.77s/it]
+torch.Size([1, 74752])
+>> gpt_gen_time: 6.57 seconds
+>> s2mel_time: 105.29 seconds
+>> bigvgan_time: 24.07 seconds
+>> Total inference time: 136.66 seconds
+>> Generated audio length: 3.39 seconds
+>> RTF: 40.3120
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s1_en.wav
+DURATION=6.144
+SIZE=271008
+TIME=256.0
+
+>> [3/34] lang=EN chars=71 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s2_en.wav
+>> starting inference...
+text after normalization: One by one,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:21,  2.14s/it] 25%|██▌       | 3/12 [00:12<00:41,  4.64s/it] 33%|███▎      | 4/12 [00:22<00:54,  6.81s/it] 42%|████▏     | 5/12 [00:32<00:53,  7.68s/it] 50%|█████     | 6/12 [00:41<00:49,  8.23s/it] 58%|█████▊    | 7/12 [00:49<00:40,  8.16s/it] 67%|██████▋   | 8/12 [00:57<00:31,  7.98s/it] 75%|███████▌  | 9/12 [01:05<00:24,  8.11s/it] 83%|████████▎ | 10/12 [01:13<00:16,  8.01s/it] 92%|█████████▏| 11/12 [01:21<00:08,  8.13s/it]100%|██████████| 12/12 [01:30<00:00,  8.31s/it]100%|██████████| 12/12 [01:30<00:00,  7.54s/it]
+torch.Size([1, 49152])
+>> gpt_gen_time: 4.84 seconds
+>> s2mel_time: 90.49 seconds
+>> bigvgan_time: 19.83 seconds
+>> Total inference time: 115.65 seconds
+>> Generated audio length: 2.23 seconds
+>> RTF: 51.8830
+>> starting inference...
+text after normalization: children hop down the steps and wave goodbye to the driver.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:31,  3.16s/it] 25%|██▌       | 3/12 [00:21<01:14,  8.28s/it] 33%|███▎      | 4/12 [00:38<01:30, 11.36s/it] 42%|████▏     | 5/12 [01:16<02:24, 20.69s/it] 58%|█████▊    | 7/12 [01:25<01:03, 12.66s/it] 67%|██████▋   | 8/12 [01:39<00:51, 12.85s/it] 75%|███████▌  | 9/12 [01:55<00:41, 13.75s/it] 83%|████████▎ | 10/12 [02:07<00:26, 13.40s/it] 92%|█████████▏| 11/12 [02:23<00:14, 14.01s/it]100%|██████████| 12/12 [02:38<00:00, 14.37s/it]100%|██████████| 12/12 [02:38<00:00, 13.20s/it]
+torch.Size([1, 108288])
+>> gpt_gen_time: 9.55 seconds
+>> s2mel_time: 158.54 seconds
+>> bigvgan_time: 28.31 seconds
+>> Total inference time: 197.54 seconds
+>> Generated audio length: 4.91 seconds
+>> RTF: 40.2243
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s2_en.wav
+DURATION=7.34
+SIZE=323744
+TIME=313.2
+
+>> [4/34] lang=ZH chars=39 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_full_zh.wav
+>> starting inference...
+text after normalization: 到了幼儿园,车门'哔'的一声打开.小朋友一个接一个跳下台阶,跟司机挥手说再见.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:22,  2.24s/it] 25%|██▌       | 3/12 [00:17<01:02,  6.91s/it] 33%|███▎      | 4/12 [00:31<01:16,  9.50s/it] 42%|████▏     | 5/12 [00:45<01:16, 10.99s/it] 50%|█████     | 6/12 [01:00<01:14, 12.39s/it] 58%|█████▊    | 7/12 [01:17<01:08, 13.72s/it] 67%|██████▋   | 8/12 [01:32<00:56, 14.11s/it] 75%|███████▌  | 9/12 [01:45<00:41, 13.80s/it] 83%|████████▎ | 10/12 [01:57<00:26, 13.38s/it] 92%|█████████▏| 11/12 [02:21<00:16, 16.55s/it]100%|██████████| 12/12 [02:25<00:00, 12.72s/it]100%|██████████| 12/12 [02:25<00:00, 12.13s/it]
+torch.Size([1, 187392])
+>> gpt_gen_time: 18.86 seconds
+>> s2mel_time: 145.62 seconds
+>> bigvgan_time: 40.56 seconds
+>> Total inference time: 206.15 seconds
+>> Generated audio length: 8.50 seconds
+>> RTF: 24.2568
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_full_zh.wav
+DURATION=8.499
+SIZE=374828
+TIME=206.2
+
+>> [5/34] lang=ZH chars=17 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s1_zh.wav
+>> starting inference...
+text after normalization: 到了幼儿园,车门'哔'的一声打开.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:15,  1.60s/it] 25%|██▌       | 3/12 [00:15<00:53,  5.94s/it] 33%|███▎      | 4/12 [00:31<01:19,  9.95s/it] 42%|████▏     | 5/12 [00:46<01:19, 11.41s/it] 50%|█████     | 6/12 [00:59<01:12, 12.13s/it] 58%|█████▊    | 7/12 [01:12<01:01, 12.36s/it] 67%|██████▋   | 8/12 [01:25<00:50, 12.63s/it] 75%|███████▌  | 9/12 [01:41<00:41, 13.69s/it] 83%|████████▎ | 10/12 [01:57<00:28, 14.27s/it] 92%|█████████▏| 11/12 [02:12<00:14, 14.45s/it]100%|██████████| 12/12 [02:26<00:00, 14.37s/it]100%|██████████| 12/12 [02:26<00:00, 12.20s/it]
+torch.Size([1, 100352])
+>> gpt_gen_time: 9.91 seconds
+>> s2mel_time: 146.41 seconds
+>> bigvgan_time: 29.12 seconds
+>> Total inference time: 186.52 seconds
+>> Generated audio length: 4.55 seconds
+>> RTF: 40.9831
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s1_zh.wav
+DURATION=4.551
+SIZE=200748
+TIME=186.5
+
+>> [6/34] lang=ZH chars=22 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s2_zh.wav
+>> starting inference...
+text after normalization: 小朋友一个接一个跳下台阶,跟司机挥手说再见.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:18,  1.87s/it] 25%|██▌       | 3/12 [00:15<00:53,  5.94s/it] 33%|███▎      | 4/12 [00:26<01:03,  7.88s/it] 42%|████▏     | 5/12 [00:38<01:05,  9.36s/it] 50%|█████     | 6/12 [00:50<01:01, 10.20s/it] 58%|█████▊    | 7/12 [01:03<00:55, 11.15s/it] 67%|██████▋   | 8/12 [01:14<00:43, 10.98s/it] 75%|███████▌  | 9/12 [01:25<00:33, 11.10s/it] 83%|████████▎ | 10/12 [01:36<00:22, 11.15s/it] 92%|█████████▏| 11/12 [01:47<00:10, 10.89s/it]100%|██████████| 12/12 [02:03<00:00, 12.54s/it]100%|██████████| 12/12 [02:03<00:00, 10.30s/it]
+torch.Size([1, 134656])
+>> gpt_gen_time: 13.73 seconds
+>> s2mel_time: 123.62 seconds
+>> bigvgan_time: 30.99 seconds
+>> Total inference time: 169.44 seconds
+>> Generated audio length: 6.11 seconds
+>> RTF: 27.7462
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p06_doors_s2_zh.wav
+DURATION=6.107
+SIZE=269356
+TIME=169.5
+
+>> [7/34] lang=EN chars=129 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_full_en.wav
+>> starting inference...
+text after normalization: A kind bus aide rides along to help.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:33,  3.36s/it] 25%|██▌       | 3/12 [00:20<01:10,  7.83s/it] 33%|███▎      | 4/12 [00:34<01:18,  9.85s/it] 42%|████▏     | 5/12 [00:46<01:15, 10.76s/it] 50%|█████     | 6/12 [01:03<01:16, 12.71s/it] 58%|█████▊    | 7/12 [01:13<00:59, 11.91s/it] 67%|██████▋   | 8/12 [01:29<00:53, 13.38s/it] 75%|███████▌  | 9/12 [01:41<00:38, 12.85s/it] 83%|████████▎ | 10/12 [01:54<00:25, 12.76s/it] 92%|█████████▏| 11/12 [02:11<00:14, 14.11s/it]100%|██████████| 12/12 [02:24<00:00, 13.72s/it]100%|██████████| 12/12 [02:24<00:00, 12.02s/it]
+torch.Size([1, 84480])
+>> gpt_gen_time: 7.60 seconds
+>> s2mel_time: 144.22 seconds
+>> bigvgan_time: 25.45 seconds
+>> Total inference time: 178.53 seconds
+>> Generated audio length: 3.83 seconds
+>> RTF: 46.5986
+>> starting inference...
+text after normalization: The aide finds each child a seat,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:23,  2.32s/it] 25%|██▌       | 3/12 [00:16<00:54,  6.10s/it] 33%|███▎      | 4/12 [00:24<00:57,  7.14s/it] 42%|████▏     | 5/12 [00:36<01:01,  8.82s/it] 50%|█████     | 6/12 [00:46<00:55,  9.20s/it] 58%|█████▊    | 7/12 [00:57<00:47,  9.57s/it] 67%|██████▋   | 8/12 [01:05<00:36,  9.18s/it] 75%|███████▌  | 9/12 [01:15<00:28,  9.51s/it] 83%|████████▎ | 10/12 [01:24<00:18,  9.23s/it] 92%|█████████▏| 11/12 [01:34<00:09,  9.55s/it]100%|██████████| 12/12 [01:44<00:00,  9.51s/it]100%|██████████| 12/12 [01:44<00:00,  8.67s/it]
+torch.Size([1, 71168])
+>> gpt_gen_time: 6.35 seconds
+>> s2mel_time: 104.15 seconds
+>> bigvgan_time: 18.87 seconds
+>> Total inference time: 130.32 seconds
+>> Generated audio length: 3.23 seconds
+>> RTF: 40.3783
+>> starting inference...
+text after normalization: fastens a belt,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:14,  1.49s/it] 25%|██▌       | 3/12 [00:11<00:39,  4.44s/it] 33%|███▎      | 4/12 [00:18<00:43,  5.49s/it] 42%|████▏     | 5/12 [00:27<00:47,  6.77s/it] 50%|█████     | 6/12 [00:36<00:43,  7.26s/it] 58%|█████▊    | 7/12 [00:45<00:39,  7.91s/it] 67%|██████▋   | 8/12 [00:54<00:32,  8.20s/it] 75%|███████▌  | 9/12 [01:04<00:26,  8.88s/it] 83%|████████▎ | 10/12 [01:12<00:17,  8.67s/it] 92%|█████████▏| 11/12 [01:24<00:09,  9.48s/it]100%|██████████| 12/12 [01:33<00:00,  9.32s/it]100%|██████████| 12/12 [01:33<00:00,  7.77s/it]
+torch.Size([1, 54528])
+>> gpt_gen_time: 5.16 seconds
+>> s2mel_time: 93.25 seconds
+>> bigvgan_time: 19.85 seconds
+>> Total inference time: 118.86 seconds
+>> Generated audio length: 2.47 seconds
+>> RTF: 48.0628
+>> starting inference...
+text after normalization: and makes sure everyone is happy and safe.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:20,  2.10s/it] 25%|██▌       | 3/12 [00:15<00:54,  6.07s/it] 33%|███▎      | 4/12 [00:29<01:10,  8.82s/it] 42%|████▏     | 5/12 [00:40<01:07,  9.63s/it] 50%|█████     | 6/12 [00:52<01:03, 10.55s/it] 58%|█████▊    | 7/12 [01:07<00:59, 11.93s/it] 67%|██████▋   | 8/12 [01:17<00:45, 11.37s/it] 75%|███████▌  | 9/12 [01:30<00:35, 11.67s/it] 83%|████████▎ | 10/12 [01:41<00:22, 11.44s/it] 92%|█████████▏| 11/12 [01:56<00:12, 12.59s/it]100%|██████████| 12/12 [02:10<00:00, 12.97s/it]100%|██████████| 12/12 [02:10<00:00, 10.84s/it]
+torch.Size([1, 97536])
+>> gpt_gen_time: 8.45 seconds
+>> s2mel_time: 130.21 seconds
+>> bigvgan_time: 27.38 seconds
+>> Total inference time: 167.66 seconds
+>> Generated audio length: 4.42 seconds
+>> RTF: 37.9029
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_full_en.wav
+DURATION=14.555
+SIZE=641928
+TIME=595.4
+
+>> [8/34] lang=EN chars=36 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s1_en.wav
+>> starting inference...
+text after normalization: A kind bus aide rides along to help.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:07<00:36,  3.61s/it] 25%|██▌       | 3/12 [00:21<01:11,  7.92s/it] 33%|███▎      | 4/12 [00:36<01:26, 10.83s/it] 42%|████▏     | 5/12 [00:49<01:18, 11.28s/it] 50%|█████     | 6/12 [01:04<01:15, 12.61s/it] 58%|█████▊    | 7/12 [01:18<01:06, 13.23s/it] 67%|██████▋   | 8/12 [01:32<00:52, 13.22s/it] 75%|███████▌  | 9/12 [01:46<00:40, 13.62s/it] 83%|████████▎ | 10/12 [02:00<00:27, 13.82s/it] 92%|█████████▏| 11/12 [02:14<00:13, 13.81s/it]100%|██████████| 12/12 [02:30<00:00, 14.29s/it]100%|██████████| 12/12 [02:30<00:00, 12.50s/it]
+torch.Size([1, 78336])
+>> gpt_gen_time: 6.70 seconds
+>> s2mel_time: 150.05 seconds
+>> bigvgan_time: 26.44 seconds
+>> Total inference time: 184.41 seconds
+>> Generated audio length: 3.55 seconds
+>> RTF: 51.9071
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s1_en.wav
+DURATION=3.553
+SIZE=156716
+TIME=184.4
+
+>> [9/34] lang=EN chars=92 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s2_en.wav
+>> starting inference...
+text after normalization: The aide finds each child a seat,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:20,  2.02s/it] 25%|██▌       | 3/12 [00:17<00:59,  6.66s/it] 33%|███▎      | 4/12 [00:30<01:14,  9.25s/it] 42%|████▏     | 5/12 [00:42<01:10, 10.01s/it] 50%|█████     | 6/12 [00:53<01:02, 10.50s/it] 58%|█████▊    | 7/12 [01:07<00:57, 11.52s/it] 67%|██████▋   | 8/12 [01:23<00:51, 12.82s/it] 75%|███████▌  | 9/12 [01:38<00:40, 13.52s/it] 83%|████████▎ | 10/12 [01:52<00:27, 13.89s/it] 92%|█████████▏| 11/12 [02:07<00:14, 14.26s/it]100%|██████████| 12/12 [02:22<00:00, 14.26s/it]100%|██████████| 12/12 [02:22<00:00, 11.85s/it]
+torch.Size([1, 79104])
+>> gpt_gen_time: 6.82 seconds
+>> s2mel_time: 142.22 seconds
+>> bigvgan_time: 27.88 seconds
+>> Total inference time: 178.31 seconds
+>> Generated audio length: 3.59 seconds
+>> RTF: 49.7046
+>> starting inference...
+text after normalization: fastens a belt,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:26,  2.63s/it] 25%|██▌       | 3/12 [00:15<00:51,  5.74s/it] 33%|███▎      | 4/12 [00:26<01:02,  7.86s/it] 42%|████▏     | 5/12 [00:47<01:25, 12.17s/it] 50%|█████     | 6/12 [00:49<00:53,  8.92s/it] 58%|█████▊    | 7/12 [01:00<00:48,  9.72s/it] 67%|██████▋   | 8/12 [01:11<00:39,  9.98s/it] 75%|███████▌  | 9/12 [01:21<00:30, 10.09s/it] 83%|████████▎ | 10/12 [01:32<00:20, 10.41s/it] 92%|█████████▏| 11/12 [01:51<00:12, 12.84s/it]100%|██████████| 12/12 [01:54<00:00,  9.83s/it]100%|██████████| 12/12 [01:54<00:00,  9.51s/it]
+torch.Size([1, 51712])
+>> gpt_gen_time: 4.78 seconds
+>> s2mel_time: 114.16 seconds
+>> bigvgan_time: 20.26 seconds
+>> Total inference time: 140.14 seconds
+>> Generated audio length: 2.35 seconds
+>> RTF: 59.7538
+>> starting inference...
+text after normalization: and makes sure everyone is happy and safe.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:21,  2.18s/it] 25%|██▌       | 3/12 [00:16<00:56,  6.29s/it] 33%|███▎      | 4/12 [00:28<01:08,  8.56s/it] 42%|████▏     | 5/12 [00:40<01:07,  9.60s/it] 50%|█████     | 6/12 [00:51<01:01, 10.23s/it] 58%|█████▊    | 7/12 [01:02<00:51, 10.26s/it] 67%|██████▋   | 8/12 [01:14<00:43, 10.85s/it] 75%|███████▌  | 9/12 [01:25<00:32, 10.88s/it] 83%|████████▎ | 10/12 [01:35<00:21, 10.81s/it] 92%|█████████▏| 11/12 [01:45<00:10, 10.55s/it]100%|██████████| 12/12 [01:55<00:00, 10.29s/it]100%|██████████| 12/12 [01:55<00:00,  9.63s/it]
+torch.Size([1, 88832])
+>> gpt_gen_time: 7.60 seconds
+>> s2mel_time: 115.59 seconds
+>> bigvgan_time: 23.84 seconds
+>> Total inference time: 148.46 seconds
+>> Generated audio length: 4.03 seconds
+>> RTF: 36.8519
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s2_en.wav
+DURATION=10.361
+SIZE=456980
+TIME=466.9
+
+>> [10/34] lang=ZH chars=44 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_full_zh.wav
+>> starting inference...
+text after normalization: 一位亲切的随车老师也坐车上帮忙.她帮每个小朋友找到座位,系好安全带,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:28,  2.81s/it] 25%|██▌       | 3/12 [00:20<01:09,  7.78s/it] 33%|███▎      | 4/12 [00:32<01:14,  9.31s/it] 42%|████▏     | 5/12 [00:45<01:14, 10.67s/it] 50%|█████     | 6/12 [00:57<01:07, 11.22s/it] 58%|█████▊    | 7/12 [01:09<00:57, 11.53s/it] 67%|██████▋   | 8/12 [01:23<00:48, 12.10s/it] 75%|███████▌  | 9/12 [01:36<00:37, 12.42s/it] 83%|████████▎ | 10/12 [01:46<00:23, 11.62s/it] 92%|█████████▏| 11/12 [01:57<00:11, 11.49s/it]100%|██████████| 12/12 [02:08<00:00, 11.51s/it]100%|██████████| 12/12 [02:08<00:00, 10.75s/it]
+torch.Size([1, 168192])
+>> gpt_gen_time: 18.78 seconds
+>> s2mel_time: 129.03 seconds
+>> bigvgan_time: 34.26 seconds
+>> Total inference time: 183.64 seconds
+>> Generated audio length: 7.63 seconds
+>> RTF: 24.0755
+>> starting inference...
+text after normalization: 让大家又开心又安全.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:07<00:36,  3.65s/it] 25%|██▌       | 3/12 [00:19<01:04,  7.13s/it] 33%|███▎      | 4/12 [00:32<01:14,  9.32s/it] 42%|████▏     | 5/12 [00:45<01:15, 10.79s/it] 50%|█████     | 6/12 [00:57<01:07, 11.22s/it] 58%|█████▊    | 7/12 [01:09<00:56, 11.37s/it] 67%|██████▋   | 8/12 [01:22<00:46, 11.69s/it] 75%|███████▌  | 9/12 [01:35<00:36, 12.19s/it] 83%|████████▎ | 10/12 [01:48<00:24, 12.49s/it] 92%|█████████▏| 11/12 [02:01<00:12, 12.80s/it]100%|██████████| 12/12 [02:16<00:00, 13.28s/it]100%|██████████| 12/12 [02:16<00:00, 11.36s/it]
+torch.Size([1, 84480])
+>> gpt_gen_time: 7.35 seconds
+>> s2mel_time: 136.42 seconds
+>> bigvgan_time: 23.76 seconds
+>> Total inference time: 168.50 seconds
+>> Generated audio length: 3.83 seconds
+>> RTF: 43.9805
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_full_zh.wav
+DURATION=11.659
+SIZE=514208
+TIME=352.2
+
+>> [11/34] lang=ZH chars=16 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s1_zh.wav
+>> starting inference...
+text after normalization: 一位亲切的随车老师也坐车上帮忙.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:09<00:46,  4.63s/it] 25%|██▌       | 3/12 [00:27<01:34, 10.49s/it] 33%|███▎      | 4/12 [00:41<01:32, 11.54s/it] 42%|████▏     | 5/12 [01:11<02:05, 18.00s/it] 58%|█████▊    | 7/12 [01:25<01:02, 12.44s/it] 67%|██████▋   | 8/12 [01:40<00:52, 13.11s/it] 75%|███████▌  | 9/12 [01:53<00:39, 13.17s/it] 83%|████████▎ | 10/12 [02:09<00:27, 13.94s/it] 92%|█████████▏| 11/12 [02:22<00:13, 13.80s/it]100%|██████████| 12/12 [02:46<00:00, 16.77s/it]100%|██████████| 12/12 [02:46<00:00, 13.90s/it]
+torch.Size([1, 106496])
+>> gpt_gen_time: 9.12 seconds
+>> s2mel_time: 166.84 seconds
+>> bigvgan_time: 21.66 seconds
+>> Total inference time: 199.30 seconds
+>> Generated audio length: 4.83 seconds
+>> RTF: 41.2649
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s1_zh.wav
+DURATION=4.83
+SIZE=213036
+TIME=199.3
+
+>> [12/34] lang=ZH chars=28 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s2_zh.wav
+>> starting inference...
+text after normalization: 她帮每个小朋友找到座位,系好安全带,让大家又开心又安全.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:24,  2.47s/it] 25%|██▌       | 3/12 [00:17<01:00,  6.76s/it] 33%|███▎      | 4/12 [00:31<01:13,  9.22s/it] 42%|████▏     | 5/12 [00:44<01:14, 10.59s/it] 50%|█████     | 6/12 [00:56<01:06, 11.04s/it] 58%|█████▊    | 7/12 [01:09<00:59, 11.82s/it] 67%|██████▋   | 8/12 [01:23<00:49, 12.34s/it] 75%|███████▌  | 9/12 [01:35<00:37, 12.49s/it] 83%|████████▎ | 10/12 [01:48<00:24, 12.45s/it] 92%|█████████▏| 11/12 [02:01<00:12, 12.83s/it]100%|██████████| 12/12 [02:14<00:00, 12.74s/it]100%|██████████| 12/12 [02:14<00:00, 11.21s/it]
+torch.Size([1, 139776])
+>> gpt_gen_time: 14.83 seconds
+>> s2mel_time: 134.56 seconds
+>> bigvgan_time: 32.06 seconds
+>> Total inference time: 182.68 seconds
+>> Generated audio length: 6.34 seconds
+>> RTF: 28.8184
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p07_aide_s2_zh.wav
+DURATION=6.339
+SIZE=279596
+TIME=182.7
+
+>> [13/34] lang=EN chars=131 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_full_en.wav
+>> starting inference...
+text after normalization: On the road, the bus follows the rules.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:08<00:41,  4.19s/it] 25%|██▌       | 3/12 [00:23<01:19,  8.89s/it] 33%|███▎      | 4/12 [00:39<01:31, 11.40s/it] 42%|████▏     | 5/12 [00:54<01:28, 12.64s/it] 50%|█████     | 6/12 [01:08<01:19, 13.17s/it] 58%|█████▊    | 7/12 [01:25<01:11, 14.30s/it] 67%|██████▋   | 8/12 [01:41<00:59, 14.86s/it] 75%|███████▌  | 9/12 [01:55<00:43, 14.61s/it] 83%|████████▎ | 10/12 [02:11<00:29, 14.90s/it] 92%|█████████▏| 11/12 [02:24<00:14, 14.45s/it]100%|██████████| 12/12 [02:36<00:00, 13.69s/it]100%|██████████| 12/12 [02:36<00:00, 13.03s/it]
+torch.Size([1, 76544])
+>> gpt_gen_time: 7.02 seconds
+>> s2mel_time: 156.45 seconds
+>> bigvgan_time: 25.18 seconds
+>> Total inference time: 190.00 seconds
+>> Generated audio length: 3.47 seconds
+>> RTF: 54.7346
+>> starting inference...
+text after normalization: It waits at red lights,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:20,  2.00s/it] 25%|██▌       | 3/12 [00:14<00:51,  5.70s/it] 33%|███▎      | 4/12 [00:25<01:01,  7.66s/it] 42%|████▏     | 5/12 [00:38<01:05,  9.37s/it] 50%|█████     | 6/12 [00:58<01:17, 12.92s/it] 58%|█████▊    | 7/12 [01:01<00:49,  9.88s/it] 67%|██████▋   | 8/12 [01:13<00:42, 10.54s/it] 75%|███████▌  | 9/12 [01:25<00:32, 10.80s/it] 83%|████████▎ | 10/12 [01:36<00:21, 10.88s/it] 92%|█████████▏| 11/12 [01:48<00:11, 11.22s/it]100%|██████████| 12/12 [01:58<00:00, 10.97s/it]100%|██████████| 12/12 [01:58<00:00,  9.90s/it]
+torch.Size([1, 62464])
+>> gpt_gen_time: 5.52 seconds
+>> s2mel_time: 118.79 seconds
+>> bigvgan_time: 22.38 seconds
+>> Total inference time: 147.74 seconds
+>> Generated audio length: 2.83 seconds
+>> RTF: 52.1533
+>> starting inference...
+text after normalization: slows at the crosswalk,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:07<00:35,  3.52s/it] 25%|██▌       | 3/12 [00:21<01:12,  8.07s/it] 33%|███▎      | 4/12 [00:36<01:26, 10.76s/it] 42%|████▏     | 5/12 [00:51<01:24, 12.02s/it] 50%|█████     | 6/12 [01:08<01:21, 13.64s/it] 58%|█████▊    | 7/12 [01:24<01:12, 14.59s/it] 67%|██████▋   | 8/12 [01:39<00:58, 14.58s/it] 75%|███████▌  | 9/12 [01:54<00:44, 14.85s/it] 83%|████████▎ | 10/12 [02:10<00:30, 15.02s/it] 92%|█████████▏| 11/12 [02:25<00:15, 15.30s/it]100%|██████████| 12/12 [02:42<00:00, 15.60s/it]100%|██████████| 12/12 [02:42<00:00, 13.52s/it]
+torch.Size([1, 64256])
+>> gpt_gen_time: 5.65 seconds
+>> s2mel_time: 162.30 seconds
+>> bigvgan_time: 27.87 seconds
+>> Total inference time: 197.03 seconds
+>> Generated audio length: 2.91 seconds
+>> RTF: 67.6111
+>> starting inference...
+text after normalization: and shares the street with cars and people.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:15,  1.53s/it] 25%|██▌       | 3/12 [00:15<00:52,  5.87s/it] 33%|███▎      | 4/12 [00:25<01:00,  7.62s/it] 42%|████▏     | 5/12 [00:46<01:24, 12.12s/it] 50%|█████     | 6/12 [00:48<00:53,  8.98s/it] 58%|█████▊    | 7/12 [01:01<00:50, 10.04s/it] 67%|██████▋   | 8/12 [01:11<00:41, 10.29s/it] 75%|███████▌  | 9/12 [01:24<00:32, 10.94s/it] 83%|████████▎ | 10/12 [01:35<00:22, 11.03s/it] 92%|█████████▏| 11/12 [01:46<00:11, 11.13s/it]100%|██████████| 12/12 [01:58<00:00, 11.25s/it]100%|██████████| 12/12 [01:58<00:00,  9.87s/it]
+torch.Size([1, 88832])
+>> gpt_gen_time: 8.23 seconds
+>> s2mel_time: 118.42 seconds
+>> bigvgan_time: 24.81 seconds
+>> Total inference time: 152.48 seconds
+>> Generated audio length: 4.03 seconds
+>> RTF: 37.8499
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_full_en.wav
+DURATION=13.847
+SIZE=610696
+TIME=687.3
+
+>> [14/34] lang=EN chars=39 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s1_en.wav
+>> starting inference...
+text after normalization: On the road, the bus follows the rules.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:30,  3.01s/it] 25%|██▌       | 3/12 [00:20<01:11,  7.99s/it] 33%|███▎      | 4/12 [00:34<01:19,  9.93s/it] 42%|████▏     | 5/12 [00:48<01:21, 11.58s/it] 50%|█████     | 6/12 [01:02<01:14, 12.41s/it] 58%|█████▊    | 7/12 [01:15<01:02, 12.55s/it] 67%|██████▋   | 8/12 [01:30<00:52, 13.22s/it] 75%|███████▌  | 9/12 [01:43<00:39, 13.19s/it] 83%|████████▎ | 10/12 [01:56<00:26, 13.07s/it] 92%|█████████▏| 11/12 [02:10<00:13, 13.51s/it]100%|██████████| 12/12 [02:22<00:00, 12.93s/it]100%|██████████| 12/12 [02:22<00:00, 11.87s/it]
+torch.Size([1, 82688])
+>> gpt_gen_time: 7.42 seconds
+>> s2mel_time: 142.52 seconds
+>> bigvgan_time: 26.27 seconds
+>> Total inference time: 177.51 seconds
+>> Generated audio length: 3.75 seconds
+>> RTF: 47.3345
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s1_en.wav
+DURATION=3.75
+SIZE=165420
+TIME=177.5
+
+>> [15/34] lang=EN chars=91 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s2_en.wav
+>> starting inference...
+text after normalization: It waits at red lights,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:24,  2.40s/it] 25%|██▌       | 3/12 [00:20<01:10,  7.78s/it] 33%|███▎      | 4/12 [00:34<01:21, 10.24s/it] 42%|████▏     | 5/12 [00:50<01:25, 12.27s/it] 50%|█████     | 6/12 [01:04<01:17, 12.92s/it] 58%|█████▊    | 7/12 [01:21<01:10, 14.13s/it] 67%|██████▋   | 8/12 [01:35<00:56, 14.18s/it] 75%|███████▌  | 9/12 [01:49<00:42, 14.19s/it] 83%|████████▎ | 10/12 [02:06<00:29, 15.00s/it] 92%|█████████▏| 11/12 [02:22<00:15, 15.29s/it]100%|██████████| 12/12 [02:37<00:00, 15.02s/it]100%|██████████| 12/12 [02:37<00:00, 13.10s/it]
+torch.Size([1, 63232])
+>> gpt_gen_time: 5.80 seconds
+>> s2mel_time: 157.17 seconds
+>> bigvgan_time: 27.22 seconds
+>> Total inference time: 191.30 seconds
+>> Generated audio length: 2.87 seconds
+>> RTF: 66.7102
+>> starting inference...
+text after normalization: slows at the crosswalk,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:10<00:50,  5.02s/it] 25%|██▌       | 3/12 [00:24<01:22,  9.13s/it] 33%|███▎      | 4/12 [00:41<01:36, 12.08s/it] 42%|████▏     | 5/12 [00:56<01:30, 12.98s/it] 50%|█████     | 6/12 [01:11<01:21, 13.64s/it] 58%|█████▊    | 7/12 [01:28<01:14, 14.84s/it] 67%|██████▋   | 8/12 [01:44<00:59, 14.95s/it] 75%|███████▌  | 9/12 [01:58<00:44, 14.81s/it] 83%|████████▎ | 10/12 [02:14<00:29, 15.00s/it] 92%|█████████▏| 11/12 [02:29<00:15, 15.26s/it]100%|██████████| 12/12 [02:44<00:00, 15.18s/it]100%|██████████| 12/12 [02:44<00:00, 13.74s/it]
+torch.Size([1, 63232])
+>> gpt_gen_time: 5.62 seconds
+>> s2mel_time: 164.94 seconds
+>> bigvgan_time: 29.93 seconds
+>> Total inference time: 201.23 seconds
+>> Generated audio length: 2.87 seconds
+>> RTF: 70.1717
+>> starting inference...
+text after normalization: and shares the street with cars and people.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:17,  1.75s/it] 25%|██▌       | 3/12 [00:15<00:53,  5.92s/it] 33%|███▎      | 4/12 [00:26<01:04,  8.06s/it] 42%|████▏     | 5/12 [00:40<01:10, 10.05s/it] 50%|█████     | 6/12 [00:53<01:06, 11.04s/it] 58%|█████▊    | 7/12 [01:08<01:01, 12.27s/it] 67%|██████▋   | 8/12 [01:21<00:49, 12.39s/it] 75%|███████▌  | 9/12 [01:33<00:36, 12.22s/it] 83%|████████▎ | 10/12 [01:46<00:25, 12.63s/it] 92%|█████████▏| 11/12 [01:59<00:12, 12.70s/it]100%|██████████| 12/12 [02:12<00:00, 12.78s/it]100%|██████████| 12/12 [02:12<00:00, 11.04s/it]
+torch.Size([1, 90624])
+>> gpt_gen_time: 11.54 seconds
+>> s2mel_time: 132.50 seconds
+>> bigvgan_time: 25.85 seconds
+>> Total inference time: 171.94 seconds
+>> Generated audio length: 4.11 seconds
+>> RTF: 41.8351
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s2_en.wav
+DURATION=10.245
+SIZE=451860
+TIME=564.5
+
+>> [16/34] lang=ZH chars=35 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_full_zh.wav
+>> starting inference...
+text after normalization: 在路上,巴士遵守规则.红灯前停下,斑马线前放慢,和小汽车,行人一起走.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:09<00:47,  4.73s/it] 25%|██▌       | 3/12 [00:27<01:31, 10.12s/it] 33%|███▎      | 4/12 [00:45<01:44, 13.02s/it] 42%|████▏     | 5/12 [01:03<01:45, 15.09s/it] 50%|█████     | 6/12 [01:22<01:37, 16.29s/it] 58%|█████▊    | 7/12 [01:39<01:22, 16.53s/it] 67%|██████▋   | 8/12 [01:59<01:09, 17.42s/it] 75%|███████▌  | 9/12 [02:16<00:52, 17.46s/it] 83%|████████▎ | 10/12 [02:31<00:33, 16.59s/it] 92%|█████████▏| 11/12 [02:50<00:17, 17.31s/it]100%|██████████| 12/12 [03:05<00:00, 16.80s/it]100%|██████████| 12/12 [03:05<00:00, 15.49s/it]
+torch.Size([1, 180480])
+>> gpt_gen_time: 20.61 seconds
+>> s2mel_time: 185.87 seconds
+>> bigvgan_time: 39.46 seconds
+>> Total inference time: 247.02 seconds
+>> Generated audio length: 8.19 seconds
+>> RTF: 30.1795
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_full_zh.wav
+DURATION=8.185
+SIZE=361004
+TIME=247.0
+
+>> [17/34] lang=ZH chars=11 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s1_zh.wav
+>> starting inference...
+text after normalization: 在路上,巴士遵守规则.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:09<00:47,  4.72s/it] 25%|██▌       | 3/12 [00:25<01:25,  9.48s/it] 33%|███▎      | 4/12 [00:41<01:35, 11.97s/it] 42%|████▏     | 5/12 [00:54<01:26, 12.40s/it] 50%|█████     | 6/12 [01:12<01:23, 13.95s/it] 58%|█████▊    | 7/12 [01:27<01:12, 14.48s/it] 67%|██████▋   | 8/12 [01:42<00:58, 14.71s/it] 75%|███████▌  | 9/12 [01:57<00:43, 14.65s/it] 83%|████████▎ | 10/12 [02:13<00:30, 15.05s/it] 92%|█████████▏| 11/12 [02:25<00:14, 14.15s/it]100%|██████████| 12/12 [02:40<00:00, 14.59s/it]100%|██████████| 12/12 [02:40<00:00, 13.42s/it]
+torch.Size([1, 85248])
+>> gpt_gen_time: 7.92 seconds
+>> s2mel_time: 161.03 seconds
+>> bigvgan_time: 26.93 seconds
+>> Total inference time: 197.24 seconds
+>> Generated audio length: 3.87 seconds
+>> RTF: 51.0168
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s1_zh.wav
+DURATION=3.866
+SIZE=170540
+TIME=197.2
+
+>> [18/34] lang=ZH chars=24 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s2_zh.wav
+>> starting inference...
+text after normalization: 红灯前停下,斑马线前放慢,和小汽车,行人一起走.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:21,  2.17s/it] 25%|██▌       | 3/12 [00:18<01:02,  6.99s/it] 33%|███▎      | 4/12 [00:31<01:15,  9.49s/it] 42%|████▏     | 5/12 [00:43<01:12, 10.36s/it] 50%|█████     | 6/12 [00:55<01:05, 10.93s/it] 58%|█████▊    | 7/12 [01:06<00:54, 10.92s/it] 67%|██████▋   | 8/12 [01:18<00:44, 11.07s/it] 75%|███████▌  | 9/12 [01:30<00:34, 11.41s/it] 83%|████████▎ | 10/12 [01:42<00:23, 11.69s/it] 92%|█████████▏| 11/12 [01:54<00:11, 11.64s/it]100%|██████████| 12/12 [02:06<00:00, 11.95s/it]100%|██████████| 12/12 [02:06<00:00, 10.57s/it]
+torch.Size([1, 145152])
+>> gpt_gen_time: 13.87 seconds
+>> s2mel_time: 126.83 seconds
+>> bigvgan_time: 33.06 seconds
+>> Total inference time: 176.00 seconds
+>> Generated audio length: 6.58 seconds
+>> RTF: 26.7362
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p08_road_s2_zh.wav
+DURATION=6.583
+SIZE=290348
+TIME=176.0
+
+>> [19/34] lang=EN chars=134 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_full_en.wav
+>> starting inference...
+text after normalization: Here we are!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:01<00:09,  1.05it/s] 25%|██▌       | 3/12 [00:10<00:38,  4.24s/it] 33%|███▎      | 4/12 [00:18<00:43,  5.46s/it] 42%|████▏     | 5/12 [00:25<00:43,  6.18s/it] 50%|█████     | 6/12 [00:35<00:44,  7.43s/it] 58%|█████▊    | 7/12 [00:44<00:38,  7.74s/it] 67%|██████▋   | 8/12 [00:52<00:32,  8.00s/it] 75%|███████▌  | 9/12 [01:00<00:23,  7.79s/it] 83%|████████▎ | 10/12 [01:07<00:15,  7.58s/it] 92%|█████████▏| 11/12 [01:14<00:07,  7.67s/it]100%|██████████| 12/12 [01:23<00:00,  7.99s/it]100%|██████████| 12/12 [01:23<00:00,  6.98s/it]
+torch.Size([1, 47360])
+>> gpt_gen_time: 4.69 seconds
+>> s2mel_time: 83.76 seconds
+>> bigvgan_time: 15.04 seconds
+>> Total inference time: 103.91 seconds
+>> Generated audio length: 2.15 seconds
+>> RTF: 48.3801
+>> starting inference...
+text after normalization: The bus arrives at the kindergarten gate.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:34,  3.48s/it] 25%|██▌       | 3/12 [00:16<00:55,  6.19s/it] 33%|███▎      | 4/12 [00:28<01:06,  8.25s/it] 42%|████▏     | 5/12 [00:41<01:09,  9.89s/it] 50%|█████     | 6/12 [00:52<01:01, 10.23s/it] 58%|█████▊    | 7/12 [01:04<00:54, 10.95s/it] 67%|██████▋   | 8/12 [01:19<00:48, 12.07s/it] 75%|███████▌  | 9/12 [01:33<00:38, 12.78s/it] 83%|████████▎ | 10/12 [01:47<00:26, 13.18s/it] 92%|█████████▏| 11/12 [01:59<00:12, 12.70s/it]100%|██████████| 12/12 [02:13<00:00, 13.14s/it]100%|██████████| 12/12 [02:13<00:00, 11.14s/it]
+torch.Size([1, 76544])
+>> gpt_gen_time: 6.43 seconds
+>> s2mel_time: 133.75 seconds
+>> bigvgan_time: 25.25 seconds
+>> Total inference time: 166.90 seconds
+>> Generated audio length: 3.47 seconds
+>> RTF: 48.0796
+>> starting inference...
+text after normalization: Children run to the slide and swings,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:07<00:36,  3.61s/it] 25%|██▌       | 3/12 [00:17<00:57,  6.43s/it] 33%|███▎      | 4/12 [00:31<01:12,  9.07s/it] 42%|████▏     | 5/12 [00:43<01:11, 10.21s/it] 50%|█████     | 6/12 [00:54<01:03, 10.59s/it] 58%|█████▊    | 7/12 [01:07<00:56, 11.36s/it] 67%|██████▋   | 8/12 [01:21<00:48, 12.25s/it] 75%|███████▌  | 9/12 [01:36<00:38, 12.89s/it] 83%|████████▎ | 10/12 [01:48<00:25, 12.71s/it] 92%|█████████▏| 11/12 [02:02<00:13, 13.13s/it]100%|██████████| 12/12 [02:17<00:00, 13.66s/it]100%|██████████| 12/12 [02:17<00:00, 11.46s/it]
+torch.Size([1, 86272])
+>> gpt_gen_time: 7.55 seconds
+>> s2mel_time: 134.50 seconds
+>> bigvgan_time: 24.93 seconds
+>> Total inference time: 168.06 seconds
+>> Generated audio length: 3.91 seconds
+>> RTF: 42.9550
+>> starting inference...
+text after normalization: ready for a fun day of play and learning.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:25,  2.60s/it] 25%|██▌       | 3/12 [00:17<01:01,  6.80s/it] 33%|███▎      | 4/12 [00:32<01:17,  9.75s/it] 42%|████▏     | 5/12 [00:46<01:17, 11.07s/it] 50%|█████     | 6/12 [00:58<01:09, 11.65s/it] 58%|█████▊    | 7/12 [01:13<01:02, 12.51s/it] 67%|██████▋   | 8/12 [01:28<00:53, 13.34s/it] 75%|███████▌  | 9/12 [01:42<00:40, 13.47s/it] 83%|████████▎ | 10/12 [01:55<00:26, 13.38s/it] 92%|█████████▏| 11/12 [02:09<00:13, 13.57s/it]100%|██████████| 12/12 [02:24<00:00, 13.99s/it]100%|██████████| 12/12 [02:24<00:00, 12.03s/it]
+torch.Size([1, 85248])
+>> gpt_gen_time: 7.31 seconds
+>> s2mel_time: 144.36 seconds
+>> bigvgan_time: 26.55 seconds
+>> Total inference time: 178.93 seconds
+>> Generated audio length: 3.87 seconds
+>> RTF: 46.2812
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_full_en.wav
+DURATION=13.998
+SIZE=617352
+TIME=620.9
+
+>> [20/34] lang=EN chars=12 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s1_en.wav
+>> starting inference...
+text after normalization: Here we are!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:17,  1.76s/it] 25%|██▌       | 3/12 [00:13<00:46,  5.19s/it] 33%|███▎      | 4/12 [00:24<00:58,  7.26s/it] 42%|████▏     | 5/12 [00:34<00:57,  8.17s/it] 50%|█████     | 6/12 [00:45<00:55,  9.21s/it] 58%|█████▊    | 7/12 [00:56<00:48,  9.71s/it] 67%|██████▋   | 8/12 [01:06<00:39,  9.95s/it] 75%|███████▌  | 9/12 [01:17<00:30, 10.20s/it] 83%|████████▎ | 10/12 [01:28<00:20, 10.35s/it] 92%|█████████▏| 11/12 [01:39<00:10, 10.78s/it]100%|██████████| 12/12 [01:50<00:00, 10.66s/it]100%|██████████| 12/12 [01:50<00:00,  9.19s/it]
+torch.Size([1, 42240])
+>> gpt_gen_time: 4.57 seconds
+>> s2mel_time: 110.28 seconds
+>> bigvgan_time: 19.69 seconds
+>> Total inference time: 135.12 seconds
+>> Generated audio length: 1.92 seconds
+>> RTF: 70.5334
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s1_en.wav
+DURATION=1.916
+SIZE=84524
+TIME=135.1
+
+>> [21/34] lang=EN chars=41 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s2_en.wav
+>> starting inference...
+text after normalization: The bus arrives at the kindergarten gate.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:32,  3.28s/it] 25%|██▌       | 3/12 [00:19<01:07,  7.49s/it] 33%|███▎      | 4/12 [00:35<01:24, 10.62s/it] 42%|████▏     | 5/12 [00:49<01:22, 11.74s/it] 50%|█████     | 6/12 [01:03<01:14, 12.44s/it] 58%|█████▊    | 7/12 [01:14<00:59, 11.82s/it] 67%|██████▋   | 8/12 [01:30<00:52, 13.17s/it] 75%|███████▌  | 9/12 [01:47<00:43, 14.39s/it] 83%|████████▎ | 10/12 [02:00<00:28, 14.15s/it] 92%|█████████▏| 11/12 [02:13<00:13, 13.68s/it]100%|██████████| 12/12 [02:30<00:00, 14.62s/it]100%|██████████| 12/12 [02:30<00:00, 12.52s/it]
+torch.Size([1, 84480])
+>> gpt_gen_time: 7.98 seconds
+>> s2mel_time: 150.24 seconds
+>> bigvgan_time: 22.26 seconds
+>> Total inference time: 181.51 seconds
+>> Generated audio length: 3.83 seconds
+>> RTF: 47.3749
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s2_en.wav
+DURATION=3.831
+SIZE=169004
+TIME=181.5
+
+>> [22/34] lang=EN chars=79 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s3_en.wav
+>> starting inference...
+text after normalization: Children run to the slide and swings,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:29,  2.94s/it] 25%|██▌       | 3/12 [00:18<01:01,  6.82s/it] 33%|███▎      | 4/12 [00:29<01:08,  8.59s/it] 42%|████▏     | 5/12 [00:42<01:09,  9.89s/it] 50%|█████     | 6/12 [00:54<01:04, 10.69s/it] 58%|█████▊    | 7/12 [01:09<00:59, 11.99s/it] 67%|██████▋   | 8/12 [01:21<00:48, 12.22s/it] 75%|███████▌  | 9/12 [01:35<00:37, 12.54s/it] 83%|████████▎ | 10/12 [01:46<00:24, 12.18s/it] 92%|█████████▏| 11/12 [01:59<00:12, 12.46s/it]100%|██████████| 12/12 [02:12<00:00, 12.49s/it]100%|██████████| 12/12 [02:12<00:00, 11.00s/it]
+torch.Size([1, 92416])
+>> gpt_gen_time: 8.00 seconds
+>> s2mel_time: 132.12 seconds
+>> bigvgan_time: 24.00 seconds
+>> Total inference time: 165.42 seconds
+>> Generated audio length: 4.19 seconds
+>> RTF: 39.4681
+>> starting inference...
+text after normalization: ready for a fun day of play and learning.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:23,  2.37s/it] 25%|██▌       | 3/12 [00:15<00:51,  5.69s/it] 33%|███▎      | 4/12 [00:28<01:08,  8.59s/it] 42%|████▏     | 5/12 [00:40<01:07,  9.70s/it] 50%|█████     | 6/12 [00:51<01:01, 10.29s/it] 58%|█████▊    | 7/12 [01:02<00:52, 10.41s/it] 67%|██████▋   | 8/12 [01:11<00:39,  9.89s/it] 75%|███████▌  | 9/12 [01:22<00:31, 10.45s/it] 83%|████████▎ | 10/12 [01:35<00:22, 11.09s/it] 92%|█████████▏| 11/12 [01:48<00:11, 11.82s/it]100%|██████████| 12/12 [02:02<00:00, 12.25s/it]100%|██████████| 12/12 [02:02<00:00, 10.18s/it]
+torch.Size([1, 80896])
+>> gpt_gen_time: 7.11 seconds
+>> s2mel_time: 122.26 seconds
+>> bigvgan_time: 20.84 seconds
+>> Total inference time: 150.83 seconds
+>> Generated audio length: 3.67 seconds
+>> RTF: 41.1112
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s3_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s3_en.wav
+DURATION=8.06
+SIZE=355488
+TIME=316.3
+
+>> [23/34] lang=ZH chars=42 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_full_zh.wav
+>> starting inference...
+text after normalization: 到啦!巴士停在幼儿园门口.小朋友跑向滑梯和秋千,
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:27,  2.75s/it] 25%|██▌       | 3/12 [00:18<01:02,  6.96s/it] 33%|███▎      | 4/12 [00:28<01:04,  8.12s/it] 42%|████▏     | 5/12 [00:41<01:08,  9.75s/it] 50%|█████     | 6/12 [00:52<01:01, 10.30s/it] 58%|█████▊    | 7/12 [01:04<00:53, 10.73s/it] 67%|██████▋   | 8/12 [01:16<00:44, 11.09s/it] 75%|███████▌  | 9/12 [01:30<00:36, 12.13s/it] 83%|████████▎ | 10/12 [01:41<00:23, 11.90s/it] 92%|█████████▏| 11/12 [01:54<00:12, 12.07s/it]100%|██████████| 12/12 [02:07<00:00, 12.32s/it]100%|██████████| 12/12 [02:07<00:00, 10.61s/it]
+torch.Size([1, 138240])
+>> gpt_gen_time: 12.27 seconds
+>> s2mel_time: 127.41 seconds
+>> bigvgan_time: 30.32 seconds
+>> Total inference time: 172.52 seconds
+>> Generated audio length: 6.27 seconds
+>> RTF: 27.5180
+>> starting inference...
+text after normalization: 准备开始快乐的一天--玩耍和学本领.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:09<00:46,  4.64s/it] 25%|██▌       | 3/12 [00:25<01:26,  9.66s/it] 33%|███▎      | 4/12 [00:39<01:30, 11.28s/it] 42%|████▏     | 5/12 [00:55<01:28, 12.67s/it] 50%|█████     | 6/12 [01:12<01:25, 14.29s/it] 58%|█████▊    | 7/12 [01:26<01:10, 14.18s/it] 67%|██████▋   | 8/12 [01:39<00:55, 13.75s/it] 75%|███████▌  | 9/12 [01:58<00:45, 15.23s/it] 83%|████████▎ | 10/12 [02:12<00:30, 15.02s/it] 92%|█████████▏| 11/12 [02:25<00:14, 14.34s/it]100%|██████████| 12/12 [02:38<00:00, 14.03s/it]100%|██████████| 12/12 [02:38<00:00, 13.23s/it]
+torch.Size([1, 102912])
+>> gpt_gen_time: 8.75 seconds
+>> s2mel_time: 158.81 seconds
+>> bigvgan_time: 30.96 seconds
+>> Total inference time: 200.82 seconds
+>> Generated audio length: 4.67 seconds
+>> RTF: 43.0277
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_full_zh.wav
+DURATION=11.137
+SIZE=491168
+TIME=373.4
+
+>> [24/34] lang=ZH chars=3 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s1_zh.wav
+>> starting inference...
+text after normalization: 到啦!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:17,  1.72s/it] 25%|██▌       | 3/12 [00:12<00:43,  4.82s/it] 33%|███▎      | 4/12 [00:21<00:49,  6.16s/it] 42%|████▏     | 5/12 [00:29<00:48,  6.88s/it] 50%|█████     | 6/12 [00:39<00:47,  7.89s/it] 58%|█████▊    | 7/12 [00:50<00:45,  9.05s/it] 67%|██████▋   | 8/12 [00:58<00:35,  8.78s/it] 75%|███████▌  | 9/12 [01:08<00:27,  9.01s/it] 83%|████████▎ | 10/12 [01:17<00:18,  9.17s/it] 92%|█████████▏| 11/12 [01:26<00:08,  8.88s/it]100%|██████████| 12/12 [01:35<00:00,  8.95s/it]100%|██████████| 12/12 [01:35<00:00,  7.94s/it]
+torch.Size([1, 34304])
+>> gpt_gen_time: 4.23 seconds
+>> s2mel_time: 95.25 seconds
+>> bigvgan_time: 18.33 seconds
+>> Total inference time: 118.24 seconds
+>> Generated audio length: 1.56 seconds
+>> RTF: 76.0008
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s1_zh.wav
+DURATION=1.556
+SIZE=68652
+TIME=118.2
+
+>> [25/34] lang=ZH chars=10 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s2_zh.wav
+>> starting inference...
+text after normalization: 巴士停在幼儿园门口.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:16,  1.67s/it] 25%|██▌       | 3/12 [00:12<00:43,  4.88s/it] 33%|███▎      | 4/12 [00:21<00:50,  6.36s/it] 42%|████▏     | 5/12 [00:30<00:50,  7.19s/it] 50%|█████     | 6/12 [00:39<00:47,  7.86s/it] 58%|█████▊    | 7/12 [00:48<00:41,  8.38s/it] 67%|██████▋   | 8/12 [00:57<00:33,  8.50s/it] 75%|███████▌  | 9/12 [01:06<00:26,  8.72s/it] 83%|████████▎ | 10/12 [01:17<00:18,  9.27s/it] 92%|█████████▏| 11/12 [01:29<00:10, 10.03s/it]100%|██████████| 12/12 [01:39<00:00, 10.10s/it]100%|██████████| 12/12 [01:39<00:00,  8.29s/it]
+torch.Size([1, 72960])
+>> gpt_gen_time: 6.29 seconds
+>> s2mel_time: 99.56 seconds
+>> bigvgan_time: 20.47 seconds
+>> Total inference time: 126.88 seconds
+>> Generated audio length: 3.31 seconds
+>> RTF: 38.3448
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s2_zh.wav
+DURATION=3.309
+SIZE=145964
+TIME=126.9
+
+>> [26/34] lang=ZH chars=29 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s3_zh.wav
+>> starting inference...
+text after normalization: 小朋友跑向滑梯和秋千,准备开始快乐的一天--玩耍和学本领.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:17,  1.76s/it] 25%|██▌       | 3/12 [00:15<00:53,  5.95s/it] 33%|███▎      | 4/12 [00:27<01:05,  8.24s/it] 42%|████▏     | 5/12 [00:38<01:05,  9.37s/it] 50%|█████     | 6/12 [00:49<00:57,  9.64s/it] 58%|█████▊    | 7/12 [00:58<00:47,  9.55s/it] 67%|██████▋   | 8/12 [01:08<00:38,  9.67s/it] 75%|███████▌  | 9/12 [01:19<00:30, 10.24s/it] 83%|████████▎ | 10/12 [01:31<00:21, 10.55s/it] 92%|█████████▏| 11/12 [01:40<00:10, 10.27s/it]100%|██████████| 12/12 [01:51<00:00, 10.28s/it]100%|██████████| 12/12 [01:51<00:00,  9.26s/it]
+torch.Size([1, 148736])
+>> gpt_gen_time: 13.99 seconds
+>> s2mel_time: 111.21 seconds
+>> bigvgan_time: 31.68 seconds
+>> Total inference time: 159.04 seconds
+>> Generated audio length: 6.75 seconds
+>> RTF: 23.5780
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s3_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p09_arrive_s3_zh.wav
+DURATION=6.745
+SIZE=297516
+TIME=159.1
+
+>> [27/34] lang=EN chars=88 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_full_en.wav
+>> starting inference...
+text after normalization: Great job, little rider!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:15,  1.60s/it] 25%|██▌       | 3/12 [00:12<00:43,  4.88s/it] 33%|███▎      | 4/12 [00:21<00:51,  6.42s/it] 42%|████▏     | 5/12 [00:29<00:49,  7.04s/it] 50%|█████     | 6/12 [00:40<00:49,  8.17s/it] 58%|█████▊    | 7/12 [00:49<00:42,  8.50s/it] 67%|██████▋   | 8/12 [00:58<00:34,  8.65s/it] 75%|███████▌  | 9/12 [01:08<00:27,  9.10s/it] 83%|████████▎ | 10/12 [01:17<00:17,  9.00s/it] 92%|█████████▏| 11/12 [01:25<00:08,  8.88s/it]100%|██████████| 12/12 [01:35<00:00,  8.98s/it]100%|██████████| 12/12 [01:35<00:00,  7.93s/it]
+torch.Size([1, 71168])
+>> gpt_gen_time: 5.93 seconds
+>> s2mel_time: 95.23 seconds
+>> bigvgan_time: 19.18 seconds
+>> Total inference time: 121.18 seconds
+>> Generated audio length: 3.23 seconds
+>> RTF: 37.5468
+>> starting inference...
+text after normalization: You learned the parts of the school bus.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:14,  1.42s/it] 25%|██▌       | 3/12 [00:14<00:49,  5.52s/it] 33%|███▎      | 4/12 [00:23<00:55,  6.91s/it] 42%|████▏     | 5/12 [00:34<00:57,  8.28s/it] 50%|█████     | 6/12 [00:43<00:52,  8.76s/it] 58%|█████▊    | 7/12 [00:53<00:45,  9.08s/it] 67%|██████▋   | 8/12 [01:03<00:37,  9.37s/it] 75%|███████▌  | 9/12 [01:13<00:28,  9.40s/it] 83%|████████▎ | 10/12 [01:24<00:19,  9.96s/it] 92%|█████████▏| 11/12 [01:34<00:09,  9.93s/it]100%|██████████| 12/12 [01:42<00:00,  9.55s/it]100%|██████████| 12/12 [01:42<00:00,  8.58s/it]
+torch.Size([1, 72960])
+>> gpt_gen_time: 6.68 seconds
+>> s2mel_time: 102.97 seconds
+>> bigvgan_time: 20.14 seconds
+>> Total inference time: 130.46 seconds
+>> Generated audio length: 3.31 seconds
+>> RTF: 39.4280
+>> starting inference...
+text after normalization: Can you name them all?
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:03<00:17,  1.72s/it] 25%|██▌       | 3/12 [00:11<00:38,  4.32s/it] 33%|███▎      | 4/12 [00:22<00:55,  6.91s/it] 42%|████▏     | 5/12 [00:31<00:51,  7.42s/it] 50%|█████     | 6/12 [00:40<00:48,  8.11s/it] 58%|█████▊    | 7/12 [00:48<00:39,  7.99s/it] 67%|██████▋   | 8/12 [00:58<00:35,  8.85s/it] 75%|███████▌  | 9/12 [01:08<00:26,  8.97s/it] 83%|████████▎ | 10/12 [01:18<00:18,  9.34s/it] 92%|█████████▏| 11/12 [01:26<00:08,  8.86s/it]100%|██████████| 12/12 [01:35<00:00,  9.10s/it]100%|██████████| 12/12 [01:35<00:00,  7.99s/it]
+torch.Size([1, 57088])
+>> gpt_gen_time: 5.33 seconds
+>> s2mel_time: 95.87 seconds
+>> bigvgan_time: 17.98 seconds
+>> Total inference time: 119.45 seconds
+>> Generated audio length: 2.59 seconds
+>> RTF: 46.1365
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_full_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_full_en.wav
+DURATION=9.525
+SIZE=420116
+TIME=371.1
+
+>> [28/34] lang=EN chars=24 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s1_en.wav
+>> starting inference...
+text after normalization: Great job, little rider!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:21,  2.12s/it] 25%|██▌       | 3/12 [00:18<01:04,  7.15s/it] 33%|███▎      | 4/12 [00:29<01:08,  8.59s/it] 42%|████▏     | 5/12 [00:40<01:05,  9.30s/it] 50%|█████     | 6/12 [00:52<01:01, 10.24s/it] 58%|█████▊    | 7/12 [01:04<00:54, 10.97s/it] 67%|██████▋   | 8/12 [01:15<00:43, 10.83s/it] 75%|███████▌  | 9/12 [01:29<00:35, 11.76s/it] 83%|████████▎ | 10/12 [01:42<00:24, 12.20s/it] 92%|█████████▏| 11/12 [01:52<00:11, 11.76s/it]100%|██████████| 12/12 [02:06<00:00, 12.42s/it]100%|██████████| 12/12 [02:06<00:00, 10.58s/it]
+torch.Size([1, 68608])
+>> gpt_gen_time: 5.78 seconds
+>> s2mel_time: 126.98 seconds
+>> bigvgan_time: 21.00 seconds
+>> Total inference time: 154.86 seconds
+>> Generated audio length: 3.11 seconds
+>> RTF: 49.7721
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s1_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s1_en.wav
+DURATION=3.111
+SIZE=137260
+TIME=154.9
+
+>> [29/34] lang=EN chars=40 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s2_en.wav
+>> starting inference...
+text after normalization: You learned the parts of the school bus.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:27,  2.75s/it] 25%|██▌       | 3/12 [00:15<00:52,  5.83s/it] 33%|███▎      | 4/12 [00:27<01:03,  7.90s/it] 42%|████▏     | 5/12 [00:36<00:58,  8.29s/it] 50%|█████     | 6/12 [00:45<00:52,  8.78s/it] 58%|█████▊    | 7/12 [00:55<00:45,  9.12s/it] 67%|██████▋   | 8/12 [01:05<00:37,  9.43s/it] 75%|███████▌  | 9/12 [01:14<00:27,  9.24s/it] 83%|████████▎ | 10/12 [01:23<00:18,  9.02s/it] 92%|█████████▏| 11/12 [01:31<00:08,  8.89s/it]100%|██████████| 12/12 [01:39<00:00,  8.67s/it]100%|██████████| 12/12 [01:39<00:00,  8.32s/it]
+torch.Size([1, 74752])
+>> gpt_gen_time: 6.20 seconds
+>> s2mel_time: 99.91 seconds
+>> bigvgan_time: 19.41 seconds
+>> Total inference time: 126.24 seconds
+>> Generated audio length: 3.39 seconds
+>> RTF: 37.2373
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s2_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s2_en.wav
+DURATION=3.39
+SIZE=149548
+TIME=126.2
+
+>> [30/34] lang=EN chars=22 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s3_en.wav
+>> starting inference...
+text after normalization: Can you name them all?
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:02<00:11,  1.19s/it] 25%|██▌       | 3/12 [00:10<00:34,  3.88s/it] 33%|███▎      | 4/12 [00:18<00:45,  5.68s/it] 42%|████▏     | 5/12 [00:25<00:43,  6.22s/it] 50%|█████     | 6/12 [00:34<00:41,  6.96s/it] 58%|█████▊    | 7/12 [00:42<00:36,  7.23s/it] 67%|██████▋   | 8/12 [00:51<00:31,  7.96s/it] 75%|███████▌  | 9/12 [01:00<00:24,  8.11s/it] 83%|████████▎ | 10/12 [01:07<00:15,  7.77s/it] 92%|█████████▏| 11/12 [01:14<00:07,  7.76s/it]100%|██████████| 12/12 [01:24<00:00,  8.28s/it]100%|██████████| 12/12 [01:24<00:00,  7.04s/it]
+torch.Size([1, 53504])
+>> gpt_gen_time: 4.85 seconds
+>> s2mel_time: 84.46 seconds
+>> bigvgan_time: 17.99 seconds
+>> Total inference time: 108.03 seconds
+>> Generated audio length: 2.43 seconds
+>> RTF: 44.5227
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s3_en.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s3_en.wav
+DURATION=2.426
+SIZE=107052
+TIME=108.0
+
+>> [31/34] lang=ZH chars=31 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_full_zh.wav
+>> starting inference...
+text after normalization: 做得好,小车友!你认识了校车的各个部件.你能叫出它们的名字吗?
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:31,  3.17s/it] 25%|██▌       | 3/12 [00:16<00:54,  6.01s/it] 33%|███▎      | 4/12 [00:27<01:02,  7.77s/it] 42%|████▏     | 5/12 [00:38<01:02,  8.97s/it] 50%|█████     | 6/12 [00:50<01:00, 10.01s/it] 58%|█████▊    | 7/12 [01:02<00:52, 10.59s/it] 67%|██████▋   | 8/12 [01:12<00:41, 10.41s/it] 75%|███████▌  | 9/12 [01:23<00:31, 10.54s/it] 83%|████████▎ | 10/12 [01:35<00:22, 11.00s/it] 92%|█████████▏| 11/12 [01:46<00:11, 11.16s/it]100%|██████████| 12/12 [01:58<00:00, 11.29s/it]100%|██████████| 12/12 [01:58<00:00,  9.85s/it]
+torch.Size([1, 150528])
+>> gpt_gen_time: 13.47 seconds
+>> s2mel_time: 118.26 seconds
+>> bigvgan_time: 29.29 seconds
+>> Total inference time: 162.33 seconds
+>> Generated audio length: 6.83 seconds
+>> RTF: 23.7783
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_full_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_full_zh.wav
+DURATION=6.827
+SIZE=301100
+TIME=162.3
+
+>> [32/34] lang=ZH chars=8 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s1_zh.wav
+>> starting inference...
+text after normalization: 做得好,小车友!
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:04<00:20,  2.07s/it] 25%|██▌       | 3/12 [00:13<00:44,  4.92s/it] 33%|███▎      | 4/12 [00:21<00:49,  6.18s/it] 42%|████▏     | 5/12 [00:29<00:47,  6.79s/it] 50%|█████     | 6/12 [00:39<00:46,  7.81s/it] 58%|█████▊    | 7/12 [00:48<00:40,  8.18s/it] 67%|██████▋   | 8/12 [00:57<00:34,  8.60s/it] 75%|███████▌  | 9/12 [01:06<00:26,  8.79s/it] 83%|████████▎ | 10/12 [01:16<00:17,  8.94s/it] 92%|█████████▏| 11/12 [01:25<00:08,  8.94s/it]100%|██████████| 12/12 [01:35<00:00,  9.35s/it]100%|██████████| 12/12 [01:35<00:00,  7.94s/it]
+torch.Size([1, 58880])
+>> gpt_gen_time: 5.60 seconds
+>> s2mel_time: 95.34 seconds
+>> bigvgan_time: 18.88 seconds
+>> Total inference time: 120.30 seconds
+>> Generated audio length: 2.67 seconds
+>> RTF: 45.0504
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s1_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s1_zh.wav
+DURATION=2.67
+SIZE=117804
+TIME=120.3
+
+>> [33/34] lang=ZH chars=12 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s2_zh.wav
+>> starting inference...
+text after normalization: 你认识了校车的各个部件.
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:05<00:28,  2.83s/it] 25%|██▌       | 3/12 [00:18<01:01,  6.79s/it] 33%|███▎      | 4/12 [00:28<01:04,  8.10s/it] 42%|████▏     | 5/12 [00:41<01:09,  9.88s/it] 50%|█████     | 6/12 [00:53<01:03, 10.52s/it] 58%|█████▊    | 7/12 [01:05<00:54, 10.93s/it] 67%|██████▋   | 8/12 [01:16<00:44, 11.12s/it] 75%|███████▌  | 9/12 [01:28<00:34, 11.40s/it] 83%|████████▎ | 10/12 [01:39<00:22, 11.20s/it] 92%|█████████▏| 11/12 [01:51<00:11, 11.34s/it]100%|██████████| 12/12 [02:02<00:00, 11.29s/it]100%|██████████| 12/12 [02:02<00:00, 10.19s/it]
+torch.Size([1, 90624])
+>> gpt_gen_time: 7.64 seconds
+>> s2mel_time: 122.29 seconds
+>> bigvgan_time: 25.03 seconds
+>> Total inference time: 156.58 seconds
+>> Generated audio length: 4.11 seconds
+>> RTF: 38.0979
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s2_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s2_zh.wav
+DURATION=4.11
+SIZE=181292
+TIME=156.6
+
+>> [34/34] lang=ZH chars=11 -> C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s3_zh.wav
+>> starting inference...
+text after normalization: 你能叫出它们的名字吗?
+>> s2mel knobs: diffusion_steps=12, inference_cfg_rate=0.7, serial_cfg=False
+Use the specified emotion vector
+  0%|          | 0/12 [00:00<?, ?it/s] 17%|█▋        | 2/12 [00:06<00:32,  3.23s/it] 25%|██▌       | 3/12 [00:20<01:10,  7.87s/it] 33%|███▎      | 4/12 [00:33<01:17,  9.64s/it] 42%|████▏     | 5/12 [00:46<01:15, 10.73s/it] 50%|█████     | 6/12 [00:57<01:05, 10.85s/it] 58%|█████▊    | 7/12 [01:06<00:50, 10.16s/it] 67%|██████▋   | 8/12 [01:21<00:46, 11.71s/it] 75%|███████▌  | 9/12 [01:36<00:38, 12.82s/it] 83%|████████▎ | 10/12 [01:51<00:27, 13.51s/it] 92%|█████████▏| 11/12 [02:06<00:13, 13.96s/it]100%|██████████| 12/12 [02:20<00:00, 13.85s/it]100%|██████████| 12/12 [02:20<00:00, 11.67s/it]
+torch.Size([1, 78336])
+>> gpt_gen_time: 7.07 seconds
+>> s2mel_time: 140.10 seconds
+>> bigvgan_time: 25.44 seconds
+>> Total inference time: 173.72 seconds
+>> Generated audio length: 3.55 seconds
+>> RTF: 48.8988
+>> wav file saved to: C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s3_zh.wav
+OUTPUT=C:\Users\Cesar\Documents\ChatGPT\儿童绘本开发\kids-books\books\schoolbus\audio\narration\p10_vocab_s3_zh.wav
+DURATION=3.553
+SIZE=156716
+TIME=173.7
+OK 34 file(s) in 9129s
