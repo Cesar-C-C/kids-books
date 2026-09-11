@@ -1,0 +1,128 @@
+# ============================================================
+# PWA / 绘本外壳校验
+#
+# 为什么单独一个 workflow：labs.yml 的触发路径只有 labs/** 与首页，
+# 完全不包含 shared/**。而 shared/reader.js、shared/overlays.js、
+# shared/cdn.js、shared/pwa.js 才是绘本与 PWA 的核心 —— 只改它们时
+# 原来一个 CI 都不会跑。这里把绘本/PWA 这条链路补上。
+#
+# 校验分三层：
+#   1. 语法     node --check（浏览器脚本只解析不执行）
+#   2. 静态契约 qa_pwa.py（manifest 尺寸、离线包清单、SW 必需特征、页面接线）
+#   3. 真实浏览器 tools/qa_pwa_offline.mjs —— 真断网后重新加载书架与绘本，
+#      断言插图有像素、音频命中缓存。这一步是唯一能抓住"静默坏掉"的。
+# ============================================================
+name: Validate PWA and books
+
+on:
+  pull_request:
+    paths:
+      - 'shared/**'
+      - 'books/**'
+      - 'labs/**/index.html'
+      - 'labs/**/*.js'
+      - 'labs/shared/**'
+      - 'icons/**'
+      - 'tools/**'
+      - 'index.html'
+      - 'sw.js'
+      - 'pwa-assets.js'
+      - 'manifest.webmanifest'
+      - 'offline.html'
+      - 'qa_*.py'
+      - 'qa_*.cjs'
+      - 'art/regeneration-manifest.json'
+      - '.gitignore'
+      - '.github/workflows/pwa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'shared/**'
+      - 'books/**'
+      - 'labs/**/index.html'
+      - 'labs/**/*.js'
+      - 'labs/shared/**'
+      - 'icons/**'
+      - 'tools/**'
+      - 'index.html'
+      - 'sw.js'
+      - 'pwa-assets.js'
+      - 'manifest.webmanifest'
+      - 'offline.html'
+      - 'qa_*.py'
+      - 'qa_*.cjs'
+      - 'art/regeneration-manifest.json'
+      - '.gitignore'
+      - '.github/workflows/pwa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    name: Static contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pillow
+        run: pip install --quiet pillow
+
+      # 语法：这些脚本都跑在浏览器里，node 只做解析不执行
+      - name: Syntax check (browser scripts)
+        run: |
+          for f in shared/cdn.js shared/pwa.js shared/reader.js shared/overlays.js sw.js pwa-assets.js; do
+            echo "node --check $f"
+            node --check "$f"
+          done
+
+      - name: Syntax check (tooling)
+        run: |
+          for f in tools/*.py tools/*.mjs; do
+            case "$f" in
+              *.py) python -m py_compile "$f" && echo "py_compile $f" ;;
+              *.mjs) node --check "$f" && echo "node --check $f" ;;
+            esac
+          done
+
+      - name: Cover derivatives up to date
+        run: python tools/gen_pwa_covers.py --check
+
+      - name: PWA static QA
+        run: python qa_pwa.py
+
+      # 137 张 r2 插画的尺寸/体积契约，此前完全不在 CI 里
+      - name: R2 illustration contract
+        run: python qa_library_r2_assets.py
+
+  browser:
+    name: Offline in real Chrome
+    runs-on: ubuntu-latest
+    needs: static
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # ubuntu-latest 自带 google-chrome-stable；脚本自己会找到它
+      - name: Offline smoke test (airplane)
+        run: node tools/qa_pwa_offline.mjs --book=airplane --out=preview_pwa
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pwa-offline-screenshots
+          path: preview_pwa/
+          if-no-files-found: warn
+          retention-days: 7

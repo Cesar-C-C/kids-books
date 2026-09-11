@@ -1,0 +1,36 @@
+{
+  "name": "儿童双语科普绘本 · 小小探索家",
+  "short_name": "小小探索家",
+  "description": "12 本中英双语点读绘本与 4 个 3D 实验室，为 4-8 岁孩子设计。支持离线阅读。",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "kids-books-shelf",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#eaf4ff",
+  "theme_color": "#2a9d8f",
+  "categories": ["education", "kids", "books"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

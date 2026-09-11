@@ -8,6 +8,13 @@ books/*/_manifest.json
 .art-review/
 *.tmp
 
+# Hotspot recalibration working set (dump_hotspots.js -> gen_calib_images.py).
+# ~200MB of annotated rulers; regenerate locally, never commit.
+calib/
+
+# PWA offline-test screenshots
+preview_pwa/
+
 # Dependencies (managed runtimes keep these outside the repo)
 node_modules/
 

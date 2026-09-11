@@ -1,0 +1,67 @@
+/* ============================================================
+   shared/pwa.css — 安装引导 + 离线包面板样式
+   与 style.css 共用配色变量（--green/--blue/--ink/--soft/--card-radius）
+   ============================================================ */
+
+/* ---------- 安装引导条 ---------- */
+.install-bar{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  background:#fff; border:1px solid #e3e8ef; border-radius:18px;
+  padding:14px 18px; margin:14px 0 4px;
+}
+.install-bar[hidden]{ display:none; }
+.install-bar .ib-face{ font-size:26px; line-height:1; }
+.install-bar .ib-text{ flex:1 1 260px; min-width:0; }
+.install-bar .ib-text b{ display:block; font-size:15px; color:var(--ink); margin-bottom:2px; }
+.install-bar .ib-text span{ font-size:13px; color:var(--soft); line-height:1.6; }
+.install-bar .ib-actions{ display:flex; align-items:center; gap:10px; }
+.install-bar button{
+  border:0; cursor:pointer; font-family:inherit; font-weight:700; font-size:14px;
+  padding:10px 20px; border-radius:999px; background:var(--green); color:#fff;
+}
+.install-bar button.ghost{ background:#eef4f8; color:var(--ink); font-weight:600; padding:10px 14px; }
+.install-bar details{ flex:1 1 100%; }
+.install-bar summary{
+  cursor:pointer; font-size:13px; color:var(--blue); font-weight:600; list-style:none;
+}
+.install-bar summary::-webkit-details-marker{ display:none; }
+.install-bar summary::before{ content:"▸ "; }
+.install-bar details[open] summary::before{ content:"▾ "; }
+.install-bar ol{ margin:10px 0 2px; padding-left:22px; font-size:13px; color:var(--soft); line-height:1.9; }
+.install-bar ol b{ color:var(--ink); }
+
+/* ---------- 离线包面板 ---------- */
+.offline-panel{
+  background:#fff; border-radius:var(--card-radius); padding:22px 22px 18px; margin:26px 0 8px;
+  box-shadow:0 12px 30px rgba(43,45,66,.06);
+}
+.offline-panel[hidden]{ display:none; }
+.offline-panel h2{ margin:0 0 4px; font-size:20px; color:var(--blue); font-family:'Fredoka','Noto Sans SC',sans-serif; }
+.offline-panel .op-sub{ margin:0 0 16px; font-size:13px; color:var(--soft); line-height:1.7; }
+.offline-list{ display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; }
+.offline-row{
+  display:flex; align-items:center; gap:10px;
+  border:1px solid #e8edf3; border-radius:14px; padding:10px 12px; background:#fbfdff;
+}
+.offline-row.done{ background:#f2fbf8; border-color:#cfe9e3; }
+.offline-row .or-info{ flex:1 1 auto; min-width:0; }
+.offline-row .or-name{ font-size:14px; font-weight:700; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.offline-row .or-size{ font-size:12px; color:var(--soft); margin-top:2px; }
+.offline-row button{
+  flex:0 0 auto; border:0; cursor:pointer; font-family:inherit; font-size:12px; font-weight:700;
+  padding:7px 13px; border-radius:999px; background:#eef4f8; color:var(--ink);
+}
+.offline-row button.go{ background:var(--green); color:#fff; }
+.offline-row button:disabled{ opacity:.55; cursor:default; }
+.offline-row .or-bar{ grid-column:1/-1; height:4px; border-radius:999px; background:#e8edf3; overflow:hidden; margin-top:8px; }
+.offline-row .or-bar i{ display:block; height:100%; width:0; background:var(--green); transition:width .18s linear; }
+.offline-foot{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  margin-top:16px; padding-top:14px; border-top:1px dashed #e3e8ef;
+}
+.offline-foot .of-note{ font-size:12px; color:var(--soft); line-height:1.6; }
+.offline-foot button{
+  border:0; cursor:pointer; font-family:inherit; font-size:13px; font-weight:700;
+  padding:9px 18px; border-radius:999px; background:#eef4f8; color:var(--ink);
+}
+.offline-foot button.ghost{ background:#fff; border:1px solid #e3e8ef; }

@@ -93,16 +93,18 @@ window.Reader = {
     const pad2 = n => String(n).padStart(2,'0');
     const sanitize = s => (s||'').trim().toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
 
-    /* ---------- CDN acceleration (jsDelivr mirrors GitHub repo) ----------
-       国内访问 github.io 较慢（无国内节点+偶发限速），jsDelivr 在国内有 CDN 节点。
+    /* ---------- CDN acceleration (multi-node cascade, see shared/cdn.js) ----------
+       国内访问 github.io 较慢（无国内节点+偶发限速），图片改走 jsDelivr 镜像。
        资源 URL 改造规则：book.js 里所有相对路径（assets/xx.webp, audio/xx.mp3）
-       拼成 CDN_BASE + 'books/' + BOOK.id + '/' + 相对路径。
+       拼成 <node>/gh/Cesar-C-C/kids-books@main/books/<id>/<相对路径>。
        绝对 URL 原样透传（万一以后要切回或者用混合来源）。
+       节点级联：gcore → testingcf → cdn → 同源。任一节点卡住 2s 自动换下一个，
+       全部失败才停止（详见 shared/cdn.js 顶部实测数据）。
        注意：jsDelivr 缓存是按 URL 永久缓存（直到 purge），文件名变了天然绕开缓存
        —— 所以 PNG->WebP 改名后自动用新文件，不会撞 CDN 老缓存。
-       CDN 失败回退：若 CDN 边缘偶发不可达（401/网络抖动），自动回退到同源
-       GitHub Pages（相对路径），保证阅读器永不因 CDN 抽风而白屏。 */
-    const CDN_BASE = 'https://cdn.jsdelivr.net/gh/Cesar-C-C/kids-books@main/';
+       “文件名必换”这条项目铁律同时也是 Service Worker 的缓存指纹。 */
+    const KBCDN = window.KBCDN;
+    const CDN_PATH = '/gh/Cesar-C-C/kids-books@main/';
     /* Same-origin base: book pages live at /<repo>/books/<id>/index.html, so a
        bare relative "books/<id>/..." would resolve against the PAGE url and
        DOUBLE UP (/books/<id>/books/<id>/... -> 404). Compute the repo root from
@@ -111,7 +113,7 @@ window.Reader = {
        the site root). */
     const REPO_BASE = (location.pathname.match(/^(.*?)\/books\//) || [, ''])[1];
     const sameOrigin = p => (REPO_BASE + '/books/' + BOOK.id + '/' + p);
-    const fallbackUrl = p => sameOrigin(p);
+    const bookRel = p => 'books/' + BOOK.id + '/' + p;
     /* AUDIO is served SAME-ORIGIN (GitHub Pages), NOT via jsDelivr.
        Lesson from the field: jsDelivr caches gh files by PATH and IGNORES the
        ?v=N query bust, so any in-place audio content change (e.g. the
@@ -123,14 +125,19 @@ window.Reader = {
     const abs = p => {
       if (/^https?:\/\//i.test(p)) return p;
       if (/\.mp3$/i.test(p)) return sameOrigin(p);                 // audio: same-origin (root-relative)
-      return CDN_BASE + 'books/' + BOOK.id + '/' + p;             // images: CDN
+      /* images: first candidate from the cascade */
+      return KBCDN ? KBCDN.candidates(bookRel(p))[0]
+                   : ('https://gcore.jsdelivr.net' + CDN_PATH + bookRel(p));
     };
-    const absWithFallback = p => {
-      const url = abs(p);
-      const fb = fallbackUrl(p);
-      if (/^https?:\/\//i.test(p)) return url;   // absolute: no fallback possible
-      return `${url}" onerror="this.onerror=null;this.src='${fb}'`;
+    /* Returns "src + trailing attributes" (closing the src attribute itself),
+       used as src="${imgSrcAttrs(p)}" in the templates below. */
+    const imgSrcAttrs = p => {
+      if (/^https?:\/\//i.test(p)) return p;                        // absolute: no fallback possible
+      if (KBCDN) return KBCDN.attrs(bookRel(p));
+      /* cdn.js 没加载（理论上不会）：退回单节点 + 同源，保证阅读器不白屏 */
+      return `${abs(p)}" onerror="this.onerror=null;this.src='${sameOrigin(p)}'`;
     };
+    const absWithFallback = imgSrcAttrs;    // legacy alias, same contract
 
     const pageUrl  = (i,lang) => aUrl(`${BOOK.audioDir}/page_${pad2(i)}_${lang}.mp3`);
     const wordUrl  = (name,lang) => aUrl(`${BOOK.audioDir}/word_${sanitize(name)}_${lang}.mp3`);
@@ -144,9 +151,10 @@ window.Reader = {
     function playAudio(url, lang, onDone){ if(settings.muted){ if(onDone) onDone(); return; }
       audioEl.playbackRate = settings.speed;
       audioEl.onerror = ()=>{ audioEl.onerror=null;
-        // CDN 失败 → 回退同源根相对路径（仍是预制 MP3，绝不回退 TTS）
-        if(url.indexOf(CDN_BASE)===0){
-          const rel = url.slice(CDN_BASE.length + ('books/'+BOOK.id+'/').length);
+        // 音频默认走同源；万一将来改回 CDN，这里仍是「CDN 失败 → 同源根相对路径」的兜底
+        // （仍是预制 MP3，绝不回退 TTS）
+        if(url.indexOf('jsdelivr.net') >= 0){
+          const rel = url.replace(/^https?:\/\/[^/]+\/gh\/[^/]+\/[^/]+\/@[^/]+\//, '');
           audioEl.onerror = ()=>{ audioEl.onerror=null; if(onDone) onDone(); };
           audioEl.src = sameOrigin(rel);
           const p2 = audioEl.play(); if(p2 && p2.catch) p2.catch(()=>{ if(onDone) onDone(); });

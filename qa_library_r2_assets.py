@@ -40,7 +40,20 @@ for book_id in selected:
     expected = {entry['newAsset'] for entry in manifest if entry['book'] == book_id}
     assert paths == expected, f'{book_id}: active asset set differs from approved manifest'
     cover = next(entry for entry in manifest if entry['book'] == book_id and entry['kind'] == 'cover')
-    assert f"books/{book_id}/{cover['newAsset']}" in homepage, f'{book_id}: homepage cover is stale'
+    # 首页封面可以是原图，也可以是 tools/gen_pwa_covers.py 生成的 480px 派生图
+    # （_card480）。派生图的文件名里带着源图全名，所以「指向新美术、不残留旧图」
+    # 这条意图照样成立；两者都不认才算 stale。
+    cover_ref = f"books/{book_id}/{cover['newAsset']}"
+    card_ref = cover_ref[:-len('.webp')] + '_card480.webp'
+    assert cover_ref in homepage or card_ref in homepage, f'{book_id}: homepage cover is stale'
+    if card_ref in homepage:
+        card_file = ROOT / card_ref
+        assert card_file.is_file(), f'{book_id}: homepage card cover missing: {card_ref}'
+        with Image.open(card_file) as image:
+            assert image.format == 'WEBP', f'{card_file}: not WebP'
+            assert image.size[0] == 480, f'{card_file}: unexpected width {image.size}'
+        assert card_file.stat().st_size * 4 < (ROOT / cover_ref).stat().st_size, \
+            f'{card_file}: card derivative should be much smaller than the original'
     assert f"books/{book_id}/{cover['oldAsset']}" not in homepage, f'{book_id}: old homepage cover remains'
     for asset in paths:
         file = ROOT / 'books' / book_id / asset
