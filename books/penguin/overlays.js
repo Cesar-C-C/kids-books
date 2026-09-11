@@ -27,7 +27,7 @@ window.OVL = {
       line:"I'm the Egg — kept warm on Papa's feet!", lineZh:'我是蛋，在爸爸脚上暖暖地待着！', lineKey:'penguin_04_0'}) +
     partSVG({px:470,py:380,name:'Papa',nameZh:'爸爸',fact:'protects the egg from cold',factZh:'保护蛋不受冻',
       line:"I'm Papa — I protect the egg from the cold!", lineZh:'我是爸爸，保护蛋不受冻！', lineKey:'penguin_04_1'}) +
-    partSVG({px:1090,py:245,name:'Snowflake',nameZh:'雪花',fact:'gently falling down',factZh:'轻轻飘落',
+    partSVG({px:1095, py:295,name:'Snowflake',nameZh:'雪花',fact:'gently falling down',factZh:'轻轻飘落',
       line:"I'm a Snowflake — gently falling down!", lineZh:'我是雪花，轻轻地飘下来！', lineKey:'penguin_04_2'})
   ),
   penguin_05: () => svgWrap(
@@ -35,7 +35,7 @@ window.OVL = {
       line:"I'm the Chick — I'm breaking out of the egg!", lineZh:'我是小宝宝，正在破壳而出！', lineKey:'penguin_05_0'}) +
     partSVG({px:350,py:390,name:'Parent',nameZh:'爸爸妈妈',fact:'so happy to meet baby',factZh:'很高兴见到宝宝',
       line:"I'm the Parent — so happy to meet baby!", lineZh:'我是爸爸妈妈，见到宝宝好开心！', lineKey:'penguin_05_1'}) +
-    partSVG({px:720,py:710,name:'Eggshell',nameZh:'蛋壳',fact:'broken into pieces',factZh:'碎成一片片',
+    partSVG({px:785, py:630,name:'Eggshell',nameZh:'蛋壳',fact:'broken into pieces',factZh:'碎成一片片',
       line:"I'm the Eggshell — broken into tiny pieces!", lineZh:'我是蛋壳，碎成一片片！', lineKey:'penguin_05_2'})
   ),
   penguin_06: () => svgWrap(

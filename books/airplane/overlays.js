@@ -8,37 +8,37 @@
 window.OVL = {
   overview(){
     const parts=[
-      {name:'Tail', nameZh:'尾翼', fact:'keeps the plane steady and helps it turn left or right.', factZh:'让飞机保持平稳，并帮助它左右转弯。', px:310,py:250,
+      {name:'Tail', nameZh:'尾翼', fact:'keeps the plane steady and helps it turn left or right.', factZh:'让飞机保持平稳，并帮助它左右转弯。', px:285, py:385,
        line:"I'm the Tail — I help the plane turn and stay steady!", lineZh:'我是尾翼，帮飞机转弯、保持平稳！', lineKey:'overview_0'},
-      {name:'Fuselage', nameZh:'机身', fact:'the long body that carries pilots, passengers and bags.', factZh:'长长的机身，载着飞行员、乘客和行李。', px:580,py:400,
+      {name:'Fuselage', nameZh:'机身', fact:'the long body that carries pilots, passengers and bags.', factZh:'长长的机身，载着飞行员、乘客和行李。', px:580, py:500,
        line:"I'm the Fuselage — I carry everyone and everything!", lineZh:'我是机身，装着所有人还有行李！', lineKey:'overview_1'},
-      {name:'Cockpit', nameZh:'驾驶舱', fact:'the front room where the pilots fly the plane.', factZh:'飞机最前面的驾驶舱，飞行员在这里开飞机。', px:960,py:350,
+      {name:'Cockpit', nameZh:'驾驶舱', fact:'the front room where the pilots fly the plane.', factZh:'飞机最前面的驾驶舱，飞行员在这里开飞机。', px:1055, py:508,
        line:"I'm the Cockpit — this is where the pilots fly!", lineZh:'我是驾驶舱，飞行员就在这里开飞机！', lineKey:'overview_2'},
-      {name:'Wing', nameZh:'机翼', fact:'makes LIFT — the upward push that holds the plane in the sky.', factZh:'产生升力——把飞机托在空中的向上力量。', px:320,py:420,
+      {name:'Wing', nameZh:'机翼', fact:'makes LIFT — the upward push that holds the plane in the sky.', factZh:'产生升力——把飞机托在空中的向上力量。', px:240, py:520,
        line:"I'm the Wing — I make the lift that keeps us up!", lineZh:'我是机翼，产生升力让我们飞起来！', lineKey:'overview_3'},
-      {name:'Engine', nameZh:'引擎', fact:'burns fuel and pushes air BACK to make THRUST (forward push).', factZh:'燃烧燃料、把空气向后推，从而产生推力（向前的力量）。', px:570,py:520,
+      {name:'Engine', nameZh:'引擎', fact:'burns fuel and pushes air BACK to make THRUST (forward push).', factZh:'燃烧燃料、把空气向后推，从而产生推力（向前的力量）。', px:700, py:600,
        line:"I'm the Engine — I burn fuel to push us forward!", lineZh:'我是引擎，燃烧燃料推着飞机前进！', lineKey:'overview_4'},
-      {name:'Landing gear', nameZh:'起落架', fact:'the wheels that come DOWN for takeoff and landing, and fold UP in the air.', factZh:'就是轮子，起飞和降落时放下，在空中收起。', px:920,py:580,
+      {name:'Landing gear', nameZh:'起落架', fact:'the wheels that come DOWN for takeoff and landing, and fold UP in the air.', factZh:'就是轮子，起飞和降落时放下，在空中收起。', px:997, py:628,
        line:"I'm the Landing Gear — wheels down, here we go!", lineZh:'我是起落架，放下轮子就可以降落啦！', lineKey:'overview_5'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
   },
   fuselage(){
     const parts=[
-      {name:'Cockpit', nameZh:'驾驶舱', fact:'the front room where pilots fly the plane.', factZh:'飞机最前面的驾驶舱，飞行员在这里开飞机。', px:290,py:460,
+      {name:'Cockpit', nameZh:'驾驶舱', fact:'the front room where pilots fly the plane.', factZh:'飞机最前面的驾驶舱，飞行员在这里开飞机。', px:918, py:468,
        line:"I'm the Cockpit — pilots sit here and steer!", lineZh:'我是驾驶舱，飞行员坐这里掌舵！', lineKey:'fuselage_0'},
       {name:'Cabin', nameZh:'客舱', fact:'where passengers sit (above the floor).', factZh:'乘客坐的地方（在地板上层）。', px:600,py:490,
        line:"I'm the Cabin — passengers sit here and look out the windows!", lineZh:'我是客舱，乘客坐这里看窗外！', lineKey:'fuselage_1'},
-      {name:'Cargo hold', nameZh:'货舱', fact:'the space below the floor for bags and boxes.', factZh:'地板下面装行李和箱子的空间。', px:910,py:460,
+      {name:'Cargo hold', nameZh:'货舱', fact:'the space below the floor for bags and boxes.', factZh:'地板下面装行李和箱子的空间。', px:790, py:540,
        line:"I'm the Cargo Hold — suitcases and boxes ride down here!", lineZh:'我是货舱，行李箱和货物都在下面！', lineKey:'fuselage_2'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
   },
   wing(){
     const parts=[
-      {name:'Wing', nameZh:'机翼', fact:'the big surface that holds the plane up in the air.', factZh:'把飞机托在空中的巨大翼面。', px:500,py:350,
+      {name:'Wing', nameZh:'机翼', fact:'the big surface that holds the plane up in the air.', factZh:'把飞机托在空中的巨大翼面。', px:450, py:480,
        line:"I'm the Wing — my curved shape holds the plane up!", lineZh:'我是机翼，弯弯的形状把飞机托起来！', lineKey:'wing_0'},
-      {name:'Aileron', nameZh:'副翼', fact:'a small hinged flap on the back edge that helps the plane roll and turn.', factZh:'机翼后缘的小襟翼，帮助飞机滚转和转弯。', px:920,py:400,
+      {name:'Aileron', nameZh:'副翼', fact:'a small hinged flap on the back edge that helps the plane roll and turn.', factZh:'机翼后缘的小襟翼，帮助飞机滚转和转弯。', px:285, py:478,
        line:"I'm the Aileron — I tilt the wings to help us turn!", lineZh:'我是副翼，帮助机翼倾斜来转弯！', lineKey:'wing_1'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
@@ -61,9 +61,9 @@ window.OVL = {
     const parts=[
       {name:'Rudder', nameZh:'方向舵', fact:'moves side to side to turn the plane left or right.', factZh:'左右摆动，让飞机向左或向右转。', px:555,py:265,
        line:"I'm the Rudder — I swing left and right to steer!", lineZh:'我是方向舵，左右摆动让飞机转向！', lineKey:'tail_0'},
-      {name:'Elevator', nameZh:'升降舵', fact:'moves up and down to tip the nose up or down.', factZh:'上下摆动，让机头上仰或下俯。', px:720,py:400,
+      {name:'Elevator', nameZh:'升降舵', fact:'moves up and down to tip the nose up or down.', factZh:'上下摆动，让机头上仰或下俯。', px:430, py:522,
        line:"I'm the Elevator — I tip the nose up or down!", lineZh:'我是升降舵，让机头上仰或下俯！', lineKey:'tail_1'},
-      {name:'Tail', nameZh:'尾翼', fact:'the tail assembly keeps the plane steady in the air.', factZh:'尾翼让飞机在空中保持平稳。', px:480,py:260,
+      {name:'Tail', nameZh:'尾翼', fact:'the tail assembly keeps the plane steady in the air.', factZh:'尾翼让飞机在空中保持平稳。', px:660, py:300,
        line:"I'm the Tail — I keep the plane flying straight and stable!", lineZh:'我是尾翼，让飞机飞得又直又稳！', lineKey:'tail_2'},
     ];
     return svgWrap(highlight+parts.map(partSVG).join('')
@@ -73,7 +73,7 @@ window.OVL = {
   engine(){
     const parts=partSVG({name:'Engine', nameZh:'引擎', fact:'sucks in air, burns fuel, and shoots hot air BACK to make THRUST.', factZh:'吸入空气、燃烧燃料，把热气向后喷出产生推力。', px:500,py:330,
       line:"I'm the Engine — air in, fuel burned, hot air out!", lineZh:'我是引擎，吸气、燃烧、喷气！', lineKey:'engine_0'})
-      + partSVG({name:'Thrust', nameZh:'推力', fact:'the forward push from the engine that moves the plane.', factZh:'引擎产生的向前推力。', px:1082,py:412,
+      + partSVG({name:'Thrust', nameZh:'推力', fact:'the forward push from the engine that moves the plane.', factZh:'引擎产生的向前推力。', px:155, py:400,
       line:"I'm Thrust — hot air shoots back and pushes us forward!", lineZh:'我是推力，热气向后喷，推动飞机前进！', lineKey:'engine_1'});
     const air=`<g fill="#3a86ff"><circle class="p-in" cx="250" cy="330" r="7"/><circle class="p-in b" cx="250" cy="305" r="7"/><circle class="disable"/><circle class="p-in c" cx="250" cy="355" r="7"/></g>`;
     const exhaust=`<g fill="#ef476f"><circle class="p-out" cx="650" cy="330" r="7"/><circle class="p-out b" cx="650" cy="305" r="7"/><circle class="p-out c" cx="650" cy="355" r="7"/></g>`;
@@ -90,13 +90,13 @@ window.OVL = {
        line:"I'm Weight — gravity pulling the plane down!", lineZh:'我是重力，把飞机往下拉！', lineKey:'forces_1'},
       {name:'THRUST', nameZh:'推力', fact:'the forward push from the engines.', factZh:'引擎产生的向前推力。', px:1070,py:418,
        line:"I'm Thrust — the forward push from the engines!", lineZh:'我是推力，引擎推着我向前冲！', lineKey:'forces_2'},
-      {name:'DRAG', nameZh:'阻力', fact:'air pushing back against the plane, slowing it down.', factZh:'空气向后推飞机，让它慢下来。', px:196,py:418,
+      {name:'DRAG', nameZh:'阻力', fact:'air pushing back against the plane, slowing it down.', factZh:'空气向后推飞机，让它慢下来。', px:120, py:425,
        line:"I'm Drag — air pushing back to slow us down!", lineZh:'我是阻力，空气往后推让我慢下来！', lineKey:'forces_3'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
   },
   gear(){
-    const part=partSVG({name:'Landing gear', nameZh:'起落架', fact:'the wheels that come DOWN for takeoff and landing, and fold UP in the air.', factZh:'就是轮子，起飞和降落时放下，在空中收起。', px:500,py:330,
+    const part=partSVG({name:'Landing gear', nameZh:'起落架', fact:'the wheels that come DOWN for takeoff and landing, and fold UP in the air.', factZh:'就是轮子，起飞和降落时放下，在空中收起。', px:338, py:528,
       line:"I'm the Wheels — I come down for takeoff and landing!", lineZh:'我是起落架，起飞降落时放下来！', lineKey:'gear_0'});
     return svgWrap(part + capSVG('Wheels DOWN for takeoff & landing','500','640','#2b2d42','middle',18));
   },

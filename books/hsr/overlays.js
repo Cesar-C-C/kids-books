@@ -39,7 +39,7 @@ window.OVL = {
       line:"I'm the field — green land beside the track!", lineZh:'我是田野，轨道旁的绿色大地！', lineKey:'hsr_05_2'})
   ),
   hsr_06: () => svgWrap(
-    partSVG({px:635,py:380,name:'Pantograph',nameZh:'受电弓',fact:'collects electricity',factZh:'收集电力',
+    partSVG({px:700, py:408,name:'Pantograph',nameZh:'受电弓',fact:'collects electricity',factZh:'收集电力',
       line:"I'm the pantograph — I collect electricity!", lineZh:'我是受电弓，我收集电力！', lineKey:'hsr_06_0'}) +
     partSVG({px:955,py:135,name:'Overhead wire',nameZh:'电线',fact:'carries electric power',factZh:'输送电力',
       line:"I'm the wire — I carry electric power!", lineZh:'我是电线，我输送电力！', lineKey:'hsr_06_1'}) +
@@ -67,7 +67,7 @@ window.OVL = {
       line:"I'm the train — coming out of the tunnel!", lineZh:'我是高铁，从隧道里出来！', lineKey:'hsr_09_0'}) +
     partSVG({px:755,py:365,name:'Tunnel',nameZh:'隧道',fact:'a hole through the mountain',factZh:'穿过山体的洞',
       line:"I'm the tunnel — a hole through the mountain!", lineZh:'我是隧道，穿过山体的洞！', lineKey:'hsr_09_1'}) +
-    partSVG({px:1050,py:185,name:'Mountains',nameZh:'大山',fact:'train goes right through',factZh:'火车直接穿过去',
+    partSVG({px:1050, py:245,name:'Mountains',nameZh:'大山',fact:'train goes right through',factZh:'火车直接穿过去',
       line:"We're mountains — the train goes right through us!", lineZh:'我们是大山，火车直接从我们身上穿过！', lineKey:'hsr_09_2'})
   ),
   hsr_10: () => svgWrap(
@@ -91,7 +91,7 @@ window.OVL = {
       line:"I'm the train — all my parts work together!", lineZh:'我是高铁，所有部件一起工作！', lineKey:'hsr_12_0'}) +
     partSVG({px:710,py:685,name:'Bridge',nameZh:'桥梁',fact:'crosses water',factZh:'跨越水面',
       line:"I'm the bridge — I cross the water!", lineZh:'我是桥梁，跨越水面！', lineKey:'hsr_12_1'}) +
-    partSVG({px:180,py:170,name:'Pantograph',nameZh:'受电弓',fact:'brings power',factZh:'带来电力',
+    partSVG({px:228, py:150,name:'Pantograph',nameZh:'受电弓',fact:'brings power',factZh:'带来电力',
       line:"I'm the pantograph — I bring the power!", lineZh:'我是受电弓，带来电力！', lineKey:'hsr_12_2'})
   )
 };

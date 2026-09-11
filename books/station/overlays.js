@@ -9,7 +9,7 @@ window.OVL = {
   station_what: () => svgWrap(
     partSVG({px:600,py:280,name:'Space station',nameZh:'太空站',fact:'a big house in space where astronauts live',factZh:'宇航员在太空生活的大房子',
       line:"I'm the space station — a big house in space!", lineZh:'我是太空站，太空里的大房子！', lineKey:'station_what_0'}) +
-    partSVG({px:480,py:600,name:'Astronaut',nameZh:'宇航员',fact:'a person who travels and works in space',factZh:'去太空旅行和工作的人',
+    partSVG({px:490, py:300,name:'Astronaut',nameZh:'宇航员',fact:'a person who travels and works in space',factZh:'去太空旅行和工作的人',
       line:"I'm an astronaut — I travel and work in space!", lineZh:'我是宇航员，去太空旅行和工作！', lineKey:'station_what_1'})
   ),
   station_overview: () => svgWrap(
@@ -17,15 +17,15 @@ window.OVL = {
       line:"I'm a module — a round room joined to the station!", lineZh:'我是舱段，连在太空站上的圆圆房间！', lineKey:'station_overview_0'}) +
     partSVG({px:200,py:200,name:'Solar panel',nameZh:'太阳能板',fact:'the big blue wings that catch sunlight',factZh:'收集阳光的大蓝翅膀',
       line:"I'm a solar panel — big blue wings that catch sunlight!", lineZh:'我是太阳能板，收集阳光的大蓝翅膀！', lineKey:'station_overview_1'}) +
-    partSVG({px:750,py:400,name:'Robot arm',nameZh:'机械臂',fact:'a long arm that reaches out into space',factZh:'伸到太空里的长手臂',
+    partSVG({px:940, py:300,name:'Robot arm',nameZh:'机械臂',fact:'a long arm that reaches out into space',factZh:'伸到太空里的长手臂',
       line:"I'm the robot arm — a long arm reaching into space!", lineZh:'我是机械臂，伸到太空里的长手臂！', lineKey:'station_overview_2'})
   ),
   station_living: () => svgWrap(
-    partSVG({px:440,py:400,name:'Sleeping bag',nameZh:'睡袋',fact:'a cozy bag to sleep in, stuck to the wall',factZh:'贴在墙上的睡袋，可以睡觉',
+    partSVG({px:200, py:330,name:'Sleeping bag',nameZh:'睡袋',fact:'a cozy bag to sleep in, stuck to the wall',factZh:'贴在墙上的睡袋，可以睡觉',
       line:"I'm the sleeping bag — a cozy bag stuck to the wall!", lineZh:'我是睡袋，贴在墙上的舒服袋子！', lineKey:'station_living_0'}) +
-    partSVG({px:290,py:660,name:'Table',nameZh:'餐桌',fact:'where astronauts eat their space meals',factZh:'宇航员吃饭的小桌子',
+    partSVG({px:450, py:500,name:'Table',nameZh:'餐桌',fact:'where astronauts eat their space meals',factZh:'宇航员吃饭的小桌子',
       line:"I'm the table — where astronauts eat in space!", lineZh:'我是餐桌，宇航员在太空吃饭的地方！', lineKey:'station_living_1'}) +
-    partSVG({px:620,py:500,name:'Treadmill',nameZh:'跑步机',fact:'keeps astronauts strong in space',factZh:'让宇航员在太空保持强壮',
+    partSVG({px:780, py:430,name:'Treadmill',nameZh:'跑步机',fact:'keeps astronauts strong in space',factZh:'让宇航员在太空保持强壮',
       line:"I'm the treadmill — I keep astronauts strong in space!", lineZh:'我是跑步机，让宇航员在太空保持强壮！', lineKey:'station_living_2'})
   ),
   station_lab: () => svgWrap(

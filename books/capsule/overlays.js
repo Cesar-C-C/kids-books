@@ -29,7 +29,7 @@ window.OVL = {
   cp_heatshield: () => svgWrap(
     partSVG({px:550,py:560,name:'Heat shield',nameZh:'防热盾',fact:'takes the heat and gets charred',factZh:'挡下热量，被烧得焦黑',
       line:"I'm the heat shield — I take the heat and get charred!", lineZh:'我是防热盾，挡下热量被烧焦！', lineKey:'cp_heatshield_0'}) +
-    partSVG({px:350,py:490,name:'Friction glow',nameZh:'摩擦火焰',fact:'the fire made by rubbing against air',factZh:'和空气摩擦产生的火焰',
+    partSVG({px:255, py:480,name:'Friction glow',nameZh:'摩擦火焰',fact:'the fire made by rubbing against air',factZh:'和空气摩擦产生的火焰',
       line:"I'm the friction glow — the fire from rubbing the air!", lineZh:'我是摩擦火焰，和空气摩擦生的火！', lineKey:'cp_heatshield_1'})
   ),
   cp_cabin: () => svgWrap(
@@ -59,7 +59,7 @@ window.OVL = {
       line:"I'm the exhaust — the fire shooting down!", lineZh:'我是喷焰，向下喷出的火焰！', lineKey:'cp_retro_1'})
   ),
   cp_window: () => svgWrap(
-    partSVG({px:975,py:630,name:'Window',nameZh:'舷窗',fact:'the round window to the outside',factZh:'通往外面的圆窗',
+    partSVG({px:900, py:550,name:'Window',nameZh:'舷窗',fact:'the round window to the outside',factZh:'通往外面的圆窗',
       line:"I'm the window — the round window to the outside!", lineZh:'我是舷窗，通往外面的圆窗！', lineKey:'cp_window_0'}) +
     partSVG({px:800,py:350,name:'Earth',nameZh:'地球',fact:'our blue home planet',factZh:'我们蓝色的家园星球',
       line:"I'm Earth — our blue home planet!", lineZh:'我是地球，我们蓝色的家园星球！', lineKey:'cp_window_1'}) +

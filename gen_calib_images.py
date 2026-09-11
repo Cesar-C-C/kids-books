@@ -22,7 +22,10 @@ def main():
     done = 0
     for book, info in data.items():
         for pg in info['pages']:
-            impath = os.path.join(ROOT, 'books', book, pg['img'])
+            # img may carry a cache-busting query (e.g. 'assets/02_earth_c_r2.webp?v=6aea572');
+            # strip it so the filesystem lookup finds the real file.
+            imgfile = pg['img'].split('?', 1)[0]
+            impath = os.path.join(ROOT, 'books', book, imgfile)
             if not os.path.exists(impath):
                 print(f"-- skip {book}/{pg['ov']}: img missing {pg['img']}")
                 continue

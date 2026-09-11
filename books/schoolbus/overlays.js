@@ -23,7 +23,7 @@ window.OVL = {
   },
   sb_inside(){
     return svgWrap(
-      partSVG({px:854, py:390, name:'Seats', nameZh:'座位', fact:'cozy seats in rows', factZh:'一排排舒服的座位', line:"Sit here with your friends!", lineZh:'和好朋友坐在这里吧！', lineKey:'sb_inside_0', bg:'dark'}) +
+      partSVG({px:640, py:300, name:'Seats', nameZh:'座位', fact:'cozy seats in rows', factZh:'一排排舒服的座位', line:"Sit here with your friends!", lineZh:'和好朋友坐在这里吧！', lineKey:'sb_inside_0', bg:'dark'}) +
       partSVG({px:610, py:634, name:'Aisle', nameZh:'走道', fact:'the walkway in the middle', factZh:'中间的走道', line:"Walk down me to your seat.", lineZh:'沿着我走到你的座位。', lineKey:'sb_inside_1', bg:'dark'}) +
       partSVG({px:1081, py:244, name:'Window', nameZh:'车窗', fact:'where we look out', factZh:'看外面的窗', line:"Look outside with me!", lineZh:'和我一起看外面！', lineKey:'sb_inside_2', bg:'light'}) +
       partSVG({px:813, py:341, name:'Friend', nameZh:'小伙伴', fact:'a happy child on board', factZh:'车上的开心小朋友', line:"Hi! I'm riding to school!", lineZh:'嗨！我正坐车去幼儿园！', lineKey:'sb_inside_3', bg:'dark'})
@@ -33,7 +33,7 @@ window.OVL = {
     return svgWrap(
       partSVG({px:394, py:394, name:'Tire', nameZh:'轮胎', fact:'thick rubber that grips road', factZh:'抓路面的厚橡胶', line:"My rubber grips the road tightly!", lineZh:'我的橡胶紧紧抓着路面！', lineKey:'sb_wheels_0', bg:'dark'}) +
       partSVG({px:431, py:382, name:'Hubcap', nameZh:'轮毂', fact:'shiny metal center', factZh:'亮亮的金属中心', line:"I spin round and round!", lineZh:'我转呀转！', lineKey:'sb_wheels_1', bg:'light'}) +
-      partSVG({px:260, py:244, name:'Treads', nameZh:'胎纹', fact:'grooves that stop slipping', factZh:'防滑的凹槽', line:"My grooves help the bus not slip.", lineZh:'我的花纹让巴士不打滑。', lineKey:'sb_wheels_2', bg:'dark'}) +
+      partSVG({px:330, py:150, name:'Treads', nameZh:'胎纹', fact:'grooves that stop slipping', factZh:'防滑的凹槽', line:"My grooves help the bus not slip.", lineZh:'我的花纹让巴士不打滑。', lineKey:'sb_wheels_2', bg:'dark'}) +
       partSVG({px:878, py:699, name:'Road', nameZh:'马路', fact:'the street the bus drives on', factZh:'巴士行驶的马路', line:"Smooth and strong — that's me!", lineZh:'又平又结实——就是我！', lineKey:'sb_wheels_3', bg:'light'})
     );
   },
@@ -57,7 +57,7 @@ window.OVL = {
     return svgWrap(
       partSVG({px:447, py:366, name:'Bus aide', nameZh:'随车老师', fact:'helps the children', factZh:'照顾小朋友', line:"I help every child feel safe!", lineZh:'我让每个小朋友都安心！', lineKey:'sb_aide_0', bg:'light'}) +
       partSVG({px:837, py:390, name:'Child', nameZh:'小朋友', fact:'gets help with the belt', factZh:'被帮忙系安全带', line:"Thank you for helping me!", lineZh:'谢谢你帮我！', lineKey:'sb_aide_1', bg:'dark'}) +
-      partSVG({px:829, py:569, name:'Seat', nameZh:'座位', fact:'where the child sits', factZh:'小朋友坐的位子', line:"Sit down and buckle up!", lineZh:'坐下，系好安全带！', lineKey:'sb_aide_2', bg:'dark'}) +
+      partSVG({px:835, py:245, name:'Seat', nameZh:'座位', fact:'where the child sits', factZh:'小朋友坐的位子', line:"Sit down and buckle up!", lineZh:'坐下，系好安全带！', lineKey:'sb_aide_2', bg:'dark'}) +
       partSVG({px:878, py:163, name:'Window', nameZh:'车窗', fact:'sunny view outside', factZh:'外面阳光的风景', line:"Look — the sun is shining!", lineZh:'看——太阳出来啦！', lineKey:'sb_aide_3', bg:'light'})
     );
   },

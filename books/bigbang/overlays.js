@@ -8,7 +8,7 @@
 window.OVL = {
   singularity(){
     const parts=[
-      {name:'Singularity', nameZh:'奇点', fact:'the tiny, super-hot point where the whole universe began.', factZh:'宇宙开始的地方，一个又小又超级热的点。', px:580,py:380,
+      {name:'Singularity', nameZh:'奇点', fact:'the tiny, super-hot point where the whole universe began.', factZh:'宇宙开始的地方，一个又小又超级热的点。', px:605, py:422,
        line:"Hi! I'm the Singularity — where the whole universe began!", lineZh:'嗨！我是奇点，整个宇宙都从我这里开始！', lineKey:'singularity_0'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
@@ -38,7 +38,7 @@ window.OVL = {
   },
   particles(){
     const parts=[
-      {name:'Particles', nameZh:'粒子', fact:'tiny cosmic building blocks that clump together to make everything.', factZh:'像宇宙积木一样的小颗粒，聚在一起组成万物。', px:680,py:500,
+      {name:'Particles', nameZh:'粒子', fact:'tiny cosmic building blocks that clump together to make everything.', factZh:'像宇宙积木一样的小颗粒，聚在一起组成万物。', px:658, py:483,
        line:"We're Particles — tiny building blocks of everything!", lineZh:'我们是粒子，组成万物的小积木！', lineKey:'particles_0'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
@@ -63,14 +63,14 @@ window.OVL = {
     const parts=[
       {name:'Sun', nameZh:'太阳', fact:'our nearest star, a big warm ball of light at the center.', factZh:'离我们最近的恒星，中心一颗温暖的大光球。', px:750,py:290,
        line:"I'm the Sun — your nearest star, warm and bright!", lineZh:'我是太阳，离你最近的恒星，又暖又亮！', lineKey:'solar_0'},
-      {name:'Earth', nameZh:'地球', fact:'our home planet, a tiny blue-and-green world.', factZh:'我们的家园，一颗蓝绿色的小星球。', px:350,py:570,
+      {name:'Earth', nameZh:'地球', fact:'our home planet, a tiny blue-and-green world.', factZh:'我们的家园，一颗蓝绿色的小星球。', px:240, py:585,
        line:"I'm Earth — your blue-and-green home!", lineZh:'我是地球，你蓝绿色的家！', lineKey:'solar_1'},
     ];
     return svgWrap(parts.map(partSVG).join(''));
   },
   universe(){
     const parts=[
-      {name:'Star', nameZh:'恒星', fact:'huge numbers of stars make up the universe.', factZh:'无数恒星一起组成了宇宙。', px:580,py:410,
+      {name:'Star', nameZh:'恒星', fact:'huge numbers of stars make up the universe.', factZh:'无数恒星一起组成了宇宙。', px:560, py:626,
        line:"So many stars make up the universe!", lineZh:'好多恒星一起组成宇宙！', lineKey:'universe_0'},
       {name:'Galaxy', nameZh:'星系', fact:'countless galaxies float in the universe.', factZh:'无数星系漂浮在宇宙之中。', px:840,py:190,
        line:"Countless galaxies float in me!", lineZh:'无数星系在我里面漂浮！', lineKey:'universe_1'},

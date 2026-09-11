@@ -4,7 +4,7 @@
    Output: calib/hotspots.json  { book: { audioDir, pages:[{page,ov,img,spots:[{n,px,py,name}]}] } } */
 const fs = require('fs'), vm = require('vm'), path = require('path');
 const root = process.cwd();
-const books = ['ocean','airplane','bigbang','seed','rocket','penguin','hsr','station','steamtrain','capsule','bus'];
+const books = ['ocean','airplane','bigbang','seed','rocket','penguin','hsr','station','steamtrain','capsule','bus','schoolbus'];
 const IMG_W=1216, IMG_H=832, LEFT=12.6, VIS=974.8, VB_H=667;
 const toPx = ovx => (ovx-LEFT)/VIS*IMG_W;
 const toPy = ovy => ovy/VB_H*IMG_H;

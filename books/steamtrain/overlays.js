@@ -14,7 +14,7 @@ window.OVL = {
     return svgWrap(
       partSVG({px:220, py:300, name:'Chimney', nameZh:'烟囱', fact:'the tall funnel that puffs smoke', factZh:'高高的烟囱，冒烟的地方',
                line:"Hi! I'm the chimney — I puff smoke up to the sky!", lineZh:'嗨！我是烟囱，把烟喷向天空！', lineKey:'st_parts_0'}) +
-      partSVG({px:585, py:265, name:'Steam dome', nameZh:'蒸汽包', fact:'where steam gathers at the top', factZh:'蒸汽聚集在顶上的圆包',
+      partSVG({px:415, py:260, name:'Steam dome', nameZh:'蒸汽包', fact:'where steam gathers at the top', factZh:'蒸汽聚集在顶上的圆包',
                line:"I'm the steam dome — I gather steam at the top!", lineZh:'我是蒸汽包，在顶上收集蒸汽！', lineKey:'st_parts_1'}) +
       partSVG({px:670, py:345, name:'Cab', nameZh:'司机室', fact:'where the driver sits and steers', factZh:'司机坐着开火车的地方',
                line:"This is the cab — the driver steers me from here!", lineZh:'这是司机室，司机在这里开车！', lineKey:'st_parts_2'}) +
@@ -28,9 +28,9 @@ window.OVL = {
   // 2. 炉膛 剖面图 — assets/03_firebox_v3.webp
   st_firebox(){
     return svgWrap(
-      partSVG({px:745, py:395, name:'Firebox', nameZh:'炉膛', fact:'where the coal burns', factZh:'煤炭燃烧的地方',
+      partSVG({px:390, py:470, name:'Firebox', nameZh:'炉膛', fact:'where the coal burns', factZh:'煤炭燃烧的地方',
                line:"I'm the firebox — this is where the coal burns hot!", lineZh:'我是炉膛，煤在这里烧得旺旺的！', lineKey:'st_firebox_0'}) +
-      partSVG({px:750, py:650, name:'Coal',    nameZh:'煤',   fact:'shoveled in to feed the fire', factZh:'铲进炉膛喂火的黑色燃料',
+      partSVG({px:685, py:480, name:'Coal',    nameZh:'煤',   fact:'shoveled in to feed the fire', factZh:'铲进炉膛喂火的黑色燃料',
                line:"I'm coal — shovel me in to feed the fire!", lineZh:'我是煤，把我铲进去喂火！', lineKey:'st_firebox_1'}) +
       partSVG({px:1080,py:460, name:'Fireman', nameZh:'司炉', fact:'shovels coal into the firebox', factZh:'把煤铲进炉膛的人',
                line:"I'm the fireman — I shovel coal to keep us going!", lineZh:'我是司炉，铲煤让火车不停！', lineKey:'st_firebox_2'})
@@ -52,11 +52,11 @@ window.OVL = {
   // 4. 蒸汽包 特写 — assets/05_steamdome_v3.webp
   st_steamdome(){
     return svgWrap(
-      partSVG({px:735, py:288, name:'Steam dome', nameZh:'蒸汽包', fact:'where steam gathers at the top', factZh:'蒸汽在顶部聚集的地方',
+      partSVG({px:560, py:250, name:'Steam dome', nameZh:'蒸汽包', fact:'where steam gathers at the top', factZh:'蒸汽在顶部聚集的地方',
                line:"I'm the steam dome — steam fills me up!", lineZh:'我是蒸汽包，蒸汽把我装满！', lineKey:'st_steamdome_0'}) +
-      partSVG({px:882, py:458, name:'Steam', nameZh:'蒸汽', fact:'fills the dome and pushes hard', factZh:'充满蒸汽包，使劲往上顶',
+      partSVG({px:600, py:640, name:'Steam', nameZh:'蒸汽', fact:'fills the dome and pushes hard', factZh:'充满蒸汽包，使劲往上顶',
                line:"I'm steam — I push hard inside the dome!", lineZh:'我是蒸汽，在包里使劲顶！', lineKey:'st_steamdome_1'}) +
-      partSVG({px:875, py:332, name:'Pressure', nameZh:'压力', fact:'the strong push of trapped steam', factZh:'蒸汽被憋住的强大推力',
+      partSVG({px:795, py:340, name:'Pressure', nameZh:'压力', fact:'the strong push of trapped steam', factZh:'蒸汽被憋住的强大推力',
                line:"Feel the pressure? I push the steam up high!", lineZh:'感觉到压力了吗？我把蒸汽往上顶！', lineKey:'st_steamdome_2'})
     );
   },
@@ -94,7 +94,7 @@ window.OVL = {
                line:"We're driving wheels — we grip the rails tight!", lineZh:'我们是动轮，紧紧抓住铁轨！', lineKey:'st_wheels_0'}) +
       partSVG({px:550, py:470, name:'Connecting rod', nameZh:'连杆', fact:'links all the wheels together', factZh:'把所有轮子连起来的杆',
                line:"I'm the connecting rod — I link all the wheels!", lineZh:'我是连杆，把所有轮子连起来！', lineKey:'st_wheels_1'}) +
-      partSVG({px:510, py:655, name:'Rail', nameZh:'钢轨', fact:'the shiny steel track the train rolls on', factZh:'火车滚动的亮亮铁轨',
+      partSVG({px:500, py:575, name:'Rail', nameZh:'钢轨', fact:'the shiny steel track the train rolls on', factZh:'火车滚动的亮亮铁轨',
                line:"I'm the rail — the shiny track we roll on!", lineZh:'我是钢轨，火车在我身上跑！', lineKey:'st_wheels_2'})
     );
   },
@@ -102,11 +102,11 @@ window.OVL = {
   // 8. 汽笛 场景 — assets/09_whistle_v3.webp
   st_whistle(){
     return svgWrap(
-      partSVG({px:520, py:280, name:'Whistle', nameZh:'汽笛', fact:'a brass trumpet that says TOOT!', factZh:'会发出"呜——！"的铜喇叭',
+      partSVG({px:400, py:220, name:'Whistle', nameZh:'汽笛', fact:'a brass trumpet that says TOOT!', factZh:'会发出"呜——！"的铜喇叭',
                line:"TOOT! I'm the whistle — hear me shout!", lineZh:'呜——！我是汽笛，听我喊！', lineKey:'st_whistle_0'}) +
-      partSVG({px:930, py:110, name:'Steam',   nameZh:'蒸汽', fact:'puffs out of the whistle', factZh:'从汽笛里喷出来的蒸汽',
+      partSVG({px:410, py:60, name:'Steam',   nameZh:'蒸汽', fact:'puffs out of the whistle', factZh:'从汽笛里喷出来的蒸汽',
                line:"I'm steam — I puff out of the whistle!", lineZh:'我是蒸汽，从汽笛里喷出来！', lineKey:'st_whistle_1'}) +
-      partSVG({px:515, py:605, name:'Driver',  nameZh:'司机', fact:'pulls the cord to blow the whistle', factZh:'拉绳子让汽笛响起来的人',
+      partSVG({px:745, py:400, name:'Driver',  nameZh:'司机', fact:'pulls the cord to blow the whistle', factZh:'拉绳子让汽笛响起来的人',
                line:"I'm the driver — I pull the cord to toot!", lineZh:'我是司机，拉绳子让汽笛响！', lineKey:'st_whistle_2'}) +
       partSVG({px:520, py:425, name:'Cord',    nameZh:'拉绳', fact:'the line the driver pulls', factZh:'司机拉的那根绳子',
                line:"I'm the cord — the driver pulls me!", lineZh:'我是拉绳，司机拉的就是我！', lineKey:'st_whistle_3'})
@@ -116,9 +116,9 @@ window.OVL = {
   // 9. 烟囱与烟 正面 — assets/10_chimney_v3.webp
   st_chimney(){
     return svgWrap(
-      partSVG({px:560, py:200, name:'Chimney', nameZh:'烟囱', fact:'the tall funnel that puffs smoke', factZh:'高高的烟囱，冒烟的地方',
+      partSVG({px:425, py:290, name:'Chimney', nameZh:'烟囱', fact:'the tall funnel that puffs smoke', factZh:'高高的烟囱，冒烟的地方',
                line:"I'm the chimney — tall and puffing smoke!", lineZh:'我是烟囱，高高的，冒着烟！', lineKey:'st_chimney_0'}) +
-      partSVG({px:330, py:150, name:'Smoke',   nameZh:'烟',   fact:'soft grey clouds floating up', factZh:'飘到天上的灰色云',
+      partSVG({px:450, py:110, name:'Smoke',   nameZh:'烟',   fact:'soft grey clouds floating up', factZh:'飘到天上的灰色云',
                line:"I'm smoke — soft grey clouds floating up!", lineZh:'我是烟，灰灰的云飘上天！', lineKey:'st_chimney_1'}) +
       partSVG({px:600, py:480, name:'Engine',  nameZh:'发动机', fact:'the front of the locomotive', factZh:'火车的前脸',
                line:"I'm the engine — the strong front of the train!", lineZh:'我是发动机，火车结实的前脸！', lineKey:'st_chimney_2'})
@@ -130,7 +130,7 @@ window.OVL = {
     return svgWrap(
       partSVG({px:950, py:400, name:'Tender', nameZh:'煤水车', fact:'the car behind the engine', factZh:'发动机后面的车厢',
                line:"I'm the tender — I ride behind the engine!", lineZh:'我是煤水车，跟在发动机后面！', lineKey:'st_tender_0'}) +
-      partSVG({px:410, py:270, name:'Coal', nameZh:'煤', fact:'black lumps to burn in the fire', factZh:'黑色的煤块，在火里燃烧',
+      partSVG({px:650, py:190, name:'Coal', nameZh:'煤', fact:'black lumps to burn in the fire', factZh:'黑色的煤块，在火里燃烧',
                line:"I'm coal — black lumps to burn for fire!", lineZh:'我是煤，黑色煤块给火里烧！', lineKey:'st_tender_1'}) +
       partSVG({px:590, py:485, name:'Water', nameZh:'水', fact:'turns to steam in the boiler', factZh:'在锅炉里变成蒸汽',
                line:"I'm water — I turn to steam in the boiler!", lineZh:'我是水，在锅炉里变成蒸汽！', lineKey:'st_tender_2'})
@@ -142,11 +142,11 @@ window.OVL = {
     return svgWrap(
       partSVG({px:420, py:435, name:'Engine',         nameZh:'发动机', fact:'the front part with the boiler', factZh:'前面装锅炉的部分',
                line:"I'm the engine — the front with the big boiler!", lineZh:'我是发动机，前面装着大锅炉！', lineKey:'st_journey_0'}) +
-      partSVG({px:590, py:120, name:'Steam & smoke',  nameZh:'蒸汽与烟', fact:'rises up and puffs out', factZh:'升起来，飘出去',
+      partSVG({px:340, py:90, name:'Steam & smoke',  nameZh:'蒸汽与烟', fact:'rises up and puffs out', factZh:'升起来，飘出去',
                line:"We're steam and smoke — we rise and puff out!", lineZh:'我们是蒸汽和烟，升起来飘出去！', lineKey:'st_journey_1'}) +
       partSVG({px:300, py:580, name:'Driving wheels', nameZh:'动轮',    fact:'rolling along the rails', factZh:'沿着铁轨滚动',
                line:"We're driving wheels — rolling along the rails!", lineZh:'我们是动轮，沿着铁轨滚！', lineKey:'st_journey_2'}) +
-      partSVG({px:785, py:440, name:'Tender',         nameZh:'煤水车', fact:'brings coal and water', factZh:'带来煤和水',
+      partSVG({px:630, py:450, name:'Tender',         nameZh:'煤水车', fact:'brings coal and water', factZh:'带来煤和水',
                line:"I'm the tender — I bring coal and water!", lineZh:'我是煤水车，带来煤和水！', lineKey:'st_journey_3'})
     );
   },

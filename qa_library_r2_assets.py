@@ -13,8 +13,14 @@ TARGET_BOOKS = (
 )
 
 def active_paths(book_id: str) -> set[str]:
+    """Active image paths referenced by book.js, with any cache-busting query
+    stripped. A versioned URL such as 'assets/02_earth_c_r2.webp?v=6aea572'
+    points at the same file as 'assets/02_earth_c_r2.webp'; the query only
+    exists to defeat browser/CDN caches at runtime and is asserted separately
+    by qa_books.js, so it must not break the file-level contract here."""
     source = (ROOT / "books" / book_id / "book.js").read_text(encoding="utf-8")
-    return set(re.findall(r"(?:img|coverImg)\s*:\s*['\"](assets/[^'\"]+)['\"]", source))
+    raw = re.findall(r"(?:img|coverImg)\s*:\s*['\"](assets/[^'\"]+)['\"]", source)
+    return {path.split("?", 1)[0] for path in raw}
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--books', nargs='+', choices=TARGET_BOOKS)
