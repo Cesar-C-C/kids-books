@@ -16,6 +16,11 @@
    安装为什么要写这么多分支
    · 只有 Chrome / Edge（安卓 + 桌面）会发 beforeinstallprompt，拿到它才能
      调 prompt() 弹出系统的安装框；Safari / Firefox / 微信一律没有。
+   · 鸿蒙的华为浏览器更绕：它会照常发 beforeinstallprompt，但**不弹系统框** ——
+     prompt() 立刻回一个 dismissed，用户什么都没看见，界面却说
+     「安装框被关掉了」（超哥在真机上遇到的）。现在按耗时把它和
+     「用户真的点了取消」区分开，并把华为官方的手动路径写进步骤：
+     页面右下角 ∷ → 添加至 → 桌面。
    · 「点安装没反应」几乎都出在两条静默路径上，两条都要堵死：
        ① 没有该事件 —— 旧版是 `if (!pendingPrompt) return;` 直接返回；
        ② prompt() 失败 —— 而它失败走的是**返回一个被拒绝的 Promise**，
@@ -100,9 +105,21 @@
   }
   function isWeChat() { return /MicroMessenger/i.test(navigator.userAgent); }
 
+  /* 鸿蒙（含华为浏览器）。
+     为什么单独识别：华为浏览器会照常发 beforeinstallprompt（内核是 Chromium），
+     但它的「装到桌面」是自己菜单里的一个动作，**不弹系统安装框** ——
+     于是 prompt() 会立刻回一个 dismissed：用户什么都没看见，
+     界面却说「安装框被关掉了」，白冤枉人。识别出来才能给对手动步骤，
+     也才能把话说准。注意必须在 Android 之前判：鸿蒙 UA 里带着 Android 兼容标记。 */
+  function isHuaweiBrowser() { return /HuaweiBrowser/i.test(navigator.userAgent); }
+  function isHarmony() {
+    return isHuaweiBrowser() || /HarmonyOS|OpenHarmony|ArkWeb/i.test(navigator.userAgent);
+  }
+
   function platformOf() {
     var ua = navigator.userAgent;
     if (isWeChat()) return 'wechat';
+    if (isHarmony()) return 'harmony';
     if (isIOS()) return 'ios';
     if (/Android/i.test(ua)) return /EdgA?\//.test(ua) ? 'edge-android' : 'android';
     if (/Edg\//.test(ua)) return 'edge-desktop';
@@ -115,6 +132,7 @@
   function platformName() {
     return {
       wechat: '微信内置浏览器', ios: 'iPhone / iPad 的 Safari', android: '安卓浏览器',
+      harmony: isHuaweiBrowser() ? '华为浏览器' : '鸿蒙浏览器',
       'edge-android': '安卓 Edge', 'edge-desktop': '桌面 Edge', 'opera-desktop': 'Opera',
       firefox: 'Firefox', 'chrome-desktop': '桌面 Chrome', 'safari-mac': 'macOS Safari',
       other: '当前浏览器',
@@ -136,6 +154,13 @@
         '在菜单里向下找，选「<b>添加到主屏幕</b>」',
         '点右上角「<b>添加</b>」，桌面就多了一个图标'];
       tip = 'iPhone / iPad 不提供自动安装接口，只能手动添加，这是苹果的限制。';
+    } else if (p === 'harmony') {
+      /* 路径取自华为官方支持文档（consumer.huawei.com …/zh-cn00448896）：
+         华为浏览器是「页面右下角 ∷ → 添加至 → 桌面」，不走系统安装框。 */
+      steps = ['点浏览器页面<b>右下角</b>的「<b>四点</b>」按钮（<b>∷</b>）',
+        '在菜单里选「<b>添加至</b>」→「<b>桌面</b>」（个别版本写「添加到主屏幕」）',
+        '确认后桌面会出现「小小探索家」图标，点开就能看'];
+      tip = '如果桌面图标右下角带<b>蓝色小闪电</b>，说明是以 PWA 方式添加的，属正常现象。';
     } else if (p === 'android' || p === 'edge-android') {
       steps = ['点浏览器右上角的 <b>⋮</b>（更多）',
         '选「<b>添加到主屏幕</b>」或「<b>安装应用</b>」',
@@ -327,7 +352,10 @@
     }
     if (pendingPrompt) {
       ui.installTitle.textContent = '装到桌面，像 App 一样打开';
-      ui.installNote.textContent = '点下面的按钮，浏览器会弹出确认框。';
+      /* 提前说清「可能没弹框」，免得点完才发现 —— 鸿蒙的浏览器就是这样 */
+      ui.installNote.textContent = platformOf() === 'harmony'
+        ? '点下面的按钮试试；要是没弹出确认框，它会直接给出手动步骤。'
+        : '点下面的按钮，浏览器会弹出确认框。';
       ui.installBtn.hidden = false;
       ui.installBtn.textContent = '安装到桌面';
       ui.installBtn.disabled = false;
@@ -363,6 +391,7 @@
     /* 同一个事件只能 prompt() 一次，用过立刻作废；浏览器之后会再给新机会 */
     pendingPrompt = null;
     ui.installBtn.disabled = true;
+    var t0 = Date.now();
 
     var settled = false;
     function settle(why, accepted) {
@@ -383,23 +412,40 @@
     try {
       pr = p.prompt();
     } catch (err) {
-      settle('浏览器这次没有弹出安装窗口，可以按下面的步骤手动添加。');
+      settle(noDialog(), false);
       return;
     }
-    var noDialog = '浏览器这次没有弹出安装窗口（多半是刚才那次安装机会已经用过了），' +
-      '可以按下面的步骤手动添加。';
     Promise.resolve(pr).then(function () {
       if (p.userChoice && p.userChoice.then) {
         p.userChoice.then(function (res) {
-          settle('刚才的安装框被关掉了，也可以按下面的步骤手动添加。',
-            res && res.outcome === 'accepted');
-        }).catch(function () { settle(noDialog); });
+          var ok = res && res.outcome === 'accepted';
+          if (ok) { settle('', true); return; }
+          /* 走到这里有两种可能，界面上的话不能一样，否则会冤枉用户：
+             · 真的弹了系统框、用户自己关掉了 —— 那说「被关掉了」是对的；
+             · 浏览器压根没有安装界面（鸿蒙的华为浏览器就是这样），
+               prompt() 立刻回一个 dismissed，用户什么都没看见。
+             靠耗时区分：人不可能在 800ms 内看完并点掉一个对话框。 */
+          var instant = Date.now() - t0 < 800;
+          settle(instant ? noDialog() : '刚才的安装框被关掉了，也可以按下面的步骤手动添加。', false);
+        }).catch(function () { settle(noDialog(), false); });
       } else {
-        settle(null, true);
+        settle('', true);
       }
     }, function () {
-      settle(noDialog);
+      settle(noDialog(), false);
     });
+  }
+
+  /* 浏览器没有给出安装框时的说明。
+     分两种：一种是这个浏览器压根不提供（鸿蒙），一种是本次机会用掉了。
+     后者别写太死 —— 真实原因只有浏览器知道。 */
+  function noDialog() {
+    if (platformOf() === 'harmony') {
+      return '这个浏览器不会弹出系统的安装框（它把「装到桌面」放在自己的菜单里），' +
+        '按下面的步骤手动添加，效果一样。';
+    }
+    return '浏览器这次没有弹出安装窗口（多半是刚才那次安装机会已经用过了），' +
+      '可以按下面的步骤手动添加。';
   }
 
   function showGuide(why) {

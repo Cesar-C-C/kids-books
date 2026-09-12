@@ -519,6 +519,46 @@ async function main() {
       promptPath.label === '安装到桌面' && promptPath.called === 1 && promptPath.dot,
       `按钮「${promptPath.label}」，prompt() 调用 ${promptPath.called} 次，小按钮角标=${promptPath.dot}`);
 
+    /* 鸿蒙（华为浏览器）实测行为：会照常发 beforeinstallprompt，但 prompt()
+       立刻回一个 dismissed —— 系统框根本没出现。旧文案写「安装框被关掉了」，
+       等于把浏览器的不作为说成用户的责任（超哥真机上遇到的就是这条）。
+       用鸿蒙 UA + 合成事件把这条路径钉死。 */
+    await cdp.send('Emulation.setUserAgentOverride', {
+      userAgent: 'Mozilla/5.0 (Phone; OpenHarmony 5.0) AppleWebKit/537.36 (KHTML, like Gecko) ' +
+        'Chrome/114.0.0.0 Safari/537.36 ArkWeb/4.1.6.1 Mobile HuaweiBrowser/5.0.8.300',
+    });
+    const harmony = await cdp.eval(`(() => {
+      let called = 0;
+      const ev = new Event('beforeinstallprompt');
+      Object.defineProperty(ev, 'prompt', { value: () => { called++; } });
+      Object.defineProperty(ev, 'userChoice', { value: Promise.resolve({ outcome: 'dismissed' }) });
+      window.dispatchEvent(ev);
+      const note = document.getElementById('kiNote').textContent.trim();
+      document.getElementById('kiBtn').click();
+      return { called, note };
+    })()`);
+    const harmonyRes = await waitFor(cdp, `(() => {
+      const g = document.getElementById('kiGuide');
+      return { ok: !g.hidden,
+               why: (g.querySelector('.kg-why') || {}).textContent || '',
+               text: g.textContent || '' };
+    })()`, { timeout: 10000 });
+    await sleep(300);
+    await saveShot(cdp, 'kb-harmony-guide.png');
+    /* 步骤展开时安装区写的是「按下面的步骤就能装到桌面」，不含平台名；
+       收起之后才会显示 —— 顺手用它验证鸿蒙被识别成「华为浏览器」
+       而不是「安卓浏览器」（鸿蒙 UA 里带着 Android 兼容标记，容易判错）。 */
+    const harmonyNote = await cdp.eval(`(() => {
+      document.getElementById('kiBtn').click();
+      return document.getElementById('kiNote').textContent.trim();
+    })()`);
+    check('鸿蒙上 prompt() 立刻 dismissed 时不写「安装框被关掉了」，并给华为官方手动路径',
+      harmonyRes.ok && harmony.called === 1 &&
+      harmonyRes.why.indexOf('被关掉') < 0 && /不会弹出/.test(harmonyRes.why) &&
+      /华为浏览器/.test(harmonyNote) && /添加至/.test(harmonyRes.text),
+      `说明「${harmonyRes.why}」；步骤含「添加至」=${/添加至/.test(harmonyRes.text)}；安装区「${harmonyNote}」`);
+    await cdp.send('Emulation.setUserAgentOverride', { userAgent: '' });
+
     const menuClose = await cdp.eval(`(() => {
       const s = document.getElementById('kbSheet');
       document.getElementById('kbClose').click();
