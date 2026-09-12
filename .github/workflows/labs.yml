@@ -21,4 +21,5 @@ jobs:
       - run: node qa_airframe_details.cjs
       - run: node qa_discovery_progress.cjs
       - run: node qa_v3_airplane_model.cjs
+      - run: node qa_v3_hsr_model.cjs
       - run: node qa_v3_engine.cjs

@@ -1,3 +1,5 @@
+// Browser contract for the explorer-architecture labs. hsr moved to the v3
+// studio and is covered by qa_v3_hsr_browser.cjs.
 const {chromium}=require('playwright');
 const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict');
 const root=__dirname,output=path.join(root,'.qa-labs');fs.mkdirSync(output,{recursive:true});
@@ -17,7 +19,7 @@ const server=http.createServer((req,res)=>{
   try{
     await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
     const base=process.env.LAB_BASE_URL||`http://127.0.0.1:${server.address().port}/kids-books/`;
-    for(const id of ['rocket','hsr','schoolbus']){
+    for(const id of ['rocket','schoolbus']){
       const page=await browser.newPage({viewport:{width:1440,height:1120},deviceScaleFactor:1});
       const errors=[],failures=[],remote=[];
       page.on('pageerror',e=>errors.push(e.message));

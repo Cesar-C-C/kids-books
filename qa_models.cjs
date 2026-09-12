@@ -1,6 +1,8 @@
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert/strict');
 const T=require('./labs/shared/vendor/three.min.js');
-for(const id of ['rocket','hsr','schoolbus']){
+// The explorer-architecture labs. hsr moved to the v3 studio and is covered by
+// qa_v3_hsr_model.cjs / qa_v3_hsr_browser.cjs.
+for(const id of ['rocket','schoolbus']){
   const context={window:{}};
   for(const file of ['parts.js','model.js'])vm.runInNewContext(fs.readFileSync(path.join(__dirname,'labs',id,file),'utf8'),context,{filename:id+'/'+file});
   const {LAB_CONFIG:config,LAB_PARTS:parts,buildLabModel:build}=context.window;

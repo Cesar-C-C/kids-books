@@ -37,3 +37,21 @@ new vm.Script(fs.readFileSync(path.join(root,'labs/airplane/details-model.js'),'
 console.log(`PASS: ${labs.length} registered labs, ready/planned routes, related books, shared assets, 10 airplane lessons, script syntax.`);
 
 for(const name of ['airframe','engine','app'])new vm.Script(fs.readFileSync(path.join(root,'labs/airplane/v3',name+'.js'),'utf8'));
+
+// The train joined the v3 studio too: same contract as the aeroplane, so the
+// two labs stay interchangeable (10 parts, a set of inside discoveries, and
+// every discovery hanging off a real part).
+const trainContext={window:{}};
+for(const file of ['labs/hsr/parts.js','labs/hsr/detail-parts.js'])vm.runInNewContext(fs.readFileSync(path.join(root,file),'utf8'),trainContext);
+const trainParts=trainContext.window.HSR_PARTS,trainDetails=trainContext.window.HSR_DETAILS;
+assert.equal(trainParts.length,10);assert.equal(new Set(trainParts.map(p=>p.id)).size,10);
+assert.equal(trainDetails.length,25);assert.equal(new Set(trainDetails.map(d=>d.id)).size,25);
+for(const p of trainParts)for(const key of ['id','name','zhName','en','zh','tip'])assert.ok(p[key],`hsr/${p.id}/${key}`);
+for(const d of trainDetails){
+  for(const key of ['id','region','name','zhName','en','zh','tip','principle'])assert.ok(d[key],`hsr/${d.id}/${key}`);
+  assert.ok(trainParts.some(p=>p.id===d.region),`hsr/${d.id}: region ${d.region} is not a part`);
+}
+assert.ok(trainParts.every(p=>trainDetails.some(d=>d.region===p.id)),'every train part needs an inside discovery');
+for(const name of ['trainframe','runninggear','app'])new vm.Script(fs.readFileSync(path.join(root,'labs/hsr/v3',name+'.js'),'utf8'));
+assert.ok(!fs.existsSync(path.join(root,'labs/hsr/model.js')),'the explorer model.js must be gone from the train lab');
+console.log(`PASS train v3: ${trainParts.length} parts, ${trainDetails.length} inside discoveries, v3 sources parse.`);

@@ -16,9 +16,9 @@ window.LABS_CATALOG = [
   },
   {
     id: 'hsr', title: '高铁 3D 实验室', englishTitle: 'High-Speed Train Lab',
-    description: '抬起车顶看看座椅，寻找受电弓、转向架和牵引电机，探索 10 类部件。',
+    description: '放大同一列高铁，探索 25 个内部细节：车头、客舱、车门、转向架与受电弓。',
     icon: '🚄', status: 'ready', href: 'hsr/index.html', image: 'hsr/preview.png', bookId: 'hsr', age: '4–8 岁',
-    features: ['360° 观察', '车厢拆解', '英文点读', '找部件挑战']
+    features: ['连续放大', '25 个内部细节', '英文点读', '剖视与机构演示']
   },
   {
     id: 'schoolbus', title: '校车 3D 实验室', englishTitle: 'School Bus Lab',

@@ -19,11 +19,21 @@ labs/
     app.js            飞机模型、拆解、选择、相机和挑战交互
     parts.js          10 类部件的英文介绍与中文释义
     preview.png      由实际模型生成的目录预览图
+  hsr/
+    index.html        高铁学习页面（三栏 studio 布局）
+    parts.js          10 类部件，id 与几何发布的 region 一一对应
+    detail-parts.js   25 个内部发现，每个挂在一个部件上
+    v3/
+      trainframe.js   车体几何：连续超级椭圆放样切成车头/车顶/客舱
+      runninggear.js  转向架、牵引电机、受电弓与展示轨道
+      app.js          渐进式剖视、取景、机构与拾取
+      studio.css      三栏 studio 样式，与飞机共用同一份
+    preview.png      由实际模型生成的目录预览图
 ```
 
-现已开放飞机（10 类部件）、火箭（9 类）、高铁（10 类）和校车（10 类）。所有主题都支持旋转、拆解复原、双语部件说明、英文点读和五题挑战。
+现已开放飞机（10 类部件 / 24 个内部细节）、高铁（10 类 / 25 个）、火箭（9 类）和校车（10 类）。所有主题都支持旋转、拆解复原、双语部件说明、英文点读和五题挑战；飞机与高铁另外支持放大自动剖视、内部细节逐级显露与机构演示。
 
-三个新主题使用共用页面与交互引擎：`shared/page.js` 生成页面，`shared/explorer.js` 提供相机、模型选取、拆解、标签、学习卡与挑战。主题 `parts.js` 定义 `LAB_CONFIG` 和 `LAB_PARTS`；`model.js` 定义 `buildLabModel`。既有飞机使用其原有独立实现。
+两种实现并存。v3 studio（`airplane/v3`、`hsr/v3`）：几何模块按 `group/exterior/interior/ghost` 四层建装配体，控制器按相机距离揭开内层、用裁剪面切开外壳，`parts.js` + `detail-parts.js` 提供两级讲解。共享 explorer（`shared/page.js` + `shared/explorer.js`）：火箭与校车的 `parts.js` 定义 `LAB_CONFIG` 与 `LAB_PARTS`，`model.js` 定义 `buildLabModel`。新主题优先走 v3。
 
 ## 增加新主题
 
@@ -44,7 +54,7 @@ labs/
 
 `buildLabModel({T,addPart,mesh,mat,sphere,box,panel,model,scene})` 创建几何。`addPart(id,basePosition,explodeOffset,localLabelAnchor)` 返回部件组；同一类部件可有多个组（例如左右整流罩）。使用 `mesh` 等辅助函数加入可选择网格，附属细节应随所属组移动。固定环境如高铁轨道直接加入 `scene`，不能登记成可拆车辆部件。保持 Y 向上；注意部件在整机与拆解时都须处于有效相机范围。
 
-测试：`node qa_models.cjs` 不需要浏览器，直接构建三个模型并校验数据、几何坐标和部件覆盖；`node qa_more_labs_browser.cjs` 检查新增主题的真实浏览器交互。设置 `UPDATE_LAB_PREVIEW=1` 可从真实模型刷新预览图；不设置时测试不会改模型资源。`LAB_BASE_URL` 可指定已发布的网站根地址（以 `/` 结尾）做线上验收。
+测试：`node qa_models.cjs` 不需要浏览器，直接构建两个 explorer 模型（火箭、校车）并校验数据、几何坐标和部件覆盖；`node qa_more_labs_browser.cjs` 检查这两个主题的真实浏览器交互。v3 studio 各有自己的契约测试：`node qa_v3_hsr_model.cjs`（几何与机构，纯 Node，已进 CI）和 `node qa_v3_hsr_browser.cjs`（渐进揭露、25 个细节、三档响应式、深链，需浏览器）；飞机对应 `qa_v3_airplane_model.cjs`、`qa_v3_engine.cjs`。设置 `UPDATE_LAB_PREVIEW=1` 可从真实模型刷新预览图（v3 实验室用各自的浏览器脚本）；不设置时测试不会改模型资源。`LAB_BASE_URL` 可指定已发布的网站根地址（以 `/` 结尾）做线上验收。
 
 ## 验证与发布
 
