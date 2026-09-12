@@ -38,6 +38,12 @@ const arg = (name, def) => {
 };
 const PORT = Number(arg('port', '8137'));
 const BOOK = arg('book', 'airplane');
+/* --live=<url>：只对已部署的站点做在线体检，跳过本地服务器与断网阶段。
+   为什么要单独一条：本地静态服务器的 MIME 映射是我们自己写的，与
+   GitHub Pages 实际返回的 Content-Type 并不一样 —— manifest.webmanifest
+   若被 Pages 用错 MIME，浏览器会直接忽略清单，PWA 可安装性悄悄失效，
+   而本地测试永远发现不了。 */
+const LIVE = arg('live', '');
 const KEEP = process.argv.includes('--keep-screenshots');
 const OUT_DIR = arg('out', path.join(HERE, '..', 'preview_pwa'));
 
@@ -181,14 +187,117 @@ async function fetchJson(url, tries = 60) {
 }
 
 /* ---------------- 主流程 ---------------- */
+/* ============================================================
+   线上体检（--live=<url>）：验证已部署站点的真实行为与响应头。
+
+   与本地测试互补：本地静态服务器的 MIME 映射是我们自己写的，Pages 返回的
+   不一定一样。manifest.webmanifest 若拿到非 JSON 的 content-type，浏览器会
+   直接忽略清单，PWA 可安装性悄悄失效 —— 而本地测试永远发现不了。
+   ============================================================ */
+async function liveCheck(cdp, live, pageErrors) {
+  const base = live.endsWith('/') ? live : live + '/';
+
+  await cdp.send('Page.navigate', { url: base + 'index.html' });
+  await sleep(3500);
+
+  /* 1. Service Worker：HTTPS 是前提，github.io 天然满足 */
+  const reg = await cdp.eval(`(async () => {
+    try {
+      const r = await navigator.serviceWorker.ready;
+      return { ok: true, scope: r.scope, active: !!r.active };
+    } catch (e) { return { ok: false, error: String(e) }; }
+  })()`);
+  check('线上 Service Worker 注册并激活', !!reg.ok && !!reg.active,
+    `scope=${reg.scope || reg.error}`);
+
+  /* 2. 外壳缓存：真装上了才说明预缓存清单可用 */
+  const shell = await cdp.eval(`(async () => {
+    const n = (await caches.keys()).find(x => x.startsWith('kb-shell-'));
+    if (!n) return { name: null, count: 0, covers: 0 };
+    const c = await caches.open(n);
+    const keys = await c.keys();
+    return { name: n, count: keys.length,
+             covers: keys.filter(r => /_card480\\.webp$/.test(r.url)).length };
+  })()`);
+  check('线上外壳缓存已建立', !!shell.name, shell.name || '无');
+  check('线上外壳缓存文件数合理（>80）', shell.count > 80, `${shell.count} 个`);
+  check('12 张封面在外壳缓存里', shell.covers === 12, `${shell.covers}/12`);
+
+  /* 3. manifest 的 MIME —— 这正是本地测不到的东西 */
+  const man = await cdp.eval(`(async () => {
+    const r = await fetch('manifest.webmanifest', { cache: 'no-store' });
+    const text = await r.text();
+    let json = null;
+    try { json = JSON.parse(text); } catch (e) {}
+    return { status: r.status, type: r.headers.get('content-type'), len: text.length,
+             name: json && json.name, display: json && json.display,
+             start: json && json.start_url, icons: (json && json.icons) || [] };
+  })()`);
+  check('manifest 可取到且是合法 JSON', man.status === 200 && !!man.name,
+    `HTTP ${man.status}  content-type=${man.type}`);
+  check('manifest 是 JSON 类型（否则浏览器会忽略清单）',
+    /manifest\+json|application\/json/i.test(man.type || ''), man.type || '(空)');
+  check('manifest display 可安装', man.display === 'standalone', String(man.display));
+
+  const iconBad = await cdp.eval(`(async () => {
+    const icons = ${JSON.stringify(man.icons || [])};
+    const bad = [];
+    for (const ic of icons) {
+      const r = await fetch(ic.src, { cache: 'no-store' });
+      if (r.status !== 200) bad.push(ic.src + ' HTTP ' + r.status);
+    }
+    return bad;
+  })()`);
+  check('manifest 里的图标全部可取', iconBad.length === 0, iconBad.join(', ') || '全部 200');
+
+  /* 4. 脚本 MIME：不是 JavaScript 类型浏览器会拒绝执行 */
+  const scriptMime = await cdp.eval(`(async () => {
+    const out = {};
+    for (const p of ['sw.js', 'shared/cdn.js', 'shared/pwa.js']) {
+      const r = await fetch(p, { cache: 'no-store' });
+      out[p] = r.status + ' ' + (r.headers.get('content-type') || '(空)');
+    }
+    return out;
+  })()`);
+  const badScript = Object.entries(scriptMime).filter(([, v]) => !/^\d+ .*javascript/i.test(v));
+  check('线上脚本的 content-type 都是 JavaScript', badScript.length === 0,
+    badScript.length ? JSON.stringify(badScript) : Object.values(scriptMime).join(' | '));
+
+  /* 5. 首页渲染：滚到底再数，理由同离线测试（loading="lazy"） */
+  await cdp.eval(`(async () => {
+    const step = Math.round(window.innerHeight * 0.8);
+    for (let y = 0; y <= document.body.scrollHeight; y += step) {
+      window.scrollTo(0, y); await new Promise(r => setTimeout(r, 220));
+    }
+    window.scrollTo(0, 0); await new Promise(r => setTimeout(r, 400));
+    return true;
+  })()`);
+  await sleep(1200);
+  const shelf = await cdp.eval(`(() => {
+    const imgs = [...document.querySelectorAll('img.cover')];
+    const origin = location.origin;
+    return { cards: document.querySelectorAll('.book-card').length,
+             ok: imgs.filter(i => i.complete && i.naturalWidth > 0).length,
+             originCover: imgs.filter(i => (i.currentSrc || i.src || '').startsWith(origin)).length,
+             panelRows: document.querySelectorAll('.offline-row').length };
+  })()`);
+  check('线上首页渲染 12 张书卡', shelf.cards === 12, `${shelf.cards} 张`);
+  check('线上 12 张封面都加载出像素', shelf.ok === 12, `${shelf.ok}/12`);
+  check('线上封面走同源（外壳缓存可直接供离线用）', shelf.originCover === 12,
+    `同源 ${shelf.originCover}/12`);
+  check('线上离线面板就绪', shelf.panelRows === 12, `${shelf.panelRows} 行`);
+  check('线上首页无 JS 异常', pageErrors.length === 0, pageErrors.slice(0, 2).join(' | '));
+}
+
 async function main() {
   const chrome = CHROME_CANDIDATES.find((p) => existsSync(p));
   if (!chrome) throw new Error('找不到 Chrome/Edge，可用 --chrome=... 指定');
 
   const profile = await mkdtemp(path.join(tmpdir(), 'kb-pwa-'));
-  let server = await startServer();
+  let server = LIVE ? null : await startServer();
   const dbgPort = PORT + 1000;
-  log(`静态服务器 http://127.0.0.1:${PORT}/  （仓库：${REPO}）`);
+  if (LIVE) log(`线上体检：${LIVE}（不起本地服务器、不做断网）`);
+  else log(`静态服务器 http://127.0.0.1:${PORT}/  （仓库：${REPO}）`);
   log(`浏览器 ${chrome}`);
 
   const child = spawn(chrome, [
@@ -225,6 +334,12 @@ async function main() {
     await cdp.send('Runtime.enable');
     await cdp.send('Network.enable');
     await cdp.send('Log.enable').catch(() => {});
+
+    if (LIVE) {
+      await liveCheck(cdp, LIVE, pageErrors);
+      console.log(failures ? `\n${failures} 项未通过` : '\n全部通过');
+      process.exit(failures ? 1 : 0);
+    }
 
     const base = `http://127.0.0.1:${PORT}/`;
 
