@@ -11,7 +11,7 @@
  <nav class="regions" aria-label="飞机部位"><p class="small-title">THE AIRPLANE</p><div id="region-list"></div><p class="regions-footer">先认识整架飞机。<br>再靠近一个部位，<br>发现里面的秘密。</p></nav>
  <section class="stage" aria-label="飞机三维观察台">
   <div class="stage-top"><button id="whole-airplane">整架飞机</button><span id="crumb-region" class="crumb"></span><span id="crumb-detail" class="crumb"></span><span id="depth-status">整体观察</span></div>
-  <div id="viewport" tabindex="0" aria-label="拖动旋转，滚轮或双指缩放，右键拖动或双指平移，双击部件靠近"><span id="model-label" class="model-label" hidden></span><div id="load-error" hidden>三维模型暂时无法显示。可以继续阅读部件的英文介绍；请使用支持 WebGL 的浏览器。</div></div>
+  <div id="viewport" tabindex="0" aria-label="拖动旋转，滚轮或双指缩放，右键拖动或双指平移，双击部件靠近"><div class="stage-heading" aria-hidden="true"><span class="live-dot"></span> YOUR AIRPLANE</div><div class="stage-watermark" aria-hidden="true">HELLO,<br> AIRPLANE.</div><span id="model-label" class="model-label" hidden></span><div id="load-error" hidden>三维模型暂时无法显示。可以继续阅读部件的英文介绍；请使用支持 WebGL 的浏览器。</div></div>
   <div class="stage-tools"><div class="tool-group"><button id="home-view" aria-label="恢复整机视角">⌂ 整机</button><button id="back-view" aria-label="返回上一级">↑ 上一级</button><span class="divider"></span><button id="zoom-out" aria-label="缩小">−</button><button id="zoom-in" aria-label="放大">＋</button><button id="auto-rotate" aria-label="自动旋转" aria-pressed="false">↻</button></div><span class="gesture-hint">拖动旋转 · 滚轮深入</span><div class="tool-group"><button id="side-view">侧面</button><button id="top-view">俯视</button><button id="explode-button" aria-pressed="false">拆解</button></div></div>
  </section>
  <aside class="inspector" aria-label="当前部位的说明和操作">
