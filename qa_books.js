@@ -41,11 +41,20 @@ for (const id of books) {
   if (!BOOK || !PAGES) { console.log(`\n[${id}] FATAL: cannot load BOOK/PAGES`); totalErrors++; continue; }
 
   // The library card must preview the same cover that opens in the book.
-  const card = homepage.match(new RegExp(`<a class="book-card" href="books/${id}/index\\.html">[\\s\\S]*?<img class="cover" src="([^"]+)"`));
+  // The shelf serves a derived 480px thumbnail (<cover>_card480.webp, see
+  // tools/gen_pwa_covers.py) with lazy-loading attributes ahead of src and a
+  // CDN-retry hook, so read src wherever it sits in the tag and accept the
+  // derived card name as the same source image.
+  const card = homepage.match(new RegExp(`<a class="book-card" href="books/${id}/index\\.html">[\\s\\S]*?<img class="cover"[^>]*\\bsrc="([^"]+)"`));
   if (!card) {
     errs.push('homepage card missing');
-  } else if (!card[1].split('?')[0].endsWith(`books/${id}/${BOOK.coverImg}`)) {
-    errs.push(`homepage cover differs from BOOK.coverImg: ${card[1]} != books/${id}/${BOOK.coverImg}`);
+  } else {
+    const cardSrc = card[1].split('?')[0];
+    const cover = `books/${id}/${BOOK.coverImg}`;
+    const derived = cover.replace(/\.webp$/, '_card480.webp');
+    if (!cardSrc.endsWith(cover) && !cardSrc.endsWith(derived)) {
+      errs.push(`homepage cover differs from BOOK.coverImg: ${card[1]} != ${cover} (or ${derived})`);
+    }
   }
 
   // ---- index.html STRUCTURAL check (catches missing #reader mount point) ----
