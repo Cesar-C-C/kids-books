@@ -183,13 +183,23 @@ def check_no_legacy():
 
 # ---------- 6. 书架封面派生图 ----------
 def check_covers():
-    """首页封面必须指向 _card480 派生图，且必须在外壳预缓存里。
+    """首页封面必须是 _card480 派生图、自带同源 src、且在外壳预缓存里。
 
-    这条为什么值得单独校验：线上封面走 jsDelivr 是跨域请求，Service Worker
-    按设计放行不缓存。一旦首页退回引用 1216×832 原图，断网打开书架就会
-    「只有已下载那本有封面，其余 11 张空白」，同时首屏白白多传约 2.5MB。
-    两种退化都是静默的 —— 在线时看不出任何异常，所以必须在这里卡住。
+    这条为什么值得单独校验：一旦首页退回引用 1216×832 原图，断网打开书架
+    就会「只有已下载那本有封面，其余 11 张空白」，同时首屏白白多传约 2.5MB；
+    而同源 src 一旦被改回「只写 data-kbc 等运行时补地址」，封面就会退回到
+    由 cdn.js 决定去向，离线时只能指望浏览器磁盘缓存的残留。
+    两种退化在线时都看不出任何异常，所以必须在这里卡住。
     """
+    shell = set()
+    ap = os.path.join(REPO, "pwa-assets.js")
+    if os.path.exists(ap):
+        s = open(ap, encoding="utf-8").read()
+        try:
+            shell = set(json.loads(s[s.index("{"): s.rindex(";")]).get("shell", []))
+        except Exception:
+            shell = set()
+
     for bid, cover, card in _covers():
         card_abs = rel_path("books/%s/%s" % (bid, card))
         cover_abs = rel_path("books/%s/%s" % (bid, cover))
@@ -204,29 +214,22 @@ def check_covers():
                     % (card, c / 1024, o / 1024))
 
     home = open(os.path.join(REPO, "index.html"), encoding="utf-8").read()
-    refs = re.findall(r'data-kbc="(books/[^"]+)"', home)
-    if len(refs) != 12:
-        bad("首页 data-kbc 封面数量为 %d，期望 12" % len(refs))
-    stale = [r for r in refs if not r.endswith("_card480.webp")]
-    if stale:
-        bad("首页封面没走小派生图（断网会空白 + 多传原图）：%s" % ", ".join(stale[:3]))
-    for r in refs:
-        if not os.path.exists(rel_path(r)):
-            bad("首页封面指向不存在的文件：%s" % r)
-
-    shell = set()
-    ap = os.path.join(REPO, "pwa-assets.js")
-    if os.path.exists(ap):
-        s = open(ap, encoding="utf-8").read()
-        try:
-            shell = set(json.loads(s[s.index("{"): s.rindex(";")]).get("shell", []))
-        except Exception:
-            shell = set()
-    if shell:
-        not_cached = [r for r in refs if r not in shell]
-        if not_cached:
-            bad("这些首页封面没进外壳预缓存，断网会空白：%s"
-                % ", ".join(not_cached[:3]))
+    # 封面必须自带同源 src（而不是只写 data-kbc 等 cdn.js 在运行时补地址）。
+    # 原因：cdn.js 的「离线走同源」分支依赖 navigator.onLine，而它取自系统网卡
+    # 状态，真断网时经常仍是 true（实测确认），于是补出来的仍是 CDN 地址，
+    # 离线只能靠浏览器磁盘缓存的残留 —— 换个滚动位置就空白。
+    # 这 12 张在外壳预缓存里，直接同源取才是确定的。
+    covers = re.findall(r'<img class="cover"[^>]*\ssrc="(books/[^"]+)"', home)
+    if len(covers) != 12:
+        bad("首页自带同源 src 的封面数量为 %d，期望 12" % len(covers))
+    not_card = [c for c in covers if not c.endswith("_card480.webp")]
+    if not_card:
+        bad("首页封面没走小派生图（断网会空白 + 多传原图）：%s" % ", ".join(not_card[:3]))
+    for c in covers:
+        if not os.path.exists(rel_path(c)):
+            bad("首页封面指向不存在的文件：%s" % c)
+        if c and c not in shell:
+            bad("首页封面没进外壳预缓存，断网会空白：%s" % c)
     ok()
 
 

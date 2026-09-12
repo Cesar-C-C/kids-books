@@ -347,22 +347,54 @@ async function main() {
     /* 书架页离线重载 */
     await cdp.send('Page.reload', { ignoreCache: false });
     await sleep(3000);
+
+    /* 关键：先把书架滚到底再数封面。
+       封面是 loading="lazy" 的，视口外的图压根不会发起请求，
+       不滚就数等于在测 Chrome 的懒加载启发式（离线时它会收紧预加载距离），
+       而不是在测「封面有没有被缓存」。滚一遍才是家长真实的浏览动作。 */
+    await cdp.eval(`(async () => {
+      const step = Math.round(window.innerHeight * 0.8);
+      for (let y = 0; y <= document.body.scrollHeight; y += step) {
+        window.scrollTo(0, y);
+        await new Promise(r => setTimeout(r, 220));
+      }
+      window.scrollTo(0, 0);
+      await new Promise(r => setTimeout(r, 400));
+      return true;
+    })()`);
+    await sleep(1500);
+
     const offlineShelf = await cdp.eval(`(() => {
       const cards = document.querySelectorAll('.book-card');
       const imgs = [...document.querySelectorAll('img.cover')];
       const bad = imgs.filter(i => !(i.complete && i.naturalWidth > 0));
+      const origin = location.origin;
+      const first = imgs[0];
+      const rel = first && first.getAttribute('data-kbc');
       return { title: document.title, cards: cards.length,
                imgsWithPixels: imgs.length - bad.length,
+               fromCache: imgs.filter(i => (i.currentSrc || i.src || '').startsWith(origin)).length,
+               crossOrigin: imgs.filter(i => !(i.currentSrc || i.src || '').startsWith(origin)).length,
+               onLine: navigator.onLine,
+               swControlled: !!navigator.serviceWorker.controller,
+               orderNow: window.KBCDN ? window.KBCDN.candidates(rel)[0] : null,
+               firstSrc: first ? (first.getAttribute('src') || '') : '',
                missing: bad.map(i => (i.getAttribute('data-kbc') || i.src || '?')
                  .replace(/^.*?\\/books\\//, '').replace(/^books\\//, '')),
                panelRows: document.querySelectorAll('.offline-row').length };
     })()`);
+    log(`  诊断：onLine=${offlineShelf.onLine} SW接管=${offlineShelf.swControlled} ` +
+        `此刻候选首选=${offlineShelf.orderNow}`);
     check('离线时书架页仍能打开', offlineShelf.cards === 12, `title=${offlineShelf.title}`);
     check('离线时面板仍可用', offlineShelf.panelRows === 12);
     check('离线时 12 张封面全部有真实像素', offlineShelf.imgsWithPixels === 12,
-      `${offlineShelf.imgsWithPixels}/12 张` +
+      `${offlineShelf.imgsWithPixels}/12 张（同源取自缓存 ${offlineShelf.fromCache} 张、跨域 ${offlineShelf.crossOrigin} 张）` +
       (offlineShelf.missing && offlineShelf.missing.length
         ? `；缺 ${offlineShelf.missing.join(',')}` : ''));
+    /* 离线时封面必须由同源缓存提供 —— 若还有跨域 src，说明 cdn.js 没切到同源，
+       这次能显示只是浏览器磁盘缓存的残留，换个用户/换个滚动位置就会空白 */
+    check('离线时封面全部走同源缓存（不靠跨域残留）', offlineShelf.crossOrigin === 0,
+      `跨域 ${offlineShelf.crossOrigin} 张`);
 
     const offlinePanel = await waitFor(cdp, `(() => {
       const rows = [...document.querySelectorAll('.offline-row')];

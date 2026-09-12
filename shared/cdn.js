@@ -16,6 +16,19 @@
      · 首访后台探测一次「CDN vs 同源」谁快，结果写入 sessionStorage，
        供本次会话的后续页面使用（不阻塞当前页渲染）
 
+   ⚠️ jsDelivr 对本仓库只是「部分可用」，别当成可靠 CDN：
+     仓库 363MB（插图 45MB + 音频 38MB + git 历史 350MB），远超 jsDelivr
+     对 GitHub 仓库 50MB 的上限，冷路径会返回
+       403 Package size exceeded the configured limit of 50 MB
+     实测抽样 24 张运行时引用的插图 ×2 轮（2026-09-12，非国内网络）：
+       testingcf  46/48 (96%)  中位 2643ms
+       cdn        48/48 (100%) 中位 2657ms
+       gcore      46/48 (96%)  中位 4678ms
+     即大约 4% 的请求会 403，且三节点失败的路径各不相同（各节点独立回源）。
+     所以：级联与同源兜底不是锦上添花，是这个仓库的必要条件。
+     要真正解决国内访问，得从源站下手（国内节点 + 备案域名 / EdgeOne 全球区），
+     而不是继续在 jsDelivr 上换节点。
+
    为什么同源也进候选：国内网络对 github.io 的可达性时好时坏，
    同一个用户在 WiFi / 4G 下最优节点可能不同，靠实测而不是猜。
    ============================================================ */
@@ -163,11 +176,17 @@
   function probe() {
     /* 已经测过就别重复打请求 */
     try { if (sessionStorage.getItem(STORE_KEY)) return; } catch (e) {}
-    Promise.all([
-      timed('https://' + HOSTS[0] + GH_PATH + PROBE_ASSET),
-      timed(ROOT + '/' + PROBE_ASSET)
-    ]).then(function (r) {
-      var cdn = r[0], origin = r[1];
+    /* 三个节点都要测，取最快的一个来代表 CDN，不能只测 HOSTS[0]。
+       原因：三节点并不是同一套边缘，实测同一批插图里
+       gcore 403 的路径 testingcf 能给 200，反之亦然（各节点独立回源）。
+       只测一个节点的话，恰好抽到慢/挂的那个就会把整站误判成「CDN 不行」。 */
+    Promise.all(
+      HOSTS.map(function (h) { return timed('https://' + h + GH_PATH + PROBE_ASSET); })
+        .concat([timed(ROOT + '/' + PROBE_ASSET)])
+    ).then(function (r) {
+      var origin = r[r.length - 1];
+      var cdnTimes = r.slice(0, r.length - 1).filter(function (t) { return t != null; });
+      var cdn = cdnTimes.length ? Math.min.apply(null, cdnTimes) : null;
       if (cdn == null && origin == null) return;
       var next;
       if (origin != null && (cdn == null || origin + PROBE_MARGIN < cdn)) {

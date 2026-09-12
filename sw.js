@@ -261,20 +261,28 @@ async function navigate(req) {
   return new Response('离线', { status: 503, headers: { 'content-type': 'text/plain; charset=utf-8' } });
 }
 
-/* 其它同源静态资源：缓存优先，缺了取网络并回填 */
+/* 其它同源静态资源：缓存优先，缺了取网络并回填。
+
+   两个缓存都要查，不能只看按扩展名归类的那个：
+   外壳预缓存里同样有图片 —— 12 张书架封面 _card480.webp、labs 的预览图、
+   PWA 图标。它们按 .webp/.png 会被归进 assets 类，先去 ASSET_CACHE 查必然
+   落空；只查一个缓存的话，「清单里明明有、断网却一张都取不到」，
+   而在线时完全看不出异常。 */
 async function serve(req, url) {
   var asset = isCacheableAsset(url.pathname);
-  var cacheName = asset ? ASSET_CACHE : SHELL_CACHE;
-  var cache = await caches.open(cacheName);
+  var primary = await caches.open(asset ? ASSET_CACHE : SHELL_CACHE);
+  var secondary = await caches.open(asset ? SHELL_CACHE : ASSET_CACHE);
 
-  var hit = await cache.match(req);
+  var hit = await primary.match(req);
+  if (hit) return hit;
+  hit = await secondary.match(req);
   if (hit) return hit;
 
   try {
     var res = await fetch(req);
     /* 只回填完整 200；206 分片响应不能进 Cache Storage */
     if (res && res.status === 200 && res.type !== 'opaque') {
-      cache.put(req, res.clone()).catch(function () {});
+      primary.put(req, res.clone()).catch(function () {});
     }
     return res;
   } catch (e) {

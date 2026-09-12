@@ -18,6 +18,10 @@ preview_pwa/
 # Dependencies (managed runtimes keep these outside the repo)
 node_modules/
 
+# Python bytecode (qa_pwa.py imports tools/*.py, which writes these)
+__pycache__/
+*.pyc
+
 # EdgeOne Pages CLI artifacts (build cache / local config, never commit)
 .edgeone/
 .env
