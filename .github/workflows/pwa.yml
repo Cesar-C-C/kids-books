@@ -99,6 +99,12 @@ jobs:
       - name: PWA static QA
         run: python qa_pwa.py
 
+      # 离线清单里的路径必须与运行时真正请求的图片/音频一一对应。
+      # 换图改名（_r2/_v2）后漏改清单，就会出现「清单里有、点开却在别处找」
+      # 的静默错配 —— 家长端表现为「缓存了还是要等」。
+      - name: Offline manifest matches runtime refs
+        run: python tools/qa_offline_manifest.py
+
       # 137 张 r2 插画的尺寸/体积契约，此前完全不在 CI 里
       - name: R2 illustration contract
         run: python qa_library_r2_assets.py
@@ -117,6 +123,20 @@ jobs:
       # ubuntu-latest 自带 google-chrome-stable；脚本自己会找到它
       - name: Offline smoke test (airplane)
         run: node tools/qa_pwa_offline.mjs --book=airplane --out=preview_pwa
+
+      # 缓存命中率：离线包下完后，强制 KBCDN 走 CDN 优先（国内真实环境），
+      # 断言插图仍然 100% 命中 SW 缓存、一条跨境请求都不发。
+      # ⚠️ 这一步不能省，也不能靠上面那条离线测试替代：本地测试的同源地址
+      # 在局域网内永远比跨境 CDN 快，probe() 必然把同源排第一，于是
+      # 「缓存键对不上」的缺陷会被测试环境本身遮蔽掉（2026-09-12 实际发生）。
+      - name: Offline cache hit rate (CDN-first)
+        run: node tools/diag_offline_cache.mjs --book=bigbang
+
+      # 「页面导航 = 缓存优先 + 后台刷新」意味着服务器内容改了之后，
+      # 第一次打开拿到的仍是旧页面。这里钉住那条行为，并守住
+      # 「强制重新加载」这个出口：点一次就必须拿到最新内容。
+      - name: Force refresh works in one click
+        run: node tools/qa_force_refresh.mjs
 
       - name: Upload screenshots
         if: always()

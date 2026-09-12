@@ -134,3 +134,19 @@ html.kb-lock{ overflow:hidden; }
 }
 .kb-foot button.kb-ghost{ background:#fff; border:1px solid #e3e8ef; }
 .kb-foot button[hidden]{ display:none; }
+
+/* ---------- 强制重新加载（改过内容却看不到变化时用） ----------
+   「页面导航 = 缓存优先 + 后台刷新」意味着服务器改了内容后，第一次打开
+   拿到的仍是旧页面。这里给一个显式出口，而不是让维护者靠猜。 */
+.kb-adv{
+  display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap;
+  margin-top:12px; padding-top:11px; border-top:1px solid #eef2f7;
+}
+.kb-adv-t{ font-size:11px; color:var(--soft,#7a8794); margin-right:auto; }
+.kb-link{
+  border:0; cursor:pointer; font-family:inherit; font-size:12px; font-weight:700;
+  padding:6px 12px; border-radius:999px; background:#f4f8fb; color:var(--blue,#3d6ea8);
+  text-decoration:underline; text-underline-offset:3px;
+}
+.kb-link:disabled{ opacity:.6; cursor:default; text-decoration:none; }
+.kb-link:focus-visible{ outline:3px solid #d89424; outline-offset:2px; }

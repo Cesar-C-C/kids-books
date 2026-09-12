@@ -251,6 +251,10 @@
       '      <button type="button" id="offlineAll" class="kb-ghost">全部下载</button>' +
       '    </div>' +
       '  </section>' +
+      '  <div class="kb-adv">' +
+      '    <span class="kb-adv-t">内容改过、页面却没变？</span>' +
+      '    <button type="button" id="kbRefresh" class="kb-link">强制重新加载</button>' +
+      '  </div>' +
       '</div>';
 
     document.body.appendChild(fab);
@@ -266,6 +270,7 @@
       installTitle: sheet.querySelector('#kiTitle'),
       installNote: sheet.querySelector('#kiNote'),
       lead: sheet.querySelector('#kbLead'),
+      refreshBtn: sheet.querySelector('#kbRefresh'),
     };
 
     /* 没有 Service Worker 就说明白原因，并且不摆出一排点了没用的按钮
@@ -301,6 +306,8 @@
       if (pendingPrompt) installNow();
       else toggleGuide();
     });
+
+    if (ui.refreshBtn) ui.refreshBtn.addEventListener('click', forceRefresh);
 
     document.getElementById('offlineAll').addEventListener('click', function () {
       var todo = panelState.books.filter(function (b) { return !isDone(b.id); });
@@ -651,6 +658,39 @@
       }
     });
     refreshStatus();
+  }
+
+  /* ---------- 强制重新加载 ----------
+     起因：「服务器上的内容明明改了，浏览器页面却一直没变化」。
+     这不是错觉，是缓存策略的必然：navigate() 是「缓存优先 + 后台刷新」，
+     第一次打开给的仍是旧页面（后台悄悄更新，第二次访问才见效）；
+     shell 里的 JS / CSS 同样是缓存优先。开发者改完内容一刷新发现没变，
+     很容易误判成「部署失败」。
+
+     所以给一个明确的出口：先让 SW 把外壳整个换成网络上的最新版，
+     再 reload，一步到位。（离线包不动 —— 家长辛苦下的那几十 MB 不受影响。） */
+  function forceRefresh() {
+    var btn = ui.refreshBtn;
+    if (!btn || btn.disabled) return;
+    btn.disabled = true;
+    btn.textContent = '正在取最新内容…';
+
+    var settled = false;
+    var finish = function () {
+      if (settled) return;
+      settled = true;
+      btn.textContent = '正在重新加载…';
+      setTimeout(function () { location.reload(); }, 120);
+    };
+    /* 无论如何都要收尾：断网、SW 无响应都不能把按钮卡成永久死状态 */
+    var guard = setTimeout(finish, 20000);
+
+    if (!supported || !navigator.serviceWorker.controller) { clearTimeout(guard); finish(); return; }
+    var sent = call({ type: 'KB_REFRESH' }, function () {
+      clearTimeout(guard);
+      finish();
+    });
+    if (!sent) { clearTimeout(guard); finish(); }
   }
 
   /* ============================================================

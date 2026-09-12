@@ -11,8 +11,10 @@
         ★ 不随版本清空，是因为家长辛苦下载的离线绘本不该被一次改版抹掉。
 
    路由策略：
-     · 跨域请求（jsDelivr 等）一律放行不拦 —— 跨域响应在 Cache Storage 里
+     · 跨域请求（jsDelivr 等）原则上放行不拦 —— 跨域响应在 Cache Storage 里
        是不透明响应，配额统计严重虚高且无法校验，交给浏览器自身的 HTTP 缓存。
+       ★ 唯一例外：本仓库的插图走 CDN 镜像，URL 与离线包里的同源键对不上，
+         必须先归一化查一次离线包，否则离线包等于白下（详见 fetch 处注释）。
      · 页面导航：缓存优先 + 后台刷新（断网立刻出页面）
      · 图片/音频：缓存优先（离线包命中这里）
      · 其它同源静态文件：缓存优先，缺了再取网络
@@ -110,6 +112,11 @@ self.addEventListener('message', function (event) {
   if (msg.type === 'KB_DELETE') {
     event.waitUntil(deleteBook(msg.bookId).then(function () { return status(); }).then(function (s) {
       reply(port, event, s);
+    }));
+  }
+  if (msg.type === 'KB_REFRESH') {
+    event.waitUntil(refreshShell().then(function (failed) {
+      reply(port, event, { type: 'KB_REFRESH', failed: failed, version: VERSION });
     }));
   }
 });
@@ -230,9 +237,26 @@ self.addEventListener('fetch', function (event) {
   if (req.method !== 'GET') return;
   var url = new URL(req.url);
 
-  /* 跨域（jsDelivr 图片等）：不介入。
-     页面侧的多节点级联已经处理了可用性，浏览器 HTTP 缓存处理重复访问。 */
-  if (!isSameOrigin(url)) return;
+  if (!isSameOrigin(url)) {
+    /* 跨域请求原则上不介入：跨域响应在 Cache Storage 里是不透明响应
+       （status 恒为 0、体积虚高、内容没法校验），交给浏览器自己的 HTTP 缓存。
+
+       但走 CDN 的插图是唯一的例外，而且必须管 ——
+       离线包（kb-asset-v1）里存的是【同源】URL（下载时用的是 abs(p)），
+       页面在线时 img.src 却是 jsDelivr URL，两者永远不是同一个键。
+       于是家长辛苦下完 72MB 离线包，在线打开绘本时一张也用不上：
+       每张图都要在三个 CDN 节点上白试一圈（每个节点最长等 6s）才级联回
+       同源 —— 表现就是「点了缓存，首次打开还要转一会儿」
+       （2026-09-12 家长反馈）。
+
+       所以先把这个 CDN URL 反推成仓库内相对路径，拿它去离线包里查一次，
+       命中就直接返回，一次跨境请求都不用发；没命中才原样放行。 */
+    if (req.destination === 'image') {
+      var rel = relFromCdn(url);
+      if (rel) { event.respondWith(fromOffline(req, rel)); return; }
+    }
+    return;
+  }
   /* Service Worker 自身与清单：永远走网络，避免自锁 */
   if (url.pathname.indexOf('/sw.js') >= 0 || url.pathname.indexOf('/pwa-assets.js') >= 0) return;
 
@@ -289,4 +313,59 @@ async function serve(req, url) {
     if (asset) return new Response('', { status: 504, statusText: 'offline' });
     return new Response('离线', { status: 504, headers: { 'content-type': 'text/plain; charset=utf-8' } });
   }
+}
+
+/* ============================================================
+   跨域插图 → 同源离线包
+   ============================================================ */
+
+/* 本仓库在 jsDelivr 上的镜像前缀：
+     https://<node>.jsdelivr.net/gh/Cesar-C-C/kids-books@main/<rel>
+   把 <rel> 抠出来，就能拿它去查同源离线包。
+   只认本仓库这一条前缀（多一个字母都不匹配）—— 万一页面日后引入别的
+   jsDelivr 资源，不会被我们误当成自己的图去查缓存。 */
+var MIRROR_RE = /\/gh\/Cesar-C-C\/kids-books(?:@[^/]+)?\/(.+)$/i;
+function relFromCdn(url) {
+  var m = MIRROR_RE.exec(url.pathname);
+  if (!m) return null;
+  try { return decodeURIComponent(m[1]); } catch (e) { return m[1]; }
+}
+
+/* 拿同源缓存回一个跨域插图请求。
+   返回的是同源（basic）响应，浏览器对 no-cors 请求会按 opaque 处理 ——
+   <img> 本来就不要求 CORS，照常解码，页面上看不出任何区别。
+   两个缓存都要查：离线包在 ASSET_CACHE，但 labs 预览图 / 图标这类
+   小图预缓存在 SHELL_CACHE。 */
+async function fromOffline(req, rel) {
+  var key = abs(rel);
+  var hit = await (await caches.open(ASSET_CACHE)).match(key);
+  if (hit) return hit;
+  hit = await (await caches.open(SHELL_CACHE)).match(key);
+  if (hit) return hit;
+  try { return await fetch(req); }
+  catch (e) { return new Response('', { status: 504, statusText: 'offline' }); }
+}
+
+/* ============================================================
+   强制刷新：把外壳换成网络上的最新内容
+
+   为什么需要这个入口：navigate() 是「缓存优先 + 后台刷新」，服务器内容
+   改了之后，**第一次**打开的仍然是旧页面（后台默默更新，第二次才见效）。
+   维护者改完内容一刷新发现没变，就会以为部署失败 —— 这正是
+   「服务器改了、浏览器页面一直不变」的成因。
+   页面上的「强制重新加载」按钮发的就是这个消息：先把外壳整个拉成最新，
+   再 reload，一步到位。离线包（ASSET_CACHE）不动，家长下的 72MB 还在。
+   ============================================================ */
+async function refreshShell() {
+  var cache = await caches.open(SHELL_CACHE);
+  var results = await Promise.allSettled(KB.shell.map(async function (p) {
+    /* cache:'reload' 明确绕开 HTTP 缓存，否则可能又把旧的拿回来 */
+    var res = await fetch(new Request(abs(p), { cache: 'reload' }));
+    if (!res || res.status !== 200) throw new Error(p + ' -> ' + (res && res.status));
+    await cache.put(abs(p), res.clone());
+    if (/index\.html$/.test(p)) {
+      await cache.put(abs(p.replace(/index\.html$/, '')), res.clone());
+    }
+  }));
+  return results.filter(function (r) { return r.status === 'rejected'; }).length;
 }
