@@ -89,7 +89,7 @@
  $('engine-task').onchange=task;task();
 
  function init(){
-  scene=new T.Scene();scene.background=new T.Color('#edf3f7');camera=new T.PerspectiveCamera(42,1,.02,180);
+  scene=new T.Scene();scene.background=new T.Color('#edf2e7');camera=new T.PerspectiveCamera(42,1,.02,180);
   renderer=new T.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1;renderer.localClippingEnabled=true;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
   const canvas=renderer.domElement;$('viewport').prepend(canvas);canvas.setAttribute('aria-hidden','true');canvas.onwebglcontextlost=e=>{e.preventDefault();$('load-error').hidden=false;};
   scene.add(new T.HemisphereLight(0xf4f8ff,0x9bafbd,2.5));const key=new T.DirectionalLight(0xfff7e9,3.2);key.position.set(-7,12,7);key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-14,right:14,top:14,bottom:-14,near:.1,far:50});key.shadow.normalBias=.025;key.shadow.bias=-.0003;scene.add(key);const fill=new T.DirectionalLight(0xd6edff,1.4);fill.position.set(5,4,-8);scene.add(fill);
