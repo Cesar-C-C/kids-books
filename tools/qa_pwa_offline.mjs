@@ -8,10 +8,14 @@
      1. 起一个本地静态服务器（正确的 MIME，尤其 .webmanifest）
      2. 启一个独立的 headless Chrome（临时 profile，不碰用户正在用的浏览器）
      3. 打开书架页 → 确认 Service Worker 注册并接管
-     4. 下载一本绘本的离线包 → 等它报 done
-     5. 把网络切成完全离线 → 重新加载书架页 + 打开那本书
-     6. 断言：书架的 12 张卡片还在、书页插图有真实像素、音频能命中缓存
-     7. 截图存档，供人眼复核
+     4. 确认角落小按钮 / 二级菜单可用，且「点安装一定有反馈」
+        （headless 里 Chrome 也会发 beforeinstallprompt，但 JS 触发的点击
+        没有用户手势，prompt() 必定失败 —— 正好覆盖那条没人愿意测的
+        失败分支；再用合成事件验证成功路径确实调用了 prompt()）
+     5. 下载一本绘本的离线包 → 等它报 done
+     6. 把网络切成完全离线 → 重新加载书架页 + 打开那本书
+     7. 断言：书架的 12 张卡片还在、书页插图有真实像素、音频能命中缓存
+     8. 截图存档，供人眼复核
 
    用法：
      node tools/qa_pwa_offline.mjs                  # 默认用 airplane（3.3MB，最快）
@@ -38,6 +42,9 @@ const arg = (name, def) => {
 };
 const PORT = Number(arg('port', '8137'));
 const BOOK = arg('book', 'airplane');
+/* 视口尺寸。默认手机竖屏（家长最常用的场景）；--size=1280x900 可看桌面版，
+   二级菜单在桌面会变成居中弹窗，与手机上的底部抽屉是两套布局，都得看一眼。 */
+const SIZE = arg('size', '430x932');
 /* --live=<url>：只对已部署的站点做在线体检，跳过本地服务器与断网阶段。
    为什么要单独一条：本地静态服务器的 MIME 映射是我们自己写的，与
    GitHub Pages 实际返回的 Content-Type 并不一样 —— manifest.webmanifest
@@ -186,6 +193,19 @@ async function fetchJson(url, tries = 60) {
   throw new Error('无法连接调试端口：' + url);
 }
 
+/* 读 Chrome 自己写的调试端口（配合 --remote-debugging-port=0 使用） */
+async function readDevToolsPort(profileDir, tries = 80) {
+  const f = path.join(profileDir, 'DevToolsActivePort');
+  for (let i = 0; i < tries; i++) {
+    try {
+      const port = parseInt((await readFile(f, 'utf8')).split('\n')[0], 10);
+      if (Number.isInteger(port) && port > 0) return port;
+    } catch {}
+    await sleep(150);
+  }
+  throw new Error('浏览器没有写出 DevToolsActivePort，无法连接调试端口');
+}
+
 /* ---------------- 主流程 ---------------- */
 /* ============================================================
    线上体检（--live=<url>）：验证已部署站点的真实行为与响应头。
@@ -276,16 +296,39 @@ async function liveCheck(cdp, live, pageErrors) {
   const shelf = await cdp.eval(`(() => {
     const imgs = [...document.querySelectorAll('img.cover')];
     const origin = location.origin;
+    const fab = document.getElementById('kbFab');
     return { cards: document.querySelectorAll('.book-card').length,
              ok: imgs.filter(i => i.complete && i.naturalWidth > 0).length,
              originCover: imgs.filter(i => (i.currentSrc || i.src || '').startsWith(origin)).length,
-             panelRows: document.querySelectorAll('.offline-row').length };
+             fab: !!fab,
+             fabInFlow: !!document.querySelector('.shelf > .kb-fab'),
+             panelRows: document.querySelectorAll('#offlineList .offline-row').length };
   })()`);
   check('线上首页渲染 12 张书卡', shelf.cards === 12, `${shelf.cards} 张`);
   check('线上 12 张封面都加载出像素', shelf.ok === 12, `${shelf.ok}/12`);
   check('线上封面走同源（外壳缓存可直接供离线用）', shelf.originCover === 12,
     `同源 ${shelf.originCover}/12`);
-  check('线上离线面板就绪', shelf.panelRows === 12, `${shelf.panelRows} 行`);
+  check('线上角落小按钮就位，且不插进页面流', shelf.fab && !shelf.fabInFlow);
+  check('线上离线清单就绪', shelf.panelRows === 12, `${shelf.panelRows} 行`);
+
+  /* 二级菜单在线上也要能开：它是纯前端 DOM，但依赖 /shared/pwa.js 与
+     /shared/pwa.css 都被正确发布 —— 少发一个文件，点开就是一片空白 */
+  const liveMenu = await cdp.eval(`(async () => {
+    document.getElementById('kbFab').click();
+    await new Promise(r => setTimeout(r, 400));
+    const s = document.getElementById('kbSheet');
+    const o = { open: s.classList.contains('open'),
+                rows: s.querySelectorAll('.offline-row').length,
+                install: !!document.getElementById('kiBtn'),
+                fabText: document.getElementById('kbFabTxt').textContent.trim() };
+    return o;
+  })()`);
+  check('线上二级菜单能打开（安装区 + 12 本清单都在）',
+    liveMenu.open && liveMenu.rows === 12 && liveMenu.install,
+    `小按钮显示「${liveMenu.fabText}」`);
+  await sleep(300);
+  await saveShot(cdp, 'kb-menu-live.png');
+  await cdp.eval(`document.getElementById('kbClose').click(); true`);
   check('线上首页无 JS 异常', pageErrors.length === 0, pageErrors.slice(0, 2).join(' | '));
 }
 
@@ -293,22 +336,34 @@ async function main() {
   const chrome = CHROME_CANDIDATES.find((p) => existsSync(p));
   if (!chrome) throw new Error('找不到 Chrome/Edge，可用 --chrome=... 指定');
 
-  const profile = await mkdtemp(path.join(tmpdir(), 'kb-pwa-'));
   let server = LIVE ? null : await startServer();
-  const dbgPort = PORT + 1000;
+
   if (LIVE) log(`线上体检：${LIVE}（不起本地服务器、不做断网）`);
   else log(`静态服务器 http://127.0.0.1:${PORT}/  （仓库：${REPO}）`);
   log(`浏览器 ${chrome}`);
 
+  /* 临时 profile 在真正开浏览器之前才创建：中途抛错时不会留下一个
+     再也没人清理的目录（之前一次失败就漏一个，攒了 30 多个） */
+  const profile = await mkdtemp(path.join(tmpdir(), 'kb-pwa-'));
+
+  /* 用 --remote-debugging-port=0 让 Chrome 自己挑空闲端口，端口号写在
+     <profile>/DevToolsActivePort 里。
+     为什么要这么做：固定端口时，上一次运行残留的浏览器会占着端口，
+     新实例绑定失败直接退出，而 CDP 探测却**静默连上那个残留实例** ——
+     于是本轮跑在上一轮的状态里（缓存里已经有书了），
+     「已下载那本显示删除」这种假失败就是这么来的。总共浪费过一次排查。
+     顺带给它一个独立的空 profile，绝不碰你日常在用的浏览器。 */
   const child = spawn(chrome, [
     '--headless=new',
-    `--remote-debugging-port=${dbgPort}`,
+    '--remote-debugging-port=0',
     `--user-data-dir=${profile}`,
     '--no-first-run', '--no-default-browser-check', '--disable-extensions',
-    '--disable-gpu', '--window-size=430,932', '--hide-scrollbars',
+    '--disable-gpu', `--window-size=${SIZE.replace('x', ',')}`, '--hide-scrollbars',
     ...CHROME_EXTRA_FLAGS,
     'about:blank',
   ], { stdio: 'ignore' });
+
+  const dbgPort = await readDevToolsPort(profile);
 
   let cdp;
   try {
@@ -368,7 +423,7 @@ async function main() {
       return { rows: rows.length, cards: document.querySelectorAll('.book-card').length,
                note: (document.getElementById('offlineNote')||{}).textContent || '' };
     })()`);
-    check('书架页渲染出离线面板', panel.cards === 12 && panel.rows === 12, `卡片 ${panel.cards} / 面板行 ${panel.rows}`);
+    check('书架页渲染出离线清单（二级菜单内，12 行）', panel.cards === 12 && panel.rows === 12, `卡片 ${panel.cards} / 清单行 ${panel.rows}`);
 
     /* 封面用了 loading=lazy：要先滚到底把它们唤起来 */
     await cdp.eval(`window.scrollTo(0, document.body.scrollHeight); true`);
@@ -391,6 +446,93 @@ async function main() {
     })()`, { timeout: 12000 });
     check('状态返回后各书都显示「下载」（未下载的一律不该显示「删除」）',
       panelStates.states && panelStates.states.every((t) => t === '下载'), `按钮：${panelStates.states}`);
+
+    /* --- 2b. 角落小按钮 + 二级菜单 ---
+       安装入口与离线清单都收进弹层，书架页不再被设置项占版面。
+       这里同时守住「点安装没反应」那个回归：headless 里没有
+       beforeinstallprompt，点按钮必须给出该浏览器的具体步骤，
+       而不是像旧版那样 `if (!pendingPrompt) return;` 静默返回。 */
+    const fabIdle = await cdp.eval(`(() => {
+      const f = document.getElementById('kbFab');
+      const s = document.getElementById('kbSheet');
+      return { exists: !!f, text: f ? f.textContent.trim() : '',
+               inFlow: !!document.querySelector('.shelf > .kb-sheet'),
+               sheetOpen: s ? s.classList.contains('open') : null,
+               rowsInDom: document.querySelectorAll('#offlineList .offline-row').length };
+    })()`);
+    check('书架页只多一个角落小按钮，设置项不在页面流里占版面',
+      fabIdle.exists && !fabIdle.sheetOpen && !fabIdle.inFlow && fabIdle.rowsInDom === 12,
+      `按钮「${fabIdle.text}」清单 ${fabIdle.rowsInDom} 行（弹层未展开）`);
+
+    const menuOpen = await cdp.eval(`(() => {
+      document.getElementById('kbFab').click();
+      const s = document.getElementById('kbSheet');
+      return { open: s.classList.contains('open'),
+               rows: s.querySelectorAll('.offline-row').length,
+               hasInstall: !!document.getElementById('kiBtn'),
+               locked: document.documentElement.classList.contains('kb-lock') };
+    })()`);
+    check('点小按钮弹出二级菜单（含安装区 + 12 本清单）',
+      menuOpen.open && menuOpen.rows === 12 && menuOpen.hasInstall, JSON.stringify(menuOpen));
+    await sleep(300);
+    await saveShot(cdp, 'kb-menu-open.png');
+
+    /* 「点了没反应」的回归守卫。
+       实测 Chrome 152 headless 也会发 beforeinstallprompt，但 JS 触发的
+       .click() 没有用户手势，prompt() 会返回一个被拒绝的 Promise —— 正好
+       压到最容易出事的失败分支：旧版就是在这里静默卡死（按钮变禁用、
+       什么都不弹），家长看到的就是「点了没反应」。现在必须展开步骤。 */
+    /* 用轮询而不是固定 sleep：prompt() 的拒绝是异步落到界面上的，
+       机器一忙（比如同时跑两个浏览器）500ms 就可能不够，会偶发假失败。 */
+    const clicked = await cdp.eval(`(() => {
+      const btn = document.getElementById('kiBtn');
+      const label = btn.textContent.trim();
+      btn.click();
+      return { label };
+    })()`);
+    const feedback = await waitFor(cdp, `(() => {
+      const g = document.getElementById('kiGuide');
+      const b = document.getElementById('kiBtn');
+      const steps = g.querySelectorAll('ol li').length;
+      return { ok: !g.hidden && steps >= 3, shown: !g.hidden, steps, disabled: b.disabled,
+               label: b.textContent.trim() };
+    })()`, { timeout: 10000 });
+    check('安装弹窗失败/不可用时，点按钮会展开具体步骤（不是静默无反应）',
+      feedback.shown && feedback.steps >= 3 && !feedback.disabled,
+      `按钮当时写着「${clicked.label}」，展开 ${feedback.steps} 步，按钮可再点=${!feedback.disabled}`);
+    await sleep(300);
+    await saveShot(cdp, 'kb-install-guide.png');
+
+    const promptPath = await cdp.eval(`(() => {
+      let called = 0;
+      const ev = new Event('beforeinstallprompt');
+      Object.defineProperty(ev, 'prompt', { value: () => { called++; } });
+      Object.defineProperty(ev, 'userChoice', { value: Promise.resolve({ outcome: 'accepted' }) });
+      window.dispatchEvent(ev);
+      const btn = document.getElementById('kiBtn');
+      const label = btn.textContent.trim();
+      const dot = !document.getElementById('kbFabDot').hidden;
+      btn.click();
+      return { called, label, dot };
+    })()`);
+    check('浏览器给出安装机会时，按钮变「安装到桌面」且点击确实调用了 prompt()',
+      promptPath.label === '安装到桌面' && promptPath.called === 1 && promptPath.dot,
+      `按钮「${promptPath.label}」，prompt() 调用 ${promptPath.called} 次，小按钮角标=${promptPath.dot}`);
+
+    const menuClose = await cdp.eval(`(() => {
+      const s = document.getElementById('kbSheet');
+      document.getElementById('kbClose').click();
+      const byX = { open: s.classList.contains('open'),
+                    locked: document.documentElement.classList.contains('kb-lock') };
+      document.getElementById('kbFab').click();
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+      const byEsc = { open: s.classList.contains('open'),
+                      locked: document.documentElement.classList.contains('kb-lock') };
+      return { byX, byEsc };
+    })()`);
+    check('二级菜单能用 ✕ 和 Esc 关掉，关闭后页面恢复滚动',
+      !menuClose.byX.open && !menuClose.byX.locked && !menuClose.byEsc.open && !menuClose.byEsc.locked,
+      JSON.stringify(menuClose));
 
     /* --- 3. 下载离线包 --- */
     log(`\n下载《${BOOK}》离线包…`);
@@ -523,6 +665,20 @@ async function main() {
       offlinePanel.map && offlinePanel.map[BOOK] === '删除' && offlinePanel.notDone === 11,
       `已存那本显示「${offlinePanel.map ? offlinePanel.map[BOOK] : '?'}」，未存 ${offlinePanel.notDone} 本；${offlinePanel.note}`);
 
+    /* 弹层是纯本地 DOM，断网也必须能开 —— 否则离线时家长连「哪几本存过」都看不到 */
+    const offlineMenu = await cdp.eval(`(() => {
+      document.getElementById('kbFab').click();
+      const s = document.getElementById('kbSheet');
+      const open = s.classList.contains('open');
+      const rows = s.querySelectorAll('.offline-row').length;
+      const fabText = document.getElementById('kbFabTxt').textContent.trim();
+      document.getElementById('kbClose').click();
+      return { open, rows, fabText, closed: !s.classList.contains('open') };
+    })()`);
+    check('离线时二级菜单照常打开（并显示已存本数）',
+      offlineMenu.open && offlineMenu.rows === 12 && offlineMenu.closed,
+      `小按钮显示「${offlineMenu.fabText}」`);
+
     /* 离线状态下 Service Worker 自己的脚本与清单是否还能起来 —— 起不来就会
        出现「缓存里明明有文件，界面却显示没下载」这种诡异现象 */
     const diag = await cdp.eval(`(async () => {
@@ -601,9 +757,20 @@ async function main() {
 
     log(`\n截图目录：${path.resolve(OUT_DIR)}`);
   } finally {
-    if (cdp) cdp.close();
-    if (child && !child.killed) child.kill();
-    server.close();
+    /* 先请浏览器自己体面退出，再兜底强杀 —— 只 kill 进程树在 Windows 上
+       不保证能杀掉真正持有端口的那个进程，会留下残骸影响下一次运行 */
+    if (cdp) {
+      try { await cdp.send('Browser.close'); } catch {}
+      cdp.close();
+    }
+    if (child && !child.killed) {
+      await new Promise((r) => { const t = setTimeout(r, 4000); child.once('exit', () => { clearTimeout(t); r(); }); });
+      if (child.exitCode === null && child.signalCode === null) {
+        try { child.kill(); } catch {}
+        await sleep(500);
+      }
+    }
+    if (server) server.close();
     if (!KEEP) { await sleep(300); await rm(profile, { recursive: true, force: true }).catch(() => {}); }
   }
 

@@ -1,67 +1,136 @@
 /* ============================================================
-   shared/pwa.css — 安装引导 + 离线包面板样式
+   shared/pwa.css — 角落小按钮 + 二级菜单（安装引导 / 离线包）
    与 style.css 共用配色变量（--green/--blue/--ink/--soft/--card-radius）
+
+   版面原则：书架页首屏是给孩子看的。安装与缓存这类家长才用的东西
+   只占右下角一个胶囊按钮，内容全部收进弹层，不再插入页面流。
    ============================================================ */
 
-/* ---------- 安装引导条 ---------- */
-.install-bar{
-  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-  background:#fff; border:1px solid #e3e8ef; border-radius:18px;
-  padding:14px 18px; margin:14px 0 4px;
+/* ---------- 角落小按钮 ---------- */
+.kb-fab{
+  position:fixed; right:14px; bottom:14px; z-index:90;
+  display:inline-flex; align-items:center; gap:7px;
+  padding:9px 15px 9px 12px; border:0; cursor:pointer; font-family:inherit;
+  font-size:13px; font-weight:700; color:#fff; background:var(--green,#2a9d8f);
+  border-radius:999px; box-shadow:0 8px 22px rgba(24,72,64,.26);
+  -webkit-tap-highlight-color:transparent; touch-action:manipulation;
 }
-.install-bar[hidden]{ display:none; }
-.install-bar .ib-face{ font-size:26px; line-height:1; }
-.install-bar .ib-text{ flex:1 1 260px; min-width:0; }
-.install-bar .ib-text b{ display:block; font-size:15px; color:var(--ink); margin-bottom:2px; }
-.install-bar .ib-text span{ font-size:13px; color:var(--soft); line-height:1.6; }
-.install-bar .ib-actions{ display:flex; align-items:center; gap:10px; }
-.install-bar button{
-  border:0; cursor:pointer; font-family:inherit; font-weight:700; font-size:14px;
-  padding:10px 20px; border-radius:999px; background:var(--green); color:#fff;
+.kb-fab:active{ transform:translateY(1px); }
+.kb-fab:focus-visible{ outline:3px solid #d89424; outline-offset:3px; }
+.kb-fab-ico{ display:flex; }
+.kb-fab-ico svg{ display:block; }
+.kb-fab.busy{ background:var(--blue,#3d6ea8); }
+.kb-fab-dot{
+  position:absolute; top:-2px; right:-2px; width:11px; height:11px; border-radius:50%;
+  background:#e5a13a; border:2px solid #fff; box-sizing:content-box;
 }
-.install-bar button.ghost{ background:#eef4f8; color:var(--ink); font-weight:600; padding:10px 14px; }
-.install-bar details{ flex:1 1 100%; }
-.install-bar summary{
-  cursor:pointer; font-size:13px; color:var(--blue); font-weight:600; list-style:none;
-}
-.install-bar summary::-webkit-details-marker{ display:none; }
-.install-bar summary::before{ content:"▸ "; }
-.install-bar details[open] summary::before{ content:"▾ "; }
-.install-bar ol{ margin:10px 0 2px; padding-left:22px; font-size:13px; color:var(--soft); line-height:1.9; }
-.install-bar ol b{ color:var(--ink); }
+.kb-fab-dot[hidden]{ display:none; }
+/* 小按钮浮在内容上，底部留出它的高度，最后一排书卡不会被压住 */
+body.kb-has-fab .shelf{ padding-bottom:86px; }
 
-/* ---------- 离线包面板 ---------- */
-.offline-panel{
-  background:#fff; border-radius:var(--card-radius); padding:22px 22px 18px; margin:26px 0 8px;
-  box-shadow:0 12px 30px rgba(43,45,66,.06);
+/* ---------- 弹层 ---------- */
+.kb-sheet{ position:fixed; inset:0; z-index:100; display:none; }
+.kb-sheet.open{ display:block; }
+.kb-backdrop{ position:absolute; inset:0; background:rgba(18,32,40,.42); }
+.kb-panel{
+  position:absolute; left:0; right:0; bottom:0; max-height:88vh; overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  background:#fff; border-radius:22px 22px 0 0; padding:16px 18px 22px;
+  box-shadow:0 -14px 40px rgba(20,40,50,.22);
+  animation:kbUp .22s cubic-bezier(.22,.9,.3,1);
 }
-.offline-panel[hidden]{ display:none; }
-.offline-panel h2{ margin:0 0 4px; font-size:20px; color:var(--blue); font-family:'Fredoka','Noto Sans SC',sans-serif; }
-.offline-panel .op-sub{ margin:0 0 16px; font-size:13px; color:var(--soft); line-height:1.7; }
-.offline-list{ display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; }
+.kb-panel:focus{ outline:none; }
+/* 只动位置，不动透明度：淡入期间面板是半透明的，底下的书卡会透上来，
+   看着像没渲染完（截图里一眼就能看出）。位移式入场没有这个中间态。 */
+@keyframes kbUp{ from{ transform:translateY(26px); } to{ transform:none; } }
+@media (min-width:760px){
+  .kb-panel{
+    left:50%; top:50%; right:auto; bottom:auto; width:min(560px,92vw);
+    max-height:min(80vh,720px); border-radius:24px; padding:20px 22px 24px;
+    transform:translate(-50%,-50%); animation:kbPop .18s cubic-bezier(.22,.9,.3,1);
+  }
+  @keyframes kbPop{ from{ transform:translate(-50%,-44%); } to{ transform:translate(-50%,-50%); } }
+}
+@media (prefers-reduced-motion:reduce){
+  .kb-panel{ animation:none; }
+}
+html.kb-lock{ overflow:hidden; }
+
+.kb-head{ display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+.kb-head h2{
+  flex:1 1 auto; margin:0; font-size:19px; color:var(--blue,#3d6ea8);
+  font-family:'Fredoka','Noto Sans SC',sans-serif;
+}
+.kb-x{
+  flex:0 0 auto; width:34px; height:34px; border:0; border-radius:50%; cursor:pointer;
+  background:#f1f5f9; color:#5b6b7a; font-size:15px; line-height:1; font-family:inherit;
+}
+.kb-x:hover{ background:#e6edf4; }
+
+.kb-sec{ margin-top:14px; }
+
+/* ---------- 安装区 ---------- */
+.kb-install{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  background:#f4faf8; border:1px solid #d8ece6; border-radius:16px; padding:13px 15px;
+}
+.kb-install .ki-text{ flex:1 1 200px; min-width:0; }
+.kb-install .ki-text b{ display:block; font-size:14px; color:var(--ink,#2b2d42); margin-bottom:3px; }
+.kb-install .ki-text span{ font-size:12px; color:var(--soft,#7a8794); line-height:1.6; }
+.kb-install button{
+  flex:0 0 auto; border:0; cursor:pointer; font-family:inherit; font-weight:700; font-size:13px;
+  padding:10px 16px; border-radius:999px; background:#e7eef5; color:var(--ink,#2b2d42);
+}
+.kb-install button.go{ background:var(--green,#2a9d8f); color:#fff; }
+.kb-install button:disabled{ opacity:.6; cursor:default; }
+.kb-install button[hidden]{ display:none; }
+
+.kb-guide[hidden]{ display:none; }
+.kb-guide{
+  margin-top:10px; padding:12px 15px; border-radius:14px;
+  background:#fbfdff; border:1px dashed #cfdde9;
+}
+.kb-guide .kg-why{ margin:0 0 8px; font-size:12px; color:#b07b1e; line-height:1.6; }
+.kb-guide ol{ margin:0; padding-left:20px; font-size:13px; color:var(--soft,#7a8794); line-height:1.95; }
+.kb-guide ol b{ color:var(--ink,#2b2d42); }
+.kb-guide .kg-tip{ margin:8px 0 0; font-size:12px; color:var(--soft,#7a8794); line-height:1.6; }
+
+/* ---------- 离线包区 ---------- */
+.kb-sub{ margin:0 0 10px; font-size:13px; line-height:1.7; }
+.kb-sub b{ display:block; font-size:14px; color:var(--ink,#2b2d42); margin-bottom:2px; }
+.kb-sub span{ color:var(--soft,#7a8794); font-size:12px; }
+
+.offline-list{ display:grid; grid-template-columns:1fr; gap:8px; }
+/* 显式写出来：作者样式里的 display 会盖过浏览器默认的 [hidden]{display:none}，
+   上次 Service Worker 那个「清单里有、断网取不到」的坑就是同类问题 */
+.offline-list[hidden]{ display:none; }
+.kb-foot[hidden]{ display:none; }
+@media (min-width:560px){ .offline-list{ grid-template-columns:repeat(2,1fr); } }
 .offline-row{
-  display:flex; align-items:center; gap:10px;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
   border:1px solid #e8edf3; border-radius:14px; padding:10px 12px; background:#fbfdff;
 }
 .offline-row.done{ background:#f2fbf8; border-color:#cfe9e3; }
 .offline-row .or-info{ flex:1 1 auto; min-width:0; }
-.offline-row .or-name{ font-size:14px; font-weight:700; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.offline-row .or-size{ font-size:12px; color:var(--soft); margin-top:2px; }
+.offline-row .or-name{ font-size:13px; font-weight:700; color:var(--ink,#2b2d42); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.offline-row .or-size{ font-size:11px; color:var(--soft,#7a8794); margin-top:2px; }
 .offline-row button{
   flex:0 0 auto; border:0; cursor:pointer; font-family:inherit; font-size:12px; font-weight:700;
-  padding:7px 13px; border-radius:999px; background:#eef4f8; color:var(--ink);
+  padding:7px 13px; border-radius:999px; background:#eef4f8; color:var(--ink,#2b2d42);
 }
-.offline-row button.go{ background:var(--green); color:#fff; }
+.offline-row button.go{ background:var(--green,#2a9d8f); color:#fff; }
 .offline-row button:disabled{ opacity:.55; cursor:default; }
-.offline-row .or-bar{ grid-column:1/-1; height:4px; border-radius:999px; background:#e8edf3; overflow:hidden; margin-top:8px; }
-.offline-row .or-bar i{ display:block; height:100%; width:0; background:var(--green); transition:width .18s linear; }
-.offline-foot{
+.offline-row .or-bar{ flex:1 1 100%; height:4px; border-radius:999px; background:#e8edf3; overflow:hidden; }
+.offline-row .or-bar i{ display:block; height:100%; width:0; background:var(--green,#2a9d8f); transition:width .18s linear; }
+
+.kb-foot{
   display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
-  margin-top:16px; padding-top:14px; border-top:1px dashed #e3e8ef;
+  margin-top:14px; padding-top:12px; border-top:1px dashed #e3e8ef;
 }
-.offline-foot .of-note{ font-size:12px; color:var(--soft); line-height:1.6; }
-.offline-foot button{
-  border:0; cursor:pointer; font-family:inherit; font-size:13px; font-weight:700;
-  padding:9px 18px; border-radius:999px; background:#eef4f8; color:var(--ink);
+.kb-foot .of-note{ font-size:11px; color:var(--soft,#7a8794); line-height:1.6; flex:1 1 160px; }
+.kb-foot button{
+  border:0; cursor:pointer; font-family:inherit; font-size:12px; font-weight:700;
+  padding:8px 16px; border-radius:999px; background:#eef4f8; color:var(--ink,#2b2d42);
 }
-.offline-foot button.ghost{ background:#fff; border:1px solid #e3e8ef; }
+.kb-foot button.kb-ghost{ background:#fff; border:1px solid #e3e8ef; }
+.kb-foot button[hidden]{ display:none; }
