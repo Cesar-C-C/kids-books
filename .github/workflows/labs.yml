@@ -23,3 +23,4 @@ jobs:
       - run: node qa_v3_airplane_model.cjs
       - run: node qa_v3_hsr_model.cjs
       - run: node qa_v3_engine.cjs
+      - run: node qa_book_hsr_model.cjs
