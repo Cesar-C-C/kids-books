@@ -62,7 +62,7 @@ window.PAGES = [
     ov: 'hsr_08', interactive: true
   },
   {
-    img: 'assets/09_tunnel_continuous_v3.png',
+    img: 'assets/09_tunnel_continuous_r2.webp',
     en: 'When there is a big mountain, the train goes through a tunnel. A tunnel is a long, dark hole dug right through the rock.',
     zh: '当有大山时，火车会穿过隧道。隧道是在岩石中开凿的一条又长又黑的通道。',
     ov: 'hsr_09', interactive: true
