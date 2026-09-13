@@ -83,7 +83,7 @@ const reset = () => drive(undefined, 0);
 reset(); bus.root.updateMatrixWorld(true);
 for (const s of initial) { s.p.copy(s.o.position); s.q.copy(s.o.quaternion); s.w.copy(worldPos(s.o)); s.wq = worldQuat(s.o); }
 const check = (region, min) => {
-  drive(region, 1);
+  drive(region, .63);
   const n = movedIn(region);
   assert.ok(n >= min, `${region} must move at least ${min} meshes, saw ${n}`);
   reset(); bus.root.updateMatrixWorld(true);
@@ -178,8 +178,8 @@ assert.ok(middleExterior, 'middle doorway must follow the opening body exterior'
 const middlePanes = [];
 bus.root.traverse(o => { if (o.name === 'Middle door glazing') middlePanes.push(o); });
 assert.equal(middlePanes.length, 2, 'middle door has two closed glazed leaves');
-assert.ok(middlePanes.every(o => o.material.opacity === 1 && !o.material.transparent), 'middle door glazing remains opaque');
-console.log('PASS doubledecker middle doorway: two opaque panes, passenger side, body exterior ownership');
+assert.ok(middlePanes.every(o => o.material.isMeshPhysicalMaterial && o.material.transmission > .9), 'middle door glazing transmits light');
+console.log('PASS doubledecker middle doorway: two physical glass panes, passenger side, body exterior ownership');
 
 // Book silhouette regression: evaluate actual exterior meshes, excluding hidden
 // compatibility ghosts, rather than allowing a ghost box to supply bus height.
@@ -217,3 +217,45 @@ const wheelchairBay=bus.root.getObjectByName('Wheelchair bay floor');
 const wheelchairBounds=new T.Box3().setFromObject(wheelchairBay);
 assert.ok(wheelchairBounds.min.z>-bus.HALF_W+.1 && wheelchairBounds.max.z<bus.HALF_W-.1,'priority bay floor must remain inside sidewalls instead of crossing the entrance');
 assert.equal(bus.assemblies.find(a=>a.id==='lower').details['lower.stroller'].parent,bus.assemblies.find(a=>a.id==='lower').interior,'priority bay is hidden inside the closed bus');
+
+// Inspection regressions: check the real target meshes, not empty compatibility groups.
+const glass=[];bus.root.traverse(o=>{if(o.userData.glass)glass.push(o);});
+assert.ok(glass.length>=25,'all passenger, front, rear and entrance panes exist');
+for(const pane of glass){assert.ok(pane.material.isMeshPhysicalMaterial&&pane.material.transmission>.9&&pane.material.ior>1.4,'glass must transmit and refract light');assert.equal(pane.castShadow,false);}
+for(const d of details){const a=bus.assemblies.find(a=>a.region===d.region);assert.ok(a.detailMeshes[d.id]?.length,d.id+' needs actual geometry');}
+reset();bus.root.updateMatrixWorld(true);
+const bodyShell=bus.assemblies.find(a=>a.id==='body').details['body.shell'];
+// Rays through the two decks and both doorways must not meet a solid body plate.
+for(const[x,y,z,dx,dz]of[[.66,1.51,5,0,-1],[-1.52,-.25,-5,0,1],[-3.52,-.5,-5,0,1],[.62,-.5,-5,0,1],[-6,-.19,0,1,0]]){
+ const ray=new T.Raycaster(new T.Vector3(x,y,z),new T.Vector3(dx,0,dz),0,dx?2:3.9);
+ assert.equal(ray.intersectObject(bodyShell,true).length,0,'window or doorway must be a real hole');
+}
+const lowerA=bus.assemblies.find(a=>a.id==='lower'),stairsA=bus.assemblies.find(a=>a.id==='stairs');
+const stairTreads=stairsA.detailMeshes['stairs.treads'].filter(o=>o.name==='Step tread');
+assert.equal(stairTreads.length,6);
+const seatMeshes=lowerA.detailMeshes['lower.seats'].filter(o=>['Seat cushion','Seat back'].includes(o.name));
+for(const tread of stairTreads)for(const seat of seatMeshes)assert.equal(new T.Box3().setFromObject(tread).intersectsBox(new T.Box3().setFromObject(seat)),false,'stairs must not intersect seats');
+const topStep=Math.max(...stairTreads.map(o=>new T.Box3().setFromObject(o).max.y));
+const topFloor=bus.assemblies.find(a=>a.id==='upper').detailMeshes['upper.floor'].find(o=>o.name==='Upper floor');
+assert.ok(Math.abs(topStep-new T.Box3().setFromObject(topFloor).max.y)<.002,'top step meets upper floor');
+const floor=lowerA.details['lower.floor'].getObjectByName('Lower floor');
+const entryRay=new T.Raycaster(new T.Vector3(-3.52,2,-1.02),new T.Vector3(0,-1,0));
+assert.equal(entryRay.intersectObject(floor).length,0,'entry floor must leave room above the step');
+const block=bus.root.getObjectByName('Engine block'),rotor=bus.root.getObjectByName('Cooling rotor');
+for(let i=0;i<=36;i++){
+ drive('doors',i/36);bus.root.updateMatrixWorld(true);
+ frontDoors.details['doors.leaf'].traverse(o=>{if(o.isMesh)assert.ok(new T.Box3().setFromObject(o).max.z<-1.24,'door sweeps outside shell and steps');});
+ drive('engine',i/36);bus.root.updateMatrixWorld(true);
+ rotor.traverse(o=>{if(o.isMesh)assert.equal(new T.Box3().setFromObject(o).intersectsBox(new T.Box3().setFromObject(block)),false,'rotor clears engine across full rotation');});
+}
+reset();console.log(`PASS doubledecker inspection: ${details.length} real details, ${glass.length} physical panes, window/entry apertures, six connected steps and 37 door/fan positions.`);
+
+// Check actual tire, shoulder and tread vertices against the retained floor volume.
+reset();bus.root.updateMatrixWorld(true);const floorBounds=new T.Box3().setFromObject(floor);let testedWheelVertices=0;
+for(const id of ['wheels.tire','wheels.tread'])for(const mesh of bus.assemblies.find(a=>a.id==='wheels').detailMeshes[id]){
+ const p=mesh.geometry.attributes.position;for(let i=0;i<p.count;i++){
+  const w=mesh.localToWorld(new T.Vector3().fromBufferAttribute(p,i));if(w.y<floorBounds.min.y||w.y>floorBounds.max.y)continue;
+  testedWheelVertices++;const r=new T.Raycaster(new T.Vector3(w.x,5,w.z),new T.Vector3(0,-1,0));assert.equal(r.intersectObject(floor).length,0,'wheel shoulder/tread must clear the floor aperture');
+ }
+}
+assert.ok(testedWheelVertices>100);console.log('PASS '+testedWheelVertices+' wheel vertices clear the lower floor.');
