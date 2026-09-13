@@ -17,11 +17,13 @@ const server=http.createServer((req,res)=>{let f=path.resolve(root,'.'+decodeURI
 
  const snap=()=>page.evaluate(()=>trainLab.snapshot());
  const frame=()=>page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
- const select=async id=>{await page.locator('#part-directory').evaluate(e=>e.open=true);await page.locator(`[data-part="${id}"]`).click();await frame();};
+ const select=async id=>{await page.locator('#part-directory').evaluate(e=>e.open=true);await page.locator(`[data-part="${id}"]`).click();await frame();assert.equal(await page.locator('#part-directory').getAttribute('open'),'','directory remains open after selection');};
  const open=async()=>{if(await page.locator('#open-part').isVisible()&&!(await snap()).opening){await page.locator('#open-part').click();await page.waitForFunction(()=>trainLab.snapshot().openAmount>.99);}};
  const identity=(await snap()).modelId;
  assert.equal((await snap()).geometry.assemblies,14);
  await page.screenshot({path:path.join(out,'hsr-book-whole.png')});
+ if(process.env.UPDATE_LAB_PREVIEW==='1'&&!process.env.LAB_LIVE_BASE)await page.locator('#viewport').screenshot({path:path.join(root,'labs/hsr/preview.png')});
+ if(!process.env.LAB_REAR_ONLY){
  const initial=(await snap()).camera,canvas=await page.locator('canvas').boundingBox();
  await page.mouse.move(canvas.x+canvas.width/2,canvas.y+canvas.height/2);await page.mouse.wheel(0,-600);await frame();
  let state=await snap();assert.ok(state.camera.distance<initial.distance);assert.equal(state.selected,null);assert.equal(state.reveal,0);assert.deepEqual(state.camera.target,initial.target);
@@ -68,7 +70,15 @@ const server=http.createServer((req,res)=>{let f=path.resolve(root,'.'+decodeURI
    await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await frame();assert.ok((await snap()).camera.distance<d*.75);assert.equal((await snap()).opening,'cabin');await touch.detach();
   }
  }
+ }
+ await page.setViewportSize({width:1440,height:940});
+ await page.evaluate(()=>trainLab.setView(2.7,.22,10,40));await frame();await select('cab');
+ assert.equal((await snap()).assembly,'coach-25.1','nearest tail cab can be selected');
+ await open();state=await snap();assert.equal(state.opening,'cab');assert.ok(state.assemblies.find(a=>a.id==='coach-25.1').interior);
+ await page.screenshot({path:path.join(out,'hsr-book-rear-cab.png')});
+ await page.locator('#part-directory').evaluate(e=>e.open=false);await page.locator('#home-view').click();await frame();
+ assert.equal(await page.locator('#part-directory').getAttribute('open'),null,'manual collapse is preserved');
  await page.goto(base+'labs/hsr/?part=pantograph');await page.waitForFunction(()=>window.trainLab?.snapshot().selected==='pantograph');
  assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
- console.log('PASS: independent selection/zoom, exact camera return, explicit opening and restoration, stable cut plane, 25 bilingual details, mechanisms, speech, mutually exclusive explosion, desktop/tablet/mobile layout and pinch.');
+ console.log(process.env.LAB_REAR_ONLY?'PASS: reverse rear cab selection, visible interior and manual directory state.':'PASS: independent selection/zoom, exact camera return, explicit opening and restoration, stable cut plane, 25 bilingual details, mechanisms, speech, mutually exclusive explosion, desktop/tablet/mobile layout and pinch.');
 }finally{await browser.close();server.close();}})().catch(e=>{console.error(e);server.close();process.exitCode=1;});

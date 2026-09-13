@@ -67,7 +67,7 @@ const minRadius = { body: 3.8, roof: 3.4, hood: 1.5, cab: 1.7, doors: 1.4, seats
 // y = +1.79 (roof crown), so its visual centre is near y = -0.15.
 const look0 = new T.Vector3(-.30, -.30, 0);
  let renderer, scene, camera, bus, assemblies = [], active = null, detail = null, mode='outside', playing = false, slow = true, simTime = 0, mechanism = 0, autoRotate = false;
-let yaw = -.62, pitch = .16, distance = 19, overviewDistance = 19, explosion = 0, targetExplosion = 0, reveal = 0, near = 0;
+let yaw = -2.52, pitch = .20, distance = 19, overviewDistance = 19, explosion = 0, targetExplosion = 0, reveal = 0, near = 0;
 const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look: look.clone() };
  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches, pickables = [], surfaces = [], materialOriginal = new Map(), materialTransparency = new Map();
  let activeFit = 6, clipping = new T.Plane(), lastFrame = 0;
@@ -113,10 +113,10 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
  }
  function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}exhibit.select(a);if(active!==a){playing=false;mechanism=0;}active=a;detail=null;mode=exhibit.opened?'inside':'outside';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
  function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(!exhibit.opened){renderLesson();return;}detail=id;journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
- function home() {remember();closeExhibit(); active = null; detail = null; mode='outside'; playing = false; autoRotate = false; targetExplosion = 0; target.look.copy(look0); target.yaw = .34; target.pitch = .20; target.distance = overviewDistance; renderLesson(); }
+ function home() {remember();closeExhibit(); active = null; detail = null; mode='outside'; playing = false; autoRotate = false; targetExplosion = 0; target.look.copy(look0); target.yaw = -2.52; target.pitch = .20; target.distance = overviewDistance; renderLesson(); }
  function back(){restoreView(viewHistory.pop());renderLesson();}
  function renderLesson() {
-  const p = data(); progress(); document.querySelector('.inspector').scrollTop = 0;
+  const p = data(); progress();
   $('part-name').textContent = p?.name || 'Your school bus'; $('part-zh-name').textContent = p?.zhName || '你的校车'; $('lesson-category').textContent = active ? (detail ? 'LOOK INSIDE' : 'MEET THE PART') : 'A WORLD INSIDE';
   $('part-en').textContent = p?.en || 'Look closer. There is a whole world inside this bus.'; $('part-zh').textContent = p?.zh || '靠近一点，这辆巴士里面还有一个世界。';
   $('part-tip').textContent=detail?p.tip:'拖动旋转，滚轮缩放。点击部件认识它，再点击“靠近观察”或主动打开结构。';
@@ -132,7 +132,7 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
   const opened=!!exhibit.opened;$('open-part').textContent=opened?'合上 · 恢复外观':exhibit.plan(active)?.label||'打开结构';$('open-part').setAttribute('aria-pressed',opened);
   $('opening-note').textContent=opened?'教学展示：覆盖件暂时打开，内部保留安装位置。合上可恢复模型和打开前的视角。':'缩放只改变距离。先主动打开模型，再探索内部细节。';
   if(active?.defaultVisible===false)$('opening-note').textContent='拓展教学部件：这部分没有出现在本书的主图中，选中时才显示。';
-  $('mechanism-controls').hidden=!active||!['doors', 'stopsign'].includes(active.region);if($('mechanism-controls').hidden)$('mechanism-help').textContent='';$('part-directory').open=false;$('part-zh-name').after($('operation-panel'));$('operation-panel').after($('explore-section'));updateButtons();
+  $('mechanism-controls').hidden=!active||!['doors', 'stopsign'].includes(active.region);if($('mechanism-controls').hidden)$('mechanism-help').textContent='';$('part-zh-name').after($('operation-panel'));$('operation-panel').after($('explore-section'));updateButtons();
  }
  function updateButtons() { document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === mode)); $('mechanism-play').setAttribute('aria-pressed', playing); $('mechanism-play').textContent = playing ? 'Ⅱ 暂停观察' : '▶ 看它怎样工作'; $('auto-rotate').setAttribute('aria-pressed', autoRotate); $('explode-button').setAttribute('aria-pressed', targetExplosion > 0); $('explode-button').textContent = targetExplosion ? '组装' : '拆解'; $('slow-play').setAttribute('aria-pressed', slow); }
  lessons.forEach((p, i) => { const b = document.createElement('button'); b.className = 'region-button'; b.dataset.part = p.id; b.setAttribute('aria-pressed', false); b.innerHTML = '<i>' + String(i + 1).padStart(2, '0') + '</i><span><strong>' + p.name + '</strong><small>' + p.zhName + '</small></span>'; b.onclick = () => { if (camera) selectAssembly(nearestAssembly(p.id)); else { $('part-name').textContent = p.name; $('part-en').textContent = p.en; $('part-zh').textContent = p.zh; } }; $('region-list').append(b); });
@@ -181,7 +181,7 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
    // constraint, so take whichever of the two needs more room.
    const byLength = 12.8 / Math.max(.5, camera.aspect);
    const byHeight = 5.6;
-   overviewDistance = Math.max(10, Math.max(byLength, byHeight));
+   overviewDistance = Math.max(12, Math.max(byLength, byHeight) * 1.20);
    if (!active && !targetExplosion) target.distance = overviewDistance;
   }
   new ResizeObserver(resize).observe($('viewport')); resize(); distance = target.distance;

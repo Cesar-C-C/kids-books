@@ -28,7 +28,7 @@
     if(['fairing','satellite'].includes(a.region)){p.key='payload';p.label='打开整流罩';p.lift.fairing=[2.2,2.4,0];p.inside=['fairing','satellite'];}
     else {p.label='切开局部箭体';p.cut=[a.id];if(a.region==='upperstage'){p.cut.push('interstage');p.inside.push('interstage');}if(a.region==='engines')p.cut.push('structure');if(['structure','fuel','oxidizer'].includes(a.region)){p.key='tanks';p.cut=['structure','fuel','oxidizer'];p.inside=p.cut.slice();p.point=[0,0,0];}}
    }else if(subject==='station'){
-    if(['modules','node','interior','windows','cupola'].includes(a.region)){p.key='cabin';p.label='打开舱段剖面';p.cut=['modules','node','windows'];if(a.region==='cupola')p.cut.push('cupola');p.inside=['modules','node','interior','windows','cupola'];p.point=[0,0,0];}
+    if(['modules','node','interior','windows','cupola'].includes(a.region)){p.key='cabin';p.label='打开舱段剖面';p.cut=['modules','node','windows'];if(a.region==='cupola')p.cut.push('cupola');p.inside=['modules','node','interior','windows'];if(a.region==='cupola')p.inside.push('cupola');p.point=[0,0,0];}
     else {p.label='查看内部连接';p.cut=[a.id];}
    }
    if(!p.inside.includes(a.id))p.inside.push(a.id);return p;
