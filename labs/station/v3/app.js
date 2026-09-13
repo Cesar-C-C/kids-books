@@ -1,0 +1,248 @@
+(() => {
+ 'use strict';
+ // Same progressive-reveal controller as the airplane, train and bus studios,
+ // driving the space station. One code path for every assembly: a group of three
+ // layers (exterior / interior / ghost), driven by a single update().
+ const $ = id => document.getElementById(id), T = window.THREE, lessons = window.STATION_PARTS, details = window.STATION_DETAILS;
+ const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+ let storage; try { storage = localStorage; } catch { storage = { getItem: () => null, setItem: () => { } }; }
+ const journal = DiscoveryProgress.create(storage, 'little-space-station:whole-station:v1', { parts: [...lessons, ...details].map(p => p.id), actions: ['open', 'spin', 'explode'], tasks: [] });
+ const speech = LabSpeech.create($('speak'), $('speech-status'));
+ const notes = {
+  modules: '每个舱段都是一只金属罐子。舱内充着一个大气压的空气，圆形舱壁处处均匀受力，所以又轻又结实。一圈圈加强肋像木桶外面的箍，防止薄薄的舱壁向外鼓出去。',
+  node: '节点是全站的门厅：圆球上开着四扇舱门，通向各个舱段。每扇门都有密封圈，关紧后两边的空气彻底分开，万一某一节漏气，把门一关就能保住其它舱。',
+  solar: '太阳电池片被光一照，里面的电子就被推着走，形成电流。单块电池电压很小，所以要串联很多片。整片翅膀还能绕着龙骨转动，一直正对太阳。',
+  truss: '桁架不是实心梁，而是用细杆拼成的三角形格子。三角形最不容易变形，所以同样重量的桁架比实心梁结实得多。它把太阳翼撑得离舱段很远，舱壁就不会被挡住光。',
+  arm: '机械臂的关节比人的胳膊还多。肩部负责大范围转动，肘部负责弯折，腕部负责最后的对准，最后由抓手扣住飞船上的专用把手。抓住以后两边刚性连成一体，才能慢慢把飞船挪到对接口。',
+  docking: '对接时两个环先轻轻碰上，再由卡爪把两边拉紧，最后密封圈被压扁，接缝才不漏气。两边压力相等、空气混好以后，里面那扇门才能打开。',
+  cupola: '穹顶的七扇窗各自独立承压，中间用金属框隔开。航天员在这里看着窗外真实的机械臂操作，所见和所动一一对应，所以抓取才不容易出错。',
+  windows: '舷窗要顶住舱内空气向外推的力。直径半米的窗户上受力有好几吨，所以窗框必须又宽又厚。玻璃分两层：内层承压，外层挨刮蹭，刮花了可以单独更换。',
+  interior: '失重时人躺着和站着没有区别，睡着了也不会翻下来，但会慢慢飘走，所以要钻进睡袋系在墙上。机柜抽屉有卡扣，跑步机有背带，连吃一顿饭都要把食物袋粘在桌上。',
+  radiator: '太空里没有空气可以带走热量，只能靠向外辐射。散热板做得又大又白，就是为了把热尽快射出去。冷却液先把机柜的热量集中起来，再统一送到板子上扔掉。'
+ };
+ const tips = {
+  modules: '沿着圆筒从这头看到那头，数一数一共有几节舱段，上面有几个圆圆的舷窗。',
+  node: '转到舱段中间那个圆球，数一数上面开几扇门。',
+  solar: '拖动滑杆，看两片翅膀怎样一起转动去追太阳。',
+  truss: '隔着桁架的空格往里看，它是一条实心梁还是一片格子？',
+  arm: '拖动滑杆，看机械臂怎样弯起来伸出去。',
+  docking: '转到舱段最前端，找找那个带一圈卡爪的圆环和中间的十字。',
+  cupola: '转到舱段下方，找找那圈朝下开的窗户。',
+  windows: '抬头看看舱段顶上的大窗户，外面那圈金色的框有多厚？',
+  interior: '走进舱内，找一找睡袋、餐桌、跑步机，还有种菜的小盒子。',
+  radiator: '找一找和深蓝色太阳能翼长得不一样的几片白板，它们是做什么用的？'
+ };
+ const helps = {
+  modules: '舱段位置固定；拆解后能看到一节节圆筒分开排列。',
+  node: '节点在舱段正中；放大后能看到球形外壳和四周的舱门。',
+  solar: '拖动动作滑杆：两片太阳翼绕着龙骨向相反方向转动，就像在追太阳。',
+  truss: '桁架横贯站体；放大后能看清一根根细杆拼成的三角形格子。',
+  arm: '拖动动作滑杆：肩、肘、腕依次转动，机械臂弯起来再放回去。',
+  docking: '对接口在舱段最前端；放大后能看清对接环、卡爪和瞄准十字。',
+  cupola: '穹顶朝下装在节点上；放大后能看清七扇窗和外面的防护盖。',
+  windows: '舷窗固定在舱壁上；放大后能看清厚窗框、两层玻璃和遮光帘。',
+  interior: '生活区在舱内；打开剖面能看到机柜、睡袋、餐桌和种植箱。',
+  radiator: '散热板立在节点上方；放大后能看清一片片板面和里面的冷却管。'
+ };
+
+// The station is a long spine with wings out to the sides and a truss across it.
+// yaw 0 puts the camera on +Z, straight at the flank, which is how the book draws
+// the station; +-PI/2 swings round to the nose (-X) where the docking port is.
+// Slight offsets keep the assembly from reading as a flat elevation.
+const angles = {
+ modules: [-1.52, .14], node: [-1.35, .22], solar: [.62, .26], truss: [-1.42, .16],
+ arm: [.52, .26], docking: [-2.00, .16], cupola: [-1.30, -.36],
+ windows: [-1.95, .18], interior: [-1.62, .16], radiator: [-1.20, .52]
+};
+const clampRadius = { modules: 3.2, node: 1.0, solar: 2.6, truss: 3.4, arm: 2.6, docking: 1.0, cupola: .9, windows: 1.6, interior: 2.4, radiator: 2.4 };
+const minRadius = { modules: 1.6, node: .6, solar: 1.4, truss: 2.0, arm: 1.4, docking: .6, cupola: .55, windows: .9, interior: 1.4, radiator: 1.3 };
+// A part that only makes sense next to its neighbour stays lit with it.
+const keepWith = {};
+const offsets = {
+ modules: [-.30, 0, 0], node: [0, 0, 0], solar: [0, 0, .70], truss: [0, .30, 0],
+ arm: [0, .30, .20], docking: [-.60, 0, 0], cupola: [0, -.50, 0],
+ windows: [0, .40, 0], interior: [-.20, 0, 0], radiator: [0, .60, 0]
+};
+// The camera looks at the middle of the station: the barrels run along X, the
+// wings reach out to +-4 m on Z and the radiators up to y = +2.2, so the visual
+// centre sits a little above the barrel axis and slightly aft of the node.
+const look0 = new T.Vector3(-.10, .10, 0);
+ let renderer, scene, camera, station, assemblies = [], active = null, detail = null, mode = 'auto', playing = false, slow = true, simTime = 0, mechanism = 0, autoRotate = false;
+let yaw = -.72, pitch = .22, distance = 20, overviewDistance = 20, explosion = 0, targetExplosion = 0, reveal = 0, near = 0;
+const look = new T.Vector3(-.10, .10, 0), target = { yaw, pitch, distance, look: look.clone() };
+ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches, pickables = [], surfaces = [], materialOriginal = new Map(), materialTransparency = new Map();
+ let activeFit = 6, clipping = new T.Plane(), lastFrame = 0;
+
+ function progress() { $('progress-text').textContent = journal.read().found.length + ' / ' + (lessons.length + details.length); }
+ function inherit(object, key) { for (let o = object; o; o = o.parent) if (o.userData[key]) return o.userData[key]; return null; }
+ function data() { return detail ? details.find(d => d.id === detail) : active ? lessons.find(p => p.id === active.region) : null; }
+ function sameRegion(id) { return assemblies.filter(a => a.region === id); }
+ function worldCenter(a) { return a.group.localToWorld(a.center.clone()); }
+ function nearestAssembly(region) { return sameRegion(region).sort((a, b) => worldCenter(a).distanceToSquared(camera.position) - worldCenter(b).distanceToSquared(camera.position))[0]; }
+ function fit(radius) { return Math.max(1.6, radius / Math.sin(T.MathUtils.degToRad(24)) * 1.06 * Math.max(1, 1.05 / camera.aspect)); }
+ function detailObjects() { return active && detail ? [].concat(active.details[detail] || []) : []; }
+ function detailCenter() {
+  const groups = detailObjects(); if (!groups.length) return worldCenter(active);
+  const box = new T.Box3();
+  groups.forEach(g => g.children.forEach(c => box.expandByObject(c)));
+  return box.isEmpty() ? worldCenter(active) : box.getCenter(new T.Vector3());
+ }
+ function focus() {
+  if (!active || !camera) return;
+  const point = detail ? detailCenter() : worldCenter(active); target.look.copy(point);
+  let r = active.radius;
+  if (detail) {
+   const b = new T.Box3();
+   detailObjects().forEach(g => g.children.forEach(c => b.expandByObject(c)));
+   r = b.isEmpty() ? .8 : b.getBoundingSphere(new T.Sphere()).radius;
+   r = Math.min(Math.max(r, minRadius[active.region] || .7), clampRadius[active.region] || r);
+  }
+  target.distance = Math.max(fit(r), 2.0); activeFit = fit(active.radius); autoRotate = false;
+  const a = angles[active.region] || [-.6, .3]; target.yaw = a[0]; target.pitch = a[1];
+  if (innerWidth <= 800) { const panel = document.querySelector('.inspector'), stage = document.querySelector('.stage'); window.scrollTo({ top: panel.getBoundingClientRect().top + scrollY - stage.offsetHeight - 12, behavior: 'instant' }); }
+ }
+ function selectAssembly(a, focusIt = true) { if (!a) return; active = a; detail = null; mode = 'auto'; activeFit = fit(a.radius); speech.stop(); journal.mark('found', a.region); renderLesson(); if (focusIt) focus(); }
+ function selectDetail(id, focusIt = true) { const d = details.find(d => d.id === id); if (!d) return; if (!active || active.region !== d.region) active = nearestAssembly(d.region); detail = id; mode = 'inside'; journal.mark('found', id); speech.stop(); renderLesson(); if (focusIt) focus(); }
+ function home() { active = null; detail = null; mode = 'auto'; playing = false; autoRotate = false; targetExplosion = 0; target.look.copy(look0); target.yaw = -.72; target.pitch = .22; target.distance = overviewDistance; renderLesson(); }
+ function back() { if (detail) { detail = null; mode = 'auto'; renderLesson(); focus(); } else home(); }
+ function renderLesson() {
+  const p = data(); progress(); document.querySelector('.inspector').scrollTop = 0;
+  $('part-name').textContent = p?.name || 'Your space station'; $('part-zh-name').textContent = p?.zhName || '你的太空站'; $('lesson-category').textContent = active ? (detail ? 'LOOK INSIDE' : 'MEET THE PART') : 'A WORLD INSIDE';
+  $('part-en').textContent = p?.en || 'Look closer. There is a whole world inside this station.'; $('part-zh').textContent = p?.zh || '靠近一点，这座太空站里面还有一个世界。';
+  $('part-tip').textContent = detail ? p.tip : active ? tips[active.region] : '拖动太空站，从不同方向看看。点一个部位，或把鼠标放在它上面向前滚动。';
+  $('principle-box').hidden = !active; $('part-principle').textContent = detail ? p.principle : active ? notes[active.region] : '';
+  $('crumb-region').textContent = active ? '› ' + lessons.find(p => p.id === active.region).zhName : ''; $('crumb-detail').textContent = detail ? '› ' + p.zhName : ''; $('back-part').hidden = !detail;
+  $('back-view').disabled = !active;
+  document.querySelectorAll('[data-part]').forEach(b => b.setAttribute('aria-pressed', active?.region === b.dataset.part));
+  const children = active ? details.filter(d => d.region === active.region) : [];
+  $('explore-section').hidden = !children.length; $('detail-count').textContent = children.length + ' 个发现'; $('detail-list').replaceChildren();
+  children.forEach(d => { const b = document.createElement('button'); b.className = 'detail-button'; b.dataset.detail = d.id; b.setAttribute('aria-pressed', detail === d.id); b.innerHTML = d.name + '<small>' + d.zhName + '</small>'; b.onclick = () => selectDetail(d.id); $('detail-list').append(b); });
+  $('operation-panel').hidden = !active;
+  $('mechanism-help').textContent = active ? helps[active.region] : '';
+  updateButtons();
+ }
+ function updateButtons() { document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === mode)); $('mechanism-play').setAttribute('aria-pressed', playing); $('mechanism-play').textContent = playing ? 'Ⅱ 暂停观察' : '▶ 看它怎样工作'; $('auto-rotate').setAttribute('aria-pressed', autoRotate); $('explode-button').setAttribute('aria-pressed', targetExplosion > 0); $('explode-button').textContent = targetExplosion ? '组装' : '拆解'; $('slow-play').setAttribute('aria-pressed', slow); }
+ lessons.forEach((p, i) => { const b = document.createElement('button'); b.className = 'region-button'; b.dataset.part = p.id; b.setAttribute('aria-pressed', false); b.innerHTML = '<i>' + String(i + 1).padStart(2, '0') + '</i><span><strong>' + p.name + '</strong><small>' + p.zhName + '</small></span>'; b.onclick = () => { if (camera) selectAssembly(nearestAssembly(p.id)); else { $('part-name').textContent = p.name; $('part-en').textContent = p.en; $('part-zh').textContent = p.zh; } }; $('region-list').append(b); });
+ $('speak').onclick = () => speech.say($('part-name').textContent + '. ' + $('part-en').textContent, true);
+ $('language').onclick = () => { const only = document.body.classList.toggle('english-only'); $('language').textContent = only ? 'English only' : '中英双语'; $('language').setAttribute('aria-pressed', !only); };
+ $('book-view').onclick = $('whole-station').onclick = $('home-view').onclick = home; $('back-view').onclick = $('back-part').onclick = back;
+ $('zoom-in').onclick = () => { target.distance = Math.max(1.4, target.distance * .8); }; $('zoom-out').onclick = () => { target.distance = Math.min(80, target.distance * 1.25); };
+ $('side-view').onclick = () => { target.pitch = .04; target.yaw = 0; autoRotate = false; updateButtons(); }; $('top-view').onclick = () => { target.pitch = 1.50; target.yaw = 0; autoRotate = false; updateButtons(); }; $('auto-rotate').onclick = () => { autoRotate = !autoRotate; updateButtons(); };
+ $('explode-button').onclick = () => { targetExplosion = targetExplosion ? 0 : 1; detail = null; active = null; target.look.copy(look0); target.distance = overviewDistance * (targetExplosion ? 1.28 : 1); playing = false; record(); renderLesson(); };
+ document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => { mode = b.dataset.view; updateButtons(); });
+ $('mechanism-play').onclick = () => { playing = !playing; updateButtons(); }; $('slow-play').onclick = () => { slow = !slow; updateButtons(); };
+ $('mechanism-step').onclick = () => { playing = false; simTime += .28; mechanism = (mechanism + .07) % 1; updateButtons(); record(); };
+ $('mechanism').oninput = e => { mechanism = Number(e.target.value) / 100; simTime = mechanism * Math.PI; record(); };
+ function record() { if (!active && !targetExplosion) return; if (targetExplosion > 0) journal.mark('operated', 'explode'); if (reveal > .45) journal.mark('operated', 'open'); if (simTime > 0) journal.mark('operated', 'spin'); }
+
+ function init() {
+  // Transparent canvas, like the shared labs: .stage paints #edf2e7 and the
+  // HELLO, / YOUR STATION captions sit behind the model, not on top of it.
+  scene = new T.Scene(); camera = new T.PerspectiveCamera(42, 1, .02, 300);
+  renderer = new T.WebGLRenderer({ antialias: true, alpha: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1; renderer.localClippingEnabled = true; renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+  const canvas = renderer.domElement; $('viewport').prepend(canvas); canvas.setAttribute('aria-hidden', 'true'); canvas.onwebglcontextlost = e => { e.preventDefault(); $('load-error').hidden = false; };
+  scene.add(new T.HemisphereLight(0xf4f8ff, 0x9bafbd, 2.4)); const key = new T.DirectionalLight(0xfff7e9, 3.0); key.position.set(-9, 15, 12); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); Object.assign(key.shadow.camera, { left: -16, right: 16, top: 14, bottom: -14, near: .1, far: 70 }); key.shadow.normalBias = .025; key.shadow.bias = -.0003; scene.add(key); const fill = new T.DirectionalLight(0xd6edff, 1.5); fill.position.set(7, 4, -9); scene.add(fill);
+  station = StationV3.create(T); assemblies = station.assemblies; scene.add(station.root);
+  for (const a of assemblies) {
+   a.group.userData.assemblyId = a.id; a.group.userData.region = a.region; a.base = a.group.position.clone();
+   a.offset = new T.Vector3(...(offsets[a.id] || [0, 0, 0]));
+   for (const [layer, root] of [['exterior', a.exterior], ['interior', a.interior], ['ghost', a.ghost]]) root.traverse(o => {
+    if (!o.material) return;
+    // Independent materials isolate observation state between assemblies.
+    if (Array.isArray(o.material)) o.material = o.material.map(m => m.clone()); else o.material = o.material.clone();
+    const materials = [].concat(o.material), d = inherit(o, 'detail');
+    // Only the shell casts shadows: the shadow pass would otherwise redraw the
+    // whole interior for a shadow nobody can see inside a closed hull.
+    surfaces.push({ object: o, assembly: a, layer, detail: d, materials, shadow: o.castShadow && layer === 'exterior' });
+    materials.forEach(m => { materialOriginal.set(m, { opacity: m.opacity, transparent: m.transparent, depthWrite: m.depthWrite }); materialTransparency.set(m, m.transparent); });
+    if (layer !== 'ghost' && o.isMesh) { o.userData.pickAssembly = a.id; o.userData.pickDetail = d; pickables.push(o); }
+   });
+  }
+  // The station floats, so there is no ground to stand on: a faint shadow pool
+  // well below the hull gives the eye a sense of scale without pretending the
+  // station is parked on anything.
+  const ground = new T.Mesh(new T.PlaneGeometry(120, 120), new T.ShadowMaterial({ opacity: .10 })); ground.rotation.x = -Math.PI / 2; ground.position.y = -4.40; ground.receiveShadow = true; scene.add(ground);
+  const grid = new T.GridHelper(40, 40, 0xd1dee7, 0xe0e8ef); grid.position.y = -4.395; grid.material.transparent = true; grid.material.opacity = .16; scene.add(grid);
+  function resize() {
+   const b = $('viewport').getBoundingClientRect(); renderer.setSize(b.width, b.height, false); camera.aspect = b.width / b.height; camera.updateProjectionMatrix();
+   // The station reaches furthest along Z (out to the solar masts, ~5.2 m) and
+   // along X (nose to tail, ~5.7 m); its height runs from the cupola below to the
+   // radiators above. Whichever of the two axes needs the most room at this
+   // aspect wins, so the station fills the frame instead of floating in it.
+   const SPAN_Z = 10.4, SPAN_Y = 6.4;
+   const bySpan = SPAN_Z / (2 * Math.tan(T.MathUtils.degToRad(24)) * Math.max(.5, camera.aspect));
+   const byHeight = SPAN_Y / (2 * Math.tan(T.MathUtils.degToRad(24)));
+   overviewDistance = Math.max(9, Math.max(bySpan, byHeight));
+   if (!active && !targetExplosion) target.distance = overviewDistance;
+  }
+  new ResizeObserver(resize).observe($('viewport')); resize(); distance = target.distance;
+  const ray = new T.Raycaster();
+  function hit(x, y) { const b = canvas.getBoundingClientRect(); ray.setFromCamera(new T.Vector2((x - b.left) / b.width * 2 - 1, -(y - b.top) / b.height * 2 + 1), camera); return ray.intersectObjects(pickables, false).find(h => { for (let o = h.object; o; o = o.parent) if (!o.visible) return false; const m = [].concat(h.object.material)[0]; if (m.opacity < .18) return false; return !m.clippingPlanes?.some(p => p.distanceToPoint(h.point) < 0); }); }
+  function pick(h, close = false) { if (!h) return; const a = assemblies.find(a => a.id === h.object.userData.pickAssembly); if (!a) return; const id = h.object.userData.pickDetail; if (id && details.some(d => d.id === id)) { if (active !== a) selectAssembly(a, false); selectDetail(id, close); } else selectAssembly(a, close); }
+  function pan(dx, dy) { const scale = distance * .0012; target.look.add(new T.Vector3(1, 0, 0).applyQuaternion(camera.quaternion).multiplyScalar(-dx * scale)).add(new T.Vector3(0, 1, 0).applyQuaternion(camera.quaternion).multiplyScalar(dy * scale)); }
+  const pointers = new Map(); let drag = 0, lastTap = null, pinch = 0;
+  canvas.oncontextmenu = e => e.preventDefault();
+  canvas.onpointerdown = e => { canvas.setPointerCapture(e.pointerId); pointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); drag = 0; autoRotate = false; if (pointers.size === 2) { const p = [...pointers.values()]; pinch = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); drag = 99; lastTap = null; const h = hit((p[0].x + p[1].x) / 2, (p[0].y + p[1].y) / 2); if (h && !active) { selectAssembly(assemblies.find(a => a.id === h.object.userData.pickAssembly), false); target.look.copy(h.point); } } };
+  canvas.onpointermove = e => { if (!pointers.has(e.pointerId)) return; const old = pointers.get(e.pointerId), dx = e.clientX - old.x, dy = e.clientY - old.y; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); drag += Math.abs(dx) + Math.abs(dy); if (pointers.size === 2) { const p = [...pointers.values()], d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); target.distance = clamp(target.distance * pinch / Math.max(d, 1), 1.4, 80); pinch = d; pan(dx * .5, dy * .5); } else if (e.buttons === 2 || e.shiftKey) pan(dx, dy); else { target.yaw -= dx * .006; target.pitch = clamp(target.pitch + dy * .005, -1.45, 1.50); } };
+  canvas.onpointerup = e => { if (drag < 6 && pointers.size === 1 && e.button !== 2) { const h = hit(e.clientX, e.clientY); pick(h); const now = performance.now(); if (e.pointerType !== 'mouse' && lastTap && now - lastTap.t < 350 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 24) { pick(h, true); lastTap = null; } else lastTap = { t: now, x: e.clientX, y: e.clientY }; } pointers.delete(e.pointerId); pinch = 0; }; canvas.onpointercancel = e => { pointers.delete(e.pointerId); pinch = 0; drag = 99; };
+  canvas.ondblclick = e => { if (drag < 6) pick(hit(e.clientX, e.clientY), true); };
+  canvas.addEventListener('wheel', e => { e.preventDefault(); if (e.deltaY < 0 && !targetExplosion) { const h = hit(e.clientX, e.clientY); if (h && (!active || distance > activeFit * 1.4)) { selectAssembly(assemblies.find(a => a.id === h.object.userData.pickAssembly), false); target.look.copy(h.point); } } target.distance = clamp(target.distance * Math.exp(e.deltaY * .0012), 1.4, 80); }, { passive: false });
+  $('viewport').onkeydown = e => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', 'Escape'].includes(e.key)) { e.preventDefault(); if (e.key === 'Escape') back(); if (e.key === 'ArrowLeft') target.yaw -= .16; if (e.key === 'ArrowRight') target.yaw += .16; if (e.key === 'ArrowUp') target.pitch = clamp(target.pitch + .12, -1.45, 1.50); if (e.key === 'ArrowDown') target.pitch = clamp(target.pitch - .12, -1.45, 1.50); if (e.key === '+' || e.key === '=') target.distance = Math.max(1.4, target.distance * .8); if (e.key === '-') target.distance = Math.min(80, target.distance * 1.25); } };
+  window.stationLab = {
+   setView: (y, p, d, x = 0) => { autoRotate = false; active = null; detail = null; mode = 'auto'; targetExplosion = 0; renderLesson(); target.yaw = y; target.pitch = p; target.distance = d; target.look.set(x, .10, 0); },
+   select: id => selectAssembly(nearestAssembly(id)), focusDetail: id => selectDetail(id),
+   snapshot: () => ({ generation: 4, changedOpacity: surfaces.filter(s => s.materials.some(m => Math.abs(m.opacity - materialOriginal.get(m).opacity) > 1e-6)).length, modelId: station.root.uuid, selected: active?.region || null, assembly: active?.id || null, detail, near, reveal, mode, playing, simulationTime: simTime, level: mechanism, explosion, meshCount: pickables.length, geometry: station.counts, visited: journal.read().found, camera: { yaw, pitch, distance, target: look.toArray() }, assemblies: assemblies.map(a => ({ id: a.id, region: a.region, exterior: a.exterior.visible, interior: a.interior.visible, ghost: a.ghost.visible })), renderer: renderer.info.render }),
+   projectPart: id => { const a = assemblies.find(a => a.id === id) || nearestAssembly(id); if (!a) return null; const c = worldCenter(a).project(camera), b = canvas.getBoundingClientRect(); return { x: b.left + (c.x * .5 + .5) * b.width, y: b.top + (-c.y * .5 + .5) * b.height }; }
+  };
+  requestAnimationFrame(frame);
+ }
+ function frame(stamp) {
+  requestAnimationFrame(frame); const dt = Math.min((stamp - lastFrame) / 1000, .05); lastFrame = stamp; if (document.hidden) return;
+  const ease = reduced ? 1 : 1 - Math.exp(-dt * 8); if (autoRotate) target.yaw += dt * .17;
+  yaw += (target.yaw - yaw) * ease; pitch += (target.pitch - pitch) * ease; distance += (target.distance - distance) * ease; look.lerp(target.look, ease); explosion += (targetExplosion - explosion) * ease;
+  camera.position.set(Math.sin(yaw) * Math.cos(pitch) * distance, Math.sin(pitch) * distance, Math.cos(yaw) * Math.cos(pitch) * distance).add(look); camera.lookAt(look); camera.updateMatrixWorld(true);
+  near = active && explosion < .02 ? clamp((activeFit * 1.7 - distance) / (activeFit * .7)) : 0;
+  reveal = active ? (mode === 'inside' ? 1 : mode === 'outside' ? 0 : clamp((near - .28) / .72)) : 0;
+  if (playing) { simTime += dt * (slow ? .55 : 1); mechanism = .5 - .5 * Math.cos(simTime); record(); }
+  $('mechanism').value = Math.round(mechanism * 100); $('mechanism-value').textContent = Math.round(mechanism * 100) + '%';
+  $('depth-status').textContent = explosion > .1 ? '部件拆解' : !active || near < .15 ? '整体观察' : reveal > .45 ? '内部结构' : '靠近观察'; $('observation-state').textContent = mode === 'auto' ? '随缩放变化' : mode === 'inside' ? '局部剖面' : '完整外观';
+  station.update({ time: simTime, mechanism: mechanism > .001, level: mechanism, region: active?.region });
+  for (const a of assemblies) { a.group.position.copy(a.base).addScaledVector(a.offset, explosion); if (a.update) a.update({ time: simTime, mechanism: mechanism > .001, level: mechanism, region: active?.region }); }
+  if (active) { const center = worldCenter(active), normal = camera.position.clone().sub(center).normalize(); clipping.setFromNormalAndCoplanarPoint(normal.clone().negate(), center.clone().addScaledVector(normal, active.radius * (1 - reveal))); }
+  // Zoom preserves the real surrounding stack, including its original materials.
+  // Once the camera is genuinely close to one assembly (near > .55), the rest fade
+  // out instead of filling the frame — otherwise the barrels on the far side hide
+  // the part being examined and there is nothing to see.
+  const fade = clamp((near - .55) / .35);
+  for (const a of assemblies) {
+   const chosen = a === active;
+   a.exterior.visible = !fade || chosen || explosion > .02;
+   a.interior.visible = chosen && reveal > .03 || explosion > .2;
+   a.ghost.visible = false;
+   a.fade = chosen ? 0 : fade;
+  }
+  for (const s of surfaces) {
+   const chosen = s.assembly === active;
+   const dim = chosen ? 0 : (s.assembly ? s.assembly.fade : 0);
+   for (const m of s.materials) {
+    const orig = materialOriginal.get(m); Object.assign(m, orig);
+    // Dim the unselected stack by sinking its opacity, not by hiding it, so the
+    // depth cue survives and the selected part keeps its silhouette.
+    if (dim > .01 && !m.transparent) { m.transparent = true; m.userData = m.userData || {}; m.userData.kbBase = orig.opacity != null ? orig.opacity : 1; }
+    if (dim > .01) m.opacity = (m.userData && m.userData.kbBase != null ? m.userData.kbBase : 1) * (1 - dim * .88);
+    m.clippingPlanes = chosen && s.layer === 'exterior' && !s.detail && reveal > .01 ? [clipping] : null;
+    if (materialTransparency.get(m) !== m.transparent) { m.needsUpdate = true; materialTransparency.set(m, m.transparent); }
+   }
+   s.object.castShadow = s.shadow && !(chosen && reveal > .1 && s.layer === 'exterior') && dim < .5;
+  }
+  station.root.updateMatrixWorld(true);
+  const label = $('model-label'); label.hidden = !active || near < .2;
+  if (!label.hidden) { const p = (detail ? detailCenter() : worldCenter(active)).project(camera), b = $('viewport').getBoundingClientRect(); label.textContent = data().name; label.hidden = Math.abs(p.x) > 1 || Math.abs(p.y) > 1 || p.z > 1; label.style.left = (p.x * .5 + .5) * b.width + 'px'; label.style.top = (-p.y * .5 + .5) * b.height - 20 + 'px'; }
+  renderer.render(scene, camera);
+ }
+window.addEventListener('pagehide', () => { playing = false; speech.stop(); });
+ try { init(); } catch (e) { console.error('Space station v3', e); $('load-error').hidden = false; }
+ renderLesson();
+ function deepLink() { if (!camera || !assemblies.length) return; const id = new URLSearchParams(location.search).get('part'); if (id && lessons.some(p => p.id === id)) selectAssembly(nearestAssembly(id)); }
+ window.addEventListener('hashchange', deepLink); deepLink();
+})();

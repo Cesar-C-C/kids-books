@@ -31,5 +31,11 @@ window.LABS_CATALOG = [
     description: '爬上楼梯看看上层车厢：红色双层巴士的 10 类部件、39 个内部细节与楼梯结构。',
     icon: '🚍', status: 'ready', href: 'doubledecker/index.html', image: 'doubledecker/preview.png', bookId: 'bus', age: '4–8 岁',
     features: ['连续放大', '39 个内部细节', '英文点读', '剖视与机构演示']
+  },
+  {
+    id: 'station', title: '太空站 3D 实验室', englishTitle: 'Space Station Lab',
+    description: '绕到太空站侧面，转动太阳能翼、弯起机械臂，探索舱段、对接端口与穹顶观察窗的 37 个内部细节。',
+    icon: '🛰', status: 'ready', href: 'station/index.html', image: 'station/preview.png', bookId: 'station', age: '4–8 岁',
+    features: ['连续放大', '37 个内部细节', '英文点读', '剖视与机构演示']
   }
 ];
