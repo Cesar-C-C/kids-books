@@ -31,7 +31,7 @@
     if(['modules','node','interior','windows','cupola'].includes(a.region)){p.key='cabin';p.label='打开舱段剖面';p.cut=['modules','node','windows'];if(a.region==='cupola')p.cut.push('cupola');p.inside=['modules','node','interior','windows'];if(a.region==='cupola')p.inside.push('cupola');p.point=[0,0,0];}
     else {p.label='查看内部连接';p.cut=[a.id];}
    }
-   if(!p.inside.includes(a.id))p.inside.push(a.id);return p;
+   if(!p.inside.includes(a.id))p.inside.push(a.id);return a.inspectionPlan?a.inspectionPlan(p):p;
   }
   function clear(immediate=false){closing=current;current=null;if(immediate){closing=null;amount=0;}}
   return {

@@ -26,7 +26,7 @@
    if(['cabin','upper-cabin','lower-cabin'].includes(exhibit.opened.key)){target.pitch=.55;target.distance=Math.max(target.distance,fit(active.radius*1.1));}
   }renderLesson();
  }
- function progress(){$('progress-text').textContent=journal.read().found.length+' / 34';}
+ function progress(){$('progress-text').textContent=journal.read().found.length+' / '+(lessons.length+details.length);}
  function inherit(object,key){for(let o=object;o;o=o.parent)if(o.userData[key])return o.userData[key];return null;}
  function data(){return detail?details.find(d=>d.id===detail):active?lessons.find(p=>p.id===active.region):null;}
  function sameRegion(id){return assemblies.filter(a=>a.region===id);}
@@ -46,6 +46,7 @@
  }
  function focus(){
   if(!active||!camera)return;
+  if(detail||active.region==='gear'){const v=AirplaneInspection.focus(T,active,detail,detailObjects());target.look.copy(v.point);target.distance=fit(v.radius);target.yaw=v.yaw;target.pitch=v.pitch;activeFit=fit(active.radius);autoRotate=false;return;}
   const point=detail?detailCenter():worldCenter(active);target.look.copy(point);
   let r=active.radius;
   if(detail){const b=new T.Box3();detailObjects().forEach(g=>b.expandByObject(g));r=b.isEmpty()?.8:b.getBoundingSphere(new T.Sphere()).radius;r=Math.min(r,{fuselage:1.9,cockpit:.75,gear:.7,wings:1.85,engines:1.3}[active.region]||r);}
@@ -60,8 +61,8 @@
   if(active.region==='stabilizers'||active.region==='elevators')angles=[point.z<0?Math.PI+.3:-.3,.7];
   target.yaw=angles[0];target.pitch=angles[1];
  }
- function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}exhibit.select(a);if(active!==a){playing=false;mechanism=0;}active=a;detail=null;mode=exhibit.opened?'inside':'outside';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
- function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(!exhibit.opened){renderLesson();return;}detail=id;journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
+ function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}a.inspectionDetail=null;exhibit.select(a);if(active!==a){playing=false;mechanism=0;}active=a;detail=null;mode=exhibit.opened?'inside':'outside';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
+ function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(!exhibit.opened){renderLesson();return;}detail=id;active.inspectionDetail=id;exhibit.select(active);journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
  function home(){remember();closeExhibit();active=null;detail=null;mode='outside';playing=false;autoRotate=false;targetExplosion=0;target.look.set(0,.3,0);target.yaw=-.62;target.pitch=.4;target.distance=overviewDistance;renderLesson();}
  function back(){restoreView(viewHistory.pop());renderLesson();}
  function renderLesson(){
@@ -76,7 +77,7 @@
   const children=active?details.filter(d=>d.region===active.region):[];
   $('explore-section').hidden=!children.length;$('detail-count').textContent=children.length+' 个发现';$('detail-list').replaceChildren();
   children.forEach(d=>{const b=document.createElement('button');b.className='detail-button';b.dataset.detail=d.id;b.setAttribute('aria-pressed',detail===d.id);b.innerHTML=d.name+'<small>'+d.zhName+'</small>';b.disabled=!exhibit.opened;b.onclick=()=>selectDetail(d.id);$('detail-list').append(b);});
-  $('operation-panel').hidden=!active;$('mechanism-controls').hidden=!active||['fuselage','cockpit','fin','stabilizers'].includes(active.region);
+  $('operation-panel').hidden=!active;$('mechanism-controls').hidden=!active||['fuselage','cockpit','fin','stabilizers'].includes(active.region)||(detail&&!detail.startsWith('engine.')&&!['wing.flap','wing.slat','wing.spoiler','gear.wheel','aileron.hinge','aileron.linkage','elevator.hinge','rudder.hinge'].includes(detail));
   $('mechanism-help').textContent=!active?'':active.region==='gear'?'轮子转动演示；支柱、刹车和舱口展示结构位置。':active.region==='engines'?'蓝色气流经过压气机，在燃烧室加热后变为暖色；单轴连接为教学简化。':active.region==='wings'?'襟翼、缝翼与扰流板分别演示自己的活动方式。':active.region==='fuselage'||active.region==='cockpit'?'拖动视角，观察结构的位置。':'';
   $('flow-choices').hidden=active?.region!=='engines';$('engine-missions').hidden=active?.region!=='engines';
   const opened=!!exhibit.opened;$('open-part').textContent=opened?'合上 · 恢复外观':exhibit.plan(active)?.label||'打开结构';$('open-part').setAttribute('aria-pressed',opened);
@@ -88,7 +89,7 @@
  lessons.forEach((p,i)=>{const b=document.createElement('button');b.className='region-button';b.dataset.part=p.id;b.setAttribute('aria-pressed',false);b.innerHTML='<i>'+String(i+1).padStart(2,'0')+'</i><span><strong>'+p.name+'</strong><small>'+p.zhName+'</small></span>';b.onclick=()=>{if(camera)selectAssembly(nearestAssembly(p.id));else{$('part-name').textContent=p.name;$('part-en').textContent=p.en;$('part-zh').textContent=p.zh;}};$('region-list').append(b);});
  $('speak').onclick=()=>speech.say($('part-name').textContent+'. '+$('part-en').textContent,true);
  $('language').onclick=()=>{const only=document.body.classList.toggle('english-only');$('language').textContent=only?'English only':'中英双语';$('language').setAttribute('aria-pressed',!only);};
- $('whole-airplane').onclick=$('home-view').onclick=home;$('back-view').onclick=back;$('back-part').onclick=()=>{detail=null;renderLesson();};$('focus-part').onclick=()=>{remember();focus();renderLesson();};$('open-part').onclick=toggleOpening;
+ $('whole-airplane').onclick=$('home-view').onclick=home;$('back-view').onclick=back;$('back-part').onclick=()=>{detail=null;active.inspectionDetail=null;exhibit.select(active);focus();renderLesson();};$('focus-part').onclick=()=>{remember();focus();renderLesson();};$('open-part').onclick=toggleOpening;
  $('zoom-in').onclick=()=>{target.distance=Math.max(.55,target.distance*.8);};$('zoom-out').onclick=()=>{target.distance=Math.min(55,target.distance*1.25);};
  $('side-view').onclick=()=>{target.pitch=.05;target.yaw=0;autoRotate=false;updateButtons();};$('top-view').onclick=()=>{target.pitch=1.53;target.yaw=0;autoRotate=false;updateButtons();};$('auto-rotate').onclick=()=>{autoRotate=!autoRotate;updateButtons();};
  $('explode-button').onclick=()=>{closeExhibit(true);targetExplosion=targetExplosion?0:1;detail=null;active=null;target.look.set(0,.3,0);target.distance=overviewDistance*(targetExplosion?1.25:1);playing=false;renderLesson();};
@@ -111,7 +112,7 @@
   scene.add(new T.HemisphereLight(0xf4f8ff,0x9bafbd,2.5));const key=new T.DirectionalLight(0xfff7e9,3.2);key.position.set(-7,12,7);key.castShadow=true;key.shadow.mapSize.set(1024,1024);Object.assign(key.shadow.camera,{left:-14,right:14,top:14,bottom:-14,near:.1,far:50});key.shadow.normalBias=.025;key.shadow.bias=-.0003;scene.add(key);const fill=new T.DirectionalLight(0xd6edff,1.4);fill.position.set(5,4,-8);scene.add(fill);
   airframe=AirframeV3.create(T);assemblies=airframe.assemblies;scene.add(airframe.root);
   for(const side of [-1,1]){const a=EngineV3.create(T,{id:side>0?'engine-right':'engine-left',side});a.group.position.set(-.65,-1,side*2.65);airframe.root.add(a.group);assemblies.push(a);}
-  for(const a of assemblies){a.group.userData.assemblyId=a.id;a.group.userData.region=a.region;a.base=a.group.position.clone();const c=worldCenter(a);a.offset=new T.Vector3(c.x*.2,a.region==='fuselage'?0:a.region==='cockpit'?1.1:a.region==='gear'?-1.3:.6,Math.sign(c.z)*1.8);if(a.region==='fin'||a.region==='rudder')a.offset.y=1.8;
+  for(const a of assemblies){a.inspectionPlan=p=>AirplaneInspection.plan(p,a);a.group.userData.assemblyId=a.id;a.group.userData.region=a.region;a.base=a.group.position.clone();const c=worldCenter(a);a.offset=new T.Vector3(c.x*.2,a.region==='fuselage'?0:a.region==='cockpit'?1.1:a.region==='gear'?-1.3:.6,Math.sign(c.z)*1.8);if(a.region==='fin'||a.region==='rudder')a.offset.y=1.8;
    for(const [layer,root]of[['exterior',a.exterior],['interior',a.interior],['ghost',a.ghost]])root.traverse(o=>{
     if(!o.material)return;
     // Independent materials isolate observation state between assemblies.
@@ -138,7 +139,17 @@
   canvas.ondblclick=e=>{if(drag<6)pick(hit(e.clientX,e.clientY),true);};
   canvas.addEventListener('wheel',e=>{e.preventDefault();target.distance=clamp(target.distance*Math.exp(e.deltaY*.0012),.55,55);},{passive:false});
   $('viewport').onkeydown=e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','Escape'].includes(e.key)){e.preventDefault();if(e.key==='Escape')back();if(e.key==='ArrowLeft')target.yaw-=.16;if(e.key==='ArrowRight')target.yaw+=.16;if(e.key==='ArrowUp')target.pitch=clamp(target.pitch+.12,-1.1,1.53);if(e.key==='ArrowDown')target.pitch=clamp(target.pitch-.12,-1.1,1.53);if(e.key==='+'||e.key==='=')target.distance=Math.max(.55,target.distance*.8);if(e.key==='-')target.distance=Math.min(55,target.distance*1.25);}};
-  window.airplaneLab={select:id=>selectAssembly(nearestAssembly(id)),focusDetail:id=>selectDetail(id),snapshot:()=>({displayVersion:1,changedOpacity:surfaces.filter(s=>s.materials.some(m=>Math.abs(m.opacity-materialOriginal.get(m).opacity)>1e-6)).length,...exhibit.snapshot(),history:viewHistory.length,generation:3,modelId:airframe.root.uuid,selected:active?.region||null,assembly:active?.id||null,detail,near,reveal,mode,playing,simulationTime:simTime,explosion,meshCount:pickables.length,visited:journal.read().found,camera:{yaw,pitch,distance,target:look.toArray()},assemblies:assemblies.map(a=>({id:a.id,region:a.region,exterior:a.exterior.visible,interior:a.interior.visible,ghost:a.ghost.visible,exteriorPosition:a.exterior.position.toArray(),position:a.group.position.toArray()})),renderer:renderer.info.render}),projectPart:id=>{const a=assemblies.find(a=>a.id===id)||nearestAssembly(id);if(!a)return null;const p=worldCenter(a).project(camera),b=canvas.getBoundingClientRect();return{x:b.left+(p.x*.5+.5)*b.width,y:b.top+(-p.y*.5+.5)*b.height};}};
+  function inspectionReport(){
+   if(!active||!detail)return null;
+   const v=AirplaneInspection.focus(T,active,detail,detailObjects()),points=[],meshes=[];
+   detailObjects().forEach(g=>g.traverse(o=>{if(o.isMesh)meshes.push(o);}));
+   meshes.sort((a,b)=>new T.Box3().setFromObject(a).getCenter(new T.Vector3()).distanceToSquared(v.point)-new T.Box3().setFromObject(b).getCenter(new T.Vector3()).distanceToSquared(v.point));
+   for(const o of meshes.slice(0,8)){const p=o.geometry.attributes.position;for(let i=0;i<p.count;i+=Math.max(1,Math.floor(p.count/12))){const w=o.localToWorld(new T.Vector3().fromBufferAttribute(p,i));if(w.distanceTo(v.point)<v.radius*1.2)points.push(w);}}
+   const b=canvas.getBoundingClientRect();let onScreen=0,visible=0;const blockers={};
+   for(const w of points){const p=w.clone().project(camera);if(Math.abs(p.x)>.95||Math.abs(p.y)>.95||p.z>1)continue;onScreen++;const h=hit(b.left+(p.x*.5+.5)*b.width,b.top+(-p.y*.5+.5)*b.height);if(h?.object.userData.pickDetail===detail)visible++;else{const key=h?.object.userData.pickDetail||h?.object.userData.pickAssembly||'empty';blockers[key]=(blockers[key]||0)+1;}}
+   return {detail,points:points.length,onScreen,visible,blockers};
+  }
+  window.airplaneLab={inspectionReport,select:id=>selectAssembly(assemblies.find(a=>a.id===id)||nearestAssembly(id)),focusDetail:id=>selectDetail(id),snapshot:()=>({displayVersion:1,changedOpacity:surfaces.filter(s=>s.materials.some(m=>Math.abs(m.opacity-materialOriginal.get(m).opacity)>1e-6)).length,...exhibit.snapshot(),history:viewHistory.length,generation:3,modelId:airframe.root.uuid,selected:active?.region||null,assembly:active?.id||null,detail,near,reveal,mode,playing,simulationTime:simTime,explosion,meshCount:pickables.length,visited:journal.read().found,camera:{yaw,pitch,distance,target:look.toArray()},assemblies:assemblies.map(a=>({id:a.id,region:a.region,exterior:a.exterior.visible,interior:a.interior.visible,ghost:a.ghost.visible,exteriorPosition:a.exterior.position.toArray(),position:a.group.position.toArray()})),renderer:renderer.info.render}),projectPart:id=>{const a=assemblies.find(a=>a.id===id)||nearestAssembly(id);if(!a)return null;const p=worldCenter(a).project(camera),b=canvas.getBoundingClientRect();return{x:b.left+(p.x*.5+.5)*b.width,y:b.top+(-p.y*.5+.5)*b.height};}};
   requestAnimationFrame(frame);
  }
  function frame(stamp){
@@ -151,12 +162,13 @@
   if(playing){simTime+=dt*(slow?.55:1);mechanism=.5-.5*Math.cos(simTime);record();}
   $('mechanism').value=Math.round(mechanism*100);$('mechanism-value').textContent=Math.round(mechanism*100)+'%';
   $('depth-status').textContent=explosion>.1?'拆解展示':exhibit.opened?'已打开 · '+(data()?.zhName||'结构'):'自由观察';$('observation-state').textContent=exhibit.opened?'手动打开':'完整外观';
-  airframe.update({time:simTime,mechanism:mechanism>.001,region:active?.region});
+  airframe.update({time:simTime,mechanism:mechanism>.001,level:mechanism,detail:detail==='aileron.linkage'?'aileron.hinge':detail,region:active?.region});
   for(const a of assemblies){a.group.position.copy(a.base).addScaledVector(a.offset,explosion);if(a.update)a.update({time:simTime,mechanism,flow:a===active&&reveal>.4&&simTime>0?flow:'off',selected:a===active?detail:null});}
   exhibit.step(ease,assemblies,surfaces,materialOriginal,explosion,active);
+  AirplaneInspection.apply(T,active,detail,!!exhibit.opened,assemblies,surfaces);
   airframe.root.updateMatrixWorld(true);
   const label=$('model-label');label.hidden=!active||near<.2;
-  if(!label.hidden){const p=(detail?detailCenter():worldCenter(active)).project(camera),b=$('viewport').getBoundingClientRect();label.textContent=data().name;label.hidden=Math.abs(p.x)>1||Math.abs(p.y)>1||p.z>1;label.style.left=(p.x*.5+.5)*b.width+'px';label.style.top=(-p.y*.5+.5)*b.height-20+'px';}
+  if(!label.hidden){const p=(detail?detailCenter():worldCenter(active)).project(camera),b=$('viewport').getBoundingClientRect();label.textContent=data().name;label.hidden=Math.abs(p.x)>1||Math.abs(p.y)>1||p.z>1;label.style.left=(p.x*.5+.5)*b.width+'px';label.style.left='16px';label.style.top='16px';label.style.transform='none';}
   renderer.render(scene,camera);
  }
  window.addEventListener('pagehide',()=>{playing=false;speech.stop();});

@@ -6,7 +6,7 @@ plane.root.updateMatrixWorld(true);
 const panes=[];cabin.exterior.traverse(o=>{if(o.name==='Cabin window on skin')panes.push(o);});
 assert.ok(panes.length>30,'A continuous row of small book-style passenger windows');
 for(const pane of panes){const side=Math.sign(pane.position.z),origin=new T.Vector3(pane.position.x,pane.position.y,side*5),ray=new T.Raycaster(origin,new T.Vector3(0,0,-side));const hit=ray.intersectObject(cabin.exterior,true)[0];assert.equal(hit?.object,pane,`Cabin skin must not bury window at ${pane.position.toArray()}`);}
-for(const a of plane.assemblies.filter(a=>a.region==='wings')){const fairings=a.exterior.children.filter(o=>o.name==='Flap track fairing');assert.equal(fairings.length,3);for(const f of fairings){const bounds=new T.Box3().setFromObject(f),size=bounds.getSize(new T.Vector3());assert.ok(size.x>size.y*4&&size.x>size.z*4,'Streamlined fairing must be elongated in flight direction');}}
+for(const a of plane.assemblies.filter(a=>a.region==='wings')){const fairings=a.exterior.getObjectByName('wing-cover').children.filter(o=>o.name==='Flap track fairing');assert.equal(fairings.length,3);for(const f of fairings){const bounds=new T.Box3().setFromObject(f),size=bounds.getSize(new T.Vector3());assert.ok(size.x>size.y*4&&size.x>size.z*4,'Streamlined fairing must be elongated in flight direction');}}
 const fin=plane.assemblies.find(a=>a.id==='vertical-tail');assert.equal(fin.exterior.children.filter(o=>o.name==='White tail ribbon').length,2);
 // Reviewable silhouette constraints, rather than paint-only assertions.
 const radome=plane.root.getObjectByName('Rounded book radome'),skin=plane.root.getObjectByName('Book fuselage skin');

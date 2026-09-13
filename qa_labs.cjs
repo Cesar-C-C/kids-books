@@ -31,7 +31,7 @@ vm.runInNewContext(fs.readFileSync(path.join(root,'labs/airplane/parts.js'),'utf
 assert.equal(partsContext.window.PLANE_PARTS.length,10);
 vm.runInNewContext(fs.readFileSync(path.join(root,'labs/airplane/detail-parts.js'),'utf8'),partsContext);
 const details=partsContext.window.AIRPLANE_DETAILS;
-assert.equal(details.length,24);assert.equal(new Set(details.map(d=>d.id)).size,24);
+assert.equal(details.length,30);assert.equal(new Set(details.map(d=>d.id)).size,30);
 for(const d of details){for(const key of ['id','region','name','zhName','en','zh','tip','principle'])assert.ok(d[key]);assert.ok(partsContext.window.PLANE_PARTS.some(p=>p.id===d.region));}
 new vm.Script(fs.readFileSync(path.join(root,'labs/airplane/details-model.js'),'utf8'));
 console.log(`PASS: ${labs.length} registered labs, ready/planned routes, related books, shared assets, 10 airplane lessons, script syntax.`);
