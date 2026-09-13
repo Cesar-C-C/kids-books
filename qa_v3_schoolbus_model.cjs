@@ -169,3 +169,25 @@ wheels.group.traverse(o => { if (!o.isMesh) return; o.geometry.computeBoundingBo
 assert.ok(Math.abs(wheelLo - mn.y) < .16, `the tyres must define the ground line: wheels ${wheelLo.toFixed(2)} vs bus ${mn.y.toFixed(2)}`);
 
 console.log(`PASS v3 school bus: ${bus.assemblies.length} assemblies, ${meshes} meshes, ${Math.round(triangles)} triangles, ${ghostMeshes} silhouette meshes; ${parts.length} parts / ${details.length} inside discoveries fully cross-linked; reversible doors + stop arm; long-nose Type-C ${size.x.toFixed(2)} x ${size.y.toFixed(2)} x ${size.z.toFixed(2)} m with a ${(hHi - hLo).toFixed(2)} m hood.`);
+
+// Regression: forward-facing backs span the vehicle width, stay inside the shell,
+// and leave a continuous center aisle (book interior reference).
+bus.root.updateMatrixWorld(true);
+bus.root.traverse(o => {
+  if (!o.isMesh || !['Seat back', 'Rear bench back', 'Driver back', 'Priority back'].includes(o.name)) return;
+  const b = new T.Box3().setFromObject(o), extent = b.getSize(new T.Vector3());
+  assert.ok(extent.z > extent.x * 2, `${o.name}: back must face -X, not block the aisle sideways`);
+  assert.ok(b.max.x < 4.15 && b.min.x > -4.2, `${o.name}: seat must remain inside the bus`);
+  assert.ok(b.max.z < 1.23 && b.min.z > -1.23, `${o.name}: seat must remain inside the side walls`);
+});
+
+const roofPanel = bus.root.getObjectByName('Roof panel');
+const rv = roofPanel.geometry.attributes.position;
+let leftHeight = -Infinity, rightHeight = -Infinity;
+for (let i = 0; i < rv.count; i++) {
+  const v = roofPanel.localToWorld(new T.Vector3(rv.getX(i), rv.getY(i), rv.getZ(i)));
+  if (v.z < -.3) leftHeight = Math.max(leftHeight, v.y);
+  if (v.z > .3) rightHeight = Math.max(rightHeight, v.y);
+}
+assert.ok(Math.abs(leftHeight - rightHeight) < .001, 'arched roof must be symmetric across the bus');
+console.log('PASS schoolbus book-shape regressions: symmetric crown, contained forward-facing seats');

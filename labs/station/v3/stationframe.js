@@ -34,13 +34,13 @@ window.StationV3 = { create(T) {
   // faint warm sheen, brass/gold foil on the joints and rings, deep navy solar
   // cells with gold grid lines, pale radiators, a wide blue Earth below.
   const palette = {
-    hull: 0xcfd2d4, hullPale: 0xdfe1e2, hullWarm: 0xc6c4bd, hullDark: 0x9ea3a6,
+    hull: 0xd8d5c8, hullPale: 0xe5e0d2, hullWarm: 0xc6c1ae, hullDark: 0x9ea3a6,
     gold: 0xb08a3c, goldLite: 0xd0ac5e, goldDark: 0x8a6a2e,
     ink: 0x24282c, black: 0x1d2124, dark: 0x39424a, steel: 0x9aa2a7,
     cell: 0x2f4b8f, cellDeep: 0x24396f, cellLite: 0x3d5fa8,
     glass: 0x3f6b93, glassLite: 0x5c8cb4, glassDark: 0x2f5677,
     radiator: 0xe2e4e3, radiatorEdge: 0xc8cccc, foil: 0xcbb994,
-    floor: 0xa8a49a, floorDark: 0x8d8a80, rack: 0x8b8d6c, rackDark: 0x74765a,
+    floor: 0xc2b59b, floorDark: 0x8d8a80, rack: 0xc8bea7, rackDark: 0x928b79,
     blue: 0x2f5f96, blueDark: 0x274e7d, bag: 0x3b6ea8, lamp: 0xf0e0a8,
     green: 0x5f8f3f, greenLite: 0x7fb055, purple: 0x8a6fc0,
     shield: 0xb9a37c, shieldDark: 0x9c885f, white: 0xeef0ef
@@ -182,7 +182,7 @@ window.StationV3 = { create(T) {
   const NODE_X = 0.20;           // centre of the spherical node (also the origin of the truss)
   const NODE_R = 0.72;
   const TRUSS_Y = -0.20;         // truss axis height
-  const WING_Z = 2.55;           // solar wing centre; the wings sit at +-WING_Z
+  const WING_Z = 3.70;           // compact panel wings beside the cross modules
   const WING_X = 0.20;           // wings ride the truss at the node's x
   const ARM_X = 1.95, ARM_Y = 0.02, ARM_Z = 0.46;
   const RAD_Z = 1.35, RAD_Y = 1.35;
@@ -220,12 +220,27 @@ window.StationV3 = { create(T) {
           { name: 'Joint collar', pos: [x, 0, 0], rot: [0, Math.PI / 2, 0], roughness: .38, metalness: .62 });
       }
     }
+    // Both overview and cover show transverse pressurised barrels meeting the
+    // node. A bare lattice alone loses the characteristic T/cross silhouette.
+    for (const side of [-1, 1]) {
+      const z0 = NODE_R - .12, z1 = 2.02, mid = side * (z0 + z1) / 2;
+      into(modules, 'exterior', 'modules.skin', cyl(RM, RM, z1 - z0, 36), 'hull',
+        { name: 'Cross module barrel', pos: [NODE_X, 0, mid], rot: [Math.PI / 2, 0, 0], roughness: .45, metalness: .32 });
+      for (const z of [z0 + .04, 1.25, z1 - .04]) {
+        into(modules, 'exterior', 'modules.ring', torus(RM + .025, .035, 32), z === 1.25 ? 'hullWarm' : 'gold',
+          { name: 'Cross module collar', pos: [NODE_X, 0, side * z], roughness: .45, metalness: .45 });
+      }
+      into(modules, 'exterior', 'modules.port', cyl(.135, .135, .04, 24), 'glass',
+        { name: 'Cross module porthole', pos: [NODE_X - RM - .015, 0, mid], rot: [0, 0, Math.PI / 2], glass: true });
+      into(modules, 'exterior', 'modules.port', torus(.16, .026, 24), 'gold',
+        { name: 'Cross porthole rim', pos: [NODE_X - RM - .04, 0, mid], rot: [0, Math.PI / 2, 0], metalness: .5 });
+    }
     // Portholes: a ring of thick glass every module, set into a heavy frame. The
     // frame is a torus about the barrel's normal, so it needs no rotation
     // beyond the barrel's own quarter turn about X (its axis is already Z).
-    const ports = [[-2.10, 0], [-1.26, 0], [.86, 0], [1.72, 0]];
+    const ports = [[-1.70, 0], [1.48, 0]];
     for (const [x] of ports) {
-      for (const th of [Math.PI * .18, Math.PI * .5, Math.PI * .82]) {
+      for (const th of [Math.PI * .18, Math.PI * .82]) {
         const z = Math.cos(th) * (RM + .03), y = Math.sin(th) * (RM + .03);
         const nx = z / (RM + .03), ny = y / (RM + .03);
         const g = new T.Group(); g.position.set(x, y, z);
@@ -413,11 +428,11 @@ window.StationV3 = { create(T) {
     // Each wing hangs off the truss through a rotary joint that follows the Sun.
     // The wing itself is a lattice of four blanket panels: cells on the front,
     // a pale backing behind, gold hinge lines between.
-    const PANEL_W = 1.52, PANEL_L = 2.60, PANELS = 4, GAP = .05;
+    const PANEL_W = 1.88, PANEL_L = 1.08, PANELS = 2, GAP = .05;
     const wingPivots = [];
     for (const side of [-1, 1]) {
       const pivot = new T.Group();
-      pivot.position.set(WING_X, TRUSS_Y, side * (NODE_R + .40));
+      pivot.position.set(WING_X, 0, side * 2.02);
       solar.exterior.add(pivot);
       wingPivots.push({ pivot, side });
       // The rotary joint housing and its gold collar.
@@ -657,14 +672,14 @@ window.StationV3 = { create(T) {
     const housing = new T.Mesh(cyl(.52, .58, .30, 30), mat('hullPale', .42, .34));
     housing.name = 'Cupola housing';
     housing.userData = { region: 'cupola', assemblyId: 'cupola', detail: 'cupola.glass' };
-    housing.position.set(NODE_X, CY - .14, 0); housing.rotation.z = Math.PI / 2;
+    housing.position.set(NODE_X, CY - .14, 0);
     housing.castShadow = housing.receiveShadow = true;
     cupola.exterior.add(housing);
     // Seven windows: one on the axis and six around, like the petals of a flower.
     // The cupola faces -Y, so its axis is Y and the top pane is a disc lying flat
     // about that axis — a quarter turn about X.
     into(cupola, 'exterior', 'cupola.glass', cyl(.17, .17, .05, 20), 'glass',
-      { name: 'Top window', pos: [NODE_X, CY - .30, 0], rot: [Math.PI / 2, 0, 0], glass: true });
+      { name: 'Top window', pos: [NODE_X, CY - .30, 0], glass: true });
     // Six petals around the rim. Each sits on the cone face and leans outward, so
     // its normal points away and down: build a group whose -Z looks that way and
     // hang a flat disc in it.
@@ -693,7 +708,7 @@ window.StationV3 = { create(T) {
         { name: 'Shield cover', pos: [NODE_X + s * .30, CY - .18, 0], rot: [0, s > 0 ? .30 : Math.PI - .30, 0], roughness: .55, metalness: .3 });
     }
     into(cupola, 'exterior', 'cupola.shutter', cyl(.50, .50, .06, 28), 'shieldDark',
-      { name: 'Shield ring', pos: [NODE_X, CY - .40, 0], rot: [Math.PI / 2, 0, 0], roughness: .55, metalness: .3 });
+      { name: 'Shield ring', pos: [NODE_X, CY - .40, 0], roughness: .55, metalness: .3 });
     // The control rail just inside the glass: this is where the robot arm is
     // driven from, looking straight out at the arm itself.
     into(cupola, 'exterior', 'cupola.rail', box(.34, .07, .52), 'dark',
@@ -748,8 +763,6 @@ window.StationV3 = { create(T) {
         const y = Math.sin(th) * (RM - .16), z = Math.cos(th) * (RM - .16);
         const g = new T.Group(); g.position.set(x, y, z);
         g.lookAt(x, y + Math.sin(th), z + Math.cos(th));
-        interior.interior === undefined;
-        interior['interior'];
         interior.details['interior.racks'].add(g);
         const r = new T.Mesh(box(.46, .40, .22), mat('rack', .62));
         r.name = 'Equipment rack';
@@ -772,11 +785,11 @@ window.StationV3 = { create(T) {
     }
     // The sleeping bag: a long blue bag strapped upright to the wall. In free
     // fall there is no "lying down", so a crew member simply zips in and floats.
-    into(interior, 'interior', 'interior.sleep', softBox(T, .46, .34, 1.06, .17), 'bag',
-      { name: 'Sleeping bag', pos: [-1.70, -.14, -RM + .36], rot: [0, -.32, 0], roughness: .78 });
+    into(interior, 'interior', 'interior.sleep', softBox(T, .46, 1.06, .22, .17), 'bag',
+      { name: 'Sleeping bag', pos: [-1.70, 0, -RM + .18], roughness: .78 });
     for (let i = 0; i < 3; i++) {
       into(interior, 'interior', 'interior.sleep', box(.48, .05, .05), 'goldLite',
-        { name: 'Bag strap', pos: [-1.70, -.46 + i * .30, -RM + .36], rot: [0, -.32, 0], roughness: .7 });
+        { name: 'Bag strap', pos: [-1.70, -.32 + i * .30, -RM + .31], roughness: .7 });
     }
     // The galley table with its food pouches taped down.
     into(interior, 'interior', 'interior.table', softBox(T, .60, .06, .40, .05), 'white',

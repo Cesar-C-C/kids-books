@@ -38,12 +38,12 @@
   const assemblies = [];
   const root = new T.Group(); root.name = 'Picture-book double-decker';
   const materials = new Map();
-  // Sampled from books/bus/assets: a bright red shell, a pale cream roof lining,
+  // Visually matched to books/bus/assets: a bright red shell, a pale cream roof lining,
   // teal seat moquette and yellow grab poles. No measured paint codes.
   const palette = {
-    red: 0xcf3a2d, redDim: 0xb32e23, redDark: 0x9c281e, cream: 0xece4d2,
+    red: 0xe63c26, redDim: 0xb32e23, redDark: 0x9c281e, cream: 0xece4d2,
     creamDim: 0xd8cfb8, ink: 0x293c45, steel: 0x8a959c, dark: 0x2d3940,
-    glass: 0x4a7f96, seat: 0x388d79, seatDim: 0x2f7a68, pole: 0xe8b93c,
+    glass: 0x4a7f96, seat: 0x287b87, seatDim: 0x246874, pole: 0xe8b93c,
     poleDim: 0xc99a26, floor: 0x6d7c84, rubber: 0x2d3940, amber: 0xe89a2e,
     copper: 0xb8823d, alum: 0xa9b1b5, oil: 0x4a4238
   };
@@ -180,11 +180,11 @@
       // passenger side so the doors are not glazed over.
       for (let i = 0; i < BAYS; i++) {
         const x = W0 + SPAN * (i + .5) / BAYS;
-        if (side < 0 && i === 0) continue;      // doorway bay on the passenger side
+        if (side < 0 && (i === 0 || i === 3)) continue; // front and middle entrance bays
         // The book draws the lower windows noticeably taller than the upper row.
         into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .88, .06, .06), 'glass',
           { name: 'Lower window', pos: [x, -.54, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .22, metalness: .2, glass: true });
-        into(body, 'exterior', 'body.windows', box(BAY_W + .08, .05, .09), 'redDark',
+        into(body, 'exterior', 'body.windows', box(BAY_W + .08, .05, .09), 'ink',
           { name: 'Window frame', pos: [x, -.07, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0] });
       }
       // Upper deck glazing: six bays across the top deck.
@@ -192,12 +192,12 @@
         const x = W0 + SPAN * (i + .5) / BAYS;
         into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .76, .06, .06), 'glass',
           { name: 'Upper window', pos: [x, .58, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .22, metalness: .2, glass: true });
-        into(body, 'exterior', 'body.windows', box(BAY_W + .08, .05, .09), 'redDark',
+        into(body, 'exterior', 'body.windows', box(BAY_W + .08, .05, .09), 'ink',
           { name: 'Window frame', pos: [x, .99, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0] });
       }
       // The two floor lines that separate the decks.
       for (const y of [DECK_LOW - .06, DECK_MID - .06]) {
-        into(body, 'exterior', 'body.livery', box(2 * HALF_LEN - .38, .09, .055), 'cream',
+        into(body, 'exterior', 'body.livery', box(2 * HALF_LEN - .38, .13, .055), 'red',
           { name: 'Deck line', pos: [0, y, z + side * .07] });
       }
       // Skirt below the floor, and a wheel arch cut over each axle.
@@ -207,14 +207,31 @@
       // can sit in the tire's own plane; drawing a second one here just doubled
       // the ring and pushed it out past the tire.
     }
+    // The cover's second doorway sits between the axles, behind the front
+    // entrance, on the same passenger side (-Z). It is a closed shell feature,
+    // owned by body.windows so it moves away with the exhibit's body exterior.
+    // The existing animated front-door assembly remains the mechanism example.
+    const MIDDLE_DOOR_X = .62, MIDDLE_DOOR_Z = -HALF_W - .14;
+    into(body, 'exterior', 'body.windows', softBox(T, 1.16, 1.52, .06, .035), 'ink',
+      { name: 'Middle doorway frame', pos: [MIDDLE_DOOR_X, -.76, MIDDLE_DOOR_Z] });
+    for (const side of [-1, 1]) {
+      into(body, 'exterior', 'body.windows', softBox(T, .47, 1.34, .025, .025), 'glass',
+        { name: 'Middle door glazing', pos: [MIDDLE_DOOR_X + side * .27, -.75, MIDDLE_DOOR_Z - .05], glass: true });
+      into(body, 'exterior', 'body.windows', box(.035, .54, .025), 'pole',
+        { name: 'Middle door grab handle', pos: [MIDDLE_DOOR_X + side * .105, -.71, MIDDLE_DOOR_Z - .075] });
+    }
+    into(body, 'exterior', 'body.windows', box(.055, 1.48, .04), 'ink',
+      { name: 'Middle door center seam', pos: [MIDDLE_DOOR_X, -.76, MIDDLE_DOOR_Z - .055] });
+    into(body, 'exterior', 'body.windows', box(1.10, .035, .05), 'pole',
+      { name: 'Middle door threshold', pos: [MIDDLE_DOOR_X, -1.48, MIDDLE_DOOR_Z - .04] });
     // Front and rear bulkheads close the box. A bulkhead spans the WIDTH, so it is
     // (width, height, thickness) turned a quarter turn about Y.
     into(body, 'exterior', 'body.shell', roundPanel(T, 2.48, 2.44, .12, .30), 'red',
       { name: 'Rear panel', pos: [HALF_LEN - .06, .02, 0], rot: [0, Math.PI / 2, 0], roughness: .52 });
     into(body, 'exterior', 'body.shell', roundPanel(T, 2.48, 2.44, .12, .30), 'red',
       { name: 'Front panel', pos: [-HALF_LEN + .06, .02, 0], rot: [0, Math.PI / 2, 0], roughness: .52 });
-    into(body, 'exterior', 'body.shell', box(2 * HALF_LEN - .40, .16, 2.44), 'red',
-      { name: 'Body floor band', pos: [0, DECK_MID - .16, 0] });
+    for (const side of [-1, 1]) into(body, 'exterior', 'body.shell', box(2 * HALF_LEN - .40, .16, .10), 'red',
+      { name: 'Body floor band', pos: [0, DECK_MID - .16, side * (HALF_W - .05)] });
     into(body, 'interior', 'body.shell', box(2 * HALF_LEN - .60, .05, 2.30), 'creamDim',
       { name: 'Inner lining', pos: [0, DECK_TOP - .04, 0], castShadow: false });
     into(body, 'ghost', null, box(2 * HALF_LEN - .34, 2.50, 2.54), 'red', { pos: [0, .02, 0] });
@@ -253,7 +270,7 @@
       into(roof, 'exterior', 'roof.hatch', box(.70, .06, .62), 'cream',
         { name: 'Roof hatch', pos: [x, DECK_TOP + RISE - .02, 0], roughness: .6 });
     }
-    // Rear air-conditioning duct, a small box the book puts at the tail. It must
+    // Educational roof-service housing; the book does not specify an AC duct. It must
     // sit ON the crown, so its centre is dropped by half its own height rather
     // than floated a clear gap above the roof line.
     into(roof, 'exterior', 'roof.rail', box(.86, .16, 1.28), 'redDark',
@@ -274,20 +291,24 @@
     // Floor of the upper deck IS the ceiling of the lower one. This is structure,
     // not a thing a child discovers, so it belongs to the shell group rather than
     // to one of the named discovery groups.
-    into(upper, 'exterior', 'upper.floor', box(2 * HALF_LEN - .60, .10, 2.34), 'floor',
-      { name: 'Upper floor', pos: [0, DECK_MID + .02, 0], roughness: .75 });
-    into(upper, 'interior', 'upper.floor', box(2 * HALF_LEN - .70, .06, 2.28), 'creamDim',
-      { name: 'Deck underside', pos: [0, DECK_MID - .06, 0], castShadow: false });
+    // Three solid floor sections leave a real stair opening on the entrance side.
+    // The illustrated stairwell cannot terminate through an unbroken upper floor.
+    for (const [x0, x1, z0, z1] of [[-4, -2.90, -1.17, 1.17], [-2.90, -1.20, -.27, 1.17], [-1.20, 4, -1.17, 1.17]]) {
+      into(upper, 'interior', 'upper.floor', box(x1 - x0, .10, z1 - z0), 'floor',
+        { name: 'Upper floor', pos: [(x0 + x1) / 2, DECK_MID + .02, (z0 + z1) / 2], roughness: .75 });
+      into(upper, 'interior', 'upper.floor', box(x1 - x0, .06, z1 - z0), 'creamDim',
+        { name: 'Deck underside', pos: [(x0 + x1) / 2, DECK_MID - .06, (z0 + z1) / 2], castShadow: false });
+    }
     // Seat pairs: two abreast each side, five rows, facing forward (-X).
     for (const side of [-1, 1]) {
       for (let row = 0; row < 5; row++) {
-        const x = .60 - row * .92;
+        const x = -1.10 + row * .92;
         into(upper, 'interior', 'upper.seats', softBox(T, .56, .14, .82, .06), 'seat',
-          { name: 'Seat cushion', pos: [x, DECK_MID + .28, side * .66], rot: [0, Math.PI / 2, 0] });
+          { name: 'Seat cushion', pos: [x, DECK_MID + .28, side * .66] });
         into(upper, 'interior', 'upper.seats', softBox(T, .16, .78, .84, .07), 'seat',
-          { name: 'Seat back', pos: [x + .32, DECK_MID + .72, side * .66], rot: [0, Math.PI / 2, 0] });
-        into(upper, 'interior', 'upper.seats', softBox(T, .10, .28, .70, .03), 'pole',
-          { name: 'Seat piping', pos: [x + .30, DECK_MID + .62, side * .66], rot: [0, Math.PI / 2, 0], roughness: .5 });
+          { name: 'Seat back', pos: [x + .32, DECK_MID + .72, side * .66] });
+        into(upper, 'interior', 'upper.seats', softBox(T, .055, .07, .70, .025), 'ink',
+          { name: 'Seat piping', pos: [x + .30, DECK_MID + .62, side * .66], roughness: .5 });
       }
     }
     // Vertical grab poles, floor to ceiling.
@@ -311,22 +332,22 @@
       { name: 'Lower floor', pos: [0, DECK_LOW, 0], roughness: .78 });
     for (const side of [-1, 1]) {
       for (let row = 0; row < 5; row++) {
-        const x = .60 - row * .92;
+        const x = -1.10 + row * .92;
         into(lower, 'interior', 'lower.seats', softBox(T, .56, .14, .82, .06), 'seat',
-          { name: 'Seat cushion', pos: [x, DECK_LOW + .30, side * .66], rot: [0, Math.PI / 2, 0] });
+          { name: 'Seat cushion', pos: [x, DECK_LOW + .30, side * .66] });
         into(lower, 'interior', 'lower.seats', softBox(T, .16, .78, .84, .07), 'seat',
-          { name: 'Seat back', pos: [x + .32, DECK_LOW + .74, side * .66], rot: [0, Math.PI / 2, 0] });
-        into(lower, 'interior', 'lower.seats', softBox(T, .10, .28, .70, .03), 'pole',
-          { name: 'Seat piping', pos: [x + .30, DECK_LOW + .64, side * .66], rot: [0, Math.PI / 2, 0], roughness: .5 });
+          { name: 'Seat back', pos: [x + .32, DECK_LOW + .74, side * .66] });
+        into(lower, 'interior', 'lower.seats', softBox(T, .055, .07, .70, .025), 'ink',
+          { name: 'Seat piping', pos: [x + .30, DECK_LOW + .64, side * .66], roughness: .5 });
       }
     }
     // The priority bay: a clear patch just inside the door, marked on the floor.
     into(lower, 'exterior', 'lower.stroller', box(.80, .05, 2.30), 'seatDim',
       { name: 'Wheelchair bay floor', pos: [-3.28, DECK_LOW + .07, -.40], roughness: .7 });
     into(lower, 'exterior', 'lower.priority', softBox(T, .56, .14, .82, .06), 'seatDim',
-      { name: 'Priority cushion', pos: [-2.10, DECK_LOW + .30, .66], rot: [0, Math.PI / 2, 0] });
+      { name: 'Priority cushion', pos: [-2.10, DECK_LOW + .30, .66] });
     into(lower, 'exterior', 'lower.priority', softBox(T, .16, .78, .84, .07), 'seatDim',
-      { name: 'Priority back', pos: [-1.78, DECK_LOW + .74, .66], rot: [0, Math.PI / 2, 0] });
+      { name: 'Priority back', pos: [-1.78, DECK_LOW + .74, .66] });
     for (const [x, z] of [[-1.20, -.30], [-1.20, .30], [.40, -.30], [.40, .30], [1.90, -.30]]) {
       into(lower, 'exterior', 'lower.seats', cyl(.032, .032, 1.00, 14), 'pole',
         { name: 'Grab pole', pos: [x, DECK_LOW + .52, z], roughness: .4, metalness: .35 });
@@ -335,7 +356,7 @@
   }
 
   /* ---------- 5. staircase: joins the two decks ---------- */
-  const STAIR_X = .35, STAIR_Z = -.74;
+  const STAIR_X = -2.05, STAIR_Z = -.74;
   const stairs = assembly('stairs', 'stairs', [STAIR_X, 0, STAIR_Z], 1.5,
     [-1.20, .30], ['stairs.treads', 'stairs.rail', 'stairs.well']);
   {
@@ -346,8 +367,8 @@
         { name: 'Step tread', pos: [x, y, STAIR_Z], roughness: .72 });
       into(stairs, 'exterior', 'stairs.treads', box(.03, rise, .74), 'ink',
         { name: 'Step riser', pos: [x + run / 2, y - rise / 2, STAIR_Z] });
-      into(stairs, 'exterior', 'stairs.treads', box(run + .04, .015, .08), 'pole',
-        { name: 'Step nosing', pos: [x, y + .03, STAIR_Z - .33], roughness: .45, metalness: .3 });
+      into(stairs, 'exterior', 'stairs.treads', box(.045, .015, .74), 'pole',
+        { name: 'Step nosing', pos: [x + run / 2, y + .03, STAIR_Z], roughness: .45, metalness: .3 });
     }
     // The handrail follows the same slope, on both sides of the flight.
     for (const z of [STAIR_Z - .40, STAIR_Z + .40]) {
@@ -358,8 +379,8 @@
           { name: 'Rail post', pos: [px, py, z], roughness: .4, metalness: .35 });
       }
     }
-    into(stairs, 'exterior', 'stairs.well', box(1.30, .06, .90), 'ink',
-      { name: 'Stairwell edge', pos: [STAIR_X, DECK_MID - .04, STAIR_Z] });
+    into(stairs, 'exterior', 'stairs.well', box(1.70, .06, .07), 'ink',
+      { name: 'Stairwell edge', pos: [STAIR_X, DECK_MID + .05, -.27] });
     into(stairs, 'ghost', null, box(1.60, 1.16, .90), 'pole', { pos: [STAIR_X, DECK_LOW + .58, STAIR_Z] });
   }
 
@@ -374,6 +395,22 @@
     }
     into(cab, 'exterior', 'cab.glass', box(.09, .06, 2.30), 'ink',
       { name: 'Screen divider', pos: [-HALF_LEN + .16, .42, 0] });
+    into(cab, 'exterior', 'cab.glass', softBox(T, .07, .70, 2.12, .03), 'glass',
+      { name: 'Upper front windscreen', pos: [-HALF_LEN - .025, .70, 0], glass: true });
+    into(cab, 'exterior', 'cab.glass', box(.075, .18, 2.14), 'ink',
+      { name: 'Front destination panel', pos: [-HALF_LEN - .03, .22, 0] });
+    for (const side of [-1, 1]) {
+      into(body, 'exterior', 'body.livery', softBox(T, .08, .25, .60, .06), 'ink',
+        { name: 'Headlight surround', pos: [-HALF_LEN - .025, -.94, side * .80] });
+      for (let i = 0; i < 3; i++) {
+        into(body, 'exterior', 'body.livery', cyl(.075 - i * .009, .075 - i * .009, .04, 16), 'cream',
+          { name: 'Front lamp', pos: [-HALF_LEN - .085, -.91 - i * .03, side * (.62 + i * .17)], rot: [0, 0, Math.PI / 2] });
+      }
+      for (let i = 0; i < 6; i++) {
+        into(body, 'exterior', 'body.livery', box(.54, .035, .04), 'ink',
+          { name: 'Rear ventilation slat', pos: [HALF_LEN - .48, -.65 + i * .10, side * (HALF_W + .085)] });
+      }
+    }
     // Dashboard and the big steering wheel above it.
     into(cab, 'exterior', 'cab.dash', box(.44, .22, 2.10), 'ink',
       { name: 'Dashboard', pos: [-HALF_LEN + .42, -.30, 0], roughness: .6 });
@@ -392,9 +429,9 @@
     }
     // Driver seat, higher than a passenger seat and set close to the wheel.
     into(cab, 'exterior', 'cab.seat', softBox(T, .62, .16, .66, .07), 'dark',
-      { name: 'Driver cushion', pos: [-HALF_LEN + .92, -.18, -.62], rot: [0, Math.PI / 2, 0] });
+      { name: 'Driver cushion', pos: [-HALF_LEN + .92, -.18, -.62] });
     into(cab, 'exterior', 'cab.seat', softBox(T, .18, .96, .68, .08), 'dark',
-      { name: 'Driver back', pos: [-HALF_LEN + 1.26, .26, -.62], rot: [0, Math.PI / 2, 0] });
+      { name: 'Driver back', pos: [-HALF_LEN + 1.26, .26, -.62] });
     // Mirrors on both sides of the nose: they sit just outside the body line, as
     // the book draws them, not on long outriggers.
     for (const side of [-1, 1]) {

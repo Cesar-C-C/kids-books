@@ -1,11 +1,11 @@
 (function () {
   'use strict';
-  // Purpose-built teaching airframe. Metres; forward -X, up +Y, right wing +Z.
+    // Purpose-built teaching airframe. Schematic units; forward -X, up +Y, right wing +Z.
   window.AirframeV3 = { create: function (T) {
     const root = new T.Group(); root.name = 'Teaching aircraft / continuous airframe';
     const assemblies = [], motions = [];
     const mat = (color, extra) => new T.MeshStandardMaterial(Object.assign({color, roughness:.4, metalness:.15},extra));
-    const white=mat(0xf4f5f0), blue=mat(0x307b9e), dark=mat(0x142e43), alloy=mat(0xb7cbd1,{metalness:.7,roughness:.3});
+    const white=mat(0xf4f5f0), blue=mat(0x087bc5), dark=mat(0x142e43), alloy=mat(0xb7cbd1,{metalness:.7,roughness:.3});
     const orange=mat(0xfba94c), seatBlue=mat(0x518faf), floorMat=mat(0xabb9bd), rubber=mat(0x202934,{roughness:.83}), green=mat(0x76bea1);
     const ghostMat=new T.MeshBasicMaterial({color:0xbed0d4,transparent:true,opacity:.08,depthWrite:false,side:T.DoubleSide});
     function assembly(id,region,center,radius,view) {
@@ -26,7 +26,9 @@
     // The blue underside is an inlaid skin band; it follows the same loft.
     function band(stations,lo,hi) {const v=[],ix=[],n=14;for(const [x,ry,rz,cy] of stations)for(let j=0;j<=n;j++){const t=lo+(hi-lo)*j/n;v.push(x,(cy||0)+Math.sin(t)*(ry+.006),Math.cos(t)*(rz+.006));}for(let i=0;i<stations.length-1;i++)for(let j=0;j<n;j++){const q=i*(n+1)+j;ix.push(q,q+n+1,q+1,q+1,q+n+1,q+n+2);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();return g;}
     mesh(body.exterior,band(bodyStations,Math.PI*1.08,Math.PI*1.92),blue);
-    for(const side of [-1,1])for(let i=0;i<15;i++){const x=-3.45+i*.405;const z=side*(x>2.2?.72:.771);const win=mesh(body.exterior,new T.SphereGeometry(1,12,8),dark,x,.25,z);win.scale.set(.095,.14,.034);}
+    // Project every pane onto the loft: fixed Z values buried the window row.
+    function bodySide(x,y,side){let k=0;while(k<bodyStations.length-2&&x>bodyStations[k+1][0])k++;const a=bodyStations[k],b=bodyStations[k+1],t=(x-a[0])/(b[0]-a[0]);const ry=a[1]+(b[1]-a[1])*t,rz=a[2]+(b[2]-a[2])*t,cy=(a[3]||0)+((b[3]||0)-(a[3]||0))*t;return side*(rz*Math.sqrt(Math.max(0,1-((y-cy)/ry)**2))+.012);}
+    for(const side of [-1,1])for(let i=0;i<23;i++){const x=-3.35+i*.272;const win=mesh(body.exterior,new T.SphereGeometry(1,12,8),dark,x,.25,bodySide(x,.25,side));win.name='Cabin window on skin';win.scale.set(.066,.103,.033);}
     for(const side of [-1,1])for(const x of [-3.75,2.85]){const pts=[[x-.15,-.39,side*.695],[x-.15,.46,side*.64],[x+.16,.46,side*.64],[x+.16,-.39,side*.695],[x-.15,-.39,side*.695]];tube(body.exterior,alloy,pts,.012);}
     const frames=detail(body,'cabin.frames');
     for(let i=0;i<15;i++){const x=-3.8+i*.48,ry=x>2.3?.76-(x-2.3)*.2:.748,rz=ry+ .025;const pts=[];for(let j=0;j<32;j++){const t=j/32*Math.PI*2;pts.push([x,Math.sin(t)*ry,Math.cos(t)*rz]);}tube(frames,alloy,pts,.022,true);}
@@ -65,7 +67,9 @@
       const sections=[[s*.67,-2.05,2.72,-.24,.19],[s*2,-1.25,2.45,-.18,.16],[s*4,.03,1.88,-.04,.105],[s*6.4,1.58,.93,.16,.045]];
       mesh(wing.exterior,foil(sections),white);silhouette(wing,foil(sections.map(v=>v)),ghostMat);
       const winglet=mesh(wing.exterior,foil([[s*6.36,1.6,.9,.17,.04],[s*6.66,1.87,.61,.95,.032],[s*6.71,2.11,.3,1.16,.018]]),blue);
-      mesh(wing.exterior,foil([[s*6.61,1.99,.44,.9,.035],[s*6.66,2.08,.34,1.08,.025],[s*6.71,2.11,.3,1.16,.018]]),orange);
+      mesh(wing.exterior,foil([[s*6.61,1.99,.44,.9,.035],[s*6.66,2.08,.34,1.08,.025],[s*6.71,2.11,.3,1.16,.018]]),white);
+      // The wing close-up shows streamlined flap-track fairings underneath.
+      for(const z of [1.65,2.75,3.85]){const x=.77+z*.27,y=-.26+z*.045;const fairing=mesh(wing.exterior,loft([[x-.45,.02,.025,y],[x-.16,.1,.09,y-.035],[x+.3,.09,.075,y-.025],[x+.65,.007,.009,y+.015]],16),white,0,0,s*z);fairing.name='Flap track fairing';}
       const spars=detail(wing,'wing.spar');for(const t of [.25,.7])rod(spars,alloy,[-2.05+t*2.72,-.24,s*.75],[1.58+t*.93,.16,s*6.3],t===.25?.062:.045);
       const ribs=detail(wing,'wing.ribs');
       for(let i=0;i<12;i++){
@@ -80,16 +84,18 @@
         const web=mesh(ribs,new T.ExtrudeGeometry(profile,{depth:.018,bevelEnabled:false,curveSegments:12}),alloy,x,y,s*z-.009);web.name='Airfoil rib web with lightening holes';
       }
 
-      hingeSurface(wing,'wing.flap',[[s*.95,.69,.57,-.25,.035],[s*2.1,1.21,.54,-.16,.032],[s*3.5,1.72,.41,-.04,.023]],[.7,-.25,s*.95],'z',.32,blue);
+      hingeSurface(wing,'wing.flap',[[s*.95,.69,.57,-.25,.035],[s*2.1,1.21,.54,-.16,.032],[s*3.5,1.72,.41,-.04,.023]],[.7,-.25,s*.95],'z',.32,white);
       hingeSurface(wing,'wing.slat',[[s*.9,-2.08,.2,-.235,.035],[s*3.9,-.13,.19,-.02,.028],[s*6.12,1.28,.16,.15,.02]],[-2.02,-.24,s*.9],'z',-.12,alloy);
       hingeSurface(wing,'wing.spoiler',[[s*1.55,.38,.46,-.05,.008],[s*3.55,1.09,.37,.075,.006]],[.38,-.05,s*1.55],'z',-.7,white);
       const aileron=assembly('aileron-'+s,'ailerons',[2.2,.05,s*4.95],1.35,[s,.8]);
-      const ac=[[s*3.65,1.88,.43,-.025,.025],[s*6.25,2.49,.24,.155,.014]];hingeSurface(aileron,'aileron.hinge',ac,[1.9,-.02,s*3.65],'z',s*.25,blue);silhouette(aileron,foil(ac));
+      const ac=[[s*3.65,1.88,.43,-.025,.025],[s*6.25,2.49,.24,.155,.014]];hingeSurface(aileron,'aileron.hinge',ac,[1.9,-.02,s*3.65],'z',s*.25,white);silhouette(aileron,foil(ac));
       const ah=detail(aileron,'aileron.linkage');rod(ah,alloy,[1.82,-.03,s*4.5],[2.13,-.02,s*4.5],.035);
       const tail=assembly('tailplane-'+s,'stabilizers',[4.6,.32,s*1.7],1.9,[s,.65]);const ts=[[s*.24,3.25,1.68,.27,.105],[s*2.65,4.45,.78,.49,.045]];mesh(tail.exterior,foil(ts),white);silhouette(tail,foil(ts));const ti=detail(tail,'stabilizer.spar');rod(ti,alloy,[3.8,.28,s*.3],[4.75,.49,s*2.58],.045);
-      const elevator=assembly('elevator-'+s,'elevators',[5.1,.4,s*1.6],1.5,[s,.65]);const es=[[s*.35,4.96,.43,.28,.026],[s*2.63,5.25,.3,.49,.018]];hingeSurface(elevator,'elevator.hinge',es,[4.96,.28,s*.35],'z',.28,blue);silhouette(elevator,foil(es));
+      const elevator=assembly('elevator-'+s,'elevators',[5.1,.4,s*1.6],1.5,[s,.65]);const es=[[s*.35,4.96,.43,.28,.026],[s*2.63,5.25,.3,.49,.018]];hingeSurface(elevator,'elevator.hinge',es,[4.96,.28,s*.35],'z',.28,white);silhouette(elevator,foil(es));
     }
-    const fin=assembly('vertical-tail','fin',[4.5,1.5,0],1.8,[1.55,.16]);const fs=[[.34,3.35,1.95,0,.12],[1.7,4.05,1.13,0,.075],[3.02,4.8,.63,0,.035]];mesh(fin.exterior,foil(fs,true),blue);silhouette(fin,foil(fs,true));mesh(fin.exterior,foil([[2.72,4.66,.73,.003,.044],[3.02,4.8,.63,.003,.036]],true),orange);
+    const fin=assembly('vertical-tail','fin',[4.5,1.5,0],1.8,[1.55,.16]);const fs=[[.34,3.35,1.95,0,.12],[1.7,4.05,1.13,0,.075],[3.02,4.8,.63,0,.035]];mesh(fin.exterior,foil(fs,true),blue);silhouette(fin,foil(fs,true));
+    // White swept ribbon follows both cambered faces, as in the tail illustration.
+    for(const side of [-1,1]){const vertices=[],indices=[],n=32;for(let row=0;row<2;row++)for(let i=0;i<=n;i++){const u=i/n,y=1.47-.66*u+.27*row;let k=y>fs[1][0]?1:0;const a=fs[k],b=fs[k+1],t=(y-a[0])/(b[0]-a[0]),lead=a[1]+(b[1]-a[1])*t,chord=a[2]+(b[2]-a[2])*t,th=a[4]+(b[4]-a[4])*t;const thickness=5*th*(.2969*Math.sqrt(u)-.126*u-.3516*u*u+.2843*u*u*u-.1015*u*u*u*u);vertices.push(lead+u*chord,y,.018*chord*Math.sin(Math.PI*u)+side*(thickness+.005));}for(let i=0;i<n;i++)indices.push(i,i+1,i+n+1,i+1,i+n+2,i+n+1);const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(vertices,3));g.setIndex(indices);g.computeVertexNormals();const paint=white.clone();paint.side=T.DoubleSide;mesh(fin.exterior,g,paint).name='White tail ribbon';}
     const fi=detail(fin,'fin.spar');rod(fi,alloy,[4,.4,0],[5.04,2.85,0],.045);for(let i=0;i<5;i++)rod(fi,alloy,[3.65+i*.25,.7+i*.42,0],[5.17+i*.04,.7+i*.42,0],.022);
     const rudder=assembly('rudder','rudder',[5.4,1.6,0],1.5,[1.5,.2]);const rs=[[.5,5.31,.4,0,.026],[1.7,5.2,.37,0,.025],[3,5.44,.2,0,.014]];hingeSurface(rudder,'rudder.hinge',rs,[5.3,.5,0],'y',.3,white,rudder.exterior,true);silhouette(rudder,foil(rs,true));
     const gear=assembly('landing-gear','gear',[-.6,-1.32,0],3.7,[1.0,.15]);
