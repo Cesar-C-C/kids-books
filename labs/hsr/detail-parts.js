@@ -78,8 +78,8 @@ window.HSR_DETAILS = [
   },
   {
     id: 'doors.leaf', region: 'doors', name: 'Door leaf and seal', zhName: '门扇与密封条',
-    en: 'The two leaves slide apart to open.', zh: '两扇门向两边滑开。',
-    tip: '拖动动作滑杆，看两扇门向两侧滑开；门边一圈黑条就是密封条。',
+    en: 'This door slides along the side of the train to open.', zh: '门扇沿车身滑开。',
+    tip: '拖动动作滑杆，看门扇沿车身滑开；门边一圈黑条就是密封条。',
     principle: '车门由电机驱动，可以内藏或外塞式开合。门边的橡胶密封条在运行中把门缝封住，既挡风挡雨，也能保持车内气压。'
   },
   {

@@ -25,9 +25,10 @@
    <div id="mechanism-controls"><div class="animation-row"><button id="mechanism-play" aria-pressed="false">▶ 看它怎样工作</button><button id="mechanism-step">单步</button><button id="slow-play" aria-pressed="true">慢速</button></div><div class="range-row"><label for="mechanism">动作</label><input id="mechanism" type="range" min="0" max="100" value="0"><output id="mechanism-value">0%</output></div></div>
    <p id="mechanism-help" class="mechanism-note"></p>
   </section>
-  <p class="fine-print">教学简化的高速列车头车。结构、比例与动作都经过简化，不对应任何具体车型；铁轨只作展示，不参与拆解。<a href="https://press.siemens.com/global/en/feature/velaro-novo-new-vehicle-concept-high-speed-trains" target="_blank" rel="noreferrer">科普参考 ↗</a></p>
+  <details class="book-reference"><summary>对照绘本里的高铁</summary><img src="../../books/hsr/assets/03_nose_c_r2.webp" alt="绘本中的圆钝高铁车头、曲面风挡和楔形侧窗" style="width:100%;border-radius:9px;margin-top:10px"><button id="book-view" class="speak">回到绘本视角</button><p class="principle">以车头特写核对外形，以封面核对连续车厢。图片没有提供工程尺寸。</p></details>
+  <p class="fine-print">依据同主题绘本图片重建：圆钝车鼻、曲面风挡、楔形侧窗与蓝色腰线。图中未展示的内部结构作教学补全，非工程尺寸模型。<a href="https://press.siemens.com/global/en/feature/velaro-novo-new-vehicle-concept-high-speed-trains" target="_blank" rel="noreferrer">科普参考 ↗</a></p>
  </aside>
 </main>
-<script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/discovery-progress.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="detail-parts.js"></script><script src="v3/trainframe.js?v=3"></script><script src="v3/runninggear.js?v=3"></script><script src="v3/app.js?v=3"></script>
+<script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/discovery-progress.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="detail-parts.js"></script><script src="book-model/interiors.js?v=4"></script><script src="book-model/gear.js?v=4"></script><script src="book-model/exterior.js?v=4"></script><script src="book-model/app.js?v=4"></script>
   <script src="../../shared/pwa.js"></script>
 </body></html>

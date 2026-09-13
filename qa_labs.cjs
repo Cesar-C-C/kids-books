@@ -55,3 +55,5 @@ assert.ok(trainParts.every(p=>trainDetails.some(d=>d.region===p.id)),'every trai
 for(const name of ['trainframe','runninggear','app'])new vm.Script(fs.readFileSync(path.join(root,'labs/hsr/v3',name+'.js'),'utf8'));
 assert.ok(!fs.existsSync(path.join(root,'labs/hsr/model.js')),'the explorer model.js must be gone from the train lab');
 console.log(`PASS train v3: ${trainParts.length} parts, ${trainDetails.length} inside discoveries, v3 sources parse.`);
+
+for(const name of ["interiors","exterior","gear","app"])new vm.Script(fs.readFileSync(path.join(root,"labs/hsr/book-model",name+".js"),"utf8"));

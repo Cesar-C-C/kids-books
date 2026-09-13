@@ -79,7 +79,7 @@ def norm(p):
 
 def sha256_of(rel):
     h = hashlib.sha256()
-    with open(os.path.join(REPO, rel), "rb") as f:
+    with open(os.path.join(REPO, rel.split("?")[0]), "rb") as f:
         for chunk in iter(lambda: f.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
@@ -145,7 +145,7 @@ def book_audio(name, audio_ver):
 
 def main():
     audio_ver = read_audio_ver()
-    lab_files = [f for f in rel_files("labs") if not f.lower().endswith(LAB_EXCLUDE)]
+    lab_files = [f for f in rel_files("labs") if not f.lower().endswith(LAB_EXCLUDE) and "/_replica/" not in f]
 
     # 书架封面用的小派生图（480px，见 tools/gen_pwa_covers.py）必须进外壳预缓存：
     # 线上封面走 jsDelivr 是跨域请求，Service Worker 按设计放行不缓存；只靠
@@ -159,10 +159,20 @@ def main():
         else:
             missing_cards.append(rel)
 
+    # Cache actual lab dependency URLs, including cache-busting query strings.
+    for page in list(lab_files):
+        if page.endswith('.html'):
+            with open(os.path.join(REPO, page), encoding='utf-8') as source:
+                for src in re.findall(r'<(?:img|script|link)\b[^>]+(?:src|href)="([^"]+)"', source.read()):
+                    if not src.startswith(('http:', 'https:', 'data:')):
+                        dep = norm(os.path.normpath(os.path.join(os.path.dirname(page), src)))
+                        if not dep.startswith('../') and os.path.isfile(os.path.join(REPO, dep.split("?")[0])):
+                            lab_files.append(dep)
+
     shell, missing = [], []
     for p in ROOT_FILES + SHARED_FILES + rel_files(ICON_DIR) + lab_files + cover_cards:
         p = norm(p)
-        if os.path.exists(os.path.join(REPO, p)):
+        if os.path.exists(os.path.join(REPO, p.split("?")[0])):
             shell.append(p)
         else:
             missing.append(p)
