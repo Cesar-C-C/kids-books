@@ -24,7 +24,7 @@
     const mat = (color, metalness = .65, roughness = .32, extra = {}) => new THREE.MeshStandardMaterial({ color, metalness, roughness, side: THREE.DoubleSide, ...extra });
     const M = {
       shell: mat(0x087bc5, .38, .26), pylon: mat(0xf4f5f0, .35, .32), lip: mat(0xc5d5e0, .9, .2), dark: mat(0x293c49, .68, .36),
-      fan: mat(0x29343f, .76, .3), compressor: mat(0x609fa9, .7, .32), stator: mat(0xb5c7cc, .8, .27),
+      fan: mat(0x526674, .4, .52), compressor: mat(0x609fa9, .7, .32), stator: mat(0xb5c7cc, .8, .27),
       chamber: mat(0xb7794e, .67, .36), liner: mat(0x6b4938, .6, .4), fire: mat(0xe1a269, .3, .3, { emissive: 0x8b3210, emissiveIntensity: .32 }),
       turbine: mat(0x9088ab, .75, .3), shaft: mat(0xcbb985, .8, .23), exhaust: mat(0x526575, .85, .29),
       hole: mat(0x242c32, .15, .7), ghost: mat(0xabbcc5, .05, .8, { transparent: true, opacity: .08, depthWrite: false }),
