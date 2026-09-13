@@ -1,0 +1,575 @@
+/* Picture-book double-decker bus. X runs along the length (the bus faces -X),
+   Y is up and Z is the width. Proportions follow books/bus/assets: a two-storey
+   red shell, a rounded glazed front, a staircase on the passenger side and a
+   rear engine bay. No engineering dimensions are claimed from painted artwork. */
+(() => {
+ 'use strict';
+
+ /* ---------- small geometry helpers (shared by every assembly) ---------- */
+ function mergeNonIndexed(T, geos) {
+  const positions = [], normals = [];
+  geos.forEach(g => {
+    const ng = g.index ? g.toNonIndexed() : g;
+    positions.push(...ng.attributes.position.array);
+    normals.push(...ng.attributes.normal.array);
+  });
+  const out = new T.BufferGeometry();
+  out.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
+  out.setAttribute('normal', new T.Float32BufferAttribute(normals, 3));
+  out.computeBoundingSphere();
+  return out;
+ }
+ // A plate with rounded corners, extruded along Z: the workhorse for panels.
+ function roundPanel(T, w, h, d, r) {
+  const rr = Math.min(r, w / 2, h / 2), a = -w / 2, b = -h / 2;
+  const s = new T.Shape();
+  s.moveTo(a + rr, b); s.lineTo(a + w - rr, b); s.quadraticCurveTo(a + w, b, a + w, b + rr);
+  s.lineTo(a + w, b + h - rr); s.quadraticCurveTo(a + w, b + h, a + w - rr, b + h);
+  s.lineTo(a + rr, b + h); s.quadraticCurveTo(a, b + h, a, b + h - rr);
+  s.lineTo(a, b + rr); s.quadraticCurveTo(a, b, a + rr, b);
+  const g = new T.ExtrudeGeometry(s, { depth: d, bevelEnabled: true, bevelSize: .016, bevelThickness: .016, bevelSegments: 2, curveSegments: 6, steps: 1 });
+  g.translate(0, 0, -d / 2);
+  return g;
+ }
+ // A soft box: a rounded plate extruded in depth, then stood up on its axis.
+ function softBox(T, w, h, d, r) { return roundPanel(T, w, h, d, r); }
+
+ window.DoubleDeckerV3 = { create(T) {
+  const assemblies = [];
+  const root = new T.Group(); root.name = 'Picture-book double-decker';
+  const materials = new Map();
+  // Sampled from books/bus/assets: a bright red shell, a pale cream roof lining,
+  // teal seat moquette and yellow grab poles. No measured paint codes.
+  const palette = {
+    red: 0xcf3a2d, redDim: 0xb32e23, redDark: 0x9c281e, cream: 0xece4d2,
+    creamDim: 0xd8cfb8, ink: 0x293c45, steel: 0x8a959c, dark: 0x2d3940,
+    glass: 0x4a7f96, seat: 0x388d79, seatDim: 0x2f7a68, pole: 0xe8b93c,
+    poleDim: 0xc99a26, floor: 0x6d7c84, rubber: 0x2d3940, amber: 0xe89a2e,
+    copper: 0xb8823d, alum: 0xa9b1b5, oil: 0x4a4238
+  };
+  const mat = (key, r = .55, m = 0) => {
+    const k = key + '|' + r + '|' + m;
+    if (!materials.has(k)) materials.set(k, new T.MeshStandardMaterial({ color: palette[key], roughness: r, metalness: m }));
+    return materials.get(k);
+  };
+  // Glazing is a thin plate sitting on the OUTSIDE of the red side wall, so from
+  // the side you see its front face and from behind the far window you see its
+  // back face. A front-side-only material disappears when a wall turns away, so
+  // the glass is double-sided. The studio clones materials per surface and
+  // restores them from materialOriginal, so this flag is preserved either way.
+  const glassMat = key => {
+    const k = 'glass|' + key;
+    if (!materials.has(k)) {
+      const m = new T.MeshStandardMaterial({ color: palette[key], roughness: .22, metalness: .2, side: T.DoubleSide });
+      materials.set(k, m);
+    }
+    return materials.get(k);
+  };
+  const ghostMat = new T.MeshBasicMaterial({ color: 0xa8bab8, transparent: true, opacity: .065, depthWrite: false, side: T.DoubleSide });
+
+  /* ---------- the assembly contract the studio relies on ---------- */
+  // Detail groups default to the EXTERIOR layer: a discovery that is visible on
+  // the outside of the part must be on screen from the start. Pass 'interior' for
+  // discoveries that only exist once the shell is opened.
+  function assembly(id, region, center, radius, view, detailSpec) {
+    const group = new T.Group(), exterior = new T.Group(), interior = new T.Group(), ghost = new T.Group();
+    group.name = id;
+    group.userData = { assemblyId: id, region };
+    group.add(exterior, interior, ghost);
+    interior.visible = ghost.visible = false;
+    root.add(group);
+    const a = {
+      id, region, group, exterior, interior, ghost,
+      center: new T.Vector3(center[0], center[1], center[2]), radius, view,
+      details: {}, detailLayer: {}
+    };
+    (detailSpec || []).forEach(spec => {
+      const d = typeof spec === 'string' ? spec : spec.id;
+      const layer = typeof spec === 'string' ? 'exterior' : (spec.layer || 'exterior');
+      const g = new T.Group(); g.name = d;
+      g.userData = { detail: d, region, assemblyId: id };
+      (layer === 'interior' ? interior : exterior).add(g);
+      a.details[d] = g;
+      a.detailLayer[d] = layer;
+    });
+    assemblies.push(a);
+    return a;
+  }
+  // Every mesh carries region + assembly + (optionally) the detail it belongs to.
+  function add(a, parent, geo, colorKey, opts) {
+    const o = opts || {};
+    const mesh = new T.Mesh(geo, o.glass
+      ? glassMat(colorKey)
+      : mat(colorKey, o.roughness != null ? o.roughness : .55, o.metalness != null ? o.metalness : 0));
+    if (o.name) mesh.name = o.name;
+    mesh.userData = { region: a.region, assemblyId: a.id };
+    if (o.detail) mesh.userData.detail = o.detail;
+    if (o.pos) mesh.position.set(o.pos[0], o.pos[1], o.pos[2]);
+    if (o.rot) mesh.rotation.set(o.rot[0], o.rot[1], o.rot[2]);
+    mesh.castShadow = o.castShadow !== false;
+    mesh.receiveShadow = true;
+    parent.add(mesh);
+    return mesh;
+  }
+  // A mesh that belongs to a named discovery goes into that detail group, so the
+  // studio can isolate one part without knowing how the assembly was built.
+  function into(a, layer, detailId, geo, colorKey, opts) {
+    const parent = detailId
+      ? a.details[detailId]
+      : (layer === 'interior' ? a.interior : layer === 'ghost' ? a.ghost : a.exterior);
+    if (!parent) throw new Error(a.id + ': unknown detail ' + detailId);
+    const mesh = add(a, parent, geo, colorKey, Object.assign(layer === 'ghost' ? {} : { detail: detailId }, opts || {}));
+    // Ghost layers are always the same faint material: no shadow pass, no depth.
+    if (layer === 'ghost') {
+      mesh.material = ghostMat;
+      mesh.castShadow = false;
+      mesh.receiveShadow = false;
+    }
+    return mesh;
+  }
+
+  /* ---------- primitives ---------- */
+  const cyl = (rt, rb, h, seg = 32, open = false, thetaStart = 0, thetaLength = Math.PI * 2) =>
+    new T.CylinderGeometry(rt, rb, h, seg, 1, open, thetaStart, thetaLength);
+  const torus = (r, t, seg = 40, arc = Math.PI * 2) => new T.TorusGeometry(r, t, 8, seg, arc);
+  const box = (w, h, d) => new T.BoxGeometry(w, h, d);
+  // A bar from point a to point b — used for every pole, rail and pipe.
+  function rod(T, a3, b3, r, seg = 12) {
+    const a = new T.Vector3(a3[0], a3[1], a3[2]), b = new T.Vector3(b3[0], b3[1], b3[2]);
+    const d = b.clone().sub(a), g = cyl(r, r, d.length(), seg);
+    const m = new T.Mesh(g, mat('steel', .45, .45));
+    m.position.copy(a).add(b).multiplyScalar(.5);
+    m.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), d.normalize());
+    return m;
+  }
+
+  /* ================= bus proportions (picture-book, metres) =================
+     One station table drives every assembly, so nothing is a hand-typed absolute.
+       ground           -2.10
+       chassis rail     -1.32 ..  -1.06
+       lower deck floor -1.02            ceiling -0.02
+       upper deck floor  0.10            ceiling  1.14
+       roof arch top     1.60
+       body tail        +4.30            nose tip -4.30                       */
+  const HALF_LEN = 4.30;         // nose tip at -HALF_LEN, tail at +HALF_LEN
+  const HALF_W = 1.24;           // body half width
+  const DECK_LOW = -1.02, DECK_MID = 0.10, DECK_TOP = 1.14;
+  const ROOF_TOP = 1.60;
+  const RAIL_Y = -1.19;          // chassis rail centre
+  const AXLE_F = -2.62, AXLE_R = 2.42;
+  const WHEEL_R = .52;
+
+  /* ---------- 1. body: the red shell around both decks ---------- */
+  const body = assembly('body', 'body', [0, .1, 0], 4.6,
+    [-1.62, .18], ['body.shell', 'body.windows', 'body.skirt', 'body.livery']);
+  {
+    // Side wall: one plate per side spanning both decks, the full length of the
+    // bus. Window bays are punched by leaving gaps between the panels we place on
+    // top. roundPanel extrudes along Z, so a side wall is built as
+    // (length, height, thickness) and then turned to face outward.
+    for (const side of [-1, 1]) {
+      const z = side * HALF_W;
+      into(body, 'exterior', 'body.shell', roundPanel(T, 2 * HALF_LEN - .40, 2.44, .12, .30), 'red',
+        { name: 'Side wall', pos: [0, .02, z], rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .52 });
+      // Glazing bays are spread across the passenger part of the body. The
+      // illustration runs its windows almost edge to edge, so the usable span is
+      // measured from the bulkheads inward rather than guessed per bay.
+      const W0 = -HALF_LEN + .60, W1 = HALF_LEN - .60;
+      const SPAN = W1 - W0, BAYS = 6, BAY_W = SPAN / BAYS - .14;
+      // Lower deck glazing: the bay over the doorway is left open on the
+      // passenger side so the doors are not glazed over.
+      for (let i = 0; i < BAYS; i++) {
+        const x = W0 + SPAN * (i + .5) / BAYS;
+        if (side < 0 && i === 0) continue;      // doorway bay on the passenger side
+        into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .72, .06, .06), 'glass',
+          { name: 'Lower window', pos: [x, -.50, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .22, metalness: .2, glass: true });
+        into(body, 'exterior', 'body.windows', box(BAY_W + .08, .05, .09), 'redDark',
+          { name: 'Window frame', pos: [x, -.13, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0] });
+      }
+      // Upper deck glazing: six bays across the top deck.
+      for (let i = 0; i < BAYS; i++) {
+        const x = W0 + SPAN * (i + .5) / BAYS;
+        into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .68, .06, .06), 'glass',
+          { name: 'Upper window', pos: [x, .62, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .22, metalness: .2, glass: true });
+        into(body, 'exterior', 'body.windows', box(BAY_W + .08, .05, .09), 'redDark',
+          { name: 'Window frame', pos: [x, .99, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0] });
+      }
+      // The two floor lines that separate the decks.
+      for (const y of [DECK_LOW - .06, DECK_MID - .06]) {
+        into(body, 'exterior', 'body.livery', box(2 * HALF_LEN - .38, .09, .055), 'cream',
+          { name: 'Deck line', pos: [0, y, z + side * .07] });
+      }
+      // Skirt below the floor, and a wheel arch cut over each axle.
+      into(body, 'exterior', 'body.skirt', box(2 * HALF_LEN - .40, .46, .10), 'redDark',
+        { name: 'Skirt panel', pos: [0, -1.28, z], rot: [0, side > 0 ? 0 : Math.PI, 0] });
+      for (const ax of [AXLE_F, AXLE_R]) {
+        // A wheel arch is a half-ring in the XY plane, one per side, opening
+        // downward over the tire. Turning it about X would swing the radius into
+        // Z and push the arch outside the body.
+        into(body, 'exterior', 'body.skirt', torus(WHEEL_R + .07, .05, 32, Math.PI), 'ink',
+          { name: 'Wheel arch', pos: [ax, RAIL_Y - .30, z + side * .02] });
+      }
+    }
+    // Front and rear bulkheads close the box. A bulkhead spans the WIDTH, so it is
+    // (width, height, thickness) turned a quarter turn about Y.
+    into(body, 'exterior', 'body.shell', roundPanel(T, 2.48, 2.44, .12, .30), 'red',
+      { name: 'Rear panel', pos: [HALF_LEN - .06, .02, 0], rot: [0, Math.PI / 2, 0], roughness: .52 });
+    into(body, 'exterior', 'body.shell', roundPanel(T, 2.48, 2.44, .12, .30), 'red',
+      { name: 'Front panel', pos: [-HALF_LEN + .06, .02, 0], rot: [0, Math.PI / 2, 0], roughness: .52 });
+    into(body, 'exterior', 'body.shell', box(2 * HALF_LEN - .40, .16, 2.44), 'red',
+      { name: 'Body floor band', pos: [0, DECK_MID - .16, 0] });
+    into(body, 'interior', 'body.shell', box(2 * HALF_LEN - .60, .05, 2.30), 'creamDim',
+      { name: 'Inner lining', pos: [0, DECK_TOP - .04, 0], castShadow: false });
+    into(body, 'ghost', null, box(2 * HALF_LEN - .34, 2.50, 2.54), 'red', { pos: [0, .02, 0] });
+  }
+
+  /* ---------- 2. roof: the arched cover over the top deck ---------- */
+  // The rearmost bay is the sightseeing section: it is left open to the sky and
+  // only ringed by a rail. So the arch must STOP at the front of that bay rather
+  // than run the full length of the bus, otherwise it roofs the open deck over.
+  const OPEN_X0 = 2.55, OPEN_X1 = HALF_LEN - .12;      // open-top bay, x range
+  const ROOF_X0 = -HALF_LEN + .16, ROOF_X1 = OPEN_X0 - .08;
+  const roof = assembly('roof', 'roof', [-.60, ROOF_TOP, 0], 4.2,
+    [-1.62, .46], ['roof.panel', 'roof.hatch', 'roof.rail']);
+  {
+    // A gentle arch, extruded along the length of the bus.
+    const cap = new T.Shape();
+    cap.moveTo(-HALF_W, 0);
+    cap.quadraticCurveTo(-HALF_W - .04, .30, -HALF_W * .62, .40);
+    cap.quadraticCurveTo(0, .50, HALF_W * .62, .40);
+    cap.quadraticCurveTo(HALF_W + .04, .30, HALF_W, 0);
+    cap.lineTo(-HALF_W, 0);
+    const rg = new T.ExtrudeGeometry(cap, { depth: ROOF_X1 - ROOF_X0, bevelEnabled: true, bevelSize: .04, bevelThickness: .04, bevelSegments: 3, curveSegments: 16, steps: 1 });
+    rg.translate(0, 0, -ROOF_X1); rg.rotateY(Math.PI / 2);
+    into(roof, 'exterior', 'roof.panel', rg, 'red', { name: 'Roof panel', pos: [0, DECK_TOP, 0], roughness: .55 });
+    // Two roof hatches that let the upper deck breathe.
+    for (const x of [-1.90, 1.10]) {
+      into(roof, 'exterior', 'roof.hatch', box(.70, .07, .62), 'cream',
+        { name: 'Roof hatch', pos: [x, DECK_TOP + .48, 0], roughness: .6 });
+    }
+    // The sightseeing section: an open deck with a rail round it and a short
+    // wind deflector at the front of the opening.
+    into(roof, 'exterior', 'roof.rail', box(OPEN_X1 - OPEN_X0, .06, 2.44), 'redDark',
+      { name: 'Open bay floor', pos: [(OPEN_X0 + OPEN_X1) / 2, DECK_TOP + .02, 0] });
+    into(roof, 'exterior', 'roof.rail', roundPanel(T, .06, .34, 2.44, .03), 'redDim',
+      { name: 'Wind deflector', pos: [OPEN_X0 + .04, DECK_TOP + .17, 0], roughness: .55 });
+    for (const z of [-HALF_W + .06, HALF_W - .06]) {
+      into(roof, 'exterior', 'roof.rail', box(OPEN_X1 - OPEN_X0, .05, .05), 'pole',
+        { name: 'Top rail', pos: [(OPEN_X0 + OPEN_X1) / 2, DECK_TOP + .62, z], roughness: .45, metalness: .3 });
+      for (const x of [OPEN_X0 + .10, OPEN_X1 - .12]) {
+        into(roof, 'exterior', 'roof.rail', box(.05, .62, .05), 'pole',
+          { name: 'Rail post', pos: [x, DECK_TOP + .31, z], roughness: .45, metalness: .3 });
+      }
+    }
+    into(roof, 'exterior', 'roof.rail', box(.05, .05, 2.32), 'pole',
+      { name: 'Rear rail', pos: [OPEN_X1 - .04, DECK_TOP + .62, 0], roughness: .45, metalness: .3 });
+    into(roof, 'ghost', null, box(2 * HALF_LEN - .38, .52, 2.54), 'red', { pos: [0, DECK_TOP + .24, 0] });
+  }
+
+  /* ---------- 3. upper deck: seats, walkway, poles ---------- */
+  const upper = assembly('upper', 'upper', [-.60, .62, 0], 3.9,
+    [-1.62, .16], [{ id: 'upper.seats', layer: 'interior' }, 'upper.aisle', 'upper.poles', 'upper.rail', { id: 'upper.floor', layer: 'interior' }]);
+  {
+    // Floor of the upper deck IS the ceiling of the lower one. This is structure,
+    // not a thing a child discovers, so it belongs to the shell group rather than
+    // to one of the named discovery groups.
+    into(upper, 'exterior', 'upper.floor', box(2 * HALF_LEN - .60, .10, 2.34), 'floor',
+      { name: 'Upper floor', pos: [0, DECK_MID + .02, 0], roughness: .75 });
+    into(upper, 'interior', 'upper.floor', box(2 * HALF_LEN - .70, .06, 2.28), 'creamDim',
+      { name: 'Deck underside', pos: [0, DECK_MID - .06, 0], castShadow: false });
+    // Seat pairs: two abreast each side, five rows, facing forward (-X).
+    for (const side of [-1, 1]) {
+      for (let row = 0; row < 5; row++) {
+        const x = .60 - row * .92;
+        into(upper, 'interior', 'upper.seats', softBox(T, .56, .14, .82, .06), 'seat',
+          { name: 'Seat cushion', pos: [x, DECK_MID + .28, side * .66], rot: [0, Math.PI / 2, 0] });
+        into(upper, 'interior', 'upper.seats', softBox(T, .16, .78, .84, .07), 'seat',
+          { name: 'Seat back', pos: [x + .32, DECK_MID + .72, side * .66], rot: [0, Math.PI / 2, 0] });
+        into(upper, 'interior', 'upper.seats', softBox(T, .10, .28, .70, .03), 'pole',
+          { name: 'Seat piping', pos: [x + .30, DECK_MID + .62, side * .66], rot: [0, Math.PI / 2, 0], roughness: .5 });
+      }
+    }
+    // Vertical grab poles, floor to ceiling.
+    for (const [x, z] of [[1.10, -.30], [1.10, .30], [-.80, -.30], [-.80, .30], [-2.60, -.30]]) {
+      into(upper, 'exterior', 'upper.poles', cyl(.035, .035, 1.06, 14), 'pole',
+        { name: 'Grab pole', pos: [x, DECK_MID + .55, z], roughness: .4, metalness: .35 });
+    }
+    // The overhead handrail along both sides.
+    for (const z of [-.34, .34]) {
+      into(upper, 'exterior', 'upper.rail', cyl(.030, .030, 2 * HALF_LEN - 1.20, 12), 'pole',
+        { name: 'Handrail', pos: [-.30, DECK_MID + .92, z], rot: [0, 0, Math.PI / 2], roughness: .4, metalness: .35 });
+    }
+    into(upper, 'ghost', null, box(2 * HALF_LEN - .60, 1.04, 2.34), 'seat', { pos: [0, DECK_MID + .52, 0] });
+  }
+
+  /* ---------- 4. lower deck: seats, walkway, priority bay ---------- */
+  const lower = assembly('lower', 'lower', [-.60, -.46, 0], 3.9,
+    [-1.62, .10], [{ id: 'lower.seats', layer: 'interior' }, { id: 'lower.floor', layer: 'interior' }, 'lower.stroller', 'lower.priority']);
+  {
+    into(lower, 'interior', 'lower.floor', box(2 * HALF_LEN - .60, .10, 2.34), 'floor',
+      { name: 'Lower floor', pos: [0, DECK_LOW, 0], roughness: .78 });
+    for (const side of [-1, 1]) {
+      for (let row = 0; row < 5; row++) {
+        const x = .60 - row * .92;
+        into(lower, 'interior', 'lower.seats', softBox(T, .56, .14, .82, .06), 'seat',
+          { name: 'Seat cushion', pos: [x, DECK_LOW + .30, side * .66], rot: [0, Math.PI / 2, 0] });
+        into(lower, 'interior', 'lower.seats', softBox(T, .16, .78, .84, .07), 'seat',
+          { name: 'Seat back', pos: [x + .32, DECK_LOW + .74, side * .66], rot: [0, Math.PI / 2, 0] });
+        into(lower, 'interior', 'lower.seats', softBox(T, .10, .28, .70, .03), 'pole',
+          { name: 'Seat piping', pos: [x + .30, DECK_LOW + .64, side * .66], rot: [0, Math.PI / 2, 0], roughness: .5 });
+      }
+    }
+    // The priority bay: a clear patch just inside the door, marked on the floor.
+    into(lower, 'exterior', 'lower.stroller', box(.80, .05, 2.30), 'seatDim',
+      { name: 'Wheelchair bay floor', pos: [-3.28, DECK_LOW + .07, -.40], roughness: .7 });
+    into(lower, 'exterior', 'lower.priority', softBox(T, .56, .14, .82, .06), 'seatDim',
+      { name: 'Priority cushion', pos: [-2.10, DECK_LOW + .30, .66], rot: [0, Math.PI / 2, 0] });
+    into(lower, 'exterior', 'lower.priority', softBox(T, .16, .78, .84, .07), 'seatDim',
+      { name: 'Priority back', pos: [-1.78, DECK_LOW + .74, .66], rot: [0, Math.PI / 2, 0] });
+    for (const [x, z] of [[-1.20, -.30], [-1.20, .30], [.40, -.30], [.40, .30], [1.90, -.30]]) {
+      into(lower, 'exterior', 'lower.seats', cyl(.032, .032, 1.00, 14), 'pole',
+        { name: 'Grab pole', pos: [x, DECK_LOW + .52, z], roughness: .4, metalness: .35 });
+    }
+    into(lower, 'ghost', null, box(2 * HALF_LEN - .60, .98, 2.34), 'seat', { pos: [0, DECK_LOW + .49, 0] });
+  }
+
+  /* ---------- 5. staircase: joins the two decks ---------- */
+  const STAIR_X = .35, STAIR_Z = -.74;
+  const stairs = assembly('stairs', 'stairs', [STAIR_X, 0, STAIR_Z], 1.5,
+    [-1.20, .30], ['stairs.treads', 'stairs.rail', 'stairs.well']);
+  {
+    const steps = 6, rise = (DECK_MID - DECK_LOW) / steps, run = .26;
+    for (let i = 0; i < steps; i++) {
+      const y = DECK_LOW + rise * (i + .5), x = STAIR_X + .62 - i * run;
+      into(stairs, 'exterior', 'stairs.treads', box(run + .03, .05, .74), 'floor',
+        { name: 'Step tread', pos: [x, y, STAIR_Z], roughness: .72 });
+      into(stairs, 'exterior', 'stairs.treads', box(.03, rise, .74), 'ink',
+        { name: 'Step riser', pos: [x + run / 2, y - rise / 2, STAIR_Z] });
+      into(stairs, 'exterior', 'stairs.treads', box(run + .04, .015, .08), 'pole',
+        { name: 'Step nosing', pos: [x, y + .03, STAIR_Z - .33], roughness: .45, metalness: .3 });
+    }
+    // The handrail follows the same slope, on both sides of the flight.
+    for (const z of [STAIR_Z - .40, STAIR_Z + .40]) {
+      into(stairs, 'exterior', 'stairs.rail', cyl(.030, .030, 1.72, 12), 'pole',
+        { name: 'Stair handrail', pos: [STAIR_X + .08, DECK_LOW + .95, z], rot: [0, 0, -.72], roughness: .4, metalness: .35 });
+      for (const [px, py] of [[STAIR_X + .62, DECK_LOW + .42], [STAIR_X - .68, DECK_MID + .42]]) {
+        into(stairs, 'exterior', 'stairs.rail', cyl(.024, .024, .58, 10), 'pole',
+          { name: 'Rail post', pos: [px, py, z], roughness: .4, metalness: .35 });
+      }
+    }
+    into(stairs, 'exterior', 'stairs.well', box(1.30, .06, .90), 'ink',
+      { name: 'Stairwell edge', pos: [STAIR_X, DECK_MID - .04, STAIR_Z] });
+    into(stairs, 'ghost', null, box(1.60, 1.16, .90), 'pole', { pos: [STAIR_X, DECK_LOW + .58, STAIR_Z] });
+  }
+
+  /* ---------- 6. cab: the driver's place at the front ---------- */
+  const cab = assembly('cab', 'cab', [-3.30, -.20, 0], 2.0,
+    [-2.10, .20], ['cab.wheel', 'cab.dash', 'cab.seat', 'cab.glass', 'cab.mirror']);
+  {
+    // The wraparound windscreen, split into two curved panes.
+    for (const side of [-1, 1]) {
+      into(cab, 'exterior', 'cab.glass', softBox(T, .10, 1.30, 1.02, .10), 'glass',
+        { name: 'Windscreen pane', pos: [-HALF_LEN + .10, .42, side * .56], rot: [0, side * .32, 0], roughness: .2, metalness: .2 });
+    }
+    into(cab, 'exterior', 'cab.glass', box(.09, .06, 2.30), 'ink',
+      { name: 'Screen divider', pos: [-HALF_LEN + .16, .42, 0] });
+    // Dashboard and the big steering wheel above it.
+    into(cab, 'exterior', 'cab.dash', box(.44, .22, 2.10), 'ink',
+      { name: 'Dashboard', pos: [-HALF_LEN + .42, -.30, 0], roughness: .6 });
+    for (const [dz, dy] of [[-.40, .04], [-.18, .04], [.04, .04]]) {
+      into(cab, 'exterior', 'cab.dash', cyl(.09, .09, .05, 18), 'amber',
+        { name: 'Dial', pos: [-HALF_LEN + .21, -.10 + dy, dz], rot: [0, 0, Math.PI / 2], roughness: .4 });
+    }
+    const sw = into(cab, 'exterior', 'cab.wheel', torus(.27, .032, 24), 'ink',
+      { name: 'Steering wheel', pos: [-HALF_LEN + .48, .16, -.62], rot: [0, Math.PI / 2, 0], roughness: .5 });
+    sw.rotation.z = -.42;
+    into(cab, 'exterior', 'cab.wheel', cyl(.030, .030, .54, 10), 'ink',
+      { name: 'Steering column', pos: [-HALF_LEN + .62, .04, -.62], rot: [0, 0, 1.16] });
+    for (const a of [0, Math.PI / 3, -Math.PI / 3]) {
+      into(cab, 'exterior', 'cab.wheel', box(.03, .50, .03), 'ink',
+        { name: 'Wheel spoke', pos: [-HALF_LEN + .48, .16, -.62], rot: [a, Math.PI / 2, 0] });
+    }
+    // Driver seat, higher than a passenger seat and set close to the wheel.
+    into(cab, 'exterior', 'cab.seat', softBox(T, .62, .16, .66, .07), 'dark',
+      { name: 'Driver cushion', pos: [-HALF_LEN + .92, -.18, -.62], rot: [0, Math.PI / 2, 0] });
+    into(cab, 'exterior', 'cab.seat', softBox(T, .18, .96, .68, .08), 'dark',
+      { name: 'Driver back', pos: [-HALF_LEN + 1.26, .26, -.62], rot: [0, Math.PI / 2, 0] });
+    // Mirrors on both sides of the nose: they sit just outside the body line, as
+    // the book draws them, not on long outriggers.
+    for (const side of [-1, 1]) {
+      into(cab, 'exterior', 'cab.mirror', cyl(.026, .026, .42, 10), 'ink',
+        { name: 'Mirror arm', pos: [-HALF_LEN + .34, .86, side * 1.14], rot: [side * .62, 0, 0] });
+      into(cab, 'exterior', 'cab.mirror', softBox(T, .10, .54, .22, .05), 'ink',
+        { name: 'Mirror housing', pos: [-HALF_LEN + .22, .66, side * 1.30], rot: [0, side * .20, 0] });
+      into(cab, 'exterior', 'cab.mirror', softBox(T, .03, .46, .17, .04), 'glass',
+        { name: 'Mirror glass', pos: [-HALF_LEN + .18, .66, side * 1.32], rot: [0, side * .20, 0], roughness: .16, metalness: .6 });
+    }
+    into(cab, 'ghost', null, box(1.90, 2.40, 2.44), 'glass', { pos: [-HALF_LEN + .95, .02, 0] });
+  }
+
+  /* ---------- 7. doors: two folding leaves on the passenger side ---------- */
+  const DOOR_Z = -HALF_W - .02;
+  const doors = assembly('doors', 'doors', [-3.30, -.40, DOOR_Z], 1.6,
+    [-2.10, .06], ['doors.leaf', 'doors.glass', 'doors.step', 'doors.emergency']);
+  const leaves = [];
+  {
+    // Front leaf folds forward, rear leaf folds back: a classic bi-fold doorway.
+    [[-.24, -1], [.30, 1]].forEach(([dx, dir]) => {
+      const pivot = new T.Group();
+      pivot.position.set(-3.30 + dx + dir * .27, DECK_LOW, DOOR_Z);
+      pivot.userData = { region: 'doors', assemblyId: 'doors', detail: 'doors.leaf' };
+      const leaf = new T.Mesh(softBox(T, .54, 2.00, .07, .03), mat('red', .5));
+      leaf.position.set(-dir * .27, 1.00, 0);
+      leaf.userData = { region: 'doors', assemblyId: 'doors', detail: 'doors.leaf' };
+      leaf.castShadow = true;
+      const up = new T.Mesh(softBox(T, .42, .72, .025, .04), mat('glass', .2, .2));
+      up.position.set(-dir * .27, 1.48, -.05);
+      up.userData = { region: 'doors', assemblyId: 'doors', detail: 'doors.glass' };
+      const lo = new T.Mesh(softBox(T, .42, .70, .025, .04), mat('glass', .2, .2));
+      lo.position.set(-dir * .27, .62, -.05);
+      lo.userData = { region: 'doors', assemblyId: 'doors', detail: 'doors.glass' };
+      pivot.add(leaf, up, lo);
+      doors.details['doors.leaf'].add(pivot);
+      leaves.push({ pivot, dir });
+    });
+    // The entry step just inside the doorway.
+    for (let i = 0; i < 2; i++) {
+      into(doors, 'exterior', 'doors.step', box(.80, .06, .60), 'floor',
+        { name: 'Entry step', pos: [-3.30, DECK_LOW - .16 - i * .20, -.72], roughness: .75 });
+    }
+    // Rear emergency exit panel, clearly outlined on the tail.
+    into(doors, 'exterior', 'doors.emergency', softBox(T, 1.16, 1.06, .05, .05), 'ink',
+      { name: 'Emergency outline', pos: [HALF_LEN - .01, -.42, .40], rot: [0, Math.PI / 2, 0] });
+    into(doors, 'exterior', 'doors.emergency', softBox(T, 1.04, .94, .03, .04), 'redDark',
+      { name: 'Emergency panel', pos: [HALF_LEN - .04, -.42, .40], rot: [0, Math.PI / 2, 0] });
+    into(doors, 'exterior', 'doors.emergency', softBox(T, .40, .34, .02, .03), 'glass',
+      { name: 'Emergency glass', pos: [HALF_LEN - .06, -.30, .40], rot: [0, Math.PI / 2, 0], roughness: .2, metalness: .2 });
+    into(doors, 'exterior', 'doors.emergency', box(.05, .10, .26), 'ink',
+      { name: 'Exit handle', pos: [HALF_LEN - .07, -.72, .40] });
+    doors.update = state => {
+      const k = state.mechanism && state.region === 'doors' ? (state.level || 0) : 0;
+      // Each leaf swings about its own hinge; the pair opens outward together.
+      leaves.forEach(l => { l.pivot.rotation.y = l.dir * k * 1.15; });
+    };
+  }
+
+  /* ---------- 8. engine: the power unit in the tail ---------- */
+  const engine = assembly('engine', 'engine', [3.28, -.55, 0], 1.9,
+    [1.20, .10], ['engine.block', 'engine.fan', 'engine.pipes', 'engine.tank']);
+  {
+    into(engine, 'exterior', 'engine.block', softBox(T, .96, .62, .88, .07), 'copper',
+      { name: 'Engine block', pos: [3.30, -.62, -.18], rot: [0, .18, 0], roughness: .5, metalness: .3 });
+    into(engine, 'exterior', 'engine.block', softBox(T, .78, .16, .74, .05), 'oil',
+      { name: 'Cylinder head', pos: [3.30, -.25, -.18], rot: [0, .18, 0], roughness: .55 });
+    for (let i = 0; i < 4; i++) {
+      into(engine, 'exterior', 'engine.block', cyl(.055, .055, .40, 12), 'alum',
+        { name: 'Injector line', pos: [3.02 + i * .19, -.06, -.18], rot: [0, 0, .18], roughness: .4, metalness: .5 });
+    }
+    // Radiator and its fan, hung on the rear face where the book draws them.
+    into(engine, 'exterior', 'engine.fan', box(.10, .78, .96), 'ink',
+      { name: 'Radiator', pos: [3.86, -.62, -.18], roughness: .6 });
+    into(engine, 'exterior', 'engine.fan', cyl(.34, .34, .10, 26), 'steel',
+      { name: 'Fan shroud', pos: [3.74, -.62, -.18], rot: [0, 0, Math.PI / 2], roughness: .5, metalness: .4 });
+    for (let i = 0; i < 7; i++) {
+      into(engine, 'exterior', 'engine.fan', box(.04, .30, .14), 'alum',
+        { name: 'Fan blade', pos: [3.70, -.62, -.18], rot: [i * Math.PI / 3.5, 0, 0], roughness: .45, metalness: .45 });
+    }
+    into(engine, 'exterior', 'engine.fan', cyl(.09, .09, .12, 16), 'dark',
+      { name: 'Fan hub', pos: [3.69, -.62, -.18], rot: [0, 0, Math.PI / 2], roughness: .5 });
+    // Curved pipework looping over the block.
+    into(engine, 'exterior', 'engine.pipes', cyl(.055, .055, .86, 12), 'alum',
+      { name: 'Coolant pipe', pos: [3.34, -.20, .22], rot: [0, 0, Math.PI / 2], roughness: .4, metalness: .5 });
+    into(engine, 'exterior', 'engine.pipes', torus(.16, .045, 20, Math.PI), 'alum',
+      { name: 'Pipe bend', pos: [3.76, -.20, .22], rot: [Math.PI / 2, 0, 0], roughness: .4, metalness: .5 });
+    into(engine, 'exterior', 'engine.pipes', cyl(.048, .048, .70, 12), 'alum',
+      { name: 'Fuel line', pos: [3.34, -.10, -.52], rot: [0, 0, Math.PI / 2], roughness: .4, metalness: .5 });
+    // The fuel tank sits beside the engine, strapped down.
+    into(engine, 'exterior', 'engine.tank', softBox(T, .86, .54, .70, .08), 'steel',
+      { name: 'Fuel tank', pos: [3.30, -.68, .70], rot: [0, .18, 0], roughness: .55, metalness: .35 });
+    for (const dx of [-.24, .24]) {
+      into(engine, 'exterior', 'engine.tank', box(.06, .60, .74), 'ink',
+        { name: 'Tank strap', pos: [3.30 + dx, -.68, .70], rot: [0, .18, 0] });
+    }
+    into(engine, 'exterior', 'engine.tank', cyl(.06, .06, .12, 12), 'ink',
+      { name: 'Filler cap', pos: [3.30, -.38, .70], roughness: .5 });
+    into(engine, 'ghost', null, box(1.00, .80, .94), 'copper', { pos: [3.30, -.62, -.18] });
+    into(engine, 'ghost', null, box(.90, .58, .74), 'steel', { pos: [3.30, -.68, .70] });
+  }
+
+  /* ---------- 9. chassis: the frame under both decks ---------- */
+  const chassis = assembly('chassis', 'chassis', [0, RAIL_Y, 0], 4.4,
+    [-1.62, -.16], ['chassis.rail', 'chassis.cross', 'chassis.axle']);
+  {
+    for (const z of [-.62, .62]) {
+      into(chassis, 'exterior', 'chassis.rail', box(2 * HALF_LEN - .30, .26, .16), 'ink',
+        { name: 'Chassis rail', pos: [0, RAIL_Y, z] });
+    }
+    for (const x of [-3.20, -1.80, -.40, 1.00, 2.40, 3.70]) {
+      into(chassis, 'exterior', 'chassis.cross', box(.14, .20, 1.40), 'steel',
+        { name: 'Cross member', pos: [x, RAIL_Y, 0], roughness: .5, metalness: .4 });
+    }
+    for (const ax of [AXLE_F, AXLE_R]) {
+      into(chassis, 'exterior', 'chassis.axle', cyl(.10, .10, 2.60, 16), 'ink',
+        { name: 'Axle', pos: [ax, RAIL_Y - .30, 0], rot: [Math.PI / 2, 0, 0] });
+    }
+    into(chassis, 'exterior', 'chassis.rail', cyl(.07, .07, 4.60, 12), 'steel',
+      { name: 'Prop shaft', pos: [.30, RAIL_Y - .28, 0], rot: [0, 0, Math.PI / 2], roughness: .45, metalness: .5 });
+    into(chassis, 'ghost', null, box(2 * HALF_LEN - .30, .30, 1.70), 'ink', { pos: [0, RAIL_Y, 0] });
+  }
+
+  /* ---------- 10. wheels ---------- */
+  const wheels = assembly('wheels', 'wheels', [0, RAIL_Y - .30, 0], 3.2,
+    [-1.62, -.24], ['wheels.tire', 'wheels.tread', 'wheels.hub', 'wheels.arch']);
+  {
+    const spots = [[AXLE_F, -1], [AXLE_F, 1], [AXLE_R, -1], [AXLE_R, 1]];
+    spots.forEach(([ax, side]) => {
+      const z = side * (HALF_W - .22);
+      // Rear axle runs twins on each side, as a heavy bus does.
+      const offsets = ax === AXLE_R ? [-.16, .16] : [0];
+      offsets.forEach(dz => {
+        // A tire is a cylinder whose AXIS lies along Z, so it turns a quarter turn
+        // about X (a Y turn would leave it standing on its rim).
+        into(wheels, 'exterior', 'wheels.tire', cyl(WHEEL_R, WHEEL_R, .30, 26), 'rubber',
+          { name: 'Tire', pos: [ax, RAIL_Y - .30, z + dz], rot: [Math.PI / 2, 0, 0], roughness: .82 });
+        for (let i = 0; i < 26; i++) {
+          const a = i / 26 * Math.PI * 2;
+          into(wheels, 'exterior', 'wheels.tread', box(.05, .07, .31), 'dark',
+            { name: 'Tread block', pos: [ax + Math.cos(a) * (WHEEL_R + .02), RAIL_Y - .30 + Math.sin(a) * (WHEEL_R + .02), z + dz], rot: [0, 0, a], castShadow: false });
+        }
+        into(wheels, 'exterior', 'wheels.hub', cyl(.30, .30, .06, 22), 'steel',
+          { name: 'Hubcap', pos: [ax, RAIL_Y - .30, z + dz + side * .18], rot: [Math.PI / 2, 0, 0], roughness: .3, metalness: .6 });
+        for (let i = 0; i < 6; i++) {
+          const a = i / 6 * Math.PI * 2;
+          into(wheels, 'exterior', 'wheels.hub', cyl(.045, .045, .05, 10), 'dark',
+            { name: 'Hub nut', pos: [ax + Math.cos(a) * .19, RAIL_Y - .30 + Math.sin(a) * .19, z + dz + side * .21], rot: [Math.PI / 2, 0, 0], castShadow: false });
+        }
+      });
+      into(wheels, 'exterior', 'wheels.arch', torus(WHEEL_R + .07, .05, 32, Math.PI), 'ink',
+        { name: 'Wheel arch', pos: [ax, RAIL_Y - .30, side * (HALF_W - .02)], castShadow: false });
+    });
+    // Ghost silhouettes span the wheel track only, so they do not inflate the
+    // model's overall width past the body line.
+    into(wheels, 'ghost', null, box(.32, 1.06, 2.46), 'rubber', { pos: [AXLE_F, RAIL_Y - .30, 0] });
+    into(wheels, 'ghost', null, box(.32, 1.06, 2.46), 'rubber', { pos: [AXLE_R, RAIL_Y - .30, 0] });
+  }
+
+  /* ---------- count what we built, for the geometry contract ---------- */
+  let meshes = 0, triangles = 0;
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    meshes++;
+    const g = o.geometry;
+    triangles += (g.index ? g.index.count : g.attributes.position.count) / 3;
+  });
+  const counts = { assemblies: assemblies.length, meshes, triangles: Math.round(triangles) };
+
+  return {
+    root, assemblies, counts,
+    HALF_LEN, HALF_W, DECK_LOW, DECK_MID, ROOF_TOP, RAIL_Y, WHEEL_R,
+    // Motion is region-gated: only the assembly named by the studio animates.
+    update(state) {
+      for (const a of assemblies) if (a.update) a.update(state || {});
+    }
+  };
+ }};
+})();
