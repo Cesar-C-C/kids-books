@@ -1,8 +1,6 @@
 (() => {
  'use strict';
- // Same progressive-reveal controller as the airplane studio, driving the train
- // airframe plus the running gear. One code path for every assembly: a group of
- // three layers (exterior / interior / ghost), driven by a single update().
+ // Explicit model opening and independent camera navigation for the train exhibit.
  const $=id=>document.getElementById(id),T=window.THREE,lessons=window.HSR_PARTS,details=window.HSR_DETAILS;
  const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
  let storage;try{storage=localStorage;}catch{storage={getItem:()=>null,setItem:()=>{}};}
@@ -54,12 +52,18 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
  const offsets={cab:[-2.30,.55,0],'cabin-body':[0,0,0],roof:[0,2.30,0],windows:[0,.55,-2.60],seats:[0,1.35,0],doors:[0,.35,2.50],coupler:[2.10,-.35,0],'bogie-front':[0,-1.50,0],'bogie-rear':[0,-1.50,0],'motor-front':[0,-2.30,0],'motor-rear':[0,-2.30,0],pantograph:[0,3.20,0]};
  const BOGIES=[{id:'bogie-front',x:-5.6},{id:'bogie-rear',x:5.5}];
  const MOTORS=[{id:'motor-front',x:-5.6},{id:'motor-rear',x:5.5}];
- const look0=new T.Vector3(-1,.2,0);
- let renderer,scene,camera,train,track,assemblies=[],active=null,detail=null,mode='auto',playing=false,slow=true,simTime=0,mechanism=0,autoRotate=false;
- let yaw=-.94,pitch=.25,distance=18,overviewDistance=18,explosion=0,targetExplosion=0,reveal=0,near=0;
- const look=new T.Vector3(-1,.2,0),target={yaw,pitch,distance,look:look.clone()};
+ const look0=new T.Vector3(15,.2,0);
+ let renderer,scene,camera,train,track,assemblies=[],active=null,detail=null,mode='outside',playing=false,slow=true,simTime=0,mechanism=0,autoRotate=false;
+ let yaw=-.28,pitch=.25,distance=18,overviewDistance=18,explosion=0,targetExplosion=0,reveal=0,near=0;
+ const look=new T.Vector3(15,.2,0),target={yaw,pitch,distance,look:look.clone()};
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,pickables=[],surfaces=[],materialOriginal=new Map(),materialTransparency=new Map();
- let activeFit=6,clipping=new T.Plane(),lastFrame=0;
+ let activeFit=6,clipping=new T.Plane(new T.Vector3(0,0,-1),0),lastFrame=0;
+ let opening=null,closing=null,openAmount=0,openingView=null;const viewHistory=[];
+ const cabinRegions=['body','roof','windows','seats'];
+ const openingType=()=>!active?null:cabinRegions.includes(active.region)?'cabin':['cab','motors','bogies'].includes(active.region)?active.region:null;
+ function remember(){viewHistory.push({yaw:target.yaw,pitch:target.pitch,distance:target.distance,look:target.look.clone()});if(viewHistory.length>20)viewHistory.shift();}
+ function closeOpening(){closing=opening;opening=null;mode='outside';playing=false;mechanism=0;detail=null;}
+ function openPart(){if(opening){closeOpening();if(openingView){target.yaw=openingView.yaw;target.pitch=openingView.pitch;target.distance=openingView.distance;target.look.copy(openingView.look);}openingView=null;}else{openingView={yaw:target.yaw,pitch:target.pitch,distance:target.distance,look:target.look.clone()};targetExplosion=0;closing=null;openAmount=0;opening=openingType();mode='inside';remember();focus();if(opening==='cabin'){target.look.set(0,.8,0);target.yaw=.15;target.pitch=.85;target.distance=fit(7.5);}if(opening==='cab'){target.yaw=-.4;target.pitch=.45;target.distance=fit(2.7);}}renderLesson();}
  function progress(){$('progress-text').textContent=journal.read().found.length+' / '+(lessons.length+details.length);}
  function inherit(object,key){for(let o=object;o;o=o.parent)if(o.userData[key])return o.userData[key];return null;}
  function data(){return detail?details.find(d=>d.id===detail):active?lessons.find(p=>p.id===active.region):null;}
@@ -80,36 +84,41 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
   if(detail){const b=new T.Box3();detailObjects().forEach(g=>b.expandByObject(g));r=b.isEmpty()?.8:b.getBoundingSphere(new T.Sphere()).radius;r=Math.min(Math.max(r,minRadius[active.region]||.7),clampRadius[active.region]||r);}
   target.distance=Math.max(fit(r),1.6);activeFit=fit(active.radius);autoRotate=false;
   const a=angles[active.region]||[-.6,.3];target.yaw=a[0];target.pitch=a[1];
-  if(innerWidth<=800){const panel=document.querySelector('.inspector'),stage=document.querySelector('.stage');window.scrollTo({top:panel.getBoundingClientRect().top+scrollY-stage.offsetHeight-12,behavior:'instant'});}
+
  }
- function selectAssembly(a,focusIt=true){if(!a)return;active=a;detail=null;mode='auto';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);renderLesson();if(focusIt)focus();}
- function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)active=nearestAssembly(d.region);detail=id;mode='inside';journal.mark('found',id);speech.stop();renderLesson();if(focusIt)focus();}
- function home(){active=null;detail=null;mode='auto';playing=false;autoRotate=false;targetExplosion=0;target.look.copy(look0);target.yaw=-.94;target.pitch=.25;target.distance=overviewDistance;renderLesson();}
- function back(){if(detail){detail=null;mode='auto';renderLesson();focus();}else home();}
+ function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}const next=cabinRegions.includes(a.region)?'cabin':a.region;if(opening&&opening!==next){closeOpening();closing=null;openAmount=0;}if(active!==a){playing=false;mechanism=0;}active=a;detail=null;activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
+ function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(openingType()&&!opening){renderLesson();return;}detail=id;journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
+ function home(){remember();closeOpening();active=null;detail=null;autoRotate=false;targetExplosion=0;target.look.copy(look0);target.yaw=-.28;target.pitch=.25;target.distance=overviewDistance;renderLesson();}
+ function back(){const v=viewHistory.pop();if(v){target.yaw=v.yaw;target.pitch=v.pitch;target.distance=v.distance;target.look.copy(v.look);autoRotate=false;}renderLesson();}
  function renderLesson(){
   const p=data();progress();document.querySelector('.inspector').scrollTop=0;
   $('part-name').textContent=p?.name||'Your high-speed train';$('part-zh-name').textContent=p?.zhName||'你的高速列车';$('lesson-category').textContent=active?(detail?'LOOK INSIDE':'MEET THE PART'):'A WORLD INSIDE';
   $('part-en').textContent=p?.en||'Look closer. There is a whole world inside this train.';$('part-zh').textContent=p?.zh||'靠近一点，这列高铁里面还有一个世界。';
-  $('part-tip').textContent=detail?p.tip:active?tips[active.region]:'拖动列车，从不同方向看看。点一个部位，或把鼠标放在它上面向前滚动。';
+  $('part-tip').textContent=detail?p.tip:active?'点击“靠近观察”调整视角。内部结构需要先打开模型；拖动可从不同方向查看。':'拖动旋转，滚轮缩放。点击部件认识它，再用“靠近观察”调整视角。';
   $('principle-box').hidden=!active;$('part-principle').textContent=detail?p.principle:active?notes[active.region]:'';
   $('crumb-region').textContent=active?'› '+lessons.find(p=>p.id===active.region).zhName:'';$('crumb-detail').textContent=detail?'› '+p.zhName:'';$('back-part').hidden=!detail;
-  $('back-view').disabled=!active;
+  $('back-view').disabled=!viewHistory.length;
   document.querySelectorAll('[data-part]').forEach(b=>b.setAttribute('aria-pressed',active?.region===b.dataset.part));
   const children=active?details.filter(d=>d.region===active.region):[];
   $('explore-section').hidden=!children.length;$('detail-count').textContent=children.length+' 个发现';$('detail-list').replaceChildren();
-  children.forEach(d=>{const b=document.createElement('button');b.className='detail-button';b.dataset.detail=d.id;b.setAttribute('aria-pressed',detail===d.id);b.innerHTML=d.name+'<small>'+d.zhName+'</small>';b.onclick=()=>selectDetail(d.id);$('detail-list').append(b);});
+  children.forEach(d=>{const b=document.createElement('button');b.className='detail-button';b.dataset.detail=d.id;b.setAttribute('aria-pressed',detail===d.id);b.innerHTML=d.name+'<small>'+d.zhName+'</small>';b.disabled=!!openingType()&&!opening;b.onclick=()=>selectDetail(d.id);$('detail-list').append(b);});
   $('operation-panel').hidden=!active;
-  $('mechanism-help').textContent=active?helps[active.region]:'';
-  updateButtons();
+  $('open-part').hidden=!openingType();$('open-part').textContent=opening?'合上 · 恢复外观':({cabin:'打开客室',cab:'打开驾驶室',motors:'抬起车体 · 切开电机',bogies:'抬起车体'})[openingType()]||'打开';$('open-part').setAttribute('aria-pressed',!!opening);
+  $('opening-note').textContent=opening?'教学展示：覆盖件暂时移开，内部仍在原来的安装位置。可旋转观察，点击合上恢复。':openingType()?'先打开模型，再选择下方的内部细节。缩放不会改变模型结构。':'直接观察部件，或播放它的动作。';
+  $('mechanism-controls').hidden=!active||!['doors','windows','bogies','motors','pantograph','coupler','roof'].includes(active.region);
+  $('operation-panel').after($('explore-section'));$('part-directory').open=false;
+  $('mechanism-help').textContent=active&&!$('mechanism-controls').hidden?'点击播放观察动作，展开“自己动手调节”可拖动控制。':'';
+  $('part-zh-name').after($('operation-panel'));updateButtons();
  }
  function updateButtons(){document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===mode));$('mechanism-play').setAttribute('aria-pressed',playing);$('mechanism-play').textContent=playing?'Ⅱ 暂停观察':'▶ 看它怎样工作';$('auto-rotate').setAttribute('aria-pressed',autoRotate);$('explode-button').setAttribute('aria-pressed',targetExplosion>0);$('explode-button').textContent=targetExplosion?'组装':'拆解';$('slow-play').setAttribute('aria-pressed',slow);}
  lessons.forEach((p,i)=>{const b=document.createElement('button');b.className='region-button';b.dataset.part=p.id;b.setAttribute('aria-pressed',false);b.innerHTML='<i>'+String(i+1).padStart(2,'0')+'</i><span><strong>'+p.name+'</strong><small>'+p.zhName+'</small></span>';b.onclick=()=>{if(camera)selectAssembly(nearestAssembly(p.id));else{$('part-name').textContent=p.name;$('part-en').textContent=p.en;$('part-zh').textContent=p.zh;}};$('region-list').append(b);});
  $('speak').onclick=()=>speech.say($('part-name').textContent+'. '+$('part-en').textContent,true);
  $('language').onclick=()=>{const only=document.body.classList.toggle('english-only');$('language').textContent=only?'English only':'中英双语';$('language').setAttribute('aria-pressed',!only);};
- $('book-view').onclick=$('whole-train').onclick=$('home-view').onclick=home;$('back-view').onclick=$('back-part').onclick=back;
- $('zoom-in').onclick=()=>{target.distance=Math.max(1.2,target.distance*.8);};$('zoom-out').onclick=()=>{target.distance=Math.min(60,target.distance*1.25);};
+ $('book-view').onclick=$('whole-train').onclick=$('home-view').onclick=home;$('back-view').onclick=back;$('back-part').onclick=()=>{detail=null;renderLesson();};
+ $('focus-part').onclick=()=>{remember();focus();renderLesson();};$('open-part').onclick=openPart;
+ $('zoom-in').onclick=()=>{target.distance=Math.max(1.2,target.distance*.8);};$('zoom-out').onclick=()=>{target.distance=Math.min(140,target.distance*1.25);};
  $('side-view').onclick=()=>{target.pitch=.04;target.yaw=0;autoRotate=false;updateButtons();};$('top-view').onclick=()=>{target.pitch=1.50;target.yaw=0;autoRotate=false;updateButtons();};$('auto-rotate').onclick=()=>{autoRotate=!autoRotate;updateButtons();};
- $('explode-button').onclick=()=>{targetExplosion=targetExplosion?0:1;detail=null;active=null;target.look.copy(look0);target.distance=overviewDistance*(targetExplosion?1.30:1);playing=false;record();renderLesson();};
+ $('explode-button').onclick=()=>{closeOpening();closing=null;openAmount=0;targetExplosion=targetExplosion?0:1;detail=null;active=null;target.look.copy(look0);target.distance=overviewDistance*(targetExplosion?1.30:1);playing=false;record();renderLesson();};
  document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{mode=b.dataset.view;updateButtons();});
  $('mechanism-play').onclick=()=>{playing=!playing;updateButtons();};$('slow-play').onclick=()=>{slow=!slow;updateButtons();};
  $('mechanism-step').onclick=()=>{playing=false;simTime+=.28;mechanism=(mechanism+.07)%1;updateButtons();record();};
@@ -151,7 +160,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
   function resize(){const b=$('viewport').getBoundingClientRect();renderer.setSize(b.width,b.height,false);camera.aspect=b.width/b.height;camera.updateProjectionMatrix();
    // The carriage is long and shallow, so frame it by its length: the sphere
    // formula would leave two thirds of the stage empty.
-   overviewDistance=Math.max(24,10.5/(Math.tan(T.MathUtils.degToRad(21))*Math.max(1,camera.aspect)*.70));
+   overviewDistance=Math.max(40,26/(Math.tan(T.MathUtils.degToRad(21))*camera.aspect*.85));
    if(!active&&!targetExplosion)target.distance=overviewDistance;}
   new ResizeObserver(resize).observe($('viewport'));resize();distance=target.distance;
   const ray=new T.Raycaster();
@@ -160,13 +169,13 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
   function pan(dx,dy){const scale=distance*.0012;target.look.add(new T.Vector3(1,0,0).applyQuaternion(camera.quaternion).multiplyScalar(-dx*scale)).add(new T.Vector3(0,1,0).applyQuaternion(camera.quaternion).multiplyScalar(dy*scale));}
   const pointers=new Map();let drag=0,lastTap=null,pinch=0;
   canvas.oncontextmenu=e=>e.preventDefault();
-  canvas.onpointerdown=e=>{canvas.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});drag=0;autoRotate=false;if(pointers.size===2){const p=[...pointers.values()];pinch=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);drag=99;lastTap=null;const h=hit((p[0].x+p[1].x)/2,(p[0].y+p[1].y)/2);if(h&&!active){selectAssembly(assemblies.find(a=>a.id===h.object.userData.pickAssembly),false);target.look.copy(h.point);}}};
-  canvas.onpointermove=e=>{if(!pointers.has(e.pointerId))return;const old=pointers.get(e.pointerId),dx=e.clientX-old.x,dy=e.clientY-old.y;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});drag+=Math.abs(dx)+Math.abs(dy);if(pointers.size===2){const p=[...pointers.values()],d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);target.distance=clamp(target.distance*pinch/Math.max(d,1),1.2,60);pinch=d;pan(dx*.5,dy*.5);}else if(e.buttons===2||e.shiftKey)pan(dx,dy);else{target.yaw-=dx*.006;target.pitch=clamp(target.pitch+dy*.005,-1.15,1.50);}};
+  canvas.onpointerdown=e=>{canvas.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});drag=0;autoRotate=false;if(pointers.size===2){const p=[...pointers.values()];pinch=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);drag=99;lastTap=null;}};
+  canvas.onpointermove=e=>{if(!pointers.has(e.pointerId))return;const old=pointers.get(e.pointerId),dx=e.clientX-old.x,dy=e.clientY-old.y;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});drag+=Math.abs(dx)+Math.abs(dy);if(pointers.size===2){const p=[...pointers.values()],d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);target.distance=clamp(target.distance*pinch/Math.max(d,1),1.2,140);pinch=d;pan(dx*.5,dy*.5);}else if(e.buttons===2||e.shiftKey)pan(dx,dy);else{target.yaw-=dx*.006;target.pitch=clamp(target.pitch+dy*.005,-1.15,1.50);}};
   canvas.onpointerup=e=>{if(drag<6&&pointers.size===1&&e.button!==2){const h=hit(e.clientX,e.clientY);pick(h);const now=performance.now();if(e.pointerType!=='mouse'&&lastTap&&now-lastTap.t<350&&Math.hypot(e.clientX-lastTap.x,e.clientY-lastTap.y)<24){pick(h,true);lastTap=null;}else lastTap={t:now,x:e.clientX,y:e.clientY};}pointers.delete(e.pointerId);pinch=0;};canvas.onpointercancel=e=>{pointers.delete(e.pointerId);pinch=0;drag=99;};
   canvas.ondblclick=e=>{if(drag<6)pick(hit(e.clientX,e.clientY),true);};
-  canvas.addEventListener('wheel',e=>{e.preventDefault();if(e.deltaY<0&&!targetExplosion){const h=hit(e.clientX,e.clientY);if(h&&(!active||distance>activeFit*1.4)){selectAssembly(assemblies.find(a=>a.id===h.object.userData.pickAssembly),false);target.look.copy(h.point);}}target.distance=clamp(target.distance*Math.exp(e.deltaY*.0012),1.2,60);},{passive:false});
-  $('viewport').onkeydown=e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','Escape'].includes(e.key)){e.preventDefault();if(e.key==='Escape')back();if(e.key==='ArrowLeft')target.yaw-=.16;if(e.key==='ArrowRight')target.yaw+=.16;if(e.key==='ArrowUp')target.pitch=clamp(target.pitch+.12,-1.15,1.50);if(e.key==='ArrowDown')target.pitch=clamp(target.pitch-.12,-1.15,1.50);if(e.key==='+'||e.key==='=')target.distance=Math.max(1.2,target.distance*.8);if(e.key==='-')target.distance=Math.min(60,target.distance*1.25);}};
-  window.trainLab={setView:(y,p,d,x=-1)=>{target.yaw=y;target.pitch=p;target.distance=d;target.look.set(x,.2,0);},select:id=>selectAssembly(nearestAssembly(id)),focusDetail:id=>selectDetail(id),snapshot:()=>({generation:4,changedOpacity:surfaces.filter(s=>s.materials.some(m=>Math.abs(m.opacity-materialOriginal.get(m).opacity)>1e-6)).length,reference:train.reference,modelId:train.root.uuid,selected:active?.region||null,assembly:active?.id||null,detail,near,reveal,mode,playing,simulationTime:simTime,level:mechanism,explosion,meshCount:pickables.length,geometry:train.counts,visited:journal.read().found,camera:{yaw,pitch,distance,target:look.toArray()},assemblies:assemblies.map(a=>({id:a.id,region:a.region,exterior:a.exterior.visible,interior:a.interior.visible,ghost:a.ghost.visible})),renderer:renderer.info.render}),projectPart:id=>{const a=assemblies.find(a=>a.id===id)||nearestAssembly(id);if(!a)return null;const c=worldCenter(a).project(camera),b=canvas.getBoundingClientRect();return{x:b.left+(c.x*.5+.5)*b.width,y:b.top+(-c.y*.5+.5)*b.height};}};
+  canvas.addEventListener('wheel',e=>{e.preventDefault();target.distance=clamp(target.distance*Math.exp(e.deltaY*.0012),1.2,140);},{passive:false});
+  $('viewport').onkeydown=e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','Escape'].includes(e.key)){e.preventDefault();if(e.key==='Escape')back();if(e.key==='ArrowLeft')target.yaw-=.16;if(e.key==='ArrowRight')target.yaw+=.16;if(e.key==='ArrowUp')target.pitch=clamp(target.pitch+.12,-1.15,1.50);if(e.key==='ArrowDown')target.pitch=clamp(target.pitch-.12,-1.15,1.50);if(e.key==='+'||e.key==='=')target.distance=Math.max(1.2,target.distance*.8);if(e.key==='-')target.distance=Math.min(140,target.distance*1.25);}};
+  window.trainLab={setView:(y,p,d,x=-1)=>{target.yaw=y;target.pitch=p;target.distance=d;target.look.set(x,.2,0);},select:id=>selectAssembly(nearestAssembly(id)),focusDetail:id=>selectDetail(id),snapshot:()=>({generation:5,opening,openAmount,cutNormal:clipping.normal.toArray(),history:viewHistory.length,changedOpacity:surfaces.filter(s=>s.materials.some(m=>Math.abs(m.opacity-materialOriginal.get(m).opacity)>1e-6)).length,reference:train.reference,modelId:train.root.uuid,selected:active?.region||null,assembly:active?.id||null,detail,near,reveal,mode,playing,simulationTime:simTime,level:mechanism,explosion,meshCount:pickables.length,geometry:train.counts,visited:journal.read().found,camera:{yaw,pitch,distance,target:look.toArray()},assemblies:assemblies.map(a=>({id:a.id,region:a.region,exterior:a.exterior.visible,interior:a.interior.visible,ghost:a.ghost.visible,position:a.group.position.toArray(),exteriorPosition:a.exterior.position.toArray()})),renderer:renderer.info.render}),projectPart:id=>{const a=assemblies.find(a=>a.id===id)||nearestAssembly(id);if(!a)return null;const c=worldCenter(a).project(camera),b=canvas.getBoundingClientRect();return{x:b.left+(c.x*.5+.5)*b.width,y:b.top+(-c.y*.5+.5)*b.height};}};
   requestAnimationFrame(frame);
  }
  function frame(stamp){
@@ -175,22 +184,33 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
   yaw+=(target.yaw-yaw)*ease;pitch+=(target.pitch-pitch)*ease;distance+=(target.distance-distance)*ease;look.lerp(target.look,ease);explosion+=(targetExplosion-explosion)*ease;
   camera.position.set(Math.sin(yaw)*Math.cos(pitch)*distance,Math.sin(pitch)*distance,Math.cos(yaw)*Math.cos(pitch)*distance).add(look);camera.lookAt(look);camera.updateMatrixWorld(true);
   near=active&&explosion<.02?clamp((activeFit*1.7-distance)/(activeFit*.7)):0;
-  reveal=active?(mode==='inside'?1:mode==='outside'?0:clamp((near-.28)/.72)):0;
+  openAmount+=((opening?1:0)-openAmount)*ease;if(openAmount<.001)closing=null;const shownOpening=opening||closing;reveal=opening?openAmount:0;
   if(playing){simTime+=dt*(slow?.55:1);mechanism=.5-.5*Math.cos(simTime);record();}
   $('mechanism').value=Math.round(mechanism*100);$('mechanism-value').textContent=Math.round(mechanism*100)+'%';
-  $('depth-status').textContent=explosion>.1?'部件拆解':!active||near<.15?'整体观察':reveal>.45?'内部结构':'靠近观察';$('observation-state').textContent=mode==='auto'?'随缩放变化':mode==='inside'?'局部剖面':'完整外观';
+  $('depth-status').textContent=explosion>.1?'拆解展示':opening?'已打开 · '+({cabin:'客室',cab:'驾驶室',motors:'电机',bogies:'车体'})[opening]:'自由观察';$('observation-state').textContent=opening?'手动打开':'完整外观';
   train.update({time:simTime,mechanism:mechanism>.001,level:mechanism,region:active?.region});
   for(const a of assemblies){a.group.position.copy(a.base).addScaledVector(a.offset,explosion);if(a.update)a.update({time:simTime,mechanism:mechanism>.001,level:mechanism,region:active?.region,spin:1.55});}
-  if(active){const center=worldCenter(active),normal=camera.position.clone().sub(center).normalize();clipping.setFromNormalAndCoplanarPoint(normal.clone().negate(),center.clone().addScaledVector(normal,active.radius*(1-reveal)));}
-  // Zoom preserves the real surrounding train, including its original materials.
-  for(const a of assemblies){const chosen=a===active;a.exterior.visible=a.region!=='seats'||chosen||explosion>.2;a.interior.visible=chosen&&reveal>.03||explosion>.2;a.ghost.visible=false;}
-  for(const s of surfaces){
-   const chosen=s.assembly===active;
-   const cabinCut=mode==='inside'&&active&&['seats','body','roof','windows'].includes(active.region)&&['cabin-body','roof','windows','doors'].includes(s.assembly.id);
-   for(const m of s.materials){const orig=materialOriginal.get(m);Object.assign(m,orig);m.clippingPlanes=s.layer==='exterior'&&(cabinCut||(chosen&&!s.detail))&&reveal>.01?[clipping]:null;
-    if(materialTransparency.get(m)!==m.transparent){m.needsUpdate=true;materialTransparency.set(m,m.transparent);}
+  // Opening is independent of the camera. Original geometry and materials are reused.
+  for(const a of assemblies){
+   const cabin=shownOpening==='cabin'&&['cabin-body','roof','windows','doors','seats'].includes(a.id);
+   a.exterior.position.set(0,0,0);
+   if(shownOpening==='cabin'){
+    if(a.id==='roof')a.exterior.position.y=3.5*openAmount;if(a.id==='pantograph')a.group.position.y+=3.5*openAmount;
+    if(['cabin-body','windows','doors'].includes(a.id))a.exterior.position.set(0,.4*openAmount,-4*openAmount);
    }
-   s.object.castShadow=s.shadow&&!(chosen&&reveal>.1&&s.layer==='exterior');
+   if(shownOpening==='cab'&&a.id==='cab')a.exterior.position.set(-1.5*openAmount,3.5*openAmount,0);
+   if(['bogies','motors'].includes(shownOpening)&&['cab','cabin-body','roof','windows','doors','seats','pantograph'].includes(a.id))a.group.position.y+=2.8*openAmount;
+   a.exterior.visible=a.region!=='seats'||cabin||explosion>.2;
+   a.interior.visible=cabin||(shownOpening===a.region&&a===active)||explosion>.2;
+   a.ghost.visible=false;
+  }
+  // A fixed longitudinal section exposes the motor without following the eye.
+  clipping.set(new T.Vector3(0,0,-1),active?worldCenter(active).z:0);
+  for(const s of surfaces){
+   const cut=shownOpening==='motors'&&s.assembly===active&&s.layer==='exterior';
+   for(const m of s.materials){Object.assign(m,materialOriginal.get(m));m.clippingPlanes=cut?[clipping]:null;}
+   s.object.castShadow=s.shadow&&!cut;
+   for(const m of s.materials){if(m.emissive){if(!m.userData.originalEmissive)m.userData.originalEmissive=m.emissive.clone();m.emissive.copy(m.userData.originalEmissive);if(s.assembly===active)m.emissive.lerp(new T.Color(0x245749),.12);}}
   }
   train.root.updateMatrixWorld(true);
   const label=$('model-label');label.hidden=!active||near<.2;
