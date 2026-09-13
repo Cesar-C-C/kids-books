@@ -274,6 +274,18 @@ window.SchoolBusV3 = { create(T) {
     // runs from the hood top up to the windshield base.
     into(hood, 'exterior', 'hood.cover', softBox(T, HL, HOOD_TOP - BELT_Y, HW * 2, .10), 'yellow',
       { name: 'Hood block', pos: [HM, (HOOD_TOP + BELT_Y) / 2, 0], rot: [0, Math.PI / 2, 0], roughness: .5 });
+    // Cowl joint: the band of body between the back of the hood (HX1) and the
+    // windshield plane (BOX_X). Leaving it out opens a visible slot right through
+    // the bus at the A-pillar, which is what the picture book never shows. Two
+    // full-height side cheeks plus a top panel close it off.
+    const jointLen = BOX_X - HX1, jointMid = (HX1 + BOX_X) / 2;
+    for (const side of [-1, 1]) {
+      into(hood, 'exterior', 'hood.cover', softBox(T, jointLen + .04, CEIL - BELT_Y, .10, .04), 'yellow',
+        { name: 'Cowl cheek', pos: [jointMid, (CEIL + BELT_Y) / 2, side * (HALF_W - .05)],
+          rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .5 });
+    }
+    into(hood, 'exterior', 'hood.cover', box(jointLen + .04, .09, HALF_W * 2 - .06), 'yellow',
+      { name: 'Cowl top', pos: [jointMid, CEIL - .04, 0], roughness: .5 });
     // The sloping shoulder from the hood top up to the base of the windshield.
     // It is a plate whose long axis is X, so a rotation about Z tips its far end
     // up towards the windscreen.
@@ -338,9 +350,12 @@ window.SchoolBusV3 = { create(T) {
       { name: 'Steering wheel', pos: [BOX_X + .95, -.24, .42], rot: [1.05, 0, 0], roughness: .5 });
     into(cab, 'interior', 'cab.wheel', cyl(.035, .035, .40, 12), 'ink',
       { name: 'Steering column', pos: [BOX_X + .88, -.44, .42], rot: [0, 0, .35] });
-    // Dashboard: a shelf of dials under the windshield.
+    // Dashboard: a shelf of dials under the windshield. softBox already puts its
+    // width on X (fore-and-aft) and its depth on Z (across the cab), so this needs
+    // NO rotation. A quarter turn about Y swapped those axes and sent the 2.18 m
+    // width down the length of the bus, poking a slab out through the windshield.
     into(cab, 'interior', 'cab.dash', softBox(T, .40, .30, HALF_W * 2 - .26, .07), 'ink',
-      { name: 'Dashboard', pos: [BOX_X + .50, -.06, 0], rot: [0, Math.PI / 2, 0], roughness: .6 });
+      { name: 'Dashboard', pos: [BOX_X + .50, -.06, 0], roughness: .6 });
     for (let i = 0; i < 3; i++) {
       into(cab, 'interior', 'cab.dash', cyl(.075, .075, .04, 16), 'glassLite',
         { name: 'Dial', pos: [BOX_X + .40, .02, .18 + i * .16], rot: [0, 0, Math.PI / 2], roughness: .3 });

@@ -181,16 +181,17 @@
       for (let i = 0; i < BAYS; i++) {
         const x = W0 + SPAN * (i + .5) / BAYS;
         if (side < 0 && i === 0) continue;      // doorway bay on the passenger side
-        into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .72, .06, .06), 'glass',
-          { name: 'Lower window', pos: [x, -.50, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .22, metalness: .2, glass: true });
+        // The book draws the lower windows noticeably taller than the upper row.
+        into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .88, .06, .06), 'glass',
+          { name: 'Lower window', pos: [x, -.54, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .22, metalness: .2, glass: true });
         into(body, 'exterior', 'body.windows', box(BAY_W + .08, .05, .09), 'redDark',
-          { name: 'Window frame', pos: [x, -.13, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0] });
+          { name: 'Window frame', pos: [x, -.07, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0] });
       }
       // Upper deck glazing: six bays across the top deck.
       for (let i = 0; i < BAYS; i++) {
         const x = W0 + SPAN * (i + .5) / BAYS;
-        into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .68, .06, .06), 'glass',
-          { name: 'Upper window', pos: [x, .62, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .22, metalness: .2, glass: true });
+        into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .76, .06, .06), 'glass',
+          { name: 'Upper window', pos: [x, .58, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .22, metalness: .2, glass: true });
         into(body, 'exterior', 'body.windows', box(BAY_W + .08, .05, .09), 'redDark',
           { name: 'Window frame', pos: [x, .99, z + side * .07], rot: [0, side > 0 ? 0 : Math.PI, 0] });
       }
@@ -202,13 +203,9 @@
       // Skirt below the floor, and a wheel arch cut over each axle.
       into(body, 'exterior', 'body.skirt', box(2 * HALF_LEN - .40, .46, .10), 'redDark',
         { name: 'Skirt panel', pos: [0, -1.28, z], rot: [0, side > 0 ? 0 : Math.PI, 0] });
-      for (const ax of [AXLE_F, AXLE_R]) {
-        // A wheel arch is a half-ring in the XY plane, one per side, opening
-        // downward over the tire. Turning it about X would swing the radius into
-        // Z and push the arch outside the body.
-        into(body, 'exterior', 'body.skirt', torus(WHEEL_R + .07, .05, 32, Math.PI), 'ink',
-          { name: 'Wheel arch', pos: [ax, RAIL_Y - .30, z + side * .02] });
-      }
+      // The wheel arch itself is owned by the wheels assembly (wheels.arch) so it
+      // can sit in the tire's own plane; drawing a second one here just doubled
+      // the ring and pushed it out past the tire.
     }
     // Front and rear bulkheads close the box. A bulkhead spans the WIDTH, so it is
     // (width, height, thickness) turned a quarter turn about Y.
@@ -223,47 +220,51 @@
     into(body, 'ghost', null, box(2 * HALF_LEN - .34, 2.50, 2.54), 'red', { pos: [0, .02, 0] });
   }
 
-  /* ---------- 2. roof: the arched cover over the top deck ---------- */
-  // The rearmost bay is the sightseeing section: it is left open to the sky and
-  // only ringed by a rail. So the arch must STOP at the front of that bay rather
-  // than run the full length of the bus, otherwise it roofs the open deck over.
-  const OPEN_X0 = 2.55, OPEN_X1 = HALF_LEN - .12;      // open-top bay, x range
-  const ROOF_X0 = -HALF_LEN + .16, ROOF_X1 = OPEN_X0 - .08;
+  /* ---------- 2. roof: the domed crown over the top deck ---------- */
+  // The picture book draws one continuous rounded crown that runs the whole
+  // length and curves down into the side walls — a fully enclosed upper deck,
+  // no sightseeing well. So the arch spans nose to tail and lifts higher in the
+  // middle than a shallow slab would.
+  const ROOF_X0 = -HALF_LEN + .16, ROOF_X1 = HALF_LEN - .16;
   const roof = assembly('roof', 'roof', [-.60, ROOF_TOP, 0], 4.2,
     [-1.62, .46], ['roof.panel', 'roof.hatch', 'roof.rail']);
   {
-    // A gentle arch, extruded along the length of the bus.
+    // A superellipse crown: flat-ish across the top, then turning down steeply
+    // into the walls. A quadratic bulge here reads as a flat slab; the power
+    // curve is what gives the book's fat rounded roof.
+    const RISE = .46, P = .68, SEG = 26;
     const cap = new T.Shape();
     cap.moveTo(-HALF_W, 0);
-    cap.quadraticCurveTo(-HALF_W - .04, .30, -HALF_W * .62, .40);
-    cap.quadraticCurveTo(0, .50, HALF_W * .62, .40);
-    cap.quadraticCurveTo(HALF_W + .04, .30, HALF_W, 0);
+    for (let i = 1; i < SEG; i++) {
+      const t = Math.PI * i / SEG;                 // 0 -> pi, left wall to right wall
+      const x = -HALF_W * Math.cos(t);
+      // Math.pow() of a value that lands a hair below zero returns NaN, and the
+      // shape then extrudes into a mesh full of NaN vertices. Clamp the base.
+      const y = RISE * Math.pow(Math.max(0, Math.sin(t)), P);
+      cap.lineTo(x, y);
+    }
+    cap.lineTo(HALF_W, 0);
     cap.lineTo(-HALF_W, 0);
-    const rg = new T.ExtrudeGeometry(cap, { depth: ROOF_X1 - ROOF_X0, bevelEnabled: true, bevelSize: .04, bevelThickness: .04, bevelSegments: 3, curveSegments: 16, steps: 1 });
+    const rg = new T.ExtrudeGeometry(cap, { depth: ROOF_X1 - ROOF_X0, bevelEnabled: false, curveSegments: 8, steps: 1 });
     rg.translate(0, 0, -ROOF_X1); rg.rotateY(Math.PI / 2);
     into(roof, 'exterior', 'roof.panel', rg, 'red', { name: 'Roof panel', pos: [0, DECK_TOP, 0], roughness: .55 });
     // Two roof hatches that let the upper deck breathe.
     for (const x of [-1.90, 1.10]) {
-      into(roof, 'exterior', 'roof.hatch', box(.70, .07, .62), 'cream',
-        { name: 'Roof hatch', pos: [x, DECK_TOP + .48, 0], roughness: .6 });
+      into(roof, 'exterior', 'roof.hatch', box(.70, .06, .62), 'cream',
+        { name: 'Roof hatch', pos: [x, DECK_TOP + RISE - .02, 0], roughness: .6 });
     }
-    // The sightseeing section: an open deck with a rail round it and a short
-    // wind deflector at the front of the opening.
-    into(roof, 'exterior', 'roof.rail', box(OPEN_X1 - OPEN_X0, .06, 2.44), 'redDark',
-      { name: 'Open bay floor', pos: [(OPEN_X0 + OPEN_X1) / 2, DECK_TOP + .02, 0] });
-    into(roof, 'exterior', 'roof.rail', roundPanel(T, .06, .34, 2.44, .03), 'redDim',
-      { name: 'Wind deflector', pos: [OPEN_X0 + .04, DECK_TOP + .17, 0], roughness: .55 });
-    for (const z of [-HALF_W + .06, HALF_W - .06]) {
-      into(roof, 'exterior', 'roof.rail', box(OPEN_X1 - OPEN_X0, .05, .05), 'pole',
-        { name: 'Top rail', pos: [(OPEN_X0 + OPEN_X1) / 2, DECK_TOP + .62, z], roughness: .45, metalness: .3 });
-      for (const x of [OPEN_X0 + .10, OPEN_X1 - .12]) {
-        into(roof, 'exterior', 'roof.rail', box(.05, .62, .05), 'pole',
-          { name: 'Rail post', pos: [x, DECK_TOP + .31, z], roughness: .45, metalness: .3 });
-      }
+    // Rear air-conditioning duct, a small box the book puts at the tail. It must
+    // sit ON the crown, so its centre is dropped by half its own height rather
+    // than floated a clear gap above the roof line.
+    into(roof, 'exterior', 'roof.rail', box(.86, .16, 1.28), 'redDark',
+      { name: 'Roof duct', pos: [HALF_LEN - .78, DECK_TOP + RISE - .04, 0], roughness: .55 });
+    // Drip rails down each side where the crown meets the wall — the dark seam
+    // the illustration draws right under the roof edge.
+    for (const z of [-HALF_W + .02, HALF_W - .02]) {
+      into(roof, 'exterior', 'roof.rail', box(2 * HALF_LEN - .34, .07, .07), 'redDim',
+        { name: 'Drip rail', pos: [0, DECK_TOP + .02, z], roughness: .5 });
     }
-    into(roof, 'exterior', 'roof.rail', box(.05, .05, 2.32), 'pole',
-      { name: 'Rear rail', pos: [OPEN_X1 - .04, DECK_TOP + .62, 0], roughness: .45, metalness: .3 });
-    into(roof, 'ghost', null, box(2 * HALF_LEN - .38, .52, 2.54), 'red', { pos: [0, DECK_TOP + .24, 0] });
+    into(roof, 'ghost', null, box(2 * HALF_LEN - .38, .62, 2.54), 'red', { pos: [0, DECK_TOP + .26, 0] });
   }
 
   /* ---------- 3. upper deck: seats, walkway, poles ---------- */
@@ -544,8 +545,11 @@
             { name: 'Hub nut', pos: [ax + Math.cos(a) * .19, RAIL_Y - .30 + Math.sin(a) * .19, z + dz + side * .21], rot: [Math.PI / 2, 0, 0], castShadow: false });
         }
       });
-      into(wheels, 'exterior', 'wheels.arch', torus(WHEEL_R + .07, .05, 32, Math.PI), 'ink',
-        { name: 'Wheel arch', pos: [ax, RAIL_Y - .30, side * (HALF_W - .02)], castShadow: false });
+      // The arch must sit in the same plane as the tire it covers. Placing it at
+      // the body's outer skin (HALF_W - .02) instead of the tire line left the
+      // ring hanging outside the wheel with nothing under it.
+      into(wheels, 'exterior', 'wheels.arch', torus(WHEEL_R + .06, .045, 32, Math.PI), 'ink',
+        { name: 'Wheel arch', pos: [ax, RAIL_Y - .30, z], castShadow: false });
     });
     // Ghost silhouettes span the wheel track only, so they do not inflate the
     // model's overall width past the body line.
