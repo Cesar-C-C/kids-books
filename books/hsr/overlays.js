@@ -67,7 +67,7 @@ window.OVL = {
       line:"I'm the train — coming out of the tunnel!", lineZh:'我是高铁，从隧道里出来！', lineKey:'hsr_09_0'}) +
     partSVG({px:755,py:365,name:'Tunnel',nameZh:'隧道',fact:'a hole through the mountain',factZh:'穿过山体的洞',
       line:"I'm the tunnel — a hole through the mountain!", lineZh:'我是隧道，穿过山体的洞！', lineKey:'hsr_09_1'}) +
-    partSVG({px:1050, py:245,name:'Mountains',nameZh:'大山',fact:'train goes right through',factZh:'火车直接穿过去',
+    partSVG({px:750, py:220,name:'Mountains',nameZh:'大山',fact:'train goes right through',factZh:'火车直接穿过去',
       line:"We're mountains — the train goes right through us!", lineZh:'我们是大山，火车直接从我们身上穿过！', lineKey:'hsr_09_2'})
   ),
   hsr_10: () => svgWrap(

@@ -768,88 +768,6 @@ window.StationV3 = { create(T) {
   /* ---------- 9. interior: the cabin the crew lives in ---------- */
   const interior = assembly('interior', 'interior', [.60, 0, 0], 2.2,
     [-1.62, .12], ['interior.racks', 'interior.sleep', 'interior.table', 'interior.treadmill', 'interior.plants']);
-  {
-    // Equipment racks: square lockers filling the curved wall, exactly the way
-    // the illustration lines the barrel. Every rack is one standard size, so the
-    // station can be fitted out one drawer at a time.
-    const RACKS = 5, RX0 = -.95, RGAP = .56;
-    for (let i = 0; i < RACKS; i++) {
-      const x = RX0 + i * RGAP;
-      for (const th of [Math.PI * .22, Math.PI * .78, Math.PI * 1.22, Math.PI * 1.78]) {
-        const y = Math.sin(th) * (RM - .16), z = Math.cos(th) * (RM - .16);
-        const g = new T.Group(); g.position.set(x, y, z);
-        g.lookAt(x, y + Math.sin(th), z + Math.cos(th));
-        interior.details['interior.racks'].add(g);
-        const r = new T.Mesh(box(.46, .40, .22), mat('rack', .62));
-        r.name = 'Equipment rack';
-        r.userData = { region: 'interior', assemblyId: 'interior', detail: 'interior.racks' };
-        r.position.set(0, 0, -.09); r.castShadow = r.receiveShadow = true;
-        g.add(r);
-        const face = new T.Mesh(box(.42, .06, .05), mat('rackDark', .6));
-        face.name = 'Rack handle';
-        face.userData = { region: 'interior', assemblyId: 'interior', detail: 'interior.racks' };
-        face.position.set(0, -.10, .03); face.castShadow = true;
-        g.add(face);
-        for (let b = 0; b < 3; b++) {
-          const led = new T.Mesh(box(.05, .03, .03), mat(b % 2 ? 'greenLite' : 'lamp', .35));
-          led.name = 'Rack indicator';
-          led.userData = { region: 'interior', assemblyId: 'interior', detail: 'interior.racks' };
-          led.position.set(-.14 + b * .14, .14, .03); led.castShadow = false;
-          g.add(led);
-        }
-      }
-    }
-    // The sleeping bag: a long blue bag strapped upright to the wall. In free
-    // fall there is no "lying down", so a crew member simply zips in and floats.
-    into(interior, 'interior', 'interior.sleep', softBox(T, .46, 1.06, .22, .17), 'bag',
-      { name: 'Sleeping bag', pos: [-1.70, 0, -RM + .18], roughness: .78 });
-    for (let i = 0; i < 3; i++) {
-      into(interior, 'interior', 'interior.sleep', box(.48, .05, .05), 'goldLite',
-        { name: 'Bag strap', pos: [-1.70, -.32 + i * .30, -RM + .31], roughness: .7 });
-    }
-    // The galley table with its food pouches taped down.
-    into(interior, 'interior', 'interior.table', softBox(T, .60, .06, .40, .05), 'white',
-      { name: 'Galley table', pos: [.34, -.42, -.20], roughness: .6 });
-    into(interior, 'interior', 'interior.table', cyl(.05, .05, .46, 12), 'steel',
-      { name: 'Table post', pos: [.34, -.66, -.20], roughness: .4, metalness: .5 });
-    for (let i = 0; i < 4; i++) {
-      into(interior, 'interior', 'interior.table', softBox(T, .16, .03, .12, .02), i % 2 ? 'shield' : 'rack',
-        { name: 'Food pouch', pos: [.16 + (i % 2) * .30, -.38, -.32 + Math.floor(i / 2) * .22], roughness: .7 });
-    }
-    // The treadmill, with its harness: without the straps the runner would simply
-    // push off and float away.
-    into(interior, 'interior', 'interior.treadmill', softBox(T, .54, .07, .36, .04), 'dark',
-      { name: 'Treadmill belt', pos: [1.28, -.58, .16], roughness: .8 });
-    into(interior, 'interior', 'interior.treadmill', box(.54, .05, .04), 'steel',
-      { name: 'Treadmill rail', pos: [1.28, .02, .34], roughness: .4, metalness: .5 });
-    for (const s of [1, -1]) {
-      into(interior, 'interior', 'interior.treadmill', box(.05, .60, .05), 'steel',
-        { name: 'Treadmill post', pos: [1.28 + s * .24, -.30, .34], roughness: .4, metalness: .5 });
-      into(interior, 'interior', 'interior.treadmill', box(.05, .05, .46), 'blue',
-        { name: 'Harness strap', pos: [1.28 + s * .12, .18, .12], rot: [.55, 0, 0], roughness: .75 });
-    }
-    // The plant box: green lettuce under purple lamps. Leaves absorb mostly red
-    // and blue, so the lamp that feeds them looks violet to us.
-    into(interior, 'interior', 'interior.plants', softBox(T, .62, .34, .44, .05), 'dark',
-      { name: 'Plant box', pos: [-1.02, -.60, .30], roughness: .7 });
-    into(interior, 'interior', 'interior.plants', box(.58, .03, .40), 'floorDark',
-      { name: 'Soil tray', pos: [-1.02, -.44, .30], roughness: .85 });
-    for (let i = 0; i < 6; i++) {
-      const s = new T.Mesh(sph(.085, 10), mat('greenLite', .8));
-      s.name = 'Lettuce plant';
-      s.userData = { region: 'interior', assemblyId: 'interior', detail: 'interior.plants' };
-      s.scale.set(1, .8, 1);
-      s.position.set(-1.22 + (i % 3) * .20, -.36 + (i > 2 ? .02 : 0), .16 + Math.floor(i / 3) * .18);
-      s.castShadow = true;
-      interior.details['interior.plants'].add(s);
-    }
-    for (let i = 0; i < 4; i++) {
-      into(interior, 'interior', 'interior.plants', box(.10, .02, .04), 'purple',
-        { name: 'Grow lamp', pos: [-1.22 + i * .14, -.22, .30], castShadow: false, roughness: .4 });
-    }
-    into(interior, 'ghost', null, box(3.40, RM * 1.7, RM * 1.7), 'rack', { pos: [.55, 0, 0] });
-  }
-
   /* ---------- 10. radiator: the pale panels that throw the heat away ---------- */
   const radiator = assembly('radiator', 'radiator', [.20, RAD_Y, 0], 2.2,
     [-1.20, .52], ['radiator.panel', 'radiator.loop']);
@@ -902,11 +820,7 @@ window.StationV3 = { create(T) {
     a.group.userData.optional = true;
     a.group.userData.referenceNote = 'Teaching extension absent from canonical overview';
   }
-  // Keep all cabin lessons inside the longer forward barrel after removing the
-  // invented aft extension. This remaps positive-X cabin furniture inward.
-  for (const a of [interior]) a.group.traverse(o => {
-    if (o.isMesh && o.position.x > .45) o.position.x -= 1.70;
-  });
+  if(window.StationReferenceDetails) window.StationReferenceDetails.enrich(T,{root,assemblies});
   arm.update({ mechanism: false, level: 0 });
 
   /* ---------- frame update + the numbers the studio and QA both read ---------- */

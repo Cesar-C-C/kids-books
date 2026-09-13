@@ -147,10 +147,10 @@ window.STATION_DETAILS = [
     principle: '飞船最后几米几乎是贴着飞过来的，靠人眼判断距离很不可靠，所以要用灯光和靶标帮助对准。'
   },
   {
-    id: 'docking.target', region: 'docking', name: 'Target cross', zhName: '瞄准十字',
-    en: 'A white cross marks the exact centre the pilot aims at.', zh: '白色的十字标出正中心，飞船就朝着它飞。',
-    tip: '找到对接环正中间那个十字。',
-    principle: '十字的中心就是两根轴线的交点。飞船的摄像机盯住十字，自动把姿态调到和它重合，再推上去。'
+    id: 'docking.target', region: 'docking', name: 'Concentric target', zhName: '同心环靶标',
+    en: 'Concentric rings mark the centre of this illustrated docking port.', zh: '同心圆环标出图中对接口的中心。',
+    tip: '找到对接环正中间的小圆环。',
+    principle: '同心环帮助理解轴线对齐；真实对接系统还需要传感器测量相对位置、距离与速度。'
   },
   /* ---- cupola ---- */
   {
@@ -235,3 +235,49 @@ window.STATION_DETAILS = [
     principle: '水冷比风冷效率高得多，而且太空里也没有风。液冷回路把设备的热量集中起来，再统一送到散热板扔掉。'
   }
 ];
+
+window.STATION_DETAILS.push(...[
+  {
+    "id": "interior.crystals",
+    "region": "interior",
+    "name": "Crystal chamber",
+    "zhName": "晶体实验箱",
+    "en": "A sealed transparent chamber holds faceted crystals. The clear walls let the crew observe growth while keeping the samples contained.",
+    "zh": "透明密封箱便于观察晶体，箱盖和卡扣把样品固定在里面。",
+    "tip": "观察晶体的平面、棱边，以及箱盖周围的密封扣。",
+    "principle": "这是依据绘本实验页补建的教学模型，展示观察与样品约束；晶体颜色和数量不是实验结果数据。"
+  },
+  {
+    "id": "interior.samples",
+    "region": "interior",
+    "name": "Sample vials",
+    "zhName": "样品瓶与仪表",
+    "en": "Three capped vials sit in retaining rings above the instrument panel. Restraints keep samples from floating away.",
+    "zh": "三只带盖样品瓶固定在仪表上方的卡环中，避免漂走。",
+    "tip": "从侧面看透明瓶壁、内部样品和固定卡环。",
+    "principle": "瓶盖负责封闭，卡环负责机械固定。仪表上的颜色用来区分样品，属于教学示意。"
+  },
+  {
+    "id": "interior.services",
+    "region": "interior",
+    "name": "Cabin services",
+    "zhName": "舱内管线与地板",
+    "en": "Clipped service lines follow the cabin wall. Removable floor panels give access for inspection and maintenance.",
+    "zh": "管线沿舱壁固定，可拆地板为检查和维护留出入口。",
+    "tip": "沿红蓝管线寻找固定夹，再看脚下分开的地板块。",
+    "principle": "管线夹限制相对移动，并使线路路径便于追踪。这里的红蓝色用于帮助分辨线路，不代表真实飞行器的统一标准。"
+  }
+]);
+
+// Book-specific descriptions must not imply that this illustrated station is ISS.
+const stationCorrections={
+ 'node.ring':{name:'Node collar',zhName:'节点接环',en:'A reinforced collar joins the rounded node to a cabin. Bolts and seals have different jobs: holding the joint and containing the air.',tip:'找出连接圆球和圆筒的接环。',principle:'接环传递连接处的载荷，密封件限制气体泄漏。不同真实飞行器的接口未必兼容；图中结构是绘本教学示意。'},
+ 'node.light':{principle:'低地球轨道上的空间站反复经过日照区和阴影区。人工照明帮助安排工作和休息，不能把图中的灯数当成真实舱段配置。'},
+ 'truss.cable':{principle:'电缆把电能送到设备。电阻会产生热，真空中不能依靠空气对流散热，需要通过传导和辐射把热量送走。'},
+ 'truss.joint':{principle:'分段桁架可以在轨连接。实际接口需要满足机械、电气和任务要求，不能假设所有接头通用。'},
+ 'windows.inner':{en:'This teaching model shows two separate panes. Real spacecraft use window stacks designed for pressure loads and environmental protection.',zh:'模型用两片分开的玻璃说明层次；真实飞行器会按压力与环境要求设计窗体。',principle:'这里用双层玻璃帮助观察窗框和玻璃的关系，不代表所有真实舷窗都只有两层，也不代表玻璃可以在轨随意更换。'},
+ 'windows.frame':{principle:'舱内外压力差作用在玻璃面积上，窗框需要把载荷传给舱体。这里展示的是受力关系，没有使用工程尺寸或载荷数据。'},
+ 'modules.port':{principle:'窗体需要同时处理压力载荷、密封与环境防护。绘本只给出外观；本模型的玻璃层次属于教学补充。'},
+ 'modules.mmu':{principle:'推力器向外喷出物质，站体受到反向作用。图中小喷口用于讲解姿态调整，不代表真实空间站持续使用同一种姿态控制方式。'}
+};
+for(const d of window.STATION_DETAILS)if(stationCorrections[d.id])Object.assign(d,stationCorrections[d.id]);

@@ -390,3 +390,59 @@ window.DOUBLEDECKER_DETAILS = [
     "principle": "转向和颠簸时车轮会摆，轮罩必须比轮胎大一圈。"
   }
 ];
+
+window.DOUBLEDECKER_DETAILS.push({id:"body.taillights",region:"body",name:"Rear lights",zhName:"车尾灯",en:"Red tail and brake lights help drivers behind see the bus. Amber indicators show a turn, and white reversing lights show that the bus is backing up.",zh:"红色尾灯和刹车灯让后车看清巴士，琥珀色灯提示转向，白色倒车灯提示车辆正在后退。",tip:"转到车尾，找出左右两组不同颜色的灯。",principle:"这里用三种颜色区分灯具用途；模型显示的是灯具结构，未模拟制动或倒车信号。"});
+
+// Principles: https://www.energy.gov/cmei/vehicles/articles/internal-combustion-engine-basics
+window.DOUBLEDECKER_DETAILS.push(...[
+  {
+    "id": "engine.pistons",
+    "region": "engine",
+    "name": "Cylinders and pistons",
+    "zhName": "气缸与活塞",
+    "en": "Four cutaway cylinders reveal pistons and sealing rings. Expanding gas pushes each piston downward. The cylinder count and cutaway are teaching choices, not a specification of this bus.",
+    "zh": "四个剖开的气缸展示活塞和密封环。膨胀气体推动活塞向下。气缸数量和剖切形式用于教学，不代表这辆巴士的实际型号。",
+    "tip": "找出活塞顶部的两道环，再沿气缸向下找连杆。",
+    "principle": "四冲程依次是进气、压缩、做功和排气；这里展示静态结构，不模拟燃烧时序。"
+  },
+  {
+    "id": "engine.crank",
+    "region": "engine",
+    "name": "Connecting rods and crankshaft",
+    "zhName": "连杆、曲轴与飞轮",
+    "en": "Connecting rods join pistons to offset crank pins. This linkage turns straight piston travel into shaft rotation. The flywheel helps smooth the changing torque.",
+    "zh": "连杆把活塞连接到偏心曲柄销，将往复运动转化为轴的旋转；飞轮帮助平稳输出。",
+    "tip": "找到直轴和偏心销，比较它们的位置。",
+    "principle": "连杆两端需要转动连接，才能随着曲柄转动而改变角度。图中是静态连接示意。"
+  },
+  {
+    "id": "engine.injectors",
+    "region": "engine",
+    "name": "Fuel rail and injectors",
+    "zhName": "燃油轨与喷油器",
+    "en": "The rail supplies fuel to four injectors. Each nozzle meters fuel into hot compressed air near the end of compression; diesel combustion does not need a spark plug.",
+    "zh": "燃油轨向四个喷油器供油。喷嘴在压缩末期向高温空气中定量喷油，柴油燃烧不依靠火花塞。",
+    "tip": "顺着上面的横向燃油轨找到四个向下的喷嘴。",
+    "principle": "喷油量和时刻影响燃烧；本模型不显示高压喷雾。"
+  },
+  {
+    "id": "engine.valves",
+    "region": "engine",
+    "name": "Intake and exhaust valves",
+    "zhName": "进排气门与回位弹簧",
+    "en": "Intake valves admit fresh air; exhaust valves let spent gas leave. Springs help close the valves. The camshaft and timing drive that control them are omitted from this simplified view.",
+    "zh": "进气门让空气进入，排气门让废气排出，弹簧帮助气门关闭。控制气门的凸轮轴和正时传动在此简图中省略。",
+    "tip": "比较青色进气门和红色排气门，找到上方的弹簧圈。",
+    "principle": "压缩和做功时气门通常关闭以保持密封；颜色只用于识别。"
+  },
+  {
+    "id": "engine.sump",
+    "region": "engine",
+    "name": "Oil pan and drain plug",
+    "zhName": "油底壳与放油螺塞",
+    "en": "The oil pan collects returning lubricating oil below the crankshaft. The drain plug is removed during an oil change. The pump, filter and internal oil passages are not shown.",
+    "zh": "油底壳在曲轴下方收集回流润滑油。换机油时可拆下放油螺塞。油泵、滤清器和内部油道未画出。",
+    "tip": "从上方看浅盘，再找到底部的放油螺塞。",
+    "principle": "润滑油减少摩擦并帮助带走热量；它与旁边油箱中的柴油用途不同。"
+  }
+]);

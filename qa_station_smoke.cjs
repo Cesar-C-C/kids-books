@@ -1,0 +1,19 @@
+// Real browser regression for the five picture-book exhibits.
+const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict');
+const root=__dirname,out=path.join(root,'.qa-labs');fs.mkdirSync(out,{recursive:true});
+const server=http.createServer((req,res)=>{let f=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname).replace(/^\/kids-books/,''));if(!f.startsWith(root+path.sep)){res.writeHead(403);return res.end();}if(fs.existsSync(f)&&fs.statSync(f).isDirectory())f=path.join(f,'index.html');if(!fs.existsSync(f)){res.writeHead(404);return res.end();}res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.webp':'image/webp','.png':'image/png'})[path.extname(f)]||'application/octet-stream');fs.createReadStream(f).pipe(res);});
+
+(async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({channel:'chrome',headless:true,args:['--enable-webgl','--use-angle=swiftshader','--enable-unsafe-swiftshader']});try{
+ const page=await browser.newPage({viewport:{width:1360,height:900},reducedMotion:'reduce'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(`http://127.0.0.1:${server.address().port}/labs/station/`);await page.waitForFunction(()=>window.stationLab?.snapshot().renderer.calls>0);
+ const frame=()=>page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+ const click=async s=>{await page.locator(s).evaluate(e=>e.click());await frame();};
+ const model=await page.evaluate(()=>stationLab.snapshot().modelId);
+ await page.screenshot({path:path.join(out,'station-desktop-final.png')});
+ for(const id of['solar','arm']){await click(`[data-part="${id}"]`);await click('#open-part');await page.locator('#mechanism').evaluate(e=>{e.value=75;e.dispatchEvent(new Event('input',{bubbles:true}));});await frame();assert.equal(await page.evaluate(()=>stationLab.snapshot().level),.75);await page.locator('#viewport').screenshot({path:path.join(out,`station-${id}-motion.png`)});await click('#home-view');}
+ await click('[data-part="interior"]');await click('#open-part');await click('[data-detail="interior.plants"]');const before=await page.evaluate(()=>stationLab.snapshot());await click('#zoom-in');assert.equal(await page.evaluate(()=>stationLab.snapshot().changedOpacity),0);assert.equal(await page.evaluate(()=>stationLab.snapshot().modelId),model);await click('#open-part');assert.equal(await page.evaluate(()=>stationLab.snapshot().opening),null);assert.ok(await page.locator('#part-directory').evaluate(e=>e.open));
+ await page.setViewportSize({width:390,height:844});await click('#home-view');await page.screenshot({path:path.join(out,'station-mobile-final.png'),fullPage:true});
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no mobile horizontal overflow');
+ await click('[data-part="interior"]');await click('#open-part');await click('[data-detail="interior.crystals"]');await page.locator('#viewport').scrollIntoViewIfNeeded();await page.locator('#viewport').screenshot({path:path.join(out,'station-mobile-crystals.png')});
+ const overlap=await page.evaluate(()=>{const a=document.querySelector('#viewport').getBoundingClientRect(),b=document.querySelector('#operation-panel').getBoundingClientRect();return Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));});assert.equal(overlap,0,'controls do not cover model');assert.deepEqual(errors,[]);console.log('PASS station desktop/mobile, motion controls, open/close, model identity, opaque zoom, persistent directory, non-overlapping controls');
+ }finally{await browser.close();server.close();}})().catch(e=>{console.error(e);server.close();process.exitCode=1;});

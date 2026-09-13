@@ -10,13 +10,13 @@
  const speech = LabSpeech.create($('speak'), $('speech-status'));
  const notes = {
   modules: '每个舱段都是一只金属罐子。舱内充着一个大气压的空气，圆形舱壁处处均匀受力，所以又轻又结实。一圈圈加强肋像木桶外面的箍，防止薄薄的舱壁向外鼓出去。',
-  node: '节点是全站的门厅：圆球上开着四扇舱门，通向各个舱段。每扇门都有密封圈，关紧后两边的空气彻底分开，万一某一节漏气，把门一关就能保住其它舱。',
+  node: '节点是全站的门厅：前舱与两个横舱在这里汇合。每扇门都有密封圈，关紧后两边的空气彻底分开，万一某一节漏气，把门一关就能保住其它舱。',
   solar: '太阳电池片被光一照，里面的电子就被推着走，形成电流。单块电池电压很小，所以要串联很多片。整片翅膀还能绕着龙骨转动，一直正对太阳。',
   truss: '桁架不是实心梁，而是用细杆拼成的三角形格子。三角形最不容易变形，所以同样重量的桁架比实心梁结实得多。它把太阳翼撑得离舱段很远，舱壁就不会被挡住光。',
   arm: '机械臂的关节比人的胳膊还多。肩部负责大范围转动，肘部负责弯折，腕部负责最后的对准，最后由抓手扣住飞船上的专用把手。抓住以后两边刚性连成一体，才能慢慢把飞船挪到对接口。',
   docking: '对接时两个环先轻轻碰上，再由卡爪把两边拉紧，最后密封圈被压扁，接缝才不漏气。两边压力相等、空气混好以后，里面那扇门才能打开。',
   cupola: '穹顶的七扇窗各自独立承压，中间用金属框隔开。航天员在这里看着窗外真实的机械臂操作，所见和所动一一对应，所以抓取才不容易出错。',
-  windows: '舷窗要顶住舱内空气向外推的力。直径半米的窗户上受力有好几吨，所以窗框必须又宽又厚。玻璃分两层：内层承压，外层挨刮蹭，刮花了可以单独更换。',
+  windows: '舷窗要顶住舱内空气向外推的力。压力差作用在玻璃面积上，所以窗框需要把载荷传给舱体。模型以双层玻璃说明层次；真实舷窗的层数与材料由任务要求决定。',
   interior: '失重时人躺着和站着没有区别，睡着了也不会翻下来，但会慢慢飘走，所以要钻进睡袋系在墙上。机柜抽屉有卡扣，跑步机有背带，连吃一顿饭都要把食物袋粘在桌上。',
   radiator: '太空里没有空气可以带走热量，只能靠向外辐射。散热板做得又大又白，就是为了把热尽快射出去。冷却液先把机柜的热量集中起来，再统一送到板子上扔掉。'
  };
@@ -26,7 +26,7 @@
   solar: '拖动滑杆，看两片翅膀怎样一起转动去追太阳。',
   truss: '隔着桁架的空格往里看，它是一条实心梁还是一片格子？',
   arm: '拖动滑杆，看机械臂怎样弯起来伸出去。',
-  docking: '转到舱段最前端，找找那个带一圈卡爪的圆环和中间的十字。',
+  docking: '转到舱段最前端，找找那个带一圈卡爪的圆环和中央圆形靶标。',
   cupola: '转到舱段下方，找找那圈朝下开的窗户。',
   windows: '抬头看看舱段顶上的大窗户，外面那圈金色的框有多厚？',
   interior: '走进舱内，找一找睡袋、餐桌、跑步机，还有种菜的小盒子。',
@@ -34,11 +34,11 @@
  };
  const helps = {
   modules: '舱段位置固定；拆解后能看到一节节圆筒分开排列。',
-  node: '节点在舱段正中；放大后能看到球形外壳和四周的舱门。',
+  node: '节点在舱段交汇处；放大后能看到球形外壳、接环和舱门。',
   solar: '拖动动作滑杆：两片太阳翼绕着龙骨向相反方向转动，就像在追太阳。',
   truss: '桁架横贯站体；放大后能看清一根根细杆拼成的三角形格子。',
   arm: '拖动动作滑杆：肩、肘、腕依次转动，机械臂弯起来再放回去。',
-  docking: '对接口在舱段最前端；放大后能看清对接环、卡爪和瞄准十字。',
+  docking: '对接口在舱段最前端；放大后能看清对接环、卡爪和同心环靶标。',
   cupola: '穹顶朝下装在节点上；放大后能看清七扇窗和外面的防护盖。',
   windows: '舷窗固定在舱壁上；放大后能看清厚窗框、两层玻璃和遮光帘。',
   interior: '生活区在舱内；打开剖面能看到机柜、睡袋、餐桌和种植箱。',
@@ -66,10 +66,10 @@ const offsets = {
 // The camera looks at the middle of the station: the barrels run along X, the
 // wings reach out to +-4 m on Z and the radiators up to y = +2.2, so the visual
 // centre sits a little above the barrel axis and slightly aft of the node.
-const look0 = new T.Vector3(-.10, .10, 0);
+const look0 = new T.Vector3(-1.25, .10, -.35);
  let renderer, scene, camera, station, assemblies = [], active = null, detail = null, mode='outside', playing = false, slow = true, simTime = 0, mechanism = 0, autoRotate = false;
 let yaw = -.72, pitch = .62, distance = 20, overviewDistance = 20, explosion = 0, targetExplosion = 0, reveal = 0, near = 0;
-const look = new T.Vector3(-.10, .10, 0), target = { yaw, pitch, distance, look: look.clone() };
+const look = new T.Vector3(-1.25, .10, -.35), target = { yaw, pitch, distance, look: look.clone() };
  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches, pickables = [], surfaces = [], materialOriginal = new Map(), materialTransparency = new Map();
  let activeFit = 6, clipping = new T.Plane(), lastFrame = 0;
 
@@ -77,11 +77,11 @@ const look = new T.Vector3(-.10, .10, 0), target = { yaw, pitch, distance, look:
  const captureView=()=>({yaw:target.yaw,pitch:target.pitch,distance:target.distance,look:target.look.clone()});
  function restoreView(v){if(!v)return;target.yaw=v.yaw;target.pitch=v.pitch;target.distance=v.distance;target.look.copy(v.look);autoRotate=false;}
  function remember(){viewHistory.push(captureView());if(viewHistory.length>20)viewHistory.shift();}
- function closeExhibit(immediate=false){exhibit.close(immediate);mode='outside';playing=false;mechanism=0;detail=null;}
+ function closeExhibit(immediate=false){if(active)active.inspectionDetail=null;exhibit.close(immediate);mode='outside';playing=false;mechanism=0;detail=null;}
  function toggleOpening(){
   if(exhibit.opened){closeExhibit();restoreView(openingView);openingView=null;}
   else if(active){openingView=captureView();targetExplosion=0;explosion=0;exhibit.open(active);mode='inside';remember();focus();
-   if(['cabin','upper-cabin','lower-cabin'].includes(exhibit.opened.key)){target.pitch=.22;target.yaw=-.25;target.distance=Math.max(target.distance,fit(3.4));}
+
   }renderLesson();
  }
 
@@ -92,28 +92,16 @@ const look = new T.Vector3(-.10, .10, 0), target = { yaw, pitch, distance, look:
  function worldCenter(a) { return a.group.localToWorld(a.center.clone()); }
  function nearestAssembly(region) { return sameRegion(region).sort((a, b) => worldCenter(a).distanceToSquared(camera.position) - worldCenter(b).distanceToSquared(camera.position))[0]; }
  function fit(radius) { return Math.max(1.6, radius / Math.sin(T.MathUtils.degToRad(24)) * 1.06 * Math.max(1, 1.05 / camera.aspect)); }
- function detailObjects() { return active && detail ? [].concat(active.details[detail] || []) : []; }
+ function detailObjects() { return active && detail ? (active.detailMeshes[detail] || []) : []; }
  function detailCenter() {
   const groups = detailObjects(); if (!groups.length) return worldCenter(active);
   const box = new T.Box3();
-  groups.forEach(g => g.children.forEach(c => box.expandByObject(c)));
+  groups.forEach(g => box.expandByObject(g));
   return box.isEmpty() ? worldCenter(active) : box.getCenter(new T.Vector3());
  }
- function focus() {
-  if (!active || !camera) return;
-  const point = detail ? detailCenter() : worldCenter(active); target.look.copy(point);
-  let r = active.radius;
-  if (detail) {
-   const b = new T.Box3();
-   detailObjects().forEach(g => g.children.forEach(c => b.expandByObject(c)));
-   r = b.isEmpty() ? .8 : b.getBoundingSphere(new T.Sphere()).radius;
-   r = Math.min(Math.max(r, minRadius[active.region] || .7), clampRadius[active.region] || r);
-  }
-  target.distance = Math.max(fit(r), 2.0); activeFit = fit(active.radius); autoRotate = false;
-  const a = angles[active.region] || [-.6, .3]; target.yaw = a[0]; target.pitch = a[1];
- }
- function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}exhibit.select(a);if(active!==a){playing=false;mechanism=0;}active=a;detail=null;mode=exhibit.opened?'inside':'outside';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
- function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(!exhibit.opened){renderLesson();return;}detail=id;journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
+ function focus(){if(!active||!camera)return;const v=StationInspection.focus(T,active,detail);target.look.copy(v.point);target.distance=fit(v.radius*1.12);target.yaw=v.yaw;target.pitch=v.pitch;autoRotate=false;}
+ function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}a.inspectionDetail=null;exhibit.select(a);if(active!==a){playing=false;mechanism=0;}active=a;detail=null;mode=exhibit.opened?'inside':'outside';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
+ function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(!exhibit.opened){renderLesson();return;}detail=id;active.inspectionDetail=id;exhibit.select(active);if(!exhibit.opened)exhibit.open(active);journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
  function home() {remember();closeExhibit(); active = null; detail = null; mode='outside'; playing = false; autoRotate = false; targetExplosion = 0; target.look.copy(look0); target.yaw = -.72; target.pitch = .62; target.distance = overviewDistance; renderLesson(); }
  function back(){restoreView(viewHistory.pop());renderLesson();}
  function renderLesson() {
@@ -139,7 +127,7 @@ const look = new T.Vector3(-.10, .10, 0), target = { yaw, pitch, distance, look:
  lessons.forEach((p, i) => { const b = document.createElement('button'); b.className = 'region-button'; b.dataset.part = p.id; b.setAttribute('aria-pressed', false); b.innerHTML = '<i>' + String(i + 1).padStart(2, '0') + '</i><span><strong>' + p.name + '</strong><small>' + p.zhName + '</small></span>'; b.onclick = () => { if (camera) selectAssembly(nearestAssembly(p.id)); else { $('part-name').textContent = p.name; $('part-en').textContent = p.en; $('part-zh').textContent = p.zh; } }; $('region-list').append(b); });
  $('speak').onclick = () => speech.say($('part-name').textContent + '. ' + $('part-en').textContent, true);
  $('language').onclick = () => { const only = document.body.classList.toggle('english-only'); $('language').textContent = only ? 'English only' : '中英双语'; $('language').setAttribute('aria-pressed', !only); };
- $('book-view').onclick = $('whole-station').onclick = $('home-view').onclick = home; $('back-view').onclick=back;$('back-part').onclick=()=>{detail=null;renderLesson();};$('focus-part').onclick=()=>{remember();focus();renderLesson();};$('open-part').onclick=toggleOpening;
+ $('book-view').onclick = $('whole-station').onclick = $('home-view').onclick = home; $('back-view').onclick=back;$('back-part').onclick=()=>{detail=null;active.inspectionDetail=null;exhibit.select(active);if(!exhibit.opened)exhibit.open(active);focus();renderLesson();};$('focus-part').onclick=()=>{remember();focus();renderLesson();};$('open-part').onclick=toggleOpening;
  $('zoom-in').onclick = () => { target.distance = Math.max(1.4, target.distance * .8); }; $('zoom-out').onclick = () => { target.distance = Math.min(80, target.distance * 1.25); };
  $('side-view').onclick = () => { target.pitch = .04; target.yaw = 0; autoRotate = false; updateButtons(); }; $('top-view').onclick = () => { target.pitch = 1.50; target.yaw = 0; autoRotate = false; updateButtons(); }; $('auto-rotate').onclick = () => { autoRotate = !autoRotate; updateButtons(); };
  $('explode-button').onclick = () => {closeExhibit(true); targetExplosion = targetExplosion ? 0 : 1; detail = null; active = null; target.look.copy(look0); target.distance = overviewDistance * (targetExplosion ? 1.28 : 1); playing = false; record(); renderLesson(); };
@@ -153,12 +141,15 @@ const look = new T.Vector3(-.10, .10, 0), target = { yaw, pitch, distance, look:
   // Transparent canvas, like the shared labs: .stage paints #edf2e7 and the
   // HELLO, / YOUR STATION captions sit behind the model, not on top of it.
   scene = new T.Scene(); camera = new T.PerspectiveCamera(42, 1, .02, 300);
-  renderer = new T.WebGLRenderer({ antialias: true, alpha: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1; renderer.localClippingEnabled = true; renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+  renderer = new T.WebGLRenderer({ antialias: true, alpha: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = .73; renderer.localClippingEnabled = true; renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
   const canvas = renderer.domElement; $('viewport').prepend(canvas); canvas.setAttribute('aria-hidden', 'true'); canvas.onwebglcontextlost = e => { e.preventDefault(); $('load-error').hidden = false; };
-  scene.add(new T.HemisphereLight(0xf4f8ff, 0x9bafbd, 2.4)); const key = new T.DirectionalLight(0xfff7e9, 3.0); key.position.set(-9, 15, 12); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); Object.assign(key.shadow.camera, { left: -16, right: 16, top: 14, bottom: -14, near: .1, far: 70 }); key.shadow.normalBias = .025; key.shadow.bias = -.0003; scene.add(key); const fill = new T.DirectionalLight(0xd6edff, 1.5); fill.position.set(7, 4, -9); scene.add(fill);
+  scene.add(new T.HemisphereLight(0xf4f8ff, 0x9bafbd, 1.45)); const key = new T.DirectionalLight(0xfff7e9, 2.0); key.position.set(-9, 15, 12); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); Object.assign(key.shadow.camera, { left: -16, right: 16, top: 14, bottom: -14, near: .1, far: 70 }); key.shadow.normalBias = .025; key.shadow.bias = -.0003; scene.add(key); const fill = new T.DirectionalLight(0xd6edff, .9); fill.position.set(7, 4, -9); scene.add(fill);
+  const envScene=new T.Scene();envScene.background=new T.Color(0x7696b1);
+  for(const [x,y,z,w,h]of[[-6,5,2,5,8],[5,6,-3,3,7],[0,9,0,12,3],[0,3,8,1.4,8],[2,3,-8,1.3,8],[-8,2,-2,2,7]]){const card=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({color:0xffffff,side:T.DoubleSide}));card.position.set(x,y,z);card.lookAt(0,0,0);envScene.add(card);}
+  const pmrem=new T.PMREMGenerator(renderer);const envTarget=pmrem.fromScene(envScene,.06);scene.environment=envTarget.texture;pmrem.dispose();envScene.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});
   station = StationV3.create(T); assemblies = station.assemblies; scene.add(station.root);
   for (const a of assemblies) {
-   a.group.userData.assemblyId = a.id; a.group.userData.region = a.region; a.base = a.group.position.clone();
+   a.inspectionPlan=p=>StationInspection.plan(p,a);a.group.userData.assemblyId = a.id; a.group.userData.region = a.region; a.base = a.group.position.clone();
    a.offset = new T.Vector3(...(offsets[a.id] || [0, 0, 0]));
    for (const [layer, root] of [['exterior', a.exterior], ['interior', a.interior], ['ghost', a.ghost]]) root.traverse(o => {
     if (!o.material) return;
@@ -183,10 +174,10 @@ const look = new T.Vector3(-.10, .10, 0), target = { yaw, pitch, distance, look:
    // along X (nose to tail, ~5.7 m); its height runs from the cupola below to the
    // radiators above. Whichever of the two axes needs the most room at this
    // aspect wins, so the station fills the frame instead of floating in it.
-   const SPAN_Z = 10.4, SPAN_Y = 6.4;
+   const SPAN_Z = 8.1, SPAN_Y = 4.4;
    const bySpan = SPAN_Z / (2 * Math.tan(T.MathUtils.degToRad(24)) * Math.max(.5, camera.aspect));
    const byHeight = SPAN_Y / (2 * Math.tan(T.MathUtils.degToRad(24)));
-   overviewDistance = Math.max(14, Math.max(bySpan, byHeight)*1.25);
+   overviewDistance = Math.max(12.5, Math.max(bySpan, byHeight)*1.25);
    if (!active && !targetExplosion) target.distance = overviewDistance;
   }
   new ResizeObserver(resize).observe($('viewport')); resize(); distance = target.distance;
@@ -202,10 +193,22 @@ const look = new T.Vector3(-.10, .10, 0), target = { yaw, pitch, distance, look:
   canvas.ondblclick = e => { if (drag < 6) pick(hit(e.clientX, e.clientY), true); };
   canvas.addEventListener('wheel', e => { e.preventDefault();  target.distance = clamp(target.distance * Math.exp(e.deltaY * .0012), 1.4, 80); }, { passive: false });
   $('viewport').onkeydown = e => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', 'Escape'].includes(e.key)) { e.preventDefault(); if (e.key === 'Escape') back(); if (e.key === 'ArrowLeft') target.yaw -= .16; if (e.key === 'ArrowRight') target.yaw += .16; if (e.key === 'ArrowUp') target.pitch = clamp(target.pitch + .12, -1.45, 1.50); if (e.key === 'ArrowDown') target.pitch = clamp(target.pitch - .12, -1.45, 1.50); if (e.key === '+' || e.key === '=') target.distance = Math.max(1.4, target.distance * .8); if (e.key === '-') target.distance = Math.min(80, target.distance * 1.25); } };
-  window.stationLab = {
+  function inspectionReport(){
+   if(!active||!detail)return null;
+   const v=StationInspection.focus(T,active,detail,detailObjects()),points=[],meshes=[];
+   detailObjects().forEach(g=>g.traverse(o=>{if(o.isMesh)meshes.push(o);}));
+   meshes.sort((a,b)=>new T.Box3().setFromObject(a).getCenter(new T.Vector3()).distanceToSquared(v.point)-new T.Box3().setFromObject(b).getCenter(new T.Vector3()).distanceToSquared(v.point));
+   for(const o of meshes.slice(0,8)){const p=o.geometry.attributes.position;for(let i=0;i<p.count;i+=Math.max(1,Math.floor(p.count/12))){const w=o.localToWorld(new T.Vector3().fromBufferAttribute(p,i));if(w.distanceTo(v.point)<v.radius*1.2)points.push(w);}}
+   for(const o of meshes.slice(0,8)){const b=new T.Box3().setFromObject(o),size=b.getSize(new T.Vector3());const axis=size.x>size.y&&size.x>size.z?'x':size.y>size.z?'y':'z';for(const delta of[-.3,0,.3]){const w=v.point.clone();w[axis]+=delta*v.radius;b.clampPoint(w,w);if(w.distanceTo(v.point)<v.radius*1.2)points.push(w);}}
+   const right=new T.Vector3(1,0,0).applyQuaternion(camera.quaternion),up=new T.Vector3(0,1,0).applyQuaternion(camera.quaternion);for(const x of[-.6,-.3,0,.3,.6])for(const y of[-.6,-.3,0,.3,.6])points.push(v.point.clone().addScaledVector(right,x*v.radius).addScaledVector(up,y*v.radius));
+   const b=canvas.getBoundingClientRect();let onScreen=0,visible=0;const blockers={};
+   for(const w of points){const p=w.clone().project(camera);if(Math.abs(p.x)>.95||Math.abs(p.y)>.95||p.z>1)continue;onScreen++;const h=hit(b.left+(p.x*.5+.5)*b.width,b.top+(-p.y*.5+.5)*b.height);if(h?.object.userData.pickDetail===detail)visible++;else{const key=h?.object.userData.pickDetail||h?.object.userData.pickAssembly||'empty';blockers[key]=(blockers[key]||0)+1;}}
+   return {detail,points:points.length,onScreen,visible,blockers};
+  }
+  window.stationLab = {inspectionReport,
    setView: (y, p, d, x = 0) => { autoRotate = false; active = null; detail = null; mode='outside'; targetExplosion = 0; renderLesson(); target.yaw = y; target.pitch = p; target.distance = d; target.look.set(x, .10, 0); },
    select: id => selectAssembly(nearestAssembly(id)), focusDetail: id => selectDetail(id),
-   snapshot: () => ({displayVersion:1,...exhibit.snapshot(),history:viewHistory.length, generation: 4, changedOpacity: surfaces.filter(s => s.materials.some(m => Math.abs(m.opacity - materialOriginal.get(m).opacity) > 1e-6)).length, modelId: station.root.uuid, selected: active?.region || null, assembly: active?.id || null, detail, near, reveal, mode, playing, simulationTime: simTime, level: mechanism, explosion, meshCount: pickables.length, geometry: station.counts, visited: journal.read().found, camera: { yaw, pitch, distance, target: look.toArray() }, assemblies: assemblies.map(a => ({ id: a.id, region: a.region, exterior: a.exterior.visible, interior: a.interior.visible, ghost:a.ghost.visible,exteriorPosition:a.exterior.position.toArray(),position:a.group.position.toArray() })), renderer: renderer.info.render }),
+   snapshot: () => ({displayVersion:1,...exhibit.snapshot(),history:viewHistory.length, generation: 5, changedOpacity: surfaces.filter(s => s.materials.some(m => Math.abs(m.opacity - materialOriginal.get(m).opacity) > 1e-6)).length, modelId: station.root.uuid, selected: active?.region || null, assembly: active?.id || null, detail, near, reveal, mode, playing, simulationTime: simTime, level: mechanism, explosion, meshCount: pickables.length, geometry: station.counts, visited: journal.read().found, camera: { yaw, pitch, distance, target: look.toArray() }, assemblies: assemblies.map(a => ({ id: a.id, region: a.region, exterior: a.exterior.visible, interior: a.interior.visible, ghost:a.ghost.visible,exteriorPosition:a.exterior.position.toArray(),position:a.group.position.toArray() })), renderer: renderer.info.render }),
    projectPart: id => { const a = assemblies.find(a => a.id === id) || nearestAssembly(id); if (!a) return null; const c = worldCenter(a).project(camera), b = canvas.getBoundingClientRect(); return { x: b.left + (c.x * .5 + .5) * b.width, y: b.top + (-c.y * .5 + .5) * b.height }; }
   };
   requestAnimationFrame(frame);
@@ -224,7 +227,7 @@ const look = new T.Vector3(-.10, .10, 0), target = { yaw, pitch, distance, look:
   for (const a of assemblies) { a.group.position.copy(a.base).addScaledVector(a.offset, explosion); if (a.update) a.update({ time: simTime, mechanism: mechanism > .001, level: mechanism, region: active?.region }); }
   exhibit.step(ease,assemblies,surfaces,materialOriginal,explosion,active);
   station.root.updateMatrixWorld(true);
-  const label = $('model-label'); label.hidden = !active || near < .2;
+  const label = $('model-label'); label.hidden = !active || !!detail || near < .2;
   if (!label.hidden) { const p = (detail ? detailCenter() : worldCenter(active)).project(camera), b = $('viewport').getBoundingClientRect(); label.textContent = data().name; label.hidden = Math.abs(p.x) > 1 || Math.abs(p.y) > 1 || p.z > 1; label.style.left = (p.x * .5 + .5) * b.width + 'px'; label.style.top = (-p.y * .5 + .5) * b.height - 20 + 'px'; }
   renderer.render(scene, camera);
  }
