@@ -12,11 +12,15 @@ window.DoubleDeckerInspection=(()=>{
  'stairs.well':[[-2.05,.18,-.70],1.12,-.2,1.15],
  'cab.wheel':[[-3.48,-.31,.58],.53,.6,.85],'cab.dash':[[-3.75,-.40,.51],.55,.9,.8],
  'cab.seat':[[-3.05,-.47,.58],.73,.05,.28],'cab.glass':[[-4.46,-.435,0],1.17,-1.6,.15],
- 'cab.mirror':[[-3.98,.66,1.42],.42,1.4,.10],
+ 'cab.mirror':[[-3.98,-.39,1.42],.42,1.4,.10],
+ 'body.taillights':[[4.36,-1.10,.82],.45,Math.PI/2,.10],
  'doors.leaf':[[-3.52,-.565,-1.30],1.44,Math.PI,.1],'doors.glass':[[-3.79,-.565,-1.31],1.12,Math.PI-.13,.10],
  'doors.step':[[-3.52,-1.13,-1.02],.71,Math.PI,.65],'doors.emergency':[[4.35,.78,0],.71,Math.PI/2,.1],
  'engine.block':[[3.20,-.55,-.18],1.08,2.7,.4],'engine.fan':[[3.80,-.62,-.18],.72,1.57,.12],
  'engine.pipes':[[3.58,-.24,.27],.73,.4,.6],'engine.tank':[[3.3,-.65,.70],.83,.55,.26],
+ 'engine.pistons':[[3.2,-.49,-.18],.64,0,.25],'engine.crank':[[3.17,-.73,-.18],.68,0,.14],
+ 'engine.injectors':[[3.2,-.20,-.18],.60,0,.35],'engine.valves':[[3.2,-.24,-.18],.60,0,.5],
+ 'engine.sump':[[3.2,-.95,-.18],.75,0,.55],
  'chassis.rail':[[0,-1.19,.62],1.7,0,-.4],'chassis.cross':[[1,-1.19,0],.94,0,-1.35],
  'chassis.axle':[[2.42,-1.49,0],1.4,0,-1.35],
  'wheels.tire':[[2.42,-1.49,1.16],.8,.16,.10],'wheels.tread':[[2.82,-1.78,1.16],.46,.95,.02],
@@ -27,6 +31,16 @@ window.DoubleDeckerInspection=(()=>{
   if(cabin||(a.region==='body'&&!d)||a.region==='engine'){
    p.move={body:[0,5,-5],roof:[0,7,-5],doors:[0,5,-5]};p.nodes=[{id:'cab',name:'cab.glass',offset:[0,5,-5]}];p.label='打开车厢覆盖件';
    if(['lower','cab','engine'].includes(a.region))p.lift.upper=[0,5,-5];
+  }
+  if(a.region==='engine'){p.label='打开发动机舱';p.lift.lower=[0,4,-5];}
+  if(['engine.pistons','engine.crank','engine.injectors','engine.valves','engine.sump'].includes(d)){
+   p.label='移开机体和缸盖，观察教学剖面';
+   for(const name of ['Engine block','Cylinder head'])p.nodes.push({id:'engine',name,offset:[0,2,-2]});
+   p.nodes.push({id:'engine',name:'engine.tank',offset:[0,0,2]});
+   p.nodes.push({id:'engine',name:'engine.pipes',offset:[0,2,-2]});
+   p.nodes.push({id:'engine',name:'engine.fan',offset:[2,0,-2]});
+   if(d==='engine.crank')p.nodes.push({id:'engine',name:'engine.pistons',offset:[0,1.2,-1.5]});
+   if(d==='engine.sump')for(const name of ['engine.pistons','engine.crank','engine.injectors','engine.valves'])p.nodes.push({id:'engine',name,offset:[0,1.7,-2]});
   }
   if(d==='engine.fan')p.nodes.push({id:'engine',name:'Radiator section',offset:[.5,1.5,-1.5]});
   if(a.region==='chassis'){for(const id of['body','roof','upper','lower','stairs','cab','doors','engine'])p.lift[id]=[0,3.5,-3.0];p.label='抬起车体查看底盘';}

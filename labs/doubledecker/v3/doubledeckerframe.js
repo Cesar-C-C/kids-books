@@ -496,9 +496,9 @@
     [1.20, .10], ['engine.block', 'engine.fan', 'engine.pipes', 'engine.tank']);
   {
     into(engine, 'exterior', 'engine.block', softBox(T, .78, .62, .78, .07), 'copper',
-      { name: 'Engine block', pos: [3.20, -.62, -.18], rot: [0, .18, 0], roughness: .5, metalness: .3 });
+      { name: 'Engine block', pos: [3.20, -.62, -.18], rot: [0, 0, 0], roughness: .5, metalness: .3 });
     into(engine, 'exterior', 'engine.block', softBox(T, .66, .16, .66, .05), 'oil',
-      { name: 'Cylinder head', pos: [3.20, -.25, -.18], rot: [0, .18, 0], roughness: .55 });
+      { name: 'Cylinder head', pos: [3.20, -.25, -.18], rot: [0, 0, 0], roughness: .55 });
     for (let i = 0; i < 4; i++) {
       into(engine, 'exterior', 'engine.block', cyl(.055, .055, .40, 12), 'alum',
         { name: 'Injector line', pos: [3.02 + i * .19, -.06, -.18], rot: [0, 0, .18], roughness: .4, metalness: .5 });
@@ -523,10 +523,10 @@
       { name: 'Fuel line', pos: [3.34, -.10, -.52], rot: [0, 0, Math.PI / 2], roughness: .4, metalness: .5 });
     // The fuel tank sits beside the engine, strapped down.
     into(engine, 'exterior', 'engine.tank', softBox(T, .86, .54, .70, .08), 'steel',
-      { name: 'Fuel tank', pos: [3.30, -.68, .70], rot: [0, .18, 0], roughness: .55, metalness: .35 });
+      { name: 'Fuel tank', pos: [3.30, -.68, .70], rot: [0, 0, 0], roughness: .55, metalness: .35 });
     for (const dx of [-.24, .24]) {
       into(engine, 'exterior', 'engine.tank', box(.06, .60, .74), 'ink',
-        { name: 'Tank strap', pos: [3.30 + dx, -.68, .70], rot: [0, .18, 0] });
+        { name: 'Tank strap', pos: [3.30 + dx, -.68, .70], rot: [0, 0, 0] });
     }
     into(engine, 'exterior', 'engine.tank', cyl(.06, .06, .12, 12), 'ink',
       { name: 'Filler cap', pos: [3.30, -.38, .70], roughness: .5 });
@@ -854,6 +854,49 @@ const floorSections=[],xs=[-4,-2.97,AXLE_F-.52,AXLE_F+.52,AXLE_R-.52,AXLE_R+.52,
     const geos=[];for(let i=0;i<48;i++)for(const z of[-.06,.06]){const a=i*Math.PI/24,g=box(.05,.017,.10);g.rotateZ(-a);g.translate(Math.sin(a)*.609,Math.cos(a)*.609,z);geos.push(g);}
     into(wheels,'exterior','wheels.tread',mergeNonIndexed(T,geos),'rubber',{name:'Tread blocks',pos:[ax,RAIL_Y-.30,side*(HALF_W-.08)]});
     into(wheels,'exterior','wheels.arch',torus(.69,.023,48,Math.PI),'ink',{name:'Wheel arch liner',pos:[ax,RAIL_Y-.30,side*(HALF_W+.04)]});
+  }
+
+  // Installed four-cylinder teaching cutaway; hidden geometry is illustrative.
+  engine.details['engine.block'].children.filter(o=>o.name==='Injector line').forEach(o=>o.removeFromParent());
+  for(const id of ['pistons','crank','injectors','valves','sump']){
+    const g=new T.Group();g.name='engine.'+id;g.userData={assemblyId:'engine',region:'engine',detail:g.name};
+    engine.exterior.add(g);engine.details[g.name]=g;engine.detailLayer[g.name]='exterior';
+  }
+  for(let i=0;i<4;i++){
+    const x=2.93+i*.18;
+    const sleeve=into(engine,'exterior','engine.pistons',cyl(.077,.077,.30,28,true,Math.PI/2,Math.PI),'steel',{name:'Cutaway cylinder liner',pos:[x,-.48,-.18]});
+    sleeve.material=sleeve.material.clone();sleeve.material.side=T.DoubleSide;
+    into(engine,'exterior','engine.pistons',cyl(.069,.069,.10,28),'alum',{name:'Piston crown',pos:[x,-.47,-.18],metalness:.65});
+    for(const y of[-.435,-.455])into(engine,'exterior','engine.pistons',torus(.070,.004,28),'dark',{name:'Piston ring',pos:[x,y,-.18],rot:[Math.PI/2,0,0]});
+    bar(engine,'engine.crank',[x,-.52,-.18],[x,-.73,-.12],.018,'copper');
+    into(engine,'exterior','engine.crank',cyl(.035,.035,.11,16),'steel',{name:'Crank pin',pos:[x,-.73,-.12],rot:[0,0,Math.PI/2]});
+    for(const dx of[-.064,.064])into(engine,'exterior','engine.crank',box(.025,.10,.08),'steel',{name:'Crank web',pos:[x+dx,-.765,-.15]});
+    into(engine,'exterior','engine.injectors',cyl(.020,.012,.18,16),'copper',{name:'Diesel injector',pos:[x,-.23,-.18]});
+    for(const side of[-1,1]){
+      into(engine,'exterior','engine.valves',cyl(.010,.010,.15,12),'steel',{name:side<0?'Intake valve stem':'Exhaust valve stem',pos:[x,-.25,-.18+side*.052]});
+      into(engine,'exterior','engine.valves',cyl(.025,.025,.014,16),side<0?'seat':'redDim',{name:'Valve head',pos:[x,-.325,-.18+side*.052]});
+      for(let r=0;r<4;r++)into(engine,'exterior','engine.valves',torus(.017,.003,16),'alum',{name:'Valve spring coil',pos:[x,-.205+r*.014,-.18+side*.052],rot:[Math.PI/2,0,0]});
+    }
+  }
+  into(engine,'exterior','engine.crank',cyl(.028,.028,.78,24),'steel',{name:'Crankshaft main axis',pos:[3.20,-.80,-.18],rot:[0,0,Math.PI/2]});
+  into(engine,'exterior','engine.crank',cyl(.13,.13,.045,32),'steel',{name:'Flywheel',pos:[2.78,-.80,-.18],rot:[0,0,Math.PI/2]});
+  into(engine,'exterior','engine.injectors',cyl(.020,.020,.64,20),'copper',{name:'Fuel rail',pos:[3.20,-.14,-.18],rot:[0,0,Math.PI/2]});
+  into(engine,'exterior','engine.sump',box(.72,.035,.62),'oil',{name:'Oil pan base',pos:[3.20,-.99,-.18]});
+  for(const z of[-.49,.13])into(engine,'exterior','engine.sump',box(.72,.10,.025),'oil',{name:'Oil pan wall',pos:[3.20,-.94,z]});
+  for(const x of[2.84,3.56])into(engine,'exterior','engine.sump',box(.025,.10,.62),'oil',{name:'Oil pan end',pos:[x,-.94,-.18]});
+  into(engine,'exterior','engine.sump',cyl(.04,.04,.025,12),'steel',{name:'Oil drain plug',pos:[3.20,-1.025,-.18]});
+
+  // Both mirrors belong beside the lower-deck driving position.
+  for(const o of cab.details['cab.mirror'].children)o.position.y-=1.05;
+  const tailLights=new T.Group();tailLights.name='body.taillights';
+  tailLights.userData={assemblyId:'body',region:'body',detail:'body.taillights'};
+  body.exterior.add(tailLights);body.details['body.taillights']=tailLights;body.detailLayer['body.taillights']='exterior';
+  for(const side of[-1,1]){
+    into(body,'exterior','body.taillights',softBox(T,.085,.34,.24,.025),'ink',{name:'Rear lamp housing',pos:[4.29,-1.10,side*.82]});
+    for(const [y,color,name]of[[-.99,'amber','Rear indicator lens'],[-1.10,'red','Rear tail and brake lens'],[-1.21,'cream','Reversing lens']]){
+      const lens=into(body,'exterior','body.taillights',softBox(T,.032,.082,.18,.012),color,{name,pos:[4.345,y,side*.82],roughness:.18});
+      lens.material=lens.material.clone();lens.material.emissive.setHex(color==='red'?0xa40803:color==='amber'?0x713500:0x2a2924);lens.material.emissiveIntensity=.32;
+    }
   }
 
   for(const a of assemblies) {

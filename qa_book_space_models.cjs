@@ -4,6 +4,7 @@ const ctx = { window: {}, console }; vm.createContext(ctx);
 vm.runInContext(fs.readFileSync('labs/shared/vendor/three.min.js', 'utf8'), ctx);
 const T = ctx.THREE;
 const models = {};
+vm.runInContext(fs.readFileSync('labs/station/v3/reference-details.js', 'utf8'), ctx);
 for (const [id, api] of [['rocket', 'RocketV3'], ['station', 'StationV3']]) {
   vm.runInContext(fs.readFileSync(`labs/${id}/v3/${id}frame.js`, 'utf8'), ctx);
   models[id] = ctx.window[api].create(T);

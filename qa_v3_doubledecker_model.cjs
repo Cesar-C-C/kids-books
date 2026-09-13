@@ -259,3 +259,17 @@ for(const id of ['wheels.tire','wheels.tread'])for(const mesh of bus.assemblies.
  }
 }
 assert.ok(testedWheelVertices>100);console.log('PASS '+testedWheelVertices+' wheel vertices clear the lower floor.');
+
+// Rear machinery must share the chassis axes; internal piston volumes fit the block.
+const rearEngine=bus.assemblies.find(a=>a.id==='engine');
+for(const name of ['Engine block','Cylinder head','Fuel tank','Tank strap']){
+ rearEngine.group.traverse(o=>{if(o.name===name)assert.ok(Math.abs(o.rotation.y)<1e-8,name+' is aligned with chassis');});
+}
+const blockVolume=new T.Box3().setFromObject(rearEngine.group.getObjectByName('Engine block'));
+for(const o of rearEngine.details['engine.pistons'].children){
+ assert.ok(blockVolume.containsBox(new T.Box3().setFromObject(o)),o.name+' stays within the installed block');
+}
+assert.equal(rearEngine.details['engine.pistons'].children.filter(o=>o.name==='Piston crown').length,4);
+assert.equal(rearEngine.details['engine.injectors'].children.filter(o=>o.name==='Diesel injector').length,4);
+assert.equal(rearEngine.details['engine.valves'].children.filter(o=>o.name==='Valve head').length,8);
+console.log('PASS aligned rear machinery and contained four-cylinder teaching cutaway.');
