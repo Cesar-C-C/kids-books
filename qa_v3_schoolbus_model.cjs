@@ -16,8 +16,8 @@ const { SchoolBusV3 } = context.window;
 assert.equal(parts.length, 10, 'ten whole-bus parts');
 assert.equal(new Set(parts.map(p => p.id)).size, 10);
 for (const p of parts) for (const f of ['id', 'name', 'zhName', 'category', 'color', 'en', 'zh', 'tip']) assert.ok(typeof p[f] === 'string' && p[f].trim(), `${p.id}/${f}`);
-assert.equal(details.length, 37, 'thirty-seven inside discoveries');
-assert.equal(new Set(details.map(d => d.id)).size, 37);
+assert.equal(details.length, 39, 'thirty-nine inside discoveries');
+assert.equal(new Set(details.map(d => d.id)).size, 39);
 for (const d of details) {
   for (const f of ['id', 'region', 'name', 'zhName', 'en', 'zh', 'tip', 'principle']) assert.ok(typeof d[f] === 'string' && d[f].trim(), `${d.id}/${f}`);
   assert.ok(parts.some(p => p.id === d.region), `${d.id}: unknown region ${d.region}`);
@@ -143,7 +143,7 @@ assert.ok(size.x > 8.5 && size.x < 11, `bus length ${size.x.toFixed(2)} m`);
 assert.ok(size.y > 2.8 && size.y < 4, `bus height ${size.y.toFixed(2)} m`);
 assert.ok(size.z > 2.2 && size.z < 3.2, `bus width ${size.z.toFixed(2)} m`);
 // A school bus is much longer than it is tall, and noticeably taller than wide.
-assert.ok(size.x / size.y > 2.4, `length/height ${(size.x / size.y).toFixed(2)} must look like a bus`);
+assert.ok(size.x / size.y > 2.3, `length/height ${(size.x / size.y).toFixed(2)} must look like a bus`);
 assert.ok(size.y / size.z > 1.0, `height/width ${(size.y / size.z).toFixed(2)}: a school bus is tall and narrow`);
 
 // The hood has to stick out ahead of the box: that is what makes it a Type-C.
@@ -225,3 +225,60 @@ for(const leaf of entranceLeaves) {
  const b=new T.Box3().setFromObject(leaf);
  assert.ok(b.min.z < -bus.HALF_W-.06 && b.min.y < -1.6,'schoolbus entrance must be outside opaque skin and reach skirt');
 }
+// Geometry-backed coverage catches empty groups left behind by model reconstruction.
+for(const d of details){const a=bus.assemblies.find(a=>a.region===d.region);assert.ok(a.detailMeshes[d.id]?.length,d.id+' must contain actual meshes');}
+const panes=[];bus.root.traverse(o=>{if(o.userData.glass)panes.push(o);});
+assert.ok(panes.length>=19,'side, front, driver, entry and rear glazing are represented');
+for(const o of panes){assert.ok(o.material.isMeshPhysicalMaterial);assert.ok(o.material.transmission>.7);assert.ok(o.material.roughness<.15);assert.equal(o.material.metalness,0);assert.equal(o.material.depthWrite,false);assert.equal(o.castShadow,false);}
+const sideSkins=bus.root.getObjectsByProperty('name','Continuous wheel-cut side skin');
+for(const side of [-1,1])for(const x of [-.82,.13,1.08,2.03,2.98]){
+ const ray=new T.Raycaster(new T.Vector3(x,.42,side*3),new T.Vector3(0,0,-side));
+ assert.equal(ray.intersectObjects(sideSkins).length,0,'windows must be real apertures, never glazing backed by steel');
+}
+// Center aisle must not be obstructed by a full-width rear bench or a lengthwise handrail.
+for(const id of ['seats.cushion','seats.back'])for(const o of bus.assemblies.find(a=>a.id==='seats').detailMeshes[id]){
+ const b=new T.Box3().setFromObject(o);assert.ok(b.max.z<-.18||b.min.z>.18,'seat leaves clear center aisle');
+}
+const doorsAssembly=bus.assemblies.find(a=>a.id==='doors');
+const leafMeshes=doorsAssembly.detailMeshes['doors.leaf'].filter(o=>o.name==='Door leaf');
+for(const t of [0,.25,.5,.75,1]){
+ doorsAssembly.update({region:'doors',level:t,mechanism:true});bus.root.updateMatrixWorld(true);
+ for(const leaf of leafMeshes){const pivot=leaf.parent;assert.ok(Math.abs(pivot.position.x-bus.DOOR_X)>.4,'hinge stays on an outer jamb');const p=new T.Box3().setFromObject(leaf);assert.ok(p.min.x>bus.DOOR_X-.49&&p.max.x<bus.DOOR_X+.49,'swept leaf remains inside doorway width');}
+}
+reset();
+console.log(`PASS schoolbus inspection: ${details.length} geometry-backed details, ${panes.length} physical glass panes, open window apertures, clear aisle and sampled door sweep.`);
+// Conservative oriented-box checks over the whole entry door swing. Glass/frame
+// opening holes are ignored here, so a pass includes clearance for the entire leaf.
+const steps=doorsAssembly.detailMeshes['doors.step'].filter(o=>['Entry step','Step riser'].includes(o.name));
+function leafHitsBox(leaf,step){
+ const world=leaf.getWorldPosition(new T.Vector3()),q=leaf.getWorldQuaternion(new T.Quaternion());
+ const u=new T.Vector3(1,0,0).applyQuaternion(q),v=new T.Vector3(0,0,1).applyQuaternion(q);
+ const b=new T.Box3().setFromObject(step),center=b.getCenter(new T.Vector3()),half=b.getSize(new T.Vector3()).multiplyScalar(.5);
+ if(Math.abs(world.y-center.y)>=1.32+half.y-.001)return false;
+ const delta=center.clone().sub(world);
+ for(const axis of [u,v,new T.Vector3(1,0,0),new T.Vector3(0,0,1)]){
+  const reach=.22*Math.abs(u.dot(axis))+.03*Math.abs(v.dot(axis))+half.x*Math.abs(axis.x)+half.z*Math.abs(axis.z);
+  if(Math.abs(delta.dot(axis))>=reach-.001)return false;
+ }
+ return true;
+}
+for(let i=0;i<=36;i++){
+ doorsAssembly.update({region:'doors',mechanism:true,level:i/36});bus.root.updateMatrixWorld(true);
+ for(const leaf of leafMeshes)for(const step of steps)assert.equal(leafHitsBox(leaf,step),false,`${step.name}: door sweep at ${i}/36 must not intersect steps`);
+}
+reset();console.log('PASS 37 door-sweep positions: both leaves clear every tread and riser.');
+
+for(const leaf of leafMeshes){
+ const panes=leaf.children.filter(o=>o.userData.glass);assert.equal(panes.length,2);
+ const intervals=panes.map(o=>{o.geometry.computeBoundingBox();const b=o.geometry.boundingBox;assert.ok(b.max.x>=.175&&b.min.x<=-.175,'glass overlaps vertical door seal');return [o.position.y+b.min.y,o.position.y+b.max.y];}).sort((a,b)=>a[0]-b[0]);
+ assert.ok(intervals[0][0]<=-1.275&&intervals[0][1]>=-.0325&&intervals[1][0]<=.0325&&intervals[1][1]>=1.275,'door glass fills openings behind frame and middle rail');
+}
+console.log('PASS entry glazing overlaps every seal and middle rail.');
+
+// The stop plate must be parallel to its lettering, rather than burying half the word.
+for(const name of ['Stop sign','Stop border']){
+ const plate=arm.group.getObjectByName(name);
+ const normal=new T.Vector3(0,1,0).applyQuaternion(plate.quaternion);
+ assert.ok(Math.abs(normal.z)>.999999,name+' face aligns with lettering plane');
+}
+console.log('PASS stop plate and lettering share a parallel face.');

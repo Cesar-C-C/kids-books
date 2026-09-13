@@ -47,7 +47,7 @@ window.SchoolBusV3 = { create(T) {
   // materialOriginal, so this flag survives either way.
   const glassMat = key => {
     const k = 'glass|' + key;
-    if (!materials.has(k)) materials.set(k, new T.MeshStandardMaterial({ color: palette[key], roughness: .18, metalness: .25, side: T.DoubleSide }));
+    if (!materials.has(k)) materials.set(k, new T.MeshPhysicalMaterial({ color: 0xb9dbe3, roughness: .035, metalness: 0, transmission: .94, thickness: .025, ior: 1.5, transparent: true, opacity: 1, depthWrite: false, side: T.DoubleSide, clearcoat: 1, clearcoatRoughness: .07, envMapIntensity: .75 }));
     return materials.get(k);
   };
   const ghostMat = new T.MeshBasicMaterial({ color: 0xa8bab8, transparent: true, opacity: .065, depthWrite: false, side: T.DoubleSide });
@@ -91,7 +91,8 @@ window.SchoolBusV3 = { create(T) {
     if (o.detail) mesh.userData.detail = o.detail;
     if (o.pos) mesh.position.set(o.pos[0], o.pos[1], o.pos[2]);
     if (o.rot) mesh.rotation.set(o.rot[0], o.rot[1], o.rot[2]);
-    mesh.castShadow = o.castShadow !== false;
+    mesh.castShadow = !o.glass && o.castShadow !== false;
+    if(o.glass) { mesh.userData.glass=true; mesh.renderOrder=2; }
     mesh.receiveShadow = true;
     parent.add(mesh);
     return mesh;
@@ -148,6 +149,11 @@ window.SchoolBusV3 = { create(T) {
     s.lineTo(x0 + rr, y1); s.quadraticCurveTo(x0, y1, x0, y1 - rr);
     s.lineTo(x0, y0 + rr); s.quadraticCurveTo(x0, y0, x0 + rr, y0);
     return new T.ExtrudeGeometry(s, { depth: d, bevelEnabled: false, curveSegments: 6, steps: 1 });
+  }
+  function windowFrame(w,h,d,border=.045) {
+    const s=new T.Shape();s.moveTo(-w/2,-h/2);s.lineTo(w/2,-h/2);s.lineTo(w/2,h/2);s.lineTo(-w/2,h/2);s.closePath();
+    const hole=new T.Path();hole.moveTo(-w/2+border,-h/2+border);hole.lineTo(-w/2+border,h/2-border);hole.lineTo(w/2-border,h/2-border);hole.lineTo(w/2-border,-h/2+border);hole.closePath();s.holes.push(hole);
+    const g=new T.ExtrudeGeometry(s,{depth:d,bevelEnabled:false});g.translate(0,0,-d/2);return g;
   }
   function softBox(T, w, h, d, r) {
     const g = roundPanel(T, w, h, d, r);
@@ -611,7 +617,7 @@ window.SchoolBusV3 = { create(T) {
     const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(vertices, 3)); g.setIndex(indices); g.computeVertexNormals();
     return g;
   }
-  function bookSide(x0, x1, bottom, top, axles, wheelY, clearance, depth = .075) {
+  function bookSide(x0, x1, bottom, top, axles, wheelY, clearance, depth = .075, apertures = []) {
     const s = new T.Shape(); s.moveTo(x0, bottom);
     for (const axle of axles) {
       const dx = Math.sqrt(Math.max(0, clearance * clearance - (bottom - wheelY) ** 2));
@@ -624,6 +630,7 @@ window.SchoolBusV3 = { create(T) {
     }
     s.lineTo(x1, bottom); s.lineTo(x1, top - .15); s.quadraticCurveTo(x1, top, x1 - .15, top);
     s.lineTo(x0 + .15, top); s.quadraticCurveTo(x0, top, x0, top - .15); s.closePath();
+    for(const [x,y,w,h] of apertures){const hole=new T.Path();hole.moveTo(x-w/2,y-h/2);hole.lineTo(x-w/2,y+h/2);hole.lineTo(x+w/2,y+h/2);hole.lineTo(x+w/2,y-h/2);hole.closePath();s.holes.push(hole);}
     return new T.ExtrudeGeometry(s, { depth, bevelEnabled: false, curveSegments: 12 });
   }
   function clearBookExterior(a) {
@@ -648,13 +655,13 @@ window.SchoolBusV3 = { create(T) {
   for (const a of [body, roof, hood, lights, wheels]) clearBookExterior(a);
   const BOOK_WHEEL_Y = -1.63, BOOK_WHEEL_R = .65, BOOK_EAVES = 1.14;
   for (const side of [-1, 1]) {
-    into(body, 'exterior', 'body.shell', bookSide(BOX_X, HALF_LEN, -1.70, BOOK_EAVES, [AXLE_R], BOOK_WHEEL_Y, .72), 'yellow', { name: 'Continuous wheel-cut side skin', pos: [0, 0, side * (HALF_W - .045) - .035] });
+    into(body, 'exterior', 'body.shell', bookSide(BOX_X, HALF_LEN, -1.70, BOOK_EAVES, [AXLE_R], BOOK_WHEEL_Y, .72,.075,[...Array.from({length:5},(_,i)=>[-.82+i*.95,.42,.81,1]),...(side>0?[[-1.73,.42,.88,1.07]]:[[-1.72,-.32,.94,2.67]])]), 'yellow', { name: 'Continuous wheel-cut side skin', pos: [0, 0, side * (HALF_W - .045) - .035] });
     // Five near-square passenger windows plus the front driver/entrance bay.
     const start = -.82, pitch = .95;
     for (let i = 0; i < 5; i++) {
       const x = start + i * pitch;
-      into(body, 'exterior', 'body.windows', softBox(T, .89, 1.08, .032, .075), 'ink', { name: 'Black window surround', pos: [x, .42, side * (HALF_W + .013)] });
-      into(body, 'exterior', 'body.windows', softBox(T, .79, .97, .021, .05), 'glassLite', { name: 'Side window', pos: [x, .42, side * (HALF_W + .040)], glass: true });
+      into(body, 'exterior', 'body.windows', windowFrame(.89,1.08,.032,.05), 'ink', { name: 'Black window surround', pos: [x, .42, side * (HALF_W + .013)] });
+      into(body, 'exterior', 'body.windows', softBox(T, .81, 1.0, .021, .02), 'glassLite', { name: 'Side window', pos: [x, .42, side * (HALF_W + .040)], glass: true });
       into(body, 'exterior', 'body.windows', box(.80, .035, .028), 'ink', { name: 'Sliding window divider', pos: [x, .43, side * (HALF_W + .057)] });
     }
     for (const y of [-.25, -.72]) into(body, 'exterior', 'body.rubrail', box(5.15, .085, .07), 'black', { name: 'Rub rail', pos: [1.54, y, side * (HALF_W + .03)] });
@@ -670,8 +677,8 @@ window.SchoolBusV3 = { create(T) {
   for (const side of [-1, 1]) {
     into(hood, 'exterior', 'hood.cover', bookSide(-4.45, -2.66, -1.66, -.52, [AXLE_F], BOOK_WHEEL_Y, .73), 'yellow', { name: 'Curved front fender skin', pos: [0, 0, side * 1.20 - .04] });
     into(hood, 'exterior', 'hood.cover', torus(.75, .105, 48, Math.PI), 'yellow', { name: 'Rounded front fender crown', pos: [AXLE_F, BOOK_WHEEL_Y, side * 1.20] });
-    into(hood, 'exterior', 'hood.headlight', cyl(.155, .155, .075, 32), 'chrome', { name: 'Headlight rim', pos: [-4.77, -1.08, side * .81], rot: [0, 0, Math.PI / 2], metalness: .6 });
-    into(hood, 'exterior', 'hood.headlight', cyl(.122, .122, .080, 32), 'lamp', { name: 'Headlight', pos: [-4.80, -1.08, side * .81], rot: [0, 0, Math.PI / 2] });
+    into(hood, 'exterior', 'hood.headlight', cyl(.155, .155, .075, 32), 'chrome', { name: 'Headlight rim', pos: [-4.935, -1.08, side * .81], rot: [0, 0, Math.PI / 2], metalness: .6 });
+    into(hood, 'exterior', 'hood.headlight', cyl(.122, .122, .080, 32), 'lamp', { name: 'Headlight', pos: [-4.952, -1.08, side * .81], rot: [0, 0, Math.PI / 2] });
   }
   into(hood, 'exterior', 'hood.grille', softBox(T, .075, .65, 1.19, .035), 'chrome', { name: 'Grille surround', pos: [-4.88, -.93, 0], metalness: .6 });
   into(hood, 'exterior', 'hood.grille', box(.085, .54, 1.06), 'ink', { name: 'Dark grille recess', pos: [-4.90, -.93, 0] });
@@ -695,9 +702,9 @@ window.SchoolBusV3 = { create(T) {
     });
   }
   cab.details['cab.glass'].traverse(o => {
-    if(o.name==='Driver window') { o.geometry=softBox(T,.86,1.05,.025,.055); o.position.set(-1.73,.42,HALF_W+.04); }
+    if(o.name==='Driver window') { o.geometry=softBox(T,.88,1.07,.025,.02); o.position.set(-1.73,.42,HALF_W+.04); }
   });
-  into(cab,'exterior','cab.glass',softBox(T,.94,1.13,.022,.06),'ink',{name:'Driver window surround',pos:[-1.73,.42,HALF_W+.012]});
+  into(cab,'exterior','cab.glass',windowFrame(.94,1.13,.022,.04),'ink',{name:'Driver window surround',pos:[-1.73,.42,HALF_W+.012]});
   into(lights,'exterior','lights.bracket',softBox(T,.07,.42,2.36,.025),'yellow',{name:'Yellow warning header',pos:[BOX_X-.014,1.13,0]});
   // Warning lights sit in the header, not as unmounted boxes on the roof.
   for (const side of [-1, 1]) {
@@ -705,6 +712,145 @@ window.SchoolBusV3 = { create(T) {
     for (const [detail, z, color] of [['lights.red', side * .65, 'red'], ['lights.amber', side * .96, 'amber']]) into(lights, 'exterior', detail, cyl(.09,.09,.06,24), color, { name: 'Header warning light', pos: [BOX_X - .095,1.17,z],rot:[0,0,Math.PI/2] });
   }
   for (const ax of [AXLE_F, AXLE_R]) for (const side of [-1, 1]) bookWheel(wheels, ax, side, BOOK_WHEEL_Y, BOOK_WHEEL_R, .30);
+
+  /* Detail audit: real apertures, installed interiors and reversible mechanisms. */
+  function bar(a,id,p,q,r=.025,color='steel',parent=a.details[id]) {
+    const mesh=rod(T,p,q,r);mesh.material=mat(color,.35,.45);mesh.name=id+' connection';mesh.userData={region:a.region,assemblyId:a.id,detail:id};parent.add(mesh);return mesh;
+  }
+  function newDetail(a,id,layer='interior') { const g=new T.Group();g.name=id;g.userData={region:a.region,assemblyId:a.id,detail:id};a[layer].add(g);a.details[id]=g;a.detailLayer[id]=layer;return g; }
+  const rear=body.exterior.getObjectByName('Rounded rear closure');
+  rear.geometry=bookSide(-HALF_W,HALF_W,-1.70,1.13,[],0,0,.10,[[0,-.12,.90,2.22],[-.84,.45,.47,.76],[.84,.45,.47,.76]]);
+  rear.position.set(4.13,0,0);rear.rotation.y=Math.PI/2;
+  for(const z of [-.84,.84]) {
+    into(body,'exterior','body.windows',windowFrame(.53,.82,.04),'ink',{name:'Rear window seal',pos:[4.24,.45,z],rot:[0,Math.PI/2,0]});
+    into(body,'exterior','body.windows',softBox(T,.46,.75,.022,.02),'glassLite',{name:'Rear window',pos:[4.25,.45,z],rot:[0,Math.PI/2,0],glass:true});
+  }
+  for(const side of [-1,1]){
+    into(hood,'exterior','hood.headlight',cyl(.16,.16,.12,32),'yellow',{name:'Headlight mount',pos:[-4.88,-1.08,side*.81],rot:[0,0,Math.PI/2]});
+    const lens=new T.SphereGeometry(.124,24,16);lens.scale(.15,1,1);
+    into(hood,'exterior','hood.headlight',lens,'glassLite',{name:'Headlight glass lens',pos:[-5.003,-1.08,side*.81],glass:true});
+  }
+  // The windscreen has a visible seal, divider and two installed wiper blades.
+  into(cab,'exterior','cab.glass',windowFrame(2.34,1.18,.045),'ink',{name:'Windshield seal',pos:[BOX_X-.07,.40,0],rot:[0,Math.PI/2,0]});
+  into(cab,'exterior','cab.glass',box(.045,1.10,.035),'ink',{name:'Windshield divider',pos:[BOX_X-.066,.40,0]});
+  for(const z of [-.56,.56]) {bar(cab,'cab.glass',[BOX_X-.09,-.08,z],[BOX_X-.09,.12,z+.13],.017,'ink');bar(cab,'cab.glass',[BOX_X-.095,.12,z-.15],[BOX_X-.095,.12,z+.36],.019,'ink');}
+  // Side mirrors now have a glossy reflective face on the driver-facing side.
+  for(const side of [-1,1])into(cab,'exterior','cab.mirror',softBox(T,.012,.40,.035,.004),'mirror',{name:'Side mirror face',pos:[BOX_X+.39,.34,side*(HALF_W+.21)],metalness:1,roughness:.08});
+  // Dials face the driver (+X); raised needles and dial rims read in close-up.
+  cab.details['cab.dash'].children.filter(o=>o.name==='Dial').forEach((o,i)=>{
+    o.position.x=BOX_X+.716;o.material=mat('cream');
+    into(cab,'interior','cab.dash',torus(.076,.009,24),'chrome',{name:'Dial rim',pos:[BOX_X+.742,.02,.18+i*.16],rot:[0,Math.PI/2,0]});
+    bar(cab,'cab.dash',[BOX_X+.748,.02,.18+i*.16],[BOX_X+.748,.057,.205+i*.16],.006,'red');
+  });
+    const marks=[];for(let i=0;i<3;i++)for(let k=0;k<9;k++){
+    const a=-2.35+k*.59,g=box(.006,.012,.003);g.rotateX(a);g.translate(BOX_X+.750,.02+Math.cos(a)*.060,.18+i*.16+Math.sin(a)*.060);marks.push(g);
+  }
+  into(cab,'interior','cab.dash',mergeNonIndexed(T,marks),'ink',{name:'Instrument tick marks'});
+  const steeringMesh=cab.details['cab.wheel'].getObjectByName('Steering wheel');
+  const column=cab.details['cab.wheel'].getObjectByName('Steering column');column.removeFromParent();
+  const axis=new T.Vector3(.3,.7,0).normalize();steeringMesh.quaternion.setFromUnitVectors(new T.Vector3(0,0,1),axis);
+  bar(cab,'cab.wheel',steeringMesh.position.toArray(),steeringMesh.position.clone().addScaledVector(axis,-.66).toArray(),.034,'ink');
+  for(let i=0;i<3;i++) {const angle=i*Math.PI*2/3;bar(cab,'cab.wheel',[0,0,0],[Math.cos(angle)*.22,Math.sin(angle)*.22,0],.014,'ink',steeringMesh);}
+  into(cab,'interior','cab.seat',box(.32,.60,.36),'steel',{name:'Driver seat pedestal',pos:[-1.40,-.94,.42]});
+  for(const z of [.24,.55])into(cab,'interior','cab.wheel',box(.16,.035,.13),'ink',{name:'Pedal',pos:[-2.15,-1.13,z],rot:[0,0,-.25]});
+  // Paired entry leaves are hinged at the two outer jambs, not at the middle.
+  for(const l of doorLeaves){
+    l.pivot.position.set(DOOR_X+l.dir*.45,-.32,-HALF_W-.09);
+    const leaf=l.pivot.getObjectByName('Door leaf');leaf.geometry=windowFrame(.44,2.64,.06,.045);leaf.position.set(-l.dir*.22,0,0);
+    leaf.children.filter(o=>o.isMesh).forEach(o=>{o.geometry=softBox(T,.355,1.27,.025,.008);o.position.y=o.position.y>0?.65:-.65;o.position.z=0;o.material=glassMat('glass');o.userData.glass=true;o.castShadow=false;o.renderOrder=2;});
+    add(doors,leaf,box(.37,.065,.065),'ink',{name:'Door middle rail',detail:'doors.leaf'});
+    for(const y of [-1,.9])add(doors,l.pivot,cyl(.025,.025,.16,12),'chrome',{name:'Entry hinge',detail:'doors.leaf',pos:[0,y,0]});
+  }
+  doors.details['doors.step'].clear();
+  for(const [y,z,depth]of[[-1.72,-1.09,.50],[-1.48,-.63,.44],[-1.24,-.20,.42]]) {
+    into(doors,'exterior','doors.step',box(.86,.08,depth),'floorDark',{name:'Entry step',pos:[DOOR_X,y,z]});
+    into(doors,'exterior','doors.step',box(.84,.02,.045),'yellow',{name:'Step safety edge',pos:[DOOR_X,y+.048,z-.18]});
+    into(doors,'exterior','doors.step',box(.86,y<-1.3?.24:.065,.045),'floorDark',{name:'Step riser',pos:[DOOR_X,y+(y<-1.3?.12:-.02),z+depth/2]});
+    for(let i=0;i<5;i++)into(doors,'exterior','doors.step',box(.012,.013,.24),'ink',{name:'Step grip',pos:[DOOR_X-.32+i*.16,y+.049,z]});
+  }
+  // Central rear exit aligns with a clear aisle and has an actual opening behind it.
+  doors.details['doors.emergency'].clear();const emergency=new T.Group();emergency.name='Rear door hinge';emergency.position.set(4.25,0,.43);doors.details['doors.emergency'].add(emergency);
+  add(doors,emergency,windowFrame(.84,2.16,.06,.07),'yellow',{name:'Emergency door',detail:'doors.emergency',pos:[0,-.12,-.43],rot:[0,Math.PI/2,0]});
+  add(doors,emergency,box(.07,1.16,.73),'yellow',{name:'Emergency lower panel',detail:'doors.emergency',pos:[0,-.59,-.43]});
+  add(doors,emergency,softBox(T,.71,.92,.022,.008),'glassLite',{name:'Emergency window',detail:'doors.emergency',pos:[.01,.445,-.43],rot:[0,Math.PI/2,0],glass:true});
+  bar(doors,'doors.emergency',[-.08,-.22,-.75],[-.08,-.22,-.11],.025,'red',emergency);
+  bar(doors,'doors.emergency',[.085,-.17,-.70],[.085,-.17,-.49],.02,'red',emergency);
+  for(const y of [-.8,.7])add(doors,emergency,cyl(.035,.035,.18,16),'steel',{name:'Rear door hinge pin',detail:'doors.emergency',pos:[0,y,0]});
+  doors.update=state=>{const k=state.region==='doors'&&state.mechanism?state.level||0:0;doorLeaves.forEach(l=>l.pivot.rotation.y=l.dir*(state.detail==='doors.emergency'?0:k)*1.42);emergency.rotation.y=state.detail==='doors.emergency'?-k*1.42:0;};
+  // A full-width rear bench previously blocked the emergency route.
+  for(const id of ['seats.cushion','seats.back'])for(const o of [...seats.details[id].children])if(o.name.startsWith('Rear bench'))o.removeFromParent();
+  seats.details['seats.belt'].clear();
+  // Belts lie on the front of each backrest, with a lap strap and visible buckle.
+  for(const side of [-1,1])for(let row=0;row<5;row++){
+    const x=-.40+row*.76,z=side*.62;
+    const ribbon=box(.024,.055,.97);ribbon.rotateX(side*.84);
+    into(seats,'interior','seats.belt',ribbon,'ink',{name:'Shoulder belt',pos:[x+.213,-.32,z]});
+    for(const [p,q] of [[[x+.213,-.682,z-side*.343],[x-.18,-.69,z-side*.25]],[[x-.18,-.69,z-side*.25],[x-.18,-.69,z+side*.25]]]){const v=new T.Vector3(...q).sub(new T.Vector3(...p)),g=box(v.length(),.018,.045);const strap=into(seats,'interior','seats.belt',g,'ink',{name:'Lap belt',pos:new T.Vector3(...p).addScaledVector(v,.5).toArray()});strap.quaternion.setFromUnitVectors(new T.Vector3(1,0,0),v.normalize());}
+    into(seats,'interior','seats.belt',softBox(T,.09,.045,.085,.012),'red',{name:'Seat belt buckle',pos:[x-.18,-.69,z-side*.25]});
+    for(const legZ of [side*.30,side*.94])into(seats,'interior','seats.frame',box(.16,.045,.16),'steel',{name:'Seat foot plate',pos:[x,-1.185,legZ]});
+  }
+  // Remove lengthwise bars that intersected every seat back. Short grasp rails serve the entry.
+  aisle.details['aisle.handrail'].clear();
+  for(const x of [-2.22,-1.20]){bar(aisle,'aisle.handrail',[x,-1.16,-.58],[x,-.30,-.58]);bar(aisle,'aisle.handrail',[x,-.30,-.58],[x,-.30,-1.09]);bar(aisle,'aisle.handrail',[x,-.30,-1.09],[x,-1.12,-1.09]);}
+  const floorMesh=aisle.details['aisle.floor'].getObjectByName('Walkway floor');
+  floorMesh.geometry=bookSide(BOX_X+.15,4.10,-1.10,1.10,[],0,0,.10,[[-1.72,-.56,.94,1.06]]);floorMesh.rotation.x=Math.PI/2;floorMesh.position.set(0,-1.21,0);
+  // All ribs are on the clear center strip, above the floor instead of crossing seat feet.
+  aisle.details['aisle.floor'].children.filter(o=>o.name==='Floor rib').forEach(o=>{o.geometry=box(.035,.014,.43);o.position.y=-1.195;});
+  const landing=aisle.details['aisle.rear'].getObjectByName('Rear landing');landing.geometry=box(.94,.02,.43);landing.position.set(3.58,-1.195,0);
+  // Real tread blocks are merged per wheel, so close-up detail doesn't multiply draw calls.
+  for(const side of [-1,1])for(const ax of [AXLE_F,AXLE_R]){
+    const geos=[];for(let i=0;i<48;i++)for(const z of [-.065,.065]){const a=i*Math.PI/24;const g=box(.057,.018,.105);g.rotateZ(-a);g.translate(Math.sin(a)*.609,Math.cos(a)*.609,z);geos.push(g);}
+    into(wheels,'exterior','wheels.tread',mergeNonIndexed(T,geos),'rubber',{name:'Tread blocks',pos:[ax,BOOK_WHEEL_Y,side*(HALF_W-.08)],roughness:.88});
+    into(wheels,'exterior','wheels.arch',torus(ax===AXLE_F?.76:.725,.027,48,Math.PI),'ink',{name:'Wheel arch liner',pos:[ax,BOOK_WHEEL_Y,side*(HALF_W+.062)]});
+  }
+  // Stop arm plate stays outside the bus throughout its 90-degree swing.
+  clearBookExterior(stopArm);const hinge=new T.Group();hinge.name='Stop arm hinge';hinge.position.set(.20,-.32,-1.35);stopArm.exterior.add(hinge);stopArm.arm=hinge;
+  const stopAdd=(geo,col,name,id,pos,rot)=>add(stopArm,hinge,geo,col,{name,detail:id,pos,rot});
+  stopAdd(box(.40,.055,.07),'ink','Stop arm','stopsign.arm',[.19,0,.07]);
+  stopAdd(cyl(.035,.035,.40,16),'steel','Hinge pin','stopsign.arm',[0,0,0]);
+  stopAdd(cyl(.32,.32,.035,8),'cream','Stop border','stopsign.blade',[.40,0,0],[Math.PI/2,0,0]);
+  stopAdd(cyl(.288,.288,.041,8),'red','Stop sign','stopsign.blade',[.40,0,0],[Math.PI/2,0,0]);
+  for(const y of [-.22,.22])stopAdd(cyl(.042,.042,.04,16),'red','Arm lamp','stopsign.lamp',[.40,y,-.03],[Math.PI/2,0,0]);
+  // Tiny vector lettering remains crisp without network fonts or image textures.
+  const letters=[[[1,1,0,1],[0,1,0,0],[0,0,1,0],[1,0,1,-1],[1,-1,0,-1]],[[0,1,1,1],[.5,1,.5,-1]],[[0,1,1,1],[1,1,1,-1],[1,-1,0,-1],[0,-1,0,1]],[[0,-1,0,1],[0,1,1,1],[1,1,1,0],[1,0,0,0]]];
+  letters.forEach((segs,i)=>segs.forEach(([x,y,u,v])=>bar(stopArm,'stopsign.blade',[.55-i*.08-x*.05,y*.07,-.027],[.55-i*.08-u*.05,v*.07,-.027],.006,'cream',hinge)));
+  stopArm.update=state=>{hinge.rotation.y=state.region==='stopsign'&&state.mechanism?(state.level||0)*Math.PI/2:0;};
+  // The hidden engine compartment now contains connected teaching geometry.
+  for(const id of ['hood.engine','hood.radiator'])newDetail(hood,id);
+  into(hood,'interior','hood.engine',softBox(T,1.15,.52,.58,.08),'steel',{name:'Engine block',pos:[-3.58,-.80,0],metalness:.5});
+  into(hood,'interior','hood.engine',softBox(T,1.04,.13,.49,.05),'dark',{name:'Valve cover',pos:[-3.58,-.49,0]});
+  for(let i=0;i<6;i++) {into(hood,'interior','hood.engine',cyl(.035,.035,.06,12),'chrome',{name:'Valve cover bolt',pos:[-4+i*.16,-.39,.18]});bar(hood,'hood.engine',[-4+i*.16,-.76,.32],[-4+i*.16,-.60,.48],.035,'copper');}
+  for(const z of [-.53,.53])into(hood,'interior','hood.engine',box(1.75,.12,.10),'dark',{name:'Engine mount rail',pos:[-3.65,-1.18,z]});
+  into(hood,'interior','hood.radiator',box(.13,.65,1.0),'dark',{name:'Radiator core',pos:[-4.44,-.82,0]});
+  const fins=[];for(let i=0;i<20;i++){const g=box(.025,.56,.012);g.translate(-4.52,-.82,-.45+i*.047);fins.push(g);}into(hood,'interior','hood.radiator',mergeNonIndexed(T,fins),'steel',{name:'Cooling fins'});
+  bar(hood,'hood.radiator',[-4.40,-.55,.43],[-3.92,-.55,.43],.04,'rubber');bar(hood,'hood.radiator',[-4.40,-1.07,-.43],[-3.95,-1.07,-.43],.04,'rubber');
+  const fan=new T.Group();fan.name='Radiator fan';hood.details['hood.radiator'].add(fan);fan.position.set(-4.28,-.82,0);
+  for(let i=0;i<6;i++)add(hood,fan,box(.045,.24,.07),'steel',{name:'Fan blade',detail:'hood.radiator',pos:[0,Math.cos(i*Math.PI/3)*.13,Math.sin(i*Math.PI/3)*.13],rot:[i*Math.PI/3,0,0]});
+  hood.update=state=>{fan.rotation.x=state.region==='hood'&&state.mechanism?(state.level||0)*Math.PI*4:0;};
+  for(const x of [-3.99,-3.20])for(const side of [-1,1]){
+    bar(hood,'hood.engine',[x,-.96,side*.28],[x,-1.15,side*.53],.047,'dark');
+    into(hood,'interior','hood.engine',cyl(.052,.052,.065,12),'rubber',{name:'Mount bushing',pos:[x,-1.15,side*.53]});
+  }
+  bar(hood,'hood.engine',[-4.03,-.60,.48],[-3.13,-.60,.48],.045,'copper');
+  for(const side of [-1,1])bar(hood,'hood.radiator',[-4.44,-1.12,side*.43],[-4.44,-1.18,side*.53],.035,'steel');
+  add(hood,fan,cyl(.05,.05,.16,20),'dark',{name:'Fan hub',detail:'hood.radiator',rot:[0,0,Math.PI/2]});
+  for(const x of [-4.48,-2.8])into(hood,'interior','hood.engine',box(.10,.12,1.16),'steel',{name:'Mount crossmember',pos:[x,-1.18,0]});
+  // Roof teaching parts: framed emergency hatch and structural roof bows.
+  for(const x of [-.65,2.10]){
+    into(roof,'exterior','roof.hatch',windowFrame(.68,.55,.06,.045),'ink',{name:'Hatch seal',pos:[x,1.53,0],rot:[-Math.PI/2,0,0]});
+    into(roof,'exterior','roof.hatch',box(.61,.045,.48),'cream',{name:'Roof hatch',pos:[x,1.57,0]});
+    for(const dx of [-.10,.10])into(roof,'exterior','roof.hatch',box(.045,.052,.045),'steel',{name:'Hatch handle mount',pos:[x+dx,1.61,0]});
+    bar(roof,'roof.hatch',[x-.1,1.64,0],[x+.1,1.64,0],.018,'red');
+    for(const z of [-.15,.15])into(roof,'exterior','roof.hatch',cyl(.026,.026,.11,12),'steel',{name:'Hatch hinge',pos:[x-.29,1.57,z],rot:[Math.PI/2,0,0]});
+  }
+  // Named roof bows replace the previous empty 'roof cap' entry.
+  roof.details['roof.beacon'].removeFromParent();roof.interior.add(roof.details['roof.beacon']);roof.detailLayer['roof.beacon']='interior';
+  for(const x of [-1.9,-.65,.6,1.85,3.1]){
+    const points=[];for(let i=0;i<=20;i++){const z=-1.12+i*.112;points.push(new T.Vector3(x,1.30-.24*(z/1.12)**4,z));}
+    into(roof,'interior','roof.beacon',new T.TubeGeometry(new T.CatmullRomCurve3(points),24,.027,8,false),'steel',{name:'Roof bow'});
+  }
+  // Link ALL documented details to their actual meshes, including moving subtrees.
+  for(const a of assemblies){a.detailMeshes={};a.group.traverse(o=>{if(o.isMesh&&o.userData.detail)(a.detailMeshes[o.userData.detail]??=[]).push(o);});}
 
   // Counts are computed from the graph, not asserted by hand.
   let meshes = 0, triangles = 0;
