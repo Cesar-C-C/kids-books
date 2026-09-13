@@ -145,3 +145,38 @@ wheels.group.traverse(o => { if (!o.isMesh) return; o.geometry.computeBoundingBo
 assert.ok(Math.abs(wheelLo - mn.y) < .16, `the tyres must define the ground line: wheels ${wheelLo.toFixed(2)} vs bus ${mn.y.toFixed(2)}`);
 
 console.log(`PASS v3 double-decker: ${bus.assemblies.length} assemblies, ${meshes} meshes, ${Math.round(triangles)} triangles, ${ghostMeshes} silhouette meshes; ${parts.length} parts / ${details.length} inside discoveries fully cross-linked; reversible ${mechanisms.join('/')} motion; two-deck bus ${size.x.toFixed(2)} x ${size.y.toFixed(2)} x ${size.z.toFixed(2)} m with ${(stepHi - stepLo).toFixed(2)} m of stairs.`);
+
+// Regression: forward-facing backs span the vehicle width, stay inside the shell,
+// and leave a continuous center aisle (book interior reference).
+bus.root.updateMatrixWorld(true);
+bus.root.traverse(o => {
+  if (!o.isMesh || !['Seat back', 'Rear bench back', 'Driver back', 'Priority back'].includes(o.name)) return;
+  const b = new T.Box3().setFromObject(o), extent = b.getSize(new T.Vector3());
+  assert.ok(extent.z > extent.x * 2, `${o.name}: back must face -X, not block the aisle sideways`);
+  assert.ok(b.max.x < 4.15 && b.min.x > -4.2, `${o.name}: seat must remain inside the bus`);
+  assert.ok(b.max.z < 1.23 && b.min.z > -1.23, `${o.name}: seat must remain inside the side walls`);
+});
+
+const stairOpening = new T.Vector3(-2.05, bus.DECK_MID + .02, -.74);
+for (const name of ['Upper floor', 'Deck underside', 'Body floor band']) {
+  bus.root.traverse(o => {
+    if (!o.isMesh || o.name !== name) return;
+    const b = new T.Box3().setFromObject(o);
+    assert.ok(!(stairOpening.x > b.min.x && stairOpening.x < b.max.x && stairOpening.z > b.min.z && stairOpening.z < b.max.z), `${name}: must leave the illustrated stairwell open`);
+  });
+}
+assert.ok(bus.assemblies.find(a => a.id === 'stairs').center.x < -1.5, 'stairs belong behind the front entrance');
+console.log('PASS doubledecker book-shape regressions: forward-facing seats, front staircase, open stairwell');
+
+// The closed middle doorway is on the illustrated passenger side between axles,
+// and leaves with the body exterior instead of obstructing the opened cabin.
+const middleDoor = bus.root.getObjectByName('Middle doorway frame');
+assert.ok(middleDoor && middleDoor.position.x > -1 && middleDoor.position.x < 1.5 && middleDoor.position.z < -bus.HALF_W, 'middle doorway must be between the axles on the passenger side');
+let middleExterior = false;
+for (let p = middleDoor.parent; p; p = p.parent) if (p === bus.assemblies.find(a => a.id === 'body').exterior) middleExterior = true;
+assert.ok(middleExterior, 'middle doorway must follow the opening body exterior');
+const middlePanes = [];
+bus.root.traverse(o => { if (o.name === 'Middle door glazing') middlePanes.push(o); });
+assert.equal(middlePanes.length, 2, 'middle door has two closed glazed leaves');
+assert.ok(middlePanes.every(o => o.material.opacity === 1 && !o.material.transparent), 'middle door glazing remains opaque');
+console.log('PASS doubledecker middle doorway: two opaque panes, passenger side, body exterior ownership');

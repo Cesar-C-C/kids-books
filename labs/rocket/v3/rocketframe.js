@@ -1,6 +1,6 @@
 /* Picture-book launch vehicle. Up is +Y; the stack stands on the pad.
    Proportions follow the picture-book illustrations: a slim cylinder, two slim
-   strap-on boosters, a pointed fairing and a three-nozzle main engine section.
+   optional teaching boosters, a pointed fairing and a single main bell.
    No engineering dimensions are claimed from painted artwork. */
 (() => {
  'use strict';
@@ -140,13 +140,13 @@
        fairing base    3.42
        fairing tip     5.82                                                            */
   const R = .60;            // main body radius
-  const FR = .74;           // fairing radius
+  const FR = .60;           // book nose continues the slender core diameter
   const BODY_BOT = -.92, BODY_TOP = 1.70;
   const BODY_H = BODY_TOP - BODY_BOT, BODY_MID = (BODY_BOT + BODY_TOP) / 2;
 
   /* ---------- 1. structure: the load-bearing shell ---------- */
   const structure = assembly('structure', 'structure', [0, BODY_MID, 0], 2.7,
-    [-.62, .22], [{ id: 'structure.frame', layer: 'interior' }, 'structure.stringers', { id: 'structure.skin', layer: 'interior' }, 'structure.separation']);
+    [-.62, .22], [{ id: 'structure.frame', layer: 'interior' }, { id: 'structure.stringers', layer: 'interior' }, 'structure.skin', 'structure.separation']);
   {
     into(structure, 'exterior', 'structure.skin', cyl(R, R, BODY_H, 44, true), 'shell',
       { name: 'Outer skin', pos: [0, BODY_MID, 0], roughness: .62 });
@@ -258,6 +258,9 @@
     [-.62, .3], ['satellite.body', 'satellite.panels', 'satellite.dish']);
   const wings = [];
   {
+    // The nose has the book's core-width profile; keep the folded payload within
+    // its circular shell instead of letting cube corners pierce the ivory wall.
+    for (const group of Object.values(satellite.details)) group.scale.set(.78, 1, .78);
     into(satellite, 'exterior', 'satellite.body', roundedBox(T, .86, .92, .86, .07), 'gold',
       { name: 'Satellite bus', pos: [0, SAT_Y, 0], roughness: .42, metalness: .3 });
     for (const y of [SAT_Y - .28, SAT_Y + .28]) {
@@ -328,7 +331,7 @@
     }
     // The orange band where the blue nose seats onto the ivory barrel.
     into(fairing, 'exterior', 'fairing.tip', cyl(FR + .008, FR + .008, .12, 34), 'band',
-      { name: 'Nose band', pos: [0, FAIR_BASE + BARREL_H - .06, 0], roughness: .55 });
+      { name: 'Nose band', pos: [0, FAIR_BASE + .06, 0], roughness: .55 });
     // A round porthole on the barrel, exactly as the book draws it.
     into(fairing, 'exterior', 'fairing.half', cyl(.15, .15, .06, 22), 'nose',
       { name: 'Porthole', pos: [0, FAIR_BASE + .52, FR - .02], rot: [Math.PI / 2, 0, 0], roughness: .3, metalness: .2 });
@@ -336,8 +339,8 @@
       { name: 'Porthole rim', pos: [0, FAIR_BASE + .52, FR - .01], roughness: .4, metalness: .5 });
     // The vertical seam where the two halves are bolted together.
     for (const side of [-1, 1]) {
-      into(fairing, 'exterior', 'fairing.seam', roundedBox(T, .03, 2.20, .03, .012), 'ink',
-        { name: 'Fairing seam', pos: [side * .012, FAIR_BASE + 1.10, FR - .005], roughness: .5 });
+      into(fairing, 'exterior', 'fairing.seam', roundedBox(T, .012, BARREL_H, .012, .004), 'shellDim',
+        { name: 'Fairing seam', pos: [side * FR, FAIR_BASE + BARREL_H / 2, 0], roughness: .5 });
     }
     into(fairing, 'interior', 'fairing.skin', cyl(FR - .04, R - .04, NOSE_H + BARREL_H - .12, 30, true), 'fairingIn',
       { name: 'Fairing liner', pos: [0, FAIR_BASE + (BARREL_H + NOSE_H) / 2 - .04, 0], roughness: .72, castShadow: false });
@@ -352,6 +355,9 @@
   const B = { r: .30, yBot: -3.05, yTop: 1.42, z: 1.62 };
   const boosters = assembly('boosters', 'boosters', [0, .2, 0], 3.7,
     [1.15, .1], ['boosters.case', 'boosters.nozzle']);
+  boosters.defaultVisible = false;
+  boosters.group.userData.optional = true;
+  boosters.group.userData.referenceNote = 'Teaching extension; no strap-on boosters in the inspected book illustrations';
   {
     const h = B.yTop - B.yBot, mid = (B.yTop + B.yBot) / 2;
     for (const side of [-1, 1]) {
@@ -382,7 +388,8 @@
     // The skirt closes the bottom of the body around the engines.
     into(engines, 'exterior', null, cyl(R, R + .04, .34, 40, true), 'ink',
       { name: 'Engine skirt', pos: [0, -1.06, 0], roughness: .5, metalness: .3 });
-    const lay = [[-.30, 0], [.16, .34], [.16, -.34]];
+    // Cover, launch, cutaway and staging images consistently show one main bell.
+    const lay = [[0, 0]];
     lay.forEach(([dx, dz], i) => {
       const pivot = new T.Group();
       pivot.position.set(dx, -1.28, dz);
@@ -393,7 +400,8 @@
       chamber.position.y = -.15;
       chamber.userData = { region: 'engines', assemblyId: 'engines', detail: 'engines.chamber' };
       chamber.castShadow = true;
-      const nozzle = new T.Mesh(cyl(.13, .40, .86, 28, true), mat('metal', .34, .55));
+      const nozzle = new T.Mesh(cyl(.16, .49, .86, 40, true), mat('metal', .34, .55));
+      nozzle.name = 'Main bell nozzle';
       nozzle.position.y = -.73;
       nozzle.userData = { region: 'engines', assemblyId: 'engines', detail: 'engines.nozzle' };
       nozzle.castShadow = true;
@@ -406,19 +414,33 @@
       // Turbopump with visible impeller vanes, hung beside each chamber.
       const px = .22 * (i === 0 ? -1 : 1);
       const pump = new T.Mesh(roundedBox(T, .22, .24, .22, .05), mat('metal', .4, .55));
-      pump.position.set(px, -.02, dz);
+      pump.position.set(px, -1.40, dz);
       pump.userData = { region: 'engines', assemblyId: 'engines', detail: 'engines.turbopump' };
       pump.castShadow = true;
       engines.details['engines.turbopump'].add(pump);
       for (let k = 0; k < 8; k++) {
         const blade = new T.Mesh(roundedBox(T, .05, .15, .02, .008), mat('copper', .45, .4));
-        blade.position.set(px, -.02, dz);
+        blade.position.set(px, -1.40, dz);
         blade.rotation.y = k * Math.PI / 4;
         blade.userData = { region: 'engines', assemblyId: 'engines', detail: 'engines.turbopump' };
         engines.details['engines.turbopump'].add(blade);
       }
       bells.push(pivot);
     });
+    // Swept ivory tail fins give the book rocket its recognisable lower outline.
+    // These are surfaces on the existing structure discovery, not extra engines.
+    const finShape = new T.Shape();
+    finShape.moveTo(R - .02, -.55);
+    finShape.lineTo(1.12, -1.32);
+    finShape.lineTo(1.12, -2.12);
+    finShape.lineTo(R - .02, -1.78);
+    finShape.closePath();
+    const finGeo = new T.ExtrudeGeometry(finShape, { depth: .055, bevelEnabled: true, bevelSize: .012, bevelThickness: .012, bevelSegments: 1, steps: 1 });
+    finGeo.translate(0, 0, -.0275);
+    for (let i = 0; i < 4; i++) {
+      into(structure, 'exterior', 'structure.separation', finGeo, 'shell',
+        { name: 'Swept tail fin', rot: [0, i * Math.PI / 2, 0], roughness: .6 });
+    }
     into(engines, 'ghost', null, cyl(.60, .40, 1.6, 16, true), 'ink', { pos: [0, -2.0, 0] });
     engines.update = state => {
       const k = state.mechanism && state.region === 'engines' ? (state.level || 0) : 0;

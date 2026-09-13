@@ -20,8 +20,8 @@
     }
     const mat = (color, metalness = .65, roughness = .32, extra = {}) => new THREE.MeshStandardMaterial({ color, metalness, roughness, side: THREE.DoubleSide, ...extra });
     const M = {
-      shell: mat(0xd8e1e8, .72, .25), lip: mat(0x879da9, .9, .2), dark: mat(0x293c49, .68, .36),
-      fan: mat(0x558fa6, .76, .3), compressor: mat(0x609fa9, .7, .32), stator: mat(0xb5c7cc, .8, .27),
+      shell: mat(0x087bc5, .38, .26), pylon: mat(0xf4f5f0, .35, .32), lip: mat(0xc5d5e0, .9, .2), dark: mat(0x293c49, .68, .36),
+      fan: mat(0x29343f, .76, .3), compressor: mat(0x609fa9, .7, .32), stator: mat(0xb5c7cc, .8, .27),
       chamber: mat(0xb7794e, .67, .36), liner: mat(0x6b4938, .6, .4), fire: mat(0xe1a269, .3, .3, { emissive: 0x8b3210, emissiveIntensity: .32 }),
       turbine: mat(0x9088ab, .75, .3), shaft: mat(0xcbb985, .8, .23), exhaust: mat(0x526575, .85, .29),
       hole: mat(0x242c32, .15, .7), ghost: mat(0xabbcc5, .05, .8, { transparent: true, opacity: .08, depthWrite: false }),
@@ -101,7 +101,7 @@
     const pylonShape = new THREE.Shape();
     pylonShape.moveTo(-.52, .51); pylonShape.lineTo(-.36, .74); pylonShape.lineTo(.51, .74); pylonShape.lineTo(.68, .47); pylonShape.closePath();
     const pg = new THREE.ExtrudeGeometry(pylonShape, { depth: .14, bevelEnabled: true, bevelThickness: .035, bevelSize: .035, bevelSegments: 2, steps: 1 });
-    pg.translate(0, 0, -.07); mesh(exterior, pg, M.shell);
+    pg.translate(0, 0, -.07); mesh(exterior, pg, M.pylon).name = 'White wing pylon';
     lathe(ghost, [[-1.47, .603], [-1.17, .64], [-.65, .624], [.12, .574], [.73, .489], [1.04, .38]], M.ghost, 0, Math.PI * 2, 20);
     mesh(ghost, pg.clone(), M.ghost);
     const inlet = details['engine.inlet'];
@@ -109,7 +109,7 @@
     lathe(inlet, [[-1.42, .563], [-1.20, .553], [-1.16, .548]], M.dark);
     const fan = details['engine.fan'], fanRotor = new THREE.Group(); fanRotor.userData = { ...fan.userData }; fan.add(fanRotor);
     blades(fanRotor, 22, -1.12, .12, .538, .14, .26, .74, M.fan);
-    lathe(fanRotor, [[-1.48, .003], [-1.43, .052], [-1.32, .098], [-1.13, .128], [-1.01, .117], [-1.00, .035]], M.lip);
+    lathe(fanRotor, [[-1.48, .003], [-1.43, .052], [-1.32, .098], [-1.13, .128], [-1.01, .117], [-1.00, .035]], M.fan);
     ring(fan, -.995, .542, .013, M.stator);
     const bypass = details['engine.bypass'];
     // Splitter separates the real outer annulus from the compressor core.

@@ -8,7 +8,7 @@
    change here moves the whole bus at once instead of drifting part by part.
 
    Reference: books/schoolbus/assets/01_parts_c_v2.webp (side), 05_stopsign_c_v2
-   (front three-quarter), 03_inside_c_v2 (cabin). Colours are sampled from those
+   (front three-quarter), 03_inside_c_v2 (cabin). Colours are visually matched to those
    images; the book gives no engineering dimensions, so the proportions are read
    off the side view and rounded to round numbers.
 
@@ -17,18 +17,18 @@
      chassis rail         -1.62 .. -1.36
      floor                -1.30            ceiling  0.96
      roof crown            1.42
-     hood top              0.30
+     hood top             -0.45
      nose tip             x -4.90          tail    x +4.20
 */
 window.SchoolBusV3 = { create(T) {
   const assemblies = [];
   const root = new T.Group(); root.name = 'Picture-book school bus';
   const materials = new Map();
-  // Sampled from books/schoolbus/assets: the National School Bus Glossy Yellow
+  // Visually matched to books/schoolbus/assets: the National School Bus Glossy Yellow
   // shell, a slightly paler roof, blue vinyl bench seats, black rub rails and
   // bumpers, and the red octagon of the stop arm.
   const palette = {
-    yellow: 0xe8b21c, yellowDim: 0xd09c14, yellowPale: 0xf0c94a, yellowDark: 0xb98410,
+    yellow: 0xf2b719, yellowDim: 0xd09c14, yellowPale: 0xf4e5bd, yellowDark: 0xb98410,
     cream: 0xf2e6c4, ink: 0x24282c, black: 0x1d2124, dark: 0x2d3940,
     glass: 0x2f4d63, glassLite: 0x3d6076, seat: 0x2f5f96, seatDim: 0x274e7d,
     floor: 0x5a6674, floorDark: 0x47525e, steel: 0x8a959c, chrome: 0xc3cbd0,
@@ -170,7 +170,7 @@ window.SchoolBusV3 = { create(T) {
   const NOSE_X = -4.90;          // front bumper face
   const BOX_X = -2.60;           // windshield plane: where the box begins
   const FLOOR = -1.30, CEIL = 0.96;
-  const ROOF_TOP = 1.42;
+  const ROOF_TOP = 1.26;
   const RAIL_Y = -1.49;          // chassis rail centre
   const AXLE_F = -3.52, AXLE_R = 2.30;
   const WHEEL_R = .50;
@@ -198,10 +198,11 @@ window.SchoolBusV3 = { create(T) {
       const W0 = BOX_X + .28, W1 = HALF_LEN - .34, SPAN = W1 - W0, BAYS = 6, BAY_W = SPAN / BAYS - .12;
       for (let i = 0; i < BAYS; i++) {
         const x = W0 + SPAN * (i + .5) / BAYS;
-        into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .62, .07, .05), 'glass',
+        if (side < 0 && i === 0) continue; // front passenger doorway
+        into(body, 'exterior', 'body.windows', softBox(T, BAY_W, .86, .07, .05), 'glass',
           { name: 'Side window', pos: [x, .30, z + side * .05], rot: [0, side > 0 ? 0 : Math.PI, 0], glass: true });
         into(body, 'exterior', 'body.windows', box(BAY_W + .08, .06, .07), 'ink',
-          { name: 'Window post', pos: [x, -.08, z + side * .05], rot: [0, side > 0 ? 0 : Math.PI, 0] });
+          { name: 'Window post', pos: [x, .30, z + side * .10], rot: [0, side > 0 ? 0 : Math.PI, 0] });
       }
       // Two rub rails: the black bars that take the bumps instead of the paint.
       // The upper one doubles as the window sill line in the illustration.
@@ -210,7 +211,7 @@ window.SchoolBusV3 = { create(T) {
           { name: 'Rub rail', pos: [mid, y, z + side * .05] });
       }
       // Skirt below the belt line, with a wheel arch cut over each axle.
-      into(body, 'exterior', 'body.skirt', box(len + .06, BELT_Y - (RAIL_Y - .10), .10), 'yellowDark',
+      into(body, 'exterior', 'body.skirt', box(len + .06, .10, .10), 'yellowDark',
         { name: 'Skirt panel', pos: [mid, (BELT_Y + RAIL_Y - .10) / 2, z], rot: [0, side > 0 ? 0 : Math.PI, 0] });
       for (const ax of [AXLE_F, AXLE_R]) {
         // A wheel arch is a half-ring in the XY plane opening downward. Turning it
@@ -244,8 +245,8 @@ window.SchoolBusV3 = { create(T) {
     const cap = new T.Shape();
     cap.moveTo(-HALF_W, 0);
     for (let i = 1; i <= 22; i++) {
-      const t = -Math.PI / 2 + Math.PI * i / 22;
-      cap.lineTo(HALF_W * Math.pow(Math.cos(t), .62), CAP_RISE * Math.pow(Math.max(0, Math.sin(t)), .62));
+      const t = Math.PI * i / 22;
+      cap.lineTo(-HALF_W * Math.cos(t), CAP_RISE * Math.pow(Math.max(0, Math.sin(t)), .62));
     }
     cap.lineTo(-HALF_W, 0);
     const len = HALF_LEN - BOX_X - .18, mid = (BOX_X + HALF_LEN) / 2 - .10;
@@ -273,19 +274,19 @@ window.SchoolBusV3 = { create(T) {
     // The hood is a slab from the belt line up to HOOD_TOP, then a sloping panel
     // runs from the hood top up to the windshield base.
     into(hood, 'exterior', 'hood.cover', softBox(T, HL, HOOD_TOP - BELT_Y, HW * 2, .10), 'yellow',
-      { name: 'Hood block', pos: [HM, (HOOD_TOP + BELT_Y) / 2, 0], rot: [0, Math.PI / 2, 0], roughness: .5 });
+      { name: 'Hood block', pos: [HM, (HOOD_TOP + BELT_Y) / 2, 0], roughness: .5 });
     // Cowl joint: the band of body between the back of the hood (HX1) and the
     // windshield plane (BOX_X). Leaving it out opens a visible slot right through
     // the bus at the A-pillar, which is what the picture book never shows. Two
     // full-height side cheeks plus a top panel close it off.
     const jointLen = BOX_X - HX1, jointMid = (HX1 + BOX_X) / 2;
     for (const side of [-1, 1]) {
-      into(hood, 'exterior', 'hood.cover', softBox(T, jointLen + .04, CEIL - BELT_Y, .10, .04), 'yellow',
-        { name: 'Cowl cheek', pos: [jointMid, (CEIL + BELT_Y) / 2, side * (HALF_W - .05)],
+      into(hood, 'exterior', 'hood.cover', softBox(T, jointLen + .04, COWL_Y - BELT_Y, .10, .04), 'yellow',
+        { name: 'Cowl cheek', pos: [jointMid, (COWL_Y + BELT_Y) / 2, side * (HALF_W - .05)],
           rot: [0, side > 0 ? 0 : Math.PI, 0], roughness: .5 });
     }
     into(hood, 'exterior', 'hood.cover', box(jointLen + .04, .09, HALF_W * 2 - .06), 'yellow',
-      { name: 'Cowl top', pos: [jointMid, CEIL - .04, 0], roughness: .5 });
+      { name: 'Cowl top', pos: [jointMid, COWL_Y - .04, 0], roughness: .5 });
     // The sloping shoulder from the hood top up to the base of the windshield.
     // It is a plate whose long axis is X, so a rotation about Z tips its far end
     // up towards the windscreen.
@@ -362,9 +363,9 @@ window.SchoolBusV3 = { create(T) {
     }
     // Driver seat: high, with a back that reaches the child's shoulder height.
     into(cab, 'interior', 'cab.seat', softBox(T, .52, .14, .58, .06), 'seat',
-      { name: 'Seat cushion', pos: [BOX_X + 1.20, -.52, .42], rot: [0, Math.PI / 2, 0] });
+      { name: 'Seat cushion', pos: [BOX_X + 1.20, -.52, .42] });
     into(cab, 'interior', 'cab.seat', softBox(T, .16, .74, .60, .07), 'seatDim',
-      { name: 'Seat back', pos: [BOX_X + 1.46, -.12, .42], rot: [0, Math.PI / 2, 0] });
+      { name: 'Seat back', pos: [BOX_X + 1.46, -.12, .42] });
     // Crossing mirror: the little round mirror that shows the blind spot right at
     // the bumper. Without it a driver cannot see a child standing in front. The
     // disc faces FORWARD, so its axis is X — turned about Z, not left lying in
@@ -398,7 +399,7 @@ window.SchoolBusV3 = { create(T) {
       pivot.position.set(DOOR_X, -.17, -HALF_W + .04);
       doors.exterior.add(pivot);
       const LEAF_W = .44;
-      const leaf = new T.Mesh(softBox(T, LEAF_W, 1.30, .07, .04), mat('yellow', .5));
+      const leaf = new T.Mesh(softBox(T, LEAF_W, 2.12, .07, .04), mat('ink', .5));
       leaf.name = 'Door leaf';
       leaf.userData = { region: 'doors', assemblyId: 'doors', detail: 'doors.leaf' };
       leaf.castShadow = leaf.receiveShadow = true;
@@ -406,7 +407,10 @@ window.SchoolBusV3 = { create(T) {
       pivot.add(leaf);
       const gl = new T.Mesh(softBox(T, LEAF_W - .14, .70, .03, .04), glassMat('glass'));
       gl.userData = { region: 'doors', assemblyId: 'doors', detail: 'doors.glass' };
-      gl.position.set(0, .24, .045);
+      gl.position.set(0, .52, -.055);
+      const lowerGlass = gl.clone();
+      lowerGlass.position.set(0, -.43, -.055);
+      leaf.add(lowerGlass);
       leaf.add(gl);
       leaves.push({ pivot, dir });
     }
@@ -435,17 +439,17 @@ window.SchoolBusV3 = { create(T) {
     [-1.62, .14], [{ id: 'seats.cushion', layer: 'interior' }, { id: 'seats.back', layer: 'interior' },
       { id: 'seats.belt', layer: 'interior' }, 'seats.frame']);
   {
-    const SX0 = BOX_X + 2.20, ROWS = 7, GAP = .76;
+    const SX0 = BOX_X + 2.20, ROWS = 5, GAP = .76;
     for (const side of [-1, 1]) {
       for (let row = 0; row < ROWS; row++) {
         const x = SX0 + row * GAP;
         // Cushion: a firm board, not a soft sofa, so a child is not thrown up in
         // a crash and cannot sink into it.
         into(seats, 'interior', 'seats.cushion', softBox(T, .58, .13, .78, .05), 'seat',
-          { name: 'Seat cushion', pos: [x, -.78, side * .62], rot: [0, Math.PI / 2, 0] });
+          { name: 'Seat cushion', pos: [x, -.78, side * .62] });
         // The tall back doubles as the wall that catches a child thrown forward.
         into(seats, 'interior', 'seats.back', softBox(T, .15, .96, .80, .07), 'seatDim',
-          { name: 'Seat back', pos: [x + .30, -.30, side * .62], rot: [0, Math.PI / 2, 0] });
+          { name: 'Seat back', pos: [x + .30, -.30, side * .62] });
         into(seats, 'interior', 'seats.belt', box(.07, .09, .70), 'ink',
           { name: 'Seat belt', pos: [x + .28, -.32, side * .62], rot: [.55, 0, 0], roughness: .6 });
         into(seats, 'interior', 'seats.frame', box(.06, .50, .08), 'steel',
@@ -457,9 +461,9 @@ window.SchoolBusV3 = { create(T) {
     // The rearmost bench runs the full width across the tail, tucked in far
     // enough that its back does not poke through the rear panel.
     into(seats, 'interior', 'seats.cushion', softBox(T, .58, .13, HALF_W * 2 - .36, .05), 'seat',
-      { name: 'Rear bench', pos: [HALF_LEN - .96, -.78, 0], rot: [0, Math.PI / 2, 0] });
+      { name: 'Rear bench', pos: [HALF_LEN - .96, -.78, 0] });
     into(seats, 'interior', 'seats.back', softBox(T, .15, .96, HALF_W * 2 - .36, .07), 'seatDim',
-      { name: 'Rear bench back', pos: [HALF_LEN - .70, -.30, 0], rot: [0, Math.PI / 2, 0] });
+      { name: 'Rear bench back', pos: [HALF_LEN - .70, -.30, 0] });
     into(seats, 'ghost', null, box(HALF_LEN - BOX_X - .60, 1.10, HALF_W * 2 - .30), 'seat',
       { pos: [(BOX_X + HALF_LEN) / 2 + .20, -.70, 0] });
   }

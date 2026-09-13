@@ -1,0 +1,18 @@
+/* Model-first display: controls and reading occupy their own layout cells. */
+.studio{grid-template-columns:minmax(0,1fr) clamp(280px,25vw,360px)}
+.stage-heading,.stage-watermark,.regions-footer,.small-title{display:none}
+.regions{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:22px;background:#f7f8f2;overflow:visible}
+.regions summary{font-weight:700;cursor:pointer}.regions #region-list{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:10px}
+.region-button{padding:8px 5px;gap:4px;min-height:48px}.region-button>i{display:none}.region-button strong{font-size:11px}
+.stage-tools{flex-wrap:wrap;justify-content:center}.stage{grid-template-rows:44px minmax(0,1fr) auto}.stage-tools .gesture-hint{display:none}
+.opening-note{font-size:12px;line-height:1.7;color:var(--muted)}.manual-action{margin-top:12px}.manual-action summary{font-size:11px}
+.segments button{min-height:44px;font-size:12px}#open-part{background:#257969;color:white}#open-part[aria-pressed=true]{background:#e8ecdf;color:#233f3b}
+.model-label{background:#fff;border-radius:6px;max-width:180px;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:800px){
+ .studio{display:flex}.stage{position:relative;top:auto;height:54dvh;min-height:340px;max-height:520px;grid-template-rows:38px minmax(0,1fr) auto}
+ .stage-tools{padding:8px;gap:6px}.stage-tools button{min-height:38px;min-width:34px}.inspector{overflow:visible;padding:20px;scroll-margin:0}
+ .regions{order:initial}.regions #region-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible}.region-button{min-width:0;width:100%}
+ .english{font-size:19px}.inspector h1{font-size:27px}.detail-list{grid-template-columns:1fr 1fr}
+}
+
+.book-reference img{width:100%;border-radius:9px;margin-top:10px}.book-reference{margin-top:20px}.opening-note{margin:10px 0}

@@ -4,31 +4,32 @@
   <link rel="stylesheet" href="../../shared/pwa.css">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="小小探索家">
-</head>
+<link rel="stylesheet" href="../shared/exhibit.css?v=1"></head>
 <body>
 <header class="app-header"><a class="brand" href="../index.html"><b>🚌</b>LITTLE SCHOOL BUS<small>走进一辆黄色校车</small></a><nav class="lab-navigation" data-lab-id="schoolbus" aria-label="实验室导航"></nav><div class="header-actions"><span id="progress-text">0 / 47</span><button id="language" aria-pressed="true">中英双语</button></div></header>
 <main class="studio">
- <nav class="regions" aria-label="校车部位"><p class="small-title">THE BUS</p><div id="region-list"></div><p class="regions-footer">先认识整辆校车。<br>再靠近一个部位，<br>发现里面的秘密。</p></nav>
+
  <section class="stage" aria-label="校车三维观察台">
   <div class="stage-top"><button id="whole-bus">整辆校车</button><span id="crumb-region" class="crumb"></span><span id="crumb-detail" class="crumb"></span><span id="depth-status">整体观察</span></div>
   <div id="viewport" tabindex="0" aria-label="拖动旋转，滚轮或双指缩放，右键拖动或双指平移，双击部件靠近"><div class="stage-heading" aria-hidden="true"><span class="live-dot"></span> YOUR SCHOOL BUS</div><div class="stage-watermark" aria-hidden="true">HELLO,<br> BUS.</div><span id="model-label" class="model-label" hidden></span><div id="load-error" hidden>三维模型暂时无法显示。可以继续阅读部件的英文介绍；请使用支持 WebGL 的浏览器。</div></div>
-  <div class="stage-tools"><div class="tool-group"><button id="home-view" aria-label="恢复整辆视角">⌂ 整体</button><button id="back-view" aria-label="返回上一级">↑ 上一级</button><span class="divider"></span><button id="zoom-out" aria-label="缩小">−</button><button id="zoom-in" aria-label="放大">＋</button><button id="auto-rotate" aria-label="自动旋转" aria-pressed="false">↻</button></div><span class="gesture-hint">拖动旋转 · 滚轮深入</span><div class="tool-group"><button id="side-view">侧面</button><button id="top-view">俯视</button><button id="explode-button" aria-pressed="false">拆解</button></div></div>
+  <div class="stage-tools"><div class="tool-group"><button id="home-view" aria-label="恢复整辆视角">⌂ 整体</button><button id="back-view" aria-label="返回上一视角">← 返回视角</button><span class="divider"></span><button id="zoom-out" aria-label="缩小">−</button><button id="zoom-in" aria-label="放大">＋</button><button id="auto-rotate" aria-label="自动旋转" aria-pressed="false">↻</button></div><span class="gesture-hint">拖动旋转 · 滚轮缩放</span><div class="tool-group"><button id="side-view">侧面</button><button id="top-view">俯视</button><button id="explode-button" aria-pressed="false">拆解</button></div></div>
  </section>
  <aside class="inspector" aria-label="当前部位的说明和操作">
+  <details class="regions" id="part-directory"><summary>部件目录 · Explore parts</summary><p class="small-title">THE BUS</p><div id="region-list"></div><p class="regions-footer">先认识整辆校车。<br>再靠近一个部位，<br>发现里面的秘密。</p></details>
   <p class="eyebrow" id="lesson-category">A WORLD INSIDE</p><h1 id="part-name">Your school bus</h1><p id="part-zh-name" class="chinese-name">你的校车</p>
   <button id="back-part" class="back-part" hidden>← 看完整部件</button>
   <p id="part-en" class="english">Look closer. There is a whole world inside this bus.</p><p id="part-zh" class="translation">靠近一点，这辆校车里面还有一个世界。</p><button id="speak" class="speak"><span>听英文 · Listen</span></button><p id="speech-status" class="speech-status" role="status"></p>
   <p class="observe-tip"><b>试试看 · TRY IT</b><span id="part-tip">拖动校车，从不同方向看看。点一个部位，或把鼠标放在它上面向前滚动。</span></p>
   <details id="principle-box" hidden><summary>它是怎样工作的？</summary><p id="part-principle" class="principle"></p></details>
   <section id="explore-section" class="explore-list" hidden><div class="section-label"><span>继续往里面看</span><span id="detail-count"></span></div><div id="detail-list" class="detail-list"></div></section>
-  <section id="operation-panel" class="operation-panel" hidden><div class="section-label"><span>观察方式</span><span id="observation-state">随缩放变化</span></div><div class="segments" aria-label="观察方式"><button data-view="auto" aria-pressed="true">自动</button><button data-view="outside" aria-pressed="false">外观</button><button data-view="inside" aria-pressed="false">剖面</button></div>
-   <div id="mechanism-controls"><div class="animation-row"><button id="mechanism-play" aria-pressed="false">▶ 看它怎样工作</button><button id="mechanism-step">单步</button><button id="slow-play" aria-pressed="true">慢速</button></div><div class="range-row"><label for="mechanism">动作</label><input id="mechanism" type="range" min="0" max="100" value="0"><output id="mechanism-value">0%</output></div></div>
+  <section id="operation-panel" class="operation-panel" hidden><div class="section-label"><span>观察方式</span><span id="observation-state">完整外观</span></div><div class="segments"><button id="focus-part">靠近观察</button><button id="open-part">打开结构</button></div><p id="opening-note" class="opening-note"></p>
+   <div id="mechanism-controls"><div class="animation-row"><button id="mechanism-play" aria-pressed="false">▶ 看它怎样工作</button><button id="mechanism-step">单步</button><button id="slow-play" aria-pressed="true">慢速</button></div><details class="manual-action"><summary>自己动手调节</summary><div class="range-row"><label for="mechanism">动作</label><input id="mechanism" type="range" min="0" max="100" value="0"><output id="mechanism-value">0%</output></div></details></div>
    <p id="mechanism-help" class="mechanism-note"></p>
   </section>
   <details class="book-reference"><summary>对照绘本里的校车</summary><img src="../../books/schoolbus/assets/01_parts_c_v2.webp" alt="绘本中的黄色校车：长车头、两排车窗、侧面红色停车牌与车头警示灯" style="width:100%;border-radius:9px;margin-top:10px"><button id="book-view" class="speak">回到绘本视角</button><p class="principle">以部件图核对外形与配色：校车黄车身、伸出的长车头与格栅、侧面一整排车窗、红色八角停车牌、车顶警示灯和四个黑轮胎。图片没有提供工程尺寸。</p></details>
   <p class="fine-print">依据同主题绘本图片重建：校车黄车身、车头前伸的发动机舱、侧面通长车窗、红色停车牌与车顶警示灯。图中未展示的内部结构作教学补全，非工程尺寸模型。</p>
  </aside>
 </main>
-<script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/discovery-progress.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="detail-parts.js"></script><script src="v3/schoolbusframe.js?v=4"></script><script src="v3/app.js?v=4"></script>
+<script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/discovery-progress.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="detail-parts.js"></script><script src="v3/schoolbusframe.js?v=6"></script><script src="../shared/exhibit.js?v=1"></script><script src="v3/app.js?v=6"></script>
   <script src="../../shared/pwa.js"></script>
 </body></html>
