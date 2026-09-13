@@ -33,6 +33,13 @@ const cases=[['airplane','airplaneLab','AIRPLANE_DETAILS','fuselage','engines'],
    await page.locator(`[data-detail="${d.id}"]`).evaluate(e=>e.click());await frame();state=await snap();
    assert.equal(state.detail,d.id);assert.equal(state.changedOpacity,0);assert.equal(state.modelId,identity);assert.equal(await page.locator('#part-en').textContent(),d.en);assert.equal(await page.locator('#part-zh').textContent(),d.zh);
   }
+  if(id==='schoolbus')for(const [region,detailId]of[['cab','cab.glass'],['body','body.windows'],['roof','roof.beacon']]){
+   await select(region);await open();await page.locator(`[data-detail="${detailId}"]`).evaluate(e=>e.click());await frame();
+   await page.locator('#open-part').click();await frame();assert.equal((await snap()).detail,null);
+   await page.locator('#open-part').click();await frame();const reopened=await snap();
+   if(region!=='roof')assert.ok(reopened.assemblies.find(a=>a.id==='body').exteriorPosition[2]<-3,'reopen uses assembly plan, not stale glass detail');
+   else assert.equal(reopened.assemblies.find(a=>a.id==='roof').exteriorPosition[2],0,'reopen roof overview restores moved skin');
+  }
   const moving={airplane:'engines',rocket:'satellite',schoolbus:'stopsign',doubledecker:'doors',station:'solar'}[id];
   await select(moving);await page.locator('#mechanism-play').click();const tick=(await snap()).simulationTime;await page.waitForFunction(({api,tick})=>window[api].snapshot().simulationTime>tick+.1,{api,tick});await page.locator('#mechanism-play').click();const paused=(await snap()).simulationTime;await frame();assert.equal((await snap()).simulationTime,paused);
   await page.evaluate(()=>{window.spoken=[];speechSynthesis.speak=u=>spoken.push(u.text);});await page.locator('#speak').click();assert.ok((await page.evaluate(()=>spoken)).length);

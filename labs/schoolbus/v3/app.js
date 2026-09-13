@@ -8,43 +8,7 @@
  let storage; try { storage = localStorage; } catch { storage = { getItem: () => null, setItem: () => { } }; }
  const journal = DiscoveryProgress.create(storage, 'little-school-bus:whole-bus:v1', { parts: [...lessons, ...details].map(p => p.id), actions: ['open', 'spin', 'explode'], tasks: [] });
  const speech = LabSpeech.create($('speak'), $('speech-status'));
- const notes = {
-  body: '车身是一整条钢制外壳，包住里面的座椅和地板。侧面两条黑色防擦条同时也是加强筋，让车身侧面更抗撞。',
-  roof: '车顶做成圆拱形，比平板更能承重。翻车时拱形车顶能撑住冲击，保护车厢里的人。车顶的两扇逃生窗向外推开。',
-  hood: '发动机装在车头前方的舱盖下面，这叫"前置"。撞车时车头这段先被压扁、吸收能量，车厢里的人就更安全。',
-  cab: '驾驶室放在车头前面，视野最好。方向盘通过转向机构带动前轮，司机转很多圈前轮才转一个小角度，才省力。',
-  doors: '两片折门各自绕铰链转，折起来占的地方小，开门时不会伸到车外划到人。车尾还有一扇安全门，从里面一推就开。',
-  seats: '座椅是硬板不是软沙发，靠背做得特别高。撞车时孩子往前甩会被高靠背接住，这叫隔舱化保护，是校车不用普通安全带也安全的原因。',
-  aisle: '过道必须一直保持空旷。紧急疏散时它是一条直路，不用绕弯就能最快跑到车尾的安全门。',
-  stopsign: '停车牌由司机座上的一个开关控制。伸出去后它比车身宽出一截，同时还有一盏红灯亮起，提醒后方车辆必须停下。',
-  lights: '黄灯先闪，表示"请注意，校车要停了"；红灯接着闪，表示"必须停"。两级预警让后面的车有时间慢慢减速。',
-  wheels: '轮胎靠花纹把积水挤走，橡胶才能直接碰到路面。前轴的一对车轮还负责转向，后轴承担更重的车身。'
- };
- const tips = {
-  body: '先看这辆校车长长的黄色车身，数一数侧面有几扇车窗。',
-  roof: '从车头方向看车顶的弧度，再看看顶上那两个方方的逃生窗。',
-  hood: '转到车头，找找伸出来的舱盖、格栅和两个圆圆的头灯。',
-  cab: '放大到驾驶室，找一找大方向盘和它前面的仪表台。',
-  doors: '拖动动作滑杆，看两扇车门怎样从中间折开。',
-  seats: '走进车厢，看看一排排蓝座椅和高高的靠背。',
-  aisle: '沿着中间的过道一直往后走，看看它通到哪里。',
-  stopsign: '拖动滑杆，看那块红色八角牌怎样从车身侧面伸出来。',
-  lights: '转到车头正面，数一数车顶上有几盏警示灯，哪一盏先亮。',
-  wheels: '转到侧面，比较前轮和后轮，看看亮闪闪的轮毂。'
- };
- const helps = {
-  body: '车身位置固定；拆解后能看到黄色外壳和里面的座椅、地板分开。',
-  roof: '车顶盖住车厢；放大后能看到拱形顶板和两扇逃生窗。',
-  hood: '舱盖在车头前方；拆解后能看到它和后面的驾驶室分开。',
-  cab: '驾驶室在车身最前面；放大后能看到方向盘、仪表和驾驶座。',
-  doors: '拖动动作滑杆：两片门扇各自绕铰链向外折开，就像到站开门。',
-  seats: '座椅固定在地板上；打开剖面能看到一排排座椅和高靠背。',
-  aisle: '过道在车厢正中；只有保持空着，紧急时才能最快疏散。',
-  stopsign: '拖动动作滑杆：停车牌从贴着车身的位置摆出，直到和车身垂直。',
-  lights: '警示灯装在车顶前部；放大后能看清红灯和黄灯的排列。',
-  wheels: '车轮压在车轴两端；放大后能看清花纹、轮毂和轮罩。'
- };
-
+ const notes = Object.fromEntries(lessons.map(p=>[p.id,p.zh]));
 // The bus is long and low, so the flank reads best from the side and the
 // underside groups from below, where the floor and axles separate.
 // yaw 0 puts the camera on +Z, straight at the flank, which is how the book draws
@@ -70,13 +34,13 @@ const look0 = new T.Vector3(-.30, -.30, 0);
 let yaw = -2.52, pitch = .20, distance = 19, overviewDistance = 19, explosion = 0, targetExplosion = 0, reveal = 0, near = 0;
 const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look: look.clone() };
  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches, pickables = [], surfaces = [], materialOriginal = new Map(), materialTransparency = new Map();
- let activeFit = 6, clipping = new T.Plane(), lastFrame = 0;
+ let activeFit = 6, clipping = new T.Plane(), lastFrame = 0, lastRenderKey = '';
 
  const exhibit=LabExhibit.create('schoolbus',T),viewHistory=[];let openingView=null;
  const captureView=()=>({yaw:target.yaw,pitch:target.pitch,distance:target.distance,look:target.look.clone()});
  function restoreView(v){if(!v)return;target.yaw=v.yaw;target.pitch=v.pitch;target.distance=v.distance;target.look.copy(v.look);autoRotate=false;}
  function remember(){viewHistory.push(captureView());if(viewHistory.length>20)viewHistory.shift();}
- function closeExhibit(immediate=false){exhibit.close(immediate);mode='outside';playing=false;mechanism=0;detail=null;}
+ function closeExhibit(immediate=false){if(active)active.inspectionDetail=null;exhibit.close(immediate);mode='outside';playing=false;mechanism=0;detail=null;}
  function toggleOpening(){
   if(exhibit.opened){closeExhibit();restoreView(openingView);openingView=null;}
   else if(active){openingView=captureView();targetExplosion=0;explosion=0;exhibit.open(active);mode='inside';remember();focus();
@@ -90,16 +54,17 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
  function sameRegion(id) { return assemblies.filter(a => a.region === id); }
  function worldCenter(a) { return a.group.localToWorld(a.center.clone()); }
  function nearestAssembly(region) { return sameRegion(region).sort((a, b) => worldCenter(a).distanceToSquared(camera.position) - worldCenter(b).distanceToSquared(camera.position))[0]; }
- function fit(radius) { return Math.max(1.6, radius / Math.sin(T.MathUtils.degToRad(24)) * 1.06 * Math.max(1, 1.05 / camera.aspect)); }
- function detailObjects() { return active && detail ? [].concat(active.details[detail] || []) : []; }
+ function fit(radius) { return Math.max(1.6, radius / Math.sin(T.MathUtils.degToRad(camera.fov/2)) * 1.06 * Math.max(1, 1.05 / camera.aspect)); }
+ function detailObjects() { return active && detail ? (active.detailMeshes[detail]||[]) : []; }
  function detailCenter() {
   const groups = detailObjects(); if (!groups.length) return worldCenter(active);
   const box = new T.Box3();
-  groups.forEach(g => g.children.forEach(c => box.expandByObject(c)));
+  groups.forEach(g => box.expandByObject(g));
   return box.isEmpty() ? worldCenter(active) : box.getCenter(new T.Vector3());
  }
  function focus() {
   if (!active || !camera) return;
+  if(detail||['stopsign','wheels'].includes(active.region)){const v=SchoolBusInspection.focus(T,active,detail,detailObjects());target.look.copy(v.point);target.distance=fit(v.radius);target.yaw=v.yaw;target.pitch=v.pitch;autoRotate=false;return;}
   const point = detail ? detailCenter() : worldCenter(active); target.look.copy(point);
   let r = active.radius;
   if (detail) {
@@ -111,8 +76,8 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
   target.distance = Math.max(fit(r), 2.0); activeFit = fit(active.radius); autoRotate = false;
   const a = angles[active.region] || [-.6, .3]; target.yaw = a[0]; target.pitch = a[1];
  }
- function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}exhibit.select(a);if(active!==a){playing=false;mechanism=0;}active=a;detail=null;mode=exhibit.opened?'inside':'outside';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
- function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(!exhibit.opened){renderLesson();return;}detail=id;journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
+ function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}a.inspectionDetail=null;exhibit.select(a);if(active!==a){playing=false;mechanism=0;}active=a;detail=null;mode=exhibit.opened?'inside':'outside';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
+ function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(!exhibit.opened){renderLesson();return;}detail=id;mechanism=0;playing=false;active.inspectionDetail=id;exhibit.select(active);if(!exhibit.opened)exhibit.open(active);journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
  function home() {remember();closeExhibit(); active = null; detail = null; mode='outside'; playing = false; autoRotate = false; targetExplosion = 0; target.look.copy(look0); target.yaw = -2.52; target.pitch = .20; target.distance = overviewDistance; renderLesson(); }
  function back(){restoreView(viewHistory.pop());renderLesson();}
  function renderLesson() {
@@ -128,17 +93,17 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
   $('explore-section').hidden = !children.length; $('detail-count').textContent = children.length + ' 个发现'; $('detail-list').replaceChildren();
   children.forEach(d => { const b = document.createElement('button'); b.className = 'detail-button'; b.dataset.detail = d.id; b.setAttribute('aria-pressed', detail === d.id); b.innerHTML = d.name + '<small>' + d.zhName + '</small>'; b.disabled=!exhibit.opened;b.onclick=()=>selectDetail(d.id); $('detail-list').append(b); });
   $('operation-panel').hidden = !active;
-  $('mechanism-help').textContent = active ? helps[active.region] : '';
+  $('mechanism-help').textContent = active ? (detail ? p.tip : '拖动滑杆或播放，观察部件动作；停止后可逐步查看。') : '';
   const opened=!!exhibit.opened;$('open-part').textContent=opened?'合上 · 恢复外观':exhibit.plan(active)?.label||'打开结构';$('open-part').setAttribute('aria-pressed',opened);
   $('opening-note').textContent=opened?'教学展示：覆盖件暂时打开，内部保留安装位置。合上可恢复模型和打开前的视角。':'缩放只改变距离。先主动打开模型，再探索内部细节。';
   if(active?.defaultVisible===false)$('opening-note').textContent='拓展教学部件：这部分没有出现在本书的主图中，选中时才显示。';
-  $('mechanism-controls').hidden=!active||!['doors', 'stopsign'].includes(active.region);if($('mechanism-controls').hidden)$('mechanism-help').textContent='';$('part-zh-name').after($('operation-panel'));$('operation-panel').after($('explore-section'));updateButtons();
+  $('mechanism-controls').hidden=!active||['doors.step','lights.bracket'].includes(detail)||(!['doors','stopsign','lights'].includes(active.region)&&detail!=='hood.radiator');if($('mechanism-controls').hidden)$('mechanism-help').textContent='';$('part-zh-name').after($('operation-panel'));$('operation-panel').after($('explore-section'));updateButtons();
  }
  function updateButtons() { document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === mode)); $('mechanism-play').setAttribute('aria-pressed', playing); $('mechanism-play').textContent = playing ? 'Ⅱ 暂停观察' : '▶ 看它怎样工作'; $('auto-rotate').setAttribute('aria-pressed', autoRotate); $('explode-button').setAttribute('aria-pressed', targetExplosion > 0); $('explode-button').textContent = targetExplosion ? '组装' : '拆解'; $('slow-play').setAttribute('aria-pressed', slow); }
  lessons.forEach((p, i) => { const b = document.createElement('button'); b.className = 'region-button'; b.dataset.part = p.id; b.setAttribute('aria-pressed', false); b.innerHTML = '<i>' + String(i + 1).padStart(2, '0') + '</i><span><strong>' + p.name + '</strong><small>' + p.zhName + '</small></span>'; b.onclick = () => { if (camera) selectAssembly(nearestAssembly(p.id)); else { $('part-name').textContent = p.name; $('part-en').textContent = p.en; $('part-zh').textContent = p.zh; } }; $('region-list').append(b); });
  $('speak').onclick = () => speech.say($('part-name').textContent + '. ' + $('part-en').textContent, true);
  $('language').onclick = () => { const only = document.body.classList.toggle('english-only'); $('language').textContent = only ? 'English only' : '中英双语'; $('language').setAttribute('aria-pressed', !only); };
- $('book-view').onclick = $('whole-bus').onclick = $('home-view').onclick = home; $('back-view').onclick=back;$('back-part').onclick=()=>{detail=null;renderLesson();};$('focus-part').onclick=()=>{remember();focus();renderLesson();};$('open-part').onclick=toggleOpening;
+ $('book-view').onclick = $('whole-bus').onclick = $('home-view').onclick = home; $('back-view').onclick=back;$('back-part').onclick=()=>{detail=null;active.inspectionDetail=null;exhibit.select(active);if(!exhibit.opened)exhibit.open(active);focus();renderLesson();};$('focus-part').onclick=()=>{remember();focus();renderLesson();};$('open-part').onclick=toggleOpening;
  $('zoom-in').onclick = () => { target.distance = Math.max(1.4, target.distance * .8); }; $('zoom-out').onclick = () => { target.distance = Math.min(70, target.distance * 1.25); };
  $('side-view').onclick = () => { target.pitch = .04; target.yaw = 0; autoRotate = false; updateButtons(); }; $('top-view').onclick = () => { target.pitch = 1.50; target.yaw = 0; autoRotate = false; updateButtons(); }; $('auto-rotate').onclick = () => { autoRotate = !autoRotate; updateButtons(); };
  $('explode-button').onclick = () => {closeExhibit(true); targetExplosion = targetExplosion ? 0 : 1; detail = null; active = null; target.look.copy(look0); target.distance = overviewDistance * (targetExplosion ? 1.28 : 1); playing = false; record(); renderLesson(); };
@@ -155,15 +120,18 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
   renderer = new T.WebGLRenderer({ antialias: true, alpha: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1; renderer.localClippingEnabled = true; renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
   const canvas = renderer.domElement; $('viewport').prepend(canvas); canvas.setAttribute('aria-hidden', 'true'); canvas.onwebglcontextlost = e => { e.preventDefault(); $('load-error').hidden = false; };
   scene.add(new T.HemisphereLight(0xf4f8ff, 0x9bafbd, 2.5)); const key = new T.DirectionalLight(0xfff7e9, 3.2); key.position.set(-7, 14, 11); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); Object.assign(key.shadow.camera, { left: -14, right: 14, top: 12, bottom: -12, near: .1, far: 60 }); key.shadow.normalBias = .025; key.shadow.bias = -.0003; scene.add(key); const fill = new T.DirectionalLight(0xd6edff, 1.4); fill.position.set(6, 5, -8); scene.add(fill);
+  const envScene=new T.Scene();envScene.background=new T.Color(0x7696b1);
+  for(const [x,y,z,w,h]of[[-6,5,2,5,8],[5,6,-3,3,7],[0,9,0,12,3],[0,3,8,1.4,8],[2,3,-8,1.3,8],[-8,2,-2,2,7]]){const card=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({color:0xffffff,side:T.DoubleSide}));card.position.set(x,y,z);card.lookAt(0,0,0);envScene.add(card);}
+  const pmrem=new T.PMREMGenerator(renderer);const envTarget=pmrem.fromScene(envScene,.06);scene.environment=envTarget.texture;pmrem.dispose();envScene.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});
   bus = SchoolBusV3.create(T); assemblies = bus.assemblies; scene.add(bus.root);
   for (const a of assemblies) {
-   a.group.userData.assemblyId = a.id; a.group.userData.region = a.region; a.base = a.group.position.clone();
+   a.inspectionPlan=p=>SchoolBusInspection.plan(p,a);a.group.userData.assemblyId = a.id; a.group.userData.region = a.region; a.base = a.group.position.clone();
    a.offset = new T.Vector3(...(offsets[a.id] || [0, 0, 0]));
    for (const [layer, root] of [['exterior', a.exterior], ['interior', a.interior], ['ghost', a.ghost]]) root.traverse(o => {
     if (!o.material) return;
     // Independent materials isolate observation state between assemblies.
     if (Array.isArray(o.material)) o.material = o.material.map(m => m.clone()); else o.material = o.material.clone();
-    const materials = [].concat(o.material), d = inherit(o, 'detail');
+    const materials = [].concat(o.material);materials.forEach(m=>{if(!o.userData.glass)m.envMapIntensity=.18;});const d = inherit(o, 'detail');
     // Only the shell casts shadows: the shadow pass would otherwise redraw the
     // whole interior for a shadow nobody can see inside a closed body.
     surfaces.push({ object: o, assembly: a, layer, detail: d, materials, shadow: o.castShadow && layer === 'exterior' });
@@ -171,8 +139,8 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
     if (layer !== 'ghost' && o.isMesh) { o.userData.pickAssembly = a.id; o.userData.pickDetail = d; pickables.push(o); }
    });
   }
-  const ground = new T.Mesh(new T.PlaneGeometry(80, 80), new T.ShadowMaterial({ opacity: .13 })); ground.rotation.x = -Math.PI / 2; ground.position.y = -2.06; ground.receiveShadow = true; scene.add(ground);
-  const grid = new T.GridHelper(26, 26, 0xd1dee7, 0xe0e8ef); grid.position.y = -2.055; grid.material.transparent = true; grid.material.opacity = .26; scene.add(grid);
+  const ground = new T.Mesh(new T.PlaneGeometry(80, 80), new T.ShadowMaterial({ opacity: .13 })); ground.rotation.x = -Math.PI / 2; ground.position.y = -2.285; ground.receiveShadow = true; scene.add(ground);
+  const grid = new T.GridHelper(26, 26, 0xd1dee7, 0xe0e8ef); grid.position.y = -2.28; grid.material.transparent = true; grid.material.opacity = .26; scene.add(grid);
   function resize() {
    const b = $('viewport').getBoundingClientRect(); renderer.setSize(b.width, b.height, false); camera.aspect = b.width / b.height; camera.updateProjectionMatrix();
    // The bus is long and low, so it is the LENGTH that has to fit: at distance d
@@ -197,7 +165,18 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
   canvas.ondblclick = e => { if (drag < 6) pick(hit(e.clientX, e.clientY), true); };
   canvas.addEventListener('wheel', e => { e.preventDefault();  target.distance = clamp(target.distance * Math.exp(e.deltaY * .0012), 1.4, 70); }, { passive: false });
   $('viewport').onkeydown = e => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', 'Escape'].includes(e.key)) { e.preventDefault(); if (e.key === 'Escape') back(); if (e.key === 'ArrowLeft') target.yaw -= .16; if (e.key === 'ArrowRight') target.yaw += .16; if (e.key === 'ArrowUp') target.pitch = clamp(target.pitch + .12, -1.15, 1.50); if (e.key === 'ArrowDown') target.pitch = clamp(target.pitch - .12, -1.15, 1.50); if (e.key === '+' || e.key === '=') target.distance = Math.max(1.4, target.distance * .8); if (e.key === '-') target.distance = Math.min(70, target.distance * 1.25); } };
-  window.busLab = {
+  function inspectionReport(){
+   if(!active||!detail)return null;
+   const v=SchoolBusInspection.focus(T,active,detail,detailObjects()),points=[],meshes=[];
+   detailObjects().forEach(g=>g.traverse(o=>{if(o.isMesh)meshes.push(o);}));
+   meshes.sort((a,b)=>new T.Box3().setFromObject(a).getCenter(new T.Vector3()).distanceToSquared(v.point)-new T.Box3().setFromObject(b).getCenter(new T.Vector3()).distanceToSquared(v.point));
+   for(const o of meshes.slice(0,8)){const p=o.geometry.attributes.position;for(let i=0;i<p.count;i+=Math.max(1,Math.floor(p.count/12))){const w=o.localToWorld(new T.Vector3().fromBufferAttribute(p,i));if(w.distanceTo(v.point)<v.radius*1.2)points.push(w);}}
+   const right=new T.Vector3(1,0,0).applyQuaternion(camera.quaternion),up=new T.Vector3(0,1,0).applyQuaternion(camera.quaternion);for(const x of[-.6,-.3,0,.3,.6])for(const y of[-.6,-.3,0,.3,.6])points.push(v.point.clone().addScaledVector(right,x*v.radius).addScaledVector(up,y*v.radius));
+   const b=canvas.getBoundingClientRect();let onScreen=0,visible=0;const blockers={};
+   for(const w of points){const p=w.clone().project(camera);if(Math.abs(p.x)>.95||Math.abs(p.y)>.95||p.z>1)continue;onScreen++;const h=hit(b.left+(p.x*.5+.5)*b.width,b.top+(-p.y*.5+.5)*b.height);if(h?.object.userData.pickDetail===detail)visible++;else{const key=h?.object.userData.pickDetail||h?.object.userData.pickAssembly||'empty';blockers[key]=(blockers[key]||0)+1;}}
+   return {detail,points:points.length,onScreen,visible,blockers};
+  }
+  window.busLab = {inspectionReport,
    setView: (y, p, d, x = 0) => { autoRotate = false; active = null; detail = null; mode='outside'; targetExplosion = 0; renderLesson(); target.yaw = y; target.pitch = p; target.distance = d; target.look.set(x, -.6, 0); },
    select: id => selectAssembly(nearestAssembly(id)), focusDetail: id => selectDetail(id),
    snapshot: () => ({displayVersion:1,...exhibit.snapshot(),history:viewHistory.length, generation: 4, changedOpacity: surfaces.filter(s => s.materials.some(m => Math.abs(m.opacity - materialOriginal.get(m).opacity) > 1e-6)).length, modelId: bus.root.uuid, selected: active?.region || null, assembly: active?.id || null, detail, near, reveal, mode, playing, simulationTime: simTime, level: mechanism, explosion, meshCount: pickables.length, geometry: bus.counts, visited: journal.read().found, camera: { yaw, pitch, distance, target: look.toArray() }, assemblies: assemblies.map(a => ({ id: a.id, region: a.region, exterior: a.exterior.visible, interior: a.interior.visible, ghost:a.ghost.visible,exteriorPosition:a.exterior.position.toArray(),position:a.group.position.toArray() })), renderer: renderer.info.render }),
@@ -215,13 +194,16 @@ const look = new T.Vector3(-.30, -.30, 0), target = { yaw, pitch, distance, look
   if (playing) { simTime += dt * (slow ? .55 : 1); mechanism = .5 - .5 * Math.cos(simTime); record(); }
   $('mechanism').value = Math.round(mechanism * 100); $('mechanism-value').textContent = Math.round(mechanism * 100) + '%';
   $('depth-status').textContent=explosion>.1?'拆解展示':exhibit.opened?'已打开 · '+(data()?.zhName||'结构'):'自由观察';$('observation-state').textContent=exhibit.opened?'手动打开':'完整外观';
-  bus.update({ time: simTime, mechanism: mechanism > .001, level: mechanism, region: active?.region });
-  for (const a of assemblies) { a.group.position.copy(a.base).addScaledVector(a.offset, explosion); if (a.update) a.update({ time: simTime, mechanism: mechanism > .001, level: mechanism, region: active?.region }); }
+  bus.update({ time: simTime, mechanism: mechanism > .001, level: mechanism, region: active?.region,detail });
+  for (const a of assemblies) { a.group.position.copy(a.base).addScaledVector(a.offset, explosion); if (a.update) a.update({ time: simTime, mechanism: mechanism > .001, level: mechanism, region: active?.region,detail }); }
   exhibit.step(ease,assemblies,surfaces,materialOriginal,explosion,active);
+  SchoolBusInspection.apply(active,detail,!!exhibit.opened,assemblies,mechanism,playing,T);
   bus.root.updateMatrixWorld(true);
   const label = $('model-label'); label.hidden = !active || near < .2;
-  if (!label.hidden) { const p = (detail ? detailCenter() : worldCenter(active)).project(camera), b = $('viewport').getBoundingClientRect(); label.textContent = data().name; label.hidden = Math.abs(p.x) > 1 || Math.abs(p.y) > 1 || p.z > 1; label.style.left = (p.x * .5 + .5) * b.width + 'px'; label.style.top = (-p.y * .5 + .5) * b.height - 20 + 'px'; }
-  renderer.render(scene, camera);
+  if (!label.hidden) {label.textContent=data().name;label.style.left='16px';label.style.top='16px';label.style.transform='none';}
+  // Keep idle glass refraction from redrawing the complete scene continuously.
+  const renderKey=[yaw,pitch,distance,...look.toArray(),explosion,exhibit.amount,active?.id,detail,mechanism,renderer.domElement.width,renderer.domElement.height].join('|');
+  if(renderKey!==lastRenderKey){renderer.render(scene,camera);lastRenderKey=renderKey;}
  }
  window.addEventListener('pagehide', () => { playing = false; speech.stop(); });
  try { init(); } catch (e) { console.error('School bus v3', e); $('load-error').hidden = false; }

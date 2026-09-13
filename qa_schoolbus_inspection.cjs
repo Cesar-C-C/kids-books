@@ -1,0 +1,23 @@
+// Real browser regression for the five picture-book exhibits.
+const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict');
+const root=__dirname,out=path.join(root,'.qa-labs');fs.mkdirSync(out,{recursive:true});
+const server=http.createServer((req,res)=>{let f=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname).replace(/^\/kids-books/,''));if(!f.startsWith(root+path.sep)){res.writeHead(403);return res.end();}if(fs.existsSync(f)&&fs.statSync(f).isDirectory())f=path.join(f,'index.html');if(!fs.existsSync(f)){res.writeHead(404);return res.end();}res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.webp':'image/webp','.png':'image/png'})[path.extname(f)]||'application/octet-stream');fs.createReadStream(f).pipe(res);});
+
+(async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({channel:'chrome',headless:true,args:['--enable-webgl','--use-angle=swiftshader','--enable-unsafe-swiftshader']});try{
+ const page=await browser.newPage({viewport:{width:1440,height:940},reducedMotion:'reduce'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto((process.env.LAB_LIVE_BASE||`http://127.0.0.1:${server.address().port}/kids-books/`)+'labs/schoolbus/');await page.waitForFunction(()=>window.busLab?.snapshot().renderer.calls>0);
+ const frame=()=>page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+ const click=async s=>{await page.locator(s).evaluate(e=>e.click());await frame();};
+ const dir=path.join(out,process.env.SCHOOLBUS_AUDIT_MOTION==='1'?'schoolbus-motion-audit':'schoolbus-audit');fs.mkdirSync(dir,{recursive:true});const shots=[],reports=[];
+ async function shot(id){await page.locator('#viewport').screenshot({path:path.join(dir,id+'.png')});shots.push(id);}
+ const parts=await page.evaluate(()=>SCHOOLBUS_PARTS),details=await page.evaluate(()=>SCHOOLBUS_DETAILS);
+ for(const p of parts.filter(p=>(!process.env.SCHOOLBUS_AUDIT_DETAILS||details.some(d=>d.region===p.id&&process.env.SCHOOLBUS_AUDIT_DETAILS.split(',').includes(d.id)))&&(!process.env.SCHOOLBUS_AUDIT_PARTS||process.env.SCHOOLBUS_AUDIT_PARTS.split(',').includes(p.id)))){await click('#home-view');await click(`[data-part="${p.id}"]`);await click('#focus-part');await shot(p.id+'-outside');await click('#open-part');await shot(p.id+'-open');
+  for(const d of details.filter(d=>d.region===p.id&&(!process.env.SCHOOLBUS_AUDIT_DETAILS||process.env.SCHOOLBUS_AUDIT_DETAILS.split(',').includes(d.id)))){await click(`[data-detail="${d.id}"]`);assert.equal(await page.locator('#part-en').textContent(),d.en);await shot(d.id);reports.push(await page.evaluate(()=>busLab.inspectionReport?.()));if(process.env.SCHOOLBUS_AUDIT_MOTION==='1'&&['doors.leaf','doors.emergency','stopsign.blade','hood.radiator','lights.red','lights.amber'].includes(d.id)){await page.locator('#mechanism').evaluate((e,id)=>{e.value=id.startsWith('lights.')?50:id==='hood.radiator'?63:75;e.dispatchEvent(new Event('input',{bubbles:true}));},d.id);await frame();await shot(d.id+'-motion');await page.locator('#mechanism').evaluate(e=>{e.value=0;e.dispatchEvent(new Event('input',{bubbles:true}));});await frame();}}
+ }
+ fs.writeFileSync(path.join(dir,'visibility.json'),JSON.stringify(reports,null,2));
+ fs.writeFileSync(path.join(dir,'content.json'),JSON.stringify({parts,details},null,2));
+ assert.deepEqual(errors,[]);await page.close();const gallery=await browser.newPage();
+ for(let i=0;i<shots.length;i+=8){const tiles=shots.slice(i,i+8);await gallery.setViewportSize({width:1600,height:1200});await gallery.setContent('<style>body{margin:0;background:#fff;font:18px sans-serif;display:grid;grid-template-columns:repeat(2,1fr)}figure{margin:3px}img{width:100%;height:250px;object-fit:contain}figcaption{height:32px}</style>'+tiles.map(id=>'<figure><figcaption>'+id+'</figcaption><img src="data:image/png;base64,'+fs.readFileSync(path.join(dir,id+'.png')).toString('base64')+'"></figure>').join(''));await gallery.screenshot({path:path.join(dir,'sheet-'+(i/8)+'.png'),fullPage:true});}
+ for(const r of reports.filter(Boolean)){assert.ok(r&&r.points>0,r?.detail+' has geometric samples');assert.ok(r.onScreen/r.points>.9,r.detail+' stays framed');assert.ok(r.visible>=4,r.detail+' has visible target geometry: '+JSON.stringify(r.blockers));}
+ assert.deepEqual(errors,[]);console.log('Captured '+shots.length+' schoolbus part/open/detail views. Visual inspection required.');
+}finally{await browser.close();server.close();}})().catch(e=>{console.error(e);server.close();process.exitCode=1;});
