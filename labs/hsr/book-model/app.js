@@ -63,7 +63,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
  const openingType=()=>!active?null:cabinRegions.includes(active.region)?'cabin':['cab','motors','bogies'].includes(active.region)?active.region:null;
  function remember(){viewHistory.push({yaw:target.yaw,pitch:target.pitch,distance:target.distance,look:target.look.clone()});if(viewHistory.length>20)viewHistory.shift();}
  function closeOpening(){closing=opening;opening=null;mode='outside';playing=false;mechanism=0;detail=null;}
- function openPart(){if(opening){closeOpening();if(openingView){target.yaw=openingView.yaw;target.pitch=openingView.pitch;target.distance=openingView.distance;target.look.copy(openingView.look);}openingView=null;}else{openingView={yaw:target.yaw,pitch:target.pitch,distance:target.distance,look:target.look.clone()};targetExplosion=0;closing=null;openAmount=0;opening=openingType();mode='inside';remember();focus();if(opening==='cabin'){target.look.set(0,.8,0);target.yaw=.15;target.pitch=.85;target.distance=fit(7.5);}if(opening==='cab'){target.yaw=-.4;target.pitch=.45;target.distance=fit(2.7);}}renderLesson();}
+ function openPart(){if(opening){closeOpening();if(openingView){target.yaw=openingView.yaw;target.pitch=openingView.pitch;target.distance=openingView.distance;target.look.copy(openingView.look);}openingView=null;}else{openingView={yaw:target.yaw,pitch:target.pitch,distance:target.distance,look:target.look.clone()};targetExplosion=0;closing=null;openAmount=0;opening=openingType();mode='inside';remember();focus();if(opening==='cabin'){target.look.set(0,.8,0);target.yaw=.15;target.pitch=.85;target.distance=fit(7.5);}if(opening==='cab'){target.yaw=(active.rearDrivingCar?Math.PI:0)-.4;target.pitch=.45;target.distance=fit(2.7);}}renderLesson();}
  function progress(){$('progress-text').textContent=journal.read().found.length+' / '+(lessons.length+details.length);}
  function inherit(object,key){for(let o=object;o;o=o.parent)if(o.userData[key])return o.userData[key];return null;}
  function data(){return detail?details.find(d=>d.id===detail):active?lessons.find(p=>p.id===active.region):null;}
@@ -83,7 +83,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
   let r=active.radius;
   if(detail){const b=new T.Box3();detailObjects().forEach(g=>b.expandByObject(g));r=b.isEmpty()?.8:b.getBoundingSphere(new T.Sphere()).radius;r=Math.min(Math.max(r,minRadius[active.region]||.7),clampRadius[active.region]||r);}
   target.distance=Math.max(fit(r),1.6);activeFit=fit(active.radius);autoRotate=false;
-  const a=angles[active.region]||[-.6,.3];target.yaw=a[0];target.pitch=a[1];
+  const a=angles[active.region]||[-.6,.3];target.yaw=a[0]+(active.rearDrivingCar?Math.PI:0);target.pitch=a[1];
 
  }
  function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}const next=cabinRegions.includes(a.region)?'cabin':a.region;if(opening&&opening!==next){closeOpening();closing=null;openAmount=0;}if(active!==a){playing=false;mechanism=0;}active=a;detail=null;activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
@@ -91,7 +91,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
  function home(){remember();closeOpening();active=null;detail=null;autoRotate=false;targetExplosion=0;target.look.copy(look0);target.yaw=-.28;target.pitch=.25;target.distance=overviewDistance;renderLesson();}
  function back(){const v=viewHistory.pop();if(v){target.yaw=v.yaw;target.pitch=v.pitch;target.distance=v.distance;target.look.copy(v.look);autoRotate=false;}renderLesson();}
  function renderLesson(){
-  const p=data();progress();document.querySelector('.inspector').scrollTop=0;
+  const p=data();progress();
   $('part-name').textContent=p?.name||'Your high-speed train';$('part-zh-name').textContent=p?.zhName||'你的高速列车';$('lesson-category').textContent=active?(detail?'LOOK INSIDE':'MEET THE PART'):'A WORLD INSIDE';
   $('part-en').textContent=p?.en||'Look closer. There is a whole world inside this train.';$('part-zh').textContent=p?.zh||'靠近一点，这列高铁里面还有一个世界。';
   $('part-tip').textContent=detail?p.tip:active?'点击“靠近观察”调整视角。内部结构需要先打开模型；拖动可从不同方向查看。':'拖动旋转，滚轮缩放。点击部件认识它，再用“靠近观察”调整视角。';
@@ -106,7 +106,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
   $('open-part').hidden=!openingType();$('open-part').textContent=opening?'合上 · 恢复外观':({cabin:'打开客室',cab:'打开驾驶室',motors:'抬起车体 · 切开电机',bogies:'抬起车体'})[openingType()]||'打开';$('open-part').setAttribute('aria-pressed',!!opening);
   $('opening-note').textContent=opening?'教学展示：覆盖件暂时移开，内部仍在原来的安装位置。可旋转观察，点击合上恢复。':openingType()?'先打开模型，再选择下方的内部细节。缩放不会改变模型结构。':'直接观察部件，或播放它的动作。';
   $('mechanism-controls').hidden=!active||!['doors','windows','bogies','motors','pantograph','coupler','roof'].includes(active.region);
-  $('operation-panel').after($('explore-section'));$('part-directory').open=false;
+  $('operation-panel').after($('explore-section'));
   $('mechanism-help').textContent=active&&!$('mechanism-controls').hidden?'点击播放观察动作，展开“自己动手调节”可拖动控制。':'';
   $('part-zh-name').after($('operation-panel'));updateButtons();
  }
@@ -136,7 +136,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
   for(const b of BOGIES){const a=BookTrainGear.createBogie(T,{id:b.id,x:b.x});train.root.add(a.group);assemblies.push(a);}
   for(const m of MOTORS){const a=BookTrainGear.createMotor(T,{id:m.id,x:m.x});train.root.add(a.group);assemblies.push(a);}
   const panto=BookTrainGear.createPantograph(T);train.root.add(panto.group);assemblies.push(panto);const coupler=BookTrainGear.createCoupler(T);train.root.add(coupler.group);assemblies.push(coupler);
-  for(const coach of assemblies.filter(a=>a.id.startsWith('coach-'))){const start=Number(coach.id.slice(6));for(const x of [start+2.5,start+13.9]){const b=BookTrainGear.createBogie(T,{id:'passive',x});const g=b.exterior;g.position.x=x;g.traverse(o=>{o.userData={region:'body',assemblyId:coach.id};});coach.exterior.add(g);}}
+  for(const coach of assemblies.filter(a=>a.id.startsWith('coach-'))){const start=Number(coach.id.slice(6));for(const x of [start+2.5,start+(coach.rearDrivingCar?13.6:13.9)]){const b=BookTrainGear.createBogie(T,{id:'passive',x});const g=b.exterior;g.position.x=x;g.traverse(o=>{o.userData={region:coach.region,assemblyId:coach.id};});coach.exterior.add(g);}}
   for(const a of assemblies){a.group.userData.assemblyId=a.id;a.group.userData.region=a.region;a.base=a.group.position.clone();a.offset=new T.Vector3(...(offsets[a.id]||[0,.6,0]));
    for(const [layer,root]of[['exterior',a.exterior],['interior',a.interior],['ghost',a.ghost]])root.traverse(o=>{
     if(!o.material)return;
@@ -151,7 +151,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
     if(layer!=='ghost'&&o.isMesh){o.userData.pickAssembly=a.id;o.userData.pickDetail=d;pickables.push(o);}
    });
   }
-  track=BookTrainGear.createTrack(T,{from:-12,to:43});scene.add(track);
+  track=BookTrainGear.createTrack(T,{from:-12,to:46});scene.add(track);
   // The airframe counts only the carriage it built, so recount now that the
   // running gear is attached — the snapshot has to describe the whole train.
   train.counts=(()=>{let m=0,t=0;train.root.traverse(o=>{if(!o.isMesh)return;m++;t+=(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3;});return{assemblies:assemblies.length,meshes:m,triangles:Math.round(t)};})();
@@ -198,7 +198,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
     if(a.id==='roof')a.exterior.position.y=3.5*openAmount;if(a.id==='pantograph')a.group.position.y+=3.5*openAmount;
     if(['cabin-body','windows','doors'].includes(a.id))a.exterior.position.set(0,.4*openAmount,-4*openAmount);
    }
-   if(shownOpening==='cab'&&a.id==='cab')a.exterior.position.set(-1.5*openAmount,3.5*openAmount,0);
+   if(shownOpening==='cab'&&a===active)a.exterior.position.set(-1.5*openAmount,3.5*openAmount,0);
    if(['bogies','motors'].includes(shownOpening)&&['cab','cabin-body','roof','windows','doors','seats','pantograph'].includes(a.id))a.group.position.y+=2.8*openAmount;
    a.exterior.visible=a.region!=='seats'||cabin||explosion>.2;
    a.interior.visible=cabin||(shownOpening===a.region&&a===active)||explosion>.2;

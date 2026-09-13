@@ -10,11 +10,13 @@ const cases=[['airplane','airplaneLab','AIRPLANE_DETAILS','fuselage','engines'],
   page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&r.url().startsWith(base))errors.push(r.status()+' '+r.url());});
   await page.goto(base+`labs/${id}/`);await page.waitForFunction(api=>window[api]?.snapshot().renderer.calls>0,api);
   const snap=()=>page.evaluate(api=>window[api].snapshot(),api),frame=()=>page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
-  const select=async part=>{await page.locator('#part-directory').evaluate(e=>e.open=true);await page.locator(`[data-part="${part}"]`).click();await frame();};
+  const select=async part=>{await page.locator('#part-directory').evaluate(e=>e.open=true);await page.locator(`[data-part="${part}"]`).click();await frame();assert.equal(await page.locator('#part-directory').getAttribute('open'),'','directory remains open after selection');};
   const open=async()=>{if(!(await snap()).opening){await page.locator('#open-part').click();await frame();}};
+  assert.equal(await page.locator('#part-directory').getAttribute('open'),'','directory defaults open');
   let state=await snap();const identity=state.modelId;assert.equal(state.displayVersion,1);assert.equal(state.opening,null);assert.equal(state.changedOpacity,0);
   await page.screenshot({path:path.join(out,`${id}-exhibit-whole.png`)});
   if(process.env.UPDATE_LAB_PREVIEW==='1'&&!process.env.LAB_LIVE_BASE)await page.locator('#viewport').screenshot({path:path.join(root,'labs',id,'preview.png')});
+  if(process.env.LAB_VISUAL_ONLY==='1'){assert.deepEqual(errors,[]);console.log('PASS visual load '+id);await page.close();continue;}
   const initial=state.camera,c=await page.locator('canvas').boundingBox();await page.mouse.move(c.x+c.width/2,c.y+c.height/2);await page.mouse.wheel(0,-450);await frame();
   state=await snap();assert.ok(state.camera.distance<initial.distance);assert.equal(state.selected,null);assert.equal(state.reveal,0);assert.equal(state.changedOpacity,0);assert.deepEqual(state.camera.target,initial.target);
   await select(insidePart);const previous=(await snap()).camera;assert.deepEqual(previous,state.camera,'select does not move camera');

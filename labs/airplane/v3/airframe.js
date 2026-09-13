@@ -20,16 +20,19 @@
     function tube(p,m,pts,r=.024,closed=false){const curve=new T.CatmullRomCurve3(pts.map(v=>new T.Vector3(...v)),closed);return mesh(p,new T.TubeGeometry(curve,Math.max(16,pts.length*3),r,6,closed),m);}
     function loft(stations,segments=48) {const v=[],idx=[];for(const [x,ry,rz,cy] of stations)for(let j=0;j<=segments;j++){const t=j/segments*Math.PI*2;v.push(x,(cy||0)+Math.sin(t)*ry,Math.cos(t)*rz);}for(let i=0;i<stations.length-1;i++)for(let j=0;j<segments;j++){const q=i*(segments+1)+j;idx.push(q,q+segments+1,q+1,q+1,q+segments+1,q+segments+2);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(idx);g.computeVertexNormals();return g;}
     function silhouette(a,geo){mesh(a.ghost,geo,ghostMat);}
-    const bodyStations=[[-4.12,.64,.67,.02],[-3.7,.77,.79,0],[-2.8,.8,.82,0],[0,.8,.82,0],[2.3,.76,.78,.015],[3.4,.65,.67,.04],[4.5,.43,.46,.12],[5.35,.19,.22,.21],[5.95,.018,.024,.26]];
+    // Silhouette rebuilt from the book overview: long near-cylindrical cabin,
+    // full shoulders and an upswept tail cone rather than a pinched spindle.
+    const bodyStations=[[-4.12,.84,.85,.01],[-3.7,.865,.88,0],[-2.8,.88,.895,0],[0,.88,.895,0],[2.3,.84,.86,.025],[3.25,.76,.79,.055],[4.1,.59,.64,.12],[4.75,.405,.46,.19],[5.35,.235,.28,.24],[5.72,.145,.17,.27],[5.95,.105,.12,.28]];
     const body=assembly('cabin','fuselage',[.1,0,0],4.8,[1.15,.25]);
-    mesh(body.exterior,loft(bodyStations),white);silhouette(body,loft(bodyStations,14));
+    mesh(body.exterior,loft(bodyStations),white).name='Book fuselage skin';silhouette(body,loft(bodyStations,14));
     // The blue underside is an inlaid skin band; it follows the same loft.
-    function band(stations,lo,hi) {const v=[],ix=[],n=14;for(const [x,ry,rz,cy] of stations)for(let j=0;j<=n;j++){const t=lo+(hi-lo)*j/n;v.push(x,(cy||0)+Math.sin(t)*(ry+.006),Math.cos(t)*(rz+.006));}for(let i=0;i<stations.length-1;i++)for(let j=0;j<n;j++){const q=i*(n+1)+j;ix.push(q,q+n+1,q+1,q+1,q+n+1,q+n+2);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();return g;}
-    mesh(body.exterior,band(bodyStations,Math.PI*1.08,Math.PI*1.92),blue);
+    function band(stations,lo,hi) {const v=[],ix=[],n=14;for(const [x,ry,rz,cy] of stations)for(let j=0;j<=n;j++){const low=typeof lo==='function'?lo(x):lo,high=typeof hi==='function'?hi(x):hi,t=low+(high-low)*j/n;v.push(x,(cy||0)+Math.sin(t)*(ry+.006),Math.cos(t)*(rz+.006));}for(let i=0;i<stations.length-1;i++)for(let j=0;j<n;j++){const q=i*(n+1)+j;ix.push(q,q+n+1,q+1,q+1,q+n+1,q+n+2);}const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(ix);g.computeVertexNormals();return g;}
+    mesh(body.exterior,band(bodyStations,Math.PI*1.1,Math.PI*1.9),blue);
     // Project every pane onto the loft: fixed Z values buried the window row.
     function bodySide(x,y,side){let k=0;while(k<bodyStations.length-2&&x>bodyStations[k+1][0])k++;const a=bodyStations[k],b=bodyStations[k+1],t=(x-a[0])/(b[0]-a[0]);const ry=a[1]+(b[1]-a[1])*t,rz=a[2]+(b[2]-a[2])*t,cy=(a[3]||0)+((b[3]||0)-(a[3]||0))*t;return side*(rz*Math.sqrt(Math.max(0,1-((y-cy)/ry)**2))+.012);}
-    for(const side of [-1,1])for(let i=0;i<23;i++){const x=-3.35+i*.272;const win=mesh(body.exterior,new T.SphereGeometry(1,12,8),dark,x,.25,bodySide(x,.25,side));win.name='Cabin window on skin';win.scale.set(.066,.103,.033);}
-    for(const side of [-1,1])for(const x of [-3.75,2.85]){const pts=[[x-.15,-.39,side*.695],[x-.15,.46,side*.64],[x+.16,.46,side*.64],[x+.16,-.39,side*.695],[x-.15,-.39,side*.695]];tube(body.exterior,alloy,pts,.012);}
+    for(const side of [-1,1])for(let i=0;i<32;i++){const x=-3.35+i*.20;const win=mesh(body.exterior,new T.SphereGeometry(1,12,8),dark,x,.25,bodySide(x,.25,side));win.name='Cabin window on skin';win.scale.set(.055,.088,.026);}
+    for(const side of [-1,1])for(const x of [-3.85,3.15]){const pts=[];for(let i=0;i<=40;i++){const t=i/40*Math.PI*2,px=x+.18*Math.sign(Math.cos(t))*Math.abs(Math.cos(t))**.36,py=.04+.43*Math.sign(Math.sin(t))*Math.abs(Math.sin(t))**.36;pts.push([px,py,bodySide(px,py,side)]);}tube(body.exterior,alloy,pts,.01).name='Flush rounded passenger door';box(body.exterior,alloy,x+.075,.05,bodySide(x+.075,.05,side),.075,.023,.02);}
+    const apu=mesh(body.exterior,new T.TorusGeometry(.105,.025,10,32),alloy,5.96,.28,0);apu.rotation.y=Math.PI/2;apu.name='Tail cone exhaust rim';const apuBore=mesh(body.exterior,new T.CircleGeometry(.092,28),dark,5.967,.28,0);apuBore.rotation.y=Math.PI/2;
     const frames=detail(body,'cabin.frames');
     for(let i=0;i<15;i++){const x=-3.8+i*.48,ry=x>2.3?.76-(x-2.3)*.2:.748,rz=ry+ .025;const pts=[];for(let j=0;j<32;j++){const t=j/32*Math.PI*2;pts.push([x,Math.sin(t)*ry,Math.cos(t)*rz]);}tube(frames,alloy,pts,.022,true);}
     for(let j=0;j<8;j++){const t=j/8*Math.PI*2;tube(frames,alloy,[[-3.8,Math.sin(t)*.73,Math.cos(t)*.75],[-2.6,Math.sin(t)*.75,Math.cos(t)*.78],[2.2,Math.sin(t)*.7,Math.cos(t)*.74],[3.0,Math.sin(t)*.61,Math.cos(t)*.64]],.013);}
@@ -41,8 +44,9 @@
     const cargo=detail(body,'cabin.cargo');
     for(let i=0;i<7;i++){const x=-2.75+i*.73;box(cargo,i%2?blue:orange,x,-.51,(i%2?1:-1)*.18,.48,.31,.46);rod(cargo,dark,[x-.07,-.344,(i%2?1:-1)*.18],[x+.07,-.344,(i%2?1:-1)*.18],.016);}
     const cockpit=assembly('flight-deck','cockpit',[-4.6,.05,0],1.32,[1.1,.35]);
-    const noseStations=[[-6.1,.025,.025,-.13],[-5.9,.16,.2,-.07],[-5.55,.36,.44,.01],[-5.1,.51,.57,.06],[-4.55,.61,.63,.06],[-4.12,.64,.67,.02]];
-    mesh(cockpit.exterior,loft(noseStations),white);mesh(cockpit.exterior,band(noseStations,Math.PI*1.08,Math.PI*1.92),blue);silhouette(cockpit,loft(noseStations,14));
+    const noseStations=[[-6.1,.005,.006,-.17],[-6.085,.085,.10,-.17],[-6.04,.18,.21,-.15],[-5.95,.29,.33,-.12],[-5.81,.415,.46,-.075],[-5.62,.53,.565,-.025],[-5.4,.63,.655,.015],[-5.13,.715,.735,.035],[-4.84,.775,.795,.035],[-4.5,.82,.835,.02],[-4.12,.84,.85,.01]];
+    const noseBand=x=>Math.PI*(1.1+.16*Math.pow(Math.max(0,(-4.12-x)/1.98),.7));
+    mesh(cockpit.exterior,loft(noseStations,64),white).name='Rounded book radome';mesh(cockpit.exterior,band(noseStations,noseBand,x=>Math.PI*3-noseBand(x)),blue);silhouette(cockpit,loft(noseStations,14));
     function polygon(p,points,m){const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(points.flat(),3));const ix=[];for(let i=1;i<points.length-1;i++)ix.push(0,i,i+1);g.setIndex(ix);g.computeVertexNormals();const o=mesh(p,g,m);o.material.side=T.DoubleSide;return o;}
     // Windshields are curved patches projected onto the exact piecewise nose loft.
     // A tessellated patch follows the skin between vertices, avoiding buried chords.
@@ -53,7 +57,7 @@
       for(let j=0;j<steps;j++)for(let i=0;i<steps;i++){const q=j*(steps+1)+i;indices.push(q,q+1,q+steps+1,q+1,q+steps+2,q+steps+1);}
       const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setIndex(indices);geometry.computeVertexNormals();const glass=dark.clone();glass.side=T.DoubleSide;glass.roughness=.22;const pane=mesh(cockpit.exterior,geometry,glass);pane.name='Curved cockpit windshield';
     }
-    for(const side of [-1,1]){windshield(side,[[-5.48,.48],[-5.14,1.31],[-4.78,1.16],[-4.91,.42]]);windshield(side,[[-4.81,.42],[-4.69,1.12],[-4.32,.91],[-4.32,.34]]);}
+    for(const side of [-1,1]){windshield(side,[[-5.58,.43],[-5.38,.85],[-5.09,.77],[-5.14,.37]]);windshield(side,[[-5.055,.37],[-5.01,.75],[-4.75,.64],[-4.75,.33]]);}
 
     const cs=detail(cockpit,'cockpit.seats');for(const s of [-1,1])seat(cs,-4.45,-.08,s*.3,1.1);
     const cp=detail(cockpit,'cockpit.panel');box(cp,floorMat,-4.74,-.28,0,1.1,.045,1.12);const panel=box(cp,dark,-5.05,.13,0,.16,.3,.96);panel.rotation.z=-.22;
@@ -64,10 +68,11 @@
     function hingeSurface(a,id,sections,pivot,axis,amplitude,m=white,parent=a.exterior,vertical=false){const d=detail(a,id,parent),hinge=new T.Group();d.add(hinge);hinge.position.set(...pivot);const o=mesh(hinge,foil(sections,vertical),m);o.position.set(-pivot[0],-pivot[1],-pivot[2]);const last=sections[sections.length-1];const hingeAxis=vertical?new T.Vector3(last[1]-pivot[0],last[0]-pivot[1],0):new T.Vector3(last[1]-pivot[0],last[3]-pivot[1],last[0]-pivot[2]);hingeAxis.normalize();motions.push({group:hinge,axis:hingeAxis,amplitude,region:a.region,id});return d;}
     for(const s of [-1,1]){
       const wing=assembly('wing-'+(s>0?'right':'left'),'wings',[.2,-.25,s*3.25],3.7,[s>0?1:-1,.8]);
-      const sections=[[s*.67,-2.05,2.72,-.24,.19],[s*2,-1.25,2.45,-.18,.16],[s*4,.03,1.88,-.04,.105],[s*6.4,1.58,.93,.16,.045]];
+      const sections=[[s*.67,-2.05,3.02,-.33,.22],[s*1.3,-1.72,2.86,-.29,.20],[s*2,-1.25,2.50,-.23,.17],[s*4,.03,1.88,-.04,.105],[s*6.4,1.58,.93,.16,.045]];
       mesh(wing.exterior,foil(sections),white);silhouette(wing,foil(sections.map(v=>v)),ghostMat);
-      const winglet=mesh(wing.exterior,foil([[s*6.36,1.6,.9,.17,.04],[s*6.66,1.87,.61,.95,.032],[s*6.71,2.11,.3,1.16,.018]]),blue);
-      mesh(wing.exterior,foil([[s*6.61,1.99,.44,.9,.035],[s*6.66,2.08,.34,1.08,.025],[s*6.71,2.11,.3,1.16,.018]]),white);
+      const wingletSections=[[s*6.36,1.6,.9,.17,.04],[s*6.47,1.65,.84,.20,.038],[s*6.57,1.71,.76,.28,.035],[s*6.64,1.79,.65,.41,.030],[s*6.70,1.88,.55,.60,.026],[s*6.74,1.97,.45,.80,.022],[s*6.75,2.035,.37,.86,.018]];
+      mesh(wing.exterior,foil(wingletSections),blue).name='Blended short winglet';
+      mesh(wing.exterior,foil(wingletSections.slice(0,4)),white);
       // The wing close-up shows streamlined flap-track fairings underneath.
       for(const z of [1.65,2.75,3.85]){const x=.77+z*.27,y=-.26+z*.045;const fairing=mesh(wing.exterior,loft([[x-.45,.02,.025,y],[x-.16,.1,.09,y-.035],[x+.3,.09,.075,y-.025],[x+.65,.007,.009,y+.015]],16),white,0,0,s*z);fairing.name='Flap track fairing';}
       const spars=detail(wing,'wing.spar');for(const t of [.25,.7])rod(spars,alloy,[-2.05+t*2.72,-.24,s*.75],[1.58+t*.93,.16,s*6.3],t===.25?.062:.045);
@@ -97,16 +102,28 @@
     // White swept ribbon follows both cambered faces, as in the tail illustration.
     for(const side of [-1,1]){const vertices=[],indices=[],n=32;for(let row=0;row<2;row++)for(let i=0;i<=n;i++){const u=i/n,y=1.47-.66*u+.27*row;let k=y>fs[1][0]?1:0;const a=fs[k],b=fs[k+1],t=(y-a[0])/(b[0]-a[0]),lead=a[1]+(b[1]-a[1])*t,chord=a[2]+(b[2]-a[2])*t,th=a[4]+(b[4]-a[4])*t;const thickness=5*th*(.2969*Math.sqrt(u)-.126*u-.3516*u*u+.2843*u*u*u-.1015*u*u*u*u);vertices.push(lead+u*chord,y,.018*chord*Math.sin(Math.PI*u)+side*(thickness+.005));}for(let i=0;i<n;i++)indices.push(i,i+1,i+n+1,i+1,i+n+2,i+n+1);const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(vertices,3));g.setIndex(indices);g.computeVertexNormals();const paint=white.clone();paint.side=T.DoubleSide;mesh(fin.exterior,g,paint).name='White tail ribbon';}
     const fi=detail(fin,'fin.spar');rod(fi,alloy,[4,.4,0],[5.04,2.85,0],.045);for(let i=0;i<5;i++)rod(fi,alloy,[3.65+i*.25,.7+i*.42,0],[5.17+i*.04,.7+i*.42,0],.022);
-    const rudder=assembly('rudder','rudder',[5.4,1.6,0],1.5,[1.5,.2]);const rs=[[.5,5.31,.4,0,.026],[1.7,5.2,.37,0,.025],[3,5.44,.2,0,.014]];hingeSurface(rudder,'rudder.hinge',rs,[5.3,.5,0],'y',.3,white,rudder.exterior,true);silhouette(rudder,foil(rs,true));
+    const rudder=assembly('rudder','rudder',[5.4,1.6,0],1.5,[1.5,.2]);const rs=[[.5,5.31,.4,0,.026],[1.7,5.2,.37,0,.025],[3,5.44,.2,0,.014]];hingeSurface(rudder,'rudder.hinge',rs,[5.3,.5,0],'y',.3,blue,rudder.exterior,true);silhouette(rudder,foil(rs,true));
+    const rudderPaint=mesh(rudder.details['rudder.hinge'].children[0],foil([[.81,5.282,.393,0,.029],[1.08,5.257,.386,0,.029]],true),white);rudderPaint.position.set(-5.3,-.5,0);
     const gear=assembly('landing-gear','gear',[-.6,-1.32,0],3.7,[1.0,.15]);
     const strut=detail(gear,'gear.strut',gear.exterior),wheels=detail(gear,'gear.wheel',gear.exterior),brakes=detail(gear,'gear.brake'),bay=detail(gear,'gear.bay');
-    for(const [x,z,nose] of [[-4.52,0,true],[.6,-1.18,false],[.6,1.18,false]]){
-      const top=nose?-.5:-.37,bottom=nose?-1.66:-1.58,r=nose?.24:.34;
-      rod(strut,alloy,[x,top,z],[x,bottom,z],nose?.055:.085);rod(strut,dark,[x,top,z],[x,top-.45,z],nose?.079:.11);rod(strut,alloy,[x+.48,top,z],[x,bottom+.23,z],.039);rod(strut,alloy,[x,bottom,z-.31],[x,bottom,z+.31],.045);
-      box(bay,dark,x,-.56,z,.75,.08,nose?.5:.72);box(bay,alloy,x,-.59,z-.29,.72,.2,.025);box(bay,alloy,x,-.59,z+.29,.72,.2,.025);for(const dz of [-1,1]){const zg=z+dz*(nose?.12:.23);const wheelGroup=new T.Group();wheels.add(wheelGroup);wheelGroup.position.set(x,bottom,zg);const tire=mesh(wheelGroup,new T.TorusGeometry(r*.72,r*.28,10,24),rubber);mesh(wheelGroup,new T.CylinderGeometry(r*.47,r*.47,.13,18),alloy).rotation.x=Math.PI/2;for(let j=0;j<5;j++){const t=j/5*Math.PI*2;box(wheelGroup,dark,Math.cos(t)*r*.28,Math.sin(t)*r*.28,dz*.075,.028,.028,.014);}motions.push({group:wheelGroup,axis:'z',amplitude:1,region:'gear',id:'gear.wheel',spin:true});if(!nose){const pack=new T.Group();pack.name='Coaxial multi-disc wheel brake';pack.userData.detail='gear.brake';pack.position.set(x,bottom,zg);brakes.add(pack);for(let disc=0;disc<3;disc++){const rotor=mesh(pack,new T.CylinderGeometry(.13,.13,.012,28),disc===1?dark:alloy,0,0,-dz*.026+(disc-1)*.017);rotor.rotation.x=Math.PI/2;}box(pack,alloy,.103,.036,-dz*.026,.067,.074,.079);box(pack,dark,.073,.036,-dz*.026,.016,.061,.055);rod(pack,alloy,[0,0,-dz*.06],[0,0,dz*.06],.034);}}
+    const gearStations=[[-4.05,0,true],[.92,-1.18,false],[.92,1.18,false]];
+    for(const [x,z,nose] of gearStations){
+      const top=nose?-.77:-.56,bottom=nose?-1.785:-1.72,r=nose?.205:.27,pair=nose?.10:.17,width=nose?.12:.17;
+      rod(strut,alloy,[x,top,z],[x,bottom,z],nose?.046:.067);rod(strut,dark,[x,top,z],[x,top-.35,z],nose?.065:.088);rod(strut,alloy,[x+.38,top,z],[x,bottom+.23,z],.032);rod(strut,alloy,[x,bottom,z-.25],[x,bottom,z+.25],.035);
+      rod(strut,alloy,[x,bottom+.15,z],[x-.13,bottom+.32,z],.026);rod(strut,alloy,[x-.13,bottom+.32,z],[x,bottom+.51,z],.026);
+      box(strut,blue,x,top-.05,z+(nose?.13:.25),nose?.30:.48,.24,.025).name='Blue gear door';
+      box(bay,dark,x,top,z,.65,.08,nose?.4:.62);box(bay,alloy,x,top-.03,z-.25,.62,.17,.025);box(bay,alloy,x,top-.03,z+.25,.62,.17,.025);
+      for(const dz of [-1,1]){const zg=z+dz*pair,wheelGroup=new T.Group();wheels.add(wheelGroup);wheelGroup.position.set(x,bottom,zg);wheelGroup.name=nose?'Nose wheel':'Main wheel';
+        const tireProfile=[[.45,-.5],[.79,-.54],[.96,-.38],[1,-.15],[1,.15],[.96,.38],[.79,.54],[.45,.5],[.45,-.5]].map(([rr,ax])=>new T.Vector2(rr*r,ax*width));
+        const tire=mesh(wheelGroup,new T.LatheGeometry(tireProfile,32),rubber);tire.rotation.x=Math.PI/2;tire.name='Rounded tire with sidewalls';
+        mesh(wheelGroup,new T.CylinderGeometry(r*.47,r*.47,width*.91,24),alloy).rotation.x=Math.PI/2;
+        const lugVertices=[];for(let j=0;j<5;j++){const t=j/5*Math.PI*2,g=new T.BoxGeometry(.022,.022,.012).toNonIndexed();g.translate(Math.cos(t)*r*.28,Math.sin(t)*r*.28,dz*width*.47);lugVertices.push(...g.attributes.position.array);g.dispose();}const lugGeometry=new T.BufferGeometry();lugGeometry.setAttribute('position',new T.Float32BufferAttribute(lugVertices,3));lugGeometry.computeVertexNormals();mesh(wheelGroup,lugGeometry,dark);
+        motions.push({group:wheelGroup,axis:'z',amplitude:1,region:'gear',id:'gear.wheel',spin:true});
+        if(!nose){const pack=new T.Group();pack.name='Coaxial multi-disc wheel brake';pack.userData.detail='gear.brake';pack.position.set(x,bottom,zg);brakes.add(pack);for(let disc=0;disc<3;disc++){const rotor=mesh(pack,new T.CylinderGeometry(.11,.11,.012,28),disc===1?dark:alloy,0,0,-dz*.026+(disc-1)*.017);rotor.rotation.x=Math.PI/2;}box(pack,alloy,.09,.03,-dz*.026,.057,.064,.069);box(pack,dark,.063,.03,-dz*.026,.016,.051,.045);rod(pack,alloy,[0,0,-dz*.055],[0,0,dz*.055],.029);}
+      }
     }
     // One coarse silhouette for this assembly, never a cloned internal hierarchy.
-    const gv=[];function appendGhost(geometry,x,y,z,rotate){if(rotate)geometry.rotateX(Math.PI/2);geometry.translate(x,y,z);const flat=geometry.index?geometry.toNonIndexed():geometry;gv.push(...flat.attributes.position.array);geometry.dispose();if(flat!==geometry)flat.dispose();}for(const [x,z,nose] of [[-4.52,0,true],[.6,-1.18,false],[.6,1.18,false]]){appendGhost(new T.CylinderGeometry(.08,.065,1.05,6),x,-1.05,z);for(const side of [-1,1])appendGhost(new T.CylinderGeometry(nose?.24:.34,nose?.24:.34,.16,10),x,nose?-1.66:-1.58,z+side*(nose?.12:.23),true);}const gg=new T.BufferGeometry();gg.setAttribute('position',new T.Float32BufferAttribute(gv,3));gg.computeVertexNormals();silhouette(gear,gg);
+    const gv=[];function appendGhost(geometry,x,y,z,rotate){if(rotate)geometry.rotateX(Math.PI/2);geometry.translate(x,y,z);const flat=geometry.index?geometry.toNonIndexed():geometry;gv.push(...flat.attributes.position.array);geometry.dispose();if(flat!==geometry)flat.dispose();}for(const [x,z,nose] of gearStations){appendGhost(new T.CylinderGeometry(.07,.055,1.05,6),x,-1.15,z);for(const side of [-1,1])appendGhost(new T.CylinderGeometry(nose?.205:.27,nose?.205:.27,.15,10),x,nose?-1.785:-1.72,z+side*(nose?.10:.17),true);}const gg=new T.BufferGeometry();gg.setAttribute('position',new T.Float32BufferAttribute(gv,3));gg.computeVertexNormals();silhouette(gear,gg);
     // Publish detail identity on meshes as well as groups for controller fading/picking.
     root.traverse(o=>{if(!o.isMesh)return;let parent=o;while(parent){if(parent.userData.detail){o.userData.detail=parent.userData.detail;break;}parent=parent.parent;}parent=o;while(parent){if(parent.userData.assemblyId){o.userData.assemblyId=parent.userData.assemblyId;o.userData.region=parent.userData.region;break;}parent=parent.parent;}});
     let meshCount=0,triangles=0;root.traverse(o=>{if(o.isMesh){meshCount++;triangles+=(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3;}});

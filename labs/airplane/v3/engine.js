@@ -6,6 +6,9 @@
     const side = options.side || 1;
     const group = new THREE.Group();
     group.name = id;
+    // The overview's short, broad pods replace the former long tapered tubes.
+    // Apply the same reconstruction transform to shell, rotor and installed core.
+    group.scale.set(.74, .90, .90);
     group.userData = { region: 'engines', assemblyId: id };
     const exterior = new THREE.Group(), interior = new THREE.Group(), ghost = new THREE.Group();
     exterior.name = 'nacelle-shell'; interior.name = 'installed-engine-internals'; ghost.name = 'nacelle-context';
@@ -90,7 +93,7 @@
       g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); g.setIndex(indices); g.computeVertexNormals();
       return mesh(parent, g, material);
     }
-    const shellProfile = [[-1.42, .565], [-1.48, .588], [-1.46, .617], [-1.39, .638], [-1.17, .64], [-.65, .624], [.12, .574], [.73, .489], [1.02, .397], [1.05, .365], [.98, .365], [.69, .458], [.1, .545], [-.65, .595], [-1.18, .61], [-1.38, .601], [-1.42, .565]];
+    const shellProfile = [[-1.42,.565],[-1.48,.588],[-1.46,.617],[-1.39,.638],[-1.17,.658],[-.78,.676],[-.28,.676],[.12,.651],[.48,.604],[.76,.524],[1.02,.427],[1.05,.395],[.98,.395],[.72,.493],[.44,.573],[.10,.620],[-.28,.645],[-.78,.645],[-1.18,.628],[-1.38,.601],[-1.42,.565]];
     const farShell = new THREE.Group(), nearShell = new THREE.Group();
     farShell.name = 'nacelle-far-half'; nearShell.name = 'nacelle-near-half';
     exterior.add(farShell, nearShell);
@@ -105,7 +108,7 @@
     lathe(ghost, [[-1.47, .603], [-1.17, .64], [-.65, .624], [.12, .574], [.73, .489], [1.04, .38]], M.ghost, 0, Math.PI * 2, 20);
     mesh(ghost, pg.clone(), M.ghost);
     const inlet = details['engine.inlet'];
-    lathe(inlet, [[-1.43, .562], [-1.49, .582], [-1.47, .609], [-1.43, .619], [-1.395, .612], [-1.40, .588], [-1.43, .562]], M.lip);
+    lathe(inlet, [[-1.43,.562],[-1.50,.583],[-1.49,.617],[-1.43,.648],[-1.29,.653],[-1.27,.642],[-1.39,.626],[-1.42,.593],[-1.43,.562]], M.lip).name='Broad rolled inlet lip';
     lathe(inlet, [[-1.42, .563], [-1.20, .553], [-1.16, .548]], M.dark);
     const fan = details['engine.fan'], fanRotor = new THREE.Group(); fanRotor.userData = { ...fan.userData }; fan.add(fanRotor);
     blades(fanRotor, 22, -1.12, .12, .538, .14, .26, .74, M.fan);

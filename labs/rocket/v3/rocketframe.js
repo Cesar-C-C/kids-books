@@ -45,9 +45,9 @@
   // bare-metal nozzles. Nothing here is a measured engineering colour.
   const palette = {
     shell: 0xe8e3d6, shellDim: 0xd4cec0, fairing: 0xe8e3d6, fairingIn: 0xcdc7b8,
-    band: 0xdd8950, ink: 0x33434c, metal: 0x9aa5ad, dark: 0x4a5a64, frame: 0xcfd6da,
+    band: 0xe98721, ink: 0x33434c, metal: 0x9aa5ad, dark: 0x4a5a64, frame: 0xcfd6da,
     fuel: 0xe8e3d6, fuelDim: 0xd4cec0, ox: 0x508dab, oxDim: 0x427a96, green: 0x579f94,
-    blue: 0x547ea4, nose: 0x3d6f96, gold: 0xbd922e, panel: 0x3d6f96, copper: 0xb5763f
+    blue: 0x547ea4, nose: 0x176a9f, gold: 0xbd922e, panel: 0x3d6f96, copper: 0xb5763f
   };
   const mat = (key, r = .55, m = 0) => {
     const k = key + '|' + r + '|' + m;
@@ -139,8 +139,8 @@
        upper stage     2.22 .. 3.42
        fairing base    3.42
        fairing tip     5.82                                                            */
-  const R = .60;            // main body radius
-  const FR = .60;           // book nose continues the slender core diameter
+  const R = .46;            // main body radius
+  const FR = .40;           // book nose continues the slender core diameter
   const BODY_BOT = -.92, BODY_TOP = 1.70;
   const BODY_H = BODY_TOP - BODY_BOT, BODY_MID = (BODY_BOT + BODY_TOP) / 2;
 
@@ -163,7 +163,7 @@
         { name: 'Stringer', pos: [0, BODY_MID, 0] });
     }
     // The stage separation plane, marked by a flange at the join.
-    into(structure, 'exterior', 'structure.separation', torus(R + .03, .028, 48), 'ink',
+    into(structure, 'exterior', 'structure.separation', torus(R + .003, .009, 48), 'shellDim',
       { name: 'Separation line', pos: [0, -.30, 0], rot: [Math.PI / 2, 0, 0] });
     // Interior skeleton, so the cutaway reads from the inside too.
     for (let y = BODY_BOT + .22; y < BODY_TOP - .10; y += .80) {
@@ -219,7 +219,7 @@
     into(interstage, 'exterior', null, cyl(R, R, IS_H, 40, true), 'shell',
       { name: 'Interstage shell', pos: [0, IS_Y, 0], roughness: .6 });
     for (const y of [IS_Y - IS_H / 2 + .04, IS_Y + IS_H / 2 - .04]) {
-      into(interstage, 'exterior', 'interstage.ring', torus(R + .022, .032, 44), 'metal',
+      into(interstage, 'exterior', 'interstage.ring', torus(R + .004, .009, 48), 'metal',
         { name: 'Connector ring', pos: [0, y, 0], rot: [Math.PI / 2, 0, 0], roughness: .4, metalness: .5 });
     }
     into(interstage, 'interior', 'interstage.cavity', cyl(R - .05, R - .05, IS_H - .02, 32, true), 'dark',
@@ -260,7 +260,7 @@
   {
     // The nose has the book's core-width profile; keep the folded payload within
     // its circular shell instead of letting cube corners pierce the ivory wall.
-    for (const group of Object.values(satellite.details)) group.scale.set(.78, 1, .78);
+    for (const group of Object.values(satellite.details)) group.scale.set(.40, 1, .40);
     into(satellite, 'exterior', 'satellite.body', roundedBox(T, .86, .92, .86, .07), 'gold',
       { name: 'Satellite bus', pos: [0, SAT_Y, 0], roughness: .42, metalness: .3 });
     for (const y of [SAT_Y - .28, SAT_Y + .28]) {
@@ -299,9 +299,9 @@
   /* ---------- 7. fairing: two halves that swing open ---------- */
   // The hinge sits at the fairing base, so every child is positioned relative to
   // it. FAIR_BASE is derived from the upper stage above.
-  const NOSE_H = 1.30, BARREL_H = .98;
+  const NOSE_H = 1.14, BARREL_H = .98;
   const FAIR_Y = FAIR_BASE + (BARREL_H + NOSE_H) / 2;
-  const FAIR_TIP = FAIR_BASE + BARREL_H + NOSE_H + .12;
+  const FAIR_TIP = FAIR_BASE + BARREL_H + NOSE_H;
   const fairing = assembly('fairing', 'fairing', [0, FAIR_Y, 0], 1.9,
     [-.62, .26], ['fairing.half', 'fairing.tip', { id: 'fairing.skin', layer: 'interior' }, 'fairing.seam']);
   const halves = [];
@@ -314,18 +314,21 @@
       pivot.position.set(0, FAIR_BASE, 0);
       pivot.userData = { region: 'fairing', assemblyId: 'fairing', detail: 'fairing.half' };
       const theta = side > 0 ? 0 : Math.PI;
-      const barrel = new T.Mesh(cyl(FR, R, BARREL_H, 30, true, theta, Math.PI), mat('fairing', .6));
+      const barrel = new T.Mesh(cyl(FR, FR, BARREL_H, 48, true, theta, Math.PI), mat('fairing', .6));
       barrel.position.y = BARREL_H / 2;
       barrel.userData = { region: 'fairing', assemblyId: 'fairing', detail: 'fairing.half' };
       barrel.castShadow = true;
-      const nose = new T.Mesh(cyl(.03, FR, NOSE_H, 30, true, theta, Math.PI), mat('nose', .55));
-      nose.position.y = BARREL_H + NOSE_H / 2;
+      // Rounded ogive traced from the cover, instead of a straight cone and peg.
+      const profile = [];
+      for (let j = 0; j <= 24; j++) {
+        const t = j / 24;
+        profile.push(new T.Vector2(FR * Math.pow(Math.cos(t * Math.PI / 2), .72), BARREL_H + t * NOSE_H));
+      }
+      const nose = new T.Mesh(new T.LatheGeometry(profile, 48, theta, Math.PI), mat('nose', .36));
+      nose.name = 'Book ogive nose';
       nose.userData = { region: 'fairing', assemblyId: 'fairing', detail: 'fairing.tip' };
       nose.castShadow = true;
-      const tip = new T.Mesh(cyl(.03, .04, .12, 30, true, theta, Math.PI), mat('nose', .55));
-      tip.position.y = BARREL_H + NOSE_H + .06;
-      tip.userData = { region: 'fairing', assemblyId: 'fairing', detail: 'fairing.tip' };
-      pivot.add(barrel, nose, tip);
+      pivot.add(barrel, nose);
       fairing.details['fairing.half'].add(pivot);
       halves.push({ pivot, side });
     }
@@ -333,10 +336,10 @@
     into(fairing, 'exterior', 'fairing.tip', cyl(FR + .008, FR + .008, .12, 34), 'band',
       { name: 'Nose band', pos: [0, FAIR_BASE + .06, 0], roughness: .55 });
     // A round porthole on the barrel, exactly as the book draws it.
-    into(fairing, 'exterior', 'fairing.half', cyl(.15, .15, .06, 22), 'nose',
-      { name: 'Porthole', pos: [0, FAIR_BASE + .52, FR - .02], rot: [Math.PI / 2, 0, 0], roughness: .3, metalness: .2 });
-    into(fairing, 'exterior', 'fairing.half', torus(.16, .022, 26), 'metal',
-      { name: 'Porthole rim', pos: [0, FAIR_BASE + .52, FR - .01], roughness: .4, metalness: .5 });
+    into(fairing, 'exterior', 'fairing.half', cyl(.115, .115, .025, 32), 'nose',
+      { name: 'Porthole', pos: [0, FAIR_BASE + .52, FR + .004], rot: [Math.PI / 2, 0, 0], roughness: .3, metalness: .2 });
+    into(fairing, 'exterior', 'fairing.half', torus(.128, .015, 32), 'metal',
+      { name: 'Porthole rim', pos: [0, FAIR_BASE + .52, FR + .014], roughness: .4, metalness: .5 });
     // The vertical seam where the two halves are bolted together.
     for (const side of [-1, 1]) {
       into(fairing, 'exterior', 'fairing.seam', roundedBox(T, .012, BARREL_H, .012, .004), 'shellDim',
@@ -386,7 +389,7 @@
   const bells = [];
   {
     // The skirt closes the bottom of the body around the engines.
-    into(engines, 'exterior', null, cyl(R, R + .04, .34, 40, true), 'ink',
+    into(engines, 'exterior', null, cyl(R, R + .008, .34, 48, true), 'shell',
       { name: 'Engine skirt', pos: [0, -1.06, 0], roughness: .5, metalness: .3 });
     // Cover, launch, cutaway and staging images consistently show one main bell.
     const lay = [[0, 0]];
@@ -400,12 +403,12 @@
       chamber.position.y = -.15;
       chamber.userData = { region: 'engines', assemblyId: 'engines', detail: 'engines.chamber' };
       chamber.castShadow = true;
-      const nozzle = new T.Mesh(cyl(.16, .49, .86, 40, true), mat('metal', .34, .55));
+      const nozzle = new T.Mesh(cyl(.13, .30, .52, 48, true), mat('metal', .34, .55));
       nozzle.name = 'Main bell nozzle';
-      nozzle.position.y = -.73;
+      nozzle.position.y = -.52;
       nozzle.userData = { region: 'engines', assemblyId: 'engines', detail: 'engines.nozzle' };
       nozzle.castShadow = true;
-      const collar = new T.Mesh(torus(.26, .025, 28), mat('metal', .4, .5));
+      const collar = new T.Mesh(torus(.17, .014, 32), mat('metal', .4, .5));
       collar.rotation.x = Math.PI / 2; collar.position.y = -.34;
       collar.userData = { region: 'engines', assemblyId: 'engines', detail: 'engines.nozzle' };
       motor.add(chamber, nozzle, collar);
@@ -430,10 +433,10 @@
     // Swept ivory tail fins give the book rocket its recognisable lower outline.
     // These are surfaces on the existing structure discovery, not extra engines.
     const finShape = new T.Shape();
-    finShape.moveTo(R - .02, -.55);
-    finShape.lineTo(1.12, -1.32);
-    finShape.lineTo(1.12, -2.12);
-    finShape.lineTo(R - .02, -1.78);
+    finShape.moveTo(R - .02, -.76);
+    finShape.lineTo(.76, -1.33);
+    finShape.lineTo(.76, -1.82);
+    finShape.lineTo(R - .02, -1.61);
     finShape.closePath();
     const finGeo = new T.ExtrudeGeometry(finShape, { depth: .055, bevelEnabled: true, bevelSize: .012, bevelThickness: .012, bevelSegments: 1, steps: 1 });
     finGeo.translate(0, 0, -.0275);

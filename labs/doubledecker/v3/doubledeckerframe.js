@@ -342,8 +342,8 @@
       }
     }
     // The priority bay: a clear patch just inside the door, marked on the floor.
-    into(lower, 'exterior', 'lower.stroller', box(.80, .05, 2.30), 'seatDim',
-      { name: 'Wheelchair bay floor', pos: [-3.28, DECK_LOW + .07, -.40], roughness: .7 });
+    into(lower, 'exterior', 'lower.stroller', box(.80, .05, .80), 'seatDim',
+      { name: 'Wheelchair bay floor', pos: [-3.28, DECK_LOW + .07, -.65], roughness: .7 });
     into(lower, 'exterior', 'lower.priority', softBox(T, .56, .14, .82, .06), 'seatDim',
       { name: 'Priority cushion', pos: [-2.10, DECK_LOW + .30, .66] });
     into(lower, 'exterior', 'lower.priority', softBox(T, .16, .78, .84, .07), 'seatDim',
@@ -592,6 +592,148 @@
     // model's overall width past the body line.
     into(wheels, 'ghost', null, box(.32, 1.06, 2.46), 'rubber', { pos: [AXLE_F, RAIL_Y - .30, 0] });
     into(wheels, 'ghost', null, box(.32, 1.06, 2.46), 'rubber', { pos: [AXLE_R, RAIL_Y - .30, 0] });
+  }
+
+
+  // Book reconstruction primitives: longitudinal lofts have continuous rounded
+  // shoulders; side skins follow the wheel clearance instead of covering tires.
+  function bookLoft(sections, segments = 48) {
+    const vertices = [], indices = [];
+    sections.forEach(([x, bottom, top, width, power = .45]) => {
+      for (let j = 0; j < segments; j++) {
+        const a = j / segments * Math.PI * 2, c = Math.cos(a), s = Math.sin(a);
+        vertices.push(x, (top + bottom) / 2 + (top - bottom) / 2 * Math.sign(s) * Math.pow(Math.abs(s), power), width * Math.sign(c) * Math.pow(Math.abs(c), power));
+      }
+    });
+    for (let i = 0; i < sections.length - 1; i++) for (let j = 0; j < segments; j++) {
+      const a = i * segments + j, b = i * segments + (j + 1) % segments, c = b + segments, d = a + segments;
+      indices.push(a, d, b, b, d, c);
+    }
+    for (const [ring, reverse] of [[0, true], [sections.length - 1, false]]) {
+      const sec = sections[ring], center = vertices.length / 3;
+      vertices.push(sec[0], (sec[1] + sec[2]) / 2, 0);
+      for (let j = 0; j < segments; j++) {
+        const a = ring * segments + j, b = ring * segments + (j + 1) % segments;
+        indices.push(center, reverse ? a : b, reverse ? b : a);
+      }
+    }
+    const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(vertices, 3)); g.setIndex(indices); g.computeVertexNormals();
+    return g;
+  }
+  function bookSide(x0, x1, bottom, top, axles, wheelY, clearance, depth = .075, clearanceY = clearance) {
+    const s = new T.Shape(); s.moveTo(x0, bottom);
+    for (const axle of axles) {
+      const dx = clearance * Math.sqrt(Math.max(0, 1 - ((bottom - wheelY) / clearanceY) ** 2));
+      if (axle - dx <= x0 || axle + dx >= x1) continue;
+      s.lineTo(axle - dx, bottom);
+      const a0 = Math.atan2((bottom - wheelY) / clearanceY, -dx / clearance), a1 = Math.atan2((bottom - wheelY) / clearanceY, dx / clearance);
+      const start = a0 < 0 ? a0 + Math.PI * 2 : a0;
+      const end = a1;
+      for (let j = 1; j <= 32; j++) { const a = start + (end - start) * j / 32; s.lineTo(axle + clearance * Math.cos(a), wheelY + clearanceY * Math.sin(a)); }
+    }
+    s.lineTo(x1, bottom); s.lineTo(x1, top - .15); s.quadraticCurveTo(x1, top, x1 - .15, top);
+    s.lineTo(x0 + .15, top); s.quadraticCurveTo(x0, top, x0, top - .15); s.closePath();
+    return new T.ExtrudeGeometry(s, { depth, bevelEnabled: false, curveSegments: 12 });
+  }
+  function clearBookExterior(a) {
+    for (const child of [...a.exterior.children]) {
+      if (Object.values(a.details).includes(child)) child.clear(); else a.exterior.remove(child);
+    }
+  }
+  function bookWheel(a, ax, side, y, radius, width) {
+    const z = side * (HALF_W - .08);
+    into(a, 'exterior', 'wheels.tire', cyl(radius - .045, radius - .045, width, 48), 'rubber', { name: 'Tire', pos: [ax, y, z], rot: [Math.PI / 2, 0, 0], roughness: .87 });
+    for (const face of [-1, 1]) into(a, 'exterior', 'wheels.tread', torus(radius - .075, .075, 48), 'rubber', { name: 'Rounded tire shoulder', pos: [ax, y, z + face * (width / 2 - .055)], roughness: .87 });
+    into(a, 'exterior', 'wheels.hub', cyl(radius * .57, radius * .57, .04, 40), 'steel', { name: 'Wheel hub', pos: [ax, y, z + side * (width / 2 + .012)], rot: [Math.PI / 2, 0, 0], roughness: .37, metalness: .55 });
+    into(a, 'exterior', 'wheels.hub', torus(radius * .57, .027, 40), 'steel', { name: 'Rim lip', pos: [ax, y, z + side * (width / 2 + .038)], metalness: .5 });
+    for (let i = 0; i < 8; i++) {
+      const angle = i * Math.PI / 4;
+      into(a, 'exterior', 'wheels.hub', cyl(.037, .037, .025, 10), 'dark', { name: 'Rim recess', pos: [ax + Math.cos(angle) * radius * .43, y + Math.sin(angle) * radius * .43, z + side * (width / 2 + .04)], rot: [Math.PI / 2, 0, 0] });
+    }
+    into(a, 'exterior', 'wheels.hub', cyl(radius * .20, radius * .20, .065, 24), 'steel', { name: 'Hub cap', pos: [ax, y, z + side * (width / 2 + .06)], rot: [Math.PI / 2, 0, 0], metalness: .55 });
+  }
+
+  /* Canonical exterior: books/bus/assets/00_cover_c_r2.webp. */
+  for (const a of [body, roof, wheels]) clearBookExterior(a);
+  cab.details['cab.glass'].clear();
+  // Two full-height storeys: raise the cabin structure, while retaining round
+  // tires and the chassis datum. All dimensions remain illustration proportions.
+  const BOOK_DECK_SCALE = 1.42, BOOK_TIRE_R = .61;
+  const localWheelY = (RAIL_Y - .30 - DECK_LOW) / BOOK_DECK_SCALE + DECK_LOW;
+  for (const side of [-1, 1]) {
+    into(body, 'exterior', 'body.shell', bookSide(-4.08, 4.08, -1.42, 1.19, [AXLE_F, AXLE_R], localWheelY, .69, .075, .69 / BOOK_DECK_SCALE), 'red', { name: 'Continuous wheel-cut side skin', pos: [0,0,side * (HALF_W - .035) - .035] });
+    // Continuous dark framing under the side glazing reads as the illustrated
+    // window ribbon rather than six blue boxes pasted onto a red wall.
+    into(body, 'exterior', 'body.windows', softBox(T,7.80,.78,.028,.11),'ink',{name:'Upper glazing surround',pos:[0,.76,side*(HALF_W+.018)]});
+    for(let i=0;i<6;i++) {
+      const x=-3.24+i*1.30;
+      into(body,'exterior','body.windows',softBox(T,1.21,.68,.023,.045),'glass',{name:'Upper window',pos:[x,.76,side*(HALF_W+.043)],glass:true});
+    }
+    for (const [x,w] of (side < 0 ? [[-1.52,1.70],[2.54,2.55]] : [[-3.18,1.42],[-1.12,2.30],[1.92,3.02]])) {
+      into(body,'exterior','body.windows',softBox(T,w,.81,.026,.055),'ink',{name:'Lower glazing surround',pos:[x,-.48,side*(HALF_W+.018)]});
+      into(body,'exterior','body.windows',softBox(T,w-.10,.71,.023,.035),'glass',{name:'Lower window',pos:[x,-.48,side*(HALF_W+.043)],glass:true});
+      if(w>2) into(body,'exterior','body.windows',box(.035,.71,.027),'ink',{name:'Lower window mullion',pos:[x,-.48,side*(HALF_W+.062)]});
+    }
+    into(body,'exterior','body.livery',box(7.98,.23,.035),'red',{name:'Wide interdeck red band',pos:[0,.20,side*(HALF_W+.019)]});
+    for(let i=0;i<9;i++) into(body,'exterior','body.livery',box(.40,.024,.025),'redDark',{name:'Rear ventilation slat',pos:[3.78,-.95+i*.08,side*(HALF_W+.055)]});
+  }
+  // Smooth front/rear corners join the sidewalls without the old oversized slabs.
+  into(body,'exterior','body.shell',bookLoft([[-4.39,-1.41,1.16,1.05,.36],[-4.30,-1.44,1.20,1.18,.35],[-4.06,-1.44,1.20,1.24,.30]]),'red',{name:'Rounded front body'});
+  into(body,'exterior','body.shell',bookLoft([[4.04,-1.43,1.18,1.24,.30],[4.24,-1.40,1.18,1.18,.36],[4.30,-1.33,1.12,1.06,.42]]),'red',{name:'Rounded rear body'});
+  // Roof is a shallow crown continuous with the red shoulders, not a tall tube.
+  into(roof,'exterior','roof.panel',bookLoft([[-4.39,1.12,1.25,1.03],[-4.24,1.10,1.40,1.20],[-4.03,1.10,1.44,1.24],[4.00,1.10,1.44,1.24],[4.22,1.10,1.37,1.18],[4.30,1.10,1.22,1.05]]),'red',{name:'Roof panel'});
+  for(const [name,low,high] of [['Lower front windscreen',-.85,-.02],['Upper front windscreen',.52,1.22]]) {
+    into(cab,'exterior','cab.glass',bookLoft([[-4.43,low,high,1.04,.30],[-4.37,low-.025,high+.025,1.13,.30]]),'ink',{name:name+' surround'});
+    into(cab,'exterior','cab.glass',bookLoft([[-4.455,low+.035,high-.035,1.005,.32],[-4.43,low+.015,high-.015,1.07,.32]]),'glass',{name,glass:true});
+  }
+  into(cab,'exterior','cab.glass',softBox(T,.05,.27,2.16,.02),'ink',{name:'Front destination panel',pos:[-4.43,.32,0]});
+  for(const side of [-1,1]) {
+    into(body,'exterior','body.livery',softBox(T,.04,.19,.58,.018),'ink',{name:'Headlight surround',pos:[-4.43,-1.08,side*.82]});
+    for(let i=0;i<3;i++) into(body,'exterior','body.livery',cyl(.065-i*.008,.065-i*.008,.045,24),'cream',{name:'Front lamp',pos:[-4.47,-1.04-i*.035,side*(.63+i*.16)],rot:[0,0,Math.PI/2]});
+  }
+  // Middle door follows the same exterior layer as the shell and window ribbon.
+  const mdx=.62, mdz=-HALF_W-.10;
+  into(body,'exterior','body.windows',softBox(T,1.08,1.36,.035,.025),'ink',{name:'Middle doorway frame',pos:[mdx,-.75,mdz]});
+  for(const side of [-1,1]) {
+    into(body,'exterior','body.windows',softBox(T,.45,1.21,.023,.025),'glass',{name:'Middle door glazing',pos:[mdx+side*.25,-.75,mdz-.032],glass:true});
+    into(body,'exterior','body.windows',box(.022,.48,.024),'pole',{name:'Middle door grab handle',pos:[mdx+side*.10,-.69,mdz-.05]});
+  }
+  into(body,'exterior','body.windows',box(1.02,.028,.04),'pole',{name:'Middle door threshold',pos:[mdx,-1.405,mdz-.028]});
+  // Fit the animated entrance to the lower deck instead of reaching into the upper windows.
+  for (const item of leaves) {
+    item.pivot.position.y=-1.40;
+    const panes=[];
+    item.pivot.traverse(o=>{if(o.isMesh && o.userData.detail==='doors.glass') panes.push(o);});
+    item.pivot.traverse(o=>{
+      if(!o.isMesh || o.userData.detail!=='doors.leaf') return;
+      o.geometry=softBox(T,.54,1.67,.06,.025);o.material=mat('ink');o.position.y=.835;
+    });
+    panes.forEach((o,i)=>{
+      if(i>0){o.parent.remove(o);return;}
+      o.geometry=softBox(T,.43,1.51,.025,.025);o.position.y=.835;
+    });
+  }
+  // Entry treads are interior teaching parts; they must not float through the
+  // front wheel opening when the entrance is closed.
+  doors.interior.add(doors.details['doors.step']);
+  doors.detailLayer['doors.step']='interior';
+  lower.interior.add(lower.details['lower.stroller']);
+  lower.detailLayer['lower.stroller']='interior';
+  for(const ax of [AXLE_F,AXLE_R]) for(const side of [-1,1]) bookWheel(wheels,ax,side,RAIL_Y-.30,BOOK_TIRE_R,.30);
+  for(const a of assemblies) {
+    if(a===wheels || a===chassis) continue;
+    // Bake the height change into local vertices (including rotated rails), so
+    // exhibit pivots keep unit scale and mechanisms retain valid quaternions.
+    a.group.traverse(o => {
+      if (o === a.group) return;
+      o.position.y *= BOOK_DECK_SCALE;
+      if (!o.isMesh) return;
+      const r = new T.Matrix4().makeRotationFromQuaternion(o.quaternion);
+      const localStretch = r.clone().invert().multiply(new T.Matrix4().makeScale(1, BOOK_DECK_SCALE, 1)).multiply(r);
+      o.geometry = o.geometry.clone().applyMatrix4(localStretch);
+    });
+    a.group.position.y=DECK_LOW*(1-BOOK_DECK_SCALE);
+    a.center.y=DECK_LOW+(a.center.y-DECK_LOW)*BOOK_DECK_SCALE;
   }
 
   /* ---------- count what we built, for the geometry contract ---------- */

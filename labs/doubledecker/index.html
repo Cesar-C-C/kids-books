@@ -15,7 +15,7 @@
   <div class="stage-tools"><div class="tool-group"><button id="home-view" aria-label="恢复整辆视角">⌂ 整体</button><button id="back-view" aria-label="返回上一视角">← 返回视角</button><span class="divider"></span><button id="zoom-out" aria-label="缩小">−</button><button id="zoom-in" aria-label="放大">＋</button><button id="auto-rotate" aria-label="自动旋转" aria-pressed="false">↻</button></div><span class="gesture-hint">拖动旋转 · 滚轮缩放</span><div class="tool-group"><button id="side-view">侧面</button><button id="top-view">俯视</button><button id="explode-button" aria-pressed="false">拆解</button></div></div>
  </section>
  <aside class="inspector" aria-label="当前部位的说明和操作">
-  <details class="regions" id="part-directory"><summary>部件目录 · Explore parts</summary><p class="small-title">THE BUS</p><div id="region-list"></div><p class="regions-footer">先认识整辆巴士。<br>再靠近一个部位，<br>发现里面的秘密。</p></details>
+  <details class="regions" id="part-directory" open><summary>部件目录 · Explore parts</summary><p class="small-title">THE BUS</p><div id="region-list"></div><p class="regions-footer">先认识整辆巴士。<br>再靠近一个部位，<br>发现里面的秘密。</p></details>
   <p class="eyebrow" id="lesson-category">A WORLD INSIDE</p><h1 id="part-name">Your double-decker</h1><p id="part-zh-name" class="chinese-name">你的双层巴士</p>
   <button id="back-part" class="back-part" hidden>← 看完整部件</button>
   <p id="part-en" class="english">Look closer. There is a whole world inside this bus.</p><p id="part-zh" class="translation">靠近一点，这辆巴士里面还有一个世界。</p><button id="speak" class="speak"><span>听英文 · Listen</span></button><p id="speech-status" class="speech-status" role="status"></p>
@@ -26,7 +26,7 @@
    <div id="mechanism-controls"><div class="animation-row"><button id="mechanism-play" aria-pressed="false">▶ 看它怎样工作</button><button id="mechanism-step">单步</button><button id="slow-play" aria-pressed="true">慢速</button></div><details class="manual-action"><summary>自己动手调节</summary><div class="range-row"><label for="mechanism">动作</label><input id="mechanism" type="range" min="0" max="100" value="0"><output id="mechanism-value">0%</output></div></details></div>
    <p id="mechanism-help" class="mechanism-note"></p>
   </section>
-  <details class="book-reference"><summary>对照绘本里的双层巴士</summary><img src="../../books/bus/assets/01_parts_c_r2.webp" alt="绘本中的红色双层巴士：上下两排车窗、车门、楼梯与车头驾驶室" style="width:100%;border-radius:9px;margin-top:10px"><button id="book-view" class="speak">回到绘本视角</button><p class="principle">以部件图核对外形与配色：红色上下两层车身、两排车窗、车门旁的楼梯与车头驾驶室。图片没有提供工程尺寸。</p></details>
+  <details class="book-reference"><summary>对照绘本里的双层巴士</summary><img src="../../books/bus/assets/00_cover_c_r2.webp" alt="绘本中的红色双层巴士：上下两排车窗、车门、楼梯与车头驾驶室" style="width:100%;border-radius:9px;margin-top:10px"><button id="book-view" class="speak">回到绘本视角</button><p class="principle">以封面为主参考核对外形与配色：红色上下两层车身、两排车窗、车门旁的楼梯与车头驾驶室。图片没有提供工程尺寸。</p></details>
   <p class="fine-print">依据同主题绘本图片重建：红色两层车身、圆角前风挡、车门旁的楼梯与车尾发动机舱。图中未展示的内部结构作教学补全，非工程尺寸模型。</p>
  </aside>
 </main>

@@ -177,14 +177,14 @@ window.StationV3 = { create(T) {
 
   /* ---------- the station table: every position in the station comes from here ---------- */
   const RM = 0.645;              // module radius
-  const NOSE_X = -2.95;          // docking face of the forward module
-  const TAIL_X = 2.70;           // aft end of the rear module
+  const NOSE_X = -4.05;          // docking face of the forward module
+  const TAIL_X = .90;           // aft end of the rear module
   const NODE_X = 0.20;           // centre of the spherical node (also the origin of the truss)
   const NODE_R = 0.72;
   const TRUSS_Y = -0.20;         // truss axis height
   const WING_Z = 3.70;           // compact panel wings beside the cross modules
   const WING_X = 0.20;           // wings ride the truss at the node's x
-  const ARM_X = 1.95, ARM_Y = 0.02, ARM_Z = 0.46;
+  const ARM_X = .20, ARM_Y = .64, ARM_Z = 1.42;
   const RAD_Z = 1.35, RAD_Y = 1.35;
 
   // Cylinders here are BARRELS lying along X, so every one of them is turned a
@@ -203,20 +203,20 @@ window.StationV3 = { create(T) {
     const FORE_X0 = NOSE_X + .26, FORE_X1 = NODE_X - .24;
     const AFT_X0 = NODE_X + .30, AFT_X1 = TAIL_X - .30;
     const hx = -NODE_X / 2 + .02;
-    for (const [x0, x1] of [[FORE_X0, FORE_X1], [AFT_X0, AFT_X1]]) {
+    for (const [x0, x1] of [[FORE_X0, FORE_X1]]) {
       const len = x1 - x0, mid = (x0 + x1) / 2;
       into(modules, 'exterior', 'modules.skin', barrel(len, RM).geo, 'hull',
         { name: 'Module barrel', pos: [mid, 0, 0], rot: [0, 0, Math.PI / 2], roughness: .42, metalness: .32 });
       // Stiffening rings: the hoops that keep a thin shell from bowing out.
       const rings = Math.max(2, Math.round(len / .62));
       for (let i = 1; i <= rings; i++) {
-        into(modules, 'exterior', 'modules.ring', torus(RM + .018, .028, 30), 'hullWarm',
+        into(modules, 'exterior', 'modules.ring', torus(RM + .006, .012, 40), 'hullWarm',
           { name: 'Stiffening ring', pos: [x0 + len * i / (rings + 1), 0, 0], rot: [0, Math.PI / 2, 0], roughness: .45, metalness: .35 });
       }
       // The gold collar where the barrel meets a joint — the warm accent that
       // reads all over the illustration.
       for (const x of [x0 + .03, x1 - .03]) {
-        into(modules, 'exterior', 'modules.ring', torus(RM + .026, .05, 30), 'gold',
+        into(modules, 'exterior', 'modules.ring', torus(RM + .012, .024, 40), 'gold',
           { name: 'Joint collar', pos: [x, 0, 0], rot: [0, Math.PI / 2, 0], roughness: .38, metalness: .62 });
       }
     }
@@ -235,10 +235,26 @@ window.StationV3 = { create(T) {
       into(modules, 'exterior', 'modules.port', torus(.16, .026, 24), 'gold',
         { name: 'Cross porthole rim', pos: [NODE_X - RM - .04, 0, mid], rot: [0, Math.PI / 2, 0], metalness: .5 });
     }
+    // Fine longitudinal seams and riveted end rings are conspicuous in the
+    // watercolour. Keep them shallow; thick gold hoops made the old model a toy.
+    const foreLength = FORE_X1 - FORE_X0;
+    for (let i = 0; i < 12; i++) {
+      const a = i * Math.PI / 6;
+      into(modules, 'exterior', 'modules.skin', box(foreLength, .008, .008), 'hullWarm',
+        { name: 'Fine hull seam', pos: [(FORE_X0 + FORE_X1) / 2, Math.sin(a) * (RM + .003), Math.cos(a) * (RM + .003)] });
+      for (const x of [FORE_X0 + .04, FORE_X1 - .04]) {
+        into(modules, 'exterior', 'modules.ring', box(.045, .025, .025), 'goldLite',
+          { name: 'Collar rivet', pos: [x, Math.sin(a) * (RM + .045), Math.cos(a) * (RM + .045)], rot: [a, 0, 0] });
+      }
+      for (const side of [-1, 1]) {
+        into(modules, 'exterior', 'modules.skin', box(.008, .008, 1.42), 'hullWarm',
+          { name: 'Cross hull seam', pos: [NODE_X + Math.cos(a) * (RM + .003), Math.sin(a) * (RM + .003), side * 1.31] });
+      }
+    }
     // Portholes: a ring of thick glass every module, set into a heavy frame. The
     // frame is a torus about the barrel's normal, so it needs no rotation
     // beyond the barrel's own quarter turn about X (its axis is already Z).
-    const ports = [[-1.70, 0], [1.48, 0]];
+    const ports = [[-2.62, 0], [-1.38, 0]];
     for (const [x] of ports) {
       for (const th of [Math.PI * .18, Math.PI * .82]) {
         const z = Math.cos(th) * (RM + .03), y = Math.sin(th) * (RM + .03);
@@ -261,7 +277,7 @@ window.StationV3 = { create(T) {
     }
     // Handholds: little yellow grips all over the outside, the way an EVA crew
     // moves about. Yellow because that is what the illustration uses.
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 5; i++) {
       const x = NOSE_X + .60 + i * .78;
       for (const th of [Math.PI * .30, Math.PI * .70]) {
         const z = Math.cos(th) * (RM + .05), y = Math.sin(th) * (RM + .05);
@@ -270,7 +286,7 @@ window.StationV3 = { create(T) {
       }
     }
     // Thrusters: small clusters of nozzles that keep the station pointing right.
-    for (const x of [-2.42, 2.16]) {
+    for (const x of [-2.92]) {
       for (const th of [Math.PI * .25, Math.PI * .75]) {
         const z = Math.cos(th) * (RM + .07), y = Math.sin(th) * (RM + .07);
         const g = new T.Group(); g.position.set(x, y, z);
@@ -288,7 +304,7 @@ window.StationV3 = { create(T) {
     }
     // Interior lining: a cylinder, so a child looking down the barrel sees the
     // far wall instead of straight through the station.
-    for (const [x0, x1] of [[FORE_X0, FORE_X1], [AFT_X0, AFT_X1]]) {
+    for (const [x0, x1] of [[FORE_X0, FORE_X1]]) {
       into(modules, 'interior', 'modules.skin', cyl(RM - .05, RM - .05, (x1 - x0) - .06, 32, true), 'floor',
         { name: 'Cabin lining', pos: [(x0 + x1) / 2, 0, 0], rot: [0, 0, Math.PI / 2], castShadow: false, roughness: .8 });
     }
@@ -306,7 +322,7 @@ window.StationV3 = { create(T) {
     into(node, 'exterior', 'node.ring', cyl(NODE_R + .012, NODE_R + .012, .10, 32), 'hullDark',
       { name: 'Node waist', pos: [NODE_X, 0, 0], rot: [Math.PI / 2, 0, 0], roughness: .45, metalness: .3 });
     // Hatches: round doors facing fore and aft, and two on the flanks.
-    for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+    for (const [dx, dz] of [[1, 0]]) {
       const g = new T.Group(); g.position.set(NODE_X + dx * (NODE_R + .01), 0, dz * (NODE_R + .01));
       if (!dx) g.rotation.y = Math.PI / 2;
       else if (dx < 0) g.rotation.y = Math.PI;
@@ -325,7 +341,7 @@ window.StationV3 = { create(T) {
     }
     // Two berthing rings left empty, waiting for the next module. They face up
     // and down, so each ring lies flat: a quarter turn about X, not Y.
-    for (const dy of [1, -1]) {
+    for (const dy of []) {
       into(node, 'exterior', 'node.ring', torus(.34, .045, 24), 'goldDark',
         { name: 'Berthing ring', pos: [NODE_X, dy * (NODE_R + .02), 0], rot: [Math.PI / 2, 0, 0], roughness: .42, metalness: .6 });
     }
@@ -428,11 +444,11 @@ window.StationV3 = { create(T) {
     // Each wing hangs off the truss through a rotary joint that follows the Sun.
     // The wing itself is a lattice of four blanket panels: cells on the front,
     // a pale backing behind, gold hinge lines between.
-    const PANEL_W = 1.88, PANEL_L = 1.08, PANELS = 2, GAP = .05;
+    const PANEL_W = 1.68, PANEL_L = .94, PANELS = 2, GAP = .045;
     const wingPivots = [];
     for (const side of [-1, 1]) {
       const pivot = new T.Group();
-      pivot.position.set(WING_X, 0, side * 2.02);
+      pivot.position.set(side < 0 ? NODE_X : -3.05, 0, side < 0 ? -2.02 : RM + .02);
       solar.exterior.add(pivot);
       wingPivots.push({ pivot, side });
       // The rotary joint housing and its gold collar.
@@ -448,16 +464,16 @@ window.StationV3 = { create(T) {
       collar.position.set(0, 0, side * .30); collar.castShadow = true;
       pivot.add(collar);
       // The mast: the long white boom that carries the whole wing.
-      const mast = new T.Mesh(box(.16, .16, PANEL_L * PANELS + .30), mat('white', .48, .3));
+      const mast = new T.Mesh(box(.065, .065, PANEL_L * PANELS + .25), mat('white', .48, .3));
       mast.name = 'Mast';
       mast.userData = { region: 'solar', assemblyId: 'solar', detail: 'solar.boom' };
-      mast.position.set(0, 0, side * (PANEL_L * PANELS / 2 + .70));
+      mast.position.set(0, 0, side * (PANEL_L * PANELS / 2 + .38));
       mast.castShadow = mast.receiveShadow = true;
       pivot.add(mast);
       // Four panels out along the mast, each one cell-side up.
       for (let i = 0; i < PANELS; i++) {
-        const z = side * (.85 + i * (PANEL_L + GAP) + PANEL_L / 2);
-        const panel = new T.Mesh(box(PANEL_W, .045, PANEL_L), mat('cell', .35, .25));
+        const z = side * (.46 + i * (PANEL_L + GAP) + PANEL_L / 2);
+        const panel = new T.Mesh(box(PANEL_W, .045, PANEL_L), mat('cell', .86, 0));
         panel.name = 'Solar panel';
         panel.userData = { region: 'solar', assemblyId: 'solar', detail: 'solar.panel' };
         panel.position.set(0, 0, z);
@@ -606,11 +622,11 @@ window.StationV3 = { create(T) {
   arm.update = state => {
     const k = state.mechanism && state.region === 'arm' ? (state.level || 0) : 0;
     const c = arm.chain;
-    c.shoulder.rotation.y = -k * .55;
-    c.upper.rotation.z = k * .70;
-    c.elbow.rotation.z = .35 - k * 1.15;
+    c.shoulder.rotation.y = -Math.PI / 2 - k * .35;
+    c.upper.rotation.z = -1.04 + k * .30;
+    c.elbow.rotation.z = -1.25 + k * .60;
     c.fore.rotation.z = -k * .25;
-    c.wrist.rotation.z = k * .55;
+    c.wrist.rotation.z = -.25 + k * .55;
   };
 
   /* ---------- 6. docking: the ringed port where ships come alongside ---------- */
@@ -620,9 +636,9 @@ window.StationV3 = { create(T) {
     // The port sits on the nose of the forward module, facing -X, so every ring
     // about it is turned a quarter turn about Y.
     for (const [x, r, t, key, name] of [
-      [NOSE_X - .02, RM + .02, .055, 'gold', 'Docking collar'],
-      [NOSE_X - .16, .54, .060, 'goldLite', 'Docking ring'],
-      [NOSE_X - .26, .46, .045, 'gold', 'Latch ring']
+      [NOSE_X - .02, RM + .01, .026, 'gold', 'Docking collar'],
+      [NOSE_X - .09, .54, .026, 'goldLite', 'Docking ring'],
+      [NOSE_X - .16, .46, .024, 'gold', 'Latch ring']
     ]) {
       into(docking, 'exterior', 'docking.ring', torus(r, t, 30), key,
         { name, pos: [x, 0, 0], rot: [0, Math.PI / 2, 0], roughness: .40, metalness: .60 });
@@ -643,10 +659,10 @@ window.StationV3 = { create(T) {
     // The aiming cross painted on the outer face of the ring: one bar across,
     // one bar up. Both are thin plates on the -X face, so their long sides run
     // on Z and on Y and neither needs a rotation.
-    into(docking, 'exterior', 'docking.target', box(.02, .05, .60), 'white',
-      { name: 'Target cross', pos: [NOSE_X - .28, 0, 0], roughness: .6 });
-    into(docking, 'exterior', 'docking.target', box(.02, .60, .05), 'white',
-      { name: 'Target cross', pos: [NOSE_X - .28, 0, 0], roughness: .6 });
+    into(docking, 'exterior', 'docking.target', torus(.19, .018, 32), 'goldLite',
+      { name: 'Docking target ring', pos: [NOSE_X - .29, 0, 0], rot: [0, Math.PI / 2, 0], metalness: .4 });
+    into(docking, 'exterior', 'docking.target', cyl(.16, .16, .028, 32), 'glassDark',
+      { name: 'Docking centre', pos: [NOSE_X - .30, 0, 0], rot: [0, 0, Math.PI / 2] });
     // Approach light: a small green lamp beside the ring, showing the pilot how
     // the ship is lined up.
     into(docking, 'exterior', 'docking.light', cyl(.05, .05, .06, 14), 'greenLite',
@@ -728,7 +744,7 @@ window.StationV3 = { create(T) {
   {
     // The big glazed openings on the top of the barrels, framed in a heavy gold
     // ring — the picture book gives every module a generous skylight.
-    for (const [x, w, l] of [[-1.70, .34, .62], [1.32, .34, .58]]) {
+    for (const [x, w, l] of [[-2.60, .25, .38]]) {
       into(windows, 'exterior', 'windows.frame', softBox(T, l, .10, w, .05), 'gold',
         { name: 'Window frame', pos: [x, RM + .02, 0], roughness: .42, metalness: .55 });
       into(windows, 'exterior', 'windows.inner', softBox(T, l - .12, .06, w - .10, .04), 'glass',
@@ -880,6 +896,18 @@ window.StationV3 = { create(T) {
     }
     into(radiator, 'ghost', null, box(1.30, .30, 3.20), 'radiator', { pos: [NODE_X, RAD_Y, 0] });
   }
+
+  for (const a of [truss, radiator, cupola]) {
+    a.defaultVisible = false;
+    a.group.userData.optional = true;
+    a.group.userData.referenceNote = 'Teaching extension absent from canonical overview';
+  }
+  // Keep all cabin lessons inside the longer forward barrel after removing the
+  // invented aft extension. This remaps positive-X cabin furniture inward.
+  for (const a of [interior]) a.group.traverse(o => {
+    if (o.isMesh && o.position.x > .45) o.position.x -= 1.70;
+  });
+  arm.update({ mechanism: false, level: 0 });
 
   /* ---------- frame update + the numbers the studio and QA both read ---------- */
   function update(state) {

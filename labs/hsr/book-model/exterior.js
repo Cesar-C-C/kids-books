@@ -75,9 +75,20 @@
   add(cab,cab.exterior,surface(-10.85,-6.9,Math.PI*1.23,Math.PI*1.77,54,25,.018),silver,'Curved nose belly fairing');
   for(const side of [-1,1])for(let x=-3.7;x<3.9;x+=.85)for(let n=0;n<4;n++)line(body,body.exterior,[new T.Vector3(x+n*.055,-.64,side*1.13),new T.Vector3(x+n*.055,-.98,side*1.13)],ink,.007);
   // Connected coaches recede behind the leading carriage, matching the cover.
-  for(const start of [8.35,25.1]){const a=assembly('coach-'+start,'body',[start+8,.3,0],8.5);const shell=surface(-5.6,8,0,Math.PI*2,40,32);shell.scale(16.4/13.6,1,1);shell.translate(start+5.6*16.4/13.6,0,0);add(a,a.exterior,shell,ivory,'Following coach body');add(a,a.ghost,shell.clone(),ghostMat,'Following coach silhouette');
+  for(const start of [8.35,25.1]){const tail=start===25.1,a=assembly('coach-'+start,tail?'cab':'body',tail?[start+14.8,.4,0]:[start+8,.3,0],tail?1.8:8.5);
+   if(tail){
+    // The rear driving car reuses the complete leading-car surfaces, turned 180°.
+    // This preserves the same rounded nose, glazing, lights and continuous belt.
+    const shell=new T.Group();shell.name='Reverse driving car';shell.rotation.y=Math.PI;shell.position.x=start+8;
+    for(const source of [cab,body,roof,windows,doors])shell.add(source.exterior.clone(true));
+    shell.traverse(o=>{o.userData={region:'cab',assemblyId:a.id};});a.exterior.add(shell);
+    const deck=cab.interior.clone(true);deck.name='Rear driving desk';deck.visible=true;deck.rotation.y=Math.PI;deck.position.x=start+8;
+    deck.traverse(o=>{o.userData={...o.userData,region:'cab',assemblyId:a.id};});a.interior.add(deck);
+    for(const id of Object.keys(cab.details)){const d=deck.getObjectByName(id);if(d)a.details[id]=d;}
+    a.rearDrivingCar=true;a.noseDirection=1;
+   }else{const shell=surface(-5.6,8,0,Math.PI*2,40,32);shell.scale(16.4/13.6,1,1);shell.translate(start+5.6*16.4/13.6,0,0);add(a,a.exterior,shell,ivory,'Following coach body');add(a,a.ghost,shell.clone(),ghostMat,'Following coach silhouette');
    for(const side of [-1,1]){const strip=add(a,a.exterior,new T.BoxGeometry(16.3,.135,.014),blue,'Continuous blue belt');strip.position.set(start+8.2,-.03,side*1.203);for(let i=0;i<17;i++){const w=add(a,a.exterior,new T.BoxGeometry(.74,.76,.02),glass,'Following coach window');w.position.set(start+.95+i*.88,.64,side*1.20);}}
-   const bellows=add(a,a.exterior,new T.BoxGeometry(.30,2.40,2.12),ink,'Flexible gangway');bellows.position.set(start-.175,.38,0);
+   }const bellows=add(a,a.exterior,new T.BoxGeometry(.30,2.40,2.12),ink,'Flexible gangway');bellows.position.set(start-.175,.38,0);
   }
   const seatDeck=add(by('seats'),by('seats').exterior,new T.BoxGeometry(11.7,.055,2.16),material(0xa0aeb3),'Cabin floor beneath seats');seatDeck.position.set(.85,-.37,0);
   const original=kit.update;return {root,assemblies,counts:{meshes:0},update(state){original(state);const n=state.mechanism&&state.region==='doors'?state.level||0:0;moving.forEach(g=>{g.position.x=n*.52;g.position.z=Math.sign(g.children[0]?.geometry.attributes.position.getZ(0)||1)*n*.06;});const k=state.mechanism&&state.region==='windows'?state.level||0:0;blinds.forEach(b=>{b.scale.y=.03+.97*k;b.position.y=.985-.345*k;});},reference:{nose:[-11,-5.6],bodyWidth:2.4,leadLength:19,images:['01_cover_c_r2.webp','03_nose_c_r2.webp']},section,point,flank};

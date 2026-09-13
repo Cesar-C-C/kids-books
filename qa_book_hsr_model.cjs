@@ -15,3 +15,11 @@ for(const region of ['doors','windows','bogies','pantograph','motors','coupler']
 for(const region of ['bogies','motors']){drive(region,1,1);const angles=[];train.root.traverse(o=>angles.push([o,o.quaternion.clone()]));drive(region,2,1);assert.ok(angles.some(([o,q])=>o.quaternion.angleTo(q)>.1),'Time must keep '+region+' rotating with an explicit spin speed');}drive(undefined,0,0);
 const bogie=train.assemblies.find(a=>a.id==='bogie-front');const bounds=new T.Box3().setFromObject(bogie.exterior);assert.ok(Math.abs(bounds.min.y+1.495)<.01,'Wheel treads/flanges align with rail top');const track=gear.createTrack(T,{from:-12,to:43});assert.equal(track.name,'train-display-track');const rail=new T.Box3().setFromObject(track);assert.equal(rail.min.x,-12);assert.equal(rail.max.x,43);
 console.log(`PASS book train: 14 attached assemblies; ${detailIds.size} details; ${meshes} meshes / ${Math.round(triangles)} triangles; surface-mounted reference features, local centers, finite geometry and mechanisms, rail alignment.`);
+
+const tail=train.assemblies.find(a=>a.id==='coach-25.1');assert.ok(tail.rearDrivingCar);assert.equal(tail.region,'cab');
+const leadNose=nose.exterior.getObjectByName('Rounded nose and shoulders'),tailNose=tail.exterior.getObjectByName('Rounded nose and shoulders');
+const rearBounds=new T.Box3().setFromObject(tailNose);assert.ok(Math.abs(rearBounds.max.x-44.1)<.02);assert.ok(rearBounds.min.x>38.6,'third-car nose points toward positive X');
+const v=new T.Vector3().fromBufferAttribute(leadNose.geometry.attributes.position,100);const front=leadNose.localToWorld(v.clone()),rear=tailNose.localToWorld(v.clone());assert.ok(Math.abs(rear.x-(33.1-front.x))<1e-5);assert.ok(Math.abs(rear.z+front.z)<1e-5);
+assert.ok(tail.exterior.getObjectByName('Wraparound windshield'));assert.equal(Object.keys(tail.details).length,3);
+console.log('PASS rear train cab: mirrored original nose, glazing and detailed driving desk, opposite travel direction.');
+assert.equal(tail.interior.getObjectByName('Rear driving desk').visible,true,'cloned driver interior stays visible within its controlled layer');

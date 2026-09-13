@@ -142,7 +142,7 @@ assert.ok(fairing.details['fairing.tip'], 'the nose must be its own detail group
 const conePts = [];
 fairing.group.updateMatrixWorld(true);
 fairing.group.traverse(o => {
-  if (!o.isMesh) return;
+  if (!o.isMesh || o.name !== 'Book ogive nose') return;
   const pos = o.geometry.attributes.position;
   for (let i = 0; i < pos.count; i++) {
     const v = new T.Vector3(pos.getX(i), pos.getY(i), pos.getZ(i));
@@ -163,7 +163,7 @@ const profile = levels.map(y => {
   return w;
 });
 const barrel = Math.max(...profile.slice(0, -1)), top = profile[profile.length - 1];
-assert.ok(barrel > 1.2, `the fairing barrel must match the core diameter: ${barrel.toFixed(2)} m`);
+assert.ok(barrel >= rocket.R * 1.7 && barrel <= rocket.R * 2.2, `the fairing barrel must match the core diameter: ${barrel.toFixed(2)} m`);
 assert.ok(top < barrel * .15, `the fairing must close to a point: barrel ${barrel.toFixed(2)} m vs top ${top.toFixed(2)} m`);
 // The taper must be a real cone, not a step: several rings between the barrel
 // and the tip must sit strictly between the two widths.

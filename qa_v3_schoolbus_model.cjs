@@ -191,3 +191,37 @@ for (let i = 0; i < rv.count; i++) {
 }
 assert.ok(Math.abs(leftHeight - rightHeight) < .001, 'arched roof must be symmetric across the bus');
 console.log('PASS schoolbus book-shape regressions: symmetric crown, contained forward-facing seats');
+
+// Book silhouette regression: evaluate actual exterior meshes, excluding hidden
+// compatibility ghosts, rather than allowing a ghost box to supply bus height.
+const exteriorBounds = new T.Box3();
+for (const a of bus.assemblies) a.exterior.traverse(o => {
+  if (o.isMesh) exteriorBounds.union(new T.Box3().setFromObject(o));
+});
+const silhouetteSize = exteriorBounds.getSize(new T.Vector3());
+const roundTires = [];
+bus.root.traverse(o=>{if(o.name==='Tire') roundTires.push(o);});
+for(const tire of roundTires) {
+  const b = new T.Box3().setFromObject(tire).getSize(new T.Vector3());
+  assert.ok(Math.abs(b.x-b.y)<.005,'tire profile must remain circular, never stretched with the body');
+}
+// A ray through the upper tire must pass through the side-skin wheel cutout.
+for (const skin of bus.assemblies.find(a=>a.id==='body').details['body.shell'].children) {
+  if(skin.name!=='Continuous wheel-cut side skin') continue;
+  const ray = new T.Raycaster(new T.Vector3(2.42,-1.30,5),new T.Vector3(0,0,-1));
+  if (bus.BOX_X !== undefined) ray.ray.origin.set(2.30,-1.35,5);
+  assert.equal(ray.intersectObject(skin).length,0,'side skin must have a genuine rear wheel clearance');
+}
+
+assert.ok(silhouetteSize.x/silhouetteSize.y>2.3 && silhouetteSize.x/silhouetteSize.y<2.5, 'schoolbus silhouette follows the canonical side-view length/height ratio');
+assert.ok(roundTires.every(o=>new T.Box3().setFromObject(o).getSize(new T.Vector3()).y>1.19),'schoolbus tires must retain illustrated large diameter');
+assert.ok(bus.root.getObjectByName('Sculpted bonnet'),'schoolbus must use the reconstructed tapered bonnet');
+console.log('PASS schoolbus canonical silhouette',silhouetteSize.toArray().map(n=>n.toFixed(2)).join(' x '));
+
+const entranceLeaves=[];
+bus.root.traverse(o=>{if(o.name==='Door leaf') entranceLeaves.push(o);});
+assert.equal(entranceLeaves.length,2);
+for(const leaf of entranceLeaves) {
+ const b=new T.Box3().setFromObject(leaf);
+ assert.ok(b.min.z < -bus.HALF_W-.06 && b.min.y < -1.6,'schoolbus entrance must be outside opaque skin and reach skirt');
+}

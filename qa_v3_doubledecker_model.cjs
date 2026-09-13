@@ -180,3 +180,40 @@ bus.root.traverse(o => { if (o.name === 'Middle door glazing') middlePanes.push(
 assert.equal(middlePanes.length, 2, 'middle door has two closed glazed leaves');
 assert.ok(middlePanes.every(o => o.material.opacity === 1 && !o.material.transparent), 'middle door glazing remains opaque');
 console.log('PASS doubledecker middle doorway: two opaque panes, passenger side, body exterior ownership');
+
+// Book silhouette regression: evaluate actual exterior meshes, excluding hidden
+// compatibility ghosts, rather than allowing a ghost box to supply bus height.
+const exteriorBounds = new T.Box3();
+for (const a of bus.assemblies) a.exterior.traverse(o => {
+  if (o.isMesh) exteriorBounds.union(new T.Box3().setFromObject(o));
+});
+const silhouetteSize = exteriorBounds.getSize(new T.Vector3());
+const roundTires = [];
+bus.root.traverse(o=>{if(o.name==='Tire') roundTires.push(o);});
+for(const tire of roundTires) {
+  const b = new T.Box3().setFromObject(tire).getSize(new T.Vector3());
+  assert.ok(Math.abs(b.x-b.y)<.005,'tire profile must remain circular, never stretched with the body');
+}
+// A ray through the upper tire must pass through the side-skin wheel cutout.
+for (const skin of bus.assemblies.find(a=>a.id==='body').details['body.shell'].children) {
+  if(skin.name!=='Continuous wheel-cut side skin') continue;
+  const ray = new T.Raycaster(new T.Vector3(2.42,-1.30,5),new T.Vector3(0,0,-1));
+  if (bus.BOX_X !== undefined) ray.ray.origin.set(2.30,-1.35,5);
+  assert.equal(ray.intersectObject(skin).length,0,'side skin must have a genuine rear wheel clearance');
+}
+
+assert.ok(silhouetteSize.x/silhouetteSize.y>1.8 && silhouetteSize.x/silhouetteSize.y<2.1,'doubledecker must retain two tall storeys instead of the old low box');
+assert.ok(bus.root.getObjectByName('Rounded front body') && bus.root.getObjectByName('Rounded rear body'),'bus ends must use rounded continuous sections');
+for(const a of bus.assemblies) assert.ok(a.group.scale.distanceTo(new T.Vector3(1,1,1))<1e-9,'display pivots must retain unit scale');
+console.log('PASS doubledecker canonical silhouette',silhouetteSize.toArray().map(n=>n.toFixed(2)).join(' x '));
+
+const frontDoors=bus.assemblies.find(a=>a.id==='doors');
+assert.equal(frontDoors.details['doors.step'].parent,frontDoors.interior,'entry steps remain inside closed bus');
+let fullPanes=0;
+frontDoors.details['doors.leaf'].traverse(o=>{if(o.isMesh&&o.userData.detail==='doors.glass'){fullPanes++;assert.ok(new T.Box3().setFromObject(o).getSize(new T.Vector3()).y>2,'front entry pane must be full height');}});
+assert.equal(fullPanes,2,'animated front door has two full-height glazed leaves');
+
+const wheelchairBay=bus.root.getObjectByName('Wheelchair bay floor');
+const wheelchairBounds=new T.Box3().setFromObject(wheelchairBay);
+assert.ok(wheelchairBounds.min.z>-bus.HALF_W+.1 && wheelchairBounds.max.z<bus.HALF_W-.1,'priority bay floor must remain inside sidewalls instead of crossing the entrance');
+assert.equal(bus.assemblies.find(a=>a.id==='lower').details['lower.stroller'].parent,bus.assemblies.find(a=>a.id==='lower').interior,'priority bay is hidden inside the closed bus');
