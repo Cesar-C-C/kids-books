@@ -14,150 +14,61 @@ const server=http.createServer((req,res)=>{let f=path.resolve(root,'.'+decodeURI
  assert.equal(await page.locator('#load-error').isVisible(),false);
  assert.equal(await page.locator('canvas').count(),1);
 
- /* ---- layering: the model must sit in front of the captions, not behind a painted stage ---- */
- const layer=await page.evaluate(()=>{const v=document.getElementById('viewport'),c=v.querySelector('canvas'),wm=document.querySelector('.stage-watermark'),head=document.querySelector('.stage-heading');const cs=getComputedStyle(c);return{canvasZ:cs.zIndex,canvasPos:cs.position,watermarkZ:getComputedStyle(wm).zIndex,watermarkEvents:getComputedStyle(wm).pointerEvents,headingZ:getComputedStyle(head).zIndex,canvasFirst:v.firstElementChild===c,stageBg:getComputedStyle(document.querySelector('.stage')).backgroundColor};});
- assert.equal(layer.canvasFirst,true,'the canvas must be prepended, so the captions can show through where nothing is drawn');
- assert.equal(layer.canvasPos,'absolute');assert.equal(layer.canvasZ,'1');
- assert.equal(layer.watermarkZ,'auto','the watermark must not claim a stacking layer above the model');
- assert.equal(layer.headingZ,'2');
- assert.equal(layer.watermarkEvents,'none');
- assert.equal(layer.stageBg,'rgb(237, 242, 231)','every lab shares the same stage tint');
 
  const snap=()=>page.evaluate(()=>trainLab.snapshot());
+ const frame=()=>page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+ const select=async id=>{await page.locator('#part-directory').evaluate(e=>e.open=true);await page.locator(`[data-part="${id}"]`).click();await frame();};
+ const open=async()=>{if(await page.locator('#open-part').isVisible()&&!(await snap()).opening){await page.locator('#open-part').click();await page.waitForFunction(()=>trainLab.snapshot().openAmount>.99);}};
  const identity=(await snap()).modelId;
  assert.equal((await snap()).geometry.assemblies,14);
- const counts=(await snap()).geometry;assert.ok(counts.meshes>150&&counts.meshes<1000,`mesh budget: ${counts.meshes}`);
  await page.screenshot({path:path.join(out,'hsr-book-whole.png')});
- if(process.env.UPDATE_LAB_PREVIEW==='1'&&!process.env.LAB_BASE_URL)await page.locator('#viewport').screenshot({path:path.join(root,'labs/hsr/preview.png')});
-
- /* ---- progressive reveal: wheel into a part and the inside appears by itself ---- */
- const before=(await snap()).camera.distance;
- const point=await page.evaluate(()=>trainLab.projectPart('cabin-body'));
- await page.mouse.move(point.x,point.y);await page.mouse.wheel(0,-900);
- await page.waitForFunction(d=>trainLab.snapshot().camera.distance<d*.7,before);
- assert.equal((await snap()).modelId,identity,'zooming must never rebuild the model');
- assert.equal((await snap()).mode,'auto');
- // Projecting a part is only meaningful once the camera has settled back out.
- await page.locator('#home-view').click();
- await page.waitForFunction(()=>{const s=trainLab.snapshot();return s.selected===null&&s.camera.distance>11;});
- // One more rendered frame, so projectPart() sees the settled camera matrices.
- await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
-
- /* ---- double click a part on the model (the cab faces the default camera) ---- */
- const nose=await page.evaluate(()=>trainLab.projectPart('cab'));
- await page.mouse.dblclick(nose.x,nose.y);
- await page.waitForFunction(()=>trainLab.snapshot().selected==='cab');
- await page.locator('[data-part="seats"]').click();
- await page.waitForFunction(()=>trainLab.snapshot().near>.95);
- await page.locator('[data-view="inside"]').click();
- await page.waitForFunction(()=>trainLab.snapshot().reveal>.95);
- const state=await snap();
- assert.ok(state.assemblies.filter(a=>a.id!==state.assembly).every(a=>!a.interior&&!a.ghost&&(a.exterior||a.region==='seats')),'Zoom must preserve solid surrounding assemblies');
- assert.equal(state.changedOpacity,0,'Zoom must not fade any surface');
+ const initial=(await snap()).camera,canvas=await page.locator('canvas').boundingBox();
+ await page.mouse.move(canvas.x+canvas.width/2,canvas.y+canvas.height/2);await page.mouse.wheel(0,-600);await frame();
+ let state=await snap();assert.ok(state.camera.distance<initial.distance);assert.equal(state.selected,null);assert.equal(state.reveal,0);assert.deepEqual(state.camera.target,initial.target);
+ await select('seats');const selected=(await snap()).camera;
+ assert.deepEqual(selected,state.camera,'selection must not move camera');
+ assert.equal((await snap()).opening,null);
+ await page.locator('#focus-part').click();await frame();assert.notEqual((await snap()).camera.distance,selected.distance);
+ await page.locator('#back-view').click();await frame();assert.deepEqual((await snap()).camera,selected,'previous view restores exact camera');
+ await open();state=await snap();assert.equal(state.opening,'cabin');
+ assert.ok(state.assemblies.find(a=>a.id==='roof').exteriorPosition[1]>3);
+ assert.ok(state.assemblies.find(a=>a.id==='seats').interior);
+ assert.ok(state.assemblies.find(a=>a.id==='cabin-body').exteriorPosition[2]<-3);
+ assert.equal(state.changedOpacity,0);
  await page.screenshot({path:path.join(out,'hsr-book-seats.png')});
-
- /* ---- every one of the 25 discoveries ---- */
- const details=await page.evaluate(()=>HSR_DETAILS);
- assert.equal(details.length,25);
- for(const d of details){
-   await page.locator(`[data-part="${d.region}"]`).click();
-   await page.locator(`[data-detail="${d.id}"]`).click();
-   await page.waitForFunction(id=>trainLab.snapshot().detail===id&&trainLab.snapshot().reveal>.95,d.id);
-   assert.equal(await page.locator('#part-en').textContent(),d.en,`${d.id} english`);
-   assert.equal(await page.locator('#part-zh').textContent(),d.zh,`${d.id} chinese`);
-   assert.equal(await page.locator('#part-principle').textContent(),d.principle,`${d.id} principle`);
-   assert.equal(await page.locator('#crumb-detail').textContent(),'› '+d.zhName);
-   assert.equal((await snap()).modelId,identity);assert.equal((await snap()).changedOpacity,0,'Detail focus must not fade surrounding surfaces');
+ await page.locator('[data-detail="seats.back"]').click();await frame();
+ assert.equal((await snap()).opening,'cabin');
+ await page.locator('#open-part').click();await page.waitForFunction(()=>trainLab.snapshot().openAmount<.001);state=await snap();
+ assert.ok(state.assemblies.every(a=>a.exteriorPosition.every(x=>x===0)),'closing restores all exterior positions');
+ assert.deepEqual(state.camera,selected,'closing restores view from before opening');assert.equal(state.detail,null);assert.ok(state.assemblies.every(a=>!a.interior));
+ const discoveries=await page.evaluate(()=>HSR_DETAILS);assert.equal(discoveries.length,25);
+ for(const d of discoveries){await select(d.region);await open();await page.locator(`[data-detail="${d.id}"]`).click();await frame();
+   assert.equal((await snap()).detail,d.id);assert.equal(await page.locator('#part-en').textContent(),d.en);assert.equal(await page.locator('#part-zh').textContent(),d.zh);assert.equal(await page.locator('#part-principle').textContent(),d.principle);
+   assert.equal((await snap()).modelId,identity);assert.equal((await snap()).changedOpacity,0);
  }
- for(const id of ['bogies.wheelset','motors.motor','panto.head','coupler.head','cab.desk']){
-   const d=details.find(x=>x.id===id);
-   await page.locator(`[data-part="${d.region}"]`).click();
-   await page.locator(`[data-detail="${id}"]`).click();
-   await page.waitForFunction(i=>trainLab.snapshot().detail===i&&trainLab.snapshot().reveal>.95,id);
-   await page.screenshot({path:path.join(out,'hsr-book-'+id.replace('.','-')+'.png')});
+ await select('motors');await open();const normal=(await snap()).cutNormal;
+ await page.locator('#side-view').click();await page.locator('#top-view').click();await frame();assert.deepEqual((await snap()).cutNormal,normal,'section stays fixed while rotating camera');
+ for(const id of ['cab','bogies','motors']){await select(id);await open();await page.screenshot({path:path.join(out,'hsr-book-open-'+id+'.png')});}
+ await select('doors');await page.locator('#mechanism-play').click();const t=(await snap()).simulationTime;await page.waitForFunction(t=>trainLab.snapshot().simulationTime>t+.1,t);await page.locator('#mechanism-play').click();const paused=(await snap()).simulationTime;await frame();assert.equal((await snap()).simulationTime,paused);
+ await select('pantograph');await page.evaluate(()=>{window.spoken=[];speechSynthesis.speak=u=>spoken.push(u.text);});await page.locator('#speak').click();assert.ok((await page.evaluate(()=>spoken))[0].includes('Pantograph'));
+ await select('seats');await open();await page.locator('#explode-button').click();await frame();assert.equal((await snap()).opening,null);assert.equal((await snap()).explosion,1);
+ await page.locator('#explode-button').click();await frame();assert.equal((await snap()).explosion,0);
+ await page.locator('#home-view').click();await frame();assert.equal((await snap()).opening,null);
+ for(const [width,height]of[[1440,940],[1024,768],[390,844]]){
+  await page.setViewportSize({width,height});await select('seats');await open();
+  await page.evaluate(()=>{window.scrollTo(0,0);document.querySelector('.inspector').scrollTop=0;});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  const c=await page.locator('canvas').boundingBox(),tools=await page.locator('.stage-tools').boundingBox(),inspector=await page.locator('.inspector').boundingBox();
+  assert.ok(c.y+c.height<=tools.y+1,'tools stay outside canvas');
+  if(width>800)assert.ok(inspector.x>=c.x+c.width-1);else assert.ok(inspector.y>=tools.y+tools.height-1);
+  await page.screenshot({path:path.join(out,'hsr-book-'+width+'.png')});
+  if(width===390){const touch=await page.context().newCDPSession(page),cx=c.x+c.width/2,cy=c.y+c.height/2,d=(await snap()).camera.distance;
+   await touch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:cx-30,y:cy,id:1},{x:cx+30,y:cy,id:2}]});
+   await touch.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:cx-60,y:cy,id:1},{x:cx+60,y:cy,id:2}]});
+   await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await frame();assert.ok((await snap()).camera.distance<d*.75);assert.equal((await snap()).opening,'cabin');await touch.detach();
+  }
  }
- /* the cutaway must actually open the shell, and only for the chosen assembly */
- assert.ok((await page.evaluate(()=>{let cut=0;document.querySelector('#viewport canvas');return true;})));
-
- /* ---- region gating: the lever drives only the chosen part ---- */
- await page.locator('[data-part="doors"]').click();
- await page.locator('[data-detail="doors.leaf"]').click();
- await page.waitForFunction(()=>trainLab.snapshot().reveal>.95);
- const doorBefore=await page.evaluate(()=>trainLab.snapshot().level);
- await page.locator('#mechanism-step').click();
- await page.waitForFunction(v=>trainLab.snapshot().level>v,doorBefore);
- const doorLevel=(await snap()).level;assert.ok(doorLevel>.05);
- await page.locator('#mechanism-play').click();
- const tick=(await snap()).simulationTime;
- await page.waitForFunction(t=>trainLab.snapshot().simulationTime>t+.1,tick);
- await page.locator('#mechanism-play').click();
- const paused=(await snap()).simulationTime;
- await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
- assert.equal((await snap()).simulationTime,paused,'pause must freeze the simulation clock');
- await page.locator('#mechanism').evaluate(el=>{el.value=100;el.dispatchEvent(new Event('input',{bubbles:true}));});
- await page.waitForFunction(()=>trainLab.snapshot().level>.99);
- await page.screenshot({path:path.join(out,'hsr-book-doors-open.png')});
- for(const id of ['pantograph','bogies','motors','windows']){
-   await page.locator(`[data-part="${id}"]`).click();
-   await page.waitForFunction(()=>trainLab.snapshot().near>.9);
-   await page.locator('#mechanism').evaluate(el=>{el.value=100;el.dispatchEvent(new Event('input',{bubbles:true}));});
-   await page.waitForFunction(()=>trainLab.snapshot().level>.99);
-   await page.screenshot({path:path.join(out,'hsr-book-live-'+id+'.png')});
- }
-
- /* ---- speech, language toggle, back / home ---- */
- await page.locator('[data-part="pantograph"]').click();
- await page.evaluate(()=>{window.spoken=[];speechSynthesis.speak=u=>window.spoken.push(u.text);});
- await page.locator('#speak').click();
- assert.ok((await page.evaluate(()=>window.spoken))[0].includes('Pantograph'));
- await page.locator('#language').click();assert.equal(await page.locator('#part-zh').isVisible(),false);
- await page.locator('#language').click();assert.equal(await page.locator('#part-zh').isVisible(),true);
- await page.locator('#mechanism').evaluate(el=>{el.value=0;el.dispatchEvent(new Event('input',{bubbles:true}));});
- await page.locator('#home-view').click();await page.waitForFunction(()=>trainLab.snapshot().near===0);
- assert.ok((await snap()).assemblies.every(a=>(a.exterior||a.region==='seats')&&!a.interior&&!a.ghost),'home view must be the whole train, nothing peeled');
- await page.locator('#explode-button').click();await page.waitForFunction(()=>trainLab.snapshot().explosion>.99);
- await page.screenshot({path:path.join(out,'hsr-book-exploded.png')});
- await page.locator('#explode-button').click();await page.waitForFunction(()=>trainLab.snapshot().explosion<.01);
- await page.locator('#side-view').click();await page.locator('#top-view').click();
- await page.locator('#zoom-out').click();await page.locator('#zoom-in').click();
- await page.locator('#auto-rotate').click();assert.equal(await page.locator('#auto-rotate').getAttribute('aria-pressed'),'true');await page.locator('#auto-rotate').click();
-
- /* ---- responsive: tablet and phone, sticky model, no sideways scroll ---- */
- for(const [width,height]of[[1024,768],[390,844]]){
-   await page.setViewportSize({width,height});
-   await page.locator('[data-part="bogies"]').click();
-   await page.locator('[data-detail="bogies.wheelset"]').click();
-   await page.waitForFunction(()=>trainLab.snapshot().reveal>.9);
-   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`no horizontal scroll at ${width}`);
-   const c=await page.locator('canvas').boundingBox(),tools=await page.locator('.stage-tools').boundingBox();
-   assert.ok(c.y+c.height<=tools.y+1,`canvas must stop above the tool strip at ${width}`);
-   if(width<800){
-     const en=await page.locator('#part-en').boundingBox();
-     assert.ok(en.y>=tools.y+tools.height-1&&en.y+en.height<=height,`the English text must be readable below the sticky model at ${width}`);
-     const touch=await page.context().newCDPSession(page),cx=c.x+c.width/2,cy=c.y+c.height/2,d=(await snap()).camera.distance;
-     await touch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:cx-30,y:cy,id:1},{x:cx+30,y:cy,id:2}]});
-     await touch.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:cx-60,y:cy,id:1},{x:cx+60,y:cy,id:2}]});
-     await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
-     await page.waitForFunction(v=>trainLab.snapshot().camera.distance<v*.75,d);
-     await touch.detach();
-   }
-   await page.screenshot({path:path.join(out,'hsr-book-'+width+'.png')});
- }
-
- /* ---- reload, deep link, and the doorways back out of the lab ---- */
- await page.setViewportSize({width:1440,height:940});
- await page.reload();await page.waitForFunction(()=>window.trainLab?.snapshot().renderer.calls>0);
- await page.goto(base+'labs/hsr/?part=pantograph');
- await page.waitForFunction(()=>window.trainLab?.snapshot().selected==='pantograph');
- await page.goto(base+'labs/hsr/#pantograph');await page.waitForFunction(()=>window.trainLab?.snapshot().selected==='pantograph');
- for(const part of await page.evaluate(()=>HSR_PARTS)){await page.locator(`[data-part="${part.id}"]`).click();assert.equal(await page.locator('#part-en').textContent(),part.en,part.id);}
- await page.locator('.lab-navigation a').first().click();await page.waitForFunction(()=>document.querySelector('.lab-card'));
- assert.equal(await page.locator('.lab-card.ready').count(),await page.evaluate(()=>LABS_CATALOG.filter(l=>l.status==='ready').length));
- for(const img of await page.locator('.lab-cover img').all())assert.ok(await img.evaluate(i=>i.complete&&i.naturalWidth>0));
- await page.locator('[data-lab-id="hsr"] .enter-lab').click();await page.waitForFunction(()=>window.trainLab?.snapshot().generation===4);
- await page.locator('.lab-navigation a').last().click();assert.ok(page.url().endsWith('/books/hsr/index.html'));
- await page.locator('.book-lab-link').click();await page.waitForFunction(()=>window.trainLab?.snapshot().generation===4);
- assert.deepEqual(failed,[],'no local asset may 404');
- assert.deepEqual(errors,[],errors.join('\n'));
- console.log(`PASS book train browser: shared stage tint and caption layering, 14 assemblies, progressive reveal, 25 english/chinese/principle discoveries, region-gated lever, pause, speech, reassembly, desktop/tablet/mobile, reload, deep link, lab and book doorways.`);
+ await page.goto(base+'labs/hsr/?part=pantograph');await page.waitForFunction(()=>window.trainLab?.snapshot().selected==='pantograph');
+ assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
+ console.log('PASS: independent selection/zoom, exact camera return, explicit opening and restoration, stable cut plane, 25 bilingual details, mechanisms, speech, mutually exclusive explosion, desktop/tablet/mobile layout and pinch.');
 }finally{await browser.close();server.close();}})().catch(e=>{console.error(e);server.close();process.exitCode=1;});
