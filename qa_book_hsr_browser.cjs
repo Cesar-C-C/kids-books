@@ -52,7 +52,8 @@ const server=http.createServer((req,res)=>{let f=path.resolve(root,'.'+decodeURI
  await page.locator('[data-view="inside"]').click();
  await page.waitForFunction(()=>trainLab.snapshot().reveal>.95);
  const state=await snap();
- assert.ok(state.assemblies.filter(a=>a.id!==state.assembly).every(a=>!a.interior&&a.ghost&&!a.exterior),'unrelated assemblies must collapse to a plain outline');
+ assert.ok(state.assemblies.filter(a=>a.id!==state.assembly).every(a=>!a.interior&&!a.ghost&&(a.exterior||a.region==='seats')),'Zoom must preserve solid surrounding assemblies');
+ assert.equal(state.changedOpacity,0,'Zoom must not fade any surface');
  await page.screenshot({path:path.join(out,'hsr-book-seats.png')});
 
  /* ---- every one of the 25 discoveries ---- */
@@ -66,7 +67,7 @@ const server=http.createServer((req,res)=>{let f=path.resolve(root,'.'+decodeURI
    assert.equal(await page.locator('#part-zh').textContent(),d.zh,`${d.id} chinese`);
    assert.equal(await page.locator('#part-principle').textContent(),d.principle,`${d.id} principle`);
    assert.equal(await page.locator('#crumb-detail').textContent(),'› '+d.zhName);
-   assert.equal((await snap()).modelId,identity);
+   assert.equal((await snap()).modelId,identity);assert.equal((await snap()).changedOpacity,0,'Detail focus must not fade surrounding surfaces');
  }
  for(const id of ['bogies.wheelset','motors.motor','panto.head','coupler.head','cab.desk']){
    const d=details.find(x=>x.id===id);

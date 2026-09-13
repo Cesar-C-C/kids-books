@@ -166,7 +166,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
   canvas.ondblclick=e=>{if(drag<6)pick(hit(e.clientX,e.clientY),true);};
   canvas.addEventListener('wheel',e=>{e.preventDefault();if(e.deltaY<0&&!targetExplosion){const h=hit(e.clientX,e.clientY);if(h&&(!active||distance>activeFit*1.4)){selectAssembly(assemblies.find(a=>a.id===h.object.userData.pickAssembly),false);target.look.copy(h.point);}}target.distance=clamp(target.distance*Math.exp(e.deltaY*.0012),1.2,60);},{passive:false});
   $('viewport').onkeydown=e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','Escape'].includes(e.key)){e.preventDefault();if(e.key==='Escape')back();if(e.key==='ArrowLeft')target.yaw-=.16;if(e.key==='ArrowRight')target.yaw+=.16;if(e.key==='ArrowUp')target.pitch=clamp(target.pitch+.12,-1.15,1.50);if(e.key==='ArrowDown')target.pitch=clamp(target.pitch-.12,-1.15,1.50);if(e.key==='+'||e.key==='=')target.distance=Math.max(1.2,target.distance*.8);if(e.key==='-')target.distance=Math.min(60,target.distance*1.25);}};
-  window.trainLab={setView:(y,p,d,x=-1)=>{target.yaw=y;target.pitch=p;target.distance=d;target.look.set(x,.2,0);},select:id=>selectAssembly(nearestAssembly(id)),focusDetail:id=>selectDetail(id),snapshot:()=>({generation:4,reference:train.reference,modelId:train.root.uuid,selected:active?.region||null,assembly:active?.id||null,detail,near,reveal,mode,playing,simulationTime:simTime,level:mechanism,explosion,meshCount:pickables.length,geometry:train.counts,visited:journal.read().found,camera:{yaw,pitch,distance,target:look.toArray()},assemblies:assemblies.map(a=>({id:a.id,region:a.region,exterior:a.exterior.visible,interior:a.interior.visible,ghost:a.ghost.visible})),renderer:renderer.info.render}),projectPart:id=>{const a=assemblies.find(a=>a.id===id)||nearestAssembly(id);if(!a)return null;const c=worldCenter(a).project(camera),b=canvas.getBoundingClientRect();return{x:b.left+(c.x*.5+.5)*b.width,y:b.top+(-c.y*.5+.5)*b.height};}};
+  window.trainLab={setView:(y,p,d,x=-1)=>{target.yaw=y;target.pitch=p;target.distance=d;target.look.set(x,.2,0);},select:id=>selectAssembly(nearestAssembly(id)),focusDetail:id=>selectDetail(id),snapshot:()=>({generation:4,changedOpacity:surfaces.filter(s=>s.materials.some(m=>Math.abs(m.opacity-materialOriginal.get(m).opacity)>1e-6)).length,reference:train.reference,modelId:train.root.uuid,selected:active?.region||null,assembly:active?.id||null,detail,near,reveal,mode,playing,simulationTime:simTime,level:mechanism,explosion,meshCount:pickables.length,geometry:train.counts,visited:journal.read().found,camera:{yaw,pitch,distance,target:look.toArray()},assemblies:assemblies.map(a=>({id:a.id,region:a.region,exterior:a.exterior.visible,interior:a.interior.visible,ghost:a.ghost.visible})),renderer:renderer.info.render}),projectPart:id=>{const a=assemblies.find(a=>a.id===id)||nearestAssembly(id);if(!a)return null;const c=worldCenter(a).project(camera),b=canvas.getBoundingClientRect();return{x:b.left+(c.x*.5+.5)*b.width,y:b.top+(-c.y*.5+.5)*b.height};}};
   requestAnimationFrame(frame);
  }
  function frame(stamp){
@@ -182,17 +182,15 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
   train.update({time:simTime,mechanism:mechanism>.001,level:mechanism,region:active?.region});
   for(const a of assemblies){a.group.position.copy(a.base).addScaledVector(a.offset,explosion);if(a.update)a.update({time:simTime,mechanism:mechanism>.001,level:mechanism,region:active?.region,spin:1.55});}
   if(active){const center=worldCenter(active),normal=camera.position.clone().sub(center).normalize();clipping.setFromNormalAndCoplanarPoint(normal.clone().negate(),center.clone().addScaledVector(normal,active.radius*(1-reveal)));}
-  for(const a of assemblies){const chosen=a===active;const distant=!chosen&&near>.9&&explosion<.02;a.exterior.visible=!distant&&(a.region!=='seats'||chosen||explosion>.2);a.ghost.visible=distant;a.interior.visible=chosen&&reveal>.03||explosion>.2;a.ghost.visible=distant;}
-  track.traverse(o=>{if(o.material){o.material.transparent=near>.4;o.material.opacity=near>.4?.25:1;o.material.depthWrite=near<=.4;}});
+  // Zoom preserves the real surrounding train, including its original materials.
+  for(const a of assemblies){const chosen=a===active;a.exterior.visible=a.region!=='seats'||chosen||explosion>.2;a.interior.visible=chosen&&reveal>.03||explosion>.2;a.ghost.visible=false;}
   for(const s of surfaces){
-   const chosen=s.assembly===active,context=!chosen&&near>0&&explosion<.02;
-   for(const m of s.materials){const orig=materialOriginal.get(m);Object.assign(m,orig);m.clippingPlanes=chosen&&s.layer==='exterior'&&!s.detail&&reveal>.01?[clipping]:null;
-    let alpha=1;if(context&&s.layer==='exterior')alpha=1-near;if(s.layer==='ghost'&&near>.5&&detail)alpha=.55;
-    if(chosen&&detail){const keep=(keepWith[detail]||[]).includes(s.detail);if(!keep&&((s.detail&&s.detail!==detail)||(!s.detail&&s.layer==='exterior')))alpha=Math.min(alpha,.12);}
-    if(alpha<1){m.opacity*=alpha;m.transparent=true;m.depthWrite=false;}
+   const chosen=s.assembly===active;
+   const cabinCut=mode==='inside'&&active&&['seats','body','roof','windows'].includes(active.region)&&['cabin-body','roof','windows','doors'].includes(s.assembly.id);
+   for(const m of s.materials){const orig=materialOriginal.get(m);Object.assign(m,orig);m.clippingPlanes=s.layer==='exterior'&&(cabinCut||(chosen&&!s.detail))&&reveal>.01?[clipping]:null;
     if(materialTransparency.get(m)!==m.transparent){m.needsUpdate=true;materialTransparency.set(m,m.transparent);}
    }
-   s.object.castShadow=s.shadow&&!context&&!(chosen&&reveal>.1&&s.layer==='exterior');
+   s.object.castShadow=s.shadow&&!(chosen&&reveal>.1&&s.layer==='exterior');
   }
   train.root.updateMatrixWorld(true);
   const label=$('model-label');label.hidden=!active||near<.2;
