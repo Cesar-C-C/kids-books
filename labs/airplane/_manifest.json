@@ -1,0 +1,205 @@
+{
+  "audioDir": "audio",
+  "entries": [
+    {
+      "id": "fuselage",
+      "lang": "en",
+      "text": "Fuselage. This is the body of the airplane. People and bags travel inside."
+    },
+    {
+      "id": "cockpit",
+      "lang": "en",
+      "text": "Cockpit. The pilots sit here. They use the controls to fly the airplane."
+    },
+    {
+      "id": "wings",
+      "lang": "en",
+      "text": "Wings. Air flows around the wings. The wings make lift to help the airplane stay in the air."
+    },
+    {
+      "id": "engines",
+      "lang": "en",
+      "text": "Engines. The engines push air backward. This gives the airplane a push forward."
+    },
+    {
+      "id": "gear",
+      "lang": "en",
+      "text": "Landing gear. These wheels help the airplane roll on the ground. They support it when it lands."
+    },
+    {
+      "id": "fin",
+      "lang": "en",
+      "text": "Vertical tail. This tall tail helps the airplane stay steady. It helps keep the nose pointing forward."
+    },
+    {
+      "id": "stabilizers",
+      "lang": "en",
+      "text": "Horizontal tail. These small tail wings help keep the airplane steady, so its nose does not tip too much."
+    },
+    {
+      "id": "ailerons",
+      "lang": "en",
+      "text": "Ailerons. These parts move on the wings. They help the airplane roll, with one wing up and one wing down."
+    },
+    {
+      "id": "elevators",
+      "lang": "en",
+      "text": "Elevators. These parts move on the small tail wings. They help the airplane point its nose up or down."
+    },
+    {
+      "id": "rudder",
+      "lang": "en",
+      "text": "Rudder. This part moves on the tall tail. It helps the airplane point its nose left or right."
+    },
+    {
+      "id": "engine.inlet",
+      "lang": "en",
+      "text": "Inlet. Air enters the engine here."
+    },
+    {
+      "id": "engine.fan",
+      "lang": "en",
+      "text": "Fan. The fan moves air toward the back."
+    },
+    {
+      "id": "engine.bypass",
+      "lang": "en",
+      "text": "Bypass duct. This air travels around the engine core."
+    },
+    {
+      "id": "engine.compressor",
+      "lang": "en",
+      "text": "Compressor. The compressor squeezes the air."
+    },
+    {
+      "id": "engine.combustor",
+      "lang": "en",
+      "text": "Combustor. Fuel mixes with air and burns here."
+    },
+    {
+      "id": "engine.turbine",
+      "lang": "en",
+      "text": "Turbine. Hot gas turns the turbine."
+    },
+    {
+      "id": "engine.shaft",
+      "lang": "en",
+      "text": "Shaft. The shaft connects turning parts."
+    },
+    {
+      "id": "engine.nozzle",
+      "lang": "en",
+      "text": "Nozzle. Gas leaves the engine at the back."
+    },
+    {
+      "id": "cabin.frames",
+      "lang": "en",
+      "text": "Body frames. These frames help hold the body in shape."
+    },
+    {
+      "id": "cabin.floor",
+      "lang": "en",
+      "text": "Cabin floor. The floor supports people and seats."
+    },
+    {
+      "id": "cabin.seats",
+      "lang": "en",
+      "text": "Passenger seats. Passengers sit in these seats."
+    },
+    {
+      "id": "cabin.cargo",
+      "lang": "en",
+      "text": "Cargo hold. Bags travel below the cabin floor."
+    },
+    {
+      "id": "cockpit.seats",
+      "lang": "en",
+      "text": "Pilot seats. The pilots sit at the front."
+    },
+    {
+      "id": "cockpit.panel",
+      "lang": "en",
+      "text": "Instrument panel. These displays show how the airplane is flying."
+    },
+    {
+      "id": "cockpit.controls",
+      "lang": "en",
+      "text": "Flight controls. Pilots use controls to guide the airplane."
+    },
+    {
+      "id": "wing.spar",
+      "lang": "en",
+      "text": "Wing spar. A strong beam runs along the wing."
+    },
+    {
+      "id": "wing.ribs",
+      "lang": "en",
+      "text": "Wing ribs. These ribs help shape the wing."
+    },
+    {
+      "id": "wing.flap",
+      "lang": "en",
+      "text": "Flap. Flaps help the wings make lift at low speeds."
+    },
+    {
+      "id": "wing.slat",
+      "lang": "en",
+      "text": "Slat. Slats help the wings make lift at low speeds."
+    },
+    {
+      "id": "wing.spoiler",
+      "lang": "en",
+      "text": "Spoiler. These panels rise to reduce lift."
+    },
+    {
+      "id": "gear.strut",
+      "lang": "en",
+      "text": "Landing gear strut. The strut supports the airplane on the ground."
+    },
+    {
+      "id": "gear.wheel",
+      "lang": "en",
+      "text": "Wheel and tire. The wheels let the airplane roll."
+    },
+    {
+      "id": "gear.brake",
+      "lang": "en",
+      "text": "Wheel brake. Brakes help slow the wheels down."
+    },
+    {
+      "id": "gear.bay",
+      "lang": "en",
+      "text": "Landing gear bay. The wheels tuck into a space inside the airplane."
+    },
+    {
+      "id": "fin.spar",
+      "lang": "en",
+      "text": "Tail frame. Spars and ribs support the upright tail."
+    },
+    {
+      "id": "stabilizer.spar",
+      "lang": "en",
+      "text": "Tailplane spar. A spar supports each horizontal tailplane."
+    },
+    {
+      "id": "aileron.hinge",
+      "lang": "en",
+      "text": "Aileron hinge. Ailerons turn around hinges at the wing edge."
+    },
+    {
+      "id": "aileron.linkage",
+      "lang": "en",
+      "text": "Control linkage. A short linkage moves the aileron."
+    },
+    {
+      "id": "elevator.hinge",
+      "lang": "en",
+      "text": "Elevator hinge. Elevators turn together on the tail."
+    },
+    {
+      "id": "rudder.hinge",
+      "lang": "en",
+      "text": "Rudder hinge. The rudder swings left and right."
+    }
+  ]
+}

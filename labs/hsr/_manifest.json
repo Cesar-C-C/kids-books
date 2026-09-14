@@ -1,0 +1,180 @@
+{
+  "audioDir": "audio",
+  "entries": [
+    {
+      "id": "body",
+      "lang": "en",
+      "text": "Train body. This is the body of the train. Its smooth nose helps air flow around it."
+    },
+    {
+      "id": "cab",
+      "lang": "en",
+      "text": "Driver’s cab. The driver sits here. The controls help the driver run the train."
+    },
+    {
+      "id": "windows",
+      "lang": "en",
+      "text": "Passenger windows. We can look outside through these windows. What can you see on a train ride?"
+    },
+    {
+      "id": "roof",
+      "lang": "en",
+      "text": "Roof. The roof covers the carriage. It helps keep the rain outside."
+    },
+    {
+      "id": "seats",
+      "lang": "en",
+      "text": "Seats. Passengers sit on these seats. There is a path between the rows."
+    },
+    {
+      "id": "doors",
+      "lang": "en",
+      "text": "Doors. We use the doors to get on and off. Wait until the train stops and the doors open."
+    },
+    {
+      "id": "bogies",
+      "lang": "en",
+      "text": "Bogies. These frames hold the wheels under the train. They support the carriage and help it follow curves."
+    },
+    {
+      "id": "motors",
+      "lang": "en",
+      "text": "Traction motors. These motors use electricity. They turn the wheels through gears to move the train."
+    },
+    {
+      "id": "pantograph",
+      "lang": "en",
+      "text": "Pantograph. This arm reaches up from the roof. It takes electric power from a wire above the train."
+    },
+    {
+      "id": "coupler",
+      "lang": "en",
+      "text": "Coupler. This part joins one carriage to another. It helps keep the train connected."
+    },
+    {
+      "id": "cab.seat",
+      "lang": "en",
+      "text": "Driver’s seat. The driver sits here and watches the track ahead."
+    },
+    {
+      "id": "cab.desk",
+      "lang": "en",
+      "text": "Driver’s desk. The driver controls the train from this desk."
+    },
+    {
+      "id": "cab.displays",
+      "lang": "en",
+      "text": "Displays. These screens show the speed and the signals."
+    },
+    {
+      "id": "body.skin",
+      "lang": "en",
+      "text": "Body shell. The body is a strong tube that carries the load."
+    },
+    {
+      "id": "body.floor",
+      "lang": "en",
+      "text": "Cabin floor. The floor carries the seats and hides the equipment."
+    },
+    {
+      "id": "body.luggage",
+      "lang": "en",
+      "text": "Luggage rack. Bags ride above the seats."
+    },
+    {
+      "id": "roof.unit",
+      "lang": "en",
+      "text": "Air-conditioning unit. The air-conditioning unit sits on the roof."
+    },
+    {
+      "id": "roof.duct",
+      "lang": "en",
+      "text": "Supply duct. Treated air travels through these ducts."
+    },
+    {
+      "id": "windows.pane",
+      "lang": "en",
+      "text": "Window glazing. The glass lets light in and keeps noise out."
+    },
+    {
+      "id": "windows.shade",
+      "lang": "en",
+      "text": "Window blind. This blind rolls down to block the sun."
+    },
+    {
+      "id": "seats.cushion",
+      "lang": "en",
+      "text": "Seat cushion. The cushion is soft, and a frame holds it up."
+    },
+    {
+      "id": "seats.back",
+      "lang": "en",
+      "text": "Seat back. The seat back supports your back."
+    },
+    {
+      "id": "doors.leaf",
+      "lang": "en",
+      "text": "Door leaf and seal. This door slides along the side of the train to open."
+    },
+    {
+      "id": "doors.sensor",
+      "lang": "en",
+      "text": "Door sensor and light. Sensors watch the doorway before the doors close."
+    },
+    {
+      "id": "bogies.frame",
+      "lang": "en",
+      "text": "Bogie frame. This H-shaped frame carries the wheels."
+    },
+    {
+      "id": "bogies.wheelset",
+      "lang": "en",
+      "text": "Wheelset. One axle joins two wheels into a wheelset."
+    },
+    {
+      "id": "bogies.airspring",
+      "lang": "en",
+      "text": "Air spring. Air springs make the ride smooth."
+    },
+    {
+      "id": "motors.motor",
+      "lang": "en",
+      "text": "Traction motor. These motors turn electricity into motion."
+    },
+    {
+      "id": "motors.gearbox",
+      "lang": "en",
+      "text": "Gearbox. The gearbox slows the motor but adds force."
+    },
+    {
+      "id": "motors.cooling",
+      "lang": "en",
+      "text": "Cooling duct. Air flows through here to cool the motors."
+    },
+    {
+      "id": "panto.insulator",
+      "lang": "en",
+      "text": "Insulator. These parts hold the live arm above the roof."
+    },
+    {
+      "id": "panto.arm",
+      "lang": "en",
+      "text": "Folding arm. The arms fold and unfold to reach the wire."
+    },
+    {
+      "id": "panto.head",
+      "lang": "en",
+      "text": "Collector head. The collector head slides along the wire."
+    },
+    {
+      "id": "coupler.head",
+      "lang": "en",
+      "text": "Coupler head. The coupler head locks onto the next carriage."
+    },
+    {
+      "id": "coupler.buffer",
+      "lang": "en",
+      "text": "Energy absorber. This absorbs the push between carriages."
+    }
+  ]
+}

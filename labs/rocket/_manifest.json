@@ -1,0 +1,180 @@
+{
+  "audioDir": "audio",
+  "entries": [
+    {
+      "id": "fairing",
+      "lang": "en",
+      "text": "Payload fairing. This cover protects the satellite during launch. Its two halves open and fall away when they are no longer needed."
+    },
+    {
+      "id": "satellite",
+      "lang": "en",
+      "text": "Satellite. This satellite is the rocket’s cargo. Its solar panels are folded for the ride into space."
+    },
+    {
+      "id": "upperstage",
+      "lang": "en",
+      "text": "Upper stage. This smaller rocket sits above the main stage. Its engine helps carry the satellite toward its orbit."
+    },
+    {
+      "id": "interstage",
+      "lang": "en",
+      "text": "Interstage. This hollow section joins two rocket stages. It surrounds the upper stage’s engine before the stages separate."
+    },
+    {
+      "id": "structure",
+      "lang": "en",
+      "text": "Rocket structure. The rocket has a strong, light structure. In this model, we open its outer skin to see the tanks inside."
+    },
+    {
+      "id": "fuel",
+      "lang": "en",
+      "text": "Fuel tank. This tank holds liquid fuel. The engine uses fuel with an oxidizer to make hot gas."
+    },
+    {
+      "id": "oxidizer",
+      "lang": "en",
+      "text": "Oxidizer tank. This tank holds liquid oxygen. It helps the fuel burn, even where there is no air."
+    },
+    {
+      "id": "boosters",
+      "lang": "en",
+      "text": "Boosters. These two side rockets give an extra push at liftoff. They separate after their propellant is used up."
+    },
+    {
+      "id": "engines",
+      "lang": "en",
+      "text": "Main engines. These engines send hot gas down through their nozzles. That gives the rocket a push upward."
+    },
+    {
+      "id": "fairing.half",
+      "lang": "en",
+      "text": "Two halves. The nose cone is made of two halves."
+    },
+    {
+      "id": "fairing.tip",
+      "lang": "en",
+      "text": "Pointed tip. The pointed tip cuts through the air."
+    },
+    {
+      "id": "fairing.skin",
+      "lang": "en",
+      "text": "Fairing skin. The smooth skin keeps the air flowing around it."
+    },
+    {
+      "id": "fairing.seam",
+      "lang": "en",
+      "text": "Seam. This line is where the two halves meet."
+    },
+    {
+      "id": "satellite.body",
+      "lang": "en",
+      "text": "Satellite body. The box in the middle holds the instruments."
+    },
+    {
+      "id": "satellite.panels",
+      "lang": "en",
+      "text": "Solar wings. These wings make electricity from sunlight."
+    },
+    {
+      "id": "satellite.dish",
+      "lang": "en",
+      "text": "Antenna. The dish talks with stations on the ground."
+    },
+    {
+      "id": "upperstage.engine",
+      "lang": "en",
+      "text": "Upper engine. This small engine fires again once in space."
+    },
+    {
+      "id": "upperstage.tanks",
+      "lang": "en",
+      "text": "Small tanks. These smaller tanks feed the upper engine."
+    },
+    {
+      "id": "interstage.ring",
+      "lang": "en",
+      "text": "Connector ring. This ring holds the two stages together."
+    },
+    {
+      "id": "interstage.cavity",
+      "lang": "en",
+      "text": "Engine space. Inside is an empty space for the upper engine."
+    },
+    {
+      "id": "structure.frame",
+      "lang": "en",
+      "text": "Ring frames. These rings keep the body round and stiff."
+    },
+    {
+      "id": "structure.stringers",
+      "lang": "en",
+      "text": "Stringers. These long beams run from top to bottom."
+    },
+    {
+      "id": "structure.skin",
+      "lang": "en",
+      "text": "Outer skin. The thin skin is the outside wall of the rocket."
+    },
+    {
+      "id": "structure.separation",
+      "lang": "en",
+      "text": "Separation line. This is where the rocket comes apart in flight."
+    },
+    {
+      "id": "fuel.tank",
+      "lang": "en",
+      "text": "Fuel chamber. Liquid fuel is stored in here."
+    },
+    {
+      "id": "fuel.dome",
+      "lang": "en",
+      "text": "Rounded dome. The rounded ends are the strongest shape."
+    },
+    {
+      "id": "fuel.pipe",
+      "lang": "en",
+      "text": "Feed line. This pipe carries fuel down to the engines."
+    },
+    {
+      "id": "oxidizer.tank",
+      "lang": "en",
+      "text": "Oxidizer chamber. Liquid oxygen is kept cold in here."
+    },
+    {
+      "id": "oxidizer.insulation",
+      "lang": "en",
+      "text": "Insulation. This layer keeps the cold liquid cold."
+    },
+    {
+      "id": "boosters.case",
+      "lang": "en",
+      "text": "Booster case. The strong case holds the booster fuel."
+    },
+    {
+      "id": "boosters.nozzle",
+      "lang": "en",
+      "text": "Booster nozzle. Hot gas shoots out from here."
+    },
+    {
+      "id": "engines.nozzle",
+      "lang": "en",
+      "text": "Bell nozzle. The bell shape speeds up the hot gas."
+    },
+    {
+      "id": "engines.chamber",
+      "lang": "en",
+      "text": "Combustion chamber. Fuel and oxidizer burn here."
+    },
+    {
+      "id": "engines.turbopump",
+      "lang": "en",
+      "text": "Turbopump. The pump pushes propellant in very fast."
+    },
+    {
+      "id": "engines.gimbal",
+      "lang": "en",
+      "text": "Gimbal mount. The engine can tilt to steer the rocket."
+    }
+  ]
+}
