@@ -104,7 +104,7 @@ const minRadius={cab:.85,body:2.0,roof:2.0,windows:1.5,seats:1.5,doors:1.6,coupl
  }
  function updateButtons(){document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===mode));$('mechanism-play').setAttribute('aria-pressed',playing);$('mechanism-play').textContent=playing?'Ⅱ 暂停观察':'▶ 看它怎样工作';$('auto-rotate').setAttribute('aria-pressed',autoRotate);$('explode-button').setAttribute('aria-pressed',targetExplosion>0);$('explode-button').textContent=targetExplosion?'组装':'拆解';$('slow-play').setAttribute('aria-pressed',slow);}
  lessons.forEach((p,i)=>{const b=document.createElement('button');b.className='region-button';b.dataset.part=p.id;b.setAttribute('aria-pressed',false);b.innerHTML='<i>'+String(i+1).padStart(2,'0')+'</i><span><strong>'+p.name+'</strong><small>'+p.zhName+'</small></span>';b.onclick=()=>{if(camera)selectAssembly(nearestAssembly(p.id));else{$('part-name').textContent=p.name;$('part-en').textContent=p.en;$('part-zh').textContent=p.zh;}};$('region-list').append(b);});
- $('speak').onclick=()=>speech.say($('part-name').textContent+'. '+$('part-en').textContent,true);
+ $('speak').onclick=()=>speech.say($('part-name').textContent+'. '+$('part-en').textContent,true,'audio/'+(detail||active?.region)+'.mp3');
  $('language').onclick=()=>{const only=document.body.classList.toggle('english-only');$('language').textContent=only?'English only':'中英双语';$('language').setAttribute('aria-pressed',!only);};
  $('whole-train').onclick=$('home-view').onclick=home;$('back-view').onclick=$('back-part').onclick=back;
  $('zoom-in').onclick=()=>{target.distance=Math.max(1.2,target.distance*.8);};$('zoom-out').onclick=()=>{target.distance=Math.min(60,target.distance*1.25);};

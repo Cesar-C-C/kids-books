@@ -1,0 +1,250 @@
+{
+  "audioDir": "audio",
+  "entries": [
+    {
+      "id": "body",
+      "lang": "en",
+      "text": "Bus body. The body is painted school-bus yellow so drivers can see it from far away."
+    },
+    {
+      "id": "roof",
+      "lang": "en",
+      "text": "Roof. The roof is rounded and strong. It keeps the rain out and the children safe inside."
+    },
+    {
+      "id": "hood",
+      "lang": "en",
+      "text": "Hood and engine. The engine sits out in front under the hood, so the driver can hear it and fix it."
+    },
+    {
+      "id": "cab",
+      "lang": "en",
+      "text": "Driver cab. The driver sits high up with a big steering wheel and mirrors on every side."
+    },
+    {
+      "id": "doors",
+      "lang": "en",
+      "text": "Doors. The doors open so children can board one at a time."
+    },
+    {
+      "id": "seats",
+      "lang": "en",
+      "text": "Seats and belts. Blue bench seats line both sides, and every seat has its own belt."
+    },
+    {
+      "id": "aisle",
+      "lang": "en",
+      "text": "Walkway. A straight walkway runs down the middle, all the way to the back door."
+    },
+    {
+      "id": "stopsign",
+      "lang": "en",
+      "text": "Stop arm. The red stop sign folds out and tells every car: stop, children are crossing."
+    },
+    {
+      "id": "lights",
+      "lang": "en",
+      "text": "Warning lights. Red and amber lights flash on the roof when the bus is picking children up."
+    },
+    {
+      "id": "wheels",
+      "lang": "en",
+      "text": "Wheels. Four big black tires grip the road. The front pair turns to steer the bus."
+    },
+    {
+      "id": "body.shell",
+      "lang": "en",
+      "text": "Yellow shell. Yellow panels join together to make the bus body."
+    },
+    {
+      "id": "body.windows",
+      "lang": "en",
+      "text": "Side windows. Five passenger windows on each side bring light into the bus."
+    },
+    {
+      "id": "body.rubrail",
+      "lang": "en",
+      "text": "Rub rail. The black bars along the side are rub rails. They take the bumps instead of the paint."
+    },
+    {
+      "id": "body.skirt",
+      "lang": "en",
+      "text": "Skirt panel. A low panel closes the gap between the floor and the road."
+    },
+    {
+      "id": "roof.panel",
+      "lang": "en",
+      "text": "Rounded roof. The curved roof covers the cabin and sheds rain."
+    },
+    {
+      "id": "roof.hatch",
+      "lang": "en",
+      "text": "Roof hatch. A release handle lets an adult open the emergency roof hatch."
+    },
+    {
+      "id": "roof.beacon",
+      "lang": "en",
+      "text": "Roof bows. Curved roof bows support the skin above the cabin."
+    },
+    {
+      "id": "hood.cover",
+      "lang": "en",
+      "text": "Hood. The hood covers the engine at the front of the bus."
+    },
+    {
+      "id": "hood.grille",
+      "lang": "en",
+      "text": "Grille. Air rushes through the grille to cool the hot engine."
+    },
+    {
+      "id": "hood.headlight",
+      "lang": "en",
+      "text": "Headlights. Two round headlights light the road on dark winter mornings."
+    },
+    {
+      "id": "hood.bumper",
+      "lang": "en",
+      "text": "Front bumper. A thick black bumper is the first thing to meet a bump."
+    },
+    {
+      "id": "hood.engine",
+      "lang": "en",
+      "text": "Engine assembly. The engine block, valve cover and pipes sit on strong mounts."
+    },
+    {
+      "id": "hood.radiator",
+      "lang": "en",
+      "text": "Radiator and fan. Coolant carries heat to the radiator, and airflow carries it away."
+    },
+    {
+      "id": "cab.wheel",
+      "lang": "en",
+      "text": "Steering wheel. The steering wheel lets the driver guide the bus."
+    },
+    {
+      "id": "cab.dash",
+      "lang": "en",
+      "text": "Dashboard. Dials show how fast the bus goes and how much fuel is left."
+    },
+    {
+      "id": "cab.seat",
+      "lang": "en",
+      "text": "Driver seat. A raised driver seat faces the windshield and controls."
+    },
+    {
+      "id": "cab.glass",
+      "lang": "en",
+      "text": "Windshield. The windshield lets the driver see ahead through clear glass."
+    },
+    {
+      "id": "cab.mirror",
+      "lang": "en",
+      "text": "Crossing mirror. Extra mirrors in front show the driver the blind spot right at the bumper."
+    },
+    {
+      "id": "doors.leaf",
+      "lang": "en",
+      "text": "Door leaves. Two door leaves swing inward on hinges at the outer edges."
+    },
+    {
+      "id": "doors.glass",
+      "lang": "en",
+      "text": "Door glass. Clear panes let the driver see the entry steps and people outside."
+    },
+    {
+      "id": "doors.step",
+      "lang": "en",
+      "text": "Entry steps. Three non-slip treads lead from the entrance to the cabin floor."
+    },
+    {
+      "id": "doors.emergency",
+      "lang": "en",
+      "text": "Emergency door. A rear emergency door lines up with the clear center aisle."
+    },
+    {
+      "id": "seats.cushion",
+      "lang": "en",
+      "text": "Seat cushions. Blue padded cushions sit above sturdy seat frames."
+    },
+    {
+      "id": "seats.back",
+      "lang": "en",
+      "text": "High seat backs. Tall padded backs separate the rows of seats."
+    },
+    {
+      "id": "seats.belt",
+      "lang": "en",
+      "text": "Seat belts. A shoulder strap and lap strap meet at a buckle."
+    },
+    {
+      "id": "seats.frame",
+      "lang": "en",
+      "text": "Seat legs. Steel legs bolt every bench straight down to the floor."
+    },
+    {
+      "id": "aisle.floor",
+      "lang": "en",
+      "text": "Walkway floor. A ribbed rubber floor gives shoes something to grip."
+    },
+    {
+      "id": "aisle.handrail",
+      "lang": "en",
+      "text": "Entry handrails. Entry handrails help children steady themselves on the steps."
+    },
+    {
+      "id": "aisle.rear",
+      "lang": "en",
+      "text": "Rear walkway. The walkway reaches all the way to the emergency door."
+    },
+    {
+      "id": "stopsign.blade",
+      "lang": "en",
+      "text": "Stop sign. The red octagonal sign unfolds to warn nearby drivers."
+    },
+    {
+      "id": "stopsign.arm",
+      "lang": "en",
+      "text": "Folding arm. A hinged arm holds the sign beside the bus."
+    },
+    {
+      "id": "stopsign.lamp",
+      "lang": "en",
+      "text": "Arm lamp. Small red lamps help the stop sign stand out."
+    },
+    {
+      "id": "lights.red",
+      "lang": "en",
+      "text": "Red warning lights. Red warning lights signal that the bus has stopped for children."
+    },
+    {
+      "id": "lights.amber",
+      "lang": "en",
+      "text": "Amber warning lights. Amber warning lights signal that the bus is preparing to stop."
+    },
+    {
+      "id": "lights.bracket",
+      "lang": "en",
+      "text": "Light housing. A black housing surrounds each pair of warning lamps."
+    },
+    {
+      "id": "wheels.tire",
+      "lang": "en",
+      "text": "Tires. Four black tires hold the whole bus up off the road."
+    },
+    {
+      "id": "wheels.tread",
+      "lang": "en",
+      "text": "Tread. Raised tread blocks leave channels around the tire."
+    },
+    {
+      "id": "wheels.hub",
+      "lang": "en",
+      "text": "Wheel hub. A shiny steel hub in the middle holds the wheel onto the axle."
+    },
+    {
+      "id": "wheels.arch",
+      "lang": "en",
+      "text": "Wheel arch. A curved arch over each wheel keeps the splash outside."
+    }
+  ]
+}

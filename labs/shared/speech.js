@@ -8,8 +8,16 @@ window.LabSpeech = {
     button.querySelector('span').textContent = '听英文 · Listen';
     status.textContent = '';
   }
-  function say(text, main = false) {
+  function say(text, main = false, audio = '') {
     stopSpeech();
+    if (audio) {
+      const player = new Audio(audio);
+      player.onplay = () => { if (main) button.querySelector('span').textContent = '停止朗读 · Stop'; };
+      player.onended = () => { button.querySelector('span').textContent = '再听一次 · Listen again'; };
+      player.onerror = () => { status.textContent = '本地音频暂不可用，请检查音频文件。'; };
+      player.play().catch(() => { status.textContent = '本地音频暂不可用，请检查音频文件。'; });
+      return;
+    }
     if (!('speechSynthesis' in window)) {
       status.textContent = '此浏览器不支持朗读，可以一起读上面的英文。';
       return;

@@ -1,0 +1,280 @@
+{
+  "audioDir": "audio",
+  "entries": [
+    {
+      "id": "body",
+      "lang": "en",
+      "text": "Bus body. This red body wraps both decks. Two rows of windows let you look out from either floor."
+    },
+    {
+      "id": "roof",
+      "lang": "en",
+      "text": "Roof. A curved roof covers the upper deck. Find its small vents and narrow rain gutters."
+    },
+    {
+      "id": "upper",
+      "lang": "en",
+      "text": "Upper deck. Upstairs the windows are high and the view is wonderful. Rows of soft seats line both sides."
+    },
+    {
+      "id": "lower",
+      "lang": "en",
+      "text": "Lower deck. Downstairs is where the doors are, so passengers get on and off easily. There is room for a stroller or wheelchair."
+    },
+    {
+      "id": "stairs",
+      "lang": "en",
+      "text": "Staircase. A staircase joins the two decks. Hold the yellow handrail and climb up step by step!"
+    },
+    {
+      "id": "cab",
+      "lang": "en",
+      "text": "Driver cab. The driver sits in the cab at the front, turning a big steering wheel above a panel of dials."
+    },
+    {
+      "id": "doors",
+      "lang": "en",
+      "text": "Doors. Glazed doors let passengers enter and leave at a stop. Watch the front leaves turn on their hinges."
+    },
+    {
+      "id": "engine",
+      "lang": "en",
+      "text": "Engine. At the back of the bus hides the engine — the strong heart that turns the wheels and pushes the heavy bus along."
+    },
+    {
+      "id": "chassis",
+      "lang": "en",
+      "text": "Chassis. This strong frame runs under the bus. It carries both decks and every wheel."
+    },
+    {
+      "id": "wheels",
+      "lang": "en",
+      "text": "Wheels. Rubber tires support the bus and grip the road. Look closely at the tread and metal hubs."
+    },
+    {
+      "id": "body.shell",
+      "lang": "en",
+      "text": "Body shell. A red shell of panels bent into a rounded box."
+    },
+    {
+      "id": "body.windows",
+      "lang": "en",
+      "text": "Windows. Clear glass lets light in. Look through it to see the seats on both decks."
+    },
+    {
+      "id": "body.skirt",
+      "lang": "en",
+      "text": "Lower skirt. The skirt closes the gap between the floor and the road."
+    },
+    {
+      "id": "body.livery",
+      "lang": "en",
+      "text": "Interdeck band. A wide red band separates the two rows of windows."
+    },
+    {
+      "id": "roof.panel",
+      "lang": "en",
+      "text": "Roof panel. The panel arches gently over the whole top deck."
+    },
+    {
+      "id": "roof.hatch",
+      "lang": "en",
+      "text": "Roof vent. A small cover protects an opening for ventilation."
+    },
+    {
+      "id": "roof.rail",
+      "lang": "en",
+      "text": "Rain gutters. Narrow gutters run along the roof edges."
+    },
+    {
+      "id": "upper.seats",
+      "lang": "en",
+      "text": "Upper seats. A cushion, a backrest and metal legs make each seat."
+    },
+    {
+      "id": "upper.aisle",
+      "lang": "en",
+      "text": "Walkway. A clear walkway runs down the middle."
+    },
+    {
+      "id": "upper.poles",
+      "lang": "en",
+      "text": "Grab poles. Yellow poles beside the aisle give passengers a handhold."
+    },
+    {
+      "id": "upper.rail",
+      "lang": "en",
+      "text": "Handrails. Horizontal rails join the upright grab poles."
+    },
+    {
+      "id": "upper.floor",
+      "lang": "en",
+      "text": "Upper floor. This floor supports the seats and has an opening for the stairs."
+    },
+    {
+      "id": "lower.seats",
+      "lang": "en",
+      "text": "Lower seats. Seats share the lower deck with the doors, stairs and a clear bay."
+    },
+    {
+      "id": "lower.floor",
+      "lang": "en",
+      "text": "Lower floor. A flat floor at boarding height, low enough to step onto."
+    },
+    {
+      "id": "lower.stroller",
+      "lang": "en",
+      "text": "Accessible bay. A marked area beside the middle door leaves room for a wheelchair or stroller."
+    },
+    {
+      "id": "lower.priority",
+      "lang": "en",
+      "text": "Priority seat. A special seat is kept for people who need it most."
+    },
+    {
+      "id": "stairs.treads",
+      "lang": "en",
+      "text": "Steps. Six steps join the lower floor to the upper landing."
+    },
+    {
+      "id": "stairs.rail",
+      "lang": "en",
+      "text": "Stair handrails. Handrails follow the slope and continue onto the landing."
+    },
+    {
+      "id": "stairs.well",
+      "lang": "en",
+      "text": "Stairwell. The opening in the upper floor is the stairwell."
+    },
+    {
+      "id": "cab.wheel",
+      "lang": "en",
+      "text": "Steering wheel. A big wheel turns the front wheels left and right."
+    },
+    {
+      "id": "cab.dash",
+      "lang": "en",
+      "text": "Dashboard. A panel of dials shows speed and other information."
+    },
+    {
+      "id": "cab.seat",
+      "lang": "en",
+      "text": "Driver seat. A supported seat keeps the driver close to the pedals and controls."
+    },
+    {
+      "id": "cab.glass",
+      "lang": "en",
+      "text": "Windscreen. The front glass gives the driver a view of the road. Wipers clear rain from it."
+    },
+    {
+      "id": "cab.mirror",
+      "lang": "en",
+      "text": "Side mirrors. Reflective mirrors help the driver see along the sides of the bus."
+    },
+    {
+      "id": "doors.leaf",
+      "lang": "en",
+      "text": "Front door leaves. Two glazed leaves swing from hinges at the sides of the doorway."
+    },
+    {
+      "id": "doors.glass",
+      "lang": "en",
+      "text": "Front door glass. Each front door leaf has one tall pane held by a frame."
+    },
+    {
+      "id": "doors.step",
+      "lang": "en",
+      "text": "Entry step. A wide step sits just inside the doorway."
+    },
+    {
+      "id": "doors.emergency",
+      "lang": "en",
+      "text": "Emergency window release. A release handle marks the rear upper escape window."
+    },
+    {
+      "id": "engine.block",
+      "lang": "en",
+      "text": "Engine block. The block holds the cylinders where fuel burns."
+    },
+    {
+      "id": "engine.fan",
+      "lang": "en",
+      "text": "Cooling fan. A fan pulls air through the radiator to carry heat away."
+    },
+    {
+      "id": "engine.pipes",
+      "lang": "en",
+      "text": "Pipes. Bent pipes carry fuel and cooling water."
+    },
+    {
+      "id": "engine.tank",
+      "lang": "en",
+      "text": "Fuel tank. A metal tank holds the fuel for the engine."
+    },
+    {
+      "id": "chassis.rail",
+      "lang": "en",
+      "text": "Chassis rails. Two long rails run the full length of the bus."
+    },
+    {
+      "id": "chassis.cross",
+      "lang": "en",
+      "text": "Cross members. Cross members tie the two rails together."
+    },
+    {
+      "id": "chassis.axle",
+      "lang": "en",
+      "text": "Axles. Two axles carry the wheels, front and back."
+    },
+    {
+      "id": "wheels.tire",
+      "lang": "en",
+      "text": "Tire. Thick black rubber grips the road."
+    },
+    {
+      "id": "wheels.tread",
+      "lang": "en",
+      "text": "Tire tread. Raised rubber blocks leave grooves across the tire surface."
+    },
+    {
+      "id": "wheels.hub",
+      "lang": "en",
+      "text": "Wheel hub. The metal hub sits inside the rubber tire. Bolts hold the wheel in place."
+    },
+    {
+      "id": "wheels.arch",
+      "lang": "en",
+      "text": "Wheel arch. A curved arch in the body gives the wheel room to turn."
+    },
+    {
+      "id": "body.taillights",
+      "lang": "en",
+      "text": "Rear lights. Red tail and brake lights help drivers behind see the bus. Amber indicators show a turn, and white reversing lights show that the bus is backing up."
+    },
+    {
+      "id": "engine.pistons",
+      "lang": "en",
+      "text": "Cylinders and pistons. Four cutaway cylinders reveal pistons and sealing rings. Expanding gas pushes each piston downward. The cylinder count and cutaway are teaching choices, not a specification of this bus."
+    },
+    {
+      "id": "engine.crank",
+      "lang": "en",
+      "text": "Connecting rods and crankshaft. Connecting rods join pistons to offset crank pins. This linkage turns straight piston travel into shaft rotation. The flywheel helps smooth the changing torque."
+    },
+    {
+      "id": "engine.injectors",
+      "lang": "en",
+      "text": "Fuel rail and injectors. The rail supplies fuel to four injectors. Each nozzle meters fuel into hot compressed air near the end of compression; diesel combustion does not need a spark plug."
+    },
+    {
+      "id": "engine.valves",
+      "lang": "en",
+      "text": "Intake and exhaust valves. Intake valves admit fresh air; exhaust valves let spent gas leave. Springs help close the valves. The camshaft and timing drive that control them are omitted from this simplified view."
+    },
+    {
+      "id": "engine.sump",
+      "lang": "en",
+      "text": "Oil pan and drain plug. The oil pan collects returning lubricating oil below the crankshaft. The drain plug is removed during an oil change. The pump, filter and internal oil passages are not shown."
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "audioDir": "audio",
+  "entries": [
+    {
+      "id": "modules",
+      "lang": "en",
+      "text": "Modules. The station is built from round modules joined end to end — each one is a room in space."
+    },
+    {
+      "id": "node",
+      "lang": "en",
+      "text": "Connecting node. Where the modules meet, a round node with hatches lets astronauts walk from room to room."
+    },
+    {
+      "id": "solar",
+      "lang": "en",
+      "text": "Solar wings. Two huge wings of dark blue panels turn sunlight into all the electricity the station needs."
+    },
+    {
+      "id": "truss",
+      "lang": "en",
+      "text": "Spine truss. A long framework, the truss, carries the wings and holds them out away from the rooms."
+    },
+    {
+      "id": "arm",
+      "lang": "en",
+      "text": "Robot arm. A long arm with joints and a gripper reaches out to catch and hold visiting spacecraft."
+    },
+    {
+      "id": "docking",
+      "lang": "en",
+      "text": "Docking port. A ringed port on the nose of a module is the doorway where ships click onto the station."
+    },
+    {
+      "id": "cupola",
+      "lang": "en",
+      "text": "Cupola. A bubble of windows looks straight down — astronauts watch Earth and guide the robot arm from here."
+    },
+    {
+      "id": "windows",
+      "lang": "en",
+      "text": "Portholes. Every module has its own round portholes, so there is always a window to the stars."
+    },
+    {
+      "id": "interior",
+      "lang": "en",
+      "text": "Cabin inside. Inside, lockers and racks line the curved wall: sleeping bag, table, treadmill and the plant box."
+    },
+    {
+      "id": "radiator",
+      "lang": "en",
+      "text": "Radiators. Pale flat panels throw away the heat the station makes, so nothing inside gets too hot."
+    },
+    {
+      "id": "modules.skin",
+      "lang": "en",
+      "text": "Module skin. Each module is a metal can, made from curved panels riveted in rings."
+    },
+    {
+      "id": "modules.ring",
+      "lang": "en",
+      "text": "Stiffening rings. Ribs run around the barrel like the hoops on a wooden bucket."
+    },
+    {
+      "id": "modules.port",
+      "lang": "en",
+      "text": "Bright window. Thick glass, set deep in a metal frame, keeps the air in and shows the stars."
+    },
+    {
+      "id": "modules.handhold",
+      "lang": "en",
+      "text": "Handholds. Little yellow grips are bolted all over the outside for spacewalking hands."
+    },
+    {
+      "id": "modules.mmu",
+      "lang": "en",
+      "text": "Thruster pack. Small thrusters push the station a little, so it keeps the right way round."
+    },
+    {
+      "id": "node.hatch",
+      "lang": "en",
+      "text": "Hatches. Round doors open between the node and every module."
+    },
+    {
+      "id": "node.ring",
+      "lang": "en",
+      "text": "Node collar. A reinforced collar joins the rounded node to a cabin. Bolts and seals have different jobs: holding the joint and containing the air."
+    },
+    {
+      "id": "node.light",
+      "lang": "en",
+      "text": "Interior light. Sunlight through the portholes is not enough here, so lamps stay on inside."
+    },
+    {
+      "id": "solar.panel",
+      "lang": "en",
+      "text": "Solar panel. Each wing is a grid of dark blue panels, hinged into a long row."
+    },
+    {
+      "id": "solar.cell",
+      "lang": "en",
+      "text": "Cell grid. Fine gold lines run across each panel to gather the electricity."
+    },
+    {
+      "id": "solar.boom",
+      "lang": "en",
+      "text": "Mast. A long white mast carries the whole wing and lets it turn towards the Sun."
+    },
+    {
+      "id": "solar.horn",
+      "lang": "en",
+      "text": "Hinges. The wings left Earth folded up, then unfolded in space like a fan."
+    },
+    {
+      "id": "truss.beam",
+      "lang": "en",
+      "text": "Truss beam. The truss is a lattice of thin struts, not a solid tube — light but very stiff."
+    },
+    {
+      "id": "truss.cable",
+      "lang": "en",
+      "text": "Power cable. Thick cables run along the truss, carrying the current back to the modules."
+    },
+    {
+      "id": "truss.joint",
+      "lang": "en",
+      "text": "Coupling joint. Each piece joins the next with a bolted joint, so the truss could be built in orbit."
+    },
+    {
+      "id": "arm.shoulder",
+      "lang": "en",
+      "text": "Shoulder joint. One powered joint on the station wall carries the whole arm and swings it around."
+    },
+    {
+      "id": "arm.boom",
+      "lang": "en",
+      "text": "Arm boom. The long white tube is the arm's upper segment, made stiff enough to reach far."
+    },
+    {
+      "id": "arm.elbow",
+      "lang": "en",
+      "text": "Elbow joint. A middle joint folds the arm, so it can bend like your own elbow."
+    },
+    {
+      "id": "arm.wrist",
+      "lang": "en",
+      "text": "Wrist. A second thin segment ends in a wrist that can twist and point."
+    },
+    {
+      "id": "arm.gripper",
+      "lang": "en",
+      "text": "Gripper. Two metal fingers close like a hand to take hold of a cargo ship."
+    },
+    {
+      "id": "docking.ring",
+      "lang": "en",
+      "text": "Docking ring. A chased metal ring with latches is the doorway a spacecraft locks onto."
+    },
+    {
+      "id": "docking.tunnel",
+      "lang": "en",
+      "text": "Tunnel. A short tunnel through the ring lets people crawl from the ship into the station."
+    },
+    {
+      "id": "docking.light",
+      "lang": "en",
+      "text": "Approach light. A little light beside the port shows the visiting pilot how they are lined up."
+    },
+    {
+      "id": "docking.target",
+      "lang": "en",
+      "text": "Concentric target. Concentric rings mark the centre of this illustrated docking port."
+    },
+    {
+      "id": "cupola.glass",
+      "lang": "en",
+      "text": "Window petals. Seven windows, one on top and six around, join like the petals of a flower."
+    },
+    {
+      "id": "cupola.shutter",
+      "lang": "en",
+      "text": "Shield cover. Metal covers can close over the glass to keep out tiny flying rocks."
+    },
+    {
+      "id": "cupola.rail",
+      "lang": "en",
+      "text": "Control rail. A row of controls right under the windows drives the robot arm outside."
+    },
+    {
+      "id": "windows.frame",
+      "lang": "en",
+      "text": "Window frame. A heavy metal ring takes all the pushing of the air inside."
+    },
+    {
+      "id": "windows.inner",
+      "lang": "en",
+      "text": "Inner pane. This teaching model shows two separate panes. Real spacecraft use window stacks designed for pressure loads and environmental protection."
+    },
+    {
+      "id": "windows.drape",
+      "lang": "en",
+      "text": "Sun shade. Soft shades are tucked beside each window, because sunrise comes 16 times a day."
+    },
+    {
+      "id": "interior.racks",
+      "lang": "en",
+      "text": "Equipment racks. Square racks fill the curved wall — like bookshelves, but screwed to the wall."
+    },
+    {
+      "id": "interior.sleep",
+      "lang": "en",
+      "text": "Sleeping bag. There is no bed to lie on, so crew zip into a bag strapped to the wall."
+    },
+    {
+      "id": "interior.table",
+      "lang": "en",
+      "text": "Galley table. Food pouches are taped down to the table so they stay put."
+    },
+    {
+      "id": "interior.treadmill",
+      "lang": "en",
+      "text": "Treadmill. Crew run on a treadmill with a harness holding them down."
+    },
+    {
+      "id": "interior.plants",
+      "lang": "en",
+      "text": "Plant box. Green lettuce grows under purple lamps — the station's little garden."
+    },
+    {
+      "id": "radiator.panel",
+      "lang": "en",
+      "text": "Radiator panel. Pale panels are full of pipes, and hot fluid runs through them."
+    },
+    {
+      "id": "radiator.loop",
+      "lang": "en",
+      "text": "Coolant loop. The fluid loop carries heat from the racks out to the panels and back."
+    },
+    {
+      "id": "interior.crystals",
+      "lang": "en",
+      "text": "Crystal chamber. A sealed transparent chamber holds faceted crystals. The clear walls let the crew observe growth while keeping the samples contained."
+    },
+    {
+      "id": "interior.samples",
+      "lang": "en",
+      "text": "Sample vials. Three capped vials sit in retaining rings above the instrument panel. Restraints keep samples from floating away."
+    },
+    {
+      "id": "interior.services",
+      "lang": "en",
+      "text": "Cabin services. Clipped service lines follow the cabin wall. Removable floor panels give access for inspection and maintenance."
+    }
+  ]
+}
