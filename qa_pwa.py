@@ -220,8 +220,9 @@ def check_covers():
     # 离线只能靠浏览器磁盘缓存的残留 —— 换个滚动位置就空白。
     # 这 12 张在外壳预缓存里，直接同源取才是确定的。
     covers = re.findall(r'<img class="cover"[^>]*\ssrc="(books/[^"]+)"', home)
-    if len(covers) != 12:
-        bad("首页自带同源 src 的封面数量为 %d，期望 12" % len(covers))
+    expected_covers = {"books/%s/%s" % (bid, card) for bid, _cover, card in _covers()}
+    if len(covers) != len(expected_covers) or set(covers) != expected_covers:
+        bad("首页同源封面与实际书目不一致：实际 %d，期望 %d" % (len(covers), len(expected_covers)))
     not_card = [c for c in covers if not c.endswith("_card480.webp")]
     if not_card:
         bad("首页封面没走小派生图（断网会空白 + 多传原图）：%s" % ", ".join(not_card[:3]))

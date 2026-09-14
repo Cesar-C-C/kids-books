@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#eff6ef"><meta name="description" content="跟随小水滴滴滴完成16页双语点读冒险，深入认识云、雨与水循环，带观察游戏和冷杯实验。">
+<title>云朵去哪里旅行 · Where Do Clouds Travel?</title>
+<link rel="icon" href="../../icons/favicon-32.png"><link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="小小探索家">
+<link rel="stylesheet" href="cloud.css"><link rel="stylesheet" href="../../shared/pwa.css">
+</head>
+<body>
+<header class="toolbar"><a class="home" href="../../index.html" aria-label="返回绘本书架">⌂ <span>绘本书架</span></a><span class="series">小小探索家 <i>·</i> 天空来信</span><div class="tools"><button id="contents" aria-label="打开目录">☷ 目录</button><button id="language" aria-label="切换中英文主读语言">EN</button><button id="auto" aria-pressed="false">自动朗读：关</button></div></header>
+<main id="reader" class="spread">
+ <section class="picture-side" aria-label="故事插图"><div class="art"><img id="illustration" alt="" fetchpriority="high"><svg id="hotspots" viewBox="0 0 1216 832" aria-label="点击插图发现科学秘密"></svg><div id="image-error" hidden>图片暂未加载，请检查连接。<button id="retry-image">重新加载</button></div><div id="bubble" hidden role="status"></div></div><p class="art-caption"><span id="scene-label"></span><span id="art-hint">点亮小圆点，发现一个秘密</span></p></section>
+ <section class="story-side"><div class="eyebrow"><span id="chapter"></span><span id="page-number"></span></div><h1 id="title" tabindex="-1"></h1><p id="subtitle" class="subtitle"></p><div class="read-row"><button id="narrate" class="read-button" aria-pressed="false">▶ 听故事</button><button id="translation" aria-expanded="false">看英文</button><span id="audio-status" role="status"></span></div><p id="story"></p><p id="translated-story" hidden></p><details id="discovery"><summary><span>✦</span> <span id="why-title"></span></summary><p id="fact"></p><button id="read-fact">♪ 听这个秘密</button></details><section id="activity" aria-label="想一想"></section><div id="feedback" role="status"></div></section>
+</main>
+<footer class="navigation"><button id="previous" aria-label="上一页">← <span>上一页</span></button><div class="journey"><span id="journey-label"></span><div class="track"><div id="progress"></div></div></div><button id="next" class="next" aria-label="下一页"><span>下一页</span> →</button></footer>
+<dialog id="toc"><div class="dialog-head"><h2>旅行目录 / Contents</h2><button id="close-toc" aria-label="关闭目录">✕</button></div><div id="toc-pages"></div><p><a href="SOURCES.md" target="_blank" rel="noopener">科学依据与家长阅读说明</a></p></dialog>
+<script src="../../shared/cdn.js"></script><script src="book.js"></script><script src="overlays.js"></script><script src="cloud.js"></script><script src="../../shared/pwa.js"></script>
+</body></html>

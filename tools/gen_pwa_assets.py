@@ -187,7 +187,10 @@ def main():
         if miss:
             missing_assets.append((name, miss))
         files = imgs + book_audio(name, audio_ver)
-        for fn in ("index.html", "book.js", "overlays.js"):
+        # Include per-book readers/styles as well as the shared-reader contract.
+        entry_files = {"index.html", "book.js", "overlays.js"}
+        entry_files.update(fn for fn in os.listdir(bdir) if fn.endswith((".js", ".css")))
+        for fn in sorted(entry_files):
             p = os.path.join(bdir, fn)
             if os.path.exists(p):
                 shell.append("books/%s/%s" % (name, fn))
