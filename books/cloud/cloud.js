@@ -51,5 +51,40 @@
  $('contents').onclick=()=>{stop();clearBubble();const list=$('toc-pages');list.replaceChildren();pages.forEach((p,i)=>{const b=document.createElement('button');b.textContent=`${String(i+1).padStart(2,'0')} · ${text(p.title,p.titleEn)}`;if(i===current)b.setAttribute('aria-current','page');b.onclick=()=>{$('toc').close();current=i;render(true);window.scrollTo(0,0);};list.append(b);});$('toc').showModal();};$('close-toc').onclick=()=>$('toc').close();
  document.addEventListener('keydown',e=>{if($('toc').open||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;if(e.key==='ArrowRight'){e.preventDefault();turn(1);}if(e.key==='ArrowLeft'){e.preventDefault();turn(-1);}if(e.key==='Escape'){stop();clearBubble();}});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});window.addEventListener('pagehide',stop);
+ // Only claim a single-finger, clearly horizontal gesture. Vertical scrolling and
+ // pinch zoom stay native; controls and browser-edge navigation are excluded.
+ let swipe=null,suppressClickUntil=0;
+ const reader=$('reader');
+ reader.addEventListener('touchstart',e=>{
+  swipe=null;suppressClickUntil=0;
+  if(e.touches.length!==1||$('toc').open||e.target.closest('button,a,input,textarea,select,summary,[role="button"],[contenteditable],#bubble'))return;
+  const t=e.touches[0];
+  if(t.clientX<24||t.clientX>innerWidth-24||(window.visualViewport?.scale||1)>1.05)return;
+  swipe={id:t.identifier,x:t.clientX,y:t.clientY,dx:0,dy:0,time:performance.now(),page:current,locked:false};
+ },{passive:true});
+ document.addEventListener('touchstart',e=>{if(e.touches.length>1)swipe=null;},{passive:true});
+ document.addEventListener('touchmove',e=>{
+  if(!swipe)return;
+  const t=Array.from(e.touches).find(t=>t.identifier===swipe.id);
+  if(e.touches.length!==1||!t){swipe=null;return;}
+  swipe.dx=t.clientX-swipe.x;swipe.dy=t.clientY-swipe.y;
+  const ax=Math.abs(swipe.dx),ay=Math.abs(swipe.dy);
+  if(!swipe.locked){
+   if(ay>12&&ay>=ax){swipe=null;return;}
+   if(ax>12&&ax>ay*1.5)swipe.locked=true;
+  }
+  if(swipe.locked&&e.cancelable)e.preventDefault();
+ },{passive:false});
+ document.addEventListener('touchend',e=>{
+  const s=swipe;swipe=null;if(!s||e.touches.length||$('toc').open||s.page!==current)return;
+  const t=Array.from(e.changedTouches).find(t=>t.identifier===s.id);if(!t)return;
+  const dx=t.clientX-s.x,dy=t.clientY-s.y;
+  if(!s.locked||performance.now()-s.time>1000||Math.abs(dx)<Math.max(50,Math.min(96,innerWidth*.1))||Math.abs(dx)<Math.abs(dy)*1.5)return;
+  suppressClickUntil=performance.now()+400;
+  if(dx<0&&current<pages.length-1)turn(1);
+  if(dx>0&&current>0)turn(-1);
+ },{passive:true});
+ document.addEventListener('touchcancel',()=>{swipe=null;},{passive:true});
+ reader.addEventListener('click',e=>{if(performance.now()<suppressClickUntil){e.preventDefault();e.stopImmediatePropagation();}},true);
  render();
 })();
