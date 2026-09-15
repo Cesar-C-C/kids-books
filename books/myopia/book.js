@@ -22,7 +22,8 @@ window.PAGES = [
   {
     img: 'assets/01_kite-clue_v1.webp',
     en: 'Duoduo can see her red kite spool clearly. But the number on a faraway kite looks blurry.',
-    zh: '朵朵能清楚看见手里的红色风筝线轴，可是远处风筝上的号码看起来模糊了。'
+    zh: '朵朵能清楚看见手里的红色风筝线轴，可是远处风筝上的号码看起来模糊了。',
+    editableLayer: { type: 'blurred-kite-number', value: '8' }
   },
   {
     img: 'assets/02_speak-up_v1.webp',
@@ -37,17 +38,20 @@ window.PAGES = [
   {
     img: 'assets/04_light-path_v1.webp',
     en: 'Light enters the eye through the cornea and lens. This picture is a diagram, not a real-size eye.',
-    zh: '光线通过角膜和晶状体进入眼睛。这张图是原理示意，不是按真实大小画的眼睛。'
+    zh: '光线通过角膜和晶状体进入眼睛。这张图是原理示意，不是按真实大小画的眼睛。',
+    editableLayer: { type: 'eye-diagram-labels', focusX: 640, focusY: 355 }
   },
   {
     img: 'assets/05_retina-focus_v1.webp',
     en: 'In this normal-focus diagram, light comes together on the retina at the back of the eye.',
-    zh: '在这张正常聚焦原理图里，光线在眼睛后面的视网膜上会合。'
+    zh: '在这张正常聚焦原理图里，光线在眼睛后面的视网膜上会合。',
+    editableLayer: { type: 'eye-diagram-labels', focusX: 760, focusY: 386 }
   },
   {
     img: 'assets/06_myopic-focus_v1.webp',
     en: 'With myopia, an eye can be longer, so light focuses in front of the retina and far things may look blurry.',
-    zh: '近视时，眼球可能更长，光线会聚焦在视网膜前方，远处的东西就可能看起来模糊。'
+    zh: '近视时，眼球可能更长，光线会聚焦在视网膜前方，远处的东西就可能看起来模糊。',
+    editableLayer: { type: 'eye-diagram-labels', focusX: 640, focusY: 386 }
   },
   {
     img: 'assets/07_glasses-help_v1.webp',

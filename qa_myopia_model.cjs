@@ -25,6 +25,15 @@ assert.equal(PAGES.length, 14);
 assert.equal(PAGES[0].cover, true);
 assert.equal(PAGES[0].img, BOOK.coverImg);
 assert.deepEqual(PAGES.filter(p => p.activity).map(p => p.activity.type), ['focus-model']);
+assert.deepEqual(
+  PAGES.map((page, index) => page.editableLayer && [index, page.editableLayer.type]).filter(Boolean),
+  [
+    [1, 'blurred-kite-number'],
+    [4, 'eye-diagram-labels'],
+    [5, 'eye-diagram-labels'],
+    [6, 'eye-diagram-labels']
+  ]
+);
 assert.equal(PAGES[13].glossary.length, 6);
 for (const [i, page] of PAGES.entries()) {
   assert.ok(page.en && page.zh, `page ${i} bilingual copy`);

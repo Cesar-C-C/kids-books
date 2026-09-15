@@ -1,0 +1,215 @@
+.myopia-kite-clue,
+.myopia-eye-labels {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.myopia-kite-number {
+  position: absolute;
+  left: 15.15%;
+  top: 6.2%;
+  width: 5.7%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  color: #33405a;
+  font: 800 clamp(12px, 4.2vw, 24px)/1 'Fredoka', sans-serif;
+  filter: blur(1.7px);
+  opacity: .78;
+  transform: rotate(10deg);
+}
+
+.myopia-eye-label line {
+  stroke: #34445f;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.myopia-eye-label text {
+  fill: #23334f;
+  font: 700 24px 'Baloo 2', 'Noto Sans SC', sans-serif;
+  paint-order: stroke;
+  stroke: #fffdf5;
+  stroke-width: 7px;
+  stroke-linejoin: round;
+}
+
+.myopia-scale-note {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  z-index: 2;
+  margin: 0;
+  padding: 4px 9px;
+  border-radius: 9px;
+  background: rgba(255, 253, 245, .9);
+  color: #34445f;
+  font-size: clamp(10px, 2.5vw, 13px);
+  font-weight: 700;
+  line-height: 1.25;
+  pointer-events: none;
+}
+
+.myopia-focus {
+  margin: 14px 0 4px;
+  padding: 14px;
+  border: 2px solid #b6ddd9;
+  border-radius: 18px;
+  background: #f4fffd;
+  color: #25344d;
+  text-align: left;
+}
+
+.myopia-focus h3 {
+  margin: 0 0 10px;
+  color: #147b78;
+  font-size: 18px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.myopia-focus-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.myopia-growth-control label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.myopia-growth-range {
+  display: block;
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  accent-color: #1f9e9a;
+  cursor: pointer;
+}
+
+.myopia-correction {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 9px 12px;
+  border: 2px solid #1f9e9a;
+  border-radius: 12px;
+  background: #fff;
+  color: #176e6b;
+  font: 700 13px/1.25 'Baloo 2', 'Noto Sans SC', sans-serif;
+  cursor: pointer;
+}
+
+.myopia-correction[aria-pressed="true"] {
+  background: #1f9e9a;
+  color: #fff;
+}
+
+.myopia-growth-range:focus-visible,
+.myopia-correction:focus-visible {
+  outline: 4px solid #ffbf47;
+  outline-offset: 3px;
+}
+
+.myopia-focus-diagram {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #eaf8ff;
+}
+
+.myopia-eye-body {
+  fill: rgba(255, 255, 255, .75);
+  stroke: #c49a6c;
+  stroke-width: 1.4;
+}
+
+.myopia-cornea {
+  fill: rgba(126, 207, 245, .42);
+  stroke: #268fc2;
+  stroke-width: 1.7;
+}
+
+.myopia-lens {
+  fill: rgba(185, 231, 252, .62);
+  stroke: #4ba7cf;
+  stroke-width: 1.2;
+}
+
+.myopia-retina {
+  stroke: #e86b5b;
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  transition: transform .2s ease;
+}
+
+.myopia-ray {
+  fill: none;
+  stroke: #f0aa12;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: d .2s ease;
+}
+
+.myopia-focus-point {
+  fill: #fff;
+  stroke: #f08c00;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 2px #ffd166);
+  transition: cx .2s ease;
+}
+
+.myopia-focus-diagram text {
+  fill: #30415d;
+  font: 700 3px 'Baloo 2', 'Noto Sans SC', sans-serif;
+}
+
+.myopia-focus-status {
+  margin: 9px 0 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #fff5cf;
+  color: #664d03;
+  font-weight: 700;
+  text-align: center;
+}
+
+.myopia-focus-status span {
+  display: block;
+}
+
+.myopia-status-en {
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.myopia-disclaimer {
+  margin: 8px 0 0;
+  color: #596579;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 430px) {
+  .myopia-focus-controls { grid-template-columns: 1fr; }
+  .myopia-correction { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .myopia-retina,
+  .myopia-ray,
+  .myopia-focus-point {
+    transition: none;
+  }
+}
