@@ -29,6 +29,12 @@ assert.equal(PAGES[13].glossary.length, 6);
 for (const [i, page] of PAGES.entries()) {
   assert.ok(page.en && page.zh, `page ${i} bilingual copy`);
   assert.match(page.img, new RegExp(`assets/${String(i).padStart(2, '0')}_.*_v1\\.webp$`));
+  const imagePath = path.join(root, 'books/myopia', page.img);
+  assert.ok(fs.existsSync(imagePath), `page ${i} illustration exists`);
+  const image = fs.readFileSync(imagePath);
+  assert.ok(image.length > 10 * 1024, `page ${i} illustration is larger than 10 KB`);
+  assert.equal(image.toString('ascii', 0, 4), 'RIFF', `page ${i} RIFF container`);
+  assert.equal(image.toString('ascii', 8, 12), 'WEBP', `page ${i} WebP format`);
 }
 const allCopy = PAGES.map(p => `${p.en} ${p.zh}`).join(' ');
 for (const forbidden of ['screens cause myopia', '眼保健操治愈近视', 'glasses weaken', '戴眼镜会加深近视']) {
