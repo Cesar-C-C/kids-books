@@ -32,9 +32,13 @@ import { existsSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.dirname(HERE);
+const assetScope = { self: {} };
+runInNewContext(readFileSync(path.join(REPO, 'pwa-assets.js'), 'utf8'), assetScope);
+const BOOK_COUNT = Object.keys(assetScope.self.KB_ASSETS.books).length;
 
 const arg = (name, def) => {
   const hit = process.argv.find((a) => a.startsWith('--' + name + '='));
@@ -241,7 +245,7 @@ async function liveCheck(cdp, live, pageErrors) {
   })()`);
   check('线上外壳缓存已建立', !!shell.name, shell.name || '无');
   check('线上外壳缓存文件数合理（>80）', shell.count > 80, `${shell.count} 个`);
-  check('12 张封面在外壳缓存里', shell.covers === 12, `${shell.covers}/12`);
+  check('全部封面在外壳缓存里', shell.covers === BOOK_COUNT, `${shell.covers}/${BOOK_COUNT}`);
 
   /* 3. manifest 的 MIME —— 这正是本地测不到的东西 */
   const man = await cdp.eval(`(async () => {
@@ -304,12 +308,12 @@ async function liveCheck(cdp, live, pageErrors) {
              fabInFlow: !!document.querySelector('.shelf > .kb-fab'),
              panelRows: document.querySelectorAll('#offlineList .offline-row').length };
   })()`);
-  check('线上首页渲染 12 张书卡', shelf.cards === 12, `${shelf.cards} 张`);
-  check('线上 12 张封面都加载出像素', shelf.ok === 12, `${shelf.ok}/12`);
-  check('线上封面走同源（外壳缓存可直接供离线用）', shelf.originCover === 12,
-    `同源 ${shelf.originCover}/12`);
+  check('线上首页渲染全部书卡', shelf.cards === BOOK_COUNT, `${shelf.cards} 张`);
+  check('线上全部封面都加载出像素', shelf.ok === BOOK_COUNT, `${shelf.ok}/${BOOK_COUNT}`);
+  check('线上封面走同源（外壳缓存可直接供离线用）', shelf.originCover === BOOK_COUNT,
+    `同源 ${shelf.originCover}/${BOOK_COUNT}`);
   check('线上角落小按钮就位，且不插进页面流', shelf.fab && !shelf.fabInFlow);
-  check('线上离线清单就绪', shelf.panelRows === 12, `${shelf.panelRows} 行`);
+  check('线上离线清单就绪', shelf.panelRows === BOOK_COUNT, `${shelf.panelRows} 行`);
 
   /* 二级菜单在线上也要能开：它是纯前端 DOM，但依赖 /shared/pwa.js 与
      /shared/pwa.css 都被正确发布 —— 少发一个文件，点开就是一片空白 */
@@ -323,8 +327,8 @@ async function liveCheck(cdp, live, pageErrors) {
                 fabText: document.getElementById('kbFabTxt').textContent.trim() };
     return o;
   })()`);
-  check('线上二级菜单能打开（安装区 + 12 本清单都在）',
-    liveMenu.open && liveMenu.rows === 12 && liveMenu.install,
+  check('线上二级菜单能打开（安装区和全部书目都在）',
+    liveMenu.open && liveMenu.rows === BOOK_COUNT && liveMenu.install,
     `小按钮显示「${liveMenu.fabText}」`);
   await sleep(300);
   await saveShot(cdp, 'kb-menu-live.png');
@@ -423,19 +427,19 @@ async function main() {
       return { rows: rows.length, cards: document.querySelectorAll('.book-card').length,
                note: (document.getElementById('offlineNote')||{}).textContent || '' };
     })()`);
-    check('书架页渲染出离线清单（二级菜单内，12 行）', panel.cards === 12 && panel.rows === 12, `卡片 ${panel.cards} / 清单行 ${panel.rows}`);
+    check('书架页渲染出完整离线清单', panel.cards === BOOK_COUNT && panel.rows === BOOK_COUNT, `卡片 ${panel.cards} / 清单行 ${panel.rows}`);
 
     /* 封面用了 loading=lazy：要先滚到底把它们唤起来 */
     await cdp.eval(`window.scrollTo(0, document.body.scrollHeight); true`);
     const covers = await waitFor(cdp, `(() => {
       const imgs = [...document.querySelectorAll('img.cover')];
       const loaded = imgs.filter(i => i.complete && i.naturalWidth > 0).length;
-      return { ok: loaded >= 12, total: imgs.length,
+      return { ok: loaded >= ${BOOK_COUNT}, total: imgs.length,
                withSrc: imgs.filter(i => i.getAttribute('src')).length, loaded,
                first: imgs[0] ? imgs[0].getAttribute('src') : null };
     })()`, { timeout: 25000 });
-    check('12 张封面都拿到了候选地址', covers.withSrc === 12, covers.first || '');
-    check('封面在线时全部加载成功', covers.loaded === 12, `${covers.loaded}/12 张`);
+    check('全部封面都拿到了候选地址', covers.withSrc === BOOK_COUNT, covers.first || '');
+    check('封面在线时全部加载成功', covers.loaded === BOOK_COUNT, `${covers.loaded}/${BOOK_COUNT} 张`);
     await cdp.eval(`window.scrollTo(0, 0); true`);
 
     const panelStates = await waitFor(cdp, `(() => {
@@ -461,7 +465,7 @@ async function main() {
                rowsInDom: document.querySelectorAll('#offlineList .offline-row').length };
     })()`);
     check('书架页只多一个角落小按钮，设置项不在页面流里占版面',
-      fabIdle.exists && !fabIdle.sheetOpen && !fabIdle.inFlow && fabIdle.rowsInDom === 12,
+      fabIdle.exists && !fabIdle.sheetOpen && !fabIdle.inFlow && fabIdle.rowsInDom === BOOK_COUNT,
       `按钮「${fabIdle.text}」清单 ${fabIdle.rowsInDom} 行（弹层未展开）`);
 
     const menuOpen = await cdp.eval(`(() => {
@@ -472,8 +476,8 @@ async function main() {
                hasInstall: !!document.getElementById('kiBtn'),
                locked: document.documentElement.classList.contains('kb-lock') };
     })()`);
-    check('点小按钮弹出二级菜单（含安装区 + 12 本清单）',
-      menuOpen.open && menuOpen.rows === 12 && menuOpen.hasInstall, JSON.stringify(menuOpen));
+    check('点小按钮弹出二级菜单（含安装区和全部书目）',
+      menuOpen.open && menuOpen.rows === BOOK_COUNT && menuOpen.hasInstall, JSON.stringify(menuOpen));
     await sleep(300);
     await saveShot(cdp, 'kb-menu-open.png');
 
@@ -545,9 +549,9 @@ async function main() {
     })()`, { timeout: 10000 });
     await sleep(300);
     await saveShot(cdp, 'kb-harmony-guide.png');
-    /* 步骤展开时安装区写的是「按下面的步骤就能装到桌面」，不含平台名；
-       收起之后才会显示 —— 顺手用它验证鸿蒙被识别成「华为浏览器」
-       而不是「安卓浏览器」（鸿蒙 UA 里带着 Android 兼容标记，容易判错）。 */
+    /* Chrome may emit another native install event after the synthetic one.
+       The transient note can then offer installation again. Verify Huawei's
+       distinctive manual route in the rendered guide, not that transient note. */
     const harmonyNote = await cdp.eval(`(() => {
       document.getElementById('kiBtn').click();
       return document.getElementById('kiNote').textContent.trim();
@@ -555,7 +559,8 @@ async function main() {
     check('鸿蒙上 prompt() 立刻 dismissed 时不写「安装框被关掉了」，并给华为官方手动路径',
       harmonyRes.ok && harmony.called === 1 &&
       harmonyRes.why.indexOf('被关掉') < 0 && /不会弹出/.test(harmonyRes.why) &&
-      /华为浏览器/.test(harmonyNote) && /添加至/.test(harmonyRes.text),
+      /右下角/.test(harmonyRes.text) && /四点/.test(harmonyRes.text) &&
+      /添加至/.test(harmonyRes.text) && /桌面/.test(harmonyRes.text),
       `说明「${harmonyRes.why}」；步骤含「添加至」=${/添加至/.test(harmonyRes.text)}；安装区「${harmonyNote}」`);
     await cdp.send('Emulation.setUserAgentOverride', { userAgent: '' });
 
@@ -682,10 +687,10 @@ async function main() {
     })()`);
     log(`  诊断：onLine=${offlineShelf.onLine} SW接管=${offlineShelf.swControlled} ` +
         `此刻候选首选=${offlineShelf.orderNow}`);
-    check('离线时书架页仍能打开', offlineShelf.cards === 12, `title=${offlineShelf.title}`);
-    check('离线时面板仍可用', offlineShelf.panelRows === 12);
-    check('离线时 12 张封面全部有真实像素', offlineShelf.imgsWithPixels === 12,
-      `${offlineShelf.imgsWithPixels}/12 张（同源取自缓存 ${offlineShelf.fromCache} 张、跨域 ${offlineShelf.crossOrigin} 张）` +
+    check('离线时书架页仍能打开', offlineShelf.cards === BOOK_COUNT, `title=${offlineShelf.title}`);
+    check('离线时面板仍可用', offlineShelf.panelRows === BOOK_COUNT);
+    check('离线时全部封面有真实像素', offlineShelf.imgsWithPixels === BOOK_COUNT,
+      `${offlineShelf.imgsWithPixels}/${BOOK_COUNT} 张（同源取自缓存 ${offlineShelf.fromCache} 张、跨域 ${offlineShelf.crossOrigin} 张）` +
       (offlineShelf.missing && offlineShelf.missing.length
         ? `；缺 ${offlineShelf.missing.join(',')}` : ''));
     /* 离线时封面必须由同源缓存提供 —— 若还有跨域 src，说明 cdn.js 没切到同源，
@@ -698,11 +703,11 @@ async function main() {
       const map = {};
       rows.forEach(r => { map[r.id.replace('orow-','')] = r.querySelector('button').textContent; });
       const notDone = Object.keys(map).filter(k => map[k] === '下载').length;
-      return { ok: Object.keys(map).length === 12 && notDone === 11, map, notDone,
+      return { ok: Object.keys(map).length === ${BOOK_COUNT} && notDone === ${BOOK_COUNT - 1}, map, notDone,
                note: (document.getElementById('offlineNote')||{}).textContent || '' };
     })()`, { timeout: 12000 });
-    check('离线时能正确区分已存/未存（1 本已存，11 本未存）',
-      offlinePanel.map && offlinePanel.map[BOOK] === '删除' && offlinePanel.notDone === 11,
+    check('离线时能正确区分已存/未存（仅一本已存）',
+      offlinePanel.map && offlinePanel.map[BOOK] === '删除' && offlinePanel.notDone === BOOK_COUNT - 1,
       `已存那本显示「${offlinePanel.map ? offlinePanel.map[BOOK] : '?'}」，未存 ${offlinePanel.notDone} 本；${offlinePanel.note}`);
 
     /* 弹层是纯本地 DOM，断网也必须能开 —— 否则离线时家长连「哪几本存过」都看不到 */
@@ -716,7 +721,7 @@ async function main() {
       return { open, rows, fabText, closed: !s.classList.contains('open') };
     })()`);
     check('离线时二级菜单照常打开（并显示已存本数）',
-      offlineMenu.open && offlineMenu.rows === 12 && offlineMenu.closed,
+      offlineMenu.open && offlineMenu.rows === BOOK_COUNT && offlineMenu.closed,
       `小按钮显示「${offlineMenu.fabText}」`);
 
     /* 离线状态下 Service Worker 自己的脚本与清单是否还能起来 —— 起不来就会
@@ -738,7 +743,7 @@ async function main() {
     })()`);
     log('  离线诊断：' + JSON.stringify(diag));
     check('离线时 SW 仍能正确读到清单',
-      diag.err === null && diag.bookKeys === 12 && diag.plane && diag.plane.cached === diag.plane.total,
+      diag.err === null && diag.bookKeys === BOOK_COUNT && diag.plane && diag.plane.cached === diag.plane.total,
       `swVersion=${diag.swVersion} 缓存=${(diag.caches || []).join(',')} 已存=${diag.plane ? diag.plane.cached + '/' + diag.plane.total : 'n/a'}`);
 
     await saveShot(cdp, `shelf-offline.png`);
@@ -789,7 +794,7 @@ async function main() {
       return { online: navigator.onLine, loaded: imgs.filter(i => i.complete && i.naturalWidth > 0).length };
     })()`);
     check('恢复联网后一切正常', backOnline.online === true && backOnline.loaded >= 10,
-      `${backOnline.loaded}/12 张封面`);
+      `${backOnline.loaded}/${BOOK_COUNT} 张封面`);
 
     check('全程没有 JS 异常', pageErrors.length === 0,
       pageErrors.slice(0, 2).join(' | ').slice(0, 200));
