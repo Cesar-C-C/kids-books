@@ -1,5 +1,6 @@
 (() => {
  'use strict';
+ const AUDIO_VER=5;
  const $=id=>document.getElementById(id), pages=window.PAGES, key='kb-cloud-journey-v1';
  let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch{}
  let current=Number.isInteger(saved.page)?Math.max(0,Math.min(pages.length-1,saved.page)):0;
@@ -15,7 +16,7 @@
   const finish=()=>{if(token!==playToken)return;clearTimeout(voiceTimer);$('narrate').setAttribute('aria-pressed','false');$('narrate').textContent=text('▶ 听故事','▶ Listen');$('audio-status').textContent='';};
   const fallback=()=>{if(token!==playToken||usedFallback)return;usedFallback=true;clearTimeout(voiceTimer);if(audio){audio.onerror=null;audio.onplaying=null;audio.pause();audio=null;}if(!window.speechSynthesis){finish();$('audio-status').textContent=text('当前设备不支持语音，可阅读文字。','Speech unavailable; read the text.');return;}const u=new SpeechSynthesisUtterance(content);u.lang=lang==='zh'?'zh-CN':'en-US';u.rate=lang==='zh'?.86:.88;u.voice=speechSynthesis.getVoices().find(v=>v.lang===u.lang&&/Natural|Aria|Xiaoxiao|Google/.test(v.name))||null;u.onend=finish;u.onerror=finish;speechSynthesis.speak(u);$('audio-status').textContent=text('设备语音','Device voice');};
   if(!file){fallback();return;}
-  const a=audio=new Audio(`audio/${file}_${lang}.mp3?v=4`);a.onended=finish;a.onerror=fallback;a.onplaying=()=>{if(token===playToken){clearTimeout(voiceTimer);$('audio-status').textContent='';}};
+  const a=audio=new Audio(`audio/${file}_${lang}.mp3?v=${AUDIO_VER}`);a.onended=finish;a.onerror=fallback;a.onplaying=()=>{if(token===playToken){clearTimeout(voiceTimer);$('audio-status').textContent='';}};
   $('audio-status').textContent=text('正在加载声音…','Loading audio…');voiceTimer=setTimeout(fallback,7000);a.play().catch(fallback);
  }
  function narration(){const p=pages[current];speak(p[lang],`page_${String(current).padStart(2,'0')}`);}

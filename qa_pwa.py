@@ -115,11 +115,18 @@ def check_assets():
 
     total = 0
     for bid, book in data.get("books", {}).items():
+        book_audio_ver = audio_ver
+        custom_reader = os.path.join(REPO, "books", bid, bid + ".js")
+        if os.path.isfile(custom_reader):
+            with open(custom_reader, encoding="utf-8") as source:
+                custom_version = re.search(r"const\s+AUDIO_VER\s*=\s*(\d+)", source.read())
+            if custom_version:
+                book_audio_ver = custom_version.group(1)
         for f in book["files"]:
             if not os.path.exists(rel_path(f)):
                 bad("%s 的离线清单引用了不存在的文件：%s" % (bid, f))
-            if f.endswith(".mp3") and "?v=" + audio_ver not in f:
-                bad("%s 的音频没带 ?v=%s：%s（离线播放会 cache miss）" % (bid, audio_ver, f))
+            if f.split("?")[0].endswith(".mp3") and not f.endswith("?v=" + book_audio_ver):
+                bad("%s 的音频没带 ?v=%s：%s（离线播放会 cache miss）" % (bid, book_audio_ver, f))
         total += book["bytes"]
         if book["bytes"] <= 0:
             bad("%s 的离线包体积为 0，明显不对" % bid)

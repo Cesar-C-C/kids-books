@@ -132,6 +132,13 @@ def book_audio(name, audio_ver):
     故意不递归子目录：schoolbus/audio/narration/ 里是最初的长音频素材
     （74 个 wav + 74 个 mp3，约 30MB），运行时从不读取（audioDir 指向 audio/），
     放进离线包纯属浪费家长流量。"""
+    # A custom reader may revise one book's audio without invalidating all books.
+    custom_reader = os.path.join(REPO, "books", name, name + ".js")
+    if os.path.isfile(custom_reader):
+        with open(custom_reader, encoding="utf-8") as source:
+            version = re.search(r"const\s+AUDIO_VER\s*=\s*(\d+)", source.read())
+        if version:
+            audio_ver = version.group(1)
     d = os.path.join(REPO, "books", name, "audio")
     out = []
     if not os.path.isdir(d):

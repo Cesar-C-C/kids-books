@@ -22,9 +22,9 @@
 
 15 张独立 AI 插画以封面为角色和画风参考，使用内置 ImageGen 生成，保存于本目录 assets。旅行地图在复述页复用，以便孩子对照回忆。提示词见 ART-PROMPTS.md。热区在可交互 SVG 浮层中，不写入图片。
 
-故事、知识卡和词汇的双语音频均从 book.js 导出，使用项目现有 Edge TTS 制作工具生成。网络语音文件不可用时回退设备语音。自动朗读由用户开启，翻页会停止上一段声音，默认不自动翻页。
+故事、知识卡和词汇的双语音频均从 book.js 导出，使用本地 Fun-CosyVoice3-0.5B、CUDA FP32 生成。188 个分角色片段合成为 80 个 MP3；旁白、滴滴、青蛙、尘埃、云中邻居、小柳树和蚯蚓使用各自的参考音色，以温柔、活泼的讲故事语气呈现。声音为 AI 合成，不是参考录音者的原始演出。音色来源、署名和复现方法见 [VOICE-SOURCES.md](VOICE-SOURCES.md)。网络语音文件不可用时回退设备语音。自动朗读由用户开启，翻页会停止上一段声音，默认不自动翻页。
 
 ## 本地维护
 
-`node tools/build_cloud_manifest.cjs` 生成音频清单；`python gen_audio.py books/cloud/_manifest.json` 制作声音。
-`node qa_cloud.cjs` 检查内容、资源、互动和版面。通过书架进入 `books/cloud/index.html` 阅读。
+`node tools/cosyvoice_cloud_cast.cjs <制作目录>/manifest.json` 导出分角色音频清单；使用已部署环境的 Python 运行 `tools/generate_cloud_cosyvoice.py` 制作声音，参数见配音来源说明。
+`node qa_cloud.cjs` 检查内容、资源、互动和版面；`node qa_cloud_offline.cjs` 验证下载后的实际断网阅读与配音。通过书架进入 `books/cloud/index.html` 阅读。

@@ -3,6 +3,7 @@ const root=__dirname,dir=path.join(root,'books/cloud'),data={window:{}};
 vm.runInNewContext(fs.readFileSync(path.join(dir,'book.js'),'utf8'),data);
 vm.runInNewContext(fs.readFileSync(path.join(dir,'overlays.js'),'utf8'),data);
 const {BOOK,PAGES,CLOUD_HOTSPOTS}=data.window;
+const audioVer=fs.readFileSync(path.join(dir,'cloud.js'),'utf8').match(/const\s+AUDIO_VER\s*=\s*(\d+)/)[1];
 assert.equal(PAGES.length,16);assert.equal(BOOK.coverImg,PAGES[0].img);
 assert.equal(new Set(PAGES.map(p=>p.img)).size,15);
 let audioFiles=[];
@@ -17,7 +18,7 @@ PAGES.forEach((p,i)=>{
 for(const f of audioFiles){assert.ok(fs.statSync(path.join(dir,'audio',f)).size>1000,f);}
 const pwa={self:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'pwa-assets.js'),'utf8'),pwa);
 const offline=pwa.self.KB_ASSETS.books.cloud.files;
-for(const f of ['index.html','book.js','overlays.js','cloud.js','cloud.css',...PAGES.map(p=>p.img),...audioFiles.map(f=>'audio/'+f+'?v=4')])assert.ok(offline.includes('books/cloud/'+f),'offline dependency: '+f);
+for(const f of ['index.html','book.js','overlays.js','cloud.js','cloud.css',...PAGES.map(p=>p.img),...audioFiles.map(f=>'audio/'+f+'?v='+audioVer)])assert.ok(offline.includes('books/cloud/'+f),'offline dependency: '+f);
 assert.match(fs.readFileSync(path.join(root,'index.html'),'utf8'),/href="books\/cloud\/index.html"/);
 console.log('PASS cloud static: 16 bilingual pages, 15 illustrations, 80 audio files, hotspots and complete offline dependencies');
 if(process.argv.includes('--static'))process.exit(0);
@@ -63,7 +64,7 @@ const server=http.createServer((req,res)=>{
   await page.reload();assert.equal(await page.locator('#story').textContent(),PAGES[13].en);
   await page.locator('#language').click();await jump(0);
   // Decode every delivered recording using the browser audio decoder, not just file extensions.
-  const decoded=await page.evaluate(async files=>{const ac=new AudioContext();try{for(const f of files){const r=await fetch('audio/'+f+'?v=4');if(!r.ok)throw Error(f+' '+r.status);const b=await ac.decodeAudioData(await r.arrayBuffer());if(b.duration<=0)throw Error('Empty audio '+f);}return files.length;}finally{await ac.close();}},audioFiles);
+  const decoded=await page.evaluate(async ({files,version})=>{const ac=new AudioContext();try{for(const f of files){const r=await fetch('audio/'+f+'?v='+version);if(!r.ok)throw Error(f+' '+r.status);const b=await ac.decodeAudioData(await r.arrayBuffer());if(b.duration<=0)throw Error('Empty audio '+f);}return files.length;}finally{await ac.close();}},{files:audioFiles,version:audioVer});
   assert.equal(decoded,80);
   await page.locator('#narrate').click();await page.waitForFunction(()=>document.getElementById('audio-status').textContent==='');assert.equal(await page.locator('#narrate').getAttribute('aria-pressed'),'true');await page.locator('#next').click();assert.equal(await page.locator('#narrate').getAttribute('aria-pressed'),'false');
   await page.locator('#auto').click();await page.waitForFunction(()=>document.getElementById('narrate').getAttribute('aria-pressed')==='true');await page.locator('#auto').click();assert.equal(await page.locator('#narrate').getAttribute('aria-pressed'),'false');
