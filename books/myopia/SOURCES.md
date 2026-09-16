@@ -37,7 +37,7 @@ The interactive diagram is not to scale, not a vision test, and not medical advi
 
 - **生成日期：** 2026-09-16（Asia/Shanghai）。
 - **引擎与模型：** 本地 Fun-CosyVoice 3；`FunAudioLLM/Fun-CosyVoice3-0.5B-2512`，PyTorch 2.3.1+cu121，CUDA FP32（Quadro T1000 with Max-Q Design）。
-- **声音来源：** 共享运行时随附的官方 `zero_shot_prompt.wav` 与其默认提示词；未使用真人录音、用户声音或克隆声音。40 个片段均为合成语音，面向儿童阅读时应明确其为 AI 生成配音。
-- **技术验证：** 40 个 `audio/*.mp3` 均由同一份 `book.js` 生成的清单驱动。每个中间 WAV 和最终 MP3 都重新解码验证为 24 kHz、单声道、有限样本、正时长且非静音；最终 MP3 再次逐个解码复核，结果为 40/40 通过。
+- **声音条件与披露：** 生成以共享运行时随附的 `zero_shot_prompt.wav` 及默认提示词为条件；没有用户提供的声音。此记录不声称该提示音频的上游说话人身份、授权或许可。40 个最终片段均为合成语音，面向儿童阅读时应明确其为 AI 生成配音。
+- **技术验证：** 40 个 `audio/*.mp3` 均由同一份 `book.js` 生成的清单驱动。每个中间 WAV 和最终 MP3 都重新解码验证为 24 kHz、单声道、有限样本、正时长且非静音；最终 MP3 再次逐个解码复核，结果为 40/40 通过。追加的客观 QA 还验证了 40 个互不重复的解码波形、RMS 范围 0.0539428–0.1049117，以及 `cornea`、`retina`、`myopia` 词条和对应中英文页面上下文的源文本与音频文件覆盖。
 - **样本记录：** `page_00_en` 生成后 WAV 与 MP3 均为 2.280 秒；WAV RMS 0.0884059，MP3 RMS 0.0884261，MP3 文件 16,200 bytes。
 - **发音与试听限制：** 未施加 `cornea`、`retina` 或 `myopia` 的文本/发音替换。自动格式和能量校验不能替代人工听感或英语术语发音审核；这些三个独立术语片段及其页面上下文仍需要发布前的人工试听确认。
