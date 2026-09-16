@@ -6,6 +6,7 @@ const vm = require('vm');
 const path = require('path');
 
 const books = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station', 'steamtrain', 'capsule', 'bus', 'schoolbus', 'myopia', 'cavities'];
+const customBooks = ['cloud'];
 const root = process.cwd();
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const pad2 = n => String(n).padStart(2, '0');
@@ -13,6 +14,28 @@ const sanitize = s => (s || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_')
 const decodeEntity = s => (s || '').replaceAll('&amp;','&').replaceAll('&quot;','"').replaceAll('&lt;','<').replaceAll('&gt;','>');
 
 let totalErrors = 0;
+
+// Keep the public library count tied to the actual shelf and the two reader
+// implementations. This catches a stale SEO description when a card is added,
+// as well as a card that was not assigned to either QA population.
+const shelfBooks = [...homepage.matchAll(/<a class="book-card" href="books\/([^/]+)\/index\.html">/g)].map(match => match[1]);
+const advertisedCount = Number((homepage.match(/<meta name="description" content="(\d+) 本/) || [])[1]);
+const expectedShelfBooks = [...books, ...customBooks];
+const duplicateShelfBooks = shelfBooks.filter((id, index) => shelfBooks.indexOf(id) !== index);
+const missingShelfBooks = expectedShelfBooks.filter(id => !shelfBooks.includes(id));
+const unexpectedShelfBooks = shelfBooks.filter(id => !expectedShelfBooks.includes(id));
+
+if (!Number.isInteger(advertisedCount)) {
+  console.log('\n[library-count] ERROR: homepage description is missing a numeric book count');
+  totalErrors++;
+} else if (advertisedCount !== shelfBooks.length) {
+  console.log(`\n[library-count] ERROR: homepage advertises ${advertisedCount} books but shelf has ${shelfBooks.length} cards`);
+  totalErrors++;
+}
+if (shelfBooks.length !== expectedShelfBooks.length || duplicateShelfBooks.length || missingShelfBooks.length || unexpectedShelfBooks.length) {
+  console.log(`\n[library-count] ERROR: shelf ${shelfBooks.length} != canonical ${books.length} + custom ${customBooks.length}; duplicates=[${duplicateShelfBooks}], missing=[${missingShelfBooks}], unexpected=[${unexpectedShelfBooks}]`);
+  totalErrors++;
+}
 
 function loadBook(id) {
   const dir = path.join(root, 'books', id);
