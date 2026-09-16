@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const http = require('node:http');
 const path = require('node:path');
@@ -26,6 +27,9 @@ const audioFiles = [
   ...glossarySlugs.flatMap(slug => ['en', 'zh'].map(lang => `word_${slug}_${lang}.mp3`))
 ];
 assert.equal(audioFiles.length, 40, 'the browser decoder receives the complete 40-file contract');
+const readerSource = fs.readFileSync(path.join(root, 'shared/reader.js'), 'utf8');
+assert.match(readerSource, /const\s+AUDIO_VER\s*=\s*5\s*;/,
+  'replacement narration increments the shared reader audio cache key to v5');
 
 const mime = {
   '.css': 'text/css; charset=utf-8',
@@ -80,11 +84,68 @@ async function timerProbe(page) {
   }));
 }
 
+async function verifyV4OfflineCacheUpgrade(browser, base) {
+  const expectedAudio = fs.readFileSync(path.join(root, 'books/cavities/audio/page_05_zh.mp3'));
+  const expectedDigest = crypto.createHash('sha256').update(expectedAudio).digest('hex');
+  const upgradeContext = await browser.newContext({ serviceWorkers: 'allow' });
+  try {
+    const page = await upgradeContext.newPage();
+    await page.route('**/shared/pwa.js', route => route.fulfill({
+      contentType: 'application/javascript',
+      body: ''
+    }));
+    await page.goto(base);
+    await page.evaluate(async () => {
+      const oldShell = await caches.open('kb-shell-v4-browser-fixture');
+      await oldShell.put(new URL('shared/reader.js', location.href), new Response('const AUDIO_VER = 4;'));
+      const assets = await caches.open('kb-asset-v1');
+      await assets.put(new URL('books/cavities/audio/page_05_zh.mp3?v=4', location.href),
+        new Response(new TextEncoder().encode('OLD-V4-CAVITIES-AUDIO')));
+    });
+    await page.unroute('**/shared/pwa.js');
+    await page.reload();
+    await page.evaluate(() => navigator.serviceWorker.ready);
+    await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
+    await page.goto(`${base}books/cavities/index.html`);
+    const fetched = await page.evaluate(async () => {
+      const requestUrl = new URL('audio/page_05_zh.mp3?v=5', location.href);
+      const response = await fetch(requestUrl);
+      const bytes = await response.arrayBuffer();
+      const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))]
+        .map(value => value.toString(16).padStart(2, '0')).join('');
+      return { url: requestUrl.href, digest, bytes: bytes.byteLength };
+    });
+    await page.waitForFunction(async () => {
+      const assets = await caches.open('kb-asset-v1');
+      return Boolean(await assets.match(new URL('books/cavities/audio/page_05_zh.mp3?v=5', location.href)));
+    });
+    const cacheState = await page.evaluate(async () => {
+      const names = await caches.keys();
+      const assets = await caches.open('kb-asset-v1');
+      return {
+        names,
+        oldV4Present: Boolean(await assets.match(new URL('audio/page_05_zh.mp3?v=4', location.href))),
+        currentV5Present: Boolean(await assets.match(new URL('audio/page_05_zh.mp3?v=5', location.href)))
+      };
+    });
+    assert.match(fetched.url, /page_05_zh\.mp3\?v=5$/);
+    assert.equal(fetched.digest, expectedDigest, 'v5 request returns the regenerated narration, not the populated v4 fixture');
+    assert.equal(fetched.bytes, expectedAudio.length);
+    assert.equal(cacheState.oldV4Present, true, 'the test began with and retained the immutable v4 cache entry');
+    assert.equal(cacheState.currentV5Present, true, 'the current narration is stored under a distinct v5 cache key');
+    assert.equal(cacheState.names.includes('kb-shell-v4-browser-fixture'), false,
+      'activating the current worker removes the stale v4 shell cache');
+  } finally {
+    await upgradeContext.close();
+  }
+}
+
 (async () => {
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const base = `http://127.0.0.1:${server.address().port}/`;
   const browser = await playwright.chromium.launch({ channel: 'chrome', headless: true });
   try {
+    await verifyV4OfflineCacheUpgrade(browser, base);
     const context = await browser.newContext({
       viewport: { width: 1440, height: 1000 },
       serviceWorkers: 'block',
@@ -192,10 +253,10 @@ async function timerProbe(page) {
 
     await goToPage(page, 1);
     await page.locator('.page.active .speak').click();
-    assert.match(await page.evaluate(() => window.__mediaProbe.plays.at(-1)), /page_01_en\.mp3\?v=4$/,
+    assert.match(await page.evaluate(() => window.__mediaProbe.plays.at(-1)), /page_01_en\.mp3\?v=5$/,
       'page narration requests the active English recording');
     await page.locator('.page.active .lang-block.zh').click();
-    assert.match(await page.evaluate(() => window.__mediaProbe.plays.at(-1)), /page_01_zh\.mp3\?v=4$/,
+    assert.match(await page.evaluate(() => window.__mediaProbe.plays.at(-1)), /page_01_zh\.mp3\?v=5$/,
       'Chinese text requests the Chinese recording');
     await page.locator('#gearBtn').click();
     await page.locator('#primarySeg button[data-lang="zh"]').click();
@@ -228,22 +289,19 @@ async function timerProbe(page) {
     await zoneButtons.nth(0).click();
     assert.equal(await page.locator('.page.active .brush-zone-button[aria-pressed="true"]').count(), 1,
       'repeating a completed zone does not inflate progress');
-    await zoneButtons.nth(1).focus();
+    const beforeTapPage = await page.locator('#pager').textContent();
+    await zoneButtons.nth(1).tap();
+    assert.equal(await zoneButtons.nth(1).getAttribute('aria-pressed'), 'true',
+      'a real touch tap activates an untouched tooth surface');
+    assert.match(await page.locator('.page.active .cavities-live').textContent(), /内侧.*Inner/s,
+      'the real touch tap announces bilingual progress');
+    assert.equal(await page.locator('#pager').textContent(), beforeTapPage,
+      'tapping an activity control does not trigger reader navigation');
+    await zoneButtons.nth(2).focus();
     await page.keyboard.press('Space');
-    await zoneButtons.nth(2).click();
     assert.equal(await page.locator('.page.active .brush-zone-button[aria-pressed="true"]').count(), 3);
     assert.match(await page.locator('.page.active .cavities-live').textContent(),
       /每个牙面都刷到了.*Every surface is brushed/s, 'all zones produce the bilingual completion message');
-
-    const beforeTouchPage = await page.locator('#pager').textContent();
-    await zoneButtons.nth(2).dispatchEvent('touchstart', {
-      touches: [{ identifier: 1, target: null, clientX: 20, clientY: 20 }]
-    });
-    await zoneButtons.nth(2).dispatchEvent('touchend', {
-      changedTouches: [{ identifier: 1, target: null, clientX: 20, clientY: 20 }]
-    });
-    assert.equal(await page.locator('#pager').textContent(), beforeTouchPage,
-      'touching an activity control does not trigger reader navigation');
 
     await goToPage(page, 12);
     const timer = page.locator('.page.active .brush-timer');
@@ -303,7 +361,7 @@ async function timerProbe(page) {
       const durations = [];
       try {
         for (const file of files) {
-          const response = await fetch(`audio/${file}?v=4`);
+          const response = await fetch(`audio/${file}?v=5`);
           if (!response.ok) throw new Error(`${file}: HTTP ${response.status}`);
           const buffer = await context.decodeAudioData(await response.arrayBuffer());
           if (!(buffer.duration > 0)) throw new Error(`${file}: empty decoded audio`);
@@ -368,7 +426,7 @@ async function timerProbe(page) {
 
     assert.deepEqual(consoleErrors, [], `console errors: ${consoleErrors.join(' | ')}`);
     assert.deepEqual(pageErrors, [], `page errors: ${pageErrors.join(' | ')}`);
-    console.log('PASS cavities browser: shelf navigation, 14 decoded images/bilingual pages, navigation/language/narration, brush zones, timer lifecycle, 40 decoded MP3s, 28 responsive page checks, touch/focus and clean console');
+    console.log('PASS cavities browser: v4 offline-cache upgrade to exact v5 audio, shelf navigation, 14 decoded images/bilingual pages, navigation/language/narration, real touch + keyboard brush zones, timer lifecycle, 40 decoded MP3s, 28 responsive page checks, focus and clean console');
     console.log(`Evidence: ${path.relative(root, outputDir)}\\layout-results.json, ${path.relative(root, outputDir)}\\reader-1024x768.png, ${path.relative(root, outputDir)}\\reader-390x844.png`);
   } finally {
     await browser.close();

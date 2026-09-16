@@ -145,7 +145,7 @@ window.Reader = {
        must bust the browser/CDN cache for the (same-named) files, otherwise users
        keep hearing the stale cached clip. Bump AUDIO_VER whenever audio content
        changes — it appends ?v=N so every client re-fetches fresh. */
-    const AUDIO_VER = 4;
+    const AUDIO_VER = 5;
     const aUrl = p => abs(p) + '?v=' + AUDIO_VER;
 
     function playAudio(url, lang, onDone){ if(settings.muted){ if(onDone) onDone(); return; }

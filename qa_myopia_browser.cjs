@@ -154,10 +154,10 @@ async function goToPage(page, index) {
 
     await goToPage(page, 1);
     await page.locator('.page.active .speak').click();
-    assert.match((await page.evaluate(() => window.__mediaProbe.plays.at(-1))), /page_01_en\.mp3\?v=4$/,
+    assert.match((await page.evaluate(() => window.__mediaProbe.plays.at(-1))), /page_01_en\.mp3\?v=5$/,
       'page narration requests the active English recording');
     await page.locator('.page.active .lang-block.zh').click();
-    assert.match((await page.evaluate(() => window.__mediaProbe.plays.at(-1))), /page_01_zh\.mp3\?v=4$/,
+    assert.match((await page.evaluate(() => window.__mediaProbe.plays.at(-1))), /page_01_zh\.mp3\?v=5$/,
       'Chinese text requests the Chinese recording');
 
     await page.locator('#gearBtn').click();
@@ -232,7 +232,7 @@ async function goToPage(page, index) {
       const durations = [];
       try {
         for (const file of files) {
-          const response = await fetch(`audio/${file}?v=4`);
+          const response = await fetch(`audio/${file}?v=5`);
           if (!response.ok) throw new Error(`${file}: HTTP ${response.status}`);
           const buffer = await context.decodeAudioData(await response.arrayBuffer());
           if (!(buffer.duration > 0)) throw new Error(`${file}: empty decoded audio`);
