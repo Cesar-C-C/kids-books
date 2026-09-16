@@ -41,6 +41,7 @@ window.PAGES = [
     zh: '光线通过角膜和晶状体进入眼睛。这张图是原理示意，不是按真实大小画的眼睛。',
     editableLayer: {
       type: 'eye-diagram-labels',
+      ariaLabel: '光线经过角膜和晶状体 / Light enters through the cornea and lens',
       sourceSize: { width: 1216, height: 832 },
       labels: {
         cornea: { label: { x: 300, y: 180 }, target: { x: 448, y: 386 } },
@@ -56,6 +57,7 @@ window.PAGES = [
     zh: '在这张正常聚焦原理图里，光线在眼睛后面的视网膜上会合。',
     editableLayer: {
       type: 'eye-diagram-labels',
+      ariaLabel: '焦点落在视网膜上 / Focus lands on the retina',
       sourceSize: { width: 1216, height: 832 },
       labels: {
         cornea: { label: { x: 300, y: 180 }, target: { x: 448, y: 386 } },
@@ -71,6 +73,7 @@ window.PAGES = [
     zh: '近视时，眼球可能更长，光线会聚焦在视网膜前方，远处的东西就可能看起来模糊。',
     editableLayer: {
       type: 'eye-diagram-labels',
+      ariaLabel: '焦点落在视网膜前方 / Focus falls in front of the retina',
       sourceSize: { width: 1216, height: 832 },
       labels: {
         cornea: { label: { x: 250, y: 160 }, target: { x: 330, y: 386 } },

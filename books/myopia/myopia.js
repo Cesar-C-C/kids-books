@@ -78,7 +78,7 @@
       class: 'myopia-eye-labels',
       viewBox: '0 0 1000 667',
       role: 'img',
-      'aria-label': '眼睛聚焦原理标注 / Eye focus diagram labels',
+      'aria-label': metadata.ariaLabel || '眼睛聚焦原理标注 / Eye focus diagram labels',
       preserveAspectRatio: 'xMidYMid meet'
     });
     const labelText = {
@@ -191,7 +191,9 @@
     diagram.appendChild(makeSvgElement(doc, 'text', { x: '18', y: '49', 'data-part': 'cornea-label' }, '角膜 Cornea'));
     diagram.appendChild(makeSvgElement(doc, 'text', { x: '35', y: '49', 'data-part': 'lens-label' }, '晶状体 Lens'));
     diagram.appendChild(makeSvgElement(doc, 'text', { x: '69', y: '49', 'data-part': 'focus-label' }, '焦点 Focus'));
-    diagram.appendChild(makeSvgElement(doc, 'text', { x: '84', y: '8', 'data-part': 'retina-label' }, '视网膜 Retina'));
+    diagram.appendChild(makeSvgElement(doc, 'text', {
+      x: '97', y: '8', 'text-anchor': 'end', 'data-part': 'retina-label'
+    }, '视网膜 Retina'));
     section.appendChild(diagram);
 
     const status = makeElement(doc, 'p', {
