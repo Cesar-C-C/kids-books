@@ -21,9 +21,13 @@ for (const file of [
 const { BOOK, PAGES } = context.window;
 
 assert.equal(BOOK.id, 'myopia');
+assert.equal(BOOK.title, 'Why Do Faraway Things Look Blurry?');
+assert.equal(BOOK.subtitle, 'Duoduo follows light into the eye');
+assert.equal(BOOK.subtitleZh, '朵朵跟着光走进眼睛');
 assert.equal(PAGES.length, 14);
 assert.equal(PAGES[0].cover, true);
 assert.equal(PAGES[0].img, BOOK.coverImg);
+assert.equal(PAGES[0].en, BOOK.title);
 assert.deepEqual(PAGES.filter(p => p.activity).map(p => p.activity.type), ['focus-model']);
 assert.deepEqual(
   PAGES.map((page, index) => page.editableLayer && [index, page.editableLayer.type]).filter(Boolean),

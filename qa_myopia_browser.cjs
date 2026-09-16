@@ -120,9 +120,14 @@ async function goToPage(page, index) {
     page.on('pageerror', error => pageErrors.push(error.message));
 
     await page.goto(base);
+    assert.equal(await page.locator('a.book-card[href="books/myopia/index.html"] h3').textContent(),
+      'Why Do Faraway Things Look Blurry?', 'shelf uses the stable English title');
     await page.locator('a.book-card[href="books/myopia/index.html"]').click();
     await page.waitForURL(/\/books\/myopia\/index\.html$/);
     assert.match(page.url(), /\/books\/myopia\/index\.html$/, 'shelf card opens the real myopia reader');
+    assert.equal(await page.title(), '眼睛为什么看不清了？ · Why Do Faraway Things Look Blurry?');
+    assert.equal(await page.locator('.page.active .cover-text .sub').textContent(), 'Duoduo follows light into the eye');
+    assert.equal(await page.locator('.page.active .cover-text .sub-zh').nth(1).textContent(), '朵朵跟着光走进眼睛');
     await waitForAllImages(page);
 
     const decodedImages = await page.locator('#pages img.base').evaluateAll(images =>
@@ -176,10 +181,10 @@ async function goToPage(page, index) {
       diagrams.map(diagram => diagram.getAttribute('aria-label'))
     );
     assert.deepEqual(accessibleDiagramDescriptions, [
-      '光线经过角膜和晶状体 / Light enters through the cornea and lens',
-      '焦点落在视网膜上 / Focus lands on the retina',
-      '焦点落在视网膜前方 / Focus falls in front of the retina'
-    ], 'static teaching diagrams expose their distinct focus relationships to assistive technology');
+      '角膜、晶状体、视网膜、焦点：光线经过角膜和晶状体，焦点朝视网膜形成 / Cornea, Lens, Retina, Focus: light passes through the cornea and lens, with focus forming toward the retina',
+      '角膜、晶状体、视网膜、焦点：焦点落在视网膜上 / Cornea, Lens, Retina, Focus: focus lands on the retina',
+      '角膜、晶状体、视网膜、焦点：焦点落在视网膜前方 / Cornea, Lens, Retina, Focus: focus falls in front of the retina'
+    ], 'static teaching diagrams expose all four bilingual labels and distinct focus relationships');
 
     const slider = page.locator('.page.active .myopia-growth-range');
     const correction = page.locator('.page.active .myopia-correction');

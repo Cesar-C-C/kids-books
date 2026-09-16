@@ -66,10 +66,18 @@ try {
     5: [[371.73, 309.45], [459.11, 309.45], [762.15, 309.45], [762.15, 309.45]],
     6: [[277.13, 309.45], [379.75, 309.45], [859.15, 309.45], [652.32, 309.45]]
   };
+  const expectedDiagramDescriptions = {
+    4: '角膜、晶状体、视网膜、焦点：光线经过角膜和晶状体，焦点朝视网膜形成 / Cornea, Lens, Retina, Focus: light passes through the cornea and lens, with focus forming toward the retina',
+    5: '角膜、晶状体、视网膜、焦点：焦点落在视网膜上 / Cornea, Lens, Retina, Focus: focus lands on the retina',
+    6: '角膜、晶状体、视网膜、焦点：焦点落在视网膜前方 / Cornea, Lens, Retina, Focus: focus falls in front of the retina'
+  };
   const near = (actual, expected) => Math.abs(Number(actual) - expected) < 0.06;
   for (const index of [4, 5, 6]) {
     const layer = pages[index].querySelector('.myopia-eye-labels');
     check(Boolean(layer), 'eye label SVG mounts on page ' + index);
+    check(layer.getAttribute('role') === 'img', 'eye label SVG uses image semantics on page ' + index);
+    check(layer.getAttribute('aria-label') === expectedDiagramDescriptions[index],
+      'eye label SVG names all four labels and its focus relationship on page ' + index);
     check(['角膜', 'Cornea', '晶状体', 'Lens', '视网膜', 'Retina', '聚焦', 'Focus']
       .every(label => layer.textContent.includes(label)), 'all four bilingual labels appear on page ' + index);
     check(pages[index].querySelector('.myopia-scale-note').textContent.includes('原理示意，不按真实比例'),

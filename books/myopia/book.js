@@ -1,12 +1,12 @@
 /* ============================================================
-   Myopia book data: Why Do Far Things Look Blurry? / 眼睛为什么看不清了？
+   Myopia book data: Why Do Faraway Things Look Blurry? / 眼睛为什么看不清了？
    ============================================================ */
 window.BOOK = {
   id: 'myopia',
-  title: 'Why Do Far Things Look Blurry?',
+  title: 'Why Do Faraway Things Look Blurry?',
   titleZh: '眼睛为什么看不清了？',
-  subtitle: 'Duoduo learns how eyes focus light',
-  subtitleZh: '朵朵学习眼睛怎样聚焦光线',
+  subtitle: 'Duoduo follows light into the eye',
+  subtitleZh: '朵朵跟着光走进眼睛',
   age: '4-8 岁',
   coverImg: 'assets/00_cover_v1.webp',
   audioDir: 'audio'
@@ -16,7 +16,7 @@ window.PAGES = [
   {
     img: 'assets/00_cover_v1.webp',
     cover: true,
-    en: 'Why Do Far Things Look Blurry?',
+    en: 'Why Do Faraway Things Look Blurry?',
     zh: '眼睛为什么看不清了？'
   },
   {
@@ -41,7 +41,7 @@ window.PAGES = [
     zh: '光线通过角膜和晶状体进入眼睛。这张图是原理示意，不是按真实大小画的眼睛。',
     editableLayer: {
       type: 'eye-diagram-labels',
-      ariaLabel: '光线经过角膜和晶状体 / Light enters through the cornea and lens',
+      ariaLabel: '角膜、晶状体、视网膜、焦点：光线经过角膜和晶状体，焦点朝视网膜形成 / Cornea, Lens, Retina, Focus: light passes through the cornea and lens, with focus forming toward the retina',
       sourceSize: { width: 1216, height: 832 },
       labels: {
         cornea: { label: { x: 300, y: 180 }, target: { x: 448, y: 386 } },
@@ -57,7 +57,7 @@ window.PAGES = [
     zh: '在这张正常聚焦原理图里，光线在眼睛后面的视网膜上会合。',
     editableLayer: {
       type: 'eye-diagram-labels',
-      ariaLabel: '焦点落在视网膜上 / Focus lands on the retina',
+      ariaLabel: '角膜、晶状体、视网膜、焦点：焦点落在视网膜上 / Cornea, Lens, Retina, Focus: focus lands on the retina',
       sourceSize: { width: 1216, height: 832 },
       labels: {
         cornea: { label: { x: 300, y: 180 }, target: { x: 448, y: 386 } },
@@ -73,7 +73,7 @@ window.PAGES = [
     zh: '近视时，眼球可能更长，光线会聚焦在视网膜前方，远处的东西就可能看起来模糊。',
     editableLayer: {
       type: 'eye-diagram-labels',
-      ariaLabel: '焦点落在视网膜前方 / Focus falls in front of the retina',
+      ariaLabel: '角膜、晶状体、视网膜、焦点：焦点落在视网膜前方 / Cornea, Lens, Retina, Focus: focus falls in front of the retina',
       sourceSize: { width: 1216, height: 832 },
       labels: {
         cornea: { label: { x: 250, y: 160 }, target: { x: 330, y: 386 } },
