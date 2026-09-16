@@ -62,6 +62,10 @@ for (const [i, page] of PAGES.entries()) {
   assert.ok(page.en && page.zh, `page ${i} bilingual copy`);
   assert.equal(page.img, `assets/${expectedAssets[i]}`, `page ${i} fixed asset`);
   assert.match(page.img, new RegExp(`assets/${String(i).padStart(2, '0')}_.*_v1\\.webp$`));
+  const assetPath = path.join(root, 'books/cavities', page.img);
+  assert.ok(fs.existsSync(assetPath), `page ${i} illustration exists`);
+  assert.equal(path.extname(assetPath).toLowerCase(), '.webp', `page ${i} illustration is WebP`);
+  assert.ok(fs.statSync(assetPath).size > 10 * 1024, `page ${i} illustration exceeds 10 KB`);
 }
 
 assert.equal(PAGES[13].glossary.length, 6);

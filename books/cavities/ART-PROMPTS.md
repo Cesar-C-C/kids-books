@@ -94,3 +94,113 @@
 ```
 
 封面必须先生成并作为泡泡、睡衣、牙刷、浴室与整体画风的参考锚点；后续页的参考关系要逐条如实记录。参考图只帮助一致性，不能代替原分辨率目视检查。
+
+## 任务 3 最终生成与验收记录
+
+以下均使用内置 `image_gen` 模式，生成日期为 2026-09-16；原始 PNG 均先按原分辨率目视检查，再以居中裁切缩放为 1216×832、WebP quality 92。提示词中的“1216:832”是构图比例要求，最终像素由本地无拉伸转换保证。
+
+### 00 · `00_cover_v1.webp`
+- 参考图及用途：无；本图先生成，作为角色、睡衣、牙刷、浴室、牙齿城与画风锚点。
+- 原始生成文件：`exec-e95639c4-ad99-4f25-b279-87800bccb91c.png`
+- 最终提示词：`Establish Paopao, a gentle five-year-old lavender-gray young hippo with natural rounded anatomy, mint-green star pajamas, and a correctly held yellow child toothbrush beside a friendly ivory Tooth City doorway in a warm cream bedtime bathroom; polished children's digital gouache with subtle cut-paper texture; 1216:832 landscape, broad low-detail title area; cozy, safe, no toothpaste ingestion, no text, labels, logos, watermark, tooth worms, monsters, black cavities, drills, needles, blood, pain, shame, or giant foam.`
+- 验收决定：接受。
+- 验收依据：原图中泡泡两眼、两耳、宽鼻口与四肢比例稳定；黄柄白刷毛清晰且在口外；睡衣、浴室和牙齿城完整；无文字和禁用元素，左侧可叠加标题。
+
+### 01 · `01_skip-brushing_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，锁定泡泡、睡衣、牙刷、浴室、配色和媒介。
+- 原始生成文件：`exec-8b78c425-2e40-4aa9-980d-d3e8bfc55fea.png`
+- 最终提示词：`Continue the same Paopao in the same warm bedtime bathroom, yawning and thoughtfully looking toward his yellow toothbrush while considering skipping brushing after a few small evening snacks; show only unbranded cracker crumbs and fruit pieces outside the doorway; same digital-gouache/cut-paper style, calm and sleepy; preserve identity and leave low-detail copy space; no scolding, shame, tooth damage, worms, monsters, pain, swallowing, text, branding, or watermark.`
+- 验收决定：接受。
+- 验收依据：角色与空间连续；零食只是背景线索，未画成立刻蛀牙；情绪是困倦犹豫而非羞耻。
+
+### 02 · `02_acid-alarm_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，锁定人物、浴室与牙齿城。
+- 原始生成文件：`exec-a8a0caf3-721f-4f70-8767-d73c7efee982.png`
+- 最终提示词：`Same Paopao looks curiously through the tooth-shaped doorway as Tooth City gives a gentle orange acid alert using a few soft orange droplets and rounded glowing ripples; seamless bathroom-to-city transition; same gouache/cut-paper style, mildly alert but safe; preserve yellow toothbrush and mint pajamas; no disaster, monsters, insects, worms, black holes, fire, corrosion, fear, pain, text, logos, or watermark.`
+- 验收决定：接受。
+- 验收依据：警报为少量抽象橙色水滴与波纹；泡泡好奇且平静，无灾难、疼痛或怪物隐喻。
+
+### 03 · `03_mouth-community_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，锁定泡泡与整体质感。
+- 原始生成文件：`exec-cf45d2f1-d0af-4e01-aa22-9356bcc5cc9b.png`
+- 最终提示词：`Enlarged conceptual cutaway of a mouth community on smooth warm-ivory tooth surfaces: many diverse rounded abstract microbes in calm teal, lavender, coral and green shapes; only a subset gathers near pale-gold plaque while others remain neutral; tiny same Paopao observes; simplified children's digital gouache, not microscopic realism; no villain faces, fangs, worms, insects, weapons, scary anatomy, text, logos, or watermark.`
+- 验收决定：接受。
+- 验收依据：微生物形态和颜色有多样性，只有部分聚集在牙菌斑附近；没有统一“坏蛋化”。
+
+### 04 · `04_sugar-and-starch_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，锁定画风和泡泡。
+- 原始生成文件：`exec-f6757c7c-a3d3-4e62-bba4-8954f272c647.png`
+- 最终提示词：`Enlarged conceptual cutaway on warm-ivory enamel: a thin pale-gold sticky plaque film with unbranded fruit specks, cracker crumbs and bread-like starch crumbs near several rounded neutral microbes, with other microbes elsewhere; miniature same Paopao observes thoughtfully; clear cause-and-effect grouping without arrows or labels; no cavity, villains, monsters, worms, black holes, rotting food, fire, text, brands, or watermark.`
+- 验收决定：接受。
+- 验收依据：糖和淀粉由无品牌食物碎屑表达；牙菌斑是浅色薄膜，牙面尚无洞。
+
+### 05 · `05_acid-attack_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，锁定配色与媒介。
+- 原始生成文件：`exec-bac94d21-ef01-4066-a906-4f54a5f100c1.png`
+- 最终提示词：`Enlarged conceptual cutaway showing only a small subset of rounded plaque microbes using nearby sugar-and-starch crumbs and producing a few gentle faceless orange acid droplets beside smooth warm-ivory enamel; tiny same Paopao watches calmly from a safe platform; restrained sequence and generous copy space; no cavity, hostile army, monsters, worms, fire, smoke, realistic damage, pain, text, logos, or watermark.`
+- 验收决定：接受。
+- 验收依据：橙色酸滴没有眼睛或威胁表情；仍是“部分细菌”，画面没有即时形成蛀洞。
+
+### 06 · `06_mineral-loss_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，锁定角色和画风。
+- 原始生成文件：`exec-abdd837d-1529-4220-8ef1-c16fa555257e.png`
+- 最终提示词：`Enlarged conceptual cutaway explaining gradual enamel mineral loss after repeated gentle orange acid exposure: warm-ivory enamel changes subtly from glossy to slightly matte and pale-speckled, with tiny pearl-like mineral dots drifting away; no hole; same miniature Paopao observes with a magnifying glass; no crater, black mark, gore, pulp, nerves, monsters, worms, pain, text, labels, logos, or watermark.`
+- 验收决定：接受。
+- 验收依据：矿物小珠逐渐离开，表面只是变哑和出现浅点；没有黑洞或真实组织破坏。
+
+### 07 · `07_saliva-fluoride_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，锁定泡泡与画风。
+- 原始生成文件：`exec-f5f6f839-8f21-4f0b-b822-9a2b353f66d5.png`
+- 最终提示词：`Enlarged conceptual cutaway: clear blue saliva flows as a gentle thin layer over very early matte enamel while pale-green fluoride shield shapes help tiny pearl-like mineral dots return to the intact surface; same miniature Paopao smiles nearby; warm ivory, clear blue and pale green palette; no cavity or hole, no magical filling, flood, slime, syringe, brand, monster, worm, black decay, pain, text, or watermark.`
+- 验收决定：接受。
+- 验收依据：只表现早期完整牙面的矿物回归；画面没有把氟化物画成填补永久性洞。
+
+### 08 · `08_cavity-forms_v1.webp`
+- 参考图及用途：`00_cover_v1.webp` 锁定泡泡、浴室和画风；`10_outer-surfaces_v1.webp` 锁定照护者奶油白上衣、深青裤与体态。
+- 原始生成文件：`exec-bfc00fb3-c4b3-4d2c-8561-818fc5b1c158.png`
+- 最终提示词：`Same bathroom: Paopao calmly tells the same adult hippo caregiver in a cream home shirt and deep-teal trousers about a suspected cavity; a large clean conceptual inset shows one small permanent shallow tan-shadowed indentation in a warm-ivory chewing tooth surface; adult rests a reassuring hand on Paopao; calm and matter-of-fact; cavity remains present and is not repaired; no black crater, worm, insect, monster, drill, needle, blood, exposed pulp, pain, crying, shame, text, labels, logos, or watermark.`
+- 验收决定：第一张候选因照护者被画成蓝色睡袍而拒绝；按服装锚点重生后接受。
+- 验收依据：最终图照护者服装与后续刷牙页一致；小凹陷是浅棕阴影而非黑洞；求助动作平静。
+
+### 09 · `09_dentist-check_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，锁定泡泡与整体风格。
+- 原始生成文件：`exec-9e89c905-58ae-4566-8189-ac757ab8d628.png`
+- 最终提示词：`A calm animal dentist gently checks same Paopao's open mouth with a small round dental mirror while the same adult hippo caregiver stands reassuringly beside him; bright pale-aqua and warm-ivory room; caregiver in cream shirt and deep-teal trousers; professional dentist in pale-blue scrubs, short white coat and unlettered badge; only a respectful non-invasive mirror check; no drill, forceps, needle, blood, restraints, pain, dark room, fear, text, logos, or watermark.`
+- 验收决定：接受。
+- 验收依据：牙医只使用小圆镜，泡泡坐姿放松、照护者陪伴；无针、钻、血或疼痛特写。
+
+### 10 · `10_outer-surfaces_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，锁定泡泡、睡衣、黄牙刷、浴室和画风；本图同时成为第 11–12 页牙列模型和照护者锚点。
+- 原始生成文件：`exec-d67b3ae9-d4a1-4681-95a2-9faca53bdc7d.png`
+- 最终提示词：`Same bathroom and Paopao with adult caregiver in cream shirt and deep-teal trousers; caregiver helps place a visibly pea-sized toothpaste dot on the yellow child toothbrush while Paopao positions it gently at the outer surfaces of one simplified ivory upper-and-lower tooth-row model; front three-quarter model orientation, matching brush scale, broad copy space; no swallowing, excess foam, hard scrubbing, blood, cavity repair, shame, text, labels, logos, or watermark.`
+- 验收决定：接受。
+- 验收依据：牙列排列、观看方向、牙刷比例与照护者服装清楚；牙膏量小，动作温和。
+
+### 11 · `11_all-surfaces_v1.webp`
+- 参考图及用途：`00_cover_v1.webp` 锁定角色、浴室和画风；`10_outer-surfaces_v1.webp` 锁定同一牙列模型、观看方向、牙刷比例和照护者。
+- 原始生成文件：`exec-9566e361-c90f-4798-817d-8cbe7ab50975.png`
+- 最终提示词：`Same bathroom: Paopao and caregiver use the same centered tooth-row model to practise visible outer faces, inward-facing backs and flat chewing tops; one real yellow toothbrush in Paopao's hand and three soft nonverbal mint-and-gold focus callouts; preserve central model's front three-quarter orientation and tooth arrangement; reserve a large clean area for native HTML buttons; no words, letters, numbers, labels, checkmarks, progress awards, scores, streaks, hard scrubbing, blood, foam, cavity, shame, logos, or watermark.`
+- 验收决定：接受。
+- 验收依据：中央牙列的齿数布局、方向和黄牙刷比例与第 10 页一致；三个圆形局部放大只是无文字表面示意，完成状态仍由 HTML 控件承担。
+
+### 12 · `12_two-minute-routine_v1.webp`
+- 参考图及用途：`00_cover_v1.webp` 锁定角色、浴室和画风；`10_outer-surfaces_v1.webp` 锁定牙列、照护者和牙刷。
+- 原始生成文件：`exec-13e290e6-62fb-4c35-bb4d-3f971c12ff4e.png`
+- 最终提示词：`Same bathroom: Paopao calmly brushes with the same yellow toothbrush while the same caregiver stays nearby; the same ivory tooth-row model remains on the counter in the same front three-quarter orientation; two soft nonverbal window-light vignettes suggest moonlight and sunrise; leave a broad empty area for the optional HTML timer and device-down guidance; no clock digits, text, awards, streak, staring at a device, swallowing, giant foam, hard scrubbing, pain, cavity repair, shame, logos, or watermark.`
+- 验收决定：接受。
+- 验收依据：夜晚和早晨只用月亮、太阳与光线表达，无数字；主牙列方向连续，右侧留有计时器空间。
+
+### 13 · `13_glossary_v1.webp`
+- 参考图及用途：`00_cover_v1.webp`，回应封面的角色、牙刷、浴室和牙齿城。
+- 原始生成文件：`exec-32fd6a1a-326e-403c-8efe-f821b0356d8f.png`
+- 最终提示词：`Close in the same bathroom: Paopao calmly places the yellow toothbrush upright in a plain cup while Tooth City glows softly and feels settled for the night; same lavender-gray anatomy and mint star pajamas; Paopao vignette on the right and a very large low-detail left/center region for six editable HTML glossary entries; no baked-in words, labels, glossary cards, numbers, logos, watermark, worms, monsters, black cavities, drills, needles, blood, pain, shame, scores, or trophies.`
+- 验收决定：接受。
+- 验收依据：封面空间与道具回环完整，牙刷收好，左侧足够放六个可编辑词条；无奖励化或恐吓元素。
+
+## 整套视觉验收结论
+
+- **角色连续性：** 泡泡保持薰衣草灰皮肤、小圆耳、宽鼻口和薄荷星点睡衣；机制页使用同一角色的缩小观察者版本。照护者最终均为奶油白上衣与深青裤。
+- **牙刷与牙列：** 黄柄白刷毛贯穿封面、跳过刷牙与第 10–13 页。第 10–12 页中央牙列模型保持相同前方三分之四视角和相近齿数布局；第 11 页的圆形局部放大只用于提示表面，不承担按钮状态。
+- **机制连续性：** 第 3–7 页依次表现多样微生物、食物残屑与牙菌斑、部分细菌产酸、渐进矿物流失、唾液与氟支持早期矿物回归；第 8 页的永久小凹陷仍保留并转向求助，第 9 页只做平静检查。
+- **禁止元素：** 14 张最终图均未发现文字、水印、虫、怪兽、黑色蛀洞、针、钻、血、逼真牙髓、剧痛、羞耻或“刷牙/氟瞬间补洞”。
+- **联系表：** `.superpowers/sdd/2026-09-16-cavities-picture-book/cavities-contact-sheet.jpg`（本地审阅证据，不发布）。
