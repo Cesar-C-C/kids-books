@@ -5,7 +5,7 @@ const fs = require('fs');
 const vm = require('vm');
 const path = require('path');
 
-const books = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station', 'steamtrain', 'capsule', 'bus', 'schoolbus', 'myopia'];
+const books = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station', 'steamtrain', 'capsule', 'bus', 'schoolbus', 'myopia', 'cavities'];
 const root = process.cwd();
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const pad2 = n => String(n).padStart(2, '0');
