@@ -1,0 +1,26 @@
+{
+  "provider": "local Fun-CosyVoice3-0.5B",
+  "precision": "fp32",
+  "directions": {
+    "narrator": "使用温柔、亲切、自然的成年女士声音，像妈妈或女老师给五岁小朋友讲故事；语速稍慢，气息柔和，不要播音腔，不要低沉。",
+    "worm": "使用年轻、阳光、憨厚友好的男声，像年轻的大哥哥；语速自然，声音不要老成、不要过度低沉。"
+  },
+  "jobs": [
+    {
+      "id": "audition_narrator_v2",
+      "track": "audition_narrator_v2",
+      "lang": "zh",
+      "kind": "audition",
+      "role": "narrator",
+      "spokenText": "小朋友，滴滴的云朵旅行要开始啦，我们一起听听它看见了什么。"
+    },
+    {
+      "id": "audition_worm_v2",
+      "track": "audition_worm_v2",
+      "lang": "zh",
+      "kind": "audition",
+      "role": "worm",
+      "spokenText": "泥土下面也很热闹，雨水让土壤变得湿润，我们就能安心松土啦。"
+    }
+  ]
+}

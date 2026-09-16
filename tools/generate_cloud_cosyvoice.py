@@ -15,6 +15,7 @@ p = argparse.ArgumentParser()
 p.add_argument('--runtime', required=True, type=Path)
 p.add_argument('--work', required=True, type=Path)
 p.add_argument('--limit', type=int, default=0)
+p.add_argument('--language', choices=['all', 'zh', 'en'], default='all')
 args = p.parse_args()
 root, work = args.runtime.resolve(), args.work.resolve()
 cache = work / 'cache'
@@ -32,9 +33,13 @@ import soundfile as sf
 import torch
 torch.set_num_threads(4)
 from cosyvoice.cli.cosyvoice import AutoModel
+from cloud_voice_plan import resolve_reference, select_jobs
 
 manifest = json.loads((work / 'manifest.json').read_text(encoding='utf-8'))
 sources = json.loads((work / 'reference-sources.json').read_text(encoding='utf-8'))
+jobs = select_jobs(manifest['jobs'], args.language)
+if not jobs:
+    raise RuntimeError('No jobs selected for language: ' + args.language)
 clips = work / 'clips'
 clips.mkdir(exist_ok=True)
 progress_file = work / 'progress.json'
@@ -47,8 +52,10 @@ def save_progress():
     tmp.write_text(json.dumps(progress, ensure_ascii=False, indent=2), encoding='utf-8')
     tmp.replace(progress_file)
 
-for i, job in enumerate(manifest['jobs']):
-    ref = sources['cast'][job['role']]['reference']
+for i, job in enumerate(jobs):
+    ref = resolve_reference(sources['cast'][job['role']], job['lang'])
+    if not ref:
+        raise RuntimeError('Missing reference for %s/%s' % (job['role'], job['lang']))
     direction = manifest['directions'][job['role']]
     instruction = 'You are a helpful assistant. ' + direction + '<|endofprompt|>'
     signature = hashlib.sha256((json.dumps(job, sort_keys=True, ensure_ascii=False) + instruction).encode() + Path(ref).read_bytes()).hexdigest()
@@ -84,9 +91,9 @@ for i, job in enumerate(manifest['jobs']):
     if args.limit and count >= args.limit:
         break
 
-if all(j['id'] in progress and (clips / (j['id'] + '.wav')).exists() for j in manifest['jobs']):
+if all(j['id'] in progress and (clips / (j['id'] + '.wav')).exists() for j in jobs):
     tracks = {}
-    for j in manifest['jobs']:
+    for j in jobs:
         tracks.setdefault(j['track'], []).append(j)
     final = work / 'final'
     final.mkdir(exist_ok=True)
@@ -104,6 +111,7 @@ if all(j['id'] in progress and (clips / (j['id'] + '.wav')).exists() for j in ma
         decoded, decoded_sr = sf.read(dest)
         assert np.isfinite(decoded).all() and decoded_sr == sr
         report[name] = {'seconds':len(decoded)/sr, 'bytes':dest.stat().st_size, 'segments':len(segments)}
-    assert len(report) == 80
+    expected_tracks = len({j['track'] for j in jobs})
+    assert len(report) == expected_tracks
     (work / 'validation.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
-    print('ALL_80_TRACKS_READY_IN_STAGING', flush=True)
+    print('ALL_%d_TRACKS_READY_IN_STAGING' % expected_tracks, flush=True)

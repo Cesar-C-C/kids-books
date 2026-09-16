@@ -1,0 +1,14 @@
+{
+  "dataset": "AISHELL/AISHELL-3",
+  "revision": "f20d5db4a31fe779ef07bb1af4ea92da5c786622",
+  "license": "Apache-2.0",
+  "cast": {
+    "narrator": {"references":{"zh":"C:/ProgramData/FunCosyVoice3/CosyVoice/asset/zero_shot_prompt.wav"}},
+    "didi": {"references":{"zh":"workbench/cloud-voice-cosyvoice-zh/references/mandarin-selected/didi__SSB0057.wav"}},
+    "frog": {"references":{"zh":"workbench/cloud-voice-cosyvoice-zh/references/mandarin-selected/frog__SSB0623.wav"}},
+    "dust": {"references":{"zh":"workbench/cloud-voice-cosyvoice-zh/references/mandarin-selected/dust__SSB0018.wav"}},
+    "neighbor": {"references":{"zh":"workbench/cloud-voice-cosyvoice-zh/references/mandarin-selected/neighbor__SSB0122.wav"}},
+    "willow": {"references":{"zh":"workbench/cloud-voice-cosyvoice-zh/references/mandarin-selected/willow__SSB0534_combined.wav"}},
+    "worm": {"references":{"zh":"workbench/cloud-voice-cosyvoice-zh/references/mandarin-candidates/SSB0535.wav"}}
+  }
+}

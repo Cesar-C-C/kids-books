@@ -1,0 +1,22 @@
+{
+  "provider": "local Fun-CosyVoice3-0.5B",
+  "precision": "fp32",
+  "directions": {
+    "narrator": "温柔、亲切地给五岁小朋友讲故事，语速稍慢，停顿自然，语气轻快。",
+    "didi": "用活泼、好奇、明亮的语气说话，像童话里的小水滴，不要喊叫。",
+    "frog": "用热情、友好、爽朗的语气说话，像耐心回答问题的青蛙朋友。",
+    "dust": "用轻巧、俏皮、亲切的语气说话，轻声讲一个小秘密。",
+    "neighbor": "用清晰、轻快、鼓励的语气说话，像带朋友一起旅行。",
+    "willow": "用慈爱、温和、从容的语气说话，语速稍慢，像讲故事的长辈。",
+    "worm": "用沉稳、憨厚、友好的语气说话，语速稍慢。"
+  },
+  "jobs": [
+    {"id":"audition_narrator","track":"audition_narrator","lang":"zh","kind":"audition","role":"narrator","spokenText":"小朋友，滴滴的云朵旅行要开始啦，我们一起听听它看见了什么。"},
+    {"id":"audition_didi","track":"audition_didi","lang":"zh","kind":"audition","role":"didi","spokenText":"哇，原来小水滴真的可以飞到天空中，我还想继续看看！"},
+    {"id":"audition_frog","track":"audition_frog","lang":"zh","kind":"audition","role":"frog","spokenText":"别着急，朋友。太阳一出来，池塘里的水就会慢慢变成水蒸气。"},
+    {"id":"audition_dust","track":"audition_dust","lang":"zh","kind":"audition","role":"dust","spokenText":"嘘，我是一粒轻轻飘着的小尘埃，可以帮云滴找到伙伴。"},
+    {"id":"audition_neighbor","track":"audition_neighbor","lang":"zh","kind":"audition","role":"neighbor","spokenText":"跟我来吧，风会带着我们越过森林，也会送我们去需要雨水的地方。"},
+    {"id":"audition_willow","track":"audition_willow","lang":"zh","kind":"audition","role":"willow","spokenText":"慢慢走，孩子。每一滴雨水都会滋养土地，帮助新的生命长大。"},
+    {"id":"audition_worm","track":"audition_worm","lang":"zh","kind":"audition","role":"worm","spokenText":"泥土下面也很热闹，雨水让土壤变得湿润，我们就能安心松土啦。"}
+  ]
+}
