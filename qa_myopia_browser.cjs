@@ -5,7 +5,12 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const root = __dirname;
-const playwright = require('./.qa-deps/node_modules/playwright');
+let playwright;
+try {
+  playwright = require('playwright');
+} catch {
+  playwright = require('./.qa-deps/node_modules/playwright');
+}
 const outputDir = path.join(root, '.qa-labs', 'myopia');
 fs.mkdirSync(outputDir, { recursive: true });
 
@@ -236,21 +241,47 @@ async function goToPage(page, index) {
     assert.equal(decodedAudio.length, 40);
     assert.ok(decodedAudio.every(duration => duration > 0), 'all 40 MP3 files decode with positive duration');
 
+    const layoutResults = [];
     for (const viewport of [{ width: 1024, height: 768 }, { width: 390, height: 844 }]) {
       await page.setViewportSize(viewport);
+      for (let pageIndex = 0; pageIndex < PAGES.length; pageIndex += 1) {
+        await goToPage(page, pageIndex);
+        const result = await page.evaluate(index => {
+          const rootElement = document.documentElement;
+          const activePage = document.querySelector('#pages .page.active');
+          const rect = activePage.getBoundingClientRect();
+          return {
+            viewportWidth: innerWidth,
+            pageIndex: index,
+            documentClientWidth: rootElement.clientWidth,
+            documentScrollWidth: rootElement.scrollWidth,
+            activeClientWidth: activePage.clientWidth,
+            activeScrollWidth: activePage.scrollWidth,
+            activeLeft: rect.left,
+            activeRight: rect.right
+          };
+        }, pageIndex);
+        layoutResults.push(result);
+        assert.ok(result.documentScrollWidth <= result.documentClientWidth,
+          `${viewport.width}x${viewport.height} page ${pageIndex + 1}: document has no horizontal overflow`);
+        assert.ok(result.activeScrollWidth <= result.activeClientWidth,
+          `${viewport.width}x${viewport.height} page ${pageIndex + 1}: active page has no internal horizontal overflow`);
+        assert.ok(result.activeLeft >= -0.5 && result.activeRight <= result.viewportWidth + 0.5,
+          `${viewport.width}x${viewport.height} page ${pageIndex + 1}: active page remains inside the viewport`);
+      }
       await goToPage(page, 11);
-      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
-        `${viewport.width}x${viewport.height} has no horizontal overflow`);
       await page.screenshot({
         path: path.join(outputDir, `reader-${viewport.width}x${viewport.height}.png`),
         fullPage: true
       });
     }
+    assert.equal(layoutResults.length, 28, 'both responsive viewports check all 14 pages');
+    fs.writeFileSync(path.join(outputDir, 'layout-results.json'), `${JSON.stringify(layoutResults, null, 2)}\n`);
 
     assert.deepEqual(consoleErrors, [], `console errors: ${consoleErrors.join(' | ')}`);
     assert.deepEqual(pageErrors, [], `page errors: ${pageErrors.join(' | ')}`);
-    console.log('PASS myopia browser: shelf navigation, 14 decoded images, bilingual pages, navigation/language/narration, accessible focus model, 40 decoded MP3s, responsive layouts, clean console');
-    console.log(`Evidence: ${path.relative(root, outputDir)}\\reader-1024x768.png, ${path.relative(root, outputDir)}\\reader-390x844.png`);
+    console.log('PASS myopia browser: shelf navigation, 14 decoded images, bilingual pages, navigation/language/narration, accessible focus model, 40 decoded MP3s, 28 page/viewport overflow checks, clean console');
+    console.log(`Evidence: ${path.relative(root, outputDir)}\\layout-results.json, ${path.relative(root, outputDir)}\\reader-1024x768.png, ${path.relative(root, outputDir)}\\reader-390x844.png`);
   } finally {
     await browser.close();
     server.close();
