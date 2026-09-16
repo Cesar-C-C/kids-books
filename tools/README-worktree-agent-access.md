@@ -5,7 +5,7 @@
 1. the exact worktree directory under this repository's `.worktrees` directory; and
 2. the matching worktree metadata directory reported by Git under `.git/worktrees`.
 
-The helper rejects the main repository, the `.worktrees` parent, nested paths, paths owned by another repository, and unregistered directories. It does not place an inheritable ACL on `.worktrees` itself, so future worktrees do not receive access automatically.
+The helper rejects the main repository, the `.worktrees` parent, nested paths, paths owned by another repository, and unregistered directories. Before changing ACLs it also verifies that Git's metadata `gitdir` backlink resolves to the candidate's exact `.git` file and that `git worktree list --porcelain` contains the candidate. A sibling directory with a copied `.git` pointer is therefore rejected. The helper does not place an inheritable ACL on `.worktrees` itself, so future worktrees do not receive access automatically.
 
 Inspect a worktree without changing ACLs:
 

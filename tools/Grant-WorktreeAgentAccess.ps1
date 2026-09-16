@@ -78,6 +78,41 @@ function Resolve-AccessTargets {
         throw "Git metadata must be an exact child of '$expectedMetadataParent'. Resolved path: '$metadataPath'."
     }
 
+    $backlinkFile = Join-Path $metadataPath 'gitdir'
+    if (-not (Test-Path -LiteralPath $backlinkFile -PathType Leaf)) {
+        throw "Git metadata backlink is missing: '$backlinkFile'."
+    }
+    $backlinkValue = [IO.File]::ReadAllText($backlinkFile).Trim()
+    if (-not [IO.Path]::IsPathRooted($backlinkValue)) {
+        $backlinkValue = Join-Path $metadataPath $backlinkValue
+    }
+    try {
+        $resolvedBacklink = Get-NormalizedPath $backlinkValue
+    }
+    catch {
+        throw "Git metadata backlink cannot be resolved: '$backlinkValue'."
+    }
+    $candidateGitFile = Get-NormalizedPath (Join-Path $candidate '.git')
+    if (-not (Test-SamePath $resolvedBacklink $candidateGitFile)) {
+        throw "Git metadata backlink does not resolve to the candidate .git file. Expected '$candidateGitFile'; found '$resolvedBacklink'."
+    }
+
+    $registeredWorktrees = @(
+        (Invoke-GitText $mainRepoRoot @('-c', 'core.quotePath=false', 'worktree', 'list', '--porcelain')) -split '\r?\n' |
+            Where-Object { $_.StartsWith('worktree ', [StringComparison]::Ordinal) } |
+            ForEach-Object { $_.Substring('worktree '.Length) }
+    )
+    $isRegistered = $false
+    foreach ($registeredWorktree in $registeredWorktrees) {
+        if (Test-SamePath $registeredWorktree $candidate) {
+            $isRegistered = $true
+            break
+        }
+    }
+    if (-not $isRegistered) {
+        throw "WorktreePath is not present in this repository's registered worktree list: '$candidate'."
+    }
+
     [pscustomobject]@{
         RepoRoot = $mainRepoRoot
         WorktreesRoot = $worktreesRoot
