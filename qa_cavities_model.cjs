@@ -6,6 +6,33 @@ const vm = require('node:vm');
 const root = __dirname;
 const bookPath = path.join(root, 'books/cavities/book.js');
 assert.ok(fs.existsSync(bookPath), 'books/cavities/book.js exists');
+const indexPath = path.join(root, 'books/cavities/index.html');
+const activityPath = path.join(root, 'books/cavities/cavities.js');
+const activityStylePath = path.join(root, 'books/cavities/cavities.css');
+assert.ok(fs.existsSync(indexPath), 'books/cavities/index.html exists');
+assert.ok(fs.existsSync(activityPath), 'books/cavities/cavities.js exists');
+assert.ok(fs.existsSync(activityStylePath), 'books/cavities/cavities.css exists');
+
+const indexHtml = fs.readFileSync(indexPath, 'utf8');
+const scriptSources = [...indexHtml.matchAll(/<script\s+src=["']([^"']+)["'][^>]*><\/script>/g)]
+  .map(match => match[1]);
+assert.deepEqual(scriptSources, [
+  '../../shared/cdn.js',
+  '../../shared/overlays.js',
+  '../../shared/reader.js',
+  'overlays.js',
+  'book.js',
+  'cavities.js',
+  '../../shared/pwa.js'
+]);
+const styleSources = [...indexHtml.matchAll(/<link\s+[^>]*rel=["']stylesheet["'][^>]*href=["']([^"']+)["'][^>]*>/g)]
+  .map(match => match[1]);
+assert.ok(styleSources.indexOf('../../shared/style.css') < styleSources.indexOf('cavities.css'),
+  'cavities.css loads after the shared reader style');
+
+const bookSource = fs.readFileSync(bookPath, 'utf8');
+assert.match(bookSource, /Reader\.init\(\);\s*$/,
+  'book.js initializes the reader after defining BOOK and PAGES');
 const context = vm.createContext({
   window: {},
   Reader: { init() {} },
