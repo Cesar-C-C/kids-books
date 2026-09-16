@@ -20,6 +20,8 @@ import re
 import struct
 import sys
 
+from tools.pwa_fingerprint import content_sha256 as fingerprint_sha256
+
 REPO = os.path.dirname(os.path.abspath(__file__))
 fails, warns, checks = [], [], 0
 
@@ -51,11 +53,7 @@ def rel_path(p):
 
 
 def content_sha256(asset):
-    digest = hashlib.sha256()
-    with open(rel_path(asset), "rb") as source:
-        for chunk in iter(lambda: source.read(1 << 20), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return fingerprint_sha256(rel_path(asset))
 
 
 def expected_asset_version(data):

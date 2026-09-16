@@ -26,6 +26,7 @@ import os
 import re
 
 import gen_pwa_covers
+from pwa_fingerprint import content_sha256
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "pwa-assets.js")
@@ -78,11 +79,7 @@ def norm(p):
 
 
 def sha256_of(rel):
-    h = hashlib.sha256()
-    with open(os.path.join(REPO, rel.split("?")[0]), "rb") as f:
-        for chunk in iter(lambda: f.read(1 << 20), b""):
-            h.update(chunk)
-    return h.hexdigest()
+    return content_sha256(os.path.join(REPO, rel.split("?")[0]))
 
 
 def read_audio_ver():
