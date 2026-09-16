@@ -42,7 +42,7 @@ window.PAGES = [
   {
     img: 'assets/05_acid-attack_v1.webp',
     en: 'As some bacteria use sugars and starches, they make acid. Orange drops in the diagram are symbols for the acid—they are not monsters or living creatures.',
-    zh: '部分细菌利用糖和淀粉时，会产生酸。示意图里的橙色小滴代表酸，它们不是怪兽，也不是真的“蛀牙虫”。'
+    zh: '部分细菌利用糖和淀粉时，会产生酸。示意图里的橙色小滴只是酸的符号，不是怪兽，也不是活的生物。'
   },
   {
     img: 'assets/06_mineral-loss_v1.webp',

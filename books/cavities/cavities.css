@@ -113,6 +113,41 @@
   text-align: center;
 }
 
+/* Keep the shared reader's compact progress-dot appearance while giving this
+   14-page book a child-friendly 44px touch target for every page shortcut. */
+#dots {
+  gap: 0;
+}
+
+#dots .dot {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  transform: none;
+}
+
+#dots .dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #c9d6e3;
+  transform: translate(-50%, -50%);
+  transition: transform .15s, background-color .15s;
+}
+
+#dots .dot.active::after {
+  background: var(--blue);
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+#dots .dot.cover::after { background: var(--yellow); }
+#dots .dot.glossary::after { background: var(--purple); }
+
 @media (max-width: 430px) {
   .cavities-activity { padding: 12px 10px; }
   .brush-zone-controls { grid-template-columns: 1fr; }
