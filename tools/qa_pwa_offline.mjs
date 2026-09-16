@@ -33,6 +33,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
+import { selectOfflineAudio } from './pwa_offline_contract.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.dirname(HERE);
@@ -46,6 +47,7 @@ const arg = (name, def) => {
 };
 const PORT = Number(arg('port', '8137'));
 const BOOK = arg('book', 'airplane');
+const BOOK_AUDIO_URL = selectOfflineAudio(assetScope.self.KB_ASSETS, BOOK);
 /* 视口尺寸。默认手机竖屏（家长最常用的场景）；--size=1280x900 可看桌面版，
    二级菜单在桌面会变成居中弹窗，与手机上的底部抽屉是两套布局，都得看一眼。 */
 const SIZE = arg('size', '430x932');
@@ -770,7 +772,7 @@ async function main() {
 
     const audio = await cdp.eval(`(async () => {
       /* 以书籍页自身为基准解析路径，别再手写 ../ 以免重复层级 */
-      const url = new URL('audio/page_01_en.mp3?v=4', location.href).href;
+      const url = new URL(${JSON.stringify(BOOK_AUDIO_URL)}, location.href).href;
       try {
         const r = await fetch(url);
         return { url, ok: r.ok, status: r.status, bytes: (await r.arrayBuffer()).byteLength };
