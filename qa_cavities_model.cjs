@@ -128,4 +128,20 @@ assert.match(allCopy, /每天.*两次/);
 
 assert.ok(context.window.OVL && typeof context.window.OVL === 'object');
 
+const audioDir = path.join(root, 'books/cavities/audio');
+const expectedAudio = new Set([
+  ...Array.from({ length: 14 }, (_, index) =>
+    ['en', 'zh'].map(lang => `page_${String(index).padStart(2, '0')}_${lang}.mp3`)).flat(),
+  ...['bacteria', 'plaque', 'acid', 'enamel', 'fluoride', 'cavity']
+    .map(word => ['en', 'zh'].map(lang => `word_${word}_${lang}.mp3`)).flat()
+]);
+assert.equal(expectedAudio.size, 40, 'audio contract has exactly 40 unique filenames');
+assert.ok(fs.existsSync(audioDir), 'cavities audio directory exists');
+const actualAudio = fs.readdirSync(audioDir).filter(name => name.endsWith('.mp3'));
+assert.equal(actualAudio.length, 40, 'audio directory has exactly 40 MP3 files');
+assert.deepEqual(new Set(actualAudio), expectedAudio, 'audio filenames exactly match the bilingual page and glossary contract');
+for (const name of actualAudio) {
+  assert.ok(fs.statSync(path.join(audioDir, name)).size > 3 * 1024, `${name} has nontrivial encoded size`);
+}
+
 console.log('cavities model: OK');
