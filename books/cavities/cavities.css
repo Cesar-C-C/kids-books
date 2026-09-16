@@ -1,0 +1,165 @@
+.cavities-activity {
+  max-width: 100%;
+  margin: 14px 0 4px;
+  padding: 14px;
+  overflow-wrap: anywhere;
+  border: 2px solid #96d7d3;
+  border-radius: 18px;
+  background: #f3fffd;
+  color: #25364d;
+  text-align: left;
+}
+
+.cavities-activity h3 {
+  margin: 0 0 10px;
+  color: #146e69;
+  font-size: 18px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.brush-zone-controls,
+.brush-timer-controls {
+  display: grid;
+  gap: 8px;
+}
+
+.brush-zone-controls {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.brush-timer-controls {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.brush-zone-button,
+.brush-timer-controls button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 2px solid #18867f;
+  border-radius: 12px;
+  background: #fff;
+  color: #145e5a;
+  font: 700 13px/1.25 'Baloo 2', 'Noto Sans SC', sans-serif;
+  cursor: pointer;
+}
+
+.brush-zone-button[aria-pressed="true"] {
+  border-color: #176f4d;
+  background: #d9f7df;
+  color: #114b35;
+}
+
+.brush-zone-button[aria-pressed="true"]::before {
+  content: '✓ ';
+  font-weight: 900;
+}
+
+.brush-zone-button:focus-visible,
+.brush-timer-controls button:focus-visible {
+  outline: 4px solid #ffbf47;
+  outline-offset: 3px;
+}
+
+.brush-timer-controls button:disabled {
+  border-color: #aebcc1;
+  background: #eef2f3;
+  color: #68767a;
+  cursor: default;
+  opacity: .78;
+}
+
+.cavities-live {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #fff5cf;
+  color: #604a06;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.cavities-live span {
+  display: block;
+}
+
+.cavities-status-en {
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.brush-zones.is-complete .cavities-live {
+  background: #dff7e5;
+  color: #174e34;
+}
+
+.brush-device-note {
+  margin: 0 0 8px;
+  color: #4d5f70;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.brush-countdown {
+  margin: 4px 0 10px;
+  color: #126b66;
+  font: 800 clamp(34px, 9vw, 54px)/1 'Fredoka', 'Baloo 2', sans-serif;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+/* Keep the shared reader's compact progress-dot appearance while giving this
+   14-page book a child-friendly 44px touch target for every page shortcut. */
+#dots {
+  gap: 0;
+}
+
+#dots .dot {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  transform: none;
+}
+
+#dots .dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #c9d6e3;
+  transform: translate(-50%, -50%);
+  transition: transform .15s, background-color .15s;
+}
+
+#dots .dot.active::after {
+  background: var(--blue);
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+#dots .dot.cover::after { background: var(--yellow); }
+#dots .dot.glossary::after { background: var(--purple); }
+
+@media (max-width: 430px) {
+  .cavities-activity { padding: 12px 10px; }
+  .brush-zone-controls { grid-template-columns: 1fr; }
+  .brush-zone-button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cavities-activity *,
+  .cavities-activity *::before,
+  .cavities-activity *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

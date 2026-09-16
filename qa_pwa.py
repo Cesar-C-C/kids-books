@@ -5,7 +5,7 @@
 
 检查项：
   1. manifest.webmanifest 合法、图标文件存在且尺寸与声明一致
-  2. pwa-assets.js 里每一个文件都真实存在；音频 URL 带正确的 ?v=<AUDIO_VER>
+  2. pwa-assets.js 内容指纹仍匹配当前文件；每个文件存在；音频 URL 带正确的 ?v=<AUDIO_VER>
   3. Service Worker 的关键约定没被改坏（离线包缓存不随版本清空、只回填 200）
   4. 所有页面都接上了 manifest / cdn.js / pwa.js
   5. reader.js 里没有遗留的旧 CDN 常量
@@ -14,10 +14,13 @@
 用法：python qa_pwa.py      退出码 0 = 全部通过
 """
 import json
+import hashlib
 import os
 import re
 import struct
 import sys
+
+from tools.pwa_fingerprint import content_sha256 as fingerprint_sha256
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 fails, warns, checks = [], [], 0
@@ -47,6 +50,21 @@ def png_size(path):
 
 def rel_path(p):
     return os.path.join(REPO, p.replace("/", os.sep).split("?")[0])
+
+
+def content_sha256(asset):
+    return fingerprint_sha256(rel_path(asset))
+
+
+def expected_asset_version(data):
+    """Recompute the generator's content fingerprint without writing files."""
+    digest = hashlib.sha256()
+    for asset in data.get("shell", []):
+        digest.update(("%s:%s;" % (asset, content_sha256(asset))).encode())
+    for book_id in sorted(data.get("books", {})):
+        for asset in data["books"][book_id].get("files", []):
+            digest.update(("%s:%s;" % (asset, content_sha256(asset))).encode())
+    return digest.hexdigest()[:12]
 
 
 # ---------- 1. manifest ----------
@@ -97,6 +115,14 @@ def check_assets():
         data = json.loads(src[src.index("{"): src.rindex(";")])
     except Exception as e:
         return bad("pwa-assets.js 内容无法解析：%s" % e)
+
+    try:
+        fresh_version = expected_asset_version(data)
+    except (OSError, KeyError) as e:
+        return bad("无法只读重算 pwa-assets.js 内容指纹：%s" % e)
+    if data.get("version") != fresh_version:
+        bad("pwa-assets.js 内容指纹已过期：记录 %s，当前应为 %s（运行 python tools/gen_pwa_assets.py）"
+            % (data.get("version"), fresh_version))
 
     reader = open(os.path.join(REPO, "shared", "reader.js"), encoding="utf-8").read()
     m = re.search(r"const\s+AUDIO_VER\s*=\s*(\d+)", reader)
