@@ -23,7 +23,8 @@
   }
 
   function createTimerController(options = {}) {
-    const duration = Math.max(0, Number(options.durationMs) || 120000);
+    const requestedDuration = options.durationMs === undefined ? 120000 : Number(options.durationMs);
+    const duration = Number.isFinite(requestedDuration) ? Math.max(0, requestedDuration) : 120000;
     const now = options.now || Date.now;
     const schedule = options.setInterval || setInterval;
     const cancel = options.clearInterval || clearInterval;
@@ -264,10 +265,9 @@
     }
     function handlePageHide() {
       timer.suspend();
-      if (observer) observer.disconnect();
     }
     doc.addEventListener('visibilitychange', handleVisibility);
-    root.addEventListener('pagehide', handlePageHide, { once: true });
+    root.addEventListener('pagehide', handlePageHide);
     protectReaderGestures(section);
     text.appendChild(section);
     render(timer.getState());
