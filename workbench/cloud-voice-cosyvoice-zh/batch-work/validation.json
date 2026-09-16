@@ -1,0 +1,202 @@
+{
+  "page_00_zh": {
+    "seconds": 17.16,
+    "bytes": 118464,
+    "segments": 3
+  },
+  "fact_00_zh": {
+    "seconds": 20.6,
+    "bytes": 143616,
+    "segments": 1
+  },
+  "page_01_zh": {
+    "seconds": 21.64,
+    "bytes": 149832,
+    "segments": 5
+  },
+  "fact_01_zh": {
+    "seconds": 17.68,
+    "bytes": 125856,
+    "segments": 1
+  },
+  "page_02_zh": {
+    "seconds": 21.76,
+    "bytes": 151680,
+    "segments": 3
+  },
+  "fact_02_zh": {
+    "seconds": 16.48,
+    "bytes": 117288,
+    "segments": 1
+  },
+  "page_03_zh": {
+    "seconds": 19.56,
+    "bytes": 140136,
+    "segments": 3
+  },
+  "fact_03_zh": {
+    "seconds": 18.68,
+    "bytes": 135552,
+    "segments": 1
+  },
+  "page_04_zh": {
+    "seconds": 22.3,
+    "bytes": 152112,
+    "segments": 6
+  },
+  "fact_04_zh": {
+    "seconds": 18.16,
+    "bytes": 126864,
+    "segments": 1
+  },
+  "page_05_zh": {
+    "seconds": 20.42,
+    "bytes": 141048,
+    "segments": 6
+  },
+  "fact_05_zh": {
+    "seconds": 18.6,
+    "bytes": 134736,
+    "segments": 1
+  },
+  "page_06_zh": {
+    "seconds": 20.86,
+    "bytes": 139896,
+    "segments": 4
+  },
+  "fact_06_zh": {
+    "seconds": 20.48,
+    "bytes": 137760,
+    "segments": 1
+  },
+  "page_07_zh": {
+    "seconds": 19.72,
+    "bytes": 138120,
+    "segments": 7
+  },
+  "fact_07_zh": {
+    "seconds": 19.04,
+    "bytes": 135504,
+    "segments": 1
+  },
+  "page_08_zh": {
+    "seconds": 22.08,
+    "bytes": 145776,
+    "segments": 3
+  },
+  "fact_08_zh": {
+    "seconds": 22.28,
+    "bytes": 156744,
+    "segments": 1
+  },
+  "page_09_zh": {
+    "seconds": 27.04,
+    "bytes": 184824,
+    "segments": 3
+  },
+  "fact_09_zh": {
+    "seconds": 18.48,
+    "bytes": 131736,
+    "segments": 1
+  },
+  "page_10_zh": {
+    "seconds": 20.76,
+    "bytes": 143640,
+    "segments": 5
+  },
+  "fact_10_zh": {
+    "seconds": 18.68,
+    "bytes": 138888,
+    "segments": 1
+  },
+  "page_11_zh": {
+    "seconds": 22.84,
+    "bytes": 159936,
+    "segments": 5
+  },
+  "fact_11_zh": {
+    "seconds": 17.04,
+    "bytes": 128520,
+    "segments": 1
+  },
+  "page_12_zh": {
+    "seconds": 22.34,
+    "bytes": 157440,
+    "segments": 6
+  },
+  "fact_12_zh": {
+    "seconds": 19.28,
+    "bytes": 140976,
+    "segments": 1
+  },
+  "page_13_zh": {
+    "seconds": 21.62,
+    "bytes": 155592,
+    "segments": 4
+  },
+  "fact_13_zh": {
+    "seconds": 14.84,
+    "bytes": 103824,
+    "segments": 1
+  },
+  "page_14_zh": {
+    "seconds": 19.48,
+    "bytes": 135120,
+    "segments": 5
+  },
+  "fact_14_zh": {
+    "seconds": 19.24,
+    "bytes": 130296,
+    "segments": 1
+  },
+  "page_15_zh": {
+    "seconds": 17.92,
+    "bytes": 123864,
+    "segments": 1
+  },
+  "fact_15_zh": {
+    "seconds": 19.96,
+    "bytes": 140640,
+    "segments": 1
+  },
+  "word_cloud_zh": {
+    "seconds": 0.6,
+    "bytes": 3360,
+    "segments": 1
+  },
+  "word_water_vapor_zh": {
+    "seconds": 1.24,
+    "bytes": 8184,
+    "segments": 1
+  },
+  "word_evaporation_zh": {
+    "seconds": 0.84,
+    "bytes": 4968,
+    "segments": 1
+  },
+  "word_condensation_zh": {
+    "seconds": 0.88,
+    "bytes": 5256,
+    "segments": 1
+  },
+  "word_rain_zh": {
+    "seconds": 0.8,
+    "bytes": 4440,
+    "segments": 1
+  },
+  "word_root_zh": {
+    "seconds": 0.52,
+    "bytes": 2544,
+    "segments": 1
+  },
+  "word_transpiration_zh": {
+    "seconds": 1.04,
+    "bytes": 6192,
+    "segments": 1
+  },
+  "word_water_cycle_zh": {
+    "seconds": 1.08,
+    "bytes": 7656,
+    "segments": 1
+  }
+}

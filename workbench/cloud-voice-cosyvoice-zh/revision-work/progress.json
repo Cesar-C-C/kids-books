@@ -1,0 +1,18 @@
+{
+  "audition_narrator_v2": {
+    "sha256": "06e822994c9e2a913343a7e1ace758827d17a0286098dc2b2fcc42df23ed8aed",
+    "seconds": 5.48,
+    "generation_seconds": 15.39,
+    "role": "narrator",
+    "rms": 0.09296227991580963,
+    "peak_before_normalization": 0.9900000095367432
+  },
+  "audition_worm_v2": {
+    "sha256": "f7a75c77f2b7b62574fd6957fa9b1cb0c365a8d0b7745f08e2afb823789c73e8",
+    "seconds": 6.08,
+    "generation_seconds": 16.34,
+    "role": "worm",
+    "rms": 0.10203143209218979,
+    "peak_before_normalization": 0.8696293830871582
+  }
+}

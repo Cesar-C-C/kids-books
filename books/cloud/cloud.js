@@ -1,6 +1,6 @@
 (() => {
  'use strict';
- const AUDIO_VER=5;
+ const AUDIO_VER=6;
  const $=id=>document.getElementById(id), pages=window.PAGES, key='kb-cloud-journey-v1';
  let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch{}
  let current=Number.isInteger(saved.page)?Math.max(0,Math.min(pages.length-1,saved.page)):0;

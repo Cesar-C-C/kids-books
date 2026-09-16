@@ -1,0 +1,1707 @@
+{
+  "provider": "local Fun-CosyVoice3-0.5B",
+  "precision": "fp32",
+  "directions": {
+    "narrator": "使用温柔、亲切、自然的成年女士声音，像妈妈或女老师给五岁小朋友讲故事；语速稍慢，气息柔和，不要播音腔，不要低沉。",
+    "didi": "用活泼、好奇、明亮的语气说话，像童话里的小水滴，不要喊叫。",
+    "frog": "用热情、友好、爽朗的语气说话，像耐心回答问题的青蛙朋友。",
+    "dust": "用轻巧、俏皮、亲切的语气说话，轻声讲一个小秘密。",
+    "neighbor": "用清晰、轻快、鼓励的语气说话，像带朋友一起旅行。",
+    "willow": "用慈爱、温和、从容的语气说话，语速稍慢，像讲故事的长辈。",
+    "worm": "使用年轻、阳光、憨厚友好的男声，像年轻的大哥哥；语速自然，声音不要老成、不要过度低沉。"
+  },
+  "jobs": [
+    {
+      "role": "narrator",
+      "text": "池塘里住着一滴爱问问题的水，叫滴滴。每天，它都望着天上的云：",
+      "id": "page_00_zh_00",
+      "track": "page_00_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "池塘里住着一滴爱问问题的水，叫滴滴。每天，它都望着天上的云："
+    },
+    {
+      "role": "didi",
+      "text": "“你们有时候像小船，有时候像高山。你们到底要去哪里？”",
+      "id": "page_00_zh_01",
+      "track": "page_00_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "你们有时候像小船，有时候像高山。你们到底要去哪里？"
+    },
+    {
+      "role": "narrator",
+      "text": "这一天，一场意想不到的旅行，把滴滴带进了答案里。",
+      "id": "page_00_zh_02",
+      "track": "page_00_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "这一天，一场意想不到的旅行，把滴滴带进了答案里。"
+    },
+    {
+      "id": "fact_00_zh",
+      "track": "fact_00_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "滴滴会说话、会想家，是故事里的想象。真实的小水滴没有眼睛，也不会选择目的地。我们会跟着它，观察水怎样在天空、地面和植物之间移动。图中放大的水滴帮助我们看清，大小不代表真实比例。",
+      "spokenText": "滴滴会说话、会想家，是故事里的想象。真实的小水滴没有眼睛，也不会选择目的地。我们会跟着它，观察水怎样在天空、地面和植物之间移动。图中放大的水滴帮助我们看清，大小不代表真实比例。"
+    },
+    {
+      "role": "narrator",
+      "text": "Didi was a curious little drop in a pond. Every day, Didi watched the clouds. ",
+      "id": "page_00_en_00",
+      "track": "page_00_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Didi was a curious little drop in a pond. Every day, Didi watched the clouds. "
+    },
+    {
+      "role": "didi",
+      "text": "“Sometimes you look like boats. Sometimes you look like mountains. Where are you going?”",
+      "id": "page_00_en_01",
+      "track": "page_00_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Sometimes you look like boats. Sometimes you look like mountains. Where are you going?"
+    },
+    {
+      "role": "narrator",
+      "text": " One day, an unexpected journey carried Didi right into the answer.",
+      "id": "page_00_en_02",
+      "track": "page_00_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " One day, an unexpected journey carried Didi right into the answer."
+    },
+    {
+      "id": "fact_00_en",
+      "track": "fact_00_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Talking and feeling homesick belong to our story. Real water drops have no eyes and cannot choose a destination. The enlarged drops help us follow water; they are not drawn to scale.",
+      "spokenText": "Talking and feeling homesick belong to our story. Real water drops have no eyes and cannot choose a destination. The enlarged drops help us follow water; they are not drawn to scale."
+    },
+    {
+      "role": "narrator",
+      "text": "好些天没有下雨了。阿跳的荷叶离岸边越来越远，小柳树也低下了头。",
+      "id": "page_01_zh_00",
+      "track": "page_01_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "好些天没有下雨了。阿跳的荷叶离岸边越来越远，小柳树也低下了头。"
+    },
+    {
+      "role": "frog",
+      "text": "“水都躲到哪里去了？”",
+      "id": "page_01_zh_01",
+      "track": "page_01_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "水都躲到哪里去了？"
+    },
+    {
+      "role": "narrator",
+      "text": "阿跳问。滴滴看了看水面上的阳光：",
+      "id": "page_01_zh_02",
+      "track": "page_01_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "阿跳问。滴滴看了看水面上的阳光："
+    },
+    {
+      "role": "didi",
+      "text": "“我去找找。要是遇见云，我就问问雨的消息！”",
+      "id": "page_01_zh_03",
+      "track": "page_01_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "我去找找。要是遇见云，我就问问雨的消息！"
+    },
+    {
+      "role": "narrator",
+      "text": "可它连第一步该怎么走，都不知道。",
+      "id": "page_01_zh_04",
+      "track": "page_01_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "可它连第一步该怎么走，都不知道。"
+    },
+    {
+      "id": "fact_01_zh",
+      "track": "fact_01_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "水会从表面慢慢变成水蒸气，进入空气，这叫蒸发。水也可能渗进泥土，或被植物吸收。池塘水位同时受下雨、流入和流出的水影响，所以不能只用“今天很热”解释所有变化。",
+      "spokenText": "水会从表面慢慢变成水蒸气，进入空气，这叫蒸发。水也可能渗进泥土，或被植物吸收。池塘水位同时受下雨、流入和流出的水影响，所以不能只用“今天很热”解释所有变化。"
+    },
+    {
+      "role": "narrator",
+      "text": "It had not rained for days. Frog’s lily pad was farther from the bank, and the young willow drooped. ",
+      "id": "page_01_en_00",
+      "track": "page_01_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "It had not rained for days. Frog’s lily pad was farther from the bank, and the young willow drooped. "
+    },
+    {
+      "role": "frog",
+      "text": "“Where is our water hiding?”",
+      "id": "page_01_en_01",
+      "track": "page_01_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Where is our water hiding?"
+    },
+    {
+      "role": "narrator",
+      "text": " asked Frog. ",
+      "id": "page_01_en_02",
+      "track": "page_01_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " asked Frog. "
+    },
+    {
+      "role": "didi",
+      "text": "“I will find out,”",
+      "id": "page_01_en_03",
+      "track": "page_01_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "I will find out,"
+    },
+    {
+      "role": "narrator",
+      "text": " said Didi. ",
+      "id": "page_01_en_04",
+      "track": "page_01_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " said Didi. "
+    },
+    {
+      "role": "didi",
+      "text": "“If I meet a cloud, I will ask about rain!”",
+      "id": "page_01_en_05",
+      "track": "page_01_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "If I meet a cloud, I will ask about rain!"
+    },
+    {
+      "role": "narrator",
+      "text": " But Didi had no idea how to begin.",
+      "id": "page_01_en_06",
+      "track": "page_01_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " But Didi had no idea how to begin."
+    },
+    {
+      "id": "fact_01_en",
+      "track": "fact_01_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Water can evaporate into the air, soak into soil, or enter plants. Rain and streams can add water. A pond’s level depends on water coming in and going out, not just on how hot today is.",
+      "spokenText": "Water can evaporate into the air, soak into soil, or enter plants. Rain and streams can add water. A pond’s level depends on water coming in and going out, not just on how hot today is."
+    },
+    {
+      "role": "narrator",
+      "text": "太阳暖暖地照着池塘。慢慢地，滴滴不再是能看见的小水滴了。",
+      "id": "page_02_zh_00",
+      "track": "page_02_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "太阳暖暖地照着池塘。慢慢地，滴滴不再是能看见的小水滴了。"
+    },
+    {
+      "role": "didi",
+      "text": "“阿跳，我还在这里！”",
+      "id": "page_02_zh_01",
+      "track": "page_02_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "阿跳，我还在这里！"
+    },
+    {
+      "role": "narrator",
+      "text": "它喊。可阿跳只看见清清的空气。滴滴变成了看不见的水蒸气，混进空气里；一股上升的空气，带着它离开了池塘。",
+      "id": "page_02_zh_02",
+      "track": "page_02_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "它喊。可阿跳只看见清清的空气。滴滴变成了看不见的水蒸气，混进空气里；一股上升的空气，带着它离开了池塘。"
+    },
+    {
+      "id": "fact_02_zh",
+      "track": "fact_02_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "不是。水蒸气是水的气体形态，肉眼看不见；云里可见的白色主要来自许多小水滴或冰晶。蒸发不需要把水烧开，晾着的湿衣服也会变干。太阳提供能量，但不是把水滴用绳子拉上去。",
+      "spokenText": "不是。水蒸气是水的气体形态，肉眼看不见；云里可见的白色主要来自许多小水滴或冰晶。蒸发不需要把水烧开，晾着的湿衣服也会变干。太阳提供能量，但不是把水滴用绳子拉上去。"
+    },
+    {
+      "role": "narrator",
+      "text": "Sunshine warmed the pond. Slowly, Didi was no longer a visible drop. ",
+      "id": "page_02_en_00",
+      "track": "page_02_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Sunshine warmed the pond. Slowly, Didi was no longer a visible drop. "
+    },
+    {
+      "role": "didi",
+      "text": "“Frog, I am still here!”",
+      "id": "page_02_en_01",
+      "track": "page_02_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Frog, I am still here!"
+    },
+    {
+      "role": "narrator",
+      "text": " But Frog saw only clear air. Didi had become invisible water vapor and mixed with the air. A rising current carried it away from the pond.",
+      "id": "page_02_en_02",
+      "track": "page_02_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " But Frog saw only clear air. Didi had become invisible water vapor and mixed with the air. A rising current carried it away from the pond."
+    },
+    {
+      "id": "fact_02_en",
+      "track": "fact_02_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "No. Water vapor is an invisible gas. Visible clouds contain tiny liquid drops or ice crystals. Evaporation does not require boiling: wet clothes can dry in ordinary air. The Sun supplies energy; moving air transports the vapor.",
+      "spokenText": "No. Water vapor is an invisible gas. Visible clouds contain tiny liquid drops or ice crystals. Evaporation does not require boiling: wet clothes can dry in ordinary air. The Sun supplies energy; moving air transports the vapor."
+    },
+    {
+      "role": "narrator",
+      "text": "越往上，空气越凉。滴滴发现，自己又变成了一颗小水珠！旁边一粒细小的尘埃说：",
+      "id": "page_03_zh_00",
+      "track": "page_03_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "越往上，空气越凉。滴滴发现，自己又变成了一颗小水珠！旁边一粒细小的尘埃说："
+    },
+    {
+      "role": "dust",
+      "text": "“欢迎，你可以在我身边形成水滴。”",
+      "id": "page_03_zh_01",
+      "track": "page_03_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "欢迎，你可以在我身边形成水滴。"
+    },
+    {
+      "role": "narrator",
+      "text": "四周还有数不清的小水珠。远远看去，它们聚在空气里的样子，就是阿跳看见的那朵白云。",
+      "id": "page_03_zh_02",
+      "track": "page_03_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "四周还有数不清的小水珠。远远看去，它们聚在空气里的样子，就是阿跳看见的那朵白云。"
+    },
+    {
+      "id": "fact_03_zh",
+      "track": "fact_03_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "含水蒸气的空气冷却到合适条件时，水蒸气会凝结成小水滴，常常围绕细小颗粒形成。很多小水滴一起散射阳光，我们才看见云。更冷的云里还可能有冰晶；云不是一整团水蒸气，也不是棉花。",
+      "spokenText": "含水蒸气的空气冷却到合适条件时，水蒸气会凝结成小水滴，常常围绕细小颗粒形成。很多小水滴一起散射阳光，我们才看见云。更冷的云里还可能有冰晶；云不是一整团水蒸气，也不是棉花。"
+    },
+    {
+      "role": "narrator",
+      "text": "Higher up, the air cooled. Didi became a tiny liquid bead again! ",
+      "id": "page_03_en_00",
+      "track": "page_03_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Higher up, the air cooled. Didi became a tiny liquid bead again! "
+    },
+    {
+      "role": "dust",
+      "text": "“Welcome,”",
+      "id": "page_03_en_01",
+      "track": "page_03_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Welcome,"
+    },
+    {
+      "role": "narrator",
+      "text": " said a speck of dust. ",
+      "id": "page_03_en_02",
+      "track": "page_03_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " said a speck of dust. "
+    },
+    {
+      "role": "dust",
+      "text": "“A drop can form around me.”",
+      "id": "page_03_en_03",
+      "track": "page_03_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "A drop can form around me."
+    },
+    {
+      "role": "narrator",
+      "text": " Countless little beads surrounded Didi. Seen from far away, all those beads in the air made the white cloud Frog could see.",
+      "id": "page_03_en_04",
+      "track": "page_03_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " Countless little beads surrounded Didi. Seen from far away, all those beads in the air made the white cloud Frog could see."
+    },
+    {
+      "id": "fact_03_en",
+      "track": "fact_03_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "When moist air cools enough, vapor condenses into tiny drops, often around airborne particles. Many drops scatter sunlight, making a cloud visible. Colder clouds can also contain ice crystals. A cloud is neither cotton nor a solid piece of vapor.",
+      "spokenText": "When moist air cools enough, vapor condenses into tiny drops, often around airborne particles. Many drops scatter sunlight, making a cloud visible. Colder clouds can also contain ice crystals. A cloud is neither cotton nor a solid piece of vapor."
+    },
+    {
+      "role": "didi",
+      "text": "“云看起来软软的，可以躺一躺吗？”",
+      "id": "page_04_zh_00",
+      "track": "page_04_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "云看起来软软的，可以躺一躺吗？"
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴刚想坐下，就发现这里根本没有地板。小水珠们散在空气中，轻轻地移动。",
+      "id": "page_04_zh_01",
+      "track": "page_04_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴刚想坐下，就发现这里根本没有地板。小水珠们散在空气中，轻轻地移动。"
+    },
+    {
+      "role": "neighbor",
+      "text": "“我们这么小，落得很慢，”",
+      "id": "page_04_zh_02",
+      "track": "page_04_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "我们这么小，落得很慢，"
+    },
+    {
+      "role": "narrator",
+      "text": "邻居说，",
+      "id": "page_04_zh_03",
+      "track": "page_04_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "邻居说，"
+    },
+    {
+      "role": "neighbor",
+      "text": "“向上流动的空气，还能把我们带起来。”",
+      "id": "page_04_zh_04",
+      "track": "page_04_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "向上流动的空气，还能把我们带起来。"
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴终于敢朝下面看了一眼。",
+      "id": "page_04_zh_05",
+      "track": "page_04_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴终于敢朝下面看了一眼。"
+    },
+    {
+      "id": "fact_04_zh",
+      "track": "fact_04_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "云里的水分散成许多很小的水滴或冰晶，并不是一个大水袋。小水滴受到空气阻力，落得很慢；气流也会带动它们。重力一直存在。只有水滴或冰晶长大到足以落下来时，才可能形成降水。",
+      "spokenText": "云里的水分散成许多很小的水滴或冰晶，并不是一个大水袋。小水滴受到空气阻力，落得很慢；气流也会带动它们。重力一直存在。只有水滴或冰晶长大到足以落下来时，才可能形成降水。"
+    },
+    {
+      "role": "didi",
+      "text": "“Could I lie down on this soft cloud?”",
+      "id": "page_04_en_00",
+      "track": "page_04_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Could I lie down on this soft cloud?"
+    },
+    {
+      "role": "narrator",
+      "text": " wondered Didi. But there was no floor! The little beads moved through the air. ",
+      "id": "page_04_en_01",
+      "track": "page_04_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " wondered Didi. But there was no floor! The little beads moved through the air. "
+    },
+    {
+      "role": "neighbor",
+      "text": "“We are tiny, so we fall very slowly,”",
+      "id": "page_04_en_02",
+      "track": "page_04_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "We are tiny, so we fall very slowly,"
+    },
+    {
+      "role": "narrator",
+      "text": " said a neighbor. ",
+      "id": "page_04_en_03",
+      "track": "page_04_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " said a neighbor. "
+    },
+    {
+      "role": "neighbor",
+      "text": "“Rising air can carry us upward, too.”",
+      "id": "page_04_en_04",
+      "track": "page_04_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Rising air can carry us upward, too."
+    },
+    {
+      "role": "narrator",
+      "text": " At last, Didi dared to look down.",
+      "id": "page_04_en_05",
+      "track": "page_04_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " At last, Didi dared to look down."
+    },
+    {
+      "id": "fact_04_en",
+      "track": "fact_04_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Cloud water is spread among many tiny drops or crystals, not held in a big bag. Air resistance slows small drops, and air currents move them. Gravity still acts. Drops or crystals must grow enough to fall as precipitation.",
+      "spokenText": "Cloud water is spread among many tiny drops or crystals, not held in a big bag. Air resistance slows small drops, and air currents move them. Gravity still acts. Drops or crystals must grow enough to fall as precipitation."
+    },
+    {
+      "role": "narrator",
+      "text": "呼——田野像拼图一样，从脚下慢慢滑过。红屋顶变小了，池塘也找不到了。",
+      "id": "page_05_zh_00",
+      "track": "page_05_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "呼——田野像拼图一样，从脚下慢慢滑过。红屋顶变小了，池塘也找不到了。"
+    },
+    {
+      "role": "didi",
+      "text": "“等等，我答应阿跳要回去！”",
+      "id": "page_05_zh_01",
+      "track": "page_05_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "等等，我答应阿跳要回去！"
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴着急地喊。风没有转弯。",
+      "id": "page_05_zh_02",
+      "track": "page_05_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴着急地喊。风没有转弯。"
+    },
+    {
+      "role": "neighbor",
+      "text": "“云不能自己开车，”",
+      "id": "page_05_zh_03",
+      "track": "page_05_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "云不能自己开车，"
+    },
+    {
+      "role": "narrator",
+      "text": "邻居安慰它，",
+      "id": "page_05_zh_04",
+      "track": "page_05_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "邻居安慰它，"
+    },
+    {
+      "role": "neighbor",
+      "text": "“我们跟着空气走。先看看前面，会遇见什么吧。”",
+      "id": "page_05_zh_05",
+      "track": "page_05_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "我们跟着空气走。先看看前面，会遇见什么吧。"
+    },
+    {
+      "id": "fact_05_zh",
+      "track": "fact_05_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "风就是流动的空气，它能搬运水蒸气和云中的小水滴。云的形状还会因为水滴不断形成、蒸发而改变。因此一朵云既在移动，也在变化，并不总是同一群水滴组成的固定“队伍”。",
+      "spokenText": "风就是流动的空气，它能搬运水蒸气和云中的小水滴。云的形状还会因为水滴不断形成、蒸发而改变。因此一朵云既在移动，也在变化，并不总是同一群水滴组成的固定“队伍”。"
+    },
+    {
+      "role": "narrator",
+      "text": "Whoosh! Fields slid below like a patchwork quilt. The red roof grew smaller. The pond disappeared. ",
+      "id": "page_05_en_00",
+      "track": "page_05_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Whoosh! Fields slid below like a patchwork quilt. The red roof grew smaller. The pond disappeared. "
+    },
+    {
+      "role": "didi",
+      "text": "“Wait! I promised Frog I would return!”",
+      "id": "page_05_en_01",
+      "track": "page_05_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Wait! I promised Frog I would return!"
+    },
+    {
+      "role": "narrator",
+      "text": " cried Didi. But the wind kept going. ",
+      "id": "page_05_en_02",
+      "track": "page_05_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " cried Didi. But the wind kept going. "
+    },
+    {
+      "role": "neighbor",
+      "text": "“Clouds cannot steer,”",
+      "id": "page_05_en_03",
+      "track": "page_05_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Clouds cannot steer,"
+    },
+    {
+      "role": "narrator",
+      "text": " said the neighbor. ",
+      "id": "page_05_en_04",
+      "track": "page_05_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " said the neighbor. "
+    },
+    {
+      "role": "neighbor",
+      "text": "“We travel with the air. Let us see what comes next.”",
+      "id": "page_05_en_05",
+      "track": "page_05_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "We travel with the air. Let us see what comes next."
+    },
+    {
+      "id": "fact_05_en",
+      "track": "fact_05_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Wind is moving air. It carries vapor and cloud droplets. A cloud also changes shape as drops form and evaporate. A cloud is not always a fixed group of the very same drops.",
+      "spokenText": "Wind is moving air. It carries vapor and cloud droplets. A cloud also changes shape as drops form and evaporate. A cloud is not always a fixed group of the very same drops."
+    },
+    {
+      "role": "narrator",
+      "text": "前面忽然竖起一座大山。",
+      "id": "page_06_zh_00",
+      "track": "page_06_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "前面忽然竖起一座大山。"
+    },
+    {
+      "role": "didi",
+      "text": "“过不去了！”",
+      "id": "page_06_zh_01",
+      "track": "page_06_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "过不去了！"
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴抱紧身边的伙伴。空气顺着山坡往上爬，带着大家一起升高。更凉的地方，又出现了许多新水珠。云一点点变厚。滴滴突然想到：",
+      "id": "page_06_zh_02",
+      "track": "page_06_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴抱紧身边的伙伴。空气顺着山坡往上爬，带着大家一起升高。更凉的地方，又出现了许多新水珠。云一点点变厚。滴滴突然想到："
+    },
+    {
+      "role": "didi",
+      "text": "“伙伴这么多了，我们会不会变成雨？”",
+      "id": "page_06_zh_03",
+      "track": "page_06_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "伙伴这么多了，我们会不会变成雨？"
+    },
+    {
+      "id": "fact_06_zh",
+      "track": "fact_06_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "潮湿空气遇到山，被迫抬升时会膨胀、冷却。在合适条件下，更多水蒸气凝结，形成云，甚至降雨。不是山“挤破”了云，也不是每次遇山都会下雨：空气中要有足够水分，水滴还要继续长大。",
+      "spokenText": "潮湿空气遇到山，被迫抬升时会膨胀、冷却。在合适条件下，更多水蒸气凝结，形成云，甚至降雨。不是山“挤破”了云，也不是每次遇山都会下雨：空气中要有足够水分，水滴还要继续长大。"
+    },
+    {
+      "role": "narrator",
+      "text": "A mountain rose ahead. ",
+      "id": "page_06_en_00",
+      "track": "page_06_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "A mountain rose ahead. "
+    },
+    {
+      "role": "didi",
+      "text": "“We cannot get through!”",
+      "id": "page_06_en_01",
+      "track": "page_06_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "We cannot get through!"
+    },
+    {
+      "role": "narrator",
+      "text": " cried Didi. The air climbed the slope and carried everyone upward. In the cooler air, more little drops formed. The cloud grew thicker. Didi wondered, ",
+      "id": "page_06_en_02",
+      "track": "page_06_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " cried Didi. The air climbed the slope and carried everyone upward. In the cooler air, more little drops formed. The cloud grew thicker. Didi wondered, "
+    },
+    {
+      "role": "didi",
+      "text": "“With so many neighbors, could we become rain?”",
+      "id": "page_06_en_03",
+      "track": "page_06_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "With so many neighbors, could we become rain?"
+    },
+    {
+      "id": "fact_06_en",
+      "track": "fact_06_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "A mountain can lift moist air. As that air rises, it expands and cools. Under suitable conditions, vapor condenses into clouds and perhaps rain. The mountain does not squeeze a cloud open; enough moisture and drop growth are still needed.",
+      "spokenText": "A mountain can lift moist air. As that air rises, it expands and cools. Under suitable conditions, vapor condenses into clouds and perhaps rain. The mountain does not squeeze a cloud open; enough moisture and drop growth are still needed."
+    },
+    {
+      "role": "narrator",
+      "text": "云的下面渐渐暗了。",
+      "id": "page_07_zh_00",
+      "track": "page_07_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "云的下面渐渐暗了。"
+    },
+    {
+      "role": "didi",
+      "text": "“我们把云弄脏了吗？”",
+      "id": "page_07_zh_01",
+      "track": "page_07_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "我们把云弄脏了吗？"
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴小声问。",
+      "id": "page_07_zh_02",
+      "track": "page_07_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴小声问。"
+    },
+    {
+      "role": "neighbor",
+      "text": "“没有呀。”",
+      "id": "page_07_zh_03",
+      "track": "page_07_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "没有呀。"
+    },
+    {
+      "role": "narrator",
+      "text": "一颗小水珠指向头顶，",
+      "id": "page_07_zh_04",
+      "track": "page_07_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "一颗小水珠指向头顶，"
+    },
+    {
+      "role": "neighbor",
+      "text": "“上面还亮着呢！只是云变厚了，能到达底下的阳光少了。”",
+      "id": "page_07_zh_05",
+      "track": "page_07_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "上面还亮着呢！只是云变厚了，能到达底下的阳光少了。"
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴松了一口气。原来，灰灰的脸色，并不表示生气。",
+      "id": "page_07_zh_06",
+      "track": "page_07_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴松了一口气。原来，灰灰的脸色，并不表示生气。"
+    },
+    {
+      "id": "fact_07_zh",
+      "track": "fact_07_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "云中的水滴和冰晶会散射光。厚云里的光经过许多次散射，到达底部、再进入我们眼睛的光可能较少，所以底部较暗。灰色本身不是“马上下雨”的保证，还要看云内部的水滴、冰晶和空气条件。",
+      "spokenText": "云中的水滴和冰晶会散射光。厚云里的光经过许多次散射，到达底部、再进入我们眼睛的光可能较少，所以底部较暗。灰色本身不是“马上下雨”的保证，还要看云内部的水滴、冰晶和空气条件。"
+    },
+    {
+      "role": "narrator",
+      "text": "The bottom of the cloud grew darker. ",
+      "id": "page_07_en_00",
+      "track": "page_07_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "The bottom of the cloud grew darker. "
+    },
+    {
+      "role": "didi",
+      "text": "“Did we make it dirty?”",
+      "id": "page_07_en_01",
+      "track": "page_07_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Did we make it dirty?"
+    },
+    {
+      "role": "narrator",
+      "text": " whispered Didi. ",
+      "id": "page_07_en_02",
+      "track": "page_07_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " whispered Didi. "
+    },
+    {
+      "role": "neighbor",
+      "text": "“No,”",
+      "id": "page_07_en_03",
+      "track": "page_07_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "No,"
+    },
+    {
+      "role": "narrator",
+      "text": " said a little bead. ",
+      "id": "page_07_en_04",
+      "track": "page_07_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " said a little bead. "
+    },
+    {
+      "role": "neighbor",
+      "text": "“Look! The top is still bright. Our cloud is thicker, so less sunlight reaches the bottom.”",
+      "id": "page_07_en_05",
+      "track": "page_07_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Look! The top is still bright. Our cloud is thicker, so less sunlight reaches the bottom."
+    },
+    {
+      "role": "narrator",
+      "text": " Didi felt better. A gray cloud was not an angry cloud.",
+      "id": "page_07_en_06",
+      "track": "page_07_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " Didi felt better. A gray cloud was not an angry cloud."
+    },
+    {
+      "id": "fact_07_en",
+      "track": "fact_07_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Drops and ice crystals scatter light. In a thick cloud, less light may reach the base and then our eyes, making it look darker. Gray color alone does not guarantee rain. Conditions inside the cloud matter, too.",
+      "spokenText": "Drops and ice crystals scatter light. In a thick cloud, less light may reach the base and then our eyes, making it look darker. Gray color alone does not guarantee rain. Conditions inside the cloud matter, too."
+    },
+    {
+      "role": "narrator",
+      "text": "挤一挤，碰一碰。滴滴遇见了一颗小水珠，两颗合成了更大的一颗；又遇见一颗，它们继续长大。忽然，滴滴感觉自己落得更快了。",
+      "id": "page_08_zh_00",
+      "track": "page_08_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "挤一挤，碰一碰。滴滴遇见了一颗小水珠，两颗合成了更大的一颗；又遇见一颗，它们继续长大。忽然，滴滴感觉自己落得更快了。"
+    },
+    {
+      "role": "didi",
+      "text": "“我要出发啦！”",
+      "id": "page_08_zh_01",
+      "track": "page_08_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "我要出发啦！"
+    },
+    {
+      "role": "narrator",
+      "text": "它和伙伴一起穿过云底。下面，正是那条流向池塘的小溪。",
+      "id": "page_08_zh_02",
+      "track": "page_08_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "它和伙伴一起穿过云底。下面，正是那条流向池塘的小溪。"
+    },
+    {
+      "id": "fact_08_zh",
+      "track": "fact_08_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "一些小水滴碰撞、合并，会长成更大的雨滴，落得更快。当它们能穿过气流向下落，并到达地面时，我们就看见雨。冷云里还可能先长出冰晶，落下融化成雨。不是把整朵云倒空；有的水滴途中还会蒸发。",
+      "spokenText": "一些小水滴碰撞、合并，会长成更大的雨滴，落得更快。当它们能穿过气流向下落，并到达地面时，我们就看见雨。冷云里还可能先长出冰晶，落下融化成雨。不是把整朵云倒空；有的水滴途中还会蒸发。"
+    },
+    {
+      "role": "narrator",
+      "text": "Bump, join, grow! Didi met another bead, and the two became one bigger drop. More drops joined. Didi began to fall faster. ",
+      "id": "page_08_en_00",
+      "track": "page_08_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Bump, join, grow! Didi met another bead, and the two became one bigger drop. More drops joined. Didi began to fall faster. "
+    },
+    {
+      "role": "didi",
+      "text": "“Here I go!”",
+      "id": "page_08_en_01",
+      "track": "page_08_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Here I go!"
+    },
+    {
+      "role": "narrator",
+      "text": " Together, they slipped below the cloud. Far below was a stream—the stream that led toward the pond.",
+      "id": "page_08_en_02",
+      "track": "page_08_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " Together, they slipped below the cloud. Far below was a stream—the stream that led toward the pond."
+    },
+    {
+      "id": "fact_08_en",
+      "track": "fact_08_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Some droplets collide and merge into larger drops that fall faster. Rain reaches us when drops fall through the air to the ground. In cold clouds, ice can grow and melt into rain. Some falling drops evaporate before reaching the ground.",
+      "spokenText": "Some droplets collide and merge into larger drops that fall faster. Rain reaches us when drops fall through the air to the ground. In cold clouds, ice can grow and melt into rain. Some falling drops evaporate before reaching the ground."
+    },
+    {
+      "role": "narrator",
+      "text": "滴答！滴滴落在一片柳叶上，叶子轻轻一晃，把它送进了泥土。",
+      "id": "page_09_zh_00",
+      "track": "page_09_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴答！滴滴落在一片柳叶上，叶子轻轻一晃，把它送进了泥土。"
+    },
+    {
+      "role": "willow",
+      "text": "“欢迎回来！”",
+      "id": "page_09_zh_01",
+      "track": "page_09_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "欢迎回来！"
+    },
+    {
+      "role": "narrator",
+      "text": "小柳树沙沙地说。远处的阿跳听见雨点，连叫了三声。滴滴也想回答，可泥土里的岔路好多呀：一条向小溪，一条向更深处，还有一条通向树根。",
+      "id": "page_09_zh_02",
+      "track": "page_09_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "小柳树沙沙地说。远处的阿跳听见雨点，连叫了三声。滴滴也想回答，可泥土里的岔路好多呀：一条向小溪，一条向更深处，还有一条通向树根。"
+    },
+    {
+      "id": "fact_09_zh",
+      "track": "fact_09_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "一部分水沿地面流动，叫径流；一部分渗入土壤；还有一些会留在叶片和水洼上，之后再蒸发。不同地面吸水的速度不同。图中雨滴画得很大是为了讲故事，真实的小雨滴通常接近圆球形，不像长尾巴的眼泪。",
+      "spokenText": "一部分水沿地面流动，叫径流；一部分渗入土壤；还有一些会留在叶片和水洼上，之后再蒸发。不同地面吸水的速度不同。图中雨滴画得很大是为了讲故事，真实的小雨滴通常接近圆球形，不像长尾巴的眼泪。"
+    },
+    {
+      "role": "narrator",
+      "text": "Pitter-patter! Didi landed on a willow leaf. The leaf tipped, and Didi slipped into the soil. ",
+      "id": "page_09_en_00",
+      "track": "page_09_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Pitter-patter! Didi landed on a willow leaf. The leaf tipped, and Didi slipped into the soil. "
+    },
+    {
+      "role": "willow",
+      "text": "“Welcome!”",
+      "id": "page_09_en_01",
+      "track": "page_09_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Welcome!"
+    },
+    {
+      "role": "narrator",
+      "text": " rustled the tree. Far away, Frog croaked three times at the sound of rain. Didi wanted to answer, but the soil had many paths: toward the stream, deeper down, and toward the roots.",
+      "id": "page_09_en_02",
+      "track": "page_09_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " rustled the tree. Far away, Frog croaked three times at the sound of rain. Didi wanted to answer, but the soil had many paths: toward the stream, deeper down, and toward the roots."
+    },
+    {
+      "id": "fact_09_en",
+      "track": "fact_09_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Some water flows over land as runoff. Some soaks into soil. Some stays on leaves or in puddles and later evaporates. Different surfaces absorb water differently. Our enlarged story drops are not to scale; small real raindrops are nearly spherical.",
+      "spokenText": "Some water flows over land as runoff. Some soaks into soil. Some stays on leaves or in puddles and later evaporates. Different surfaces absorb water differently. Our enlarged story drops are not to scale; small real raindrops are nearly spherical."
+    },
+    {
+      "role": "narrator",
+      "text": "这里没有大隧道，只有土粒和石缝之间的小空隙。滴滴慢慢挤过去，遇见一条蚯蚓。",
+      "id": "page_10_zh_00",
+      "track": "page_10_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "这里没有大隧道，只有土粒和石缝之间的小空隙。滴滴慢慢挤过去，遇见一条蚯蚓。"
+    },
+    {
+      "role": "worm",
+      "text": "“别急，”",
+      "id": "page_10_zh_01",
+      "track": "page_10_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "别急，"
+    },
+    {
+      "role": "narrator",
+      "text": "蚯蚓说，",
+      "id": "page_10_zh_02",
+      "track": "page_10_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "蚯蚓说，"
+    },
+    {
+      "role": "worm",
+      "text": "“有些水会在地下住很久。”",
+      "id": "page_10_zh_03",
+      "track": "page_10_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "有些水会在地下住很久。"
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴沿着湿湿的细缝前进，忽然看见一根细细的树根。那是小柳树伸来的邀请。",
+      "id": "page_10_zh_04",
+      "track": "page_10_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴沿着湿湿的细缝前进，忽然看见一根细细的树根。那是小柳树伸来的邀请。"
+    },
+    {
+      "id": "fact_10_zh",
+      "track": "fact_10_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "很多地下的水藏在土壤、沙粒和岩石的孔隙或裂缝里。土里的水有些被根吸收，有些继续向下补充地下水。地下水也能缓慢流动，之后从泉眼出来，或进入河流。不同水滴的旅程可能长短很不一样。",
+      "spokenText": "很多地下的水藏在土壤、沙粒和岩石的孔隙或裂缝里。土里的水有些被根吸收，有些继续向下补充地下水。地下水也能缓慢流动，之后从泉眼出来，或进入河流。不同水滴的旅程可能长短很不一样。"
+    },
+    {
+      "role": "narrator",
+      "text": "There was no grand tunnel—only little spaces between grains and cracks in rock. Didi moved slowly past a worm. ",
+      "id": "page_10_en_00",
+      "track": "page_10_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "There was no grand tunnel—only little spaces between grains and cracks in rock. Didi moved slowly past a worm. "
+    },
+    {
+      "role": "worm",
+      "text": "“Take your time,”",
+      "id": "page_10_en_01",
+      "track": "page_10_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Take your time,"
+    },
+    {
+      "role": "narrator",
+      "text": " said the worm. ",
+      "id": "page_10_en_02",
+      "track": "page_10_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " said the worm. "
+    },
+    {
+      "role": "worm",
+      "text": "“Some water stays underground for a long while.”",
+      "id": "page_10_en_03",
+      "track": "page_10_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Some water stays underground for a long while."
+    },
+    {
+      "role": "narrator",
+      "text": " Along a damp passage, Didi found a fine root: an invitation from the young willow.",
+      "id": "page_10_en_04",
+      "track": "page_10_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " Along a damp passage, Didi found a fine root: an invitation from the young willow."
+    },
+    {
+      "id": "fact_10_en",
+      "track": "fact_10_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Much underground water occupies pores and cracks, not giant caves. Roots take up some soil water; some moves deeper to recharge groundwater. Groundwater can flow slowly and later reach springs or rivers. Different drops can have very different journey times.",
+      "spokenText": "Much underground water occupies pores and cracks, not giant caves. Roots take up some soil water; some moves deeper to recharge groundwater. Groundwater can flow slowly and later reach springs or rivers. Different drops can have very different journey times."
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴被树根吸收，沿着细小的输水通道来到叶子里。",
+      "id": "page_11_zh_00",
+      "track": "page_11_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴被树根吸收，沿着细小的输水通道来到叶子里。"
+    },
+    {
+      "role": "willow",
+      "text": "“谢谢你！”",
+      "id": "page_11_zh_01",
+      "track": "page_11_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "谢谢你！"
+    },
+    {
+      "role": "narrator",
+      "text": "小柳树精神起来了。又过了一阵子，滴滴再次变成看不见的水蒸气，从叶片的小气孔离开。",
+      "id": "page_11_zh_02",
+      "track": "page_11_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "小柳树精神起来了。又过了一阵子，滴滴再次变成看不见的水蒸气，从叶片的小气孔离开。"
+    },
+    {
+      "role": "didi",
+      "text": "“原来，树也和天空相连！”",
+      "id": "page_11_zh_03",
+      "track": "page_11_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "原来，树也和天空相连！"
+    },
+    {
+      "role": "narrator",
+      "text": "它惊喜地说。下一站，会不会又是一朵云？",
+      "id": "page_11_zh_04",
+      "track": "page_11_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "它惊喜地说。下一站，会不会又是一朵云？"
+    },
+    {
+      "id": "fact_11_zh",
+      "track": "fact_11_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "根吸收的水能沿植物的输水组织移动。叶片中的水蒸发，并通过气孔进入空气，叫蒸腾。植物利用水维持生命，水不只是“被喝掉就结束了”。图中的气孔和输水通道被放大，真实叶片不会冒出白烟。",
+      "spokenText": "根吸收的水能沿植物的输水组织移动。叶片中的水蒸发，并通过气孔进入空气，叫蒸腾。植物利用水维持生命，水不只是“被喝掉就结束了”。图中的气孔和输水通道被放大，真实叶片不会冒出白烟。"
+    },
+    {
+      "role": "narrator",
+      "text": "The root took Didi in. Tiny water-carrying tubes led upward into a leaf. ",
+      "id": "page_11_en_00",
+      "track": "page_11_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "The root took Didi in. Tiny water-carrying tubes led upward into a leaf. "
+    },
+    {
+      "role": "willow",
+      "text": "“Thank you!”",
+      "id": "page_11_en_01",
+      "track": "page_11_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Thank you!"
+    },
+    {
+      "role": "narrator",
+      "text": " rustled the willow. Later, Didi became invisible vapor again and left through a tiny leaf pore. ",
+      "id": "page_11_en_02",
+      "track": "page_11_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " rustled the willow. Later, Didi became invisible vapor again and left through a tiny leaf pore. "
+    },
+    {
+      "role": "didi",
+      "text": "“Trees are connected to the sky, too!”",
+      "id": "page_11_en_03",
+      "track": "page_11_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Trees are connected to the sky, too!"
+    },
+    {
+      "role": "narrator",
+      "text": " Didi wondered whether another cloud might be next.",
+      "id": "page_11_en_04",
+      "track": "page_11_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " Didi wondered whether another cloud might be next."
+    },
+    {
+      "id": "fact_11_en",
+      "track": "fact_11_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Roots absorb water, which can move through water-carrying tissue. Water evaporates inside leaves and escapes through pores called stomata. This is transpiration. Plants use water to live. The enlarged pore is a teaching view; real leaves do not puff white vapor.",
+      "spokenText": "Roots absorb water, which can move through water-carrying tissue. Water evaporates inside leaves and escapes through pores called stomata. This is transpiration. Plants use water to live. The enlarged pore is a teaching view; real leaves do not puff white vapor."
+    },
+    {
+      "role": "narrator",
+      "text": "又经过一段长长的旅行，滴滴跟着另一场雨落进小溪，终于回到池塘。",
+      "id": "page_12_zh_00",
+      "track": "page_12_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "又经过一段长长的旅行，滴滴跟着另一场雨落进小溪，终于回到池塘。"
+    },
+    {
+      "role": "frog",
+      "text": "“你真的找到云了？”",
+      "id": "page_12_zh_01",
+      "track": "page_12_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "你真的找到云了？"
+    },
+    {
+      "role": "narrator",
+      "text": "阿跳瞪大眼睛。滴滴点点头：",
+      "id": "page_12_zh_02",
+      "track": "page_12_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "阿跳瞪大眼睛。滴滴点点头："
+    },
+    {
+      "role": "didi",
+      "text": "“我去过云里面，还走过泥土和树叶！”",
+      "id": "page_12_zh_03",
+      "track": "page_12_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "我去过云里面，还走过泥土和树叶！"
+    },
+    {
+      "role": "narrator",
+      "text": "它停了停：",
+      "id": "page_12_zh_04",
+      "track": "page_12_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "它停了停："
+    },
+    {
+      "role": "didi",
+      "text": "“不过，雨不是我叫来的。是阳光、空气和水，一起完成的旅行。”",
+      "id": "page_12_zh_05",
+      "track": "page_12_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "不过，雨不是我叫来的。是阳光、空气和水，一起完成的旅行。"
+    },
+    {
+      "id": "fact_12_zh",
+      "track": "fact_12_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "不一定。滴滴回到同一个池塘，是我们为故事安排的巧合。真实的水可能到大海、远方的湖泊，或在冰雪和地下停留很久。水循环没有固定起点，也不是每滴水按同一个顺序绕圈，更没有固定的回家时间。",
+      "spokenText": "不一定。滴滴回到同一个池塘，是我们为故事安排的巧合。真实的水可能到大海、远方的湖泊，或在冰雪和地下停留很久。水循环没有固定起点，也不是每滴水按同一个顺序绕圈，更没有固定的回家时间。"
+    },
+    {
+      "role": "narrator",
+      "text": "After another long journey, a later rain brought Didi into the stream and back to the pond. ",
+      "id": "page_12_en_00",
+      "track": "page_12_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "After another long journey, a later rain brought Didi into the stream and back to the pond. "
+    },
+    {
+      "role": "frog",
+      "text": "“Did you really find the clouds?”",
+      "id": "page_12_en_01",
+      "track": "page_12_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Did you really find the clouds?"
+    },
+    {
+      "role": "narrator",
+      "text": " asked Frog. ",
+      "id": "page_12_en_02",
+      "track": "page_12_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " asked Frog. "
+    },
+    {
+      "role": "didi",
+      "text": "“I went inside one—and through soil and a leaf!”",
+      "id": "page_12_en_03",
+      "track": "page_12_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "I went inside one—and through soil and a leaf!"
+    },
+    {
+      "role": "narrator",
+      "text": " said Didi. ",
+      "id": "page_12_en_04",
+      "track": "page_12_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " said Didi. "
+    },
+    {
+      "role": "didi",
+      "text": "“But I did not order the rain. Sunlight, air, and water made the journey happen.”",
+      "id": "page_12_en_05",
+      "track": "page_12_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "But I did not order the rain. Sunlight, air, and water made the journey happen."
+    },
+    {
+      "id": "fact_12_en",
+      "track": "fact_12_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "No. Returning to this very pond is a coincidence in our story. Real water may reach an ocean or distant lake, or remain in ice or underground. There is no fixed starting point, route, or homecoming time for every drop.",
+      "spokenText": "No. Returning to this very pond is a coincidence in our story. Real water may reach an ocean or distant lake, or remain in ice or underground. There is no fixed starting point, route, or homecoming time for every drop."
+    },
+    {
+      "role": "narrator",
+      "text": "阿跳在荷叶上画了一张旅行地图。",
+      "id": "page_13_zh_00",
+      "track": "page_13_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "阿跳在荷叶上画了一张旅行地图。"
+    },
+    {
+      "role": "frog",
+      "text": "“太阳提供能量，水可以变成水蒸气；空气冷却，小水滴聚成云；水滴长大，雨又落下来。”",
+      "id": "page_13_zh_01",
+      "track": "page_13_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "太阳提供能量，水可以变成水蒸气；空气冷却，小水滴聚成云；水滴长大，雨又落下来。"
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴补充：",
+      "id": "page_13_zh_02",
+      "track": "page_13_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴补充："
+    },
+    {
+      "role": "didi",
+      "text": "“别忘了泥土、树叶和河流！这张地图有好多条路，轮到你带我们走一遍啦。”",
+      "id": "page_13_zh_03",
+      "track": "page_13_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "别忘了泥土、树叶和河流！这张地图有好多条路，轮到你带我们走一遍啦。"
+    },
+    {
+      "id": "fact_13_zh",
+      "track": "fact_13_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "太阳的能量帮助水蒸发；重力让雨往下落、河水往低处流。风搬运空气中的水，植物也参与其中。下面的顺序游戏只练习一条常见路线，并不代表所有水滴都走这条路。",
+      "spokenText": "太阳的能量帮助水蒸发；重力让雨往下落、河水往低处流。风搬运空气中的水，植物也参与其中。下面的顺序游戏只练习一条常见路线，并不代表所有水滴都走这条路。"
+    },
+    {
+      "role": "narrator",
+      "text": "Frog made a travel map. ",
+      "id": "page_13_en_00",
+      "track": "page_13_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Frog made a travel map. "
+    },
+    {
+      "role": "frog",
+      "text": "“The Sun gives energy. Water can become vapor. Cooling air helps droplets form a cloud. Growing drops can fall as rain.”",
+      "id": "page_13_en_01",
+      "track": "page_13_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "The Sun gives energy. Water can become vapor. Cooling air helps droplets form a cloud. Growing drops can fall as rain."
+    },
+    {
+      "role": "narrator",
+      "text": " Didi added, ",
+      "id": "page_13_en_02",
+      "track": "page_13_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " Didi added, "
+    },
+    {
+      "role": "didi",
+      "text": "“Remember soil, leaves, and rivers! Our map has many routes. Now you can guide us.”",
+      "id": "page_13_en_03",
+      "track": "page_13_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Remember soil, leaves, and rivers! Our map has many routes. Now you can guide us."
+    },
+    {
+      "id": "fact_13_en",
+      "track": "fact_13_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Solar energy helps evaporation. Gravity makes rain fall and water flow downhill. Wind transports water in air, and plants take part. The sequence game below follows just one possible route, not the route of every drop.",
+      "spokenText": "Solar energy helps evaporation. Gravity makes rain fall and water flow downhill. Wind transports water in air, and plants take part. The sequence game below follows just one possible route, not the route of every drop."
+    },
+    {
+      "role": "narrator",
+      "text": "故事讲完了，阿跳还想亲眼看一次。",
+      "id": "page_14_zh_00",
+      "track": "page_14_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "故事讲完了，阿跳还想亲眼看一次。"
+    },
+    {
+      "role": "didi",
+      "text": "“不用飞到云里，”",
+      "id": "page_14_zh_01",
+      "track": "page_14_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "不用飞到云里，"
+    },
+    {
+      "role": "narrator",
+      "text": "滴滴说，",
+      "id": "page_14_zh_02",
+      "track": "page_14_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "滴滴说，"
+    },
+    {
+      "role": "didi",
+      "text": "“在桌上也能找到线索！”",
+      "id": "page_14_zh_03",
+      "track": "page_14_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "在桌上也能找到线索！"
+    },
+    {
+      "role": "narrator",
+      "text": "和大人一起，把冰水装进一个不易碎的杯子，再摆一杯常温水。先擦干杯外，等一会儿。哪只杯子外面更容易出现小水珠？",
+      "id": "page_14_zh_04",
+      "track": "page_14_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "和大人一起，把冰水装进一个不易碎的杯子，再摆一杯常温水。先擦干杯外，等一会儿。哪只杯子外面更容易出现小水珠？"
+    },
+    {
+      "id": "fact_14_zh",
+      "track": "fact_14_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "空气中的水蒸气遇到足够冷的杯壁，会凝结成水珠，并不是穿过杯壁漏出来的。干燥天气里，水珠可能不明显；可以多等一会儿，但“没看到”也要如实记录。只观察，不喝实验用水；冰块由大人放入。",
+      "spokenText": "空气中的水蒸气遇到足够冷的杯壁，会凝结成水珠，并不是穿过杯壁漏出来的。干燥天气里，水珠可能不明显；可以多等一会儿，但“没看到”也要如实记录。只观察，不喝实验用水；冰块由大人放入。"
+    },
+    {
+      "role": "narrator",
+      "text": "Frog wanted to see a clue for himself. ",
+      "id": "page_14_en_00",
+      "track": "page_14_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Frog wanted to see a clue for himself. "
+    },
+    {
+      "role": "didi",
+      "text": "“You need not fly into a cloud,”",
+      "id": "page_14_en_01",
+      "track": "page_14_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "You need not fly into a cloud,"
+    },
+    {
+      "role": "narrator",
+      "text": " said Didi. With a grown-up, put ice water in an unbreakable cup and place a room-temperature cup beside it. Dry both outsides. Wait and look. Which cup is more likely to grow beads outside?",
+      "id": "page_14_en_02",
+      "track": "page_14_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": " said Didi. With a grown-up, put ice water in an unbreakable cup and place a room-temperature cup beside it. Dry both outsides. Wait and look. Which cup is more likely to grow beads outside?"
+    },
+    {
+      "id": "fact_14_en",
+      "track": "fact_14_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Vapor in the surrounding air can condense on a cold enough cup. It has not leaked through the wall. In dry air, beads may be hard to see. Record what actually happens, even if nothing appears. A grown-up handles the ice; do not drink the experiment water.",
+      "spokenText": "Vapor in the surrounding air can condense on a cold enough cup. It has not leaked through the wall. In dry air, beads may be hard to see. Record what actually happens, even if nothing appears. A grown-up handles the ice; do not drink the experiment water."
+    },
+    {
+      "role": "narrator",
+      "text": "现在，轮到你给阿跳讲故事啦：滴滴为什么忽然看不见？它怎样加入一朵云？云里的小水珠怎样长成雨？你可以指着地图慢慢说，也可以挑一个最喜欢的词，讲给家人听。阿跳已经坐好，等你开讲了！",
+      "id": "page_15_zh_00",
+      "track": "page_15_zh",
+      "lang": "zh",
+      "kind": "page",
+      "spokenText": "现在，轮到你给阿跳讲故事啦：滴滴为什么忽然看不见？它怎样加入一朵云？云里的小水珠怎样长成雨？你可以指着地图慢慢说，也可以挑一个最喜欢的词，讲给家人听。阿跳已经坐好，等你开讲了！"
+    },
+    {
+      "id": "fact_15_zh",
+      "track": "fact_15_zh",
+      "lang": "zh",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "可以分两次读：第一次陪滴滴旅行，第二次打开“为什么”和观察问题。先听孩子自己的解释，再一起修正。能说出因果，比背出术语更重要。再次打开绘本会记住阅读位置，目录可以随时跳回最喜欢的一页。",
+      "spokenText": "可以分两次读：第一次陪滴滴旅行，第二次打开“为什么”和观察问题。先听孩子自己的解释，再一起修正。能说出因果，比背出术语更重要。再次打开绘本会记住阅读位置，目录可以随时跳回最喜欢的一页。"
+    },
+    {
+      "role": "narrator",
+      "text": "Now tell Frog the story! Why did Didi become invisible? How did it join a cloud? How did small droplets grow into rain? Point to the map, take your time, and choose a favorite word to explain. Frog is ready to listen!",
+      "id": "page_15_en_00",
+      "track": "page_15_en",
+      "lang": "en",
+      "kind": "page",
+      "spokenText": "Now tell Frog the story! Why did Didi become invisible? How did it join a cloud? How did small droplets grow into rain? Point to the map, take your time, and choose a favorite word to explain. Frog is ready to listen!"
+    },
+    {
+      "id": "fact_15_en",
+      "track": "fact_15_en",
+      "lang": "en",
+      "kind": "fact",
+      "role": "narrator",
+      "text": "Try two readings: follow the adventure first, then explore the questions. Listen to your child’s explanation before refining it together. Explaining a cause matters more than memorizing a term. The book saves your place, and the contents menu lets you revisit any page.",
+      "spokenText": "Try two readings: follow the adventure first, then explore the questions. Listen to your child’s explanation before refining it together. Explaining a cause matters more than memorizing a term. The book saves your place, and the contents menu lets you revisit any page."
+    },
+    {
+      "id": "word_cloud_zh",
+      "track": "word_cloud_zh",
+      "lang": "zh",
+      "kind": "word",
+      "role": "narrator",
+      "text": "云",
+      "spokenText": "云"
+    },
+    {
+      "id": "word_cloud_en",
+      "track": "word_cloud_en",
+      "lang": "en",
+      "kind": "word",
+      "role": "narrator",
+      "text": "Cloud",
+      "spokenText": "Cloud"
+    },
+    {
+      "id": "word_water_vapor_zh",
+      "track": "word_water_vapor_zh",
+      "lang": "zh",
+      "kind": "word",
+      "role": "narrator",
+      "text": "水蒸气",
+      "spokenText": "水蒸气"
+    },
+    {
+      "id": "word_water_vapor_en",
+      "track": "word_water_vapor_en",
+      "lang": "en",
+      "kind": "word",
+      "role": "narrator",
+      "text": "Water vapor",
+      "spokenText": "Water vapor"
+    },
+    {
+      "id": "word_evaporation_zh",
+      "track": "word_evaporation_zh",
+      "lang": "zh",
+      "kind": "word",
+      "role": "narrator",
+      "text": "蒸发",
+      "spokenText": "蒸发"
+    },
+    {
+      "id": "word_evaporation_en",
+      "track": "word_evaporation_en",
+      "lang": "en",
+      "kind": "word",
+      "role": "narrator",
+      "text": "Evaporation",
+      "spokenText": "Evaporation"
+    },
+    {
+      "id": "word_condensation_zh",
+      "track": "word_condensation_zh",
+      "lang": "zh",
+      "kind": "word",
+      "role": "narrator",
+      "text": "凝结",
+      "spokenText": "凝结"
+    },
+    {
+      "id": "word_condensation_en",
+      "track": "word_condensation_en",
+      "lang": "en",
+      "kind": "word",
+      "role": "narrator",
+      "text": "Condensation",
+      "spokenText": "Condensation"
+    },
+    {
+      "id": "word_rain_zh",
+      "track": "word_rain_zh",
+      "lang": "zh",
+      "kind": "word",
+      "role": "narrator",
+      "text": "雨",
+      "spokenText": "雨"
+    },
+    {
+      "id": "word_rain_en",
+      "track": "word_rain_en",
+      "lang": "en",
+      "kind": "word",
+      "role": "narrator",
+      "text": "Rain",
+      "spokenText": "Rain"
+    },
+    {
+      "id": "word_root_zh",
+      "track": "word_root_zh",
+      "lang": "zh",
+      "kind": "word",
+      "role": "narrator",
+      "text": "根",
+      "spokenText": "根"
+    },
+    {
+      "id": "word_root_en",
+      "track": "word_root_en",
+      "lang": "en",
+      "kind": "word",
+      "role": "narrator",
+      "text": "Root",
+      "spokenText": "Root"
+    },
+    {
+      "id": "word_transpiration_zh",
+      "track": "word_transpiration_zh",
+      "lang": "zh",
+      "kind": "word",
+      "role": "narrator",
+      "text": "蒸腾",
+      "spokenText": "蒸腾"
+    },
+    {
+      "id": "word_transpiration_en",
+      "track": "word_transpiration_en",
+      "lang": "en",
+      "kind": "word",
+      "role": "narrator",
+      "text": "Transpiration",
+      "spokenText": "Transpiration"
+    },
+    {
+      "id": "word_water_cycle_zh",
+      "track": "word_water_cycle_zh",
+      "lang": "zh",
+      "kind": "word",
+      "role": "narrator",
+      "text": "水循环",
+      "spokenText": "水循环"
+    },
+    {
+      "id": "word_water_cycle_en",
+      "track": "word_water_cycle_en",
+      "lang": "en",
+      "kind": "word",
+      "role": "narrator",
+      "text": "Water cycle",
+      "spokenText": "Water cycle"
+    }
+  ]
+}

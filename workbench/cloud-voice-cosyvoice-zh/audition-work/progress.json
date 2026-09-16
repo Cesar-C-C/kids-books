@@ -1,0 +1,58 @@
+{
+  "audition_narrator": {
+    "sha256": "b8459fedd5dc5371f5eaeaeef84c6bb28d34c5a2ce551e58e213a4fbbb9a386e",
+    "seconds": 6.36,
+    "generation_seconds": 15.59,
+    "role": "narrator",
+    "rms": 0.06767933815717697,
+    "peak_before_normalization": 0.45605161786079407
+  },
+  "audition_didi": {
+    "sha256": "b4ab9e384b9a48bc150dc18b517338a9c3eeebf4de17e29edce10031920fe7e0",
+    "seconds": 4.64,
+    "generation_seconds": 12.09,
+    "role": "didi",
+    "rms": 0.11268765479326248,
+    "peak_before_normalization": 0.7656645178794861
+  },
+  "audition_frog": {
+    "sha256": "c16ebbc395d6ca4ede87a4c3f2c4ce2e4396a2814ebed374efaa622351e976f3",
+    "seconds": 5.12,
+    "generation_seconds": 13.8,
+    "role": "frog",
+    "rms": 0.030629202723503113,
+    "peak_before_normalization": 0.37734007835388184
+  },
+  "audition_dust": {
+    "sha256": "f9ea7609ad10870e832d4e934d9f9d86f64a75dede90dbc5fce2940729f0c00b",
+    "seconds": 5.36,
+    "generation_seconds": 12.93,
+    "role": "dust",
+    "rms": 0.03250185772776604,
+    "peak_before_normalization": 0.241689994931221
+  },
+  "audition_neighbor": {
+    "sha256": "2ab3d42463837427f4be53d8f1630735e45316b5eb05f2971ce79a94f31b1e36",
+    "seconds": 4.96,
+    "generation_seconds": 13.9,
+    "role": "neighbor",
+    "rms": 0.08176456391811371,
+    "peak_before_normalization": 0.6670429706573486
+  },
+  "audition_willow": {
+    "sha256": "dc29e5cf3ba1548469bea4cd12fc538827a333a6356a4549b4153594ab40fb26",
+    "seconds": 6.36,
+    "generation_seconds": 17.3,
+    "role": "willow",
+    "rms": 0.04128030687570572,
+    "peak_before_normalization": 0.27539417147636414
+  },
+  "audition_worm": {
+    "sha256": "d6ddf1235f35fba3c559e2a04a7b2fc4805f9bbf311e05be67e2dbf9f92df8ef",
+    "seconds": 7.44,
+    "generation_seconds": 26.38,
+    "role": "worm",
+    "rms": 0.09223634004592896,
+    "peak_before_normalization": 0.5784782767295837
+  }
+}

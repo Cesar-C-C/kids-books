@@ -17,6 +17,7 @@ preview_pwa/
 
 # Dependencies (managed runtimes keep these outside the repo)
 node_modules/
+.learnings/
 
 # Python bytecode (qa_pwa.py imports tools/*.py, which writes these)
 __pycache__/
@@ -31,3 +32,6 @@ __pycache__/
 # `python gen_schoolbus_voiceover.py --run`, then `--mp3` to transcode).
 books/schoolbus/audio/narration/*.wav
 books/schoolbus/audio/narration/_pending.json
+
+# Isolated feature worktrees
+.worktrees/

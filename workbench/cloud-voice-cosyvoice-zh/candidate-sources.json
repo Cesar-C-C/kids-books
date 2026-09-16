@@ -1,0 +1,407 @@
+[
+  {
+    "speaker": "SSB0005",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0005/SSB00050353.wav",
+    "transcript": "深交所副总经理周明指出",
+    "bytes": 438052
+  },
+  {
+    "speaker": "SSB0009",
+    "age": "B",
+    "gender": "female",
+    "accent": "south",
+    "source_path": "test/wav/SSB0009/SSB00090030.wav",
+    "transcript": "碗碗香",
+    "bytes": 131792
+  },
+  {
+    "speaker": "SSB0011",
+    "age": "C",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0011/SSB00110049.wav",
+    "transcript": "搁浅",
+    "bytes": 132166
+  },
+  {
+    "speaker": "SSB0016",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0016/SSB00160056.wav",
+    "transcript": "见集",
+    "bytes": 123524
+  },
+  {
+    "speaker": "SSB0018",
+    "age": "B",
+    "gender": "female",
+    "accent": "south",
+    "source_path": "test/wav/SSB0018/SSB00180003.wav",
+    "transcript": "梁家仁出演的电视剧有什么",
+    "bytes": 290934
+  },
+  {
+    "speaker": "SSB0033",
+    "age": "B",
+    "gender": "female",
+    "accent": "south",
+    "source_path": "test/wav/SSB0033/SSB00330114.wav",
+    "transcript": "烤鸭",
+    "bytes": 113536
+  },
+  {
+    "speaker": "SSB0038",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0038/SSB00380055.wav",
+    "transcript": "艾伦外语",
+    "bytes": 141076
+  },
+  {
+    "speaker": "SSB0057",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0057/SSB00570040.wav",
+    "transcript": "负责开发数据库的康某",
+    "bytes": 253534
+  },
+  {
+    "speaker": "SSB0073",
+    "age": "B",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0073/SSB00730202.wav",
+    "transcript": "安徽六岁女童被伤案告破女童母亲及同居男子被拘",
+    "bytes": 520954
+  },
+  {
+    "speaker": "SSB0080",
+    "age": "B",
+    "gender": "female",
+    "accent": "south",
+    "source_path": "test/wav/SSB0080/SSB00800163.wav",
+    "transcript": "惊兆",
+    "bytes": 134362
+  },
+  {
+    "speaker": "SSB0112",
+    "age": "B",
+    "gender": "female",
+    "accent": "south",
+    "source_path": "test/wav/SSB0112/SSB01120005.wav",
+    "transcript": "来一首萍聚",
+    "bytes": 127094
+  },
+  {
+    "speaker": "SSB0122",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0122/SSB01220090.wav",
+    "transcript": "而戴尔公司的策略则是与合作伙伴紧密配合",
+    "bytes": 423410
+  },
+  {
+    "speaker": "SSB0133",
+    "age": "B",
+    "gender": "female",
+    "accent": "south",
+    "source_path": "test/wav/SSB0133/SSB01330039.wav",
+    "transcript": "张伟",
+    "bytes": 139576
+  },
+  {
+    "speaker": "SSB0139",
+    "age": "B",
+    "gender": "male",
+    "accent": "south",
+    "source_path": "test/wav/SSB0139/SSB01390019.wav",
+    "transcript": "黑色婚姻",
+    "bytes": 138902
+  },
+  {
+    "speaker": "SSB0145",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0145/SSB01450011.wav",
+    "transcript": "想听快歌",
+    "bytes": 137194
+  },
+  {
+    "speaker": "SSB0200",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0200/SSB02000173.wav",
+    "transcript": "热爱",
+    "bytes": 140634
+  },
+  {
+    "speaker": "SSB0241",
+    "age": "B",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0241/SSB02410008.wav",
+    "transcript": "悟空",
+    "bytes": 134902
+  },
+  {
+    "speaker": "SSB0261",
+    "age": "C",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0261/SSB02610109.wav",
+    "transcript": "爱囚",
+    "bytes": 118232
+  },
+  {
+    "speaker": "SSB0267",
+    "age": "C",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0267/SSB02670011.wav",
+    "transcript": "公共厕所",
+    "bytes": 135386
+  },
+  {
+    "speaker": "SSB0273",
+    "age": "B",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0273/SSB02730118.wav",
+    "transcript": "停车场",
+    "bytes": 108796
+  },
+  {
+    "speaker": "SSB0287",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0287/SSB02870128.wav",
+    "transcript": "放手了吗",
+    "bytes": 135984
+  },
+  {
+    "speaker": "SSB0288",
+    "age": "C",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0288/SSB02880036.wav",
+    "transcript": "天黑黑",
+    "bytes": 128110
+  },
+  {
+    "speaker": "SSB0309",
+    "age": "D",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0309/SSB03090282.wav",
+    "transcript": "包容",
+    "bytes": 106766
+  },
+  {
+    "speaker": "SSB0316",
+    "age": "B",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0316/SSB03160030.wav",
+    "transcript": "别说傻话了",
+    "bytes": 139408
+  },
+  {
+    "speaker": "SSB0323",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0323/SSB03230019.wav",
+    "transcript": "陈悦",
+    "bytes": 137814
+  },
+  {
+    "speaker": "SSB0338",
+    "age": "B",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0338/SSB03380013.wav",
+    "transcript": "来儿歌吗",
+    "bytes": 137182
+  },
+  {
+    "speaker": "SSB0354",
+    "age": "D",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0354/SSB03540005.wav",
+    "transcript": "音乐",
+    "bytes": 115586
+  },
+  {
+    "speaker": "SSB0375",
+    "age": "B",
+    "gender": "male",
+    "accent": "south",
+    "source_path": "test/wav/SSB0375/SSB03750104.wav",
+    "transcript": "天龙决",
+    "bytes": 138782
+  },
+  {
+    "speaker": "SSB0393",
+    "age": "A",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0393/SSB03930036.wav",
+    "transcript": "愚爱",
+    "bytes": 133792
+  },
+  {
+    "speaker": "SSB0407",
+    "age": "C",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0407/SSB04070024.wav",
+    "transcript": "成旺饭店",
+    "bytes": 135358
+  },
+  {
+    "speaker": "SSB0434",
+    "age": "D",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0434/SSB04340002.wav",
+    "transcript": "蔡依林",
+    "bytes": 94430
+  },
+  {
+    "speaker": "SSB0534",
+    "age": "C",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0534/SSB05340062.wav",
+    "transcript": "大男人",
+    "bytes": 120878
+  },
+  {
+    "speaker": "SSB0535",
+    "age": "B",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0535/SSB05350009.wav",
+    "transcript": "很多人料想到了中国女排恐怕赢不了美国队",
+    "bytes": 477780
+  },
+  {
+    "speaker": "SSB0539",
+    "age": "C",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0539/SSB05390012.wav",
+    "transcript": "书签儿",
+    "bytes": 118232
+  },
+  {
+    "speaker": "SSB0544",
+    "age": "B",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0544/SSB05440016.wav",
+    "transcript": "为爱",
+    "bytes": 110118
+  },
+  {
+    "speaker": "SSB0590",
+    "age": "C",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0590/SSB05900043.wav",
+    "transcript": "协会建议化学制药产业应从国家医药工业发展战略着眼",
+    "bytes": 628900
+  },
+  {
+    "speaker": "SSB0603",
+    "age": "B",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0603/SSB06030028.wav",
+    "transcript": "不想",
+    "bytes": 105002
+  },
+  {
+    "speaker": "SSB0606",
+    "age": "D",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0606/SSB06060074.wav",
+    "transcript": "母亲",
+    "bytes": 124406
+  },
+  {
+    "speaker": "SSB0609",
+    "age": "C",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0609/SSB06090081.wav",
+    "transcript": "毫米",
+    "bytes": 131374
+  },
+  {
+    "speaker": "SSB0623",
+    "age": "B",
+    "gender": "male",
+    "accent": "south",
+    "source_path": "test/wav/SSB0623/SSB06230403.wav",
+    "transcript": "一定有你愿意为之牺牲的事",
+    "bytes": 327798
+  },
+  {
+    "speaker": "SSB0629",
+    "age": "B",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0629/SSB06290388.wav",
+    "transcript": "除了苹果上周公布的选定合作伙伴儿",
+    "bytes": 465474
+  },
+  {
+    "speaker": "SSB0631",
+    "age": "B",
+    "gender": "male",
+    "accent": "south",
+    "source_path": "test/wav/SSB0631/SSB06310207.wav",
+    "transcript": "将会使公司有较多灵活性及时作出投资决定",
+    "bytes": 674948
+  },
+  {
+    "speaker": "SSB0710",
+    "age": "C",
+    "gender": "male",
+    "accent": "north",
+    "source_path": "test/wav/SSB0710/SSB07100296.wav",
+    "transcript": "九十三",
+    "bytes": 137576
+  },
+  {
+    "speaker": "SSB0736",
+    "age": "B",
+    "gender": "male",
+    "accent": "south",
+    "source_path": "test/wav/SSB0736/SSB07360001.wav",
+    "transcript": "北京时间八月二十八日",
+    "bytes": 204918
+  },
+  {
+    "speaker": "SSB0737",
+    "age": "D",
+    "gender": "female",
+    "accent": "north",
+    "source_path": "test/wav/SSB0737/SSB07370057.wav",
+    "transcript": "儿歌有",
+    "bytes": 134940
+  }
+]
