@@ -52,8 +52,20 @@
     return true;
   }
 
-  function addDiagramLabel(doc, svg, text, x, y, targetX, targetY) {
-    const group = makeSvgElement(doc, 'g', { class: 'myopia-eye-label' });
+  function mapContainedPoint(point, sourceSize, frameSize = { width: 1000, height: 667 }) {
+    const scale = Math.min(frameSize.width / sourceSize.width, frameSize.height / sourceSize.height);
+    const offsetX = (frameSize.width - sourceSize.width * scale) / 2;
+    const offsetY = (frameSize.height - sourceSize.height * scale) / 2;
+    return {
+      x: offsetX + point.x * scale,
+      y: offsetY + point.y * scale
+    };
+  }
+
+  function addDiagramLabel(doc, svg, name, text, label, target) {
+    const group = makeSvgElement(doc, 'g', { class: 'myopia-eye-label', 'data-label': name });
+    const { x, y } = label;
+    const { x: targetX, y: targetY } = target;
     group.appendChild(makeSvgElement(doc, 'line', { x1: x, y1: y + 7, x2: targetX, y2: targetY }));
     group.appendChild(makeSvgElement(doc, 'text', { x, y }, text));
     svg.appendChild(group);
@@ -69,11 +81,23 @@
       'aria-label': '眼睛聚焦原理标注 / Eye focus diagram labels',
       preserveAspectRatio: 'xMidYMid meet'
     });
-    addDiagramLabel(doc, svg, '角膜 / Cornea', 270, 164, 392, 252);
-    addDiagramLabel(doc, svg, '晶状体 / Lens', 438, 126, 486, 252);
-    addDiagramLabel(doc, svg, '视网膜 / Retina', 784, 128, 844, 248);
-    addDiagramLabel(doc, svg, '聚焦 / Focus', metadata.focusX - 58, metadata.focusY + 100,
-      metadata.focusX, metadata.focusY);
+    const labelText = {
+      cornea: '角膜 / Cornea',
+      lens: '晶状体 / Lens',
+      retina: '视网膜 / Retina',
+      focus: '聚焦 / Focus'
+    };
+    for (const name of ['cornea', 'lens', 'retina', 'focus']) {
+      const spec = metadata.labels[name];
+      addDiagramLabel(
+        doc,
+        svg,
+        name,
+        labelText[name],
+        mapContainedPoint(spec.label, metadata.sourceSize),
+        mapContainedPoint(spec.target, metadata.sourceSize)
+      );
+    }
     art.appendChild(svg);
     art.appendChild(makeElement(doc, 'p', { className: 'myopia-scale-note' },
       '原理示意，不按真实比例 / Diagram only — not to scale'));

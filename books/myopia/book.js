@@ -39,19 +39,46 @@ window.PAGES = [
     img: 'assets/04_light-path_v1.webp',
     en: 'Light enters the eye through the cornea and lens. This picture is a diagram, not a real-size eye.',
     zh: '光线通过角膜和晶状体进入眼睛。这张图是原理示意，不是按真实大小画的眼睛。',
-    editableLayer: { type: 'eye-diagram-labels', focusX: 640, focusY: 355 }
+    editableLayer: {
+      type: 'eye-diagram-labels',
+      sourceSize: { width: 1216, height: 832 },
+      labels: {
+        cornea: { label: { x: 300, y: 180 }, target: { x: 448, y: 386 } },
+        lens: { label: { x: 500, y: 150 }, target: { x: 557, y: 386 } },
+        retina: { label: { x: 980, y: 150 }, target: { x: 932, y: 386 } },
+        focus: { label: { x: 730, y: 570 }, target: { x: 780, y: 386 } }
+      }
+    }
   },
   {
     img: 'assets/05_retina-focus_v1.webp',
     en: 'In this normal-focus diagram, light comes together on the retina at the back of the eye.',
     zh: '在这张正常聚焦原理图里，光线在眼睛后面的视网膜上会合。',
-    editableLayer: { type: 'eye-diagram-labels', focusX: 760, focusY: 386 }
+    editableLayer: {
+      type: 'eye-diagram-labels',
+      sourceSize: { width: 1216, height: 832 },
+      labels: {
+        cornea: { label: { x: 300, y: 180 }, target: { x: 448, y: 386 } },
+        lens: { label: { x: 500, y: 150 }, target: { x: 557, y: 386 } },
+        retina: { label: { x: 990, y: 150 }, target: { x: 935, y: 386 } },
+        focus: { label: { x: 850, y: 585 }, target: { x: 935, y: 386 } }
+      }
+    }
   },
   {
     img: 'assets/06_myopic-focus_v1.webp',
     en: 'With myopia, an eye can be longer, so light focuses in front of the retina and far things may look blurry.',
     zh: '近视时，眼球可能更长，光线会聚焦在视网膜前方，远处的东西就可能看起来模糊。',
-    editableLayer: { type: 'eye-diagram-labels', focusX: 640, focusY: 386 }
+    editableLayer: {
+      type: 'eye-diagram-labels',
+      sourceSize: { width: 1216, height: 832 },
+      labels: {
+        cornea: { label: { x: 250, y: 160 }, target: { x: 330, y: 386 } },
+        lens: { label: { x: 420, y: 130 }, target: { x: 458, y: 386 } },
+        retina: { label: { x: 930, y: 140 }, target: { x: 1056, y: 386 } },
+        focus: { label: { x: 730, y: 570 }, target: { x: 798, y: 386 } }
+      }
+    }
   },
   {
     img: 'assets/07_glasses-help_v1.webp',

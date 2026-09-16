@@ -34,6 +34,11 @@ assert.deepEqual(
     [6, 'eye-diagram-labels']
   ]
 );
+for (const index of [4, 5, 6]) {
+  assert.deepEqual(PAGES[index].editableLayer.sourceSize, { width: 1216, height: 832 });
+  assert.deepEqual(Object.keys(PAGES[index].editableLayer.labels), ['cornea', 'lens', 'retina', 'focus']);
+}
+assert.notDeepEqual(PAGES[4].editableLayer.labels, PAGES[6].editableLayer.labels);
 assert.equal(PAGES[13].glossary.length, 6);
 for (const [i, page] of PAGES.entries()) {
   assert.ok(page.en && page.zh, `page ${i} bilingual copy`);
