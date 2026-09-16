@@ -73,8 +73,15 @@
      ============================================================ */
   function registerSW() {
     if (!supported) return;
+    /* 新 worker 可能在本页脚本加载前就已经进入 waiting。只监听 updatefound
+       会漏掉这种状态：页面拿到新书架，旧 worker 却继续回旧书单，新书就会
+       永久停在“读取中…”。控制器切换后必须重查一次状态。 */
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      loadStatus();
+    });
     navigator.serviceWorker.register(ROOT + '/sw.js', { scope: ROOT + '/' }).then(function (r) {
       reg = r;
+      if (r.waiting) r.waiting.postMessage({ type: 'KB_SKIP_WAITING' });
       loadStatus();               // 缓存状态与界面无关，尽早问一次，点开菜单就是最新的
       /* 有新版本：让它立刻接管，家长不需要做任何动作 */
       r.addEventListener('updatefound', function () {

@@ -1,0 +1,429 @@
+{
+  "method": "gender-and-role constrained acoustic ranking using pitch, spectral and MFCC statistics",
+  "english_crops": {
+    "narrator": [
+      2.04,
+      7.34
+    ],
+    "didi": [
+      0.0,
+      6.78
+    ],
+    "frog": [
+      1.01,
+      9.44
+    ],
+    "dust": [
+      2.87,
+      8.89
+    ],
+    "neighbor": [
+      0.0,
+      12.0
+    ],
+    "willow": [
+      0.0,
+      9.02
+    ],
+    "worm": [
+      1.83,
+      13.83
+    ]
+  },
+  "selection": {
+    "narrator": {
+      "speaker": "SSB0005",
+      "score": 0.7985,
+      "age": "B",
+      "gender": "female",
+      "accent": "north",
+      "duration": 4.273,
+      "transcript": "深交所副总经理周明指出"
+    },
+    "didi": {
+      "speaker": "SSB0057",
+      "score": 0.8166,
+      "age": "B",
+      "gender": "female",
+      "accent": "north",
+      "duration": 2.239,
+      "transcript": "负责开发数据库的康某"
+    },
+    "frog": {
+      "speaker": "SSB0623",
+      "score": 1.1652,
+      "age": "B",
+      "gender": "male",
+      "accent": "south",
+      "duration": 3.376,
+      "transcript": "一定有你愿意为之牺牲的事"
+    },
+    "dust": {
+      "speaker": "SSB0033",
+      "score": 1.0376,
+      "age": "B",
+      "gender": "female",
+      "accent": "south",
+      "duration": 0.825,
+      "transcript": "烤鸭"
+    },
+    "neighbor": {
+      "speaker": "SSB0122",
+      "score": 1.0473,
+      "age": "B",
+      "gender": "female",
+      "accent": "north",
+      "duration": 4.102,
+      "transcript": "而戴尔公司的策略则是与合作伙伴紧密配合"
+    },
+    "willow": {
+      "speaker": "SSB0534",
+      "score": 1.4032,
+      "age": "C",
+      "gender": "female",
+      "accent": "north",
+      "duration": 0.857,
+      "transcript": "大男人"
+    },
+    "worm": {
+      "speaker": "SSB0590",
+      "score": 0.9932,
+      "age": "C",
+      "gender": "male",
+      "accent": "north",
+      "duration": 6.624,
+      "transcript": "协会建议化学制药产业应从国家医药工业发展战略着眼"
+    }
+  },
+  "top_five_per_role": {
+    "narrator": [
+      {
+        "speaker": "SSB0005",
+        "score": 0.7985,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 4.273,
+        "transcript": "深交所副总经理周明指出"
+      },
+      {
+        "speaker": "SSB0122",
+        "score": 0.8232,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 4.102,
+        "transcript": "而戴尔公司的策略则是与合作伙伴紧密配合"
+      },
+      {
+        "speaker": "SSB0057",
+        "score": 0.9211,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 2.239,
+        "transcript": "负责开发数据库的康某"
+      },
+      {
+        "speaker": "SSB0287",
+        "score": 1.1538,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 0.931,
+        "transcript": "放手了吗"
+      },
+      {
+        "speaker": "SSB0145",
+        "score": 1.3288,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 1.146,
+        "transcript": "想听快歌"
+      }
+    ],
+    "didi": [
+      {
+        "speaker": "SSB0057",
+        "score": 0.8166,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 2.239,
+        "transcript": "负责开发数据库的康某"
+      },
+      {
+        "speaker": "SSB0005",
+        "score": 1.0025,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 4.273,
+        "transcript": "深交所副总经理周明指出"
+      },
+      {
+        "speaker": "SSB0122",
+        "score": 1.0394,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 4.102,
+        "transcript": "而戴尔公司的策略则是与合作伙伴紧密配合"
+      },
+      {
+        "speaker": "SSB0145",
+        "score": 1.1193,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 1.146,
+        "transcript": "想听快歌"
+      },
+      {
+        "speaker": "SSB0018",
+        "score": 1.2544,
+        "age": "B",
+        "gender": "female",
+        "accent": "south",
+        "duration": 3.092,
+        "transcript": "梁家仁出演的电视剧有什么"
+      }
+    ],
+    "frog": [
+      {
+        "speaker": "SSB0623",
+        "score": 1.1652,
+        "age": "B",
+        "gender": "male",
+        "accent": "south",
+        "duration": 3.376,
+        "transcript": "一定有你愿意为之牺牲的事"
+      },
+      {
+        "speaker": "SSB0316",
+        "score": 1.2272,
+        "age": "B",
+        "gender": "male",
+        "accent": "north",
+        "duration": 1.089,
+        "transcript": "别说傻话了"
+      },
+      {
+        "speaker": "SSB0535",
+        "score": 1.24,
+        "age": "B",
+        "gender": "male",
+        "accent": "north",
+        "duration": 4.663,
+        "transcript": "很多人料想到了中国女排恐怕赢不了美国队"
+      },
+      {
+        "speaker": "SSB0629",
+        "score": 1.3115,
+        "age": "B",
+        "gender": "male",
+        "accent": "north",
+        "duration": 4.475,
+        "transcript": "除了苹果上周公布的选定合作伙伴儿"
+      },
+      {
+        "speaker": "SSB0631",
+        "score": 1.3691,
+        "age": "B",
+        "gender": "male",
+        "accent": "south",
+        "duration": 6.647,
+        "transcript": "将会使公司有较多灵活性及时作出投资决定"
+      }
+    ],
+    "dust": [
+      {
+        "speaker": "SSB0033",
+        "score": 1.0376,
+        "age": "B",
+        "gender": "female",
+        "accent": "south",
+        "duration": 0.825,
+        "transcript": "烤鸭"
+      },
+      {
+        "speaker": "SSB0018",
+        "score": 1.0802,
+        "age": "B",
+        "gender": "female",
+        "accent": "south",
+        "duration": 3.092,
+        "transcript": "梁家仁出演的电视剧有什么"
+      },
+      {
+        "speaker": "SSB0038",
+        "score": 1.09,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 0.964,
+        "transcript": "艾伦外语"
+      },
+      {
+        "speaker": "SSB0145",
+        "score": 1.1715,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 1.146,
+        "transcript": "想听快歌"
+      },
+      {
+        "speaker": "SSB0005",
+        "score": 1.2359,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 4.273,
+        "transcript": "深交所副总经理周明指出"
+      }
+    ],
+    "neighbor": [
+      {
+        "speaker": "SSB0057",
+        "score": 0.9762,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 2.239,
+        "transcript": "负责开发数据库的康某"
+      },
+      {
+        "speaker": "SSB0122",
+        "score": 1.0473,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 4.102,
+        "transcript": "而戴尔公司的策略则是与合作伙伴紧密配合"
+      },
+      {
+        "speaker": "SSB0005",
+        "score": 1.0477,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 4.273,
+        "transcript": "深交所副总经理周明指出"
+      },
+      {
+        "speaker": "SSB0287",
+        "score": 1.2665,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 0.931,
+        "transcript": "放手了吗"
+      },
+      {
+        "speaker": "SSB0145",
+        "score": 1.4667,
+        "age": "B",
+        "gender": "female",
+        "accent": "north",
+        "duration": 1.146,
+        "transcript": "想听快歌"
+      }
+    ],
+    "willow": [
+      {
+        "speaker": "SSB0534",
+        "score": 1.4032,
+        "age": "C",
+        "gender": "female",
+        "accent": "north",
+        "duration": 0.857,
+        "transcript": "大男人"
+      },
+      {
+        "speaker": "SSB0737",
+        "score": 1.604,
+        "age": "D",
+        "gender": "female",
+        "accent": "north",
+        "duration": 0.992,
+        "transcript": "儿歌有"
+      },
+      {
+        "speaker": "SSB0539",
+        "score": 1.7459,
+        "age": "C",
+        "gender": "female",
+        "accent": "north",
+        "duration": 0.842,
+        "transcript": "书签儿"
+      },
+      {
+        "speaker": "SSB0606",
+        "score": 1.8162,
+        "age": "D",
+        "gender": "female",
+        "accent": "north",
+        "duration": 0.873,
+        "transcript": "母亲"
+      },
+      {
+        "speaker": "SSB0011",
+        "score": 1.8503,
+        "age": "C",
+        "gender": "female",
+        "accent": "north",
+        "duration": 0.897,
+        "transcript": "搁浅"
+      }
+    ],
+    "worm": [
+      {
+        "speaker": "SSB0590",
+        "score": 0.9932,
+        "age": "C",
+        "gender": "male",
+        "accent": "north",
+        "duration": 6.624,
+        "transcript": "协会建议化学制药产业应从国家医药工业发展战略着眼"
+      },
+      {
+        "speaker": "SSB0434",
+        "score": 1.2261,
+        "age": "D",
+        "gender": "male",
+        "accent": "north",
+        "duration": 0.833,
+        "transcript": "蔡依林"
+      },
+      {
+        "speaker": "SSB0261",
+        "score": 1.5111,
+        "age": "C",
+        "gender": "male",
+        "accent": "north",
+        "duration": 0.796,
+        "transcript": "爱囚"
+      },
+      {
+        "speaker": "SSB0710",
+        "score": 1.5914,
+        "age": "C",
+        "gender": "male",
+        "accent": "north",
+        "duration": 0.987,
+        "transcript": "九十三"
+      },
+      {
+        "speaker": "SSB0609",
+        "score": 1.7134,
+        "age": "C",
+        "gender": "male",
+        "accent": "north",
+        "duration": 0.749,
+        "transcript": "毫米"
+      }
+    ]
+  }
+}

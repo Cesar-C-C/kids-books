@@ -1,0 +1,83 @@
+{
+  "dataset": "AISHELL/AISHELL-3",
+  "revision": "f20d5db4a31fe779ef07bb1af4ea92da5c786622",
+  "license": "Apache-2.0",
+  "cast": {
+    "narrator": {
+      "speaker": "zero_shot_prompt",
+      "reference": "C:/ProgramData/FunCosyVoice3/CosyVoice/asset/zero_shot_prompt.wav",
+      "transcript": "希望你以后能够做的比我还好呦。",
+      "source_path": "CosyVoice/asset/zero_shot_prompt.wav",
+      "provider": "Fun-CosyVoice3 bundled asset",
+      "gender": "female",
+      "bytes": 334138
+    },
+    "didi": {
+      "speaker": "SSB0057",
+      "reference": "references/mandarin-selected/didi__SSB0057.wav",
+      "transcript": "负责开发数据库的康某",
+      "source_path": "test/wav/SSB0057/SSB00570040.wav",
+      "age": "B",
+      "gender": "female",
+      "accent": "north",
+      "bytes": 253534
+    },
+    "frog": {
+      "speaker": "SSB0623",
+      "reference": "references/mandarin-selected/frog__SSB0623.wav",
+      "transcript": "一定有你愿意为之牺牲的事",
+      "source_path": "test/wav/SSB0623/SSB06230403.wav",
+      "age": "B",
+      "gender": "male",
+      "accent": "south",
+      "bytes": 327798
+    },
+    "dust": {
+      "speaker": "SSB0018",
+      "reference": "references/mandarin-selected/dust__SSB0018.wav",
+      "transcript": "梁家仁出演的电视剧有什么",
+      "source_path": "test/wav/SSB0018/SSB00180003.wav",
+      "age": "B",
+      "gender": "female",
+      "accent": "south",
+      "bytes": 290934
+    },
+    "neighbor": {
+      "speaker": "SSB0122",
+      "reference": "references/mandarin-selected/neighbor__SSB0122.wav",
+      "transcript": "而戴尔公司的策略则是与合作伙伴紧密配合",
+      "source_path": "test/wav/SSB0122/SSB01220090.wav",
+      "age": "B",
+      "gender": "female",
+      "accent": "north",
+      "bytes": 423410
+    },
+    "willow": {
+      "speaker": "SSB0534",
+      "reference": "references/mandarin-selected/willow__SSB0534_combined.wav",
+      "transcript": "至上励合，你没搞错吧，干衣机，林俊杰，想和你。",
+      "source_path": "test/wav/SSB0534/SSB05340090.wav",
+      "age": "C",
+      "gender": "female",
+      "accent": "north",
+      "bytes": 743340,
+      "source_paths": [
+        "test/wav/SSB0534/SSB05340090.wav",
+        "test/wav/SSB0534/SSB05340348.wav",
+        "test/wav/SSB0534/SSB05340225.wav",
+        "test/wav/SSB0534/SSB05340327.wav",
+        "test/wav/SSB0534/SSB05340274.wav"
+      ]
+    },
+    "worm": {
+      "speaker": "SSB0535",
+      "reference": "references/mandarin-candidates/SSB0535.wav",
+      "transcript": "很多人料想到了中国女排恐怕赢不了美国队",
+      "source_path": "test/wav/SSB0535/SSB05350009.wav",
+      "age": "B",
+      "gender": "male",
+      "accent": "north",
+      "bytes": 477780
+    }
+  }
+}

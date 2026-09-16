@@ -17,6 +17,7 @@ preview_pwa/
 
 # Dependencies (managed runtimes keep these outside the repo)
 node_modules/
+.learnings/
 
 # Python bytecode (qa_pwa.py imports tools/*.py, which writes these)
 __pycache__/

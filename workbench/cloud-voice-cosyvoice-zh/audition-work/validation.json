@@ -1,0 +1,37 @@
+{
+  "audition_narrator": {
+    "seconds": 6.64,
+    "bytes": 49104,
+    "segments": 1
+  },
+  "audition_didi": {
+    "seconds": 4.92,
+    "bytes": 33336,
+    "segments": 1
+  },
+  "audition_frog": {
+    "seconds": 5.4,
+    "bytes": 43104,
+    "segments": 1
+  },
+  "audition_dust": {
+    "seconds": 5.64,
+    "bytes": 42192,
+    "segments": 1
+  },
+  "audition_neighbor": {
+    "seconds": 5.24,
+    "bytes": 36864,
+    "segments": 1
+  },
+  "audition_willow": {
+    "seconds": 6.64,
+    "bytes": 47040,
+    "segments": 1
+  },
+  "audition_worm": {
+    "seconds": 7.72,
+    "bytes": 52968,
+    "segments": 1
+  }
+}
