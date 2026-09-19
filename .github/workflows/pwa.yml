@@ -116,6 +116,12 @@ jobs:
       - name: Offline manifest matches runtime refs
         run: python tools/qa_offline_manifest.py
 
+      - name: Scene-based Moon contracts (audio may be pending)
+        run: |
+          node tests/qa_moon_model.cjs
+          node tests/qa_moon_geometry.cjs
+          node --test tests/pwa_upgrade.test.mjs tests/pwa_offline_contract.test.mjs
+
       # 137 张 r2 插画的尺寸/体积契约，此前完全不在 CI 里
       - name: R2 illustration contract
         run: python qa_library_r2_assets.py
@@ -142,6 +148,16 @@ jobs:
 
       - name: Offline smoke test (airplane)
         run: node tools/qa_pwa_offline.mjs --book=airplane --out=preview_pwa
+
+      - name: Moon local visual offline and content contracts (not audio acceptance)
+        env:
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/.qa-deps/node_modules/playwright
+        run: |
+          node tests/qa_moon_browser.cjs
+          node tests/qa_moon_interactions.cjs
+          node tests/qa_moon_content.cjs
+          node tests/qa_moon_offline.cjs
+          node tests/qa_moon_audio_offline.cjs
 
       # 缓存命中率：离线包下完后，强制 KBCDN 走 CDN 优先（国内真实环境），
       # 断言插图仍然 100% 命中 SW 缓存、一条跨境请求都不发。

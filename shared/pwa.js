@@ -213,7 +213,7 @@
     'stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>';
 
   function buildLauncher() {
-    var shelf = document.querySelector('.shelf');
+    var shelf = document.querySelector('.shelf') || document.querySelector('[data-offline-book]');
     if (!shelf || document.getElementById('kbFab')) return;
 
     var fab = document.createElement('button');
@@ -317,7 +317,7 @@
     if (ui.refreshBtn) ui.refreshBtn.addEventListener('click', forceRefresh);
 
     document.getElementById('offlineAll').addEventListener('click', function () {
-      var todo = panelState.books.filter(function (b) { return !isDone(b.id); });
+      var todo = panelState.books.filter(function (b) { return !isStored(b.id); });
       if (!todo.length) return;
       downloadQueue(todo.map(function (b) { return b.id; }));
     });
@@ -489,6 +489,11 @@
         en: (en && en.textContent.trim()) || ''
       });
     }
+    // On a custom reader, offer its own offline package without duplicating a shelf.
+    if (!out.length) {
+      var current = location.pathname.match(/\/books\/([^/]+)\/(?:index\.html)?$/);
+      if (current) out.push({ id: current[1], name: document.title, en: '' });
+    }
     return out;
   }
 
@@ -535,7 +540,7 @@
       return;
     }
     if (panelState.busy) return;      // 正在下载别的：不排队，避免误触
-    if (isDone(id)) call({ type: 'KB_DELETE', bookId: id }, function (data) {
+    if (isStored(id)) call({ type: 'KB_DELETE', bookId: id }, function (data) {
       if (data && data.type === 'KB_STATUS') { panelState.sizes = data.books; refreshStatus(); }
     });
     else downloadQueue([id]);
@@ -545,6 +550,11 @@
     var st = panelState.sizes && panelState.sizes[id];
     /* 必须要求 total > 0：否则「状态还没拿到」会被算成 0>=0 = 已下载，
        整列按钮全变成「删除」，家长会以为早就存好了 */
+    return !!(st && st.complete !== false && isStored(id));
+  }
+
+  function isStored(id) {
+    var st = panelState.sizes && panelState.sizes[id];
     return !!(st && st.total > 0 && st.cached >= st.total);
   }
 
@@ -567,10 +577,10 @@
         if (bar) bar.style.width = '0%';
         return;
       }
-      var done = st.total > 0 && st.cached >= st.total;
+      var done = isDone(id);
       if (row) row.classList.toggle('done', done);
-      btn.className = done ? '' : 'go';
-      btn.textContent = done ? '删除' : '下载';
+      btn.className = isStored(id) ? '' : 'go';
+      btn.textContent = isStored(id) ? '删除' : (st.complete === false ? '下载图文' : '下载');
       btn.disabled = false;
       if (bar) bar.style.width = done ? '100%' : '0%';
     } else if (mode === 'busy') {
@@ -584,22 +594,26 @@
 
   function refreshStatus() {
     var s = panelState.sizes;
-    var cachedBooks = 0, bytes = 0;
+    var cachedBooks = 0, visualBooks = 0, bytes = 0;
     panelState.books.forEach(function (b) {
       /* 排队中/下载中的行由进度回调负责刷新，别被这里覆盖掉 */
       if (panelState.pending[b.id]) return;
       var st = s && s[b.id];
       if (!st) { setRow(b.id, 'idle', 0); return; }
-      var done = st.total > 0 && st.cached >= st.total;
+      var done = isDone(b.id);
+      if (!done && isStored(b.id)) visualBooks++;
       if (done) { cachedBooks++; bytes += st.bytes; }
       setRow(b.id, 'idle', done ? 100 : 0,
-        done ? '已存好 · ' + human(st.bytes) : human(st.bytes) + ' · 未下载');
+        st.complete === false
+          ? (isStored(b.id) ? '图文互动已存 · ' : '图文互动可下载 · ') + '配音待交付 ' + st.missingAudio + '/' + st.audioExpected
+          : done ? '已存好 · ' + human(st.bytes) : human(st.bytes) + ' · 未下载');
     });
     var note = document.getElementById('offlineNote');
     if (note) {
       note.dataset.base = cachedBooks
         ? '已存好 ' + cachedBooks + ' 本（约 ' + human(bytes) + '），断网也能看'
-        : '还没有下载任何绘本';
+        : '还没有完整下载的绘本';
+      if (visualBooks) note.dataset.base += ' · 另有 ' + visualBooks + ' 本图文互动已存，配音待交付';
       note.textContent = note.dataset.base;
     }
     updateFab(cachedBooks);
@@ -648,7 +662,7 @@
         panelState.pct = pct;
         setRow(id, 'busy', pct, '下载中 ' + pct + '%　' + human(msg.bytes) + ' / ' + human(msg.totalBytes));
         updateFab();
-      } else if (msg.state === 'done') {
+      } else if (msg.state === 'done' || msg.state === 'partial') {
         delete panelState.pending[id];
         panelState.sizes = msg.books || panelState.sizes;
         panelState.busy = null;

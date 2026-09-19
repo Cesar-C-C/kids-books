@@ -35,6 +35,7 @@ import re
 import sys
 
 from PIL import Image
+from story_resources import discover as story_resources
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BOOKS = os.path.join(REPO, "books")
@@ -57,6 +58,9 @@ def cover_rel(book_id):
     与 qa_library_r2_assets.py 的提取口径保持一致。取不到再退而求其次，
     在 book.js 里找第一个文件名带 cover 的 webp。
     """
+    structured = story_resources(REPO, book_id)
+    if structured:
+        return structured['cover']
     p = os.path.join(BOOKS, book_id, "book.js")
     if not os.path.exists(p):
         return None
@@ -75,7 +79,7 @@ def book_ids():
     return sorted(
         d for d in os.listdir(BOOKS)
         if os.path.isdir(os.path.join(BOOKS, d))
-        and os.path.exists(os.path.join(BOOKS, d, "book.js"))
+        and any(os.path.exists(os.path.join(BOOKS, d, fn)) for fn in ('book.js', 'story.json'))
     )
 
 
@@ -112,6 +116,7 @@ def render(src_path):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument('--book', help='Only generate/check one book; leave unrelated derivatives untouched')
     ap.add_argument("--check", action="store_true",
                     help="只校验派生图是否存在且尺寸正确，不写文件")
     ap.add_argument("--print", dest="show", action="store_true",
@@ -119,6 +124,10 @@ def main():
     args = ap.parse_args()
 
     items = discover()
+    if args.book:
+        items = [item for item in items if item[0] == args.book]
+        if not items:
+            ap.error('Unknown book or missing cover: ' + args.book)
     missing_cover, missing_card, bad_size = [], [], []
     written, unchanged = 0, 0
     total_orig, total_card = 0, 0

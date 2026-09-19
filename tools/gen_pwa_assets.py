@@ -26,6 +26,7 @@ import os
 import re
 
 import gen_pwa_covers
+from story_resources import discover as story_resources
 from pwa_fingerprint import content_sha256
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -193,10 +194,13 @@ def main():
         bdir = os.path.join(REPO, "books", name)
         if not os.path.isdir(bdir):
             continue
-        imgs, miss = referenced_assets(name)
+        structured = story_resources(REPO, name)
+        imgs, miss = (structured['images'], []) if structured else referenced_assets(name)
         if miss:
             missing_assets.append((name, miss))
-        files = imgs + book_audio(name, audio_ver)
+        files = imgs + (structured['audio'] + structured['data'] if structured else book_audio(name, audio_ver))
+        if structured:
+            shell.extend(structured['data'])
         # Include per-book readers/styles as well as the shared-reader contract.
         entry_files = {"index.html", "book.js", "overlays.js"}
         entry_files.update(fn for fn in os.listdir(bdir) if fn.endswith((".js", ".css")))
@@ -209,6 +213,10 @@ def main():
             "files": sorted(files),
             "bytes": sum(size_of(f) for f in files),
         }
+        if structured:
+            books[name].update(audioExpected=structured['audioExpected'],
+                               missingAudio=structured['missingAudio'],
+                               complete=not structured['missingAudio'])
 
     shell = sorted(set(shell))
     total = sum(size_of(f) for f in shell) + sum(b["bytes"] for b in books.values())
@@ -241,6 +249,8 @@ def main():
     print("shell   = %d files, %.0f KB" % (len(shell), sum(size_of(f) for f in shell) / 1024))
     for bid, b in books.items():
         print("  %-11s %3d files  %6.1f MB" % (bid, len(b["files"]), b["bytes"] / 1048576))
+        if b.get('missingAudio'):
+            print('    PENDING audio: %d/%d missing; visual-only package' % (len(b['missingAudio']), b['audioExpected']))
     print("total   = %.1f MB" % (total / 1048576))
     if missing:
         print("WARN 清单里缺失（已跳过）: %s" % ", ".join(missing))
