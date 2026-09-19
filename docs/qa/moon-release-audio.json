@@ -1,0 +1,253 @@
+{
+  "bookId": "moon",
+  "scriptVersion": "moon-story-v1",
+  "audioVersion": 1,
+  "engine": "Fun-CosyVoice3 v3 batch-r2 instruct2",
+  "approval": {
+    "status": "accepted-by-user",
+    "message": "试听通过。",
+    "deliverySha256": "e0f6125df96b505b22917ac7f48599ba9b5c8316fb4a8c54dfd545b8facdbd56"
+  },
+  "files": [
+    {
+      "id": "scene-gift-zh",
+      "path": "books/moon/audio/scene-gift-zh.mp3",
+      "sha256": "ff04b9723fa18099ed635640c3512b18f37f55d714cabc0847924426bd70c2a9",
+      "seconds": 11.72
+    },
+    {
+      "id": "scene-gift-en",
+      "path": "books/moon/audio/scene-gift-en.mp3",
+      "sha256": "1a5bda745c8c54cbad247cd65359ffedd1474c3a72613ea7e7fd44ab355b1b73",
+      "seconds": 12.08
+    },
+    {
+      "id": "scene-changed-zh",
+      "path": "books/moon/audio/scene-changed-zh.mp3",
+      "sha256": "b9aa8864b38f4e00fe3a974bdaf6aa260c090e21daf1ae9052e104a6a37e3686",
+      "seconds": 10.44
+    },
+    {
+      "id": "scene-changed-en",
+      "path": "books/moon/audio/scene-changed-en.mp3",
+      "sha256": "8a8e3495a6b31cb15731b1cf6f6f8f9686960ca316ed016805c5ef2741130152",
+      "seconds": 11.16
+    },
+    {
+      "id": "scene-keep-zh",
+      "path": "books/moon/audio/scene-keep-zh.mp3",
+      "sha256": "73a7608c85e43865c84fe20fefed5772cb0f9abebce9b27c5f18d1d72286956b",
+      "seconds": 11.96
+    },
+    {
+      "id": "scene-keep-en",
+      "path": "books/moon/audio/scene-keep-en.mp3",
+      "sha256": "d365e7ac138e1df302215d518d07df855d231fcab6fb5e2fd6625c5b99788168",
+      "seconds": 12
+    },
+    {
+      "id": "scene-cloud-zh",
+      "path": "books/moon/audio/scene-cloud-zh.mp3",
+      "sha256": "cdf737628314569e840295d3e1c0176f8a85afb610b22ba7ebb37ac15b575025",
+      "seconds": 14.7
+    },
+    {
+      "id": "scene-cloud-en",
+      "path": "books/moon/audio/scene-cloud-en.mp3",
+      "sha256": "2f7e47a6dc443a03cee1c27cd597039c86c7349050d7a7b18a7ce2e951892195",
+      "seconds": 14.7
+    },
+    {
+      "id": "scene-sunlight-zh",
+      "path": "books/moon/audio/scene-sunlight-zh.mp3",
+      "sha256": "823095d03c0a5ee80f8954bc60b65f8b82290010121e968996859d5ba2ce27b3",
+      "seconds": 14.14
+    },
+    {
+      "id": "scene-sunlight-en",
+      "path": "books/moon/audio/scene-sunlight-en.mp3",
+      "sha256": "e2289c2efed6671e4eb887c3e718017ff8484ce296fa5b001887572f0354913f",
+      "seconds": 12.86
+    },
+    {
+      "id": "scene-ball-zh",
+      "path": "books/moon/audio/scene-ball-zh.mp3",
+      "sha256": "6eeaa4da76f17b0fedf9c6f5627ebe44f0ea1e56306a2835f2a61d06a914766a",
+      "seconds": 13.44
+    },
+    {
+      "id": "scene-ball-en",
+      "path": "books/moon/audio/scene-ball-en.mp3",
+      "sha256": "becb84249794bd09ad7a85d1f0605c20f646f341f3b4edf63b4c893ac13a203b",
+      "seconds": 14
+    },
+    {
+      "id": "scene-view-zh",
+      "path": "books/moon/audio/scene-view-zh.mp3",
+      "sha256": "4aeef5c42cdc88015fc2400cbbef4fb8836856fe8dde627bb9bd390b6e18d335",
+      "seconds": 12.3
+    },
+    {
+      "id": "scene-view-en",
+      "path": "books/moon/audio/scene-view-en.mp3",
+      "sha256": "4c92023d6bb79a737fa25d9aac4928e8a0efc59c3135062885fa2e49c1b4a20b",
+      "seconds": 12.66
+    },
+    {
+      "id": "scene-orbit-zh",
+      "path": "books/moon/audio/scene-orbit-zh.mp3",
+      "sha256": "4cbb30746229e26c3c1719de4489aa614a377f28d6f3c4a6208ca4ca36bd4bcc",
+      "seconds": 15.1
+    },
+    {
+      "id": "scene-orbit-en",
+      "path": "books/moon/audio/scene-orbit-en.mp3",
+      "sha256": "d2f425c8c5f24a551e37e9fd702804c03056fdef1da988667600a8b6b584d073",
+      "seconds": 13.76
+    },
+    {
+      "id": "scene-full-zh",
+      "path": "books/moon/audio/scene-full-zh.mp3",
+      "sha256": "c8c54dde85e13b8c4b92f3a2d356478be553df7970513c63293a03287faadc92",
+      "seconds": 11.52
+    },
+    {
+      "id": "scene-full-en",
+      "path": "books/moon/audio/scene-full-en.mp3",
+      "sha256": "e385c99f0f3133dbc126c7a62383d28084b46f490bb588a01d46c9a6da46e6ec",
+      "seconds": 12.48
+    },
+    {
+      "id": "scene-morning-zh",
+      "path": "books/moon/audio/scene-morning-zh.mp3",
+      "sha256": "4b760f54e558d809f147f21d0c93e08c3b410276d59f56279ec1b8ff9f4cfb1f",
+      "seconds": 14.52
+    },
+    {
+      "id": "scene-morning-en",
+      "path": "books/moon/audio/scene-morning-en.mp3",
+      "sha256": "fde825f9d4c2e8f2740334a3048987e99dfc32fece259a62719d04a682e5580c",
+      "seconds": 14.68
+    },
+    {
+      "id": "scene-missing-zh",
+      "path": "books/moon/audio/scene-missing-zh.mp3",
+      "sha256": "75188e3c1f64ee75b751fe6a1fc4e600d786fdf18d819d4f8882ee7ac2154e19",
+      "seconds": 14.22
+    },
+    {
+      "id": "scene-missing-en",
+      "path": "books/moon/audio/scene-missing-en.mp3",
+      "sha256": "8f252294fe35467d9871052b26b0ac6f39519c5dcb60d43dace12d3e4af2b654",
+      "seconds": 15.4
+    },
+    {
+      "id": "scene-return-zh",
+      "path": "books/moon/audio/scene-return-zh.mp3",
+      "sha256": "20bfc53fc5a92995704f6eeac609a1e0737f57263f12a89ed6e554cc8963a988",
+      "seconds": 11.48
+    },
+    {
+      "id": "scene-return-en",
+      "path": "books/moon/audio/scene-return-en.mp3",
+      "sha256": "2ade9e88fcd7c8784779fbc4035d6e72a66fc0dca891fff7cfa0c06210de9178",
+      "seconds": 14.56
+    },
+    {
+      "id": "scene-grandma-zh",
+      "path": "books/moon/audio/scene-grandma-zh.mp3",
+      "sha256": "d7d65f17e5bd37df4bbb6a6dec5dcf521b8c96178b9e1b3dd83e01d88a827334",
+      "seconds": 15.26
+    },
+    {
+      "id": "scene-grandma-en",
+      "path": "books/moon/audio/scene-grandma-en.mp3",
+      "sha256": "a421ef9c8475c85b42419dc8809866f3b302c12ec9a6b3c5dfb68438b2bf044a",
+      "seconds": 16.9
+    },
+    {
+      "id": "scene-your-diary-zh",
+      "path": "books/moon/audio/scene-your-diary-zh.mp3",
+      "sha256": "3f0cd8ae067da5f5167a5b35afa76e9e754af3d27bb7fedf7b451c313c155928",
+      "seconds": 14.7
+    },
+    {
+      "id": "scene-your-diary-en",
+      "path": "books/moon/audio/scene-your-diary-en.mp3",
+      "sha256": "bd1fe6eb5dfe534773bf1a45b5b27167c49fcd252610cf910f1c1ab7c2118589",
+      "seconds": 16.44
+    },
+    {
+      "id": "vocab-moon-zh",
+      "path": "books/moon/audio/vocab-moon-zh.mp3",
+      "sha256": "6e130051ea18223d909e8c03c65a282b8d779a72f57d326fd5a11068f4539b1b",
+      "seconds": 0.88
+    },
+    {
+      "id": "vocab-moon-en",
+      "path": "books/moon/audio/vocab-moon-en.mp3",
+      "sha256": "8d7381389a53e446ecc0ed4b04116667e62951bc2a00ead81d4c0acfcf44bd77",
+      "seconds": 0.68
+    },
+    {
+      "id": "vocab-sunlight-zh",
+      "path": "books/moon/audio/vocab-sunlight-zh.mp3",
+      "sha256": "d92fabca9e12e364e8ded69e943466760c26b8c443cdfd0e9ea135308e1b1310",
+      "seconds": 0.88
+    },
+    {
+      "id": "vocab-sunlight-en",
+      "path": "books/moon/audio/vocab-sunlight-en.mp3",
+      "sha256": "9e006eddd3a5d2d5e40d5bbd50234ee31c17c66adeda7ba0ae1f44f89d93b568",
+      "seconds": 1.08
+    },
+    {
+      "id": "vocab-earth-zh",
+      "path": "books/moon/audio/vocab-earth-zh.mp3",
+      "sha256": "6ee6a6e96de7df8b97c514485acabb3a1e9a095e73d766334390bb3d5903c4ea",
+      "seconds": 0.92
+    },
+    {
+      "id": "vocab-earth-en",
+      "path": "books/moon/audio/vocab-earth-en.mp3",
+      "sha256": "5152e617d51214d350e4e58f5f11c0c14a177caf4c6fe1fe0e1ceb7f71efedab",
+      "seconds": 0.88
+    },
+    {
+      "id": "vocab-crescent-zh",
+      "path": "books/moon/audio/vocab-crescent-zh.mp3",
+      "sha256": "d55ab01075b53d32ea1341eab1188ba6b273a015dff837a75da0630a8e9712a6",
+      "seconds": 0.96
+    },
+    {
+      "id": "vocab-crescent-en",
+      "path": "books/moon/audio/vocab-crescent-en.mp3",
+      "sha256": "06101bf7b93a9a47929b5ceca4624ae8af63a0f3b6c1ce589ef5af3a22eb879b",
+      "seconds": 1.16
+    },
+    {
+      "id": "vocab-full-moon-zh",
+      "path": "books/moon/audio/vocab-full-moon-zh.mp3",
+      "sha256": "a4d8140c6849b6017456f3041ab05a5ba06a24a88ecd4eacc085f06ce8eb547a",
+      "seconds": 0.76
+    },
+    {
+      "id": "vocab-full-moon-en",
+      "path": "books/moon/audio/vocab-full-moon-en.mp3",
+      "sha256": "6b1325180b74bc1fe351db22de3d27ec53f977dddad8b4076ee44e793effc2c9",
+      "seconds": 1.44
+    },
+    {
+      "id": "vocab-cycle-zh",
+      "path": "books/moon/audio/vocab-cycle-zh.mp3",
+      "sha256": "72f3a7e5065e43b0c19ce0c027c2d9362427b912eab0079c79ad7f0d7b431af3",
+      "seconds": 0.84
+    },
+    {
+      "id": "vocab-cycle-en",
+      "path": "books/moon/audio/vocab-cycle-en.mp3",
+      "sha256": "4cf11d71506e415e77e69a5afce8bf21dea5c77a6324e4db50e2cc5498e0eb4d",
+      "seconds": 1.08
+    }
+  ]
+}

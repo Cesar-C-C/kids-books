@@ -1,0 +1,29 @@
+{
+  "bookId": "moon",
+  "scriptVersion": "moon-story-v1",
+  "title": {"zh": "月亮怎么少了一块？", "en": "Why Does the Moon Change Shape?"},
+  "scenes": [
+    {"id":"gift","act":"album","image":"gift","zh":"栗栗想送奶奶一份礼物。画什么呢？窗外，月牙挂在刚暗下来的天空里。\n“就画月亮吧！”栗栗拿起了黄色蜡笔。","en":"Lili wanted to make a gift for Grandma. What could it be? Outside, a crescent Moon hung in the evening sky.\n“I’ll draw the Moon!” Lili picked up a yellow crayon."},
+    {"id":"changed","act":"album","image":"compare","zh":"隔了几天，栗栗又来到窗前。\n“咦，月亮变胖了！我的画不对了吗？”他翻出橡皮，正想擦掉那弯月牙。","en":"A few days later, Lili returned to the window.\n“Oh! The Moon looks wider. Is my drawing wrong?” He found his eraser and reached for the little crescent."},
+    {"id":"keep","act":"album","image":"compare","zh":"爸爸轻轻按住画纸。\n“先别擦。那是你那天看到的月亮。把今天的也画下来吧。”\n栗栗给两张画标上不同的日期。原来，变化也可以留下来。","en":"Dad gently held the paper still.\n“Keep it. That is the Moon you saw that day. Let’s draw today’s Moon too.”\nLili added a different date to each drawing. He could keep the changes!"},
+    {"id":"cloud","act":"album","image":"window","zh":"一朵云飘过去，月亮躲起来，又露出来。\n“云会挡住月亮，可云走了，它还是刚才的样子。”栗栗说，“那它为什么隔几天就不一样呢？”","en":"A cloud drifted past. The Moon hid, then came out again.\n“A cloud can cover the Moon, but it looks the same when the cloud moves away,” said Lili. “Why does it look different after a few days?”"},
+    {"id":"sunlight","act":"light","image":"experiment","zh":"爸爸拿来一盏灯和一个白球。\n“月亮自己不会发光。我们看到的月光，是太阳光照到月亮上，又反射过来的光。”\n“那就请小灯当太阳！”栗栗说。","en":"Dad brought a lamp and a white ball.\n“The Moon does not make its own light. Moonlight is sunlight reflected from the Moon.”\n“Then our lamp can be the Sun!” said Lili."},
+    {"id":"ball","act":"light","image":"experiment","zh":"爸爸摆好灯，栗栗慢慢移动白球。他让球留在灯光里，不让脑袋挡住光。\n朝着灯的一半亮起来了，背着灯的一半暗暗的。球还是完整的一颗。","en":"Dad set up the lamp. Lili slowly moved the white ball, keeping it in the light without blocking the lamp with his head.\nThe half facing the lamp was bright. The other half was dark. The ball was still whole."},
+    {"id":"view","act":"orbit","image":"experiment","zh":"从栗栗站的地方看，球上的亮光有时细细的，有时宽宽的。\n“球没有被咬掉！”他笑了，“是我看到的亮面多少不一样。”","en":"From where Lili stood, the bright part sometimes looked narrow and sometimes wide.\n“No one took a bite out of the ball!” he laughed. “I can see different amounts of its bright side.”"},
+    {"id":"orbit","act":"orbit","image":"experiment","zh":"月亮也在绕着地球走。太阳照亮它的一半；我们在地球上，看到的那一半亮面有时多，有时少。\n栗栗伸出手：“让我移动月亮，看看会怎样！”","en":"The Moon travels around Earth. The Sun lights half of it. From Earth, we see more or less of that bright half as the Moon moves.\n“Let me move the Moon and see what happens!” said Lili."},
+    {"id":"full","act":"cycle","image":"full","zh":"又过了几天，傍晚的月亮圆圆的。栗栗画了一个明亮的圆。\n“这一张也留着。”他把画放进画册，和前面的月牙、半月排在一起。","en":"More days passed. One evening, the Moon looked round. Lili drew a bright circle.\n“I’ll keep this one too.” He placed it in his album beside the crescent and the half moon."},
+    {"id":"morning","act":"cycle","image":"morning","zh":"满月之后，栗栗有几晚没有找到月亮。他没有熬夜等。\n后来一个早晨，爸爸指向淡蓝的天空：“看，月亮在这里！”栗栗发现，它的亮面又变小了。","en":"After the full Moon, Lili could not find it on some evenings. He did not stay up late to wait.\nOne morning, Dad pointed to the pale blue sky. “There it is!” Its bright part looked smaller again."},
+    {"id":"missing","act":"cycle","image":"window","zh":"有一天，栗栗只画了一朵云，写下“今天没找到”。\n爸爸说：“这也是观察。可能有云，也可能月亮还没升起来。没找到，不一定就是新月。”","en":"One day, Lili drew a cloud and wrote, “Not found today.”\n“That is an observation too,” said Dad. “Clouds may hide it, or it may not have risen yet. Not finding the Moon does not always mean it is a new moon.”"},
+    {"id":"return","act":"cycle","image":"gift","zh":"再后来，傍晚又出现了一弯月牙。栗栗把画排成一圈。\n“这些样子会轮流回来！”月相的一个循环，大约要二十九天半。","en":"Later, a crescent appeared in the evening again. Lili arranged his drawings in a circle.\n“These shapes come around again!” One cycle of Moon phases takes about twenty-nine and a half days."},
+    {"id":"grandma","act":"ending","image":"grandma","zh":"奶奶打开礼物，里面不是一张画，而是一本《月亮变化日记》。\n“哪一张最好？”栗栗问。\n奶奶把他搂进怀里：“每一张都好。它们让我看见，你是怎样一点一点发现的。”","en":"Grandma opened her gift. It was not just one drawing. It was a Moon Diary!\n“Which drawing is the best?” asked Lili.\nGrandma hugged him. “Every one. Together, they show me how you discovered something, little by little.”"},
+    {"id":"your-diary","act":"ending","image":"grandma","zh":"栗栗给画册留了一张空白页。\n“下一次，会看到什么呢？”\n你也可以和大人一起，在方便的时候看看天空。记下时间、月亮的样子，或是“有云”“没有找到”。每一种记录都有用。","en":"Lili left a blank page in his album.\n“What will I see next time?”\nYou can look at the sky with a grown-up when it is convenient. Record the time, the Moon’s shape, or “cloudy” or “not found.” Every observation counts."}
+  ],
+  "vocab": [
+    {"id":"moon","zh":"月亮","en":"Moon"},
+    {"id":"sunlight","zh":"阳光","en":"sunlight"},
+    {"id":"earth","zh":"地球","en":"Earth"},
+    {"id":"crescent","zh":"月牙","en":"crescent"},
+    {"id":"full-moon","zh":"满月","en":"full moon"},
+    {"id":"cycle","zh":"循环","en":"cycle"}
+  ]
+}

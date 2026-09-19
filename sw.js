@@ -142,7 +142,9 @@ async function status() {
     var b = KB.books[id];
     var hit = 0;
     b.files.forEach(function (f) { if (have[urlPath(f)]) hit++; });
-    out[id] = { total: b.files.length, cached: hit, bytes: b.bytes };
+    out[id] = { total: b.files.length, cached: hit, bytes: b.bytes,
+      complete: b.complete !== false, missingAudio: (b.missingAudio || []).length,
+      audioExpected: b.audioExpected || 0 };
   });
   return { type: 'KB_STATUS', version: VERSION, books: out };
 }
@@ -206,7 +208,7 @@ async function downloadBook(bookId, port) {
   var st = await status();
   post({
     type: 'KB_PROGRESS', bookId: bookId,
-    state: failed ? 'error' : 'done',
+    state: failed ? 'error' : (book.complete === false ? 'partial' : 'done'),
     done: done, total: files.length, bytes: bytes, totalBytes: totalBytes,
     books: st.books, failed: failed
   });

@@ -1,0 +1,407 @@
+{
+  "bookId": "moon",
+  "scriptVersion": "moon-story-v1",
+  "scriptSha256": "a4936f906d0d1216050daf3285d27359a7561f852c94065532971cdd587efcee",
+  "entries": [
+    {
+      "id": "scene-gift-zh",
+      "kind": "scene",
+      "sceneId": "gift",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "栗栗想送奶奶一份礼物。画什么呢？窗外，月牙挂在刚暗下来的天空里。\n“就画月亮吧！”栗栗拿起了黄色蜡笔。",
+      "textSha256": "ed55048dc3cf720b01caeb5b9acbe11da141b79889dbb64e09f288bb91c31b50",
+      "output": "audio/scene-gift-zh.mp3"
+    },
+    {
+      "id": "scene-gift-en",
+      "kind": "scene",
+      "sceneId": "gift",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Lili wanted to make a gift for Grandma. What could it be? Outside, a crescent Moon hung in the evening sky.\n“I’ll draw the Moon!” Lili picked up a yellow crayon.",
+      "textSha256": "e7e6a90a49534f714382362f7286fe54bb4eeaaad1c2504bd6d4aaf3b99c3d3e",
+      "output": "audio/scene-gift-en.mp3"
+    },
+    {
+      "id": "scene-changed-zh",
+      "kind": "scene",
+      "sceneId": "changed",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "隔了几天，栗栗又来到窗前。\n“咦，月亮变胖了！我的画不对了吗？”他翻出橡皮，正想擦掉那弯月牙。",
+      "textSha256": "da0c2030040adc141198b8534ec9135770224988548b4bba1a865a73b0886ea0",
+      "output": "audio/scene-changed-zh.mp3"
+    },
+    {
+      "id": "scene-changed-en",
+      "kind": "scene",
+      "sceneId": "changed",
+      "role": "narrator",
+      "lang": "en",
+      "text": "A few days later, Lili returned to the window.\n“Oh! The Moon looks wider. Is my drawing wrong?” He found his eraser and reached for the little crescent.",
+      "textSha256": "538b630dde97f678e71776cbda8215241465e0a0919f80f9b348aa69164bc431",
+      "output": "audio/scene-changed-en.mp3"
+    },
+    {
+      "id": "scene-keep-zh",
+      "kind": "scene",
+      "sceneId": "keep",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "爸爸轻轻按住画纸。\n“先别擦。那是你那天看到的月亮。把今天的也画下来吧。”\n栗栗给两张画标上不同的日期。原来，变化也可以留下来。",
+      "textSha256": "333b269d0885cca3ee8325e66e8c34fc1a2a10fa5569dfe9ac60c9e75c221efa",
+      "output": "audio/scene-keep-zh.mp3"
+    },
+    {
+      "id": "scene-keep-en",
+      "kind": "scene",
+      "sceneId": "keep",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Dad gently held the paper still.\n“Keep it. That is the Moon you saw that day. Let’s draw today’s Moon too.”\nLili added a different date to each drawing. He could keep the changes!",
+      "textSha256": "9d9cdf84362f9e0310068e7a69a2237a3509c3b9341967cd59d2596b92569537",
+      "output": "audio/scene-keep-en.mp3"
+    },
+    {
+      "id": "scene-cloud-zh",
+      "kind": "scene",
+      "sceneId": "cloud",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "一朵云飘过去，月亮躲起来，又露出来。\n“云会挡住月亮，可云走了，它还是刚才的样子。”栗栗说，“那它为什么隔几天就不一样呢？”",
+      "textSha256": "fe303f6d08d31e3424c0fdf279e79d981c06a206bd792b086ae292fc387caa3d",
+      "output": "audio/scene-cloud-zh.mp3"
+    },
+    {
+      "id": "scene-cloud-en",
+      "kind": "scene",
+      "sceneId": "cloud",
+      "role": "narrator",
+      "lang": "en",
+      "text": "A cloud drifted past. The Moon hid, then came out again.\n“A cloud can cover the Moon, but it looks the same when the cloud moves away,” said Lili. “Why does it look different after a few days?”",
+      "textSha256": "1b4aa13f4927f571b05cdbb86620cc08b946f91f242969d6ac6f1710d26b7df2",
+      "output": "audio/scene-cloud-en.mp3"
+    },
+    {
+      "id": "scene-sunlight-zh",
+      "kind": "scene",
+      "sceneId": "sunlight",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "爸爸拿来一盏灯和一个白球。\n“月亮自己不会发光。我们看到的月光，是太阳光照到月亮上，又反射过来的光。”\n“那就请小灯当太阳！”栗栗说。",
+      "textSha256": "187463ef1d6d8e0cdaab916740062dca525715b77fb94618c4dc8eeb6f324254",
+      "output": "audio/scene-sunlight-zh.mp3"
+    },
+    {
+      "id": "scene-sunlight-en",
+      "kind": "scene",
+      "sceneId": "sunlight",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Dad brought a lamp and a white ball.\n“The Moon does not make its own light. Moonlight is sunlight reflected from the Moon.”\n“Then our lamp can be the Sun!” said Lili.",
+      "textSha256": "4ef8ebb44fdb8967e1d823f64e97aa58db8e8395b7f655b66bb9c46ebded2065",
+      "output": "audio/scene-sunlight-en.mp3"
+    },
+    {
+      "id": "scene-ball-zh",
+      "kind": "scene",
+      "sceneId": "ball",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "爸爸摆好灯，栗栗慢慢移动白球。他让球留在灯光里，不让脑袋挡住光。\n朝着灯的一半亮起来了，背着灯的一半暗暗的。球还是完整的一颗。",
+      "textSha256": "ebfc46bd7365c7ae6cdea86499d6a4b97df69bb8a9bd3b38886c584d89611350",
+      "output": "audio/scene-ball-zh.mp3"
+    },
+    {
+      "id": "scene-ball-en",
+      "kind": "scene",
+      "sceneId": "ball",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Dad set up the lamp. Lili slowly moved the white ball, keeping it in the light without blocking the lamp with his head.\nThe half facing the lamp was bright. The other half was dark. The ball was still whole.",
+      "textSha256": "b5da6fc2cdd8eabd59c0a90274162eea4ec7be622e9fc88817a43ed7f04643f6",
+      "output": "audio/scene-ball-en.mp3"
+    },
+    {
+      "id": "scene-view-zh",
+      "kind": "scene",
+      "sceneId": "view",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "从栗栗站的地方看，球上的亮光有时细细的，有时宽宽的。\n“球没有被咬掉！”他笑了，“是我看到的亮面多少不一样。”",
+      "textSha256": "8a16d51da08ea4b6fc3f37cc6ab2908b093d1aa889d82021c428a6a00530f74c",
+      "output": "audio/scene-view-zh.mp3"
+    },
+    {
+      "id": "scene-view-en",
+      "kind": "scene",
+      "sceneId": "view",
+      "role": "narrator",
+      "lang": "en",
+      "text": "From where Lili stood, the bright part sometimes looked narrow and sometimes wide.\n“No one took a bite out of the ball!” he laughed. “I can see different amounts of its bright side.”",
+      "textSha256": "ddbae6146e7bac80e0670ad251d5eddd350057bcfdaafc318a357533af33e662",
+      "output": "audio/scene-view-en.mp3"
+    },
+    {
+      "id": "scene-orbit-zh",
+      "kind": "scene",
+      "sceneId": "orbit",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "月亮也在绕着地球走。太阳照亮它的一半；我们在地球上，看到的那一半亮面有时多，有时少。\n栗栗伸出手：“让我移动月亮，看看会怎样！”",
+      "textSha256": "e652ab7831d1ba1cc627cdac6fd776bb05f6b9d945ad36e0ac940868958b3c5d",
+      "output": "audio/scene-orbit-zh.mp3"
+    },
+    {
+      "id": "scene-orbit-en",
+      "kind": "scene",
+      "sceneId": "orbit",
+      "role": "narrator",
+      "lang": "en",
+      "text": "The Moon travels around Earth. The Sun lights half of it. From Earth, we see more or less of that bright half as the Moon moves.\n“Let me move the Moon and see what happens!” said Lili.",
+      "textSha256": "0a5a086f90635ba36e6560aed708ad2d5defe1bbe47d818dd400523a5fde0fe6",
+      "output": "audio/scene-orbit-en.mp3"
+    },
+    {
+      "id": "scene-full-zh",
+      "kind": "scene",
+      "sceneId": "full",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "又过了几天，傍晚的月亮圆圆的。栗栗画了一个明亮的圆。\n“这一张也留着。”他把画放进画册，和前面的月牙、半月排在一起。",
+      "textSha256": "d769af15782a27cec87f4d6582c0b25ae6c635cf1b0e1a1b9936458dda0158c9",
+      "output": "audio/scene-full-zh.mp3"
+    },
+    {
+      "id": "scene-full-en",
+      "kind": "scene",
+      "sceneId": "full",
+      "role": "narrator",
+      "lang": "en",
+      "text": "More days passed. One evening, the Moon looked round. Lili drew a bright circle.\n“I’ll keep this one too.” He placed it in his album beside the crescent and the half moon.",
+      "textSha256": "1885efec3334767f48d01cfe8d72b297bcc2aee070a40c20c809a3ddffa878e5",
+      "output": "audio/scene-full-en.mp3"
+    },
+    {
+      "id": "scene-morning-zh",
+      "kind": "scene",
+      "sceneId": "morning",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "满月之后，栗栗有几晚没有找到月亮。他没有熬夜等。\n后来一个早晨，爸爸指向淡蓝的天空：“看，月亮在这里！”栗栗发现，它的亮面又变小了。",
+      "textSha256": "5775a83e13bd71423689502a6e22852128caa5ba3257f2589be07a56b2c3e3b1",
+      "output": "audio/scene-morning-zh.mp3"
+    },
+    {
+      "id": "scene-morning-en",
+      "kind": "scene",
+      "sceneId": "morning",
+      "role": "narrator",
+      "lang": "en",
+      "text": "After the full Moon, Lili could not find it on some evenings. He did not stay up late to wait.\nOne morning, Dad pointed to the pale blue sky. “There it is!” Its bright part looked smaller again.",
+      "textSha256": "1f11c1a949466307fcc3ea4013872e78eb7c98857a78aed398793766b81e8b41",
+      "output": "audio/scene-morning-en.mp3"
+    },
+    {
+      "id": "scene-missing-zh",
+      "kind": "scene",
+      "sceneId": "missing",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "有一天，栗栗只画了一朵云，写下“今天没找到”。\n爸爸说：“这也是观察。可能有云，也可能月亮还没升起来。没找到，不一定就是新月。”",
+      "textSha256": "f8184a96591c4f694667ddf7d9b570e0dc71ba4894470ae9b88860c53b27cc76",
+      "output": "audio/scene-missing-zh.mp3"
+    },
+    {
+      "id": "scene-missing-en",
+      "kind": "scene",
+      "sceneId": "missing",
+      "role": "narrator",
+      "lang": "en",
+      "text": "One day, Lili drew a cloud and wrote, “Not found today.”\n“That is an observation too,” said Dad. “Clouds may hide it, or it may not have risen yet. Not finding the Moon does not always mean it is a new moon.”",
+      "textSha256": "50213bb56996ea3aa702a8a083dbe6df940890e8335bb4886cdce8846ef3593e",
+      "output": "audio/scene-missing-en.mp3"
+    },
+    {
+      "id": "scene-return-zh",
+      "kind": "scene",
+      "sceneId": "return",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "再后来，傍晚又出现了一弯月牙。栗栗把画排成一圈。\n“这些样子会轮流回来！”月相的一个循环，大约要二十九天半。",
+      "textSha256": "f50722847a9b42d013d99127a7e7f520f6edde4152915c5de934a4fdf6b395ee",
+      "output": "audio/scene-return-zh.mp3"
+    },
+    {
+      "id": "scene-return-en",
+      "kind": "scene",
+      "sceneId": "return",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Later, a crescent appeared in the evening again. Lili arranged his drawings in a circle.\n“These shapes come around again!” One cycle of Moon phases takes about twenty-nine and a half days.",
+      "textSha256": "a42f6fe1c88a765be75e75581218d61e4505b14387b56aad34c50c337c97bb8b",
+      "output": "audio/scene-return-en.mp3"
+    },
+    {
+      "id": "scene-grandma-zh",
+      "kind": "scene",
+      "sceneId": "grandma",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "奶奶打开礼物，里面不是一张画，而是一本《月亮变化日记》。\n“哪一张最好？”栗栗问。\n奶奶把他搂进怀里：“每一张都好。它们让我看见，你是怎样一点一点发现的。”",
+      "textSha256": "45f574bed9144e5843f6ae88dac5605bfb72bba1bad02eea61d2854e962f44b7",
+      "output": "audio/scene-grandma-zh.mp3"
+    },
+    {
+      "id": "scene-grandma-en",
+      "kind": "scene",
+      "sceneId": "grandma",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Grandma opened her gift. It was not just one drawing. It was a Moon Diary!\n“Which drawing is the best?” asked Lili.\nGrandma hugged him. “Every one. Together, they show me how you discovered something, little by little.”",
+      "textSha256": "96dd7ebb95689b0049a3ac390603957a70736919b54390cd07215a710698f562",
+      "output": "audio/scene-grandma-en.mp3"
+    },
+    {
+      "id": "scene-your-diary-zh",
+      "kind": "scene",
+      "sceneId": "your-diary",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "栗栗给画册留了一张空白页。\n“下一次，会看到什么呢？”\n你也可以和大人一起，在方便的时候看看天空。记下时间、月亮的样子，或是“有云”“没有找到”。每一种记录都有用。",
+      "textSha256": "44b516159695c036453d10527755e4596dbef724f606ecf0c9949cff7325173e",
+      "output": "audio/scene-your-diary-zh.mp3"
+    },
+    {
+      "id": "scene-your-diary-en",
+      "kind": "scene",
+      "sceneId": "your-diary",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Lili left a blank page in his album.\n“What will I see next time?”\nYou can look at the sky with a grown-up when it is convenient. Record the time, the Moon’s shape, or “cloudy” or “not found.” Every observation counts.",
+      "textSha256": "42ad67471abf0371676bfe9f4f76f28e97ea4324f010f8db47a7a41faaeff4da",
+      "output": "audio/scene-your-diary-en.mp3"
+    },
+    {
+      "id": "vocab-moon-zh",
+      "kind": "vocab",
+      "termId": "moon",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "月亮",
+      "textSha256": "917705b6ba5e02dd551c971f5833d9fc440dbf323c2df8adc05cca91da4490b7",
+      "output": "audio/vocab-moon-zh.mp3"
+    },
+    {
+      "id": "vocab-moon-en",
+      "kind": "vocab",
+      "termId": "moon",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Moon",
+      "textSha256": "5fc165254f4f817ba6f8b6f80c08b3174c0fea225398b5b84c17c0af975feacf",
+      "output": "audio/vocab-moon-en.mp3"
+    },
+    {
+      "id": "vocab-sunlight-zh",
+      "kind": "vocab",
+      "termId": "sunlight",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "阳光",
+      "textSha256": "ce9a0598434fd8092e281e3f04ccbb38a570c5c624e9a242f1457a43dce41502",
+      "output": "audio/vocab-sunlight-zh.mp3"
+    },
+    {
+      "id": "vocab-sunlight-en",
+      "kind": "vocab",
+      "termId": "sunlight",
+      "role": "narrator",
+      "lang": "en",
+      "text": "sunlight",
+      "textSha256": "921a95e8b614f668981d9eee4d24a3ffdb6821162246bb8036f73f4fd7d20564",
+      "output": "audio/vocab-sunlight-en.mp3"
+    },
+    {
+      "id": "vocab-earth-zh",
+      "kind": "vocab",
+      "termId": "earth",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "地球",
+      "textSha256": "eeef861b87676f3f2f6f17768e74a90dd58f1dab90449b1d8abe751f2fb55911",
+      "output": "audio/vocab-earth-zh.mp3"
+    },
+    {
+      "id": "vocab-earth-en",
+      "kind": "vocab",
+      "termId": "earth",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Earth",
+      "textSha256": "b7c9b5ccd3e3ec741ecfa5864b577f5dab1d987bfd3caa4815f1b3f8354a5f16",
+      "output": "audio/vocab-earth-en.mp3"
+    },
+    {
+      "id": "vocab-crescent-zh",
+      "kind": "vocab",
+      "termId": "crescent",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "月牙",
+      "textSha256": "8b3e0785a3aec46ef90cbb9bafb2e1053615ab10031a8dd1dfe6d230ace21b0e",
+      "output": "audio/vocab-crescent-zh.mp3"
+    },
+    {
+      "id": "vocab-crescent-en",
+      "kind": "vocab",
+      "termId": "crescent",
+      "role": "narrator",
+      "lang": "en",
+      "text": "crescent",
+      "textSha256": "94af67700f696247cb304807e7115b26fe1587f09b855c34a3801d99ecbc8b9b",
+      "output": "audio/vocab-crescent-en.mp3"
+    },
+    {
+      "id": "vocab-full-moon-zh",
+      "kind": "vocab",
+      "termId": "full-moon",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "满月",
+      "textSha256": "e07d1bea894a54601aae76924b0ef9477af49d43d25f574556e78eec77a93f05",
+      "output": "audio/vocab-full-moon-zh.mp3"
+    },
+    {
+      "id": "vocab-full-moon-en",
+      "kind": "vocab",
+      "termId": "full-moon",
+      "role": "narrator",
+      "lang": "en",
+      "text": "full moon",
+      "textSha256": "45e434a23fcfe2725efaccbe558233479245c8a376b7feaaf13c23f87bd8ddcc",
+      "output": "audio/vocab-full-moon-en.mp3"
+    },
+    {
+      "id": "vocab-cycle-zh",
+      "kind": "vocab",
+      "termId": "cycle",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "循环",
+      "textSha256": "ad3221dd6681f3f5706ce6eff35f9160e56674756b7b3e62317ab2a369b29a80",
+      "output": "audio/vocab-cycle-zh.mp3"
+    },
+    {
+      "id": "vocab-cycle-en",
+      "kind": "vocab",
+      "termId": "cycle",
+      "role": "narrator",
+      "lang": "en",
+      "text": "cycle",
+      "textSha256": "c501935a6b2b247d007e9860becbe4c13d6561af9fc8b73ba24c8b2a7a80cb22",
+      "output": "audio/vocab-cycle-en.mp3"
+    }
+  ]
+}

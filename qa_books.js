@@ -6,7 +6,7 @@ const vm = require('vm');
 const path = require('path');
 
 const books = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station', 'steamtrain', 'capsule', 'bus', 'schoolbus', 'myopia', 'cavities'];
-const customBooks = ['cloud'];
+const customBooks = ['cloud', 'moon']; // Moon's story-json contract: tests/qa_moon_{model,content,offline}.
 const customExperienceBooks = {
   myopia: ['myopia-experience.css', 'myopia-experience.js'],
   cavities: ['cavities-experience.css', 'cavities-experience.js']

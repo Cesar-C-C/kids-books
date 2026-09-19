@@ -22,6 +22,7 @@ import json
 import os
 import re
 import sys
+from story_resources import discover as story_resources
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -58,6 +59,20 @@ def main():
     print('=' * 78)
 
     for bid in sorted(books):
+        structured = story_resources(REPO, bid)
+        if structured:
+            book = books[bid]
+            required = set(structured['images'] + structured['data'] + structured['audio'])
+            required.update('books/%s/%s' % (bid, f) for f in
+                            ('index.html', bid + '-experience.js', bid + '-model.js', bid + '.css'))
+            if required != set(book['files']):
+                problems.append('[%s] story resources differ from offline files' % bid)
+            if book.get('missingAudio') != structured['missingAudio'] or book.get('complete') != (not structured['missingAudio']):
+                problems.append('[%s] incorrect audio readiness' % bid)
+            print('%s %-11s story resources %d; audio missing %d/%d' %
+                  ('PENDING' if structured['missingAudio'] else 'OK', bid, len(required),
+                   len(structured['missingAudio']), structured['audioExpected']))
+            continue
         listed = [norm(x) for x in books[bid]['files']]
         listed_set = set(listed)
         img_listed = set(f for f in listed if IMG_RE.fullmatch(f.split('/')[-1]))
