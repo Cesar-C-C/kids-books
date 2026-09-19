@@ -1,5 +1,7 @@
 # Myopia Picture Book Implementation Plan
 
+> 已被 2026-09-17 定制体验设计与同日对应实施记录替代；最终交付包含 2026-09-19 v6 录音更新。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build and integrate the 14-page bilingual interactive picture book 《眼睛为什么看不清了？》 / *Why Do Faraway Things Look Blurry?* as the first book in the knowledge-gap roadmap.

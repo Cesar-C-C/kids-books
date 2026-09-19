@@ -1,33 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f6f73">
+  <meta name="description" content="跟随朵朵从风筝节走进眼睛，在互动实验中理解近视为什么让远处变模糊。">
   <title>眼睛为什么看不清了？ · Why Do Faraway Things Look Blurry?</title>
-  <meta name="theme-color" content="#1F9E9A">
   <link rel="manifest" href="../../manifest.webmanifest">
   <link rel="icon" href="../../icons/favicon-32.png">
   <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
   <link rel="stylesheet" href="../../shared/pwa.css">
+  <link rel="stylesheet" href="myopia-experience.css">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="小小探索家">
-  <link rel="stylesheet" href="../../shared/style.css">
-  <link rel="stylesheet" href="myopia.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="home-btn" href="../../index.html" title="返回书架">🏠</a>
-    <div class="book-title" id="bookTitle"></div>
-    <button class="gear-btn" id="gearBtn" title="家长设置">⚙️</button>
+  <a class="skip-link" href="#experience">跳到故事 / Skip to story</a>
+  <header class="journey-bar">
+    <a class="shelf-link" href="../../index.html" aria-label="返回绘本书架">⌂ <span>绘本书架</span></a>
+    <div class="journey-title"><strong>眼睛为什么看不清了？</strong><span>Why Do Faraway Things Look Blurry?</span></div>
+    <div class="journey-tools">
+      <button id="language" type="button" aria-label="切换中英文主读语言">EN</button>
+      <button id="narrate-chapter" type="button" aria-pressed="false">▶ 听本章</button>
+    </div>
   </header>
-  <main id="reader"></main>
+
+  <nav class="chapter-rail" aria-label="章节导航">
+    <a href="#discover" data-chapter-link="discover"><span>01</span><b>发现</b></a>
+    <a href="#follow-light" data-chapter-link="follow-light"><span>02</span><b>追光</b></a>
+    <a href="#focus-lab" data-chapter-link="focus-lab"><span>03</span><b>实验</b></a>
+    <a href="#take-action" data-chapter-link="take-action"><span>04</span><b>行动</b></a>
+  </nav>
+
+  <main id="experience">
+    <section id="discover" class="journey-chapter chapter-discover" data-chapter="discover" tabindex="-1">
+      <header class="chapter-heading"><span>第一幕 · Act One</span><h1>风筝节上的模糊号码</h1><p>A blurry number at the kite festival</p></header>
+      <div class="scene-stack" data-group="discover"></div>
+    </section>
+
+    <section id="follow-light" class="journey-chapter chapter-light" data-chapter="follow-light" tabindex="-1">
+      <header class="chapter-heading"><span>第二幕 · Act Two</span><h2>跟着光走进眼睛</h2><p>Follow light into the eye</p></header>
+      <div class="light-path" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="scene-stack" data-group="follow-light"></div>
+    </section>
+
+    <section id="focus-lab" class="journey-chapter chapter-lab" data-chapter="focus-lab" tabindex="-1">
+      <header class="chapter-heading"><span>第三幕 · Act Three</span><h2>聚焦实验室</h2><p>Focus laboratory</p></header>
+      <div class="lab-layout">
+        <div class="scene-stack" data-group="focus-lab"></div>
+        <section id="focus-model" class="focus-model" aria-labelledby="focus-model-title">
+          <div class="whiteboard-display">
+            <div class="lab-title"><h3 id="focus-model-title">让焦点找到视网膜</h3><p>Help the focus find the retina</p></div>
+            <svg class="focus-diagram" viewBox="0 0 100 54" role="img" aria-labelledby="focus-svg-title focus-svg-desc">
+              <title id="focus-svg-title">跟着朵朵寻找焦点</title>
+              <desc id="focus-svg-desc">拖动眼球生长滑块，观察焦点与视网膜的位置；眼镜按钮帮助焦点回到视网膜。</desc>
+              <path class="eye-body" data-eye-body></path>
+              <path class="cornea" d="M28 10 Q18 27 28 44"></path>
+              <ellipse class="lens" cx="34" cy="27" rx="5" ry="14"></ellipse>
+              <line class="retina" data-retina y1="13" y2="41"></line>
+              <path class="ray" data-ray="upper"></path><path class="ray" data-ray="middle"></path><path class="ray" data-ray="lower"></path>
+              <circle class="focus-point" data-focus cy="27" r="2.2"></circle>
+              <text x="5" y="9">光 Light</text><text x="23" y="52">角膜 Cornea</text><text x="53" y="52">晶状体 Lens</text><text x="98" y="9" text-anchor="end">视网膜 Retina</text>
+            </svg>
+          </div>
+          <div class="lab-controls">
+            <label for="eye-growth"><span>眼球生长</span><span lang="en">Eye growth</span></label>
+            <input id="eye-growth" type="range" min="0" max="1" step="0.1" value="0" aria-describedby="focus-status">
+            <button id="corrective-lens" type="button" aria-pressed="false">戴上矫正眼镜 / Add corrective lenses</button>
+          </div>
+          <p id="focus-status" class="focus-status" role="status" aria-live="polite"></p>
+        </section>
+      </div>
+    </section>
+
+    <section id="take-action" class="journey-chapter chapter-action" data-chapter="take-action" tabindex="-1">
+      <header class="chapter-heading"><span>第四幕 · Act Four</span><h2>看不清时，我们可以这样做</h2><p>What we can do when things look blurry</p></header>
+      <div class="action-summary" aria-label="健康用眼行动">
+        <div><b>告诉大人</b><span>Tell a grown-up</span></div><div><b>正规检查</b><span>Get an eye exam</span></div><div><b>需要时戴眼镜</b><span>Wear prescribed glasses</span></div><div><b>户外活动与看远休息</b><span>Outdoor time and distance breaks</span></div>
+      </div>
+      <div class="scene-stack" data-group="take-action"></div>
+      <a class="replay-lab" href="#focus-lab">再玩一次聚焦实验 / Try the focus lab again</a>
+    </section>
+    <details class="parent-note science-note">
+      <summary>给家长的话 / For grown-ups</summary>
+      <p>眼睛结构和聚焦互动经过简化，不按真实比例呈现，用于亲子探索光线与视网膜的关系，不能用于视力检测或诊断。如孩子看不清或眼睛不舒服，请寻求眼科专业人员帮助。</p>
+      <p lang="en">The eye and focus activity are simplified and not to scale. Explore light and the retina together; the activity cannot test vision or diagnose a condition. Seek professional eye care if a child has blurry vision or discomfort.</p>
+    </details>
+  </main>
+
+  <noscript><p class="noscript-note">请开启 JavaScript 体验互动；中文和 English 科学内容仍可在本书的纸面版本中阅读。</p></noscript>
+  <div id="audio-status" class="audio-status" role="status" aria-live="polite"></div>
 
   <script src="../../shared/cdn.js"></script>
-  <script src="../../shared/overlays.js"></script>
-  <script src="../../shared/reader.js"></script>
-  <script src="overlays.js"></script>
   <script src="book.js"></script>
   <script src="myopia.js"></script>
+  <script src="myopia-experience.js"></script>
   <script src="../../shared/pwa.js"></script>
 </body>
 </html>

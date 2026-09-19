@@ -37,8 +37,8 @@ window.PAGES = [
   },
   {
     img: 'assets/04_light-path_v1.webp',
-    en: 'Light enters the eye through the cornea and lens. This picture is a diagram, not a real-size eye.',
-    zh: '光线通过角膜和晶状体进入眼睛。这张图是原理示意，不是按真实大小画的眼睛。',
+    en: 'Duoduo follows the light. It passes through the cornea and lens, into the eye.',
+    zh: '朵朵跟着光线往里走。光线穿过角膜和晶状体，进入眼睛。',
     editableLayer: {
       type: 'eye-diagram-labels',
       ariaLabel: '角膜、晶状体、视网膜、焦点：光线经过角膜和晶状体，焦点朝视网膜形成 / Cornea, Lens, Retina, Focus: light passes through the cornea and lens, with focus forming toward the retina',
@@ -53,8 +53,8 @@ window.PAGES = [
   },
   {
     img: 'assets/05_retina-focus_v1.webp',
-    en: 'In this normal-focus diagram, light comes together on the retina at the back of the eye.',
-    zh: '在这张正常聚焦原理图里，光线在眼睛后面的视网膜上会合。',
+    en: '“There they meet!” says Duoduo. When the eye focuses clearly, light comes together on the retina at the back of the eye.',
+    zh: '“它们在那里会合啦！”朵朵说。眼睛清楚聚焦时，光线会在眼睛后面的视网膜上会合。',
     editableLayer: {
       type: 'eye-diagram-labels',
       ariaLabel: '角膜、晶状体、视网膜、焦点：焦点落在视网膜上 / Cornea, Lens, Retina, Focus: focus lands on the retina',
@@ -105,8 +105,8 @@ window.PAGES = [
   },
   {
     img: 'assets/11_focus-model_v1.webp',
-    en: 'Try the focus model! This simulation is not a vision test, is not to scale, and is not medical advice.',
-    zh: '来试试聚焦模型吧！这个模拟不是视力测试，不按真实比例绘制，也不是医疗建议。',
+    en: '“Let me try!” Duoduo moves the slider to see where the light meets. Can you help her bring the focus back to the retina with glasses?',
+    zh: '“让我试试！”朵朵拖动滑块，看看光线在哪里会合。你能帮她戴上眼镜，让焦点回到视网膜上吗？',
     activity: { type: 'focus-model' }
   },
   {
@@ -129,4 +129,4 @@ window.PAGES = [
   }
 ];
 
-Reader.init();
+if (window.Reader) Reader.init();

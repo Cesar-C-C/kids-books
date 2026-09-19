@@ -7,6 +7,10 @@ const path = require('path');
 
 const books = ['ocean', 'airplane', 'bigbang', 'seed', 'rocket', 'penguin', 'hsr', 'station', 'steamtrain', 'capsule', 'bus', 'schoolbus', 'myopia', 'cavities'];
 const customBooks = ['cloud'];
+const customExperienceBooks = {
+  myopia: ['myopia-experience.css', 'myopia-experience.js'],
+  cavities: ['cavities-experience.css', 'cavities-experience.js']
+};
 const root = process.cwd();
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const pad2 = n => String(n).padStart(2, '0');
@@ -80,23 +84,32 @@ for (const id of books) {
     }
   }
 
-  // ---- index.html STRUCTURAL check (catches missing #reader mount point) ----
-  // This is the #1 cause of "book renders blank": reader.js does
-  // document.getElementById('reader') and will throw if it's absent.
+  // ---- index.html STRUCTURAL check ----
+  // Most books use the shared paged reader. Content-led experiences may opt
+  // into their own shell, but must explicitly mount and load that shell.
   const idxPath = path.join(dir, 'index.html');
   if (!exists(idxPath)) {
     errs.push('index.html missing entirely');
   } else {
     const idx = fs.readFileSync(idxPath, 'utf8');
-    if (!/id=["']reader["']/.test(idx)) errs.push('index.html missing <main id="reader"> mount point (reader.js will throw → blank page)');
-    // scripts must load in this exact order, else Reader.init() runs before data exists
-    const order = ['../../shared/overlays.js', '../../shared/reader.js', 'overlays.js', 'book.js'];
-    let last = -1;
-    for (const s of order) {
-      const p = idx.indexOf(`src="${s}"`);
-      if (p < 0) errs.push(`index.html missing script tag: ${s}`);
-      else if (p < last) errs.push(`index.html script order wrong: ${s} appears before an earlier required script`);
-      else last = p;
+    const customAssets = customExperienceBooks[id];
+    if (customAssets) {
+      if (!/id=["']experience["']/.test(idx)) errs.push('index.html missing <main id="experience"> custom mount point');
+      if (/shared\/reader\.js/.test(idx)) errs.push('custom experience must not load shared/reader.js');
+      for (const asset of customAssets) {
+        if (!idx.includes(asset)) errs.push(`index.html missing custom experience asset: ${asset}`);
+      }
+    } else {
+      if (!/id=["']reader["']/.test(idx)) errs.push('index.html missing <main id="reader"> mount point (reader.js will throw → blank page)');
+      // scripts must load in this exact order, else Reader.init() runs before data exists
+      const order = ['../../shared/overlays.js', '../../shared/reader.js', 'overlays.js', 'book.js'];
+      let last = -1;
+      for (const s of order) {
+        const p = idx.indexOf(`src="${s}"`);
+        if (p < 0) errs.push(`index.html missing script tag: ${s}`);
+        else if (p < last) errs.push(`index.html script order wrong: ${s} appears before an earlier required script`);
+        else last = p;
+      }
     }
   }
 

@@ -1,33 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b6672">
+  <meta name="description" content="跟随小河马泡泡调查牙齿城堡的酸雨警报，理解蛀牙过程并练习刷到每一个牙面。">
   <title>牙齿里的小洞洞 · The Little Hole in a Tooth</title>
-  <meta name="theme-color" content="#76cfe3">
   <link rel="manifest" href="../../manifest.webmanifest">
   <link rel="icon" href="../../icons/favicon-32.png">
   <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
   <link rel="stylesheet" href="../../shared/pwa.css">
+  <link rel="stylesheet" href="cavities-experience.css">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="小小探索家">
-  <link rel="stylesheet" href="../../shared/style.css">
-  <link rel="stylesheet" href="cavities.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="home-btn" href="../../index.html" title="返回书架">🏠</a>
-    <div class="book-title" id="bookTitle"></div>
-    <button class="gear-btn" id="gearBtn" title="家长设置">⚙️</button>
+  <a class="skip-link" href="#experience">跳到故事 / Skip to story</a>
+  <header class="castle-bar">
+    <a class="shelf-link" href="../../index.html" aria-label="返回绘本书架">⌂ <span>绘本书架</span></a>
+    <div class="castle-title"><strong>牙齿里的小洞洞</strong><span>The Little Hole in a Tooth</span></div>
+    <div class="castle-tools">
+      <button id="language" type="button" aria-label="切换中英文主读语言">EN</button>
+      <button id="narrate-section" type="button" aria-pressed="false">▶ 听本区</button>
+    </div>
   </header>
-  <main id="reader"></main>
+
+  <nav class="map-rail" aria-label="章节导航">
+    <a href="#bedtime-story" data-section-link="bedtime-story"><span>01</span><b>睡前故事</b></a>
+    <a href="#tooth-city" data-section-link="tooth-city"><span>02</span><b>城堡调查</b></a>
+    <a href="#brushing-route" data-section-link="brushing-route"><span>03</span><b>刷牙路线</b></a>
+  </nav>
+
+  <main id="experience">
+    <section id="bedtime-story" class="experience-section bedtime-story" data-section="bedtime-story" tabindex="-1">
+      <header class="section-heading"><span>故事开场 · Story opening</span><h1>泡泡和午夜酸雨警报</h1><p>Paopao and the midnight acid alarm</p></header>
+      <div class="story-strip" data-group="bedtime-story"></div>
+      <a class="enter-city" href="#tooth-city">缩小，进入牙齿城堡 / Shrink down and enter Tooth City</a>
+    </section>
+
+    <section id="tooth-city" class="experience-section tooth-city" data-section="tooth-city" tabindex="-1">
+      <header class="section-heading"><span>自由调查区 · Investigation map</span><h2>牙齿城堡发生了什么？</h2><p>What is happening inside Tooth City?</p></header>
+      <div class="city-layout">
+        <div class="city-stage">
+          <figure class="city-figure">
+            <img id="city-image" alt="" data-city-image>
+            <figcaption id="city-caption"></figcaption>
+            <div id="city-image-error" class="image-error" hidden><p>图片暂未加载，科学文字仍可阅读。</p><button type="button">重新加载 / Retry</button></div>
+          </figure>
+          <div id="city-detail" class="city-detail" aria-live="polite"></div>
+        </div>
+        <div class="investigation-panel">
+          <h3>沿时间线寻找线索</h3>
+          <div id="decay-timeline" class="decay-timeline" role="list" aria-label="蛀牙过程时间线"></div>
+          <div class="balance-note"><b>牙齿每天都在经历动态平衡</b><span>Teeth lose and regain minerals throughout the day.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="brushing-route" class="experience-section brushing-route" data-section="brushing-route" tabindex="-1">
+      <header class="section-heading"><span>行动练习 · Action route</span><h2>沿路线刷到每一个牙面</h2><p>Follow the route to every tooth surface</p></header>
+      <div class="route-layout">
+        <div class="route-story" data-group="brushing-route"></div>
+        <section class="brush-practice" aria-labelledby="brush-practice-title">
+          <h3 id="brush-practice-title">外侧、内侧、咀嚼面</h3>
+          <div id="brush-zone-controls" class="brush-zone-controls"></div>
+          <p id="brush-status" class="brush-status" role="status" aria-live="polite">选择一个牙面开始。<span lang="en">Choose a surface to begin.</span></p>
+        </section>
+        <section class="timer-practice" aria-labelledby="timer-title">
+          <div><h3 id="timer-title">可选两分钟计时</h3><p>刷牙时可以放下设备，请让大人帮忙。<span lang="en">Put the device down while brushing and ask a grown-up to help.</span></p></div>
+          <p id="brush-countdown" class="brush-countdown" role="timer" aria-live="off">2:00</p>
+          <div id="timer-controls" class="timer-controls">
+            <button type="button" data-action="start">开始 / Start</button><button type="button" data-action="pause" disabled>暂停 / Pause</button><button type="button" data-action="resume" disabled>继续 / Resume</button><button type="button" data-action="reset">重置 / Reset</button>
+          </div>
+          <p id="timer-status" class="timer-status" role="status" aria-live="polite"></p>
+        </section>
+      </div>
+    </section>
+    <details class="parent-note science-note">
+      <summary>给家长的话 / For grown-ups</summary>
+      <p>牙齿城堡、酸雨警报和橙色小滴是帮助孩子理解蛀牙过程的故事表达。口腔场景经过放大与简化，酸是细菌产生的物质。早期矿物质流失与已经形成的蛀洞不同；出现蛀洞或牙痛时，应由牙医检查处理。</p>
+      <p lang="en">Tooth City, its acid alarm and orange drops are story devices for exploring decay. The scenes are enlarged and simplified; acid is a substance made by bacteria. Early mineral loss differs from an established cavity, which needs dental care.</p>
+    </details>
+  </main>
+
+  <noscript><p class="noscript-note">请开启 JavaScript 体验互动；中文和 English 的故事与科学说明仍保存在本书内容中。</p></noscript>
+  <div id="audio-status" class="audio-status" role="status" aria-live="polite"></div>
 
   <script src="../../shared/cdn.js"></script>
-  <script src="../../shared/overlays.js"></script>
-  <script src="../../shared/reader.js"></script>
-  <script src="overlays.js"></script>
   <script src="book.js"></script>
   <script src="cavities.js"></script>
+  <script src="cavities-experience.js"></script>
   <script src="../../shared/pwa.js"></script>
 </body>
 </html>

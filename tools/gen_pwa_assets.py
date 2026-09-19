@@ -131,6 +131,12 @@ def book_audio(name, audio_ver):
     放进离线包纯属浪费家长流量。"""
     # A custom reader may revise one book's audio without invalidating all books.
     custom_reader = os.path.join(REPO, "books", name, name + ".js")
+    experience = os.path.join(REPO, "books", name, name + "-experience.js")
+    entry = os.path.join(REPO, "books", name, "index.html")
+    if os.path.isfile(experience) and os.path.isfile(entry):
+        with open(entry, encoding="utf-8") as source:
+            if name + "-experience.js" in source.read():
+                custom_reader = experience
     if os.path.isfile(custom_reader):
         with open(custom_reader, encoding="utf-8") as source:
             version = re.search(r"const\s+AUDIO_VER\s*=\s*(\d+)", source.read())

@@ -18,21 +18,21 @@ const scriptSources = [...indexHtml.matchAll(/<script\s+src=["']([^"']+)["'][^>]
   .map(match => match[1]);
 assert.deepEqual(scriptSources, [
   '../../shared/cdn.js',
-  '../../shared/overlays.js',
-  '../../shared/reader.js',
-  'overlays.js',
   'book.js',
   'cavities.js',
+  'cavities-experience.js',
   '../../shared/pwa.js'
 ]);
 const styleSources = [...indexHtml.matchAll(/<link\s+[^>]*rel=["']stylesheet["'][^>]*href=["']([^"']+)["'][^>]*>/g)]
   .map(match => match[1]);
-assert.ok(styleSources.indexOf('../../shared/style.css') < styleSources.indexOf('cavities.css'),
-  'cavities.css loads after the shared reader style');
+assert.ok(styleSources.includes('cavities-experience.css'),
+  'the bespoke cavities experience stylesheet loads');
+assert.ok(!styleSources.includes('../../shared/style.css'),
+  'the bespoke cavities experience does not inherit the paged reader layout');
 
 const bookSource = fs.readFileSync(bookPath, 'utf8');
-assert.match(bookSource, /Reader\.init\(\);\s*$/,
-  'book.js initializes the reader after defining BOOK and PAGES');
+assert.match(bookSource, /if\s*\(window\.Reader\)\s*Reader\.init\(\);\s*$/,
+  'book.js keeps shared-reader compatibility without requiring that reader');
 const context = vm.createContext({
   window: {},
   Reader: { init() {} },
