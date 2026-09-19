@@ -1,0 +1,146 @@
+{
+  "myopia/page_04_zh": {
+    "text": "朵朵跟着光线往里走。光线穿过角膜和晶状体，进入眼睛。",
+    "text_sha256": "f96af0b1ab4d2bed5d05bf306284935ce4a5696dff2738ce1ea20f80a835537f",
+    "seconds": 5.16,
+    "rms": 0.07739733158316903,
+    "sample_rate": 24000,
+    "bytes": 39024,
+    "sha256": "367b9425731ee16388476243c048613d73caae5687534a8f1397bd7e590fcfe0"
+  },
+  "myopia/page_04_en": {
+    "text": "Duoduo follows the light. It passes through the cornea and lens, into the eye.",
+    "text_sha256": "44811af83cb4f4f4c7b2b1cfd34dbb25495fd21eefef89dcc875ef4fa3242517",
+    "seconds": 7.24,
+    "rms": 0.10403174897832264,
+    "sample_rate": 24000,
+    "bytes": 49200,
+    "sha256": "6d8b4d39848c0bc5e86e2419f03770ab7590d6e075c4469d25fd3b4b0bfcaa82"
+  },
+  "myopia/page_05_zh": {
+    "text": "“它们在那里会合啦！”朵朵说。眼睛清楚聚焦时，光线会在眼睛后面的视网膜上会合。",
+    "text_sha256": "013d0f1a6ab3c970e2432a22a33241ff7add1a67b4e55281826aa7ca09b40ab7",
+    "seconds": 8.4,
+    "rms": 0.09118614962738751,
+    "sample_rate": 24000,
+    "bytes": 63768,
+    "sha256": "68c2a4fc2123926f04720ae2f5deb23b40fffc13219ab5c233f243c71c36bc85"
+  },
+  "myopia/page_05_en": {
+    "text": "“There they meet!” says Duoduo. When the eye focuses clearly, light comes together on the retina at the back of the eye.",
+    "text_sha256": "814365e9fc59607777deb10e8fb275c9d79a7c0e42907b6da12194aa0ca275d1",
+    "seconds": 7.68,
+    "rms": 0.10331388445361255,
+    "sample_rate": 24000,
+    "bytes": 59136,
+    "sha256": "f2764ade09fba2b1267504f2e7e4a6335200d8b80eaab254fd794ee772aa2927"
+  },
+  "myopia/page_11_zh": {
+    "text": "“让我试试！”朵朵拖动滑块，看看光线在哪里会合。你能帮她戴上眼镜，让焦点回到视网膜上吗？",
+    "text_sha256": "a61db8aa83b2a37faa9f4d713715ec8faafbc8bdfb327bffa130e99259e79e9d",
+    "seconds": 9.24,
+    "rms": 0.10128184981598239,
+    "sample_rate": 24000,
+    "bytes": 69096,
+    "sha256": "1ed3c9888402c7f5214142e859ec5f29337d6722f4f6b8533c138d40ebcb5c4b"
+  },
+  "myopia/page_11_en": {
+    "text": "“Let me try!” Duoduo moves the slider to see where the light meets. Can you help her bring the focus back to the retina with glasses?",
+    "text_sha256": "3ad051616072527d5271784a0a90492401c75ac2730695c2a3c45e6e0836bb54",
+    "seconds": 8.84,
+    "rms": 0.09300504964545674,
+    "sample_rate": 24000,
+    "bytes": 64368,
+    "sha256": "6bd814dfb3dd572cd7bce22ab86c8f9a391e97eee8485895acbbef7642fa4251"
+  },
+  "cavities/page_02_zh": {
+    "text": "牙齿城里亮起了橙色灯光。“午夜酸雨警报！”泡泡赶紧凑过去，想弄清楚发生了什么。",
+    "text_sha256": "d363ecd66dca1cc5b7c0162a2cc5028e8ecbea0206af46d4fa99512bd08076f5",
+    "seconds": 7.44,
+    "rms": 0.08751052877753186,
+    "sample_rate": 24000,
+    "bytes": 57024,
+    "sha256": "d1ccda5ad1c474e848fc51717c529c45d1cdd9f09b9695a4953dca3fdd64eba3"
+  },
+  "cavities/page_02_en": {
+    "text": "An orange light glows inside Tooth City. “The midnight acid alarm!” Paopao hurries over to find out what is happening.",
+    "text_sha256": "68de429f537af55b76d639186d4d605357f099dc5add33246a5f7e0ff7719101",
+    "seconds": 8.36,
+    "rms": 0.09888379360658335,
+    "sample_rate": 24000,
+    "bytes": 60936,
+    "sha256": "baf6d7e81146faee740a393f54f9fc3ff8593a1b18188d2e440829dbc0b31b3d"
+  },
+  "cavities/page_03_zh": {
+    "text": "泡泡发现了一个热闹的微生物社区。这里的居民各不相同！有些细菌会参与蛀牙的过程，还有许多微生物安静地生活在嘴巴里。",
+    "text_sha256": "059a6acca6b856049043fb65088fedbcc0a6774af051ca432e4e1a97f4db4b2f",
+    "seconds": 11.48,
+    "rms": 0.09711213129701853,
+    "sample_rate": 24000,
+    "bytes": 91296,
+    "sha256": "b5abdf9d688bdb4936ee4efd2026e86097c5caee295dc1cdec58548fa9cdd660"
+  },
+  "cavities/page_03_en": {
+    "text": "Paopao discovers a busy community of tiny microbes. They are all different! Some bacteria take part in tooth decay, while others live peacefully in the mouth.",
+    "text_sha256": "d9ddc9822752b133194b5029d8304de8faa3cab4c13348a7a3fc63cbd495c1df",
+    "seconds": 9.84,
+    "rms": 0.09282999580368811,
+    "sample_rate": 24000,
+    "bytes": 74112,
+    "sha256": "f195da98da1dd51caff265c145e76965c80bd9d7806b39d0b7ba3526ccc03f85"
+  },
+  "cavities/page_04_zh": {
+    "text": "“我的零食还留在这里呀！”含糖和淀粉的食物碎屑留在牙面黏黏的牙菌斑附近，有些细菌正利用这些食物残渣。",
+    "text_sha256": "d751b7f6a87804016cf3accd7237afa45e926ced6558b8631c5f812b5eb45a2b",
+    "seconds": 10.28,
+    "rms": 0.08137015192140735,
+    "sample_rate": 24000,
+    "bytes": 79584,
+    "sha256": "44e0592826e67e57786133d329c90fbcf9ceaa1e83b86c554f3673754b6c27e9"
+  },
+  "cavities/page_04_en": {
+    "text": "“Some of my snack is still here!” Bits of food with sugar and starch linger near sticky plaque on the teeth. Some bacteria use these leftovers.",
+    "text_sha256": "93f67846ffc8e32a90b5b4b0536847787a73a804149d3183041a31a1c36cb551",
+    "seconds": 10.16,
+    "rms": 0.08393549234022704,
+    "sample_rate": 24000,
+    "bytes": 76176,
+    "sha256": "8f04c703d8f85cc4ad02642b7504f223a16b804a0b7425e770c8a7f5123833e3"
+  },
+  "cavities/page_05_zh": {
+    "text": "泡泡沿着橙色小滴寻找线索。原来，部分细菌利用糖和淀粉时会产生酸。“这就是警报响起的原因呀！”",
+    "text_sha256": "c69e446052ea475cc206cf7f00fbcc10c65af3fc99f04ea00fec93dead40e085",
+    "seconds": 9.32,
+    "rms": 0.07310810708816282,
+    "sample_rate": 24000,
+    "bytes": 69888,
+    "sha256": "88c9d65b2bab399c2d612c67898be458dd7899a40603a39163213a57e3b6fb67"
+  },
+  "cavities/page_05_en": {
+    "text": "Paopao follows the trail of orange drops. Some bacteria make acid as they use sugars and starches. “So that is what set off the alarm!”",
+    "text_sha256": "5236e2eb05fc99a814c544aa89c9159aae085a9f38ec21125bfcf05a398dd7ce",
+    "seconds": 9.6,
+    "rms": 0.09909581667848745,
+    "sample_rate": 24000,
+    "bytes": 70560,
+    "sha256": "90e9c298ba7e6782a4bdb109ecced6687d48e62012b1a10dedc2550af6a98f68"
+  },
+  "cavities/page_06_zh": {
+    "text": "泡泡仔细观察牙齿坚硬的外层——牙釉质。酸反复起作用，会让这里的矿物质慢慢流失。蛀洞是逐渐形成的，并不是吃一次零食就会出现。",
+    "text_sha256": "da822e8a1f34f5746571a7dd8cccf11f5d31fb0a4d6a03aa128b17a720a3eb9b",
+    "seconds": 13.28,
+    "rms": 0.0960780935319549,
+    "sample_rate": 24000,
+    "bytes": 100584,
+    "sha256": "19e45e7e59e36e2f25e1f2b4bd5ddcdfd1a183f8736b21c2a81e8bb3d3175828"
+  },
+  "cavities/page_06_en": {
+    "text": "Paopao looks closely at the tooth’s hard outer layer, the enamel. Repeated acid attacks can slowly take away its minerals. A cavity takes time to form—it does not appear after just one snack.",
+    "text_sha256": "77b563ebdc1f9a3247bf15381275b9638a6318efef67beb7d73b93ffd90e0b0b",
+    "seconds": 13.92,
+    "rms": 0.10337845829088282,
+    "sample_rate": 24000,
+    "bytes": 105792,
+    "sha256": "b6e9d01791b55a63c74c13f420ac9f308cf0bb52c5cca75e574a54571d4ae60d"
+  }
+}

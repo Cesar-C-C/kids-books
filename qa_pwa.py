@@ -143,6 +143,12 @@ def check_assets():
     for bid, book in data.get("books", {}).items():
         book_audio_ver = audio_ver
         custom_reader = os.path.join(REPO, "books", bid, bid + ".js")
+        experience = os.path.join(REPO, "books", bid, bid + "-experience.js")
+        entry = os.path.join(REPO, "books", bid, "index.html")
+        if os.path.isfile(experience) and os.path.isfile(entry):
+            with open(entry, encoding="utf-8") as source:
+                if bid + "-experience.js" in source.read():
+                    custom_reader = experience
         if os.path.isfile(custom_reader):
             with open(custom_reader, encoding="utf-8") as source:
                 custom_version = re.search(r"const\s+AUDIO_VER\s*=\s*(\d+)", source.read())

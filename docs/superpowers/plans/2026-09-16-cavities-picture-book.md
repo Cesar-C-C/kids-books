@@ -1,5 +1,7 @@
 # Cavities Picture Book Implementation Plan
 
+> 已被 2026-09-17 定制体验设计与同日对应实施记录替代；最终交付包含 2026-09-19 v6 录音更新。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build and integrate the 14-page bilingual interactive picture book 《牙齿里的小洞洞》 / *The Little Hole in a Tooth* so children understand tooth decay and practise a calm, repeatable brushing routine.

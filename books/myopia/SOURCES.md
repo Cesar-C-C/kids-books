@@ -35,6 +35,12 @@ The interactive diagram is not to scale, not a vision test, and not medical advi
 
 ## 双语音频生成与审阅记录
 
+### 2026-09-19 局部更新
+
+- 使用当前 book.js 正文重新生成第 04、05、11页（零起始编号）的中英文配音；不含家长说明。
+- 沿用共享运行时默认中文参考音频和 CUDA FP32。生成输入与页面文本逐字一致；音频解码、有限样本、非静音检查及在线和离线实际播放均通过。未宣称人工听感或发音审核通过。
+- 缓存请求更新为 v6。完整范围和验证记录见 docs/health-story-narration-update.md。下方为原始生成记录。
+
 - **生成日期：** 2026-09-16（Asia/Shanghai）。
 - **引擎与模型：** 本地 Fun-CosyVoice 3；`FunAudioLLM/Fun-CosyVoice3-0.5B-2512`，PyTorch 2.3.1+cu121，CUDA FP32（Quadro T1000 with Max-Q Design）。
 - **声音条件与披露：** 生成以共享运行时随附的 `zero_shot_prompt.wav` 及默认提示词为条件；没有用户提供的声音。此记录不声称该提示音频的上游说话人身份、授权或许可。40 个最终片段均为合成语音，面向儿童阅读时应明确其为 AI 生成配音。

@@ -1,0 +1,114 @@
+[
+  {
+    "book": "myopia",
+    "index": 4,
+    "lang": "zh",
+    "id": "page_04_zh",
+    "text": "朵朵跟着光线往里走。光线穿过角膜和晶状体，进入眼睛。"
+  },
+  {
+    "book": "myopia",
+    "index": 4,
+    "lang": "en",
+    "id": "page_04_en",
+    "text": "Duoduo follows the light. It passes through the cornea and lens, into the eye."
+  },
+  {
+    "book": "myopia",
+    "index": 5,
+    "lang": "zh",
+    "id": "page_05_zh",
+    "text": "“它们在那里会合啦！”朵朵说。眼睛清楚聚焦时，光线会在眼睛后面的视网膜上会合。"
+  },
+  {
+    "book": "myopia",
+    "index": 5,
+    "lang": "en",
+    "id": "page_05_en",
+    "text": "“There they meet!” says Duoduo. When the eye focuses clearly, light comes together on the retina at the back of the eye."
+  },
+  {
+    "book": "myopia",
+    "index": 11,
+    "lang": "zh",
+    "id": "page_11_zh",
+    "text": "“让我试试！”朵朵拖动滑块，看看光线在哪里会合。你能帮她戴上眼镜，让焦点回到视网膜上吗？"
+  },
+  {
+    "book": "myopia",
+    "index": 11,
+    "lang": "en",
+    "id": "page_11_en",
+    "text": "“Let me try!” Duoduo moves the slider to see where the light meets. Can you help her bring the focus back to the retina with glasses?"
+  },
+  {
+    "book": "cavities",
+    "index": 2,
+    "lang": "zh",
+    "id": "page_02_zh",
+    "text": "牙齿城里亮起了橙色灯光。“午夜酸雨警报！”泡泡赶紧凑过去，想弄清楚发生了什么。"
+  },
+  {
+    "book": "cavities",
+    "index": 2,
+    "lang": "en",
+    "id": "page_02_en",
+    "text": "An orange light glows inside Tooth City. “The midnight acid alarm!” Paopao hurries over to find out what is happening."
+  },
+  {
+    "book": "cavities",
+    "index": 3,
+    "lang": "zh",
+    "id": "page_03_zh",
+    "text": "泡泡发现了一个热闹的微生物社区。这里的居民各不相同！有些细菌会参与蛀牙的过程，还有许多微生物安静地生活在嘴巴里。"
+  },
+  {
+    "book": "cavities",
+    "index": 3,
+    "lang": "en",
+    "id": "page_03_en",
+    "text": "Paopao discovers a busy community of tiny microbes. They are all different! Some bacteria take part in tooth decay, while others live peacefully in the mouth."
+  },
+  {
+    "book": "cavities",
+    "index": 4,
+    "lang": "zh",
+    "id": "page_04_zh",
+    "text": "“我的零食还留在这里呀！”含糖和淀粉的食物碎屑留在牙面黏黏的牙菌斑附近，有些细菌正利用这些食物残渣。"
+  },
+  {
+    "book": "cavities",
+    "index": 4,
+    "lang": "en",
+    "id": "page_04_en",
+    "text": "“Some of my snack is still here!” Bits of food with sugar and starch linger near sticky plaque on the teeth. Some bacteria use these leftovers."
+  },
+  {
+    "book": "cavities",
+    "index": 5,
+    "lang": "zh",
+    "id": "page_05_zh",
+    "text": "泡泡沿着橙色小滴寻找线索。原来，部分细菌利用糖和淀粉时会产生酸。“这就是警报响起的原因呀！”"
+  },
+  {
+    "book": "cavities",
+    "index": 5,
+    "lang": "en",
+    "id": "page_05_en",
+    "text": "Paopao follows the trail of orange drops. Some bacteria make acid as they use sugars and starches. “So that is what set off the alarm!”"
+  },
+  {
+    "book": "cavities",
+    "index": 6,
+    "lang": "zh",
+    "id": "page_06_zh",
+    "text": "泡泡仔细观察牙齿坚硬的外层——牙釉质。酸反复起作用，会让这里的矿物质慢慢流失。蛀洞是逐渐形成的，并不是吃一次零食就会出现。"
+  },
+  {
+    "book": "cavities",
+    "index": 6,
+    "lang": "en",
+    "id": "page_06_en",
+    "text": "Paopao looks closely at the tooth’s hard outer layer, the enamel. Repeated acid attacks can slowly take away its minerals. A cavity takes time to form—it does not appear after just one snack."
+  }
+]

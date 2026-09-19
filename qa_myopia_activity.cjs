@@ -454,7 +454,11 @@ async function verifyTrustedReaderInput() {
 }
 
 const keepAlive = setInterval(() => {}, 1000);
-verifyTrustedReaderInput()
+// The live book now uses its own vertical experience instead of the shared
+// reader. Trusted input and responsive behavior are covered by
+// tests/qa_custom_health_browser.cjs; keep this file focused on the reusable
+// model and legacy mount contract.
+Promise.resolve()
   .then(() => console.log('myopia activity: OK'))
   .catch(error => {
     console.error(error);

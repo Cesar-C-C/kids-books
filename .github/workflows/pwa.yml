@@ -24,6 +24,7 @@ on:
       - 'labs/shared/**'
       - 'icons/**'
       - 'tools/**'
+      - 'tests/**'
       - 'index.html'
       - 'sw.js'
       - 'pwa-assets.js'
@@ -44,6 +45,7 @@ on:
       - 'labs/shared/**'
       - 'icons/**'
       - 'tools/**'
+      - 'tests/**'
       - 'index.html'
       - 'sw.js'
       - 'pwa-assets.js'
@@ -99,6 +101,15 @@ jobs:
       - name: PWA static QA
         run: python qa_pwa.py
 
+      - name: Health book contracts and PWA regressions
+        run: |
+          node tests/qa_custom_health_layout.cjs
+          node qa_books.js
+          node qa_runtime.js
+          node qa_myopia_model.cjs
+          node qa_cavities_model.cjs
+          python -m unittest discover -s tests -p 'test_*.py'
+
       # 离线清单里的路径必须与运行时真正请求的图片/音频一一对应。
       # 换图改名（_r2/_v2）后漏改清单，就会出现「清单里有、点开却在别处找」
       # 的静默错配 —— 家长端表现为「缓存了还是要等」。
@@ -121,6 +132,14 @@ jobs:
           node-version: '22'
 
       # ubuntu-latest 自带 google-chrome-stable；脚本自己会找到它
+      - name: Install browser test driver
+        run: npm install --prefix .qa-deps --no-save playwright
+
+      - name: Health book experience and native offline narration
+        run: |
+          node tests/qa_custom_health_browser.cjs
+          node tests/qa_health_narration.cjs
+
       - name: Offline smoke test (airplane)
         run: node tools/qa_pwa_offline.mjs --book=airplane --out=preview_pwa
 

@@ -26,28 +26,28 @@ window.PAGES = [
   },
   {
     img: 'assets/02_acid-alarm_v1.webp',
-    en: 'A gentle orange alert glows inside Tooth City. In this make-believe story, it is the midnight acid alarm—not real rain inside a mouth.',
-    zh: '牙齿城里亮起温和的橙色警报。在这个想象故事里，它叫“午夜酸雨警报”——嘴巴里并不会真的下雨。'
+    en: 'An orange light glows inside Tooth City. “The midnight acid alarm!” Paopao hurries over to find out what is happening.',
+    zh: '牙齿城里亮起了橙色灯光。“午夜酸雨警报！”泡泡赶紧凑过去，想弄清楚发生了什么。',
   },
   {
     img: 'assets/03_mouth-community_v1.webp',
-    en: 'Paopao sees a busy community of many kinds of tiny microbes. Some bacteria join the tooth-decay process, but not every microbe is a villain. This is an enlarged conceptual picture.',
-    zh: '泡泡看见一个热闹的微生物社区，里面有许多不同种类。部分细菌会参与蛀牙过程，但不是每一种微生物都是坏蛋。这是放大的概念示意。'
+    en: 'Paopao discovers a busy community of tiny microbes. They are all different! Some bacteria take part in tooth decay, while others live peacefully in the mouth.',
+    zh: '泡泡发现了一个热闹的微生物社区。这里的居民各不相同！有些细菌会参与蛀牙的过程，还有许多微生物安静地生活在嘴巴里。',
   },
   {
     img: 'assets/04_sugar-and-starch_v1.webp',
-    en: 'Bits of food with sugar and starch can stay near the sticky plaque on teeth. Some plaque bacteria use these leftovers. This is an enlarged conceptual picture.',
-    zh: '含有糖和淀粉的食物碎屑可能留在牙面黏黏的牙菌斑附近。牙菌斑里的部分细菌会利用这些食物残渣。这是放大的概念示意。'
+    en: '“Some of my snack is still here!” Bits of food with sugar and starch linger near sticky plaque on the teeth. Some bacteria use these leftovers.',
+    zh: '“我的零食还留在这里呀！”含糖和淀粉的食物碎屑留在牙面黏黏的牙菌斑附近，有些细菌正利用这些食物残渣。',
   },
   {
     img: 'assets/05_acid-attack_v1.webp',
-    en: 'As some bacteria use sugars and starches, they make acid. Orange drops in the diagram are symbols for the acid—they are not monsters or living creatures.',
-    zh: '部分细菌利用糖和淀粉时，会产生酸。示意图里的橙色小滴只是酸的符号，不是怪兽，也不是活的生物。'
+    en: 'Paopao follows the trail of orange drops. Some bacteria make acid as they use sugars and starches. “So that is what set off the alarm!”',
+    zh: '泡泡沿着橙色小滴寻找线索。原来，部分细菌利用糖和淀粉时会产生酸。“这就是警报响起的原因呀！”',
   },
   {
     img: 'assets/06_mineral-loss_v1.webp',
-    en: 'When acid attacks happen again and again, the enamel can lose minerals over time. One snack does not make a cavity at once; this is a gradual, enlarged conceptual picture.',
-    zh: '当酸的作用反复发生，牙釉质会随时间逐渐失去矿物质。吃一次零食不会立刻形成蛀洞；这是放大的渐进过程示意。'
+    en: 'Paopao looks closely at the tooth’s hard outer layer, the enamel. Repeated acid attacks can slowly take away its minerals. A cavity takes time to form—it does not appear after just one snack.',
+    zh: '泡泡仔细观察牙齿坚硬的外层——牙釉质。酸反复起作用，会让这里的矿物质慢慢流失。蛀洞是逐渐形成的，并不是吃一次零食就会出现。',
   },
   {
     img: 'assets/07_saliva-fluoride_v1.webp',
@@ -96,4 +96,4 @@ window.PAGES = [
   }
 ];
 
-Reader.init();
+if (window.Reader) Reader.init();
