@@ -20,9 +20,30 @@ def discover(repo, book_id):
     entries = manifest['entries']
     if len(entries) != len(expected) or {e['id']: e['text'] for e in entries} != expected:
         raise ValueError('Audio manifest does not cover the actual bilingual story: ' + book_id)
-    source = (base / (book_id + '-experience.js')).read_text(encoding='utf-8')
-    version = re.search(r'const\s+AUDIO_VER\s*=\s*(\d+)', source).group(1)
-    images = sorted({f'images/{s["image"]}.webp' for s in story['scenes']})
+    # Read the scripts actually used by this entry, without imposing a reader name.
+    entry = base / 'index.html'
+    if entry.is_file():
+        scripts = re.findall(r'<script\b[^>]*\bsrc=[\"\x27]([^\"\x27]+)', entry.read_text(encoding='utf-8'), re.I)
+        sources = []
+        for script in scripts:
+            target = (base / script.split('?')[0]).resolve()
+            if target.is_relative_to(base.resolve()) and target.is_file():
+                sources.append(target.read_text(encoding='utf-8'))
+    else:
+        # Preserve the minimal discovery fixture contract.
+        sources = [(base / (book_id + '-experience.js')).read_text(encoding='utf-8')]
+    versions = [v for source in sources for v in re.findall(r'const\s+AUDIO_VER\s*=\s*(\d+)', source)]
+    if len(versions) != 1:
+        raise ValueError('Expected one AUDIO_VER in entry scripts: ' + book_id)
+    version = versions[0]
+    image_maps = [json.loads(value) for source in sources for value in
+                  re.findall(r'const\s+SCENE_IMAGES\s*=\s*(\{[^;]*?\})\s*;', source)]
+    if len(image_maps) > 1:
+        raise ValueError('Ambiguous scene image mapping: ' + book_id)
+    overrides = image_maps[0] if image_maps else {}
+    if not isinstance(overrides, dict) or not set(overrides).issubset({s['id'] for s in story['scenes']}):
+        raise ValueError('Unknown scene image override: ' + book_id)
+    images = sorted({f'images/{overrides.get(s["id"], s["image"])}.webp' for s in story['scenes']})
     audio = []
     for e in entries:
         output = e['output']
@@ -36,10 +57,11 @@ def discover(repo, book_id):
     missing = [p for p in audio if p not in present]
     prefix = f'books/{book_id}/'
     return {
-        'cover': f'images/{story["scenes"][0]["image"]}.webp',
+        'cover': f'images/{overrides.get(story["scenes"][0]["id"], story["scenes"][0]["image"])}.webp',
         'images': [prefix + p for p in images],
         'data': [prefix + p for p in ('story.json', 'audio-manifest.json')],
         'audio': [prefix + p + '?v=' + version for p in present],
         'audioExpected': len(audio),
+        'audioVersion': version,
         'missingAudio': [prefix + p + '?v=' + version for p in missing],
     }
