@@ -56,14 +56,17 @@
 
   /* ---------- 与 Service Worker 通信（MessageChannel，回复与进度互不串味） ---------- */
   function call(msg, onMessage) {
-    var target = (reg && (reg.active || reg.waiting)) || navigator.serviceWorker.controller;
+    var target = navigator.serviceWorker.controller || (reg && reg.active);
     if (!target) {
       /* 首次访问时 SW 还没激活，等它就绪后重试一次，别让面板卡在「正在检查」 */
       navigator.serviceWorker.ready.then(function (r) { reg = r; call(msg, onMessage); }).catch(function () {});
       return false;
     }
     var ch = new MessageChannel();
-    if (onMessage) ch.port1.onmessage = function (e) { onMessage(e.data); };
+    if (onMessage) ch.port1.onmessage = function (e) {
+      onMessage(e.data);
+      if (e.data && (e.data.type !== 'KB_PROGRESS' || e.data.state !== 'running')) ch.port1.close();
+    };
     target.postMessage(msg, [ch.port2]);
     return true;
   }
@@ -79,24 +82,42 @@
     navigator.serviceWorker.addEventListener('controllerchange', function () {
       loadStatus();
     });
-    navigator.serviceWorker.register(ROOT + '/sw.js', { scope: ROOT + '/' }).then(function (r) {
+    navigator.serviceWorker.register(ROOT + '/sw.js', { scope: ROOT + '/', updateViaCache: 'none' }).then(function (r) {
       reg = r;
       if (r.waiting) r.waiting.postMessage({ type: 'KB_SKIP_WAITING' });
       loadStatus();               // 缓存状态与界面无关，尽早问一次，点开菜单就是最新的
       /* 有新版本：让它立刻接管，家长不需要做任何动作 */
-      r.addEventListener('updatefound', function () {
+      function watchInstalling() {
         var nw = r.installing;
         if (!nw) return;
-        nw.addEventListener('statechange', function () {
+        function activateInstalled() {
           if (nw.state === 'installed' && navigator.serviceWorker.controller) {
             nw.postMessage({ type: 'KB_SKIP_WAITING' });
           }
-        });
-      });
+        }
+        nw.addEventListener('statechange', activateInstalled);
+        activateInstalled();
+      }
+      r.addEventListener('updatefound', watchInstalling);
+      watchInstalling();
     }).catch(function (err) {
       /* 注册失败（比如被浏览器策略拦下）不应该影响阅读 */
       console.warn('[pwa] Service Worker 注册失败：', err && err.message);
+      panelState.statusError = true;
+      refreshStatus();
     });
+    window.addEventListener('online', function () { checkForUpdate(true); loadStatus(); });
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) { checkForUpdate(false); loadStatus(); }
+    });
+  }
+
+  var lastUpdateCheck = 0;
+  function checkForUpdate(force) {
+    if (!reg || !reg.update || panelState.busy) return;
+    if (!force && Date.now() - lastUpdateCheck < 30000) return;
+    lastUpdateCheck = Date.now();
+    reg.update().catch(function () { panelState.statusError = true; refreshStatus(); });
   }
 
   /* ============================================================
@@ -317,7 +338,8 @@
     if (ui.refreshBtn) ui.refreshBtn.addEventListener('click', forceRefresh);
 
     document.getElementById('offlineAll').addEventListener('click', function () {
-      var todo = panelState.books.filter(function (b) { return !isStored(b.id); });
+      checkForUpdate(false);
+      var todo = panelState.books.filter(function (b) { return panelState.sizes && panelState.sizes[b.id] && !isStored(b.id); });
       if (!todo.length) return;
       downloadQueue(todo.map(function (b) { return b.id; }));
     });
@@ -345,6 +367,7 @@
     ui.sheet.classList.add('open');
     document.documentElement.classList.add('kb-lock');
     loadStatus();
+    checkForUpdate(false);
     if (ui.panel) ui.panel.focus();
   }
   function closeSheet() {
@@ -471,7 +494,8 @@
   /* ============================================================
      四、离线包列表
      ============================================================ */
-  var panelState = { books: [], sizes: null, busy: null, pending: {}, pct: 0 };
+  var panelState = { books: [], sizes: null, busy: null, pending: {}, pct: 0, statusError: false };
+  var statusRequest = 0, statusTimer = null;
 
   function readShelf() {
     var cards = document.querySelectorAll('.book-card');
@@ -524,14 +548,29 @@
      这一步不能省：不主动问，界面永远停在「未下载」。 */
   function loadStatus() {
     if (!supported) return;
+    var request = ++statusRequest;
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(function () {
+      if (request !== statusRequest) return;
+      panelState.statusError = true;
+      refreshStatus();
+    }, 8000);
     call({ type: 'KB_STATUS' }, function (data) {
-      if (!data || data.type !== 'KB_STATUS') return;
+      if (request !== statusRequest || !data || data.type !== 'KB_STATUS') return;
+      clearTimeout(statusTimer);
+      panelState.statusError = false;
       panelState.sizes = data.books || {};
       refreshStatus();
+      if (panelState.books.some(function (b) { return !panelState.sizes[b.id]; })) checkForUpdate(false);
     });
   }
 
   function onRowButton(id) {
+    if (!panelState.sizes || !panelState.sizes[id]) {
+      checkForUpdate(true);
+      loadStatus();
+      return;
+    }
     /* 正在下载这本：再点一次就是取消 */
     if (panelState.busy === id) {
       call({ type: 'KB_CANCEL', bookId: id });
@@ -572,8 +611,9 @@
       if (!st) {
         /* 状态未到位：禁用按钮，等 KB_STATUS 回来再定 */
         if (row) row.classList.remove('done');
-        btn.className = ''; btn.textContent = '下载'; btn.disabled = true;
-        if (size) size.textContent = '读取中…';
+        var retry = panelState.statusError || !!panelState.sizes;
+        btn.className = ''; btn.textContent = retry ? '重试更新' : '下载'; btn.disabled = !retry;
+        if (size) size.textContent = retry ? '书单暂未同步，请联网后重试' : '读取中…';
         if (bar) bar.style.width = '0%';
         return;
       }

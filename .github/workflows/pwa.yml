@@ -179,6 +179,13 @@ jobs:
           node tests/qa_sound_soap_browser.cjs
           node tests/qa_everyday_full.cjs
 
+      - name: Existing installation upgrades without losing downloads
+        env:
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/.qa-deps/node_modules/playwright
+        run: |
+          git fetch --no-tags --depth=1 origin 87b7b8795bb4c30b5e4f7f0b0b8230621cfd076c
+          node tests/qa_installed_pwa_upgrade.cjs
+
       # 「页面导航 = 缓存优先 + 后台刷新」意味着服务器内容改了之后，
       # 第一次打开拿到的仍是旧页面。这里钉住那条行为，并守住
       # 「强制重新加载」这个出口：点一次就必须拿到最新内容。

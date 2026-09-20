@@ -245,6 +245,19 @@ def main():
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write(body)
 
+    # sw.js is not part of the content fingerprint (no circular dependency).
+    # Changing the top-level worker also boots already-installed legacy clients;
+    # the versioned import cannot reuse their cached unversioned manifest.
+    worker_path = os.path.join(REPO, 'sw.js')
+    with open(worker_path, encoding='utf-8') as f:
+        worker = f.read()
+    worker, count = re.subn(r"importScripts\('./pwa-assets\.js(?:\?v=[a-f0-9]+)?'\);",
+                           "importScripts('./pwa-assets.js?v=%s');" % version, worker)
+    if count != 1:
+        raise ValueError('Expected one generated PWA manifest import in sw.js')
+    with open(worker_path, 'w', encoding='utf-8', newline='\n') as f:
+        f.write(worker)
+
     print("version = %s  (audioVer=%s)" % (version, audio_ver))
     print("shell   = %d files, %.0f KB" % (len(shell), sum(size_of(f) for f in shell) / 1024))
     for bid, b in books.items():
