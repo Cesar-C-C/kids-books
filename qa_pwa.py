@@ -21,6 +21,7 @@ import struct
 import sys
 
 from tools.pwa_fingerprint import content_sha256 as fingerprint_sha256
+from tools.story_resources import discover as story_resources
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 fails, warns, checks = [], [], 0
@@ -154,6 +155,9 @@ def check_assets():
                 custom_version = re.search(r"const\s+AUDIO_VER\s*=\s*(\d+)", source.read())
             if custom_version:
                 book_audio_ver = custom_version.group(1)
+        story = story_resources(REPO, bid)
+        if story is not None:
+            book_audio_ver = story['audioVersion']
         for f in book["files"]:
             if not os.path.exists(rel_path(f)):
                 bad("%s 的离线清单引用了不存在的文件：%s" % (bid, f))

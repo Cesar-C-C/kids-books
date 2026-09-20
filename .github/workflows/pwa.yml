@@ -126,6 +126,11 @@ jobs:
       - name: R2 illustration contract
         run: python qa_library_r2_assets.py
 
+      - name: Everyday science interaction contracts
+        run: |
+          node tests/qa_sound_soap_models.cjs
+          node tests/qa_everyday_delivery.cjs
+
   browser:
     name: Offline in real Chrome
     runs-on: ubuntu-latest
@@ -166,6 +171,13 @@ jobs:
       # 「缓存键对不上」的缺陷会被测试环境本身遮蔽掉（2026-09-12 实际发生）。
       - name: Offline cache hit rate (CDN-first)
         run: node tools/diag_offline_cache.mjs --book=bigbang
+
+      - name: Everyday science layout and all bilingual offline narration
+        env:
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/.qa-deps/node_modules/playwright
+        run: |
+          node tests/qa_sound_soap_browser.cjs
+          node tests/qa_everyday_full.cjs
 
       # 「页面导航 = 缓存优先 + 后台刷新」意味着服务器内容改了之后，
       # 第一次打开拿到的仍是旧页面。这里钉住那条行为，并守住

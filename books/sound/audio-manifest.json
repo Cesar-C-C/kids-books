@@ -1,0 +1,347 @@
+{
+  "bookId": "sound",
+  "scriptVersion": "sound-story-v1",
+  "scriptSha256": "2dfb6dabb943ebba8dc6623155f2546bf40f43fde862159a0643e029204171f0",
+  "entries": [
+    {
+      "id": "scene-concert-zh",
+      "kind": "scene",
+      "sceneId": "concert",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "森林音乐会快开始了。小兔咚咚抱着小鼓，想请最后一排的朋友也听见他的节拍。\n“咚！”第一声响起来了。",
+      "textSha256": "9989355389f3fdfb030b80dd644c6481927582f0ba899ecdeaafd93b9b383c79",
+      "output": "audio/scene-concert-zh.mp3"
+    },
+    {
+      "id": "scene-concert-en",
+      "kind": "scene",
+      "sceneId": "concert",
+      "role": "narrator",
+      "lang": "en",
+      "text": "The forest concert was about to begin. Dongdong the rabbit held his little drum. He wanted his friends in the back row to hear his beat too.\nBoom! There was the first beat.",
+      "textSha256": "82742e11b6761e0cb0f731fefadea9d962ea447b13dd2dca5291adacc18eff23",
+      "output": "audio/scene-concert-en.mp3"
+    },
+    {
+      "id": "scene-missing-zh",
+      "kind": "scene",
+      "sceneId": "missing",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "声音一下就不见了。咚咚看看鼓里面，又看看桌子底下。\n“我的鼓声跑到哪里去了？”\n松鼠笑了：“先别找地上。我们看看鼓面。”",
+      "textSha256": "88363846ecde1cd90a361a35653be35f27f11a2d36afee829c3233854de4e8f9",
+      "output": "audio/scene-missing-zh.mp3"
+    },
+    {
+      "id": "scene-missing-en",
+      "kind": "scene",
+      "sceneId": "missing",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Then the sound was gone. Dongdong looked inside the drum and under the table.\n“Where did my drumbeat go?”\n“Let’s look at the top of the drum,” said Squirrel.",
+      "textSha256": "b4a008debbcdd4fbb6ba2c1c0ea2cc05803081861bec47114528eb39cadefe1b",
+      "output": "audio/scene-missing-en.mp3"
+    },
+    {
+      "id": "scene-vibration-zh",
+      "kind": "scene",
+      "sceneId": "vibration",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "咚咚轻敲一下。鼓面来回动了起来。\n“这叫振动。”松鼠说。\n拨一下绷紧的弦，弦也来回动。许多声音，都是从物体的振动开始的。",
+      "textSha256": "8733530a12ef692868f4c712c2e7029285932fa1b9a2c538ceccf307bc001e76",
+      "output": "audio/scene-vibration-zh.mp3"
+    },
+    {
+      "id": "scene-vibration-en",
+      "kind": "scene",
+      "sceneId": "vibration",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Dongdong tapped gently. The drumhead moved back and forth.\n“That is vibration,” said Squirrel.\nA plucked string moved back and forth too. Many sounds begin with an object vibrating.",
+      "textSha256": "39e464a26cf6cbbec9d8c8cd0c60dea75918a86b36a453107cc1667daa65557d",
+      "output": "audio/scene-vibration-en.mp3"
+    },
+    {
+      "id": "scene-stop-zh",
+      "kind": "scene",
+      "sceneId": "stop",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "咚咚轻轻按住鼓面，振动很快停下来，声音也静了。\n“原来，不是有个小东西藏在鼓里叫！”\n他又轻敲了一下，继续观察。",
+      "textSha256": "246b618b7d4f702fa2015858d44658e27fc03b7dfb6fe7e8fcd69459b23941c6",
+      "output": "audio/scene-stop-zh.mp3"
+    },
+    {
+      "id": "scene-stop-en",
+      "kind": "scene",
+      "sceneId": "stop",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Dongdong gently touched the drumhead. Its vibration quickly stopped, and the sound faded.\n“So there isn’t a tiny thing hiding in my drum and shouting!”\nHe tapped again and watched.",
+      "textSha256": "c013dee50c82cdb98a677b57e3aa38f7d0bbdc8ae23de736009ed939c7414a91",
+      "output": "audio/scene-stop-en.mp3"
+    },
+    {
+      "id": "scene-air-zh",
+      "kind": "scene",
+      "sceneId": "air",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "鼓面振动，让旁边的空气也来回动。这样的变化在空气里向外传开。\n“不是一颗空气小粒子，从鼓边一路飞进我的耳朵。”咚咚说，“传过去的是振动的变化！”",
+      "textSha256": "d23c7976cca1d0ff06a80cd04cbbb85964bf061b45001f636e74a3bbc2007bfb",
+      "output": "audio/scene-air-zh.mp3"
+    },
+    {
+      "id": "scene-air-en",
+      "kind": "scene",
+      "sceneId": "air",
+      "role": "narrator",
+      "lang": "en",
+      "text": "The vibrating drumhead made the nearby air move back and forth. The disturbance spread outward through the air.\n“One air particle doesn’t fly all the way from my drum into my ear,” said Dongdong. “The disturbance travels!”",
+      "textSha256": "8a45729790302552c8975537bb4738f8ae1acb55051f67ed1f9ed815b2973f1a",
+      "output": "audio/scene-air-en.mp3"
+    },
+    {
+      "id": "scene-pitch-zh",
+      "kind": "scene",
+      "sceneId": "pitch",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "咚咚发现了新的不同：有的声音低，有的声音高。\n只改变振动的快慢时，振动更快，音调通常更高；振动更慢，音调通常更低。\n“这次我们只比较快慢。”",
+      "textSha256": "498d9cd9799beb946f6977ee821822caef9fa8a89d5efe69df77559eee5971f3",
+      "output": "audio/scene-pitch-zh.mp3"
+    },
+    {
+      "id": "scene-pitch-en",
+      "kind": "scene",
+      "sceneId": "pitch",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Dongdong noticed another difference. Some sounds were low, and some were high.\nWhen only the vibration rate changes, faster vibration usually gives a higher pitch, and slower vibration a lower pitch.\n“This time, let’s compare only the speed of vibration.”",
+      "textSha256": "5abca02e931ff877d04c6ff2220c934b291e145a54eedfc10a3dc7d75c711f12",
+      "output": "audio/scene-pitch-en.mp3"
+    },
+    {
+      "id": "scene-loudness-zh",
+      "kind": "scene",
+      "sceneId": "loudness",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "接着，他们保持振动快慢一样，只改变来回动的幅度。\n幅度大一些，声音通常更响；幅度小一些，通常更轻。\n“高低和轻响，是两件不同的事！”",
+      "textSha256": "e1f885c3401314c04a9feb27d1f243ab76fb51cdef37bea8efed2b610ae49e8f",
+      "output": "audio/scene-loudness-zh.mp3"
+    },
+    {
+      "id": "scene-loudness-en",
+      "kind": "scene",
+      "sceneId": "loudness",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Next, they kept the vibration rate the same and changed how far it moved back and forth.\nA larger movement usually made a louder sound; a smaller movement made a softer sound.\n“Pitch and loudness are different!”",
+      "textSha256": "50b5fc7cb7fc7da86b1c33b318c7806e3e6cd5e57efc763a3737bd3a59e73a12",
+      "output": "audio/scene-loudness-en.mp3"
+    },
+    {
+      "id": "scene-ear-zh",
+      "kind": "scene",
+      "sceneId": "ear",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "声音传到耳朵，沿着耳道，让薄薄的耳膜振动起来。耳膜后面的小骨头继续传递振动。\n咚咚摸摸自己的长耳朵：“里面还有这样一段路呀！”",
+      "textSha256": "ad597c926abee15c72f077342f3c739b1def4abe5d363924f957f00121f1c946",
+      "output": "audio/scene-ear-zh.mp3"
+    },
+    {
+      "id": "scene-ear-en",
+      "kind": "scene",
+      "sceneId": "ear",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Sound reached the ear and passed along the ear canal. It made the thin eardrum vibrate. Tiny bones behind the eardrum passed the vibration on.\nDongdong touched his long ears. “There is a whole journey inside!”",
+      "textSha256": "8a8e43e2a3be6970295cc49aa1aea2b1df637f8314ab94494697fc9f5f610e00",
+      "output": "audio/scene-ear-en.mp3"
+    },
+    {
+      "id": "scene-brain-zh",
+      "kind": "scene",
+      "sceneId": "brain",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "更里面有个叫耳蜗的地方。里面的感觉细胞帮助把振动变成电信号，再由听觉神经送到大脑。\n咚咚听出了熟悉的节拍：“这是我的小鼓！”",
+      "textSha256": "1479ea8132988e42f5a35550847a447c9afd60523fd9108ed84e719901cb6674",
+      "output": "audio/scene-brain-zh.mp3"
+    },
+    {
+      "id": "scene-brain-en",
+      "kind": "scene",
+      "sceneId": "brain",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Deeper inside was the cochlea. Its sensory cells helped turn the vibrations into electrical signals. The auditory nerve carried them to the brain.\nDongdong recognized the familiar beat. “That’s my drum!”",
+      "textSha256": "d6176d383e8f0391d2391bb80dbfc87e1dcb11c9fb66919cc0bcd0e66c131849",
+      "output": "audio/scene-brain-en.mp3"
+    },
+    {
+      "id": "scene-care-zh",
+      "kind": "scene",
+      "sceneId": "care",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "试奏时，咚咚觉得旁边太响了。他先退远一点，请伙伴轻一些。\n“耳朵需要舒服的声音，也需要休息。”\n如果声音让耳朵不舒服，就离开响声，告诉大人。",
+      "textSha256": "69b49a2026714676cb7b81eb89b5b9dbac037cb479eeae5337804b6f66716ea6",
+      "output": "audio/scene-care-zh.mp3"
+    },
+    {
+      "id": "scene-care-en",
+      "kind": "scene",
+      "sceneId": "care",
+      "role": "narrator",
+      "lang": "en",
+      "text": "During practice, it felt too loud nearby. Dongdong stepped farther away and asked his friends to play more softly.\n“Our ears need comfortable sounds and breaks.”\nIf a sound makes your ears uncomfortable, move away and tell a grown-up.",
+      "textSha256": "bd67554fc04a147527fe7919ac65636916010f40a3d54b7cf043c44e595194d0",
+      "output": "audio/scene-care-en.mp3"
+    },
+    {
+      "id": "scene-together-zh",
+      "kind": "scene",
+      "sceneId": "together",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "音乐会重新开始。咚咚敲一下，松鼠接一下，大家轮流送出节拍。\n鼓声没有躲起来。振动经过空气，走进耳朵，最后变成了朋友们听懂的音乐。",
+      "textSha256": "796ac6300344941a844d851845bb08d8b2a9765ccca75099c966ea0e8b33a400",
+      "output": "audio/scene-together-zh.mp3"
+    },
+    {
+      "id": "scene-together-en",
+      "kind": "scene",
+      "sceneId": "together",
+      "role": "narrator",
+      "lang": "en",
+      "text": "The concert began again. Dongdong played a beat, and Squirrel answered. Everyone took a turn.\nThe drumbeat had not been hiding. Vibrations traveled through the air, reached their ears, and became music they could recognize.",
+      "textSha256": "1fb46b7e094cb3ce61de22e091e56728a0b621d7ed1ceebfc0077f696a97efb6",
+      "output": "audio/scene-together-en.mp3"
+    },
+    {
+      "id": "vocab-sound-zh",
+      "kind": "vocab",
+      "termId": "sound",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "声音",
+      "textSha256": "473400815c0f687da9d51a61e214975ee2e3a78ffadd5dfc961246f0b715cc94",
+      "output": "audio/vocab-sound-zh.mp3"
+    },
+    {
+      "id": "vocab-sound-en",
+      "kind": "vocab",
+      "termId": "sound",
+      "role": "narrator",
+      "lang": "en",
+      "text": "sound",
+      "textSha256": "dd29442deca69f52c50006b831cb216edf78a7da33748f0a80ff19f2ebe57ecd",
+      "output": "audio/vocab-sound-en.mp3"
+    },
+    {
+      "id": "vocab-vibration-zh",
+      "kind": "vocab",
+      "termId": "vibration",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "振动",
+      "textSha256": "4908952d86aae908dfa11e788584c278fa6258a343b197fb61930cde58ad9198",
+      "output": "audio/vocab-vibration-zh.mp3"
+    },
+    {
+      "id": "vocab-vibration-en",
+      "kind": "vocab",
+      "termId": "vibration",
+      "role": "narrator",
+      "lang": "en",
+      "text": "vibration",
+      "textSha256": "d6740176da76c7e5ec367c9155b211e3899b451fb44e6b221b187d5b8fc41304",
+      "output": "audio/vocab-vibration-en.mp3"
+    },
+    {
+      "id": "vocab-air-zh",
+      "kind": "vocab",
+      "termId": "air",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "空气",
+      "textSha256": "dd4a875013d7c403c4474d9c4178f3939af19334edc525174b2c902ae628f34e",
+      "output": "audio/vocab-air-zh.mp3"
+    },
+    {
+      "id": "vocab-air-en",
+      "kind": "vocab",
+      "termId": "air",
+      "role": "narrator",
+      "lang": "en",
+      "text": "air",
+      "textSha256": "9fe430e5274621be518924ed90d2355f39eeb1d4d98fb00ea0022f3a26ba5595",
+      "output": "audio/vocab-air-en.mp3"
+    },
+    {
+      "id": "vocab-eardrum-zh",
+      "kind": "vocab",
+      "termId": "eardrum",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "耳膜",
+      "textSha256": "bb40050f18c0cb64271f101b47c4239d45d72190d27ddbda823470c421f7ccda",
+      "output": "audio/vocab-eardrum-zh.mp3"
+    },
+    {
+      "id": "vocab-eardrum-en",
+      "kind": "vocab",
+      "termId": "eardrum",
+      "role": "narrator",
+      "lang": "en",
+      "text": "eardrum",
+      "textSha256": "aca7b5c138b47655b53c27f75ebad113e2e18680395477fb6e9ffb8719fc6427",
+      "output": "audio/vocab-eardrum-en.mp3"
+    },
+    {
+      "id": "vocab-pitch-zh",
+      "kind": "vocab",
+      "termId": "pitch",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "音调",
+      "textSha256": "8f8c5a469bea4a85d76f784aef3063a525431fbd3c4ff8e4b661e84ecd6d3cf7",
+      "output": "audio/vocab-pitch-zh.mp3"
+    },
+    {
+      "id": "vocab-pitch-en",
+      "kind": "vocab",
+      "termId": "pitch",
+      "role": "narrator",
+      "lang": "en",
+      "text": "pitch",
+      "textSha256": "4502846f2b0708ba711ffbd11548a7d79223c02b9fec3b7863628a72d46ac8b3",
+      "output": "audio/vocab-pitch-en.mp3"
+    },
+    {
+      "id": "vocab-brain-zh",
+      "kind": "vocab",
+      "termId": "brain",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "大脑",
+      "textSha256": "4af8f4c6dd2e233e6fd8e4fbc7cb82c0e762f6b951cf8398a3f8ed245191d26b",
+      "output": "audio/vocab-brain-zh.mp3"
+    },
+    {
+      "id": "vocab-brain-en",
+      "kind": "vocab",
+      "termId": "brain",
+      "role": "narrator",
+      "lang": "en",
+      "text": "brain",
+      "textSha256": "bbbf7a6412d6d3e8244ac1fda5e35a20037acee661288cb95b7b18cf469980aa",
+      "output": "audio/vocab-brain-en.mp3"
+    }
+  ]
+}

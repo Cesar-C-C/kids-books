@@ -1,0 +1,327 @@
+{
+  "bookId": "soap",
+  "scriptVersion": "soap-story-v1",
+  "scriptSha256": "b6dd3c92020321c190cf17fff8864012d5eb4c7605ba3b6a9a59c5f8b72589a4",
+  "entries": [
+    {
+      "id": "scene-helper-zh",
+      "kind": "scene",
+      "sceneId": "helper",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "小浣熊沫沫在厨房帮忙，把拌好的蔬菜端上桌。低头一看，围裙上多了几颗油点。\n“我也来把它洗干净！”",
+      "textSha256": "b66b8be8267f11a967c09e2d7b15f197931b630e71a175d55324eb8965cae9a0",
+      "output": "audio/scene-helper-zh.mp3"
+    },
+    {
+      "id": "scene-helper-en",
+      "kind": "scene",
+      "sceneId": "helper",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Momo the raccoon helped in the kitchen, carrying a bowl of dressed vegetables to the table. Looking down, Momo spotted oily marks on the apron.\n“I’ll help wash this too!”",
+      "textSha256": "4b79a505582e8a0af162ddb19a6933ead2e7736a9fde1807ebbf4d280c450ce7",
+      "output": "audio/scene-helper-en.mp3"
+    },
+    {
+      "id": "scene-water-zh",
+      "kind": "scene",
+      "sceneId": "water",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "沫沫用清水冲一冲，又轻轻揉一揉。油点还留着一些。\n“水已经来了，为什么还不走呢？”\n妈妈说：“油和水不容易混在一起。我们来做个比较。”",
+      "textSha256": "5cd6d61bf25f4aec157c40dc640bd5aa502fe1c9ac7e47926c59271a19e446c9",
+      "output": "audio/scene-water-zh.mp3"
+    },
+    {
+      "id": "scene-water-en",
+      "kind": "scene",
+      "sceneId": "water",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Momo rinsed with water and rubbed gently. Some oily marks stayed.\n“The water is here. Why hasn’t all the oil gone?”\n“Oil and water do not mix easily,” said Mom. “Let’s compare.”",
+      "textSha256": "da506a8415b8eee89ede6ce734ee1ad6120b2b6c6ae46c0e9b91975af9623c1a",
+      "output": "audio/scene-water-en.mp3"
+    },
+    {
+      "id": "scene-soap-zh",
+      "kind": "scene",
+      "sceneId": "soap",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "他们准备两份同样的油和水，只有一份加入少量清洁剂。两边都用同样的方法轻轻搅动。\n沫沫盯着两边：“这次，只让清洁剂不一样。”",
+      "textSha256": "edbf65299fe90172644f9e3564242317491f6790093728d0c79396aa3f8f6467",
+      "output": "audio/scene-soap-zh.mp3"
+    },
+    {
+      "id": "scene-soap-en",
+      "kind": "scene",
+      "sceneId": "soap",
+      "role": "narrator",
+      "lang": "en",
+      "text": "They prepared equal amounts of oil and water in two containers. They added a little detergent to just one. Both were stirred gently in the same way.\n“Only the detergent is different this time,” said Momo.",
+      "textSha256": "a563c7bf01cba5190fc4aef39c5575c8b0bbdce479138d3f8f8ec30719b38d52",
+      "output": "audio/scene-soap-en.mp3"
+    },
+    {
+      "id": "scene-two-ends-zh",
+      "kind": "scene",
+      "sceneId": "two-ends",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "肥皂和许多清洁剂里，有能帮助去油的分子。它们的一部分容易和水相处，另一部分容易和油相处。\n沫沫想：“原来，同一个小分子，有不同的部分。”",
+      "textSha256": "e4a2aed213f7198454ea3546309554b1ac866c15d2eec871551cb931f9557778",
+      "output": "audio/scene-two-ends-zh.mp3"
+    },
+    {
+      "id": "scene-two-ends-en",
+      "kind": "scene",
+      "sceneId": "two-ends",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Soap and many detergents contain molecules that help remove oil. One part interacts well with water. Another part interacts well with oil.\n“One tiny molecule has different parts,” thought Momo.",
+      "textSha256": "416b7badb942b125a4e815b98d4de4ce1787828f24303c490ddf2e3c60974237",
+      "output": "audio/scene-two-ends-en.mp3"
+    },
+    {
+      "id": "scene-rub-zh",
+      "kind": "scene",
+      "sceneId": "rub",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "轻轻揉搓，让清洁剂、水和油污充分接触。许多清洁剂分子在油和水之间排列，帮助油污分散成小油滴。\n油没有凭空消失，而是分散在洗涤水里。",
+      "textSha256": "8e15e07ea2631f4dae74403770869de813cb68d976d78b13e2ca90c39a36c57e",
+      "output": "audio/scene-rub-zh.mp3"
+    },
+    {
+      "id": "scene-rub-en",
+      "kind": "scene",
+      "sceneId": "rub",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Gentle rubbing helped the detergent, water, and oil come into contact. Many detergent molecules arranged themselves between oil and water, helping the oil break into small droplets.\nThe oil had not vanished. It was dispersed in the wash water.",
+      "textSha256": "b638d97470493c4595b56a2da94d587b0c7c20e948ffe5c201884d190af7cf01",
+      "output": "audio/scene-rub-en.mp3"
+    },
+    {
+      "id": "scene-rinse-zh",
+      "kind": "scene",
+      "sceneId": "rinse",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "接着，妈妈和沫沫用清水冲洗。分散开的油污随着洗涤水离开了围裙。\n“还需要水把它们带走！”沫沫说。",
+      "textSha256": "1eaed76a9bc74808dde841067879566276eae8c125b7b841366b8feaa66a3837",
+      "output": "audio/scene-rinse-zh.mp3"
+    },
+    {
+      "id": "scene-rinse-en",
+      "kind": "scene",
+      "sceneId": "rinse",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Next, Mom and Momo rinsed with clean water. The dispersed oil left the apron with the wash water.\n“We still need water to carry it away!” said Momo.",
+      "textSha256": "3c54f2390c2690ef72aada6788f2da35409e75d5b20752ab7f991e32c02a29e4",
+      "output": "audio/scene-rinse-en.mp3"
+    },
+    {
+      "id": "scene-bubbles-zh",
+      "kind": "scene",
+      "sceneId": "bubbles",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "沫沫看着几颗泡泡：“是你们把油污搬走的吗？”\n妈妈摇摇头：“泡泡里主要是空气。帮助去油的是清洁剂的作用，不是泡泡的数量。泡泡更多，不一定洗得更干净。”",
+      "textSha256": "34f0af56ff1fd5a3b5cbc23c07d7cd577bd7fa590d3a9f3c9f446e7812c8a213",
+      "output": "audio/scene-bubbles-zh.mp3"
+    },
+    {
+      "id": "scene-bubbles-en",
+      "kind": "scene",
+      "sceneId": "bubbles",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Momo watched a few bubbles. “Did you carry the oil away?”\nMom shook her head. “Bubbles mostly hold air. Detergent helps remove oil; counting bubbles does not tell us how well it cleans. More bubbles do not always mean cleaner.”",
+      "textSha256": "974fac4786c6246cb42272aaa0870210345b306eb6b04c12da0f6455692bac17",
+      "output": "audio/scene-bubbles-en.mp3"
+    },
+    {
+      "id": "scene-clean-zh",
+      "kind": "scene",
+      "sceneId": "clean",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "“那洗干净，就是什么细菌都没有了吗？”\n“不是。清洗可以去掉油污和一些微生物，但不等于消灭所有细菌。”妈妈说。\n沫沫把干净一些的围裙挂好。",
+      "textSha256": "7fd24159d1ab95efb0dca49330080aa4bf6cdb0d43ce887de87be384bfb66291",
+      "output": "audio/scene-clean-zh.mp3"
+    },
+    {
+      "id": "scene-clean-en",
+      "kind": "scene",
+      "sceneId": "clean",
+      "role": "narrator",
+      "lang": "en",
+      "text": "“Does washing mean there are no germs left at all?”\n“No. Washing can remove grease and some microbes, but it does not kill every germ,” said Mom.\nMomo hung up the cleaner apron.",
+      "textSha256": "cd2c3086f20f575eb3e5b77954a0f4c240c4fb037fb62aed1038880624e5a47b",
+      "output": "audio/scene-clean-en.mp3"
+    },
+    {
+      "id": "scene-finish-zh",
+      "kind": "scene",
+      "sceneId": "finish",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "厨房又收拾好了。沫沫记住了：选合适的清洁剂，轻轻揉搓，再冲洗。\n下一次帮忙，他不再只盯着泡泡，而会看看油污有没有被洗走。",
+      "textSha256": "907fd9f6d4443763f41ee0269dd5c8a67b5c2f806ab981b60f5117d6f7b4efff",
+      "output": "audio/scene-finish-zh.mp3"
+    },
+    {
+      "id": "scene-finish-en",
+      "kind": "scene",
+      "sceneId": "finish",
+      "role": "narrator",
+      "lang": "en",
+      "text": "The kitchen was tidy again. Momo remembered: choose a suitable cleaner, rub gently, then rinse.\nNext time, Momo would look at whether the oil washed away, not just at the bubbles.",
+      "textSha256": "8a90494aa02de0ecb2869e972e97a37cb93200a6b832a6986c7cfb879dba4a6d",
+      "output": "audio/scene-finish-en.mp3"
+    },
+    {
+      "id": "scene-try-zh",
+      "kind": "scene",
+      "sceneId": "try",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "想自己比较吗？请大人陪你，用少量水、食用油和合适的清洁剂试一试。\n材料不入口，不揉眼睛，不混用清洁产品。结束后收拾桌面、洗好手。",
+      "textSha256": "e8393c6bbc23e4c65bdc296e530e128af0ed5ce817f755d79425b11580289b68",
+      "output": "audio/scene-try-zh.mp3"
+    },
+    {
+      "id": "scene-try-en",
+      "kind": "scene",
+      "sceneId": "try",
+      "role": "narrator",
+      "lang": "en",
+      "text": "Want to compare for yourself? Ask a grown-up to help with small amounts of water, cooking oil, and a suitable detergent.\nKeep materials away from your mouth and eyes. Do not mix cleaning products. Tidy the table and wash your hands afterward.",
+      "textSha256": "8450c816fa389933e0702c476c9ae932315f54b4ad4c078d15372078b94bce38",
+      "output": "audio/scene-try-en.mp3"
+    },
+    {
+      "id": "vocab-water-zh",
+      "kind": "vocab",
+      "termId": "water",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "水",
+      "textSha256": "327b54d04f71f2126114d9d61d4c3640ca0fc5b30878ad28416ff634a51a712d",
+      "output": "audio/vocab-water-zh.mp3"
+    },
+    {
+      "id": "vocab-water-en",
+      "kind": "vocab",
+      "termId": "water",
+      "role": "narrator",
+      "lang": "en",
+      "text": "water",
+      "textSha256": "0f4168490e38b8447e11ba4bd656aa11b925bd22af30bac464bc153fdb608501",
+      "output": "audio/vocab-water-en.mp3"
+    },
+    {
+      "id": "vocab-oil-zh",
+      "kind": "vocab",
+      "termId": "oil",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "油",
+      "textSha256": "d07cd4b0a23b3a373b1c75e390e9940624400ef70cd8799f385863f317ba5f61",
+      "output": "audio/vocab-oil-zh.mp3"
+    },
+    {
+      "id": "vocab-oil-en",
+      "kind": "vocab",
+      "termId": "oil",
+      "role": "narrator",
+      "lang": "en",
+      "text": "oil",
+      "textSha256": "ab7902bcbd91137e09d6aeb83a2a8853f75878830c4a550ac8ef2b0ae12b8c86",
+      "output": "audio/vocab-oil-en.mp3"
+    },
+    {
+      "id": "vocab-soap-zh",
+      "kind": "vocab",
+      "termId": "soap",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "肥皂",
+      "textSha256": "247d71e18ca631b2a39b24e62d9f099c03c3eb61eb681324bc72a640046b2151",
+      "output": "audio/vocab-soap-zh.mp3"
+    },
+    {
+      "id": "vocab-soap-en",
+      "kind": "vocab",
+      "termId": "soap",
+      "role": "narrator",
+      "lang": "en",
+      "text": "soap",
+      "textSha256": "736bc2d4e0945110e88f7808a4a4d38d3479a0122de1de7ac84c920121928480",
+      "output": "audio/vocab-soap-en.mp3"
+    },
+    {
+      "id": "vocab-molecule-zh",
+      "kind": "vocab",
+      "termId": "molecule",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "分子",
+      "textSha256": "248b4c7b7f4943ea7a504cc43ca83f01fd02605fb46230e986a92faebafe87e4",
+      "output": "audio/vocab-molecule-zh.mp3"
+    },
+    {
+      "id": "vocab-molecule-en",
+      "kind": "vocab",
+      "termId": "molecule",
+      "role": "narrator",
+      "lang": "en",
+      "text": "molecule",
+      "textSha256": "cd282cd375dcc40a9fa0f06a7b72f24b7cacb587af40aea3f53227cbd6cb1124",
+      "output": "audio/vocab-molecule-en.mp3"
+    },
+    {
+      "id": "vocab-droplet-zh",
+      "kind": "vocab",
+      "termId": "droplet",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "小液滴",
+      "textSha256": "10c953c4bd0ee814ae6831691de8669a6cd78e7ccf686c8b1bf0ce50f3248f47",
+      "output": "audio/vocab-droplet-zh.mp3"
+    },
+    {
+      "id": "vocab-droplet-en",
+      "kind": "vocab",
+      "termId": "droplet",
+      "role": "narrator",
+      "lang": "en",
+      "text": "droplet",
+      "textSha256": "7becf04360b642f45b6fb7f7ce10dadfc51bd5b6154373065ee35e690ed37c63",
+      "output": "audio/vocab-droplet-en.mp3"
+    },
+    {
+      "id": "vocab-rinse-zh",
+      "kind": "vocab",
+      "termId": "rinse",
+      "role": "narrator",
+      "lang": "zh",
+      "text": "冲洗",
+      "textSha256": "e654c38df5ed3997c2125a8b36fc5ac5a7e6fb251cd96d140e336905f457033a",
+      "output": "audio/vocab-rinse-zh.mp3"
+    },
+    {
+      "id": "vocab-rinse-en",
+      "kind": "vocab",
+      "termId": "rinse",
+      "role": "narrator",
+      "lang": "en",
+      "text": "rinse",
+      "textSha256": "7d535f27315c57ec3942c1af6056addcf57f09df9b7702a306561784bca24a99",
+      "output": "audio/vocab-rinse-en.mp3"
+    }
+  ]
+}

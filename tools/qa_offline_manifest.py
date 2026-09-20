@@ -64,7 +64,8 @@ def main():
             book = books[bid]
             required = set(structured['images'] + structured['data'] + structured['audio'])
             required.update('books/%s/%s' % (bid, f) for f in
-                            ('index.html', bid + '-experience.js', bid + '-model.js', bid + '.css'))
+                            os.listdir(os.path.join(REPO, 'books', bid))
+                            if f == 'index.html' or f.endswith(('.js', '.css')))
             if required != set(book['files']):
                 problems.append('[%s] story resources differ from offline files' % bid)
             if book.get('missingAudio') != structured['missingAudio'] or book.get('complete') != (not structured['missingAudio']):
