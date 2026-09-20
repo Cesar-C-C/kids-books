@@ -182,8 +182,10 @@ def check_sw():
     if not os.path.exists(path):
         return bad("sw.js 不存在")
     src = open(path, encoding="utf-8").read()
-    if "importScripts('./pwa-assets.js')" not in src:
-        bad("sw.js 没有 importScripts('./pwa-assets.js')")
+    manifest_source = open(os.path.join(REPO, 'pwa-assets.js'), encoding='utf-8').read()
+    manifest_version = re.search(r'"version":"([a-f0-9]+)"', manifest_source)
+    if not manifest_version or "importScripts('./pwa-assets.js?v=%s');" % manifest_version.group(1) not in src:
+        bad("sw.js 的离线清单版本未同步（运行 python tools/gen_pwa_assets.py）")
     if "'kb-asset-v1'" not in src and '"kb-asset-v1"' not in src:
         bad("离线包缓存不是固定名（kb-asset-v1）—— 一旦跟版本走，家长下载的绘本会被改版清空")
     if "status === 200" not in src:

@@ -28,7 +28,9 @@
    ============================================================ */
 /* global self, caches, clients, fetch, Response, URL, Request */
 
-importScripts('./pwa-assets.js');
+// Manifest URL is regenerated with the content fingerprint: old installed clients
+// may still register with updateViaCache=imports, so an unversioned import stays stale.
+importScripts('./pwa-assets.js?v=02b2e01817c0');
 
 var KB = self.KB_ASSETS || { version: 'dev', shell: [], books: {} };
 var VERSION = KB.version || 'dev';
@@ -71,6 +73,8 @@ self.addEventListener('install', function (event) {
     }));
     var bad = results.filter(function (r) { return r.status === 'rejected'; });
     if (bad.length) console.warn('[sw] 外壳预缓存部分失败：', bad.map(function (b) { return String(b.reason); }));
+    // Bootstrap upgrades even when the cached client misses updatefound/installed.
+    await self.skipWaiting();
   })());
 });
 
