@@ -1,0 +1,23 @@
+{
+  "scope": "Chrome headless WebAudio decode and offline render only; not human hearing acceptance or integrated page QA",
+  "results": [
+    {
+      "name": "drum-low",
+      "duration": 1.2536666666666667,
+      "sampleRate": 48000,
+      "channels": 1,
+      "frames": 60176,
+      "finite": true,
+      "nonSilent": true
+    },
+    {
+      "name": "drum-high",
+      "duration": 1.2536666666666667,
+      "sampleRate": 48000,
+      "channels": 1,
+      "frames": 60176,
+      "finite": true,
+      "nonSilent": true
+    }
+  ]
+}

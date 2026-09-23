@@ -43,7 +43,19 @@ def discover(repo, book_id):
     overrides = image_maps[0] if image_maps else {}
     if not isinstance(overrides, dict) or not set(overrides).issubset({s['id'] for s in story['scenes']}):
         raise ValueError('Unknown scene image override: ' + book_id)
-    images = sorted({f'images/{overrides.get(s["id"], s["image"])}.webp' for s in story['scenes']})
+    images = {f'images/{overrides.get(s["id"], s["image"])}.webp' for s in story['scenes']}
+    # Book-local interaction scripts may use images outside the frozen story.
+    # Follow only scripts loaded by this entry, not unused drafts on disk. Keep
+    # these literal URLs under the same existence/path checks as scene images.
+    for source in sources:
+        images.update(re.findall(r'''["'](images/[^"']+\.webp)["']''', source))
+    images = sorted(images)
+    sfx = sorted({p for source in sources for p in
+                  re.findall(r'''["'](sfx/[^"']+\.wav)["']''', source)})
+    for resource in sfx:
+        if (not re.fullmatch(r'sfx/[\w-]+\.wav', resource)
+                or not (base / resource).is_file() or (base / resource).stat().st_size == 0):
+            raise ValueError('Missing/invalid interaction sound: ' + resource)
     audio = []
     for e in entries:
         output = e['output']
@@ -59,6 +71,7 @@ def discover(repo, book_id):
     return {
         'cover': f'images/{overrides.get(story["scenes"][0]["id"], story["scenes"][0]["image"])}.webp',
         'images': [prefix + p for p in images],
+        'sfx': [prefix + p for p in sfx],
         'data': [prefix + p for p in ('story.json', 'audio-manifest.json')],
         'audio': [prefix + p + '?v=' + version for p in present],
         'audioExpected': len(audio),

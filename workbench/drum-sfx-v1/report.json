@@ -1,0 +1,77 @@
+{
+  "source": "Darbuka_1_hit_vl2_rr1.wav",
+  "pitch_shift_semitones": 5,
+  "method": "librosa time-preserving phase-vocoder pitch shift; full-window ungated K-weighted energy match; shared peak ceiling -6 dBFS",
+  "metrics": [
+    {
+      "file": "books\\sound\\sfx\\drum-low.wav",
+      "sha256": "6fac1c2921d0aac2a6926155649b8acc9ea7af8bce2b7c8ce630b4ebd3e915b6",
+      "frames": 60176,
+      "sample_rate": 48000,
+      "channels": 1,
+      "duration_s": 1.2536666666666667,
+      "peak_dbfs": -6.770397010184248,
+      "rms_dbfs": -23.86347917773296,
+      "k_weighted_energy_db": -24.350614686551637,
+      "dominant_peak_first_250ms_hz": 144.0,
+      "finite": true,
+      "clipped_samples": 0,
+      "rms_100ms_dbfs": [
+        -14.4,
+        -19.87,
+        -24.73,
+        -29.78,
+        -34.82,
+        -39.91,
+        -45.01,
+        -50.04,
+        -54.62,
+        -58.41,
+        -61.32,
+        -63.35,
+        -66.0
+      ]
+    },
+    {
+      "file": "books\\sound\\sfx\\drum-high.wav",
+      "sha256": "f522cd30c605a18736ac8090ff4fc0c6e3c92c65d066707f9bc9bf136d737f7c",
+      "frames": 60176,
+      "sample_rate": 48000,
+      "channels": 1,
+      "duration_s": 1.2536666666666667,
+      "peak_dbfs": -6.000477743319013,
+      "rms_dbfs": -24.104894363453102,
+      "k_weighted_energy_db": -24.35061522781551,
+      "dominant_peak_first_250ms_hz": 192.0,
+      "finite": true,
+      "clipped_samples": 0,
+      "rms_100ms_dbfs": [
+        -14.59,
+        -20.24,
+        -25.07,
+        -30.16,
+        -35.29,
+        -40.33,
+        -45.42,
+        -50.43,
+        -55.01,
+        -58.8,
+        -61.55,
+        -63.39,
+        -66.47
+      ]
+    }
+  ],
+  "runtime_gains": {
+    "soft": 0.4,
+    "loud": 0.85,
+    "normal": 0.85
+  },
+  "gain_pair_difference_db": 6.547178687726607,
+  "limitations": [
+    "K weighting is a perceptual proxy, not human equal-loudness acceptance.",
+    "Time-preserving shift may alter transient timbre.",
+    "Recorded tail is NOT guaranteed audible for one second on every device.",
+    "dBFS is not acoustic SPL or a hearing-safety measurement."
+  ]
+}
