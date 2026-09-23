@@ -62,7 +62,7 @@ def main():
         structured = story_resources(REPO, bid)
         if structured:
             book = books[bid]
-            required = set(structured['images'] + structured['data'] + structured['audio'])
+            required = set(structured['images'] + structured['data'] + structured['audio'] + structured['sfx'])
             required.update('books/%s/%s' % (bid, f) for f in
                             os.listdir(os.path.join(REPO, 'books', bid))
                             if f == 'index.html' or f.endswith(('.js', '.css')))

@@ -30,7 +30,7 @@
 
 // Manifest URL is regenerated with the content fingerprint: old installed clients
 // may still register with updateViaCache=imports, so an unversioned import stays stale.
-importScripts('./pwa-assets.js?v=02b2e01817c0');
+importScripts('./pwa-assets.js?v=5abde007feec');
 
 var KB = self.KB_ASSETS || { version: 'dev', shell: [], books: {} };
 var VERSION = KB.version || 'dev';

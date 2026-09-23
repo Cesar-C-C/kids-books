@@ -198,7 +198,7 @@ def main():
         imgs, miss = (structured['images'], []) if structured else referenced_assets(name)
         if miss:
             missing_assets.append((name, miss))
-        files = imgs + (structured['audio'] + structured['data'] if structured else book_audio(name, audio_ver))
+        files = imgs + (structured['audio'] + structured['data'] + structured['sfx'] if structured else book_audio(name, audio_ver))
         if structured:
             shell.extend(structured['data'])
         # Include per-book readers/styles as well as the shared-reader contract.

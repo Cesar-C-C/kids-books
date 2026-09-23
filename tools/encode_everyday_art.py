@@ -12,5 +12,6 @@ root = Path(__file__).resolve().parents[1]
 target = root / 'books' / args.book / 'images' / (args.name + '.webp')
 target.parent.mkdir(parents=True, exist_ok=True)
 with Image.open(args.source) as im:
-    im.convert('RGB').save(target, 'WEBP', quality=92, method=6)
+    mode = 'RGBA' if 'A' in im.getbands() or 'transparency' in im.info else 'RGB'
+    im.convert(mode).save(target, 'WEBP', quality=92, method=6)
     print(f'{target}: {im.size}, {target.stat().st_size} bytes')
