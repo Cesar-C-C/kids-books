@@ -43,6 +43,43 @@
   var pendingPrompt = null;      // 浏览器给出的安装机会，用过即作废
   var ui = {};                   // 元素引用
 
+  /* Optional book-to-lab link: read the installed worker's actual core cache.
+     An old/silent worker, an uncontrolled page, or a malformed reply fails closed. */
+  window.KBOfflineLab = {
+    check: function (labId) {
+      var unavailable = { ready: false, version: null };
+      if (labId !== 'earthquake' || !supported || !navigator.serviceWorker.controller ||
+          typeof MessageChannel === 'undefined') {
+        return Promise.resolve(unavailable);
+      }
+      return new Promise(function (resolve) {
+        var channel = new MessageChannel();
+        var done = false;
+        var timer;
+        function finish(value) {
+          if (done) return;
+          done = true;
+          clearTimeout(timer);
+          channel.port1.close();
+          resolve(value);
+        }
+        timer = setTimeout(function () { finish(unavailable); }, 1200);
+        channel.port1.onmessage = function (event) {
+          var data = event.data;
+          if (!data || data.type !== 'KB_LAB_STATUS' || data.labId !== labId ||
+              data.ready !== true || typeof data.version !== 'string') {
+            finish(unavailable);
+            return;
+          }
+          finish({ ready: true, version: data.version });
+        };
+        try {
+          navigator.serviceWorker.controller.postMessage({ type: 'KB_LAB_STATUS', labId: labId }, [channel.port2]);
+        } catch (error) { finish(unavailable); }
+      });
+    }
+  };
+
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
     else fn();
@@ -367,7 +404,8 @@
     ui.sheet.classList.add('open');
     document.documentElement.classList.add('kb-lock');
     loadStatus();
-    checkForUpdate(false);
+    /* 不在打开面板时重复注册更新：此时若恰逢部署切换，旧版 update()
+       与下一次页面导航的更新会重叠，导致新 worker 停在 waiting。 */
     if (ui.panel) ui.panel.focus();
   }
   function closeSheet() {

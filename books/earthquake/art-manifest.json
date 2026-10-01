@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "status": "candidate",
+  "generator": "built-in image_gen",
+  "entries": [
+    {
+      "id": "yan-yan",
+      "path": "images/yan-yan.webp",
+      "sourceFile": "exec-60c68cdc-4237-454d-8f82-ef1e723dce75.png",
+      "prompt": "Full-body friendly honey-brown pangolin Yan-Yan, cream muzzle and belly, dark eyes, long scaled tail, teal museum-helper apron. Painterly gouache/pencil. Transparent alpha, no text or backdrop.",
+      "referenceIds": [],
+      "alphaRequired": true,
+      "reviewed": true,
+      "reviewNotes": "Character and museum story framing visually inspected; no text baked in.",
+      "sourceBatch": "imagegen-2026-10-01-earthquake"
+    },
+    {
+      "id": "opening",
+      "path": "images/opening.webp",
+      "sourceFile": "exec-5f525257-95a5-4783-9c8a-d27aaed20097.png",
+      "prompt": "Wide opening: Yan-Yan holding blank task card beside low museum table with two sandstone blocks; bright arched windows, wooden rock shelves and ferns. Reference locks character and gouache style. No text.",
+      "referenceIds": [
+        "yan-yan"
+      ],
+      "alphaRequired": false,
+      "reviewed": true,
+      "reviewNotes": "Character and museum story framing visually inspected; no text baked in.",
+      "sourceBatch": "imagegen-2026-10-01-earthquake"
+    },
+    {
+      "id": "observation",
+      "path": "images/observation.webp",
+      "sourceFile": "exec-501df9eb-71aa-4a3e-bf7d-22fa29a25e7d.png",
+      "prompt": "Medium museum scene: Yan-Yan gently touches outer side of sandstone tabletop model with horizontal grain, hands and face visible outside model. Reference locks identity. No diagrams or labels.",
+      "referenceIds": [
+        "yan-yan"
+      ],
+      "alphaRequired": false,
+      "reviewed": true,
+      "reviewNotes": "Character and museum story framing visually inspected; no text baked in.",
+      "sourceBatch": "imagegen-2026-10-01-earthquake"
+    },
+    {
+      "id": "arrival",
+      "path": "images/arrival.webp",
+      "sourceFile": "exec-e39eef44-08ee-4940-a1cf-f0f1de9bf1fb.png",
+      "prompt": "Wide museum scene: Yan-Yan places two blank pennant flags at different positions on sandstone tabletop exhibit. Reference locks character; rocks, wooden shelves, green plants. No letters, no magic waves.",
+      "referenceIds": [
+        "yan-yan"
+      ],
+      "alphaRequired": false,
+      "reviewed": true,
+      "reviewNotes": "Narrative exhibit only; different specimen arrangement, no instructional geometric claims.",
+      "sourceBatch": "imagegen-2026-10-01-earthquake"
+    },
+    {
+      "id": "exhibit",
+      "path": "images/exhibit.webp",
+      "sourceFile": "exec-4bbe1e7f-2755-4ac9-ae08-6385dc9eaf64.png",
+      "prompt": "Closing museum scene: Yan-Yan welcomes rabbit and squirrel beside low wooden display with three blank framed exhibit cards. Warm calm sunlight. Reference locks character/style. No text, no danger.",
+      "referenceIds": [
+        "yan-yan"
+      ],
+      "alphaRequired": false,
+      "reviewed": true,
+      "reviewNotes": "Character and museum story framing visually inspected; no text baked in.",
+      "sourceBatch": "imagegen-2026-10-01-earthquake"
+    }
+  ]
+}

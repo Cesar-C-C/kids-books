@@ -1,0 +1,403 @@
+{
+  "bookId": "earthquake",
+  "scriptVersion": "earthquake-story-v1",
+  "frozen": true,
+  "title": {
+    "zh": "地面为什么会摇？",
+    "en": "Why Does the Ground Shake?"
+  },
+  "scenes": [
+    {
+      "id": "invitation",
+      "act": "opening",
+      "image": "opening",
+      "zh": "自然博物馆快开新展览了。小穿山甲岩岩收到一张任务卡：让大家看懂，地面为什么会摇？",
+      "en": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: help visitors discover why the ground shakes.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "自然博物馆快开新展览了。小穿山甲岩岩收到一张任务卡：让大家看懂，地面为什么会摇？"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: help visitors discover why the ground shakes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "quiet-model",
+      "act": "opening",
+      "image": "opening",
+      "zh": "岩岩摆好两块岩石模型。它们安安静静，一点也不摇。“先别急，”讲解员说，“我们在馆里，慢慢看看大地模型怎样动。”",
+      "en": "Yan-Yan set two model rock blocks in place. Nothing moved. “Take your time,” said the museum guide. “Here in the museum, we can watch our model Earth move slowly.”",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "岩岩摆好两块岩石模型。它们安安静静，一点也不摇。“先别急，”讲解员说，“我们在馆里，慢慢看看大地模型怎样动。”"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "Yan-Yan set two model rock blocks in place. Nothing moved. “Take your time,” said the museum guide. “Here in the museum, we can watch our model Earth move slowly.”"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stuck",
+      "act": "fault",
+      "image": "observation",
+      "zh": "岩岩轻轻推动模型的两边。接缝还卡着，旁边的纹路却弯了。“咦！这里没滑，那里已经变样了。”",
+      "en": "Yan-Yan gently pushed the sides of the model toward each other. The seam stayed stuck, but the markings beside it bent. “This part has not slipped, but that part is changing!”",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "岩岩轻轻推动模型的两边。接缝还卡着，旁边的纹路却弯了。"
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“咦！这里没滑，那里已经变样了。”"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "Yan-Yan gently pushed the sides of the model toward each other. The seam stayed stuck, but the markings beside it bent. "
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“This part has not slipped, but that part is changing!”"
+          }
+        ]
+      }
+    },
+    {
+      "id": "slip",
+      "act": "fault",
+      "image": "observation",
+      "zh": "突然，接缝两边滑动了！弯着的纹路松回来一些，却没有全回到老地方。岩岩指着错开的线：“这就是它动过的痕迹。”",
+      "en": "Suddenly, the rocks slipped along the seam! The bent markings sprang back a little, but not all the way. Yan-Yan pointed at the offset lines. “They show us where the rocks moved.”",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "突然，接缝两边滑动了！弯着的纹路松回来一些，却没有全回到老地方。岩岩指着错开的线："
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“这就是它动过的痕迹。”"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "Suddenly, the rocks slipped along the seam! The bent markings sprang back a little, but not all the way. Yan-Yan pointed at the offset lines. "
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“They show us where the rocks moved.”"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flags",
+      "act": "waves",
+      "image": "arrival",
+      "zh": "“振动传到哪里了？”岩岩在地表摆好两面感应旗。你来帮他选位置，再猜猜，哪面旗先收到信号？",
+      "en": "“Where have the vibrations reached?” Yan-Yan placed two signal flags on the surface. Help him choose their positions. Which flag will receive the signal first?",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "yanyan",
+            "sourceText": "“振动传到哪里了？”"
+          },
+          {
+            "role": "narrator",
+            "sourceText": "岩岩在地表摆好两面感应旗。你来帮他选位置，再猜猜，哪面旗先收到信号？"
+          }
+        ],
+        "en": [
+          {
+            "role": "yanyan",
+            "sourceText": "“Where have the vibrations reached?”"
+          },
+          {
+            "role": "narrator",
+            "sourceText": " Yan-Yan placed two signal flags on the surface. Help him choose their positions. Which flag will receive the signal first?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "little-rock",
+      "act": "waves",
+      "image": "arrival",
+      "zh": "岩岩盯住地下的一颗小标记。振动传过去时，它在原来的位置附近来回动，并没有跟着波跑到旗子那里。",
+      "en": "Yan-Yan watched a little marker underground. As the vibration passed, it moved back and forth near its starting place. It did not travel with the wave to the flags.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "岩岩盯住地下的一颗小标记。振动传过去时，它在原来的位置附近来回动，并没有跟着波跑到旗子那里。"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "Yan-Yan watched a little marker underground. As the vibration passed, it moved back and forth near its starting place. It did not travel with the wave to the flags."
+          }
+        ]
+      }
+    },
+    {
+      "id": "curator",
+      "act": "exhibit",
+      "image": "exhibit",
+      "zh": "展览快准备好了！岩岩有三张会动的展卡：旁边变形、突然滑动、振动传开。怎样摆，能把刚才的发现讲清楚？",
+      "en": "The exhibition was almost ready! Yan-Yan had three moving display cards: rocks changing shape, sudden slipping, and vibrations spreading. How could he arrange them to tell the story?",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "展览快准备好了！岩岩有三张会动的展卡：旁边变形、突然滑动、振动传开。怎样摆，能把刚才的发现讲清楚？"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "The exhibition was almost ready! Yan-Yan had three moving display cards: rocks changing shape, sudden slipping, and vibrations spreading. How could he arrange them to tell the story?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "opening-day",
+      "act": "ending",
+      "image": "exhibit",
+      "zh": "小伙伴们来了。岩岩带大家看纹路、看接缝、看留在附近的小标记。“不是整块岩石跑远了，”他说，“是振动的变化传开了！”",
+      "en": "The visitors arrived. Yan-Yan showed them the markings, the seam, and the marker that stayed nearby. “The whole rock did not travel far away,” he said. “The vibrations spread!”",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "小伙伴们来了。岩岩带大家看纹路、看接缝、看留在附近的小标记。"
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“不是整块岩石跑远了，”"
+          },
+          {
+            "role": "narrator",
+            "sourceText": "他说，"
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“是振动的变化传开了！”"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "The visitors arrived. Yan-Yan showed them the markings, the seam, and the marker that stayed nearby. "
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“The whole rock did not travel far away,”"
+          },
+          {
+            "role": "narrator",
+            "sourceText": " he said. "
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“The vibrations spread!”"
+          }
+        ]
+      }
+    }
+  ],
+  "vocab": [
+    {
+      "id": "fault",
+      "zh": "断层",
+      "en": "fault",
+      "narrationNeeded": true,
+      "conceptId": "fault"
+    },
+    {
+      "id": "elastic-strain",
+      "zh": "弹性形变",
+      "en": "elastic deformation",
+      "narrationNeeded": true,
+      "conceptId": "elastic-strain"
+    },
+    {
+      "id": "slip",
+      "zh": "滑动",
+      "en": "slip",
+      "narrationNeeded": true,
+      "conceptId": "slip"
+    },
+    {
+      "id": "focus",
+      "zh": "震源",
+      "en": "earthquake focus",
+      "narrationNeeded": true,
+      "conceptId": "focus"
+    },
+    {
+      "id": "wavefront",
+      "zh": "波前",
+      "en": "wavefront",
+      "narrationNeeded": true,
+      "conceptId": "wavefront"
+    },
+    {
+      "id": "particle-motion",
+      "zh": "原位附近的运动",
+      "en": "local motion",
+      "narrationNeeded": true,
+      "conceptId": "particle-motion"
+    }
+  ],
+  "interactions": [
+    {
+      "id": "fault-predict",
+      "kind": "prompt",
+      "conceptId": "elastic-strain",
+      "zh": "接缝卡住时，旁边会怎样？",
+      "en": "What happens beside a fault when it is stuck?",
+      "narrationNeeded": true
+    },
+    {
+      "id": "fault-initial",
+      "kind": "result",
+      "conceptId": "fault",
+      "zh": "先看接缝和旁边的纹路，再轻轻推动。",
+      "en": "Watch the seam and the markings beside it. Then push gently.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "fault-locked",
+      "kind": "result",
+      "conceptId": "elastic-strain",
+      "zh": "接缝还没滑，旁边的纹路已经弯了。",
+      "en": "The fault is still stuck. The markings beside it have bent.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "fault-slipped",
+      "kind": "result",
+      "conceptId": "slip",
+      "zh": "这里突然滑了！看看两边的纹路。",
+      "en": "It slipped suddenly here! Look at the markings on both sides.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "fault-settled",
+      "kind": "result",
+      "conceptId": "slip",
+      "zh": "运动停了，纹路仍然错开。",
+      "en": "The movement stopped. The markings are still offset.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "wave-predict",
+      "kind": "prompt",
+      "conceptId": "wavefront",
+      "zh": "同一次振动，哪面旗先收到信号？",
+      "en": "Which flag will receive the signal first from this event?",
+      "narrationNeeded": true
+    },
+    {
+      "id": "wave-ready",
+      "kind": "result",
+      "conceptId": "wavefront",
+      "zh": "两面旗准备好了。先猜猜，也可以直接观察。",
+      "en": "Both flags are ready. Make a prediction, or just watch.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "wave-moving",
+      "kind": "result",
+      "conceptId": "wavefront",
+      "zh": "变化从地下传开了，留意两面旗。",
+      "en": "The disturbance is spreading from underground. Watch both flags.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "arrived-a",
+      "kind": "result",
+      "conceptId": "wavefront",
+      "zh": "A先收到了信号。换个位置再看看？",
+      "en": "A received the signal first. Try changing the positions.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "arrived-b",
+      "kind": "result",
+      "conceptId": "wavefront",
+      "zh": "B先收到了信号。换个位置再看看？",
+      "en": "B received the signal first. Try changing the positions.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "arrived-together",
+      "kind": "result",
+      "conceptId": "wavefront",
+      "zh": "两面旗离起点一样远，一起收到了信号。",
+      "en": "Both flags are the same distance from the source. They received the signal together.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "local-motion",
+      "kind": "result",
+      "conceptId": "particle-motion",
+      "zh": "小标记在原位附近动，没有跟着波跑走。",
+      "en": "The marker moves near its starting place. It does not travel with the wave.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "exhibit-hint",
+      "kind": "prompt",
+      "conceptId": "elastic-strain",
+      "zh": "先找旁边纹路慢慢弯的那张，再看哪里突然滑动。",
+      "en": "Start with the card showing the markings bending. Then find the sudden slip.",
+      "narrationNeeded": true
+    },
+    {
+      "id": "exhibit-complete",
+      "kind": "result",
+      "conceptId": "wavefront",
+      "zh": "展览摆好了：旁边变形，突然滑动，振动传开。",
+      "en": "The display is ready: rocks change shape, slip suddenly, and vibrations spread.",
+      "narrationNeeded": true
+    }
+  ],
+  "ui": {},
+  "exhibitOrder": [
+    "strain",
+    "slip",
+    "waves"
+  ],
+  "adultNotes": {
+    "zh": "本书介绍断层突然滑动引发地震的一种机制。断层卡住时，周围岩石仍可发生弹性形变；滑动释放的部分能量以地震波传开。实验采用向内挤压的逆断层教学近似，上盘沿倾斜断层面向上移动。时间、形变和位移经过放大或压缩，不对应现实预测。波实验是均匀介质中的单一脉冲；旗子表示信号到达，不表示震动强弱或安全程度。局部振动与断层永久错位是不同现象。本书不提供地震预报或避险指引。",
+    "en": "This story explores one earthquake mechanism: sudden slip on a fault. Surrounding rock can deform elastically while a fault is locked. Part of the energy released by slipping travels as seismic waves. The fault activity uses a simplified compression-driven reverse fault, with the hanging wall moving upward along the inclined fault. Time, deformation and displacement are scaled for observation, not real-world prediction. The wave activity uses one pulse in a uniform medium. Flags show arrival, not shaking strength or safety. Local vibration and permanent fault offset are different effects. This book is not an earthquake forecast or an emergency guide."
+  }
+}

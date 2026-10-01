@@ -57,6 +57,47 @@ ICON_DIR = "icons"
 LAB_EXCLUDE = (".md", ".py", ".json")
 
 
+def earthquake_lab_inventory(repo):
+    """List only runtime lab core assets; MP3 stays a separate on-demand budget."""
+    base = os.path.join(repo, 'labs', 'earthquake')
+    if not os.path.isdir(base):
+        return None
+    files, audio = set(), set()
+    for root, dirs, names in os.walk(base):
+        dirs[:] = [name for name in dirs if name not in ('__pycache__', '_replica', 'audio')]
+        for name in names:
+            rel = os.path.relpath(os.path.join(root, name), repo).replace('\\', '/')
+            if name.lower().endswith(('.md', '.py', '.wav', '.log')):
+                continue
+            if name.lower().endswith('.json') and name not in ('content.json', 'audio-manifest.json'):
+                continue
+            files.add(rel)
+    audio_dir = os.path.join(base, 'audio')
+    if os.path.isdir(audio_dir):
+        for name in os.listdir(audio_dir):
+            path = os.path.join(audio_dir, name)
+            if os.path.isfile(path) and name.lower().endswith('.mp3'):
+                audio.add('labs/earthquake/audio/' + name)
+    for page in list(files):
+        if not page.endswith('.html'):
+            continue
+        with open(os.path.join(repo, page), encoding='utf-8') as source:
+            refs = re.findall(r'<(?:img|script|link)\b[^>]+(?:src|href)="([^"]+)"', source.read())
+        for src in refs:
+            if src.startswith(('http:', 'https:', 'data:', '/')):
+                continue
+            dep = os.path.normpath(os.path.join(os.path.dirname(page), src.split('?')[0])).replace('\\', '/')
+            if (not dep.startswith('../') and not os.path.isabs(dep)
+                    and '/audio/' not in dep and os.path.isfile(os.path.join(repo, dep))):
+                files.add(dep + ('?' + src.split('?', 1)[1] if '?' in src else ''))
+    return {
+        'files': sorted(files),
+        'bytes': sum(os.path.getsize(os.path.join(repo, rel.split('?')[0])) for rel in files),
+        'onDemandAudio': sorted(audio),
+        'onDemandAudioBytes': sum(os.path.getsize(os.path.join(repo, rel)) for rel in audio),
+    }
+
+
 def rel_files(*dirs):
     """按目录列举仓库内文件（相对路径，正斜杠）。"""
     found = []
@@ -157,6 +198,10 @@ def book_audio(name, audio_ver):
 def main():
     audio_ver = read_audio_ver()
     lab_files = [f for f in rel_files("labs") if not f.lower().endswith(LAB_EXCLUDE) and "/_replica/" not in f]
+    earthquake_lab = earthquake_lab_inventory(REPO)
+    if earthquake_lab is not None:
+        lab_files = [f for f in lab_files if not f.startswith('labs/earthquake/')]
+        lab_files.extend(earthquake_lab['files'])
 
     # 书架封面用的小派生图（480px，见 tools/gen_pwa_covers.py）必须进外壳预缓存：
     # 线上封面走 jsDelivr 是跨域请求，Service Worker 按设计放行不缓存；只靠
@@ -235,6 +280,7 @@ def main():
         "audioVer": audio_ver,
         "shell": shell,
         "books": books,
+        "labs": {"earthquake": earthquake_lab} if earthquake_lab is not None else {},
         "total": total,
     }
 

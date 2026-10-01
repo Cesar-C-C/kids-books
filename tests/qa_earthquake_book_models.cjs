@@ -1,0 +1,23 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'../books/earthquake');
+for(const f of ['fault-model.js','wave-model.js'])assert(fs.existsSync(path.join(root,f)),f+' not implemented');
+const F=require(path.join(root,'fault-model.js')),W=require(path.join(root,'wave-model.js'));
+let s=F.createFault(),original=structuredClone(s);assert.equal(s.eventCount,0);
+for(let i=0;i<10;i++)s=F.stepFault(s,{drive:true,dt:1/60});
+assert.deepEqual(original,F.createFault());assert.equal(s.phase,'locked');assert(s.elasticStrain>0);assert.equal(s.slipOffset,0);
+let released=F.stepFault(s,{drive:false,dt:.1});assert.equal(released.eventCount,0);assert.equal(released.driverDisplacement,s.driverDisplacement);
+assert.deepEqual(F.stepFault(F.pauseFault(s,true),{drive:true,dt:.1}),F.pauseFault(s,true));
+function run(dt){let a=F.createFault();for(let i=0;i<30/dt;i++)a=F.stepFault(a,{drive:true,dt});assert.equal(a.phase,'settled');assert.equal(a.eventCount,1);assert(a.slipOffset>0);return a;}
+const a=run(1/30),b=run(1/120);assert(Math.abs(a.slipOffset-b.slipOffset)<1e-3);assert.equal(F.stepFault(a,{drive:true,dt:.1}).slipOffset,a.slipOffset);
+for(const dt of [-1,NaN,Infinity])assert.throws(()=>F.stepFault(s,{drive:true,dt}));
+assert.deepEqual(F.stepFault(s,{drive:true,dt:100}),F.stepFault(s,{drive:true,dt:.1}));
+let w=W.createWave({a:'center',b:'left'});assert.equal(w.arrivalTimes.a,1);assert.equal(w.arrivalTimes.b,Math.sqrt(2));
+assert.throws(()=>W.createWave({a:'left',b:'left'}));assert.throws(()=>W.placeFlag(w,'a','wrong'));
+w=W.setWaveMode(w,'running');assert.deepEqual(W.placeFlag(w,'a','right'),w);
+for(let i=0;i<4;i++)w=W.stepWave(w,.1);assert.deepEqual(w.particleOffset,{x:0,y:0});
+const paused=W.setWaveMode(w,'paused');assert.deepEqual(W.stepWave(paused,.1),paused);
+let max=0;while(w.phase!=='done'){w=W.stepWave(w,.05);max=Math.max(max,Math.hypot(w.particleOffset.x,w.particleOffset.y));}assert(max>0&&max<=.03);assert.deepEqual(w.particleOffset,{x:0,y:0});assert(w.arrived.a&&w.arrived.b);
+const equal=W.createWave({a:'left',b:'right'});assert.equal(equal.arrivalTimes.a,equal.arrivalTimes.b);
+const swapped=W.createWave({a:'left',b:'center'});assert.equal(swapped.arrivalTimes.b,1);
+assert.throws(()=>W.setWaveMode(equal,'done'));assert.throws(()=>W.stepWave(w,-1));
+console.log('EARTHQUAKE_MODELS_PASS',JSON.stringify({slip30:a.slipOffset,slip120:b.slipOffset,maxLocalMotion:max}));
