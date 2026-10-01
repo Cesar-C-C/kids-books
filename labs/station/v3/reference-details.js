@@ -88,6 +88,29 @@ window.StationReferenceDetails = { enrich(T, model) {
   rod(inside,d,[-1.45,y,0],[1.45,y,0],.012,y>0?'blue':'red');
   for(let i=0;i<9;i++)put(inside,d,box(.023,.07,.04),'steel',[-1.35+i*.33,y,-.012]);
  }
+ // Repeating installed cues turn the loose equipment into a legible cabin.
+ // All coordinates below are local to the services group at [-2,.47,-.27].
+ for(const x of[-1.38,-.74,-.10,.54,1.18]){
+  put(inside,d,ring(.575,.010),'steel',[x,-.47,.27],[0,Math.PI/2,0]).name='Cabin rib';
+ }
+ for(const x of[-1.08,0,1.04]){
+  const light=put(inside,d,rounded(.29,.055,.08,.018),'cream',[x,.035,.27]);
+  light.name='Ceiling light';light.material=light.material.clone();
+  light.material.emissive.setHex(0xffe9b2);light.material.emissiveIntensity=.85;
+ }
+ for(const x of[-.92,.52]){
+  put(inside,d,rounded(.25,.025,.17,.018),'dark',[x,-.01,.03]).name='Air return grille';
+  for(let i=0;i<5;i++)put(inside,d,box(.012,.008,.13),'steel',[x-.09+i*.045,.009,.03]).name='Grille slat';
+ }
+ for(const z of[-.22,.76]){
+  rod(inside,d,[-1.4,-.65,z],[1.36,-.65,z],.014,'steel').name='Handrail';
+  for(const x of[-1.25,-.35,.55,1.25])rod(inside,d,[x,-.65,z],[x,-.47,z],.012,'gold').name='Handrail bracket';
+ }
+ for(const x of[-1.02,.03,.98]){
+  put(inside,d,rounded(.32,.015,.19,.025),'ivory',[x,-.98,.35],[Math.PI/2,0,0]).name='Access panel';
+  for(const sx of[-.12,.12])for(const sz of[-.07,.07])
+   put(inside,d,cyl(.009,.012),'gold',[x+sx,-.965,.35+sz]).name='Panel fastener';
+ }
  // Floor and wall panels follow the actual installed cabin envelope.
  for(let x=-3.55;x<-.55;x+=.38){put(inside,'interior.services',box(.35,.022,.56),'ivory',[x+2,-.94,.27]);}
  // Recessed docking hardware and closed pressure hatch.

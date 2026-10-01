@@ -55,3 +55,11 @@
 最终模型：10 类部件，40 条细节，609 个网格、177283 个三角形、30 个玻璃面。静态包络与设备分离、动作复位、浏览器 40/40 细节画幅与射线可见性、桌面/手机布局、打开合上、模型身份保持、缩放不改透明度及离线清单均通过。已逐页查看完整截图集，并针对节点照明、太阳翼近景、桁架、机械臂、观察舱做修正与复测。最终报告为 `.qa-labs/station-audit/visibility-final.json`。
 
 `qa_station_smoke.cjs` 覆盖 1360×900 桌面与 390×844 手机布局。截图 `station-desktop-final.png`、`station-mobile-final.png`、`station-mobile-crystals.png` 位于 `.qa-labs/`。本次仅保存本地修改，未执行 GitHub 发布。
+
+## 2026-09-27：舱内漫游与空间细化
+
+沿用上面的生图参考板，把新增细节做成可旋转的模型实体：前舱内加入加强环、顶灯、通风格栅、扶手和检修面板，均归入既有 `interior.services` 发现点。没有新增需要配音的部件编号。
+
+`v3/tour.js` 定义六站舱内路线：设备机柜、睡眠区、用餐区、锻炼区、植物实验箱、晶体实验箱。每站的相机位于教学舱体内，朝向已安装的设备；进入时主动打开剖面，仍可自由旋转和缩放。`v3/tour.css` 只作用于太空站页面，不改六个实验室共用的工作室样式。正式入口已加载路线模块和样式，并更新脚本缓存版本；`pwa-assets.js` 已由生成器重建。
+
+本轮模型为 654 个网格、184923 个三角形。`qa_station_tour.cjs`、`qa_station_cabin_depth.cjs`、`qa_station_reference_model.cjs`、`qa_book_space_models.cjs`、`qa_exhibits_model.cjs` 通过；浏览器 `qa_station_tour_browser.cjs` 覆盖六站、舱内缩放、双语提示、退出和切换部件、桌面与手机布局。设置 `STATION_TOUR_SHOTS=1` 时保存逐站截图到 `.qa-labs/station-tour-stop-01.png` 至 `06.png`，本轮已逐张检查；`qa_station_smoke.cjs` 与 `qa_station_inspection.cjs` 的八个舱内发现点检查通过。离线清单的静态校验通过。本轮未做线上发布。
