@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#edf2e7"><title>Little Space Station · 走进一座太空站</title><link rel="icon" href="../../icons/favicon-32.png"><link rel="stylesheet" href="v3/studio.css?v=4">  <link rel="manifest" href="../../manifest.webmanifest">
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#edf2e7"><title>Little Space Station · 走进一座太空站</title><link rel="icon" href="../../icons/favicon-32.png"><link rel="stylesheet" href="v3/studio.css?v=4"><link rel="stylesheet" href="v3/tour.css?v=2">  <link rel="manifest" href="../../manifest.webmanifest">
   <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
   <link rel="stylesheet" href="../../shared/pwa.css">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,7 +11,7 @@
 
  <section class="stage" aria-label="太空站三维观察台">
   <div class="stage-top"><button id="whole-station">整座太空站</button><span id="crumb-region" class="crumb"></span><span id="crumb-detail" class="crumb"></span><span id="depth-status">整体观察</span></div>
-  <div id="viewport" tabindex="0" aria-label="拖动旋转，滚轮或双指缩放，右键拖动或双指平移，双击部件靠近"><div class="stage-heading" aria-hidden="true"><span class="live-dot"></span> YOUR SPACE STATION</div><div class="stage-watermark" aria-hidden="true">HELLO,<br> STATION.</div><span id="model-label" class="model-label" hidden></span><div id="load-error" hidden>三维模型暂时无法显示。可以继续阅读部件的英文介绍；请使用支持 WebGL 的浏览器。</div></div>
+  <div id="viewport" tabindex="0" aria-label="拖动旋转，滚轮或双指缩放，右键拖动或双指平移，双击部件靠近"><div class="stage-heading" aria-hidden="true"><span class="live-dot"></span> YOUR SPACE STATION</div><div class="stage-watermark" aria-hidden="true">HELLO,<br> STATION.</div><button id="tour-start" type="button">走进舱内</button><div id="tour-controls" role="group" aria-label="舱内漫游路线" hidden><button id="tour-prev" type="button" aria-label="上一站">←</button><div class="tour-copy"><strong id="tour-progress" role="status" aria-live="polite"></strong><span id="tour-cue"></span></div><button id="tour-next" type="button" aria-label="下一站">→</button><button id="tour-exit" type="button">退出</button></div><span id="model-label" class="model-label" hidden></span><div id="load-error" hidden>三维模型暂时无法显示。可以继续阅读部件的英文介绍；请使用支持 WebGL 的浏览器。</div></div>
   <div class="stage-tools"><div class="tool-group"><button id="home-view" aria-label="恢复整座视角">⌂ 整体</button><button id="back-view" aria-label="返回上一视角">← 返回视角</button><span class="divider"></span><button id="zoom-out" aria-label="缩小">−</button><button id="zoom-in" aria-label="放大">＋</button><button id="auto-rotate" aria-label="自动旋转" aria-pressed="false">↻</button></div><span class="gesture-hint">拖动旋转 · 滚轮缩放</span><div class="tool-group"><button id="side-view">侧面</button><button id="top-view">俯视</button><button id="explode-button" aria-pressed="false">拆解</button></div></div>
  </section>
  <aside class="inspector" aria-label="当前部位的说明和操作">
@@ -30,6 +30,6 @@
   <p class="fine-print">外观依据绘本的 T 形舱段、连接节点、太阳翼、机械臂和对接口细化。桁架、散热器、穹顶及未画出的内部配置属于教学扩展，非工程尺寸模型。<a href="https://www.nasa.gov/international-space-station/" target="_blank" rel="noreferrer">科普参考 ↗</a></p>
  </aside>
 </main>
-<script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/discovery-progress.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="detail-parts.js"></script><script src="v3/reference-details.js?v=1"></script><script src="v3/inspection.js?v=1"></script><script src="v3/stationframe.js?v=7"></script><script src="../shared/exhibit.js?v=1"></script><script src="v3/app.js?v=7"></script>
+<script src="../catalog.js"></script><script src="../shared/navigation.js"></script><script src="../shared/speech.js"></script><script src="../shared/discovery-progress.js"></script><script src="../shared/vendor/three.min.js"></script><script src="parts.js"></script><script src="detail-parts.js"></script><script src="v3/reference-details.js?v=2"></script><script src="v3/inspection.js?v=1"></script><script src="v3/tour.js?v=2"></script><script src="v3/stationframe.js?v=7"></script><script src="../shared/exhibit.js?v=1"></script><script src="v3/app.js?v=10"></script>
   <script src="../../shared/pwa.js"></script>
 </body></html>

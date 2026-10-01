@@ -31,3 +31,5 @@ jobs:
       - run: node qa_book_airplane_model.cjs
       - run: node qa_book_space_models.cjs
       - run: node qa_exhibits_model.cjs
+      - run: node qa_station_tour.cjs
+      - run: node qa_station_cabin_depth.cjs

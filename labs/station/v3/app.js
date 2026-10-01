@@ -3,7 +3,7 @@
  // Same progressive-reveal controller as the airplane, train and bus studios,
  // driving the space station. One code path for every assembly: a group of three
  // layers (exterior / interior / ghost), driven by a single update().
- const $ = id => document.getElementById(id), T = window.THREE, lessons = window.STATION_PARTS, details = window.STATION_DETAILS;
+ const $ = id => document.getElementById(id), T = window.THREE, lessons = window.STATION_PARTS, details = window.STATION_DETAILS, tour = window.StationTour;
  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
  let storage; try { storage = localStorage; } catch { storage = { getItem: () => null, setItem: () => { } }; }
  const journal = DiscoveryProgress.create(storage, 'little-space-station:whole-station:v1', { parts: [...lessons, ...details].map(p => p.id), actions: ['open', 'spin', 'explode'], tasks: [] });
@@ -67,7 +67,7 @@ const offsets = {
 // wings reach out to +-4 m on Z and the radiators up to y = +2.2, so the visual
 // centre sits a little above the barrel axis and slightly aft of the node.
 const look0 = new T.Vector3(-1.25, .10, -.35);
- let renderer, scene, camera, station, assemblies = [], active = null, detail = null, mode='outside', playing = false, slow = true, simTime = 0, mechanism = 0, autoRotate = false;
+ let renderer, scene, camera, station, assemblies = [], active = null, detail = null, mode='outside', playing = false, slow = true, simTime = 0, mechanism = 0, autoRotate = false, tourIndex = -1;
 let yaw = -.72, pitch = .62, distance = 20, overviewDistance = 20, explosion = 0, targetExplosion = 0, reveal = 0, near = 0;
 const look = new T.Vector3(-1.25, .10, -.35), target = { yaw, pitch, distance, look: look.clone() };
  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches, pickables = [], surfaces = [], materialOriginal = new Map(), materialTransparency = new Map();
@@ -77,7 +77,7 @@ const look = new T.Vector3(-1.25, .10, -.35), target = { yaw, pitch, distance, l
  const captureView=()=>({yaw:target.yaw,pitch:target.pitch,distance:target.distance,look:target.look.clone()});
  function restoreView(v){if(!v)return;target.yaw=v.yaw;target.pitch=v.pitch;target.distance=v.distance;target.look.copy(v.look);autoRotate=false;}
  function remember(){viewHistory.push(captureView());if(viewHistory.length>20)viewHistory.shift();}
- function closeExhibit(immediate=false){if(active)active.inspectionDetail=null;exhibit.close(immediate);mode='outside';playing=false;mechanism=0;detail=null;}
+ function closeExhibit(immediate=false){if(active)active.inspectionDetail=null;exhibit.close(immediate);mode='outside';playing=false;mechanism=0;detail=null;tourIndex=-1;}
  function toggleOpening(){
   if(exhibit.opened){closeExhibit();restoreView(openingView);openingView=null;}
   else if(active){openingView=captureView();targetExplosion=0;explosion=0;exhibit.open(active);mode='inside';remember();focus();
@@ -92,6 +92,7 @@ const look = new T.Vector3(-1.25, .10, -.35), target = { yaw, pitch, distance, l
  function worldCenter(a) { return a.group.localToWorld(a.center.clone()); }
  function nearestAssembly(region) { return sameRegion(region).sort((a, b) => worldCenter(a).distanceToSquared(camera.position) - worldCenter(b).distanceToSquared(camera.position))[0]; }
  function fit(radius) { return Math.max(1.6, radius / Math.sin(T.MathUtils.degToRad(24)) * 1.06 * Math.max(1, 1.05 / camera.aspect)); }
+ function minimumDistance(){return tourIndex >= 0 ? .35 : 1.4;}
  function detailObjects() { return active && detail ? (active.detailMeshes[detail] || []) : []; }
  function detailCenter() {
   const groups = detailObjects(); if (!groups.length) return worldCenter(active);
@@ -100,18 +101,34 @@ const look = new T.Vector3(-1.25, .10, -.35), target = { yaw, pitch, distance, l
   return box.isEmpty() ? worldCenter(active) : box.getCenter(new T.Vector3());
  }
  function focus(){if(!active||!camera)return;const v=StationInspection.focus(T,active,detail);target.look.copy(v.point);target.distance=fit(v.radius*1.12);target.yaw=v.yaw;target.pitch=v.pitch;autoRotate=false;}
- function selectAssembly(a,focusIt=false){if(!a)return;if(targetExplosion){targetExplosion=0;explosion=0;}a.inspectionDetail=null;exhibit.select(a);if(active!==a){playing=false;mechanism=0;}active=a;detail=null;mode=exhibit.opened?'inside':'outside';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
- function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(!exhibit.opened){renderLesson();return;}detail=id;active.inspectionDetail=id;exhibit.select(active);if(!exhibit.opened)exhibit.open(active);journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
- function home() {remember();closeExhibit(); active = null; detail = null; mode='outside'; playing = false; autoRotate = false; targetExplosion = 0; target.look.copy(look0); target.yaw = -.72; target.pitch = .62; target.distance = overviewDistance; renderLesson(); }
- function back(){restoreView(viewHistory.pop());renderLesson();}
+ function selectAssembly(a,focusIt=false){if(!a)return;tourIndex=-1;if(targetExplosion){targetExplosion=0;explosion=0;}a.inspectionDetail=null;exhibit.select(a);if(active!==a){playing=false;mechanism=0;}active=a;detail=null;mode=exhibit.opened?'inside':'outside';activeFit=fit(a.radius);speech.stop();journal.mark('found',a.region);if(focusIt){remember();focus();}renderLesson();}
+ function selectDetail(id,focusIt=true){const d=details.find(d=>d.id===id);if(!d)return;tourIndex=-1;if(!active||active.region!==d.region)selectAssembly(nearestAssembly(d.region));if(!exhibit.opened){renderLesson();return;}detail=id;active.inspectionDetail=id;exhibit.select(active);if(!exhibit.opened)exhibit.open(active);journal.mark('found',id);speech.stop();if(focusIt){remember();focus();}renderLesson();}
+ function goTour(index){
+  const stop=tour.stops[index];if(!stop||!camera)return;
+  if(tourIndex<0)viewHistory.length=0;
+  if(!active||active.region!=='interior')selectAssembly(nearestAssembly('interior'));
+  if(!exhibit.opened){openingView=captureView();targetExplosion=0;explosion=0;exhibit.open(active);mode='inside';}
+  selectDetail(stop.detail,false);
+  const pose=tour.pose(stop);target.look.set(...stop.look);target.yaw=pose.yaw;target.pitch=pose.pitch;target.distance=pose.distance;autoRotate=false;
+  tourIndex=index;renderLesson();
+ }
+ function updateTour(){
+  const running=tourIndex>=0,stop=tour.stops[tourIndex];$('tour-start').hidden=running;$('tour-controls').hidden=!running;
+  if(!running)return;
+  const englishOnly=document.body.classList.contains('english-only');
+  $('tour-progress').textContent=(tourIndex+1)+' / '+tour.stops.length+' · '+(englishOnly?stop.enName:stop.name+' · '+stop.enName);
+  $('tour-cue').textContent=englishOnly?stop.enCue:stop.cue;$('tour-prev').disabled=tourIndex===0;$('tour-next').disabled=tourIndex===tour.stops.length-1;
+ }
+ function home() {if(tourIndex>=0)viewHistory.length=0;else remember();closeExhibit(); openingView=null; active = null; detail = null; mode='outside'; playing = false; autoRotate = false; targetExplosion = 0; target.look.copy(look0); target.yaw = -.72; target.pitch = .62; target.distance = overviewDistance; renderLesson(); }
+ function back(){if(tourIndex>=0){if(tourIndex>0)goTour(tourIndex-1);else home();return;}restoreView(viewHistory.pop());renderLesson();}
  function renderLesson() {
   const p = data(); progress();
   $('part-name').textContent = p?.name || 'Your space station'; $('part-zh-name').textContent = p?.zhName || '你的太空站'; $('lesson-category').textContent = active ? (detail ? 'LOOK INSIDE' : 'MEET THE PART') : 'A WORLD INSIDE';
   $('part-en').textContent = p?.en || 'Look closer. There is a whole world inside this station.'; $('part-zh').textContent = p?.zh || '靠近一点，这座太空站里面还有一个世界。';
-  $('part-tip').textContent=detail?p.tip:'拖动旋转，滚轮缩放。点击部件认识它，再点击“靠近观察”或主动打开结构。';
+  $('part-tip').textContent=tourIndex>=0?(document.body.classList.contains('english-only')?tour.stops[tourIndex].enCue:tour.stops[tourIndex].cue):detail?p.tip:'拖动旋转，滚轮缩放。点击部件认识它，再点击“靠近观察”或主动打开结构。';
   $('principle-box').hidden = !active; $('part-principle').textContent = detail ? p.principle : active ? notes[active.region] : '';
   $('crumb-region').textContent = active ? '› ' + lessons.find(p => p.id === active.region).zhName : ''; $('crumb-detail').textContent = detail ? '› ' + p.zhName : ''; $('back-part').hidden = !detail;
-  $('back-view').disabled=!viewHistory.length;
+  $('back-view').disabled=tourIndex<0&&!viewHistory.length;
   document.querySelectorAll('[data-part]').forEach(b => b.setAttribute('aria-pressed', active?.region === b.dataset.part));
   const children = active ? details.filter(d => d.region === active.region) : [];
   $('explore-section').hidden = !children.length; $('detail-count').textContent = children.length + ' 个发现'; $('detail-list').replaceChildren();
@@ -121,14 +138,15 @@ const look = new T.Vector3(-1.25, .10, -.35), target = { yaw, pitch, distance, l
   const opened=!!exhibit.opened;$('open-part').textContent=opened?'合上 · 恢复外观':exhibit.plan(active)?.label||'打开结构';$('open-part').setAttribute('aria-pressed',opened);
   $('opening-note').textContent=opened?'教学展示：覆盖件暂时打开，内部保留安装位置。合上可恢复模型和打开前的视角。':'缩放只改变距离。先主动打开模型，再探索内部细节。';
   if(active?.defaultVisible===false)$('opening-note').textContent='拓展教学部件：这部分没有出现在本书的主图中，选中时才显示。';
-  $('mechanism-controls').hidden=!active||!['solar', 'arm'].includes(active.region);if($('mechanism-controls').hidden)$('mechanism-help').textContent='';$('part-zh-name').after($('operation-panel'));$('operation-panel').after($('explore-section'));updateButtons();
+  $('mechanism-controls').hidden=!active||!['solar', 'arm'].includes(active.region);if($('mechanism-controls').hidden)$('mechanism-help').textContent='';$('part-zh-name').after($('operation-panel'));$('operation-panel').after($('explore-section'));updateButtons();updateTour();
  }
  function updateButtons() { document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === mode)); $('mechanism-play').setAttribute('aria-pressed', playing); $('mechanism-play').textContent = playing ? 'Ⅱ 暂停观察' : '▶ 看它怎样工作'; $('auto-rotate').setAttribute('aria-pressed', autoRotate); $('explode-button').setAttribute('aria-pressed', targetExplosion > 0); $('explode-button').textContent = targetExplosion ? '组装' : '拆解'; $('slow-play').setAttribute('aria-pressed', slow); }
  lessons.forEach((p, i) => { const b = document.createElement('button'); b.className = 'region-button'; b.dataset.part = p.id; b.setAttribute('aria-pressed', false); b.innerHTML = '<i>' + String(i + 1).padStart(2, '0') + '</i><span><strong>' + p.name + '</strong><small>' + p.zhName + '</small></span>'; b.onclick = () => { if (camera) selectAssembly(nearestAssembly(p.id)); else { $('part-name').textContent = p.name; $('part-en').textContent = p.en; $('part-zh').textContent = p.zh; } }; $('region-list').append(b); });
  $('speak').onclick = () => speech.say($('part-name').textContent + '. ' + $('part-en').textContent, true, 'audio/' + (detail || active?.region) + '.mp3');
- $('language').onclick = () => { const only = document.body.classList.toggle('english-only'); $('language').textContent = only ? 'English only' : '中英双语'; $('language').setAttribute('aria-pressed', !only); };
- $('book-view').onclick = $('whole-station').onclick = $('home-view').onclick = home; $('back-view').onclick=back;$('back-part').onclick=()=>{detail=null;active.inspectionDetail=null;exhibit.select(active);if(!exhibit.opened)exhibit.open(active);focus();renderLesson();};$('focus-part').onclick=()=>{remember();focus();renderLesson();};$('open-part').onclick=toggleOpening;
- $('zoom-in').onclick = () => { target.distance = Math.max(1.4, target.distance * .8); }; $('zoom-out').onclick = () => { target.distance = Math.min(80, target.distance * 1.25); };
+ $('tour-start').onclick=()=>goTour(0);$('tour-prev').onclick=()=>goTour(tourIndex-1);$('tour-next').onclick=()=>goTour(tourIndex+1);$('tour-exit').onclick=home;
+ $('language').onclick = () => { const only = document.body.classList.toggle('english-only'); $('language').textContent = only ? 'English only' : '中英双语'; $('language').setAttribute('aria-pressed', !only); renderLesson(); };
+ $('book-view').onclick = $('whole-station').onclick = $('home-view').onclick = home; $('back-view').onclick=back;$('back-part').onclick=()=>{tourIndex=-1;detail=null;active.inspectionDetail=null;exhibit.select(active);if(!exhibit.opened)exhibit.open(active);focus();renderLesson();};$('focus-part').onclick=()=>{tourIndex=-1;remember();focus();renderLesson();};$('open-part').onclick=toggleOpening;
+ $('zoom-in').onclick = () => { target.distance = Math.max(minimumDistance(), target.distance * .8); }; $('zoom-out').onclick = () => { target.distance = Math.min(80, target.distance * 1.25); };
  $('side-view').onclick = () => { target.pitch = .04; target.yaw = 0; autoRotate = false; updateButtons(); }; $('top-view').onclick = () => { target.pitch = 1.50; target.yaw = 0; autoRotate = false; updateButtons(); }; $('auto-rotate').onclick = () => { autoRotate = !autoRotate; updateButtons(); };
  $('explode-button').onclick = () => {closeExhibit(true); targetExplosion = targetExplosion ? 0 : 1; detail = null; active = null; target.look.copy(look0); target.distance = overviewDistance * (targetExplosion ? 1.28 : 1); playing = false; record(); renderLesson(); };
  document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => { mode = b.dataset.view; updateButtons(); });
@@ -188,11 +206,11 @@ const look = new T.Vector3(-1.25, .10, -.35), target = { yaw, pitch, distance, l
   const pointers = new Map(); let drag = 0, lastTap = null, pinch = 0;
   canvas.oncontextmenu = e => e.preventDefault();
   canvas.onpointerdown = e => { canvas.setPointerCapture(e.pointerId); pointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); drag = 0; autoRotate = false; if (pointers.size === 2) { const p = [...pointers.values()]; pinch = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); drag = 99; lastTap = null;  } };
-  canvas.onpointermove = e => { if (!pointers.has(e.pointerId)) return; const old = pointers.get(e.pointerId), dx = e.clientX - old.x, dy = e.clientY - old.y; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); drag += Math.abs(dx) + Math.abs(dy); if (pointers.size === 2) { const p = [...pointers.values()], d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); target.distance = clamp(target.distance * pinch / Math.max(d, 1), 1.4, 80); pinch = d; pan(dx * .5, dy * .5); } else if (e.buttons === 2 || e.shiftKey) pan(dx, dy); else { target.yaw -= dx * .006; target.pitch = clamp(target.pitch + dy * .005, -1.45, 1.50); } };
+  canvas.onpointermove = e => { if (!pointers.has(e.pointerId)) return; const old = pointers.get(e.pointerId), dx = e.clientX - old.x, dy = e.clientY - old.y; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); drag += Math.abs(dx) + Math.abs(dy); if (pointers.size === 2) { const p = [...pointers.values()], d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); target.distance = clamp(target.distance * pinch / Math.max(d, 1), minimumDistance(), 80); pinch = d; pan(dx * .5, dy * .5); } else if (e.buttons === 2 || e.shiftKey) pan(dx, dy); else { target.yaw -= dx * .006; target.pitch = clamp(target.pitch + dy * .005, -1.45, 1.50); } };
   canvas.onpointerup = e => { if (drag < 6 && pointers.size === 1 && e.button !== 2) { const h = hit(e.clientX, e.clientY); pick(h); const now = performance.now(); if (e.pointerType !== 'mouse' && lastTap && now - lastTap.t < 350 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 24) { pick(h, true); lastTap = null; } else lastTap = { t: now, x: e.clientX, y: e.clientY }; } pointers.delete(e.pointerId); pinch = 0; }; canvas.onpointercancel = e => { pointers.delete(e.pointerId); pinch = 0; drag = 99; };
   canvas.ondblclick = e => { if (drag < 6) pick(hit(e.clientX, e.clientY), true); };
-  canvas.addEventListener('wheel', e => { e.preventDefault();  target.distance = clamp(target.distance * Math.exp(e.deltaY * .0012), 1.4, 80); }, { passive: false });
-  $('viewport').onkeydown = e => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', 'Escape'].includes(e.key)) { e.preventDefault(); if (e.key === 'Escape') back(); if (e.key === 'ArrowLeft') target.yaw -= .16; if (e.key === 'ArrowRight') target.yaw += .16; if (e.key === 'ArrowUp') target.pitch = clamp(target.pitch + .12, -1.45, 1.50); if (e.key === 'ArrowDown') target.pitch = clamp(target.pitch - .12, -1.45, 1.50); if (e.key === '+' || e.key === '=') target.distance = Math.max(1.4, target.distance * .8); if (e.key === '-') target.distance = Math.min(80, target.distance * 1.25); } };
+  canvas.addEventListener('wheel', e => { e.preventDefault();  target.distance = clamp(target.distance * Math.exp(e.deltaY * .0012), minimumDistance(), 80); }, { passive: false });
+  $('viewport').onkeydown = e => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', 'Escape'].includes(e.key)) { e.preventDefault(); if (e.key === 'Escape') tourIndex>=0?home():back(); if (e.key === 'ArrowLeft') target.yaw -= .16; if (e.key === 'ArrowRight') target.yaw += .16; if (e.key === 'ArrowUp') target.pitch = clamp(target.pitch + .12, -1.45, 1.50); if (e.key === 'ArrowDown') target.pitch = clamp(target.pitch - .12, -1.45, 1.50); if (e.key === '+' || e.key === '=') target.distance = Math.max(minimumDistance(), target.distance * .8); if (e.key === '-') target.distance = Math.min(80, target.distance * 1.25); } };
   function inspectionReport(){
    if(!active||!detail)return null;
    const v=StationInspection.focus(T,active,detail,detailObjects()),points=[],meshes=[];
@@ -206,9 +224,9 @@ const look = new T.Vector3(-1.25, .10, -.35), target = { yaw, pitch, distance, l
    return {detail,points:points.length,onScreen,visible,blockers};
   }
   window.stationLab = {inspectionReport,
-   setView: (y, p, d, x = 0) => { autoRotate = false; active = null; detail = null; mode='outside'; targetExplosion = 0; renderLesson(); target.yaw = y; target.pitch = p; target.distance = d; target.look.set(x, .10, 0); },
+   setView: (y, p, d, x = 0) => { autoRotate = false; active = null; detail = null; tourIndex=-1; mode='outside'; targetExplosion = 0; renderLesson(); target.yaw = y; target.pitch = p; target.distance = d; target.look.set(x, .10, 0); },
    select: id => selectAssembly(nearestAssembly(id)), focusDetail: id => selectDetail(id),
-   snapshot: () => ({displayVersion:1,...exhibit.snapshot(),history:viewHistory.length, generation: 5, changedOpacity: surfaces.filter(s => s.materials.some(m => Math.abs(m.opacity - materialOriginal.get(m).opacity) > 1e-6)).length, modelId: station.root.uuid, selected: active?.region || null, assembly: active?.id || null, detail, near, reveal, mode, playing, simulationTime: simTime, level: mechanism, explosion, meshCount: pickables.length, geometry: station.counts, visited: journal.read().found, camera: { yaw, pitch, distance, target: look.toArray() }, assemblies: assemblies.map(a => ({ id: a.id, region: a.region, exterior: a.exterior.visible, interior: a.interior.visible, ghost:a.ghost.visible,exteriorPosition:a.exterior.position.toArray(),position:a.group.position.toArray() })), renderer: renderer.info.render }),
+   snapshot: () => ({displayVersion:1,...exhibit.snapshot(),history:viewHistory.length, generation: 6, tourIndex, changedOpacity: surfaces.filter(s => s.materials.some(m => Math.abs(m.opacity - materialOriginal.get(m).opacity) > 1e-6)).length, modelId: station.root.uuid, selected: active?.region || null, assembly: active?.id || null, detail, near, reveal, mode, playing, simulationTime: simTime, level: mechanism, explosion, meshCount: pickables.length, geometry: station.counts, visited: journal.read().found, camera: { yaw, pitch, distance, target: look.toArray() }, assemblies: assemblies.map(a => ({ id: a.id, region: a.region, exterior: a.exterior.visible, interior: a.interior.visible, ghost:a.ghost.visible,exteriorPosition:a.exterior.position.toArray(),position:a.group.position.toArray() })), renderer: renderer.info.render }),
    projectPart: id => { const a = assemblies.find(a => a.id === id) || nearestAssembly(id); if (!a) return null; const c = worldCenter(a).project(camera), b = canvas.getBoundingClientRect(); return { x: b.left + (c.x * .5 + .5) * b.width, y: b.top + (-c.y * .5 + .5) * b.height }; }
   };
   requestAnimationFrame(frame);
