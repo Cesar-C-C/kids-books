@@ -295,11 +295,18 @@
     $('cutaway').addEventListener('click', () => { cutaway = !cutaway; if (geology) geology.setCutaway(cutaway); $('cutaway').setAttribute('aria-pressed', String(cutaway)); paintScene(); });
     const stage = $('viewport');
     let start = null;
-    stage.addEventListener('pointerdown', event => { if (event.target !== stage && event.target.tagName !== 'CANVAS') return; start = { x: event.clientX, y: event.clientY, yaw: view.yaw, pitch: view.pitch }; });
+    stage.addEventListener('pointerdown', event => { if (event.target !== stage && event.target.tagName !== 'CANVAS') return; start = { x: event.clientX, y: event.clientY, yaw: view.yaw, pitch: view.pitch, pointerType: event.pointerType, axis: null }; });
     stage.addEventListener('pointermove', event => {
       if (!start || !(event.buttons & 1)) return;
-      view.yaw = start.yaw - (event.clientX - start.x) * 0.006;
-      view.pitch = Math.max(-0.12, Math.min(1.48, start.pitch + (event.clientY - start.y) * 0.005));
+      const dx = event.clientX - start.x, dy = event.clientY - start.y;
+      if (start.pointerType === 'touch' && !start.axis) {
+        if (Math.hypot(dx, dy) < 8) return;
+        // Leave vertical touch gestures to native page scrolling (touch-action: pan-y).
+        if (Math.abs(dy) >= Math.abs(dx)) { start = null; return; }
+        start.axis = 'orbit';
+      }
+      view.yaw = start.yaw - dx * 0.006;
+      view.pitch = start.pointerType === 'touch' ? start.pitch : Math.max(-0.12, Math.min(1.48, start.pitch + dy * 0.005));
       setCamera();
     });
     for (const name of ['pointerup', 'pointercancel', 'pointerleave']) stage.addEventListener(name, () => { start = null; });
