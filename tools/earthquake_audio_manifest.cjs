@@ -6,6 +6,13 @@ function normalize(value){
  return value.normalize('NFC').replace(/\r\n/g,'\n');
 }
 const hash=value=>createHash('sha256').update(value).digest('hex');
+// The owner freeze records Windows bytes; Git and Pages use canonical NFC/LF.
+// Accept only either exact representation, while binding both to the same source.
+function isFrozenSource(raw,locked){
+ const actual=hash(raw);
+ return !!locked&&hash(normalize(raw))===locked.sourceSha256&&
+  (actual===locked.fileSha256||actual===locked.sourceSha256);
+}
 function nonempty(value,label){if(typeof value!=='string')throw new Error('Missing '+label);const v=normalize(value);if(!v.trim())throw new Error('Missing '+label);return v;}
 function collectEntries(owner,source){
  if(!['book','lab'].includes(owner))throw new Error('Invalid owner');
@@ -56,7 +63,7 @@ function buildManifest(owner,source,sourceRaw){
  if(owner==='book')Object.assign(result,{bookId:'earthquake',scriptVersion:contentVersion,scriptSha256:sourceSha256});
  return result;
 }
-module.exports={normalize,collectEntries,buildManifest};
+module.exports={normalize,collectEntries,buildManifest,isFrozenSource};
 if(require.main===module){
  try{
   const fs=require('node:fs'),path=require('node:path'),args=process.argv.slice(2);
@@ -78,7 +85,7 @@ if(require.main===module){
     const sourcePath=path.join(root,sourceRel),destination=path.join(root,manifestRel),sourceRaw=fs.readFileSync(sourcePath,'utf8');
     const sourceFileSha256=hash(sourceRaw),manifest=buildManifest(owner,JSON.parse(sourceRaw),sourceRaw),locked=freeze.sources?.[owner],ownerDiff=diff.owners?.[owner];
     if(!locked||locked.frozen!==true||locked.ownerConfirmed!==true)throw new Error(`${owner} source freeze is incomplete`);
-    if(sourceFileSha256!==locked.fileSha256||manifest.sourceSha256!==locked.sourceSha256)throw new Error(`${owner} source hash differs from joint freeze`);
+    if(!isFrozenSource(sourceRaw,locked)||manifest.sourceSha256!==locked.sourceSha256)throw new Error(`${owner} source hash differs from joint freeze`);
     if(manifest.contentVersion!==locked.contentVersion||manifest.entries.length!==locked.entries)throw new Error(`${owner} source version or entry count differs from joint freeze`);
     if(!ownerDiff||ownerDiff.contentVersion!==manifest.contentVersion||ownerDiff.priorManifestSha256==null)throw new Error(`${owner} narration diff is incomplete`);
     const categories=['reuseCandidates','changed','added'];

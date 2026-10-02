@@ -1,4 +1,5 @@
 import importlib.util
+import os
 import base64
 import subprocess
 import tempfile
@@ -64,6 +65,8 @@ class PreparationTests(unittest.TestCase):
         command = "$value = 'quote''雪'; Write-Output $value"
         encoded = self.api.encode_powershell_command(command)
         self.assertEqual(base64.b64decode(encoded).decode('utf-16le'), command)
+        if os.name != 'nt':
+            return  # Linux CI checks the encoding; the native PowerShell run is Windows-only.
         result = subprocess.run(
             ['powershell.exe', '-NoLogo', '-NoProfile', '-NonInteractive', '-EncodedCommand', encoded],
             check=True, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=20)
