@@ -25,7 +25,8 @@ const server = http.createServer((request, response) => {
   let browser;
   try {
     browser = await pw.chromium.launch({ channel: 'chrome', headless: true });
-    const base = 'http://127.0.0.1:' + server.address().port;
+    // An isolated Chrome profile can repeat the same complete gate against Pages.
+    const base = (process.env.EARTHQUAKE_PUBLIC_BASE || ('http://127.0.0.1:' + server.address().port)).replace(/\/$/, '');
     const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
     await nativeAudio.observe(context);
     const page = await context.newPage();
