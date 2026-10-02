@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "base": "0e2cf4cf49c3f865dbd24e44a9782ba357b5e04f",
+  "cause": "The app published its snapshot before content.json completed, but the back-to-book link was initialized only by the later teaching UI render. A cold direct waves entry could return to the static default Chinese book without its chapter.",
+  "publicEvidence": "Expected ?lang=en#wave-lab; observed ?lang=zh with content.json still pending. Canonical bytes of all 146 MP3s and ten critical files had already matched release #35.",
+  "fix": "Initialize the already validated return route immediately after URL parsing, independent of content loading. Retain the existing later render update for language switches.",
+  "scope": ["labs/earthquake/v3/app.js", "tests/qa_earthquake_lab_startup.cjs", ".github/workflows/pwa.yml", "pwa-assets.js", "sw.js"],
+  "freezeAndAllAudioUnchanged": true,
+  "regression": {
+    "baseline": "FAIL: Chinese default instead of English/wave-lab while the teaching fetch is deliberately held.",
+    "fixed": "PASS: English/waves, Chinese/fault and unknown-source validation before teaching content loads; real back-link navigation preserves the language and correct book entry.",
+    "pwaStatic": "PASS: 6 checks, zero warnings/failures",
+    "semanticRoutes": "PASS",
+    "formalAudioDelivery": "PASS: book 74, lab 72"
+  },
+  "nextPwaVersion": "0f47c7f02c40",
+  "publicAudioProvenanceBoundary": "Warm native media can be fulfilled by a legitimate browser HTTP cache. The independent public verification disables only its own browser HTTP cache to require actual Cache Storage provenance; user caches are never cleared.",
+  "externalAcceptance": "Pending this follow-up PR CI, Pages and public recheck."
+}

@@ -189,6 +189,7 @@ jobs:
           PLAYWRIGHT_MODULE: ${{ github.workspace }}/.qa-deps/node_modules/playwright
         run: |
           node tests/qa_earthquake_book_browser.cjs
+          node tests/qa_earthquake_lab_startup.cjs
           node tests/qa_earthquake_lab_browser.cjs
           node tests/qa_earthquake_lab_scroll.cjs
           git fetch --no-tags --depth=1 origin dce876b7d52c9c7554bda1aee42988c003aaf22e
