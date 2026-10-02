@@ -136,6 +136,8 @@ jobs:
           node tests/qa_earthquake_lab_routes.cjs
           node tests/qa_earthquake_lab_audio.cjs
           node tests/qa_earthquake_audio_manifest.cjs
+          node tools/earthquake_audio_manifest.cjs --check-v2
+          python tests/qa_earthquake_audio_prepare.py
           node tests/qa_earthquake_audio_delivery.cjs
           node tests/qa_earthquake_integration.cjs
           node tests/qa_pwa_mutable_book_core.cjs
