@@ -20,4 +20,20 @@ let max=0;while(w.phase!=='done'){w=W.stepWave(w,.05);max=Math.max(max,Math.hypo
 const equal=W.createWave({a:'left',b:'right'});assert.equal(equal.arrivalTimes.a,equal.arrivalTimes.b);
 const swapped=W.createWave({a:'left',b:'center'});assert.equal(swapped.arrivalTimes.b,1);
 assert.throws(()=>W.setWaveMode(equal,'done'));assert.throws(()=>W.stepWave(w,-1));
+// Underground and surface motion are samples of the same wave and clock.
+const saved=structuredClone(w);
+assert.deepEqual(W.sampleMotion(w,'surface'),{x:0,y:0});
+assert.deepEqual(w,saved);
+assert.throws(()=>W.sampleMotion(w,'unknown'));
+for(const [point,arrival]of [['near',.5],['surface',1]]){
+ let q=W.setWaveMode(W.createWave(),'running'),peak=0;
+ while(q.phase!=='done'){
+  q=W.stepWave(q,.025);
+  const motion=W.sampleMotion(q,point),magnitude=Math.hypot(motion.x,motion.y);
+  if(q.time<=arrival+1e-10)assert(magnitude<1e-9,point+' moved before arrival');
+  if(q.time>=arrival+.8-1e-10)assert(magnitude<1e-9,point+' retained wave drift');
+  peak=Math.max(peak,magnitude);
+ }
+ assert(peak>.02&&peak<=.03,point+' must have visible bounded local motion');
+}
 console.log('EARTHQUAKE_MODELS_PASS',JSON.stringify({slip30:a.slipOffset,slip120:b.slipOffset,maxLocalMotion:max}));

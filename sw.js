@@ -30,7 +30,7 @@
 
 // Manifest URL is regenerated with the content fingerprint: old installed clients
 // may still register with updateViaCache=imports, so an unversioned import stays stale.
-importScripts('./pwa-assets.js?v=349172b60646');
+importScripts('./pwa-assets.js?v=a47a2ba0b122');
 
 var KB = self.KB_ASSETS || { version: 'dev', shell: [], books: {} };
 var VERSION = KB.version || 'dev';
@@ -206,7 +206,9 @@ async function downloadBook(bookId, port) {
       var url = abs(rel);
       try {
         var hit = await cache.match(url);
-        if (!hit) {
+        // Media URLs are immutable/versioned, but a newly downloaded edition must
+        // replace its unversioned story, manifest, HTML, controller and style bytes.
+        if (!hit || !isCacheableAsset(new URL(url).pathname)) {
           var res = await fetch(new Request(url, { cache: 'no-store' }));
           /* 206 不能进 Cache Storage（Cache API 会直接拒绝），
              离线包这边发的是不带 Range 的整包请求，正常应拿到 200 */

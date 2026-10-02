@@ -8,7 +8,7 @@ window.EarthquakeUI=(()=>{
   if(!node.querySelector('.listen')){node.replaceChildren(el('span','spoken-text'),button('',()=>{},undefined));node.lastChild.className='listen';}
   node.firstChild.textContent=text;const b=node.lastChild;b.dataset.kind=kind;b.dataset.itemId=id;
   b.textContent=lang==='en'?'Listen':'听这句';b.setAttribute('aria-label',(lang==='en'?'Listen: ':'朗读：')+text);
-  b.disabled=!window.EarthquakeUI.audioAvailable?.(kind,id,lang);
+  b.disabled=!window.EarthquakeUI.audioAvailable?.(kind,id,lang);b.hidden=b.disabled;
  }
  return {el,button,svg,shape,createSession,narratedText};
 })();

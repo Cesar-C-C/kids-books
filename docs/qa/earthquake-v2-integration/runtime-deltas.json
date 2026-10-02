@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "topicId": "earthquake",
+  "workspace": "C:/Users/Cesar/.codex/worktrees/earthquake-v2-integration/儿童绘本开发",
+  "contentFreezeSha256": "f06b08850acd29228538116368106ae9a84c0b495dac7891ae6fa1d403e293ed",
+  "sourceHashes": {
+    "book": {
+      "path": "books/earthquake/story.json",
+      "contentVersion": "earthquake-story-v2",
+      "ownerConfirmed": true,
+      "sourceSha256": "7850516bab08c7cf1569e851a0418ac02727bf2929d2f987887477a090be700f",
+      "fileSha256": "227274ad8fa797eef3454f95ae39677d2e1e5f604201d7e76757eedff6aba10f",
+      "entries": 74,
+      "frozen": true
+    },
+    "lab": {
+      "path": "labs/earthquake/content.json",
+      "contentVersion": "earthquake-lab-v2",
+      "ownerConfirmed": true,
+      "sourceSha256": "62dbdd96fcd45e76714395f30bffa53018c740444406e8a930ae9328ae44383d",
+      "fileSha256": "456f0fbfd55cf4fc03bc2274731aa0403e89f356b6889d0f84f50efc4913254c",
+      "entries": 72,
+      "frozen": true
+    }
+  },
+  "files": [
+    {
+      "path": "books/earthquake/wave-view.js",
+      "owner": "book",
+      "before": "b5ec21d8000b3f144351c19000d75e7203221b54de1d3a8772ff378067ea145e",
+      "after": "7729aba5098c03445744f1f05d3784abe19f637f376fc871c6145c6e306b62d7",
+      "reason": "Attach the frozen result/local-motion narration to an accessible native disclosure without modifying the teaching source.",
+      "ownerConfirmed": true,
+      "verification": "Owner static tests and actual browser keyboard/phone/landscape; formal MP3 and offline checks pending.",
+      "evidence": "C:/Users/Cesar/Documents/ChatGPT/儿童绘本开发/.qa-labs/earthquake-local-motion-adapter-2026-10-02/adapter-delta.json"
+    },
+    {
+      "path": "tests/qa_earthquake_lab_depth.cjs",
+      "owner": "qa",
+      "before": "d97827ac57c10a2e8df72719bfc251a5beb3d1ff999fd148ef5e417e81081b0c",
+      "after": "96bb4c583251be38cb405327514fc9c641d30cd8c04f140085b80b5dbfba058c",
+      "reason": "Remove only one blank line at EOF flagged by staged diff --check. Assertions and teaching sources are unchanged.",
+      "verification": "Depth contract test and staged diff --check passed."
+    }
+  ]
+}

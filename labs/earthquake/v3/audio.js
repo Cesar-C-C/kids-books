@@ -3,15 +3,16 @@
   const normalize = value => String(value).normalize('NFC').replace(/\r\n/g, '\n');
   const keyOf = (kind, id, lang) => `${kind}:${id}:${lang}`;
   const validHash = value => typeof value === 'string' && /^[0-9a-f]{64}$/i.test(value);
-  async function sha(value) {
-    const bytes = new TextEncoder().encode(normalize(value));
+  async function shaBytes(bytes) {
     const digest = await root.crypto.subtle.digest('SHA-256', bytes);
     return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
   }
+  const sha = value => shaBytes(new TextEncoder().encode(normalize(value)));
   function create({ manifestUrl, contentVersion, contentUrl = 'content.json', fetcher = root.fetch.bind(root), AudioClass = root.Audio, baseUrl = root.location?.href || 'https://example.invalid/labs/earthquake/', onStatus = () => {} }) {
     let disposed = false;
     let generation = 0;
     let player = null;
+    let transfer = null;
     const entries = new Map();
     const manifestAddress = new URL(manifestUrl, baseUrl);
 
@@ -48,32 +49,52 @@
     function available(kind, id, lang) { return !disposed && entries.has(keyOf(kind, id, lang)); }
     function stop() {
       generation++;
+      if (transfer) { transfer.abort(); transfer = null; }
       if (player) { player.pause(); player = null; }
     }
     async function play(kind, id, lang) {
-      const requestedGeneration = generation;
-      await ready;
-      if (disposed || requestedGeneration !== generation) return { ok: false, reason: 'cancelled' };
-      if (!available(kind, id, lang)) { onStatus('unavailable', { kind, id, lang }); return { ok: false, reason: 'unavailable' }; }
+      // Reserve the ticket before awaiting metadata: the latest click always wins.
       stop();
       const token = generation;
+      await ready;
+      if (disposed || token !== generation) return { ok: false, reason: 'cancelled' };
+      if (!available(kind, id, lang)) { onStatus('unavailable', { kind, id, lang }); return { ok: false, reason: 'unavailable' }; }
       const entry = entries.get(keyOf(kind, id, lang));
       const url = new URL(entry.output, manifestAddress);
       // A regenerated clip at the same path must not reuse older cache-first bytes.
       url.searchParams.set('v', entry.fileSha256.toLowerCase());
-      const current = new AudioClass(url.href);
-      current.preload = 'auto';
-      player = current;
+      const controller = new root.AbortController();
+      transfer = controller;
+      const timeout = root.setTimeout(() => controller.abort(), 15000);
+      let current = null;
       try {
+        // Native Audio commonly requests Range/206, which cannot warm a full cache entry.
+        // Only a user play fetches complete bytes, and verifies them before creating a player.
+        const response = await fetcher(url.href, { signal: controller.signal });
+        if (disposed || token !== generation) return { ok: false, reason: 'cancelled' };
+        if (response.status !== 200 || response.headers.has('Content-Range')) throw new Error('Incomplete narration');
+        const bytes = await response.arrayBuffer();
+        if (disposed || token !== generation) return { ok: false, reason: 'cancelled' };
+        const hash = await shaBytes(bytes);
+        if (disposed || token !== generation) return { ok: false, reason: 'cancelled' };
+        if (hash !== entry.fileSha256.toLowerCase()) throw new Error('Narration hash mismatch');
+        root.clearTimeout(timeout);
+        if (transfer === controller) transfer = null;
+        current = new AudioClass(url.href);
+        current.preload = 'auto';
+        player = current;
         await current.play();
         if (disposed || token !== generation) { current.pause(); return { ok: false, reason: 'cancelled' }; }
         onStatus('playing', { kind, id, lang });
         return { ok: true };
       } catch (error) {
-        if (player === current) { current.pause(); player = null; }
+        if (player === current) { current?.pause(); player = null; }
         if (token !== generation || disposed) return { ok: false, reason: 'cancelled' };
         onStatus('unavailable', { kind, id, lang });
         return { ok: false, reason: 'unavailable' };
+      } finally {
+        root.clearTimeout(timeout);
+        if (transfer === controller) transfer = null;
       }
     }
     function dispose() { stop(); disposed = true; entries.clear(); }

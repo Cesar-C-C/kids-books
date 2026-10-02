@@ -1,6 +1,6 @@
 {
   "bookId": "earthquake",
-  "scriptVersion": "earthquake-story-v1",
+  "scriptVersion": "earthquake-story-v2",
   "frozen": true,
   "title": {
     "zh": "地面为什么会摇？",
@@ -11,20 +11,20 @@
       "id": "invitation",
       "act": "opening",
       "image": "opening",
-      "zh": "自然博物馆快开新展览了。小穿山甲岩岩收到一张任务卡：让大家看懂，地面为什么会摇？",
-      "en": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: help visitors discover why the ground shakes.",
+      "zh": "自然博物馆快开新展览了。小穿山甲岩岩接到任务：让大家看懂，平时很稳的地面为什么有时会摇？",
+      "en": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: explain why the ground, usually so steady, sometimes shakes.",
       "narrationNeeded": true,
       "segments": {
         "zh": [
           {
             "role": "narrator",
-            "sourceText": "自然博物馆快开新展览了。小穿山甲岩岩收到一张任务卡：让大家看懂，地面为什么会摇？"
+            "sourceText": "自然博物馆快开新展览了。小穿山甲岩岩接到任务：让大家看懂，平时很稳的地面为什么有时会摇？"
           }
         ],
         "en": [
           {
             "role": "narrator",
-            "sourceText": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: help visitors discover why the ground shakes."
+            "sourceText": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: explain why the ground, usually so steady, sometimes shakes."
           }
         ]
       }
@@ -33,20 +33,50 @@
       "id": "quiet-model",
       "act": "opening",
       "image": "opening",
-      "zh": "岩岩摆好两块岩石模型。它们安安静静，一点也不摇。“先别急，”讲解员说，“我们在馆里，慢慢看看大地模型怎样动。”",
-      "en": "Yan-Yan set two model rock blocks in place. Nothing moved. “Take your time,” said the museum guide. “Here in the museum, we can watch our model Earth move slowly.”",
+      "zh": "岩岩把两块岩石模型摆好。它们纹丝不动。他问：“大地也要有人推吗？”",
+      "en": "Yan-Yan set two model rock blocks in place. They stayed still. He asked, “Does someone have to push the Earth too?”",
       "narrationNeeded": true,
       "segments": {
         "zh": [
           {
             "role": "narrator",
-            "sourceText": "岩岩摆好两块岩石模型。它们安安静静，一点也不摇。“先别急，”讲解员说，“我们在馆里，慢慢看看大地模型怎样动。”"
+            "sourceText": "岩岩把两块岩石模型摆好。它们纹丝不动。他问："
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“大地也要有人推吗？”"
           }
         ],
         "en": [
           {
             "role": "narrator",
-            "sourceText": "Yan-Yan set two model rock blocks in place. Nothing moved. “Take your time,” said the museum guide. “Here in the museum, we can watch our model Earth move slowly.”"
+            "sourceText": "Yan-Yan set two model rock blocks in place. They stayed still. He asked, "
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“Does someone have to push the Earth too?”"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tectonic-load",
+      "act": "fault",
+      "image": "observation",
+      "zh": "讲解员带他看大地的地图。地球坚硬的外层分成许多板块，平时也在很慢地移动。它们的运动会让岩石受到挤压、拉伸或错开的作用。今天，岩岩先看向内挤压的一种情形。",
+      "en": "The guide showed him a map of Earth. Its hard outer shell is divided into plates that move very slowly, even on a quiet day. Their motion can squeeze, stretch, or shear rock. Today, Yan-Yan would watch one case of squeezing.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "讲解员带他看大地的地图。地球坚硬的外层分成许多板块，平时也在很慢地移动。它们的运动会让岩石受到挤压、拉伸或错开的作用。今天，岩岩先看向内挤压的一种情形。"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "The guide showed him a map of Earth. Its hard outer shell is divided into plates that move very slowly, even on a quiet day. Their motion can squeeze, stretch, or shear rock. Today, Yan-Yan would watch one case of squeezing."
           }
         ]
       }
@@ -55,28 +85,58 @@
       "id": "stuck",
       "act": "fault",
       "image": "observation",
-      "zh": "岩岩轻轻推动模型的两边。接缝还卡着，旁边的纹路却弯了。“咦！这里没滑，那里已经变样了。”",
-      "en": "Yan-Yan gently pushed the sides of the model toward each other. The seam stayed stuck, but the markings beside it bent. “This part has not slipped, but that part is changing!”",
+      "zh": "岩岩轻轻推动模型。岩石里原有的接缝叫断层。两边被压在一起，摩擦阻住了滑动；外面的作用还在继续，周围岩石却已经发生了很小的弹性形变。放大看，原本直直的纹路弯了。",
+      "en": "Yan-Yan pushed gently. A fault is a break in rock along which its sides can slip. Here the sides were pressed together, and friction resisted sliding. The loading continued, so the surrounding rock deformed a little elastically. In the enlarged view, straight markings bent.",
       "narrationNeeded": true,
       "segments": {
         "zh": [
           {
             "role": "narrator",
-            "sourceText": "岩岩轻轻推动模型的两边。接缝还卡着，旁边的纹路却弯了。"
-          },
-          {
-            "role": "yanyan",
-            "sourceText": "“咦！这里没滑，那里已经变样了。”"
+            "sourceText": "岩岩轻轻推动模型。岩石里原有的接缝叫断层。两边被压在一起，摩擦阻住了滑动；外面的作用还在继续，周围岩石却已经发生了很小的弹性形变。放大看，原本直直的纹路弯了。"
           }
         ],
         "en": [
           {
             "role": "narrator",
-            "sourceText": "Yan-Yan gently pushed the sides of the model toward each other. The seam stayed stuck, but the markings beside it bent. "
+            "sourceText": "Yan-Yan pushed gently. A fault is a break in rock along which its sides can slip. Here the sides were pressed together, and friction resisted sliding. The loading continued, so the surrounding rock deformed a little elastically. In the enlarged view, straight markings bent."
+          }
+        ]
+      }
+    },
+    {
+      "id": "stored-energy",
+      "act": "fault",
+      "image": "observation",
+      "zh": "岩岩盯着纹路：“接缝没滑，推过去的能量去哪了？”一部分能量储存在变形的岩石里，就像弹簧被压缩后能弹回来。岩石不是软软的弹簧，但也能发生很小的弹性形变。",
+      "en": "Yan-Yan watched the markings. “If the fault has not slipped, where did the energy go?” Some energy was stored in the deformed rock, just as a compressed spring stores energy. Rock is not a soft spring, but it can deform elastically by a small amount.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "岩岩盯着纹路："
           },
           {
             "role": "yanyan",
-            "sourceText": "“This part has not slipped, but that part is changing!”"
+            "sourceText": "“接缝没滑，推过去的能量去哪了？”"
+          },
+          {
+            "role": "narrator",
+            "sourceText": "一部分能量储存在变形的岩石里，就像弹簧被压缩后能弹回来。岩石不是软软的弹簧，但也能发生很小的弹性形变。"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "Yan-Yan watched the markings. "
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“If the fault has not slipped, where did the energy go?”"
+          },
+          {
+            "role": "narrator",
+            "sourceText": " Some energy was stored in the deformed rock, just as a compressed spring stores energy. Rock is not a soft spring, but it can deform elastically by a small amount."
           }
         ]
       }
@@ -85,28 +145,58 @@
       "id": "slip",
       "act": "fault",
       "image": "observation",
-      "zh": "突然，接缝两边滑动了！弯着的纹路松回来一些，却没有全回到老地方。岩岩指着错开的线：“这就是它动过的痕迹。”",
-      "en": "Suddenly, the rocks slipped along the seam! The bent markings sprang back a little, but not all the way. Yan-Yan pointed at the offset lines. “They show us where the rocks moved.”",
+      "zh": "继续加载，岩石沿断层滑动的趋势终于超过了这里的阻力，接缝突然滑了！周围岩石部分回弹，弯曲减小了。两边却已换了位置：纹路仍然错开，没有回到最初的样子。",
+      "en": "As loading continued, the tendency to slip overcame the resistance here. The fault slipped suddenly! The surrounding rock rebounded partly, and its bending decreased. But the sides were now in new positions. The markings stayed offset instead of returning to the beginning.",
       "narrationNeeded": true,
       "segments": {
         "zh": [
           {
             "role": "narrator",
-            "sourceText": "突然，接缝两边滑动了！弯着的纹路松回来一些，却没有全回到老地方。岩岩指着错开的线："
-          },
-          {
-            "role": "yanyan",
-            "sourceText": "“这就是它动过的痕迹。”"
+            "sourceText": "继续加载，岩石沿断层滑动的趋势终于超过了这里的阻力，接缝突然滑了！周围岩石部分回弹，弯曲减小了。两边却已换了位置：纹路仍然错开，没有回到最初的样子。"
           }
         ],
         "en": [
           {
             "role": "narrator",
-            "sourceText": "Suddenly, the rocks slipped along the seam! The bent markings sprang back a little, but not all the way. Yan-Yan pointed at the offset lines. "
+            "sourceText": "As loading continued, the tendency to slip overcame the resistance here. The fault slipped suddenly! The surrounding rock rebounded partly, and its bending decreased. But the sides were now in new positions. The markings stayed offset instead of returning to the beginning."
+          }
+        ]
+      }
+    },
+    {
+      "id": "released-energy",
+      "act": "waves",
+      "image": "arrival",
+      "zh": "岩岩问：“那储存的能量呢？”一部分随着地震波向外传开，一部分变成了摩擦产生的热等。慢慢积累的能量，能在很短的时间里释放。",
+      "en": "Yan-Yan asked, “What happened to the stored energy?” Some spread outward in seismic waves. Some became heat from friction and other changes. Energy that accumulated slowly could be released in a short time.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "岩岩问："
           },
           {
             "role": "yanyan",
-            "sourceText": "“They show us where the rocks moved.”"
+            "sourceText": "“那储存的能量呢？”"
+          },
+          {
+            "role": "narrator",
+            "sourceText": "一部分随着地震波向外传开，一部分变成了摩擦产生的热等。慢慢积累的能量，能在很短的时间里释放。"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "Yan-Yan asked, "
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“What happened to the stored energy?”"
+          },
+          {
+            "role": "narrator",
+            "sourceText": " Some spread outward in seismic waves. Some became heat from friction and other changes. Energy that accumulated slowly could be released in a short time."
           }
         ]
       }
@@ -115,28 +205,20 @@
       "id": "flags",
       "act": "waves",
       "image": "arrival",
-      "zh": "“振动传到哪里了？”岩岩在地表摆好两面感应旗。你来帮他选位置，再猜猜，哪面旗先收到信号？",
-      "en": "“Where have the vibrations reached?” Yan-Yan placed two signal flags on the surface. Help him choose their positions. Which flag will receive the signal first?",
+      "zh": "岩岩在地下和地表各选了一个小标记，又留下近、远两面感应旗。他望着它们，等着看同一次振动怎样从地下传到地面。",
+      "en": "Yan-Yan chose one marker underground and another at the surface, and left a near and a far signal flag. He watched them to see how one disturbance traveled from underground toward the surface.",
       "narrationNeeded": true,
       "segments": {
         "zh": [
           {
-            "role": "yanyan",
-            "sourceText": "“振动传到哪里了？”"
-          },
-          {
             "role": "narrator",
-            "sourceText": "岩岩在地表摆好两面感应旗。你来帮他选位置，再猜猜，哪面旗先收到信号？"
+            "sourceText": "岩岩在地下和地表各选了一个小标记，又留下近、远两面感应旗。他望着它们，等着看同一次振动怎样从地下传到地面。"
           }
         ],
         "en": [
           {
-            "role": "yanyan",
-            "sourceText": "“Where have the vibrations reached?”"
-          },
-          {
             "role": "narrator",
-            "sourceText": " Yan-Yan placed two signal flags on the surface. Help him choose their positions. Which flag will receive the signal first?"
+            "sourceText": "Yan-Yan chose one marker underground and another at the surface, and left a near and a far signal flag. He watched them to see how one disturbance traveled from underground toward the surface."
           }
         ]
       }
@@ -145,20 +227,50 @@
       "id": "little-rock",
       "act": "waves",
       "image": "arrival",
-      "zh": "岩岩盯住地下的一颗小标记。振动传过去时，它在原来的位置附近来回动，并没有跟着波跑到旗子那里。",
-      "en": "Yan-Yan watched a little marker underground. As the vibration passed, it moved back and forth near its starting place. It did not travel with the wave to the flags.",
+      "zh": "波传过去时，地下的小标记在原位附近来回动。岩岩发现：“它没有一路跑到地面！传开的是振动和能量。”",
+      "en": "As the wave passed, the underground marker moved back and forth near its starting place. Yan-Yan noticed, “It did not run all the way to the surface! The vibration and energy are spreading.”",
       "narrationNeeded": true,
       "segments": {
         "zh": [
           {
             "role": "narrator",
-            "sourceText": "岩岩盯住地下的一颗小标记。振动传过去时，它在原来的位置附近来回动，并没有跟着波跑到旗子那里。"
+            "sourceText": "波传过去时，地下的小标记在原位附近来回动。岩岩发现："
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“它没有一路跑到地面！传开的是振动和能量。”"
           }
         ],
         "en": [
           {
             "role": "narrator",
-            "sourceText": "Yan-Yan watched a little marker underground. As the vibration passed, it moved back and forth near its starting place. It did not travel with the wave to the flags."
+            "sourceText": "As the wave passed, the underground marker moved back and forth near its starting place. Yan-Yan noticed, "
+          },
+          {
+            "role": "yanyan",
+            "sourceText": "“It did not run all the way to the surface! The vibration and energy are spreading.”"
+          }
+        ]
+      }
+    },
+    {
+      "id": "surface-shakes",
+      "act": "waves",
+      "image": "arrival",
+      "zh": "振动到达地表，地表的小标记也在原位附近动起来。这就是波引起的地面振动。断层滑动留下的错位，与波经过时的来回振动，是两种不同的变化。",
+      "en": "When the disturbance reached the surface, the surface marker also moved near its starting place. This was ground motion caused by the wave. The offset left by fault slip and the back-and-forth motion as a wave passes are two different changes.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "振动到达地表，地表的小标记也在原位附近动起来。这就是波引起的地面振动。断层滑动留下的错位，与波经过时的来回振动，是两种不同的变化。"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "When the disturbance reached the surface, the surface marker also moved near its starting place. This was ground motion caused by the wave. The offset left by fault slip and the back-and-forth motion as a wave passes are two different changes."
           }
         ]
       }
@@ -167,20 +279,20 @@
       "id": "curator",
       "act": "exhibit",
       "image": "exhibit",
-      "zh": "展览快准备好了！岩岩有三张会动的展卡：旁边变形、突然滑动、振动传开。怎样摆，能把刚才的发现讲清楚？",
-      "en": "The exhibition was almost ready! Yan-Yan had three moving display cards: rocks changing shape, sudden slipping, and vibrations spreading. How could he arrange them to tell the story?",
+      "zh": "岩岩把展览摆好了：持续作用让岩石变形并储能；断层突然滑动，周围岩石部分回弹；一部分能量随地震波传开，让经过的地方振动。每幅展图都连着一个“为什么”。",
+      "en": "Yan-Yan finished the display. Continued loading deformed rock and stored energy. Sudden fault slip allowed surrounding rock to rebound partly. Some energy spread in seismic waves, making the places they passed vibrate. Each exhibit answered a “why.”",
       "narrationNeeded": true,
       "segments": {
         "zh": [
           {
             "role": "narrator",
-            "sourceText": "展览快准备好了！岩岩有三张会动的展卡：旁边变形、突然滑动、振动传开。怎样摆，能把刚才的发现讲清楚？"
+            "sourceText": "岩岩把展览摆好了：持续作用让岩石变形并储能；断层突然滑动，周围岩石部分回弹；一部分能量随地震波传开，让经过的地方振动。每幅展图都连着一个“为什么”。"
           }
         ],
         "en": [
           {
             "role": "narrator",
-            "sourceText": "The exhibition was almost ready! Yan-Yan had three moving display cards: rocks changing shape, sudden slipping, and vibrations spreading. How could he arrange them to tell the story?"
+            "sourceText": "Yan-Yan finished the display. Continued loading deformed rock and stored energy. Sudden fault slip allowed surrounding rock to rebound partly. Some energy spread in seismic waves, making the places they passed vibrate. Each exhibit answered a “why.”"
           }
         ]
       }
@@ -189,44 +301,120 @@
       "id": "opening-day",
       "act": "ending",
       "image": "exhibit",
-      "zh": "小伙伴们来了。岩岩带大家看纹路、看接缝、看留在附近的小标记。“不是整块岩石跑远了，”他说，“是振动的变化传开了！”",
-      "en": "The visitors arrived. Yan-Yan showed them the markings, the seam, and the marker that stayed nearby. “The whole rock did not travel far away,” he said. “The vibrations spread!”",
+      "zh": "小伙伴们来了。岩岩指着纹路、断层和两个小标记：“先看慢慢积累，再看突然释放。地面摇，是振动传到了这里！”",
+      "en": "The visitors arrived. Yan-Yan pointed to the markings, the fault, and the two markers. “First watch energy build slowly, then release suddenly. The ground shakes when the vibration reaches here!”",
       "narrationNeeded": true,
       "segments": {
         "zh": [
           {
             "role": "narrator",
-            "sourceText": "小伙伴们来了。岩岩带大家看纹路、看接缝、看留在附近的小标记。"
+            "sourceText": "小伙伴们来了。岩岩指着纹路、断层和两个小标记："
           },
           {
             "role": "yanyan",
-            "sourceText": "“不是整块岩石跑远了，”"
-          },
-          {
-            "role": "narrator",
-            "sourceText": "他说，"
-          },
-          {
-            "role": "yanyan",
-            "sourceText": "“是振动的变化传开了！”"
+            "sourceText": "“先看慢慢积累，再看突然释放。地面摇，是振动传到了这里！”"
           }
         ],
         "en": [
           {
             "role": "narrator",
-            "sourceText": "The visitors arrived. Yan-Yan showed them the markings, the seam, and the marker that stayed nearby. "
+            "sourceText": "The visitors arrived. Yan-Yan pointed to the markings, the fault, and the two markers. "
           },
           {
             "role": "yanyan",
-            "sourceText": "“The whole rock did not travel far away,”"
-          },
+            "sourceText": "“First watch energy build slowly, then release suddenly. The ground shakes when the vibration reaches here!”"
+          }
+        ]
+      }
+    },
+    {
+      "id": "why-loading",
+      "act": "fault",
+      "image": "observation",
+      "layer": "why",
+      "zh": "板块不是等到地震才动。地球内部的热与重力等作用参与驱动板块缓慢运动。运动的板块可以把作用传到远处的岩石；一小段断层暂时锁住，并不意味着整个板块和周围岩石都停止变化。",
+      "en": "Plates do not wait for an earthquake to move. Processes involving Earth’s internal heat and gravity help drive their slow motion. Moving plates can load rock farther away. A locally locked part of a fault does not mean that a whole plate and all nearby rock have stopped changing.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
           {
             "role": "narrator",
-            "sourceText": " he said. "
-          },
+            "sourceText": "板块不是等到地震才动。地球内部的热与重力等作用参与驱动板块缓慢运动。运动的板块可以把作用传到远处的岩石；一小段断层暂时锁住，并不意味着整个板块和周围岩石都停止变化。"
+          }
+        ],
+        "en": [
           {
-            "role": "yanyan",
-            "sourceText": "“The vibrations spread!”"
+            "role": "narrator",
+            "sourceText": "Plates do not wait for an earthquake to move. Processes involving Earth’s internal heat and gravity help drive their slow motion. Moving plates can load rock farther away. A locally locked part of a fault does not mean that a whole plate and all nearby rock have stopped changing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "why-locking",
+      "act": "fault",
+      "image": "observation",
+      "layer": "why",
+      "zh": "断层两边的岩石相互接触。被压在一起的接触部位会抵抗滑动，这种阻力与摩擦有关。周围仍受作用时，岩石中的微小弹性形变可以储存能量。它并不需要先出现一条肉眼可见的大弯。",
+      "en": "Rock on the two sides of a fault is in contact. Contact areas pressed together resist sliding through friction. While the surrounding rock remains loaded, tiny elastic deformation can store energy. No large, visible bend is needed.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "断层两边的岩石相互接触。被压在一起的接触部位会抵抗滑动，这种阻力与摩擦有关。周围仍受作用时，岩石中的微小弹性形变可以储存能量。它并不需要先出现一条肉眼可见的大弯。"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "Rock on the two sides of a fault is in contact. Contact areas pressed together resist sliding through friction. While the surrounding rock remains loaded, tiny elastic deformation can store energy. No large, visible bend is needed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "why-rebound",
+      "act": "fault",
+      "image": "observation",
+      "layer": "why",
+      "zh": "在这种锁定后突然滑动的情形中，滑动开始后，阻力可能降低，使滑动很快发展。岩石的弹性形变减小，储存的部分能量释放；滑动停止后，两边仍可有永久错位，也可能仍有未释放的作用。另一些断层可以缓慢滑动，并不是每次板块移动都会发生地震。",
+      "en": "In this kind of sudden slip after locking, resistance can decrease once sliding starts, allowing slip to develop rapidly. Elastic deformation decreases and some stored energy is released. After motion stops, permanent offset and some remaining loading can persist. Other faults can creep slowly; not every movement of a plate produces an earthquake.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "在这种锁定后突然滑动的情形中，滑动开始后，阻力可能降低，使滑动很快发展。岩石的弹性形变减小，储存的部分能量释放；滑动停止后，两边仍可有永久错位，也可能仍有未释放的作用。另一些断层可以缓慢滑动，并不是每次板块移动都会发生地震。"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "In this kind of sudden slip after locking, resistance can decrease once sliding starts, allowing slip to develop rapidly. Elastic deformation decreases and some stored energy is released. After motion stops, permanent offset and some remaining loading can persist. Other faults can creep slowly; not every movement of a plate produces an earthquake."
+          }
+        ]
+      }
+    },
+    {
+      "id": "why-wave",
+      "act": "waves",
+      "image": "arrival",
+      "layer": "why",
+      "zh": "波经过时，一处岩石的运动与变形影响相邻的岩石，变化接着传下去。单个小标记只在附近运动，能量却能传得更远。真实地震波有不同种类，地面可以向不同方向振动；图中选一个方向慢看，圆圈记录变化到达哪里，不是石头或能量的外壳。",
+      "en": "As a wave passes, motion and deformation at one place affect neighboring rock, carrying the disturbance onward. One marker moves locally, while energy can travel farther. Real seismic waves have different kinds of motion. This view slows one direction for observation; its circle marks where the disturbance has arrived, not a shell of rock or energy.",
+      "narrationNeeded": true,
+      "segments": {
+        "zh": [
+          {
+            "role": "narrator",
+            "sourceText": "波经过时，一处岩石的运动与变形影响相邻的岩石，变化接着传下去。单个小标记只在附近运动，能量却能传得更远。真实地震波有不同种类，地面可以向不同方向振动；图中选一个方向慢看，圆圈记录变化到达哪里，不是石头或能量的外壳。"
+          }
+        ],
+        "en": [
+          {
+            "role": "narrator",
+            "sourceText": "As a wave passes, motion and deformation at one place affect neighboring rock, carrying the disturbance onward. One marker moves locally, while energy can travel farther. Real seismic waves have different kinds of motion. This view slows one direction for observation; its circle marks where the disturbance has arrived, not a shell of rock or energy."
           }
         ]
       }
@@ -241,11 +429,32 @@
       "conceptId": "fault"
     },
     {
+      "id": "tectonic-plates",
+      "zh": "板块",
+      "en": "tectonic plates",
+      "narrationNeeded": true,
+      "conceptId": "tectonic-plates"
+    },
+    {
+      "id": "friction",
+      "zh": "摩擦",
+      "en": "friction",
+      "narrationNeeded": true,
+      "conceptId": "friction"
+    },
+    {
       "id": "elastic-strain",
       "zh": "弹性形变",
       "en": "elastic deformation",
       "narrationNeeded": true,
       "conceptId": "elastic-strain"
+    },
+    {
+      "id": "stored-energy",
+      "zh": "储存的能量",
+      "en": "stored energy",
+      "narrationNeeded": true,
+      "conceptId": "stored-energy"
     },
     {
       "id": "slip",
@@ -281,112 +490,96 @@
       "id": "fault-predict",
       "kind": "prompt",
       "conceptId": "elastic-strain",
-      "zh": "接缝卡住时，旁边会怎样？",
-      "en": "What happens beside a fault when it is stuck?",
+      "zh": "接缝还没滑，周围岩石发生了什么？",
+      "en": "What changes in the rock while the fault is still stuck?",
       "narrationNeeded": true
     },
     {
       "id": "fault-initial",
       "kind": "result",
       "conceptId": "fault",
-      "zh": "先看接缝和旁边的纹路，再轻轻推动。",
-      "en": "Watch the seam and the markings beside it. Then push gently.",
+      "zh": "从原来的纹路开始看：先让外面的作用继续。",
+      "en": "Start with the original markings. Let loading continue.",
       "narrationNeeded": true
     },
     {
       "id": "fault-locked",
       "kind": "result",
       "conceptId": "elastic-strain",
-      "zh": "接缝还没滑，旁边的纹路已经弯了。",
-      "en": "The fault is still stuck. The markings beside it have bent.",
+      "zh": "接缝锁住，周围岩石形变并储能。灰色虚线留下了原来的纹路。",
+      "en": "The fault is locked. Surrounding rock deforms and stores energy. Gray dashed lines show the original markings.",
       "narrationNeeded": true
     },
     {
       "id": "fault-slipped",
       "kind": "result",
       "conceptId": "slip",
-      "zh": "这里突然滑了！看看两边的纹路。",
-      "en": "It slipped suddenly here! Look at the markings on both sides.",
+      "zh": "阻力被克服，断层开始滑动，周围岩石部分回弹。",
+      "en": "Resistance is overcome. The fault slips and surrounding rock rebounds partly.",
       "narrationNeeded": true
     },
     {
       "id": "fault-settled",
       "kind": "result",
       "conceptId": "slip",
-      "zh": "运动停了，纹路仍然错开。",
-      "en": "The movement stopped. The markings are still offset.",
+      "zh": "变形减小了，纹路却仍错开：回弹与永久错位可以同时留下。",
+      "en": "Deformation decreased, but the markings remain offset: rebound can leave permanent fault offset.",
       "narrationNeeded": true
     },
     {
       "id": "wave-predict",
       "kind": "prompt",
-      "conceptId": "wavefront",
-      "zh": "同一次振动，哪面旗先收到信号？",
-      "en": "Which flag will receive the signal first from this event?",
+      "conceptId": "particle-motion",
+      "zh": "看振动传开，也看小标记留在哪里。",
+      "en": "Watch the disturbance spread, and see where each marker stays.",
       "narrationNeeded": true
     },
     {
       "id": "wave-ready",
       "kind": "result",
       "conceptId": "wavefront",
-      "zh": "两面旗准备好了。先猜猜，也可以直接观察。",
-      "en": "Both flags are ready. Make a prediction, or just watch.",
+      "zh": "地下与地表标记都在原位；同一次振动将依次到达。",
+      "en": "Both markers are at their starting places. One disturbance will reach them in turn.",
       "narrationNeeded": true
     },
     {
       "id": "wave-moving",
       "kind": "result",
-      "conceptId": "wavefront",
-      "zh": "变化从地下传开了，留意两面旗。",
-      "en": "The disturbance is spreading from underground. Watch both flags.",
+      "conceptId": "particle-motion",
+      "zh": "振动经过地下标记：标记在附近来回动，变化继续传向地表。",
+      "en": "The disturbance passes the underground marker. It moves locally as the disturbance continues toward the surface.",
       "narrationNeeded": true
     },
     {
-      "id": "arrived-a",
+      "id": "wave-surface",
       "kind": "result",
-      "conceptId": "wavefront",
-      "zh": "A先收到了信号。换个位置再看看？",
-      "en": "A received the signal first. Try changing the positions.",
+      "conceptId": "particle-motion",
+      "zh": "振动到达地表，地表标记也来回动起来；地下标记没有跑上来。",
+      "en": "The disturbance reaches the surface marker and it moves locally too. The underground marker did not travel up here.",
       "narrationNeeded": true
     },
     {
-      "id": "arrived-b",
+      "id": "wave-finished",
       "kind": "result",
-      "conceptId": "wavefront",
-      "zh": "B先收到了信号。换个位置再看看？",
-      "en": "B received the signal first. Try changing the positions.",
-      "narrationNeeded": true
-    },
-    {
-      "id": "arrived-together",
-      "kind": "result",
-      "conceptId": "wavefront",
-      "zh": "两面旗离起点一样远，一起收到了信号。",
-      "en": "Both flags are the same distance from the source. They received the signal together.",
+      "conceptId": "particle-motion",
+      "zh": "脉冲已经过这两个标记，它们回到原位附近；到达记录留下了传播的先后。",
+      "en": "The pulse has passed both markers. They are near their starting places; arrival records show the sequence of propagation.",
       "narrationNeeded": true
     },
     {
       "id": "local-motion",
       "kind": "result",
       "conceptId": "particle-motion",
-      "zh": "小标记在原位附近动，没有跟着波跑走。",
-      "en": "The marker moves near its starting place. It does not travel with the wave.",
-      "narrationNeeded": true
-    },
-    {
-      "id": "exhibit-hint",
-      "kind": "prompt",
-      "conceptId": "elastic-strain",
-      "zh": "先找旁边纹路慢慢弯的那张，再看哪里突然滑动。",
-      "en": "Start with the card showing the markings bending. Then find the sudden slip.",
+      "zh": "灰色圈是原位，彩色点是现在：放大看往返，不随波跑走。",
+      "en": "The gray ring is the starting place; the colored point is its current position. Enlarge the back-and-forth motion without following the wave.",
       "narrationNeeded": true
     },
     {
       "id": "exhibit-complete",
       "kind": "result",
       "conceptId": "wavefront",
-      "zh": "展览摆好了：旁边变形，突然滑动，振动传开。",
-      "en": "The display is ready: rocks change shape, slip suddenly, and vibrations spread.",
+      "zh": "持续作用 → 形变储能 → 断层滑动与部分回弹 → 地震波传播 → 地面振动。",
+      "en": "Continued loading → elastic deformation and stored energy → fault slip and partial rebound → seismic waves → ground motion.",
       "narrationNeeded": true
     }
   ],
@@ -396,8 +589,30 @@
     "slip",
     "waves"
   ],
+  "why": [
+    {
+      "id": "why-loading",
+      "zh": "大地为什么一直受着作用？",
+      "en": "Why does loading continue?"
+    },
+    {
+      "id": "why-locking",
+      "zh": "硬岩石也能储存能量？",
+      "en": "Can hard rock store energy?"
+    },
+    {
+      "id": "why-rebound",
+      "zh": "为什么会突然滑，而不是慢慢滑？",
+      "en": "Why can slip become sudden?"
+    },
+    {
+      "id": "why-wave",
+      "zh": "石头没跑远，振动怎么传过去？",
+      "en": "How does vibration travel without the rock traveling?"
+    }
+  ],
   "adultNotes": {
-    "zh": "本书介绍断层突然滑动引发地震的一种机制。断层卡住时，周围岩石仍可发生弹性形变；滑动释放的部分能量以地震波传开。实验采用向内挤压的逆断层教学近似，上盘沿倾斜断层面向上移动。时间、形变和位移经过放大或压缩，不对应现实预测。波实验是均匀介质中的单一脉冲；旗子表示信号到达，不表示震动强弱或安全程度。局部振动与断层永久错位是不同现象。本书不提供地震预报或避险指引。",
-    "en": "This story explores one earthquake mechanism: sudden slip on a fault. Surrounding rock can deform elastically while a fault is locked. Part of the energy released by slipping travels as seismic waves. The fault activity uses a simplified compression-driven reverse fault, with the hanging wall moving upward along the inclined fault. Time, deformation and displacement are scaled for observation, not real-world prediction. The wave activity uses one pulse in a uniform medium. Flags show arrival, not shaking strength or safety. Local vibration and permanent fault offset are different effects. This book is not an earthquake forecast or an emergency guide."
+    "zh": "本书讲断层锁定后突然滑动的一种机制。采用向内挤压的逆断层弹簧摩擦模型；时间与变形被放大，图中弯曲不能当现实岩石的肉眼变化或地震倒计时。外部加载在本次滑移后停止，便于单次观察；现实构造作用并不因此停止。波是均匀介质中的单一纵向脉冲，忽略多波型、衰减、场地效应与复杂破裂；放大窗口只放大局部位移，圆线是传播到达示意。断层永久位移和波的局部振动不同，真实地点还可能有永久变形。旗子只记到达，不能判断强弱或安全。本书不提供预测或避险指导。",
+    "en": "This book follows one mechanism: sudden slip after local fault locking. A compression-driven reverse-fault spring/friction model scales time and deformation for observation; bending is not a visible real-rock precursor or an earthquake countdown. Loading stops after this one slip for observation; real tectonic loading does not stop then. The wave is one longitudinal pulse in a uniform medium, omitting multiple wave types, attenuation, site effects, and complex rupture. The enlarged window magnifies local displacement only, and the circle marks propagation arrival. Fault offset differs from local wave motion; real locations can also undergo permanent deformation. Flags record arrival, not strength or safety. This is not a forecast or an emergency guide."
   }
 }

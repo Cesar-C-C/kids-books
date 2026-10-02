@@ -41,7 +41,7 @@ for (const detail of details) {
   assert.ok(detailIds.has(detail.id), `${detail.id}: selectable detail geometry exists`);
 }
 assert.ok(meshes.length >= 10, 'actual layered block, fault and evidence markers exist');
-assert.ok(groupIds.has('surface-candidates'), 'three spatial surface choices share the geology frame');
+assert.equal(groupIds.has('surface-candidates'), false, 'fixed-answer geometry is retired in favor of source projection');
 
 const getAnchor = key => {
   geology.root.updateMatrixWorld(true);
@@ -55,11 +55,17 @@ assert.ok(Math.abs(before.epicenter.x - model.EPICENTER.x) < 1e-8 && Math.abs(be
 for (const flag of model.FLAGS) assert.ok(Math.abs(before[flag.id].x - flag.position.x) < 1e-8);
 const hanging = geology.root.children.find(object => object.userData.partId === 'hanging-wall');
 const marker = hanging.children.find(object => object.name === 'Moving half of the marker');
+const soil = hanging.children.find(object => object.name === 'Topsoil follows its own block');
+assert.ok(soil && soil.parent === hanging, 'topsoil moves with its block rather than bridging a slipped fault');
+const rock = hanging.children.find(object => object.name === 'Continuous right rock wedge');
+const restVertices = Array.from(rock.geometry.attributes.position.array);
 const locked = Array.from({ length: 3 }).reduce(state => model.stepFault(state, { drive: true }), model.createFault());
 geology.renderFault(locked);
 assert.equal(hanging.position.y, 0, 'locked rock must not visually slip before threshold');
 assert.ok(marker.geometry.attributes.position.getY(0) > marker.geometry.attributes.position.getY(1), 'marker bends near locked seam');
+assert.notDeepEqual(Array.from(rock.geometry.attributes.position.array), restVertices, 'stored strain deforms the visible rock proxy, not only its marker');
 geology.renderType('normal', 0.6);
+assert.deepEqual(Array.from(rock.geometry.attributes.position.array), restVertices, 'independent loading comparison clears elastic deformation');
 assert.ok(Math.abs(marker.geometry.attributes.position.getY(0) + 0.18) < 1e-6, 'a separate fault-type preset clears prior elastic bending');
 assert.ok(hanging.position.y < 0, 'normal preset moves the hanging wall down');
 const fault = Array.from({ length: 20 }, (_, index) => index).reduce(state => model.stepFault(state, { drive: true }), model.createFault());
@@ -81,6 +87,8 @@ assert.ok(Math.abs(tracked.position.x * radial.x + tracked.position.y * radial.y
 const nearFlag = geology.root.children.find(object => object.userData.partId === 'near-flag');
 const pArrival = nearFlag.children.find(object => object.name === 'near P arrival');
 const sArrival = nearFlag.children.find(object => object.name === 'near S arrival');
+const surfaceParticle = nearFlag.children.find(object => object.name === 'near local surface rock');
+assert.ok(surfaceParticle, 'surface rock particle is actual geometry, not only an arrival lamp');
 let beforeS = model.createWave({ mode: 's' });
 for (let i = 0; i < beforeS.arrivalTicks.near.p; i++) beforeS = model.stepWave(beforeS);
 geology.renderWave(beforeS);
@@ -92,13 +100,28 @@ assert.equal(sArrival.visible, true, 'S evidence appears at S arrival');
 geology.renderWave(beforeS = { ...beforeS, mode: 'combined' });
 assert.equal(pArrival.visible, true, 'combined view retains P evidence');
 assert.equal(sArrival.visible, true, 'combined view retains S evidence');
+const surfaceOffset = model.particleDisplacement(beforeS, model.FLAGS[0].position, 's');
+assert.ok(Math.abs(surfaceParticle.position.x - surfaceOffset.x) < 1e-8 && Math.abs(surfaceParticle.position.y - 0.08 - surfaceOffset.y) < 1e-8, 'surface particle follows its own local wave displacement');
+for (const source of model.FOCI) {
+  geology.setSource(source);
+  assert.deepEqual(getAnchor('focus'), { ...source }, 'source is grounded on the selected fault location');
+  assert.deepEqual(getAnchor('epicenter'), { x: source.x, y: 0, z: source.z }, 'epicenter is the exact vertical projection, not a fixed answer');
+}
+let ended = model.createWave();
+for (let i = 0; i < 82; i++) ended = model.stepWave(ended);
+geology.renderWave(ended);
+const fronts = geology.root.children.find(object => object.userData.partId === 'wavefront');
+assert.ok(fronts.children.every(front => !front.visible), 'terminal wavefronts leave the scene instead of enclosing it in giant shells');
+assert.equal(tracked.position.length(), 0, 'local rock returns to its own rest position');
+geology.renderType('reverse', 0);
+geology.renderWave(model.createWave());
 geology.setCutaway(true);
 geology.setCutaway(false);
 assert.equal(geology.root, beforeRoot, 'card and cutaway changes keep the same root object');
 for (const key of Object.keys(before)) assert.deepEqual(getAnchor(key), before[key], `${key} retains its world coordinate`);
 assert.equal(fault.slipOffset > 0, true, 'cutaway cannot alter the pure model snapshot');
 const metrics = geology.metrics();
-assert.ok(metrics.triangles > 100 && metrics.triangles < 100000, `triangle budget: ${metrics.triangles}`);
-assert.ok(metrics.drawCalls > 10 && metrics.drawCalls < 250, `draw-call budget: ${metrics.drawCalls}`);
+assert.ok(metrics.triangles > 100 && metrics.triangles < 6000, `triangle budget: ${metrics.triangles}`);
+assert.ok(metrics.drawCalls > 10 && metrics.drawCalls < 80, `draw-call budget: ${metrics.drawCalls}`);
 geology.dispose();
 console.log(`Earthquake continuous geology: ${meshes.length} meshes, ${metrics.triangles} triangles, ${metrics.drawCalls} draws PASS`);

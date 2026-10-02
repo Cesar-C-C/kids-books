@@ -56,6 +56,22 @@
     return createFault({ contactPreset: state.contactPreset });
   }
 
+  // Dimensionless spring energy for this teaching model, not earthquake magnitude.
+  function storedEnergy(state) {
+    return round(0.5 * state.parameters.stiffness * state.elasticStrain ** 2);
+  }
+
+  function advanceObservation(state) {
+    if (state.phase === 'settled') return state;
+    const target = state.phase === 'initial' ? 'locked' : state.phase === 'locked' ? 'slipped' : 'settled';
+    let next = state;
+    for (let i = 0; i < 64; i++) {
+      next = stepFault(next, { drive: true });
+      if (target === 'locked' ? i >= 7 : next.phase === target) return next;
+    }
+    return next;
+  }
+
   function faultMotion(type, amount) {
     const level = Math.max(0, Math.min(1, Number(amount) || 0));
     let hangingWall;
@@ -79,6 +95,7 @@
 
   const FOCUS = Object.freeze({ x: 2.4 * FAULT_DIP, y: -2.4, z: 0 });
   const EPICENTER = Object.freeze({ x: FOCUS.x, y: 0, z: FOCUS.z });
+  const FOCI = Object.freeze([FOCUS, Object.freeze({ x: 1.4 * FAULT_DIP, y: -1.4, z: 0.8 })]);
   const FLAGS = Object.freeze([
     Object.freeze({ id: 'near', position: Object.freeze({ x: 0.5, y: 0, z: 0 }) }),
     Object.freeze({ id: 'far', position: Object.freeze({ x: 3, y: 0, z: 0 }) })
@@ -87,15 +104,15 @@
   const WAVE_SPEED = Object.freeze({ p: 0.16, s: 0.1 });
   const TRACKED_RADIUS = Math.hypot(TRACKED_POINT.x - FOCUS.x, TRACKED_POINT.y - FOCUS.y, TRACKED_POINT.z - FOCUS.z);
 
-  function distanceFromFocus(point) {
-    return Math.hypot(point.x - FOCUS.x, point.y - FOCUS.y, point.z - FOCUS.z);
+  function distanceFromFocus(point, focus = FOCUS) {
+    return Math.hypot(point.x - focus.x, point.y - focus.y, point.z - focus.z);
   }
 
-  function createWave({ mode = 'combined', flags = FLAGS } = {}) {
+  function createWave({ mode = 'combined', flags = FLAGS, focus = FOCUS } = {}) {
     const acceptedMode = ['p', 's', 'combined'].includes(mode) ? mode : 'combined';
     const arrivalTicks = {};
     for (const flag of flags) {
-      const distance = distanceFromFocus(flag.position);
+      const distance = distanceFromFocus(flag.position, focus);
       arrivalTicks[flag.id] = {
         p: Math.ceil(distance / WAVE_SPEED.p),
         s: Math.ceil(distance / WAVE_SPEED.s)
@@ -103,10 +120,11 @@
     }
     return {
       tick: 0,
+      focus: { ...focus },
       mode: acceptedMode,
       frontRadius: { p: 0, s: 0 },
       arrivalTicks,
-      trackedRadius: TRACKED_RADIUS
+      trackedRadius: distanceFromFocus(TRACKED_POINT, focus)
     };
   }
 
@@ -119,18 +137,32 @@
     };
   }
 
-  function particleOffset(state, kind) {
+  function particleOffset(state, kind, point = TRACKED_POINT) {
     if (kind !== 'p' && kind !== 's') return { radial: 0, tangential: 0 };
     const pulseWidth = 0.9;
-    const passed = state.frontRadius[kind] - state.trackedRadius;
+    const passed = state.frontRadius[kind] - distanceFromFocus(point, state.focus || FOCUS);
     if (passed <= 0 || passed >= pulseWidth) return { radial: 0, tangential: 0 };
-    const displacement = round(Math.sin(Math.PI * passed / pulseWidth) * 0.16);
+    const displacement = round(Math.sin(2 * Math.PI * passed / pulseWidth) * 0.22);
     return kind === 'p'
       ? { radial: displacement, tangential: 0 }
       : { radial: 0, tangential: displacement };
   }
 
-  const api = { createFault, stepFault, resetFault, faultMotion, FAULT_DIP, FOCUS, EPICENTER, TRACKED_POINT, FLAGS, createWave, stepWave, particleOffset };
+  function particleDisplacement(state, point, kind) {
+    const pulse = particleOffset(state, kind, point);
+    if (!pulse.radial && !pulse.tangential) return { x: 0, y: 0, z: 0 };
+    const focus = state.focus || FOCUS;
+    const dx = point.x - focus.x, dy = point.y - focus.y, dz = point.z - focus.z;
+    const length = Math.hypot(dx, dy, dz) || 1;
+    const transverseLength = Math.hypot(dx, dy) || 1;
+    return {
+      x: round(dx / length * pulse.radial - dy / transverseLength * pulse.tangential),
+      y: round(dy / length * pulse.radial + dx / transverseLength * pulse.tangential),
+      z: round(dz / length * pulse.radial)
+    };
+  }
+
+  const api = { createFault, stepFault, resetFault, storedEnergy, advanceObservation, faultMotion, FAULT_DIP, FOCUS, FOCI, EPICENTER, TRACKED_POINT, FLAGS, WAVE_SPEED, createWave, stepWave, particleOffset, particleDisplacement };
   root.EarthquakeModel = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : globalThis);

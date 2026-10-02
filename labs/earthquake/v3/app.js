@@ -4,15 +4,17 @@
   const model = window.EarthquakeModel;
   const THREE = window.THREE;
   const route = window.EarthquakeRoute;
-  const cards = ['elastic-rebound', 'fault-types', 'focus-epicenter', 'waves'];
+  const cards = ['elastic-rebound', 'waves', 'fault-types', 'focus-epicenter'];
   const entry = route.parse(location.search, location.hash);
   let language = entry.lang;
   let card = entry.card;
   const source = entry.from;
   let fault = model && model.createFault();
-  let wave = model && model.createWave();
+  let focusIndex = 0;
+  let wave = model && model.createWave({ mode: 'p' });
   let selectedType = 'reverse';
   let focusRevealed = false;
+  let focusChanged = false;
   let cutaway = card === 'focus-epicenter' || card === 'waves';
   let paused = false;
   let driveTimer = null;
@@ -68,7 +70,10 @@
     const zh = language === 'zh';
     $('narration-open').textContent = zh ? '点读' : 'Listen';
     $('narration-heading').textContent = zh ? '点读小卡' : 'Listen & explore';
-    $('narration-help').textContent = zh ? '点一句，听一句。可以先听问题，再回模型找线索。' : 'Choose a line to hear it. Listen to a question, then return to the model to find clues.';
+    const hasNarration = !!audio && [...content.values()].some(item => item.narrationNeeded && audio.available(item.kind, item.id, language));
+    $('narration-help').textContent = hasNarration
+      ? (zh ? '点一句，听一句。可以先听问题，再回模型找线索。' : 'Choose a line to hear it. Listen to a question, then return to the model to find clues.')
+      : t('audio-unavailable');
     $('narration-close').textContent = zh ? '关闭' : 'Close';
     for (const id of ['audio-stop', 'narration-stop']) $(id).textContent = zh ? '停止朗读' : 'Stop narration';
     for (const group of narrationGroups) {
@@ -84,8 +89,13 @@
       }
     }
   }
-  function audioStatus(status) {
-    const message = status === 'unavailable' ? t('audio-unavailable') : '';
+  function audioStatus(status, detail = {}) {
+    // Runtime transfer failures are different from missing/stale teaching-version audio.
+    const hasClip = audio?.available(detail.kind, detail.id, detail.lang || language);
+    const failure = language === 'zh'
+      ? '录音暂时不可用，可以继续阅读文字和操作模型。'
+      : 'Narration is temporarily unavailable. You can still read and explore the model.';
+    const message = status === 'unavailable' ? (hasClip ? failure : t('audio-unavailable')) : '';
     $('audio-status').textContent = message;
     $('narration-status').textContent = message;
   }
@@ -94,8 +104,8 @@
     if (!audio || !item?.narrationNeeded) return;
     stopMotion();
     audioStatus('loading');
-    const result = await audio.play(item.kind, item.id, language);
-    if (!result.ok && result.reason !== 'cancelled') audioStatus('unavailable');
+    // The adapter emits one current-ticket status; a late caller must not repaint it.
+    await audio.play(item.kind, item.id, language);
   }
   function stopMotion() {
     for (const timer of [driveTimer, waveTimer, replayTimer]) if (timer) clearInterval(timer);
@@ -109,9 +119,10 @@
   }
   function startWave() {
     stopMotion();
-    if (wave.tick >= 82) return;
+    if (wave.tick >= 82) wave = model.createWave({ mode: wave.mode, focus: model.FOCI[focusIndex] });
     waveStarted = true;
     waveTimer = setInterval(waveStep, reduced.matches ? 240 : 80);
+    paint();
     updateWavePause();
   }
   function reportError(message) {
@@ -128,12 +139,18 @@
     camera.updateProjectionMatrix();
   }
   function setPreset(name) {
-    if (name === 'side') { view.yaw = Math.PI / 2; view.pitch = 0.08; view.distance = 10.3; }
+    if (name === 'side') { view.yaw = 0.12; view.pitch = 0.14; view.distance = 11.6; }
     else if (name === 'top') { view.yaw = 0; view.pitch = 1.43; view.distance = 10.6; }
     else { view.yaw = 0.55; view.pitch = 0.32; view.distance = 11.6; }
     setCamera();
   }
   function faultResult() { return `result-${fault.phase}`; }
+  function whyId() {
+    if (card === 'elastic-rebound') return 'why-' + fault.phase;
+    if (card === 'fault-types') return 'why-' + selectedType;
+    if (card === 'focus-epicenter') return 'why-focus';
+    return wave.mode === 'combined' ? 'why-waves' : 'why-' + wave.mode;
+  }
   function resultId() {
     if (card === 'elastic-rebound') return faultResult();
     if (card === 'fault-types') return 'result-fault-types';
@@ -141,14 +158,15 @@
     return wave.mode === 'combined' && wave.tick >= wave.arrivalTicks.near.s ? 'result-arrival' : 'result-waves';
   }
   function paintScene() {
-    if (fallback) { fallback.render({ card, model: card === 'waves' ? wave : fault, view, cutaway, language }); return; }
+    if (fallback) { fallback.render({ card, model: card === 'waves' ? wave : fault, view, cutaway, language, focus: model.FOCI[focusIndex] }); return; }
     if (!geology) return;
+    geology.setSource(model.FOCI[focusIndex]);
     geology.setCard(card);
     geology.renderFocus(card === 'focus-epicenter' && focusRevealed ? 'epicenter' : null);
     if (card === 'elastic-rebound') geology.renderFault(fault);
     else if (card === 'fault-types') geology.renderType(selectedType, 0.64);
     else geology.renderType('reverse', 0);
-    geology.renderWave(card === 'waves' ? wave : model.createWave());
+    geology.renderWave(card === 'waves' ? wave : model.createWave({ focus: model.FOCI[focusIndex] }));
   }
   function paintText() {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
@@ -156,17 +174,35 @@
     for (const el of document.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
     $('question').textContent = t(`question-${card}`);
     $('result').textContent = t(resultId());
-    const status = card === 'elastic-rebound' ? t(faultResult()) : `${String(cards.indexOf(card) + 1).padStart(2, '0')} / 04`;
+    const phases = language === 'zh' ? { initial: '受力前', locked: '锁定储能', slipped: '突然滑动', settled: '回弹后错位' } : { initial: 'Before loading', locked: 'Locked: storing energy', slipped: 'Sudden slip', settled: 'Offset remains' };
+    const status = card === 'elastic-rebound' ? phases[fault.phase] : `${String(cards.indexOf(card) + 1).padStart(2, '0')} / 04`;
     if ($('status').textContent !== status) $('status').textContent = status;
     $('mobile-question').textContent = $('question').textContent;
     $('mobile-result').textContent = $('result').textContent;
-    $('mobile-action').hidden = !['elastic-rebound', 'waves'].includes(card);
-    $('mobile-action').textContent = t(card === 'waves' ? 'wave-play' : 'drive');
-    $('surface-choices').hidden = card !== 'focus-epicenter';
+    $('mobile-action').hidden = true;
+    $('advance').textContent = t('advance-' + fault.phase);
+    $('advance').disabled = false;
+    $('energy-evidence').hidden = card !== 'elastic-rebound';
+    const energy = model.storedEnergy(fault);
+    const percent = Math.min(100, Math.round(energy / (0.5 * fault.parameters.stiffness * fault.parameters.staticLimit ** 2) * 100));
+    $('energy-meter').setAttribute('aria-valuenow', String(percent));
+    $('energy-value').style.width = percent + '%';
+    $('energy-description').textContent = language === 'zh' ? '能量条随弹性形变增减；滑后仍有残余形变。不是实测值。' : 'The bar follows elastic deformation; some strain remains after slip. It is not a measured value.';
+    $('why-body').textContent = t(whyId());
+    $('observe-label').textContent = t(card === 'fault-types' ? 'label-force' : 'why-evidence');
+    $('model-limit').textContent = t(card === 'waves' ? 'model-limit-waves' : card === 'focus-epicenter' ? 'model-limit-focus' : 'model-limit-fault');
+    $('limit-title').textContent = language === 'zh' ? '这个模型没有模拟什么？' : 'What does this model leave out?';
+    $('type-context').textContent = t('type-reset');
+    $('focus-project').setAttribute('aria-pressed', String(focusRevealed));
+    $('focus-status').textContent = focusChanged ? t('source-changed') : '';
+    for (const [id, index] of [['focus-deep', 0], ['focus-shallow', 1]]) $(id).setAttribute('aria-pressed', String(index === focusIndex));
     $('caveat').textContent = t(card === 'waves' ? 'wave-caveat' : 'toy-caveat');
     $('pause').textContent = t(paused ? 'resume' : 'pause');
     const spoken = content.get(resultId());
     $('listen').hidden = !(audio && spoken && audio.available(spoken.kind, spoken.id, language));
+    const explanation = content.get(whyId());
+    $('why-listen').hidden = !(audio && explanation && audio.available(explanation.kind, explanation.id, language));
+    $('pending-audio').hidden = !!audio && [...content.values()].filter(item => item.narrationNeeded).every(item => ['zh', 'en'].every(lang => audio.available(item.kind, item.id, lang)));
     $('back-book').href = route.bookHref({ lang: language, from: source });
     $('scene-mode').textContent = card === 'waves' ? 'P / S WAVES' : card === 'fault-types' ? selectedType.toUpperCase() : 'REVERSE FAULT';
     $('lesson-number').textContent = `${String(cards.indexOf(card) + 1).padStart(2, '0')} — 04`;
@@ -174,11 +210,16 @@
     for (const [id, name] of [['controls-fault', 'elastic-rebound'], ['controls-types', 'fault-types'], ['controls-focus', 'focus-epicenter'], ['controls-waves', 'waves']]) $(id).hidden = card !== name;
     for (const id of ['normal', 'reverse', 'strike-slip']) $('type-' + id).setAttribute('aria-pressed', String(id === selectedType));
     for (const id of ['combined', 'p', 's']) $('wave-' + id).setAttribute('aria-pressed', String(id === wave.mode));
-    for (const [id, label] of [['left', 'A'], ['correct', 'B'], ['right', 'C']]) $('surface-' + id).setAttribute('aria-label', `${t('guess-' + id)} ${label}`);
     paintNarration();
     updateWavePause();
   }
-  function paint() { paintScene(); paintText(); positionChoices(); }
+  function paint() { paintScene(); paintText(); positionLabels(); }
+  function advanceFault() {
+    stopMotion();
+    const next = model.advanceObservation(fault);
+    while (fault.tick < next.tick) { fault = model.stepFault(fault, { drive: true }); faultHistory.push(fault); }
+    paint();
+  }
   function faultStep() {
     fault = model.stepFault(fault, { drive: true });
     faultHistory.push(fault);
@@ -198,10 +239,7 @@
     cutaway = card === 'focus-epicenter' || card === 'waves';
     if (geology) geology.setCutaway(cutaway);
     $('cutaway').setAttribute('aria-pressed', String(cutaway));
-    if (card === 'elastic-rebound') { fault = model.createFault(); faultHistory = [fault]; }
-    if (card === 'waves') { wave = model.createWave(); waveStarted = false; }
-    if (card === 'fault-types') selectedType = 'reverse';
-    if (card === 'focus-epicenter') focusRevealed = false;
+    // Observations are independent but persistent: a chapter change is not a reset.
     if (card === 'focus-epicenter' || card === 'waves') setPreset('home');
     view.type = selectedType;
     view.focusRevealed = focusRevealed;
@@ -213,34 +251,33 @@
     return {
       card, language, phase: card === 'elastic-rebound' ? fault.phase : card === 'waves' ? 'travelling' : 'observing',
       model: JSON.parse(JSON.stringify(current)), view: { ...view }, cutaway,
-      playing: !!(driveTimer || waveTimer || replayTimer), source, renderer: rendererKind
+      playing: !!(driveTimer || waveTimer || replayTimer), source, renderer: rendererKind,
+      fault: JSON.parse(JSON.stringify(fault)), wave: JSON.parse(JSON.stringify(wave)),
+      focus: { ...model.FOCI[focusIndex] }, energy: model.storedEnergy(fault), explanationId: whyId(),
+      geometry: geology && geology.metrics(), contentVersion: content.get('lab-title')?.contentVersion
     };
   }
   window.earthquakeLab = { snapshot };
 
-  function positionChoices() {
-    if (card !== 'focus-epicenter') return;
-    const viewport = $('viewport').getBoundingClientRect();
-    const positions = [['left', -1.5], ['correct', model.EPICENTER.x], ['right', 3]];
-    for (const [id, x] of positions) {
-      let px, py;
-      if (fallback) {
-        const svg = $('model-fallback').querySelector('svg').getBoundingClientRect();
-        px = svg.left + (400 + 80 * x) / 800 * svg.width;
-        py = svg.top + 140 / 480 * svg.height;
-      } else if (camera) {
-        const projected = new THREE.Vector3(x, 0.24, 0).project(camera);
-        px = viewport.left + (projected.x + 1) * viewport.width / 2;
-        py = viewport.top + (1 - projected.y) * viewport.height / 2;
-      } else continue;
-      const button = $('surface-' + id);
-      button.style.left = `${px - viewport.left}px`;
-      button.style.top = `${py - viewport.top}px`;
+  function positionLabels() {
+    const viewport = $('viewport');
+    const visible = card === 'focus-epicenter' ? ['focus', ...(focusRevealed ? ['epicenter'] : [])] : card === 'waves' ? ['particle', 'surface'] : ['marker', ...(cutaway && card === 'elastic-rebound' ? ['lock'] : [])];
+    for (const id of ['marker', 'lock', 'focus', 'epicenter', 'particle', 'surface']) {
+      const label = $('label-' + id);
+      label.hidden = !geology || !camera || !visible.includes(id);
+      if (label.hidden || !geology.anchors[id]) continue;
+      const point = geology.anchors[id].getWorldPosition(new THREE.Vector3()).project(camera);
+      label.hidden = point.z < -1 || point.z > 1;
+      const dx = id === 'particle' ? -90 : id === 'surface' ? 12 : 8;
+      const dy = id === 'particle' ? 26 : -32;
+      label.style.left = Math.max(7, Math.min(viewport.clientWidth - label.offsetWidth - 7, (point.x + 1) * viewport.clientWidth / 2 + dx)) + 'px';
+      label.style.top = Math.max(40, Math.min(viewport.clientHeight - label.offsetHeight - 70, (1 - point.y) * viewport.clientHeight / 2 + dy)) + 'px';
     }
   }
 
   function bindControls() {
     for (const id of cards) $('card-' + id).addEventListener('click', () => switchCard(id));
+    $('advance').addEventListener('click', () => { if (fault.phase === 'settled') switchCard('waves'); else advanceFault(); });
     $('step').addEventListener('click', faultStep);
     const startDrive = event => {
       if (event.button !== 0 || card !== 'elastic-rebound' || paused) return;
@@ -249,12 +286,11 @@
       driveTimer = setInterval(faultStep, reduced.matches ? 350 : 120);
       event.currentTarget.setPointerCapture(event.pointerId);
     };
-    for (const button of [$('drive'), $('mobile-action')]) {
+    for (const button of [$('drive')]) {
       button.addEventListener('pointerdown', startDrive);
       for (const eventName of ['pointerup', 'pointercancel', 'lostpointercapture']) button.addEventListener(eventName, stopMotion);
       button.addEventListener('click', event => { if (event.detail === 0 && card === 'elastic-rebound') faultStep(); });
     }
-    $('mobile-action').addEventListener('click', () => { if (card === 'waves') $('wave-play').click(); });
     $('pause').addEventListener('click', () => { paused = !paused; stopMotion(); paintText(); });
     $('replay').addEventListener('click', () => {
       stopMotion();
@@ -270,7 +306,7 @@
     $('wave-step').addEventListener('click', () => { stopMotion(); waveStep(); });
     $('wave-play').addEventListener('click', startWave);
     $('wave-pause').addEventListener('click', () => { if (waveTimer) stopMotion(); else startWave(); });
-    $('wave-reset').addEventListener('click', () => { stopMotion(); wave = model.createWave({ mode: wave.mode }); waveStarted = false; paint(); });
+    $('wave-reset').addEventListener('click', () => { stopMotion(); wave = model.createWave({ mode: wave.mode, focus: model.FOCI[focusIndex] }); waveStarted = false; paint(); });
     for (const mode of ['combined', 'p', 's']) $('wave-' + mode).addEventListener('click', () => { stopMotion(); wave = { ...wave, mode }; paint(); });
     for (const type of ['normal', 'reverse', 'strike-slip']) $('type-' + type).addEventListener('click', () => {
       stopMotion(); selectedType = type; view.type = type;
@@ -278,11 +314,20 @@
       else setPreset('side');
       paint();
     });
-    for (const id of ['left', 'right', 'correct']) for (const prefix of ['guess-', 'surface-']) $(prefix + id).addEventListener('click', () => { focusRevealed = id === 'correct'; view.focusRevealed = focusRevealed; paint(); });
+    for (const [id, index] of [['focus-deep', 0], ['focus-shallow', 1]]) $(id).addEventListener('click', () => {
+      if (focusIndex === index) return;
+      stopMotion(); focusIndex = index;
+      wave = model.createWave({ mode: wave.mode, focus: model.FOCI[focusIndex] });
+      waveStarted = false;
+      focusChanged = true;
+      paint();
+    });
+    $('focus-project').addEventListener('click', () => { stopMotion(); focusRevealed = !focusRevealed; view.focusRevealed = focusRevealed; paint(); });
     const switchLanguage = () => { stopMotion(); language = language === 'zh' ? 'en' : 'zh'; audioStatus('stopped'); paint(); };
     $('language').addEventListener('click', switchLanguage);
     $('narration-language').addEventListener('click', switchLanguage);
     $('listen').addEventListener('click', () => playNarration(resultId()));
+    $('why-listen').addEventListener('click', () => playNarration(whyId()));
     $('narration-open').addEventListener('click', () => { stopMotion(); paintNarration(); $('narration-dialog').showModal(); });
     $('narration-close').addEventListener('click', () => $('narration-dialog').close());
     $('narration-dialog').addEventListener('close', stopMotion);
@@ -343,12 +388,12 @@
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
-      positionChoices();
+      positionLabels();
     };
     resize();
     window.addEventListener('resize', resize);
     rendererKind = 'webgl';
-    const frame = () => { if (!renderer) return; positionChoices(); renderer.render(scene, camera); requestAnimationFrame(frame); };
+    const frame = () => { if (!renderer) return; positionLabels(); renderer.render(scene, camera); requestAnimationFrame(frame); };
     requestAnimationFrame(frame);
   }
 
@@ -358,7 +403,7 @@
     fallback = window.EarthquakeFallback.create($('viewport'));
     rendererKind = 'fallback';
     paint();
-    window.addEventListener('resize', positionChoices);
+    window.addEventListener('resize', positionLabels);
   }
 
   async function boot() {
@@ -368,6 +413,9 @@
       if (!response.ok) throw new Error('Content could not be loaded');
       const data = await response.json();
       content = new Map(data.entries.map(entry => [entry.id, entry]));
+      for (const group of narrationGroups) for (const item of data.entries) {
+        if (group.card && item.card === group.card && item.narrationNeeded && !group.ids.includes(item.id)) group.ids.push(item.id);
+      }
       buildNarration();
       if (window.EarthquakeLabAudio) {
         audio = window.EarthquakeLabAudio.create({ manifestUrl: 'audio-manifest.json', contentVersion: data.contentVersion, onStatus: audioStatus });

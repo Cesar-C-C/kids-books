@@ -4,6 +4,16 @@ const fs=require('node:fs');
 const modulePath='../tools/earthquake_audio_manifest.cjs';
 const api=fs.existsSync(require('node:path').resolve(__dirname,modulePath))?require(modulePath):{};
 beforeEach(()=>assert.equal(typeof api.collectEntries,'function','real exporter required before negative validation tests'));
+test('frozen_source_accepts_only_owner_bytes_or_exact_canonical_git_bytes',()=>{
+ const hash=value=>require('node:crypto').createHash('sha256').update(value).digest('hex');
+ const canonical='{"zh":"岩岩",\n"en":"Cafe"}\n',owner=canonical.replace(/\n/g,'\r\n');
+ const locked={fileSha256:hash(owner),sourceSha256:hash(canonical)};
+ assert.equal(api.isFrozenSource(owner,locked),true);
+ assert.equal(api.isFrozenSource(canonical,locked),true);
+ assert.equal(api.isFrozenSource(canonical.replace('Cafe','Cafe '),locked),false);
+ assert.equal(api.isFrozenSource(canonical.replace('\n','\r\n'),locked),false,'unapproved mixed endings are not a third accepted byte representation');
+ assert.equal(api.isFrozenSource(canonical,{...locked,sourceSha256:'0'.repeat(64)}),false);
+});
 const item=(id='intro')=>({id,zh:'岩岩看模型。',en:'Yanyan looks at the model.',narrationNeeded:true});
 const book=()=>({bookId:'earthquake',scriptVersion:'earthquake-v1',scenes:[item()],vocab:[],interactions:[]});
 test('covers_required_bilingual_items',()=>{

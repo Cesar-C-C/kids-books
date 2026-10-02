@@ -7,7 +7,12 @@ function validate(s){
   assert.ok(Array.isArray(list)&&list.length);
   for(const x of list){const k=kind==='interaction'?x.kind:kind;assert.match(x.id,/^[a-z0-9-]+$/);assert(!keys.has(k+':'+x.id));keys.add(k+':'+x.id);assert.equal(typeof x.narrationNeeded,'boolean');for(const lang of ['zh','en'])assert.ok(typeof x[lang]==='string'&&x[lang].trim());if(kind==='scene')assert(images.has(x.image));if(kind==='interaction')assert(['prompt','result'].includes(k));}
  }
- for(const id of ['fault-predict','fault-locked','fault-slipped','fault-settled','wave-predict','arrived-a','arrived-b','arrived-together','local-motion','exhibit-hint'])assert(s.interactions.some(x=>x.id===id),id);
+ for(const id of ['fault-predict','fault-locked','fault-slipped','fault-settled','wave-predict','wave-ready','wave-moving','wave-surface','wave-finished','local-motion','exhibit-complete'])assert(s.interactions.some(x=>x.id===id),id);
+ assert.equal(s.scriptVersion,'earthquake-story-v2');
+ assert.equal(s.why.length,4);
+ for(const q of s.why){assert(q.zh&&q.en);assert(s.scenes.some(x=>x.id===q.id&&x.layer==='why'));}
+ for(const id of ['tectonic-load','stored-energy','released-energy','surface-shakes'])assert(s.scenes.some(x=>x.id===id));
+ for(const id of ['arrived-a','arrived-b','arrived-together','exhibit-hint'])assert(!s.interactions.some(x=>x.id===id),'removed guess/sort line: '+id);
  assert.deepEqual(s.exhibitOrder,['strain','slip','waves']);assert(s.adultNotes.zh&&s.adultNotes.en);
  for(const scene of s.scenes)for(const lang of ['zh','en'])if(scene.segments){assert.equal(scene.segments[lang].map(x=>x.sourceText).join(''),scene[lang]);assert(scene.segments[lang].every(x=>['narrator','yanyan'].includes(x.role)));}
  return s;

@@ -1,10 +1,37 @@
-window.mountExhibit=function(container,{content,lang,session}){
- const {el,button}=EarthquakeUI,t=(z,e)=>lang()==='en'?e:z;let order=[],previewCard=null,assisted=false,resultId='exhibit-hint';const heading=el('h2'),cards=el('div','exhibit-cards'),placed=el('ol','placements'),controls=el('div','controls'),result=el('p','result');result.setAttribute('role','status');
- const labels={strain:['旁边变形','Rock deforms'],slip:['突然滑动','Sudden slip'],waves:['振动传开','Vibrations spread']};
- function animate(id){session.cancel('card');previewCard=id;render();session.schedule(()=>{previewCard=null;render();},1200);}
- const check=button('',()=>{session.cancel('check');resultId=order.join()===content.exhibitOrder.join()?'exhibit-complete':'exhibit-hint';render();});
- const help=button('',()=>{session.cancel('help');order=[...content.exhibitOrder];assisted=true;render();check.click();});const reset=button('',()=>{session.cancel('cards-reset');order=[];assisted=false;resultId='exhibit-hint';render();});
- controls.append(check,help,reset);container.append(heading,cards,placed,controls,result);
- function render(){heading.textContent=t('帮岩岩摆好展览','Help Yan-Yan arrange the display');cards.replaceChildren();for(const id of content.exhibitOrder){const card=el('div','exhibit-card '+id+(previewCard===id?' playing':'')),visual=el('div','card-visual');visual.setAttribute('aria-hidden','true');visual.append(el('i'),el('i'));card.append(visual,el('h3','',t(...labels[id])),button(t('放入展位','Place in display'),()=>{session.cancel('place');if(!order.includes(id))order.push(id);resultId='exhibit-hint';render();}),button(t('看这张动起来','Watch this card'),()=>animate(id)));card.querySelector('button').disabled=order.includes(id);cards.append(card);}placed.replaceChildren();order.forEach((id,i)=>{const li=el('li','',t(...labels[id])+' ');const move=button(t('前移','Move earlier'),()=>{session.cancel('move');resultId='exhibit-hint';[order[i-1],order[i]]=[order[i],order[i-1]];render();});move.disabled=i===0;li.append(move);placed.append(li);});check.textContent=t('看看展览','Check the display');help.textContent=t('请岩岩帮忙布展','Let Yan-Yan arrange it');reset.textContent=t('重新摆放','Arrange again');const item=content.interactions.find(x=>x.id===resultId);EarthquakeUI.narratedText(result,item[lang()],item.kind,item.id,lang());}
- const off=session.onCancel(()=>{previewCard=null;render();});render();return {render,cancel:()=>session.cancel('exhibit'),destroy:off,snapshot:()=>({order:[...order],previewCard,assisted})};
+'use strict';
+window.mountExhibit = function (container, {content, lang, session}) {
+ const {el} = EarthquakeUI, t=(zh,en)=>lang()==='en'?en:zh;
+ const heading=el('h2'), chain=el('ol','cause-chain'), result=el('p','result');
+ const stages=[
+  {id:'strain', title:['接缝锁住，周围形变储能','Locked fault, deformed rock, stored energy'],
+   question:'why-locking', scene:'stuck', link:'#fault-lab'},
+  {id:'slip', title:['断层滑动，周围部分回弹','Fault slip and partial rebound'],
+   question:'why-rebound', scene:'slip', link:'#fault-lab'},
+  {id:'waves', title:['波传到这里，地面振动','Waves arrive and the ground moves'],
+   question:'why-wave', scene:'surface-shakes', link:'#wave-lab'}
+ ];
+ result.setAttribute('role','status'); container.append(heading,chain,result);
+ function render() {
+  heading.textContent=t('岩岩的展览：把原因连起来','Yan-Yan’s display: connect the causes');
+  chain.replaceChildren();
+  for (const [i,s] of stages.entries()) {
+   const li=el('li','cause-step'), label=el('span','cause-number',String(i+1));
+   li.dataset.cause=s.id;
+   li.append(label,el('h3','',t(...s.title)));
+   const evidence=content.scenes.find(x=>x.id===s.scene), p=el('p','cause-evidence');
+   EarthquakeUI.narratedText(p,evidence[lang()],'scene',evidence.id,lang()); li.append(p);
+   const details=el('details','cause-why'), question=content.why.find(x=>x.id===s.question);
+   const explanation=content.scenes.find(x=>x.id===s.question), answer=el('p');
+   EarthquakeUI.narratedText(answer,explanation[lang()],'scene',explanation.id,lang());
+   details.append(el('summary','',question[lang()]),answer); li.append(details);
+   const link=el('a','evidence-link',t('回到这项观察 →','Return to this observation →'));
+   link.href=s.link; link.onclick=()=>session.cancel('exhibit-evidence'); li.append(link);
+   chain.append(li);
+  }
+  const complete=content.interactions.find(x=>x.id==='exhibit-complete');
+  EarthquakeUI.narratedText(result,complete[lang()],complete.kind,complete.id,lang());
+ }
+ render();
+ return {render,cancel:()=>session.cancel('exhibit'),destroy:()=>{},
+  snapshot:()=>({order:[...content.exhibitOrder],mode:'causal-display',gated:false})};
 };

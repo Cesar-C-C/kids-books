@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "topicId": "earthquake",
   "owner": "lab",
-  "contentVersion": "earthquake-lab-v1",
-  "sourceSha256": "3debc81f4a6ce509bd0dedfa89e3fe9df7bd343518b17965c60c12badc832aea",
+  "contentVersion": "earthquake-lab-v2",
+  "sourceSha256": "62dbdd96fcd45e76714395f30bffa53018c740444406e8a930ae9328ae44383d",
   "entries": [
     {
       "id": "knowledge-lab-title-zh",
@@ -20,7 +20,7 @@
           "spokenText": "地面为什么会摇？"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
+      "contentVersion": "earthquake-lab-v2",
       "textSha256": "6be41fe9201c1e782bef834d50d62b568324c307cb35d7c28e12755a1ad539fa",
       "utteranceSha256": "5fa61cb567b337624af5f50c082469dbd04fd566ace8027674cae14482c14e08",
       "output": "audio/knowledge-lab-title-zh.mp3",
@@ -43,7 +43,7 @@
           "spokenText": "Why does the ground shake?"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
+      "contentVersion": "earthquake-lab-v2",
       "textSha256": "c32a181a3fcfa518b137532c91e542b6d0777cf6e9a678e39b28dd303ed0e4cc",
       "utteranceSha256": "1d829fe3b045e4f18e5f6c2b1f4f8aaa0b0dfbe24ab96ec7460411f1726e78ec",
       "output": "audio/knowledge-lab-title-en.mp3",
@@ -58,20 +58,20 @@
       "itemId": "lab-subtitle",
       "kind": "knowledge",
       "lang": "zh",
-      "text": "转一转岩层，找出藏在地下的线索。",
+      "text": "沿标记线看储能、滑动和回弹，再追踪传出去的振动。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "转一转岩层，找出藏在地下的线索。",
-          "spokenText": "转一转岩层，找出藏在地下的线索。"
+          "sourceText": "沿标记线看储能、滑动和回弹，再追踪传出去的振动。",
+          "spokenText": "沿标记线看储能、滑动和回弹，再追踪传出去的振动。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "6809048a9b10f5cc5823f71f6bbb79beb71e67100c944a5f4bb621dac3e4a1ae",
-      "utteranceSha256": "a38ce92b1145887fc89e74c0c8576aeda1cc336a6ade903e62b3d7be494e4670",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "7b9cdb2c3405ecbdf8c90996426e8f439ed750a92620f7581abeafe23bf6422c",
+      "utteranceSha256": "43c33abdbe82b06ed1e8bbc1da6bb5b72655838199f40b1c2992d63ccee12f50",
       "output": "audio/knowledge-lab-subtitle-zh.mp3",
       "status": "ready",
-      "fileSha256": "9d2afbb89ab56c710f1fc0e013c0515d816a5b5c9e434478f3642ded1fca7e95",
+      "fileSha256": "c7c56800b46980123c70585c895796d60f5a1f637c1cd2f8aae64d3ed909465e",
       "conceptId": "fault"
     },
     {
@@ -81,20 +81,20 @@
       "itemId": "lab-subtitle",
       "kind": "knowledge",
       "lang": "en",
-      "text": "Turn the rock block and look for clues underground.",
+      "text": "Follow the marker through loading, slip and rebound, then track the travelling disturbance.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Turn the rock block and look for clues underground.",
-          "spokenText": "Turn the rock block and look for clues underground."
+          "sourceText": "Follow the marker through loading, slip and rebound, then track the travelling disturbance.",
+          "spokenText": "Follow the marker through loading, slip and rebound, then track the travelling disturbance."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "a68e2eafc5a244a5659cd1148e10d6608f7a19afa23721ac18e108cd5af37042",
-      "utteranceSha256": "98a4341ce58aa34a395b2f775ad36c61e308a6655f7d7b367ae829c1c7a05957",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "8edc837cee50a9f8d74fe47e7ca462c1ecfe8ad32e5cfbb82d30ec0b7e43ef59",
+      "utteranceSha256": "17efd9945ab1fbe07acc2eae12995068d3d5c8f8b3395bf9d96bbb162257c63e",
       "output": "audio/knowledge-lab-subtitle-en.mp3",
       "status": "ready",
-      "fileSha256": "dd3f6e83ead51d5dfc4546e2f90071e1959351ba16bc6a8256cee40e792995a0",
+      "fileSha256": "414791cd2a93425bbd50873fbd975db02242eeb092f9a531fee46937587c62e0",
       "conceptId": "fault"
     },
     {
@@ -104,20 +104,20 @@
       "itemId": "card-elastic-rebound",
       "kind": "prompt",
       "lang": "zh",
-      "text": "1 · 岩石先弯，再错开",
+      "text": "1 · 为什么突然滑动",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "1 · 岩石先弯，再错开",
-          "spokenText": "1 · 岩石先弯，再错开"
+          "sourceText": "1 · 为什么突然滑动",
+          "spokenText": "1 · 为什么突然滑动"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "29af5ce8f8fa942440c3c0a7cc73da836c699ee6e0146d78a879112ab51e6a1c",
-      "utteranceSha256": "de269570ce049ee60a68049cbedb51f762b283c51aac3d1e24b02aff5ae07a05",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "e4c2736ba7b38eb11dc54df6f84f0a6f552b8f42f37a72533498340173798ba3",
+      "utteranceSha256": "ca58417f7a912d1ae8c8f97d20a2c52f0cddd1d9aca7da0416f9aaad9ff8cc1e",
       "output": "audio/prompt-card-elastic-rebound-zh.mp3",
       "status": "ready",
-      "fileSha256": "de854be3763ca3effa52242cf276b4b93772d588cdd0df8892fb278a6fff6c25",
+      "fileSha256": "2ab364779d07c69a6ab819a2c6d9e7488c4e5fc1559603510ad1bd2acd6eac6e",
       "conceptId": "elastic-strain"
     },
     {
@@ -127,20 +127,20 @@
       "itemId": "card-elastic-rebound",
       "kind": "prompt",
       "lang": "en",
-      "text": "1 · Bend, then slip",
+      "text": "1 · Why sudden slip?",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "1 · Bend, then slip",
-          "spokenText": "1 · Bend, then slip"
+          "sourceText": "1 · Why sudden slip?",
+          "spokenText": "1 · Why sudden slip?"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "b9bfd944c9c358ff0eec11f47c286e19be5ebe86d8732f8d5d0f0f89cacbbcd0",
-      "utteranceSha256": "75d78ea16167527dd80fe71d0ad92cc684ab52490f9e0db4fd96cd7cf9e8ff9e",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "34a0138f8cd0ba850144b2ae26f5fef3a4a72210afbd50f0e0e404ac0a6b5606",
+      "utteranceSha256": "adfb294751795cd8e556e494275430e3570d2f5c80d9ee9b231e9eba0251ca68",
       "output": "audio/prompt-card-elastic-rebound-en.mp3",
       "status": "ready",
-      "fileSha256": "47be843933a6dc270689a231b835d87c9bd4cad569d200827dd071dc159ced3d",
+      "fileSha256": "8d4a01588e6d0c4a3429172d23845008d2c01ab0029ae85cd0e339133df178ff",
       "conceptId": "elastic-strain"
     },
     {
@@ -150,20 +150,20 @@
       "itemId": "card-fault-types",
       "kind": "prompt",
       "lang": "zh",
-      "text": "2 · 三种断层",
+      "text": "深入 · 受力与断层方向",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "2 · 三种断层",
-          "spokenText": "2 · 三种断层"
+          "sourceText": "深入 · 受力与断层方向",
+          "spokenText": "深入 · 受力与断层方向"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "96f46d7f57f12fe7ea632b1e42d00dae0bf36ab1d763452e35b5216e16db9ee7",
-      "utteranceSha256": "1f09d82f83f91e46b1ed0bf41e01e65d61ddde83142ceb43caa87bbe5cf9cf92",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "112ffb71b0fa5d256003f43fc04433ce7fb69677a304335818e48ea75a844c00",
+      "utteranceSha256": "47e80a05211678a8aab06008c8b9522bb616c8e8237c23f5ba07dc5324ae458b",
       "output": "audio/prompt-card-fault-types-zh.mp3",
       "status": "ready",
-      "fileSha256": "3683785559488c56d612cd040a9d2387dee9d0c67ee19c7aa3458504fdac8b55",
+      "fileSha256": "64041bf9ea261ca9d98616dfb0a02ef3dae0d148f93f351aed21237d9df942a4",
       "conceptId": "fault"
     },
     {
@@ -173,20 +173,20 @@
       "itemId": "card-fault-types",
       "kind": "prompt",
       "lang": "en",
-      "text": "2 · Three fault motions",
+      "text": "Explore · Force and fault motion",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "2 · Three fault motions",
-          "spokenText": "2 · Three fault motions"
+          "sourceText": "Explore · Force and fault motion",
+          "spokenText": "Explore · Force and fault motion"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "b7a4f6f01a6a1374217b738854b015c9498b4c81adc31d29b6a9ec317a3ab685",
-      "utteranceSha256": "63cab1939dc9a5dcb3c854bc2eba701bd0ccb47d8bc3a7353af35e230f17c8d9",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "1ac2e8e4d43ced2457da6f2610e0de8e8a93ce09de9d9b3072381a2dc32464db",
+      "utteranceSha256": "0000ba3e85eef337b5977739647b5dd2c3882af21f19e946e82447635ca613bf",
       "output": "audio/prompt-card-fault-types-en.mp3",
       "status": "ready",
-      "fileSha256": "70c7078a7c76503934c199304548baa1371106b4481a0205f57498787fb8f794",
+      "fileSha256": "ff1da7cf40b512dec21b62a2959e035572ce4aa30de915aebd4a9251698cf492",
       "conceptId": "fault"
     },
     {
@@ -196,20 +196,20 @@
       "itemId": "card-focus-epicenter",
       "kind": "prompt",
       "lang": "zh",
-      "text": "3 · 地下起点",
+      "text": "深入 · 起点与正上方",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "3 · 地下起点",
-          "spokenText": "3 · 地下起点"
+          "sourceText": "深入 · 起点与正上方",
+          "spokenText": "深入 · 起点与正上方"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "b35b983916f462ec04adb5a2d21feb79a15a6ea5144a70ed926d9d72fbc39c16",
-      "utteranceSha256": "702662e15fa7b60f52189a57ba441354dc6c4166790ddd6c5c45f0e5f146245c",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "2574468a43c2661d94caded0b814ddd046669064e9c3f4bbcb27ea4157d3d13b",
+      "utteranceSha256": "17247356cfaf6881c921f2bfe90fd79209e72923f7b0cd1d51e8c367133b52c4",
       "output": "audio/prompt-card-focus-epicenter-zh.mp3",
       "status": "ready",
-      "fileSha256": "18927211c93999ade43fbc7c5810ebb784647edef211e0bc6bd50cf4199a061d",
+      "fileSha256": "72caf2ef5fdee7ac91d87e7d92cb11a316a04a72f8de7f3dafd37cd2ac5f8693",
       "conceptId": "focus"
     },
     {
@@ -219,20 +219,20 @@
       "itemId": "card-focus-epicenter",
       "kind": "prompt",
       "lang": "en",
-      "text": "3 · The underground start",
+      "text": "Explore · Start and projection",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "3 · The underground start",
-          "spokenText": "3 · The underground start"
+          "sourceText": "Explore · Start and projection",
+          "spokenText": "Explore · Start and projection"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "25b94564d6b0d34de6cbafe031e24263c21e003a70367dbf275e3750e46a72bb",
-      "utteranceSha256": "a047879fcb325ca83313f9db6221ff0443bdb43c27541b2f132c5dbc6f710902",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "a107c6eede7a3b242dd3fec53404301bdb66ab790983b55b641b2238c9b32cc9",
+      "utteranceSha256": "5c4668fbf9de4798b3487bddc82dc138e7dfb11463340785bfac9d0d20972202",
       "output": "audio/prompt-card-focus-epicenter-en.mp3",
       "status": "ready",
-      "fileSha256": "3dc507013d4f94885c989b3b175824048e36430a97e3f487888af77353d32e3d",
+      "fileSha256": "e77ba898805ba311865842f30e8dc35f379164ff340648dfa2353462256375b8",
       "conceptId": "focus"
     },
     {
@@ -242,20 +242,20 @@
       "itemId": "card-waves",
       "kind": "prompt",
       "lang": "zh",
-      "text": "4 · 波往外走",
+      "text": "2 · 能量如何传出去",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "4 · 波往外走",
-          "spokenText": "4 · 波往外走"
+          "sourceText": "2 · 能量如何传出去",
+          "spokenText": "2 · 能量如何传出去"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "77e001b7d0ba32f6b3bae86c2a4eb12312fcd6c7222b9da4cef13b7ac4bd236b",
-      "utteranceSha256": "527aee1d59be1d81af89474c595c548b0558c36ac671aceeae97404aea3550a1",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "8f246638cc639a7f491d2f0a650c6a8454a061075f4386efea9c5284fe087029",
+      "utteranceSha256": "34fa5ff966e83b305414c81e53f3d7bae9e7cc4e104a9c011f9099da344fd192",
       "output": "audio/prompt-card-waves-zh.mp3",
       "status": "ready",
-      "fileSha256": "e3912314e6ba6916d9af79c460350df256fe0c97f3423578d373cdc4f3a4ba31",
+      "fileSha256": "0fc4675072555e04ca5d0aa64c6ef20e79bc1086aaceb358dc12427854d5e021",
       "conceptId": "wavefront"
     },
     {
@@ -265,20 +265,20 @@
       "itemId": "card-waves",
       "kind": "prompt",
       "lang": "en",
-      "text": "4 · Waves travel outward",
+      "text": "2 · How energy travels",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "4 · Waves travel outward",
-          "spokenText": "4 · Waves travel outward"
+          "sourceText": "2 · How energy travels",
+          "spokenText": "2 · How energy travels"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "248e91babd80ad37791d640f559bf1ca5c1a7cc8b439cb8a0f55d7865bb40062",
-      "utteranceSha256": "4c516699d846a78cd41d754cd8eeeb6a1b42d8172a18e110064c955fdfe7f68e",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "2218af679c959411c2a3b21ea7c3f8bc17603fc30fb72e2d38126d5c17829232",
+      "utteranceSha256": "79128cf5945cb4be99385eb93b89fe6c111474ef60c03f6ba170abe8607a6e96",
       "output": "audio/prompt-card-waves-en.mp3",
       "status": "ready",
-      "fileSha256": "aa71e5fead57aade1e1d6743d345382f62d2549b875b06dd12cec81de92b320d",
+      "fileSha256": "8f65e50f8e9f00d4d846eeb853b69096257706017fc845652e47a1424e6e6d23",
       "conceptId": "wavefront"
     },
     {
@@ -288,20 +288,20 @@
       "itemId": "question-elastic-rebound",
       "kind": "prompt",
       "lang": "zh",
-      "text": "接缝还没动，旁边的岩石怎样了？",
+      "text": "接缝卡住，岩石为什么还能储能？",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "接缝还没动，旁边的岩石怎样了？",
-          "spokenText": "接缝还没动，旁边的岩石怎样了？"
+          "sourceText": "接缝卡住，岩石为什么还能储能？",
+          "spokenText": "接缝卡住，岩石为什么还能储能？"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "c012f00b0264ad014431ecb732befb0d1ab567ad12d2cac4dc7cbc7295930b50",
-      "utteranceSha256": "622aa40cc8e0f335deb62e2b4e0bfd7c6eeadee8a03d5598be87125f0048622f",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "fa0e1af2ad3962d1d4587e0aa56b2ccfff8748a00ca257de5b502b701422f86f",
+      "utteranceSha256": "5ab58a407cd3a40183f37e11606ee7d1eb5008b14e1293fd670c06e5658c9b20",
       "output": "audio/prompt-question-elastic-rebound-zh.mp3",
       "status": "ready",
-      "fileSha256": "fb2c4ac5981c87a753ed319c81b59c3be5dfb0cc39dd39107cdc4320b0aaff66",
+      "fileSha256": "752fb65220c41d16855f8e41714b3f6d83ec35442a65de1704178c03e343aa90",
       "conceptId": "elastic-strain"
     },
     {
@@ -311,20 +311,20 @@
       "itemId": "question-elastic-rebound",
       "kind": "prompt",
       "lang": "en",
-      "text": "What happens beside the seam before it slips?",
+      "text": "How can rock store energy while the fault is locked?",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "What happens beside the seam before it slips?",
-          "spokenText": "What happens beside the seam before it slips?"
+          "sourceText": "How can rock store energy while the fault is locked?",
+          "spokenText": "How can rock store energy while the fault is locked?"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "f1ee86a254fcda362844bcc15c5723669a4ab988f41a7d0b08ad91fe61455b7c",
-      "utteranceSha256": "516f8f34b0bef0b436b1dd4a538bbb8a7f26dd611688ffbe548b689393e5ecf7",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "19e52df9e597c340b083e21b28f40ee6eddcebd9a627f1b4a8227855dbb07805",
+      "utteranceSha256": "65bfff988afb06c04a729b68a18c3a3f42cb29083d48f16259c380c3a3e59a01",
       "output": "audio/prompt-question-elastic-rebound-en.mp3",
       "status": "ready",
-      "fileSha256": "ca2ecb16c0a985d223f8570d8bafd5ff48de831783f756975126c58c51719ea4",
+      "fileSha256": "8296db3c0c8dab48b6a152e6605a7b5609ada73d51999742316f536dcff521ac",
       "conceptId": "elastic-strain"
     },
     {
@@ -334,20 +334,20 @@
       "itemId": "question-fault-types",
       "kind": "prompt",
       "lang": "zh",
-      "text": "两边沿接缝怎样错开？",
+      "text": "远处怎样受力，两侧就怎样相对滑动？",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "两边沿接缝怎样错开？",
-          "spokenText": "两边沿接缝怎样错开？"
+          "sourceText": "远处怎样受力，两侧就怎样相对滑动？",
+          "spokenText": "远处怎样受力，两侧就怎样相对滑动？"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "550109edb9f0ce25120f0abf8b715d9848971c18645fe68d0f2e61c49b0d1371",
-      "utteranceSha256": "25e251bc582282ed3a29c7c64727132cf0c265a9595456ea8fcf4d3f709fdf32",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "f3df145fc94323f78858eeef84831c660e8c93afffe8d222d62d121b56b7a59c",
+      "utteranceSha256": "05e30d147cb82c155af267b0d8402ad3752a2ff338fd7e216408b887bf4cb6e3",
       "output": "audio/prompt-question-fault-types-zh.mp3",
       "status": "ready",
-      "fileSha256": "f4f522ffb128797790b43d63fa6eecd79e0021bf70b51f9e1eedc30de8aefa12",
+      "fileSha256": "035b2ad57302c10ae1303a27dd2090a94a3ba8e9e40e0d8df21338203f4b2909",
       "conceptId": "fault"
     },
     {
@@ -357,20 +357,20 @@
       "itemId": "question-fault-types",
       "kind": "prompt",
       "lang": "en",
-      "text": "How do the two sides move along the seam?",
+      "text": "How does loading relate to the relative slip direction?",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "How do the two sides move along the seam?",
-          "spokenText": "How do the two sides move along the seam?"
+          "sourceText": "How does loading relate to the relative slip direction?",
+          "spokenText": "How does loading relate to the relative slip direction?"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "87d1db26468f2588c76a34bcf389e2e252c4480f2e3b921c691092dacd3c947a",
-      "utteranceSha256": "46a9598958c4aa9ae6101f1550e5faa0b1bf2d4f02a476ca4f4bbed9d1990c94",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "b6c4914032b139856dacc065d1c859176c98936151628b1643c55ad1a5535842",
+      "utteranceSha256": "82f6e0779828dd2bb462d14e9d3ce58d1dd4d89c59eadf53877afc886b18471f",
       "output": "audio/prompt-question-fault-types-en.mp3",
       "status": "ready",
-      "fileSha256": "fa940cee2a42f306f86efaa35b259eba5e078e3aecc5f45f0ae373daebab2d77",
+      "fileSha256": "76c2333f574c1d3a736861c44fc2662b4ec6d850ce303b8c1cb6806ad9a49089",
       "conceptId": "fault"
     },
     {
@@ -380,20 +380,20 @@
       "itemId": "question-focus-epicenter",
       "kind": "prompt",
       "lang": "zh",
-      "text": "地下从哪儿开始？它正上方在哪儿？",
+      "text": "换一个地下起点，正上方会怎样改变？",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "地下从哪儿开始？它正上方在哪儿？",
-          "spokenText": "地下从哪儿开始？它正上方在哪儿？"
+          "sourceText": "换一个地下起点，正上方会怎样改变？",
+          "spokenText": "换一个地下起点，正上方会怎样改变？"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "b8312c0f48cb857201853ab5bacd40c5b770b3eb1ded59e96891450847248cbd",
-      "utteranceSha256": "392486b42d08d909a8998c4999aacea6b41e30c2fc61803bdbf3721dc5ad3f50",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "da4795cc1573d937ad2a04c6af565ef785c0cda6fe4a9b7137c797511c26da0f",
+      "utteranceSha256": "a7440a4b38bd1bdbcc44794ad0330e775f7e111c667f9743a8271947975dda1b",
       "output": "audio/prompt-question-focus-epicenter-zh.mp3",
       "status": "ready",
-      "fileSha256": "5587ed6318befdd4c227fa621ce89947908b9fa4ec06834dd332699cadf82822",
+      "fileSha256": "726b42352244a1d81193514b428dc7d0a598ceb4151c8187932ac10bc4955607",
       "conceptId": "epicenter"
     },
     {
@@ -403,20 +403,20 @@
       "itemId": "question-focus-epicenter",
       "kind": "prompt",
       "lang": "en",
-      "text": "Where does it start below ground, and what is directly above?",
+      "text": "If the underground start changes, what happens directly above it?",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Where does it start below ground, and what is directly above?",
-          "spokenText": "Where does it start below ground, and what is directly above?"
+          "sourceText": "If the underground start changes, what happens directly above it?",
+          "spokenText": "If the underground start changes, what happens directly above it?"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "aef60fe2b22ba046657252b2e29816999d5b8283d94f015b8412b23b7b91d5b9",
-      "utteranceSha256": "ce6832256396a488ccd5d8cbcdf845da28368efa13005e1b5f073e8759ee9827",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "ef07ef4c573eb8b2935e8230d336ce154698da43a53011837d41267ccb9bb284",
+      "utteranceSha256": "cb4ef74843e743231f09ffb7c788e87150f2e1c03e7903b1ea96e0c2eab89963",
       "output": "audio/prompt-question-focus-epicenter-en.mp3",
       "status": "ready",
-      "fileSha256": "5892b7f99a442b1f487fb2e7ebc650ad93c1f8b6a9b6274aff3cf4c208c22652",
+      "fileSha256": "5abc0c4b33a5d5b5a9af8aa15c02b6e2a991ff38a29d6aa4bb927e6a6d35f70a",
       "conceptId": "epicenter"
     },
     {
@@ -426,20 +426,20 @@
       "itemId": "question-waves",
       "kind": "prompt",
       "lang": "zh",
-      "text": "往外走的是振动，还是这颗石头？",
+      "text": "能量传到地表，岩石会被一路带走吗？",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "往外走的是振动，还是这颗石头？",
-          "spokenText": "往外走的是振动，还是这颗石头？"
+          "sourceText": "能量传到地表，岩石会被一路带走吗？",
+          "spokenText": "能量传到地表，岩石会被一路带走吗？"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "557286b0fdf1a65d9cb52afa8522be65c4d413fcecaf37b7643357d4155a7b69",
-      "utteranceSha256": "704b1e6a0aec842277931a3c4bb8c4719ce88f0347c2e140647ae06d1d64f23a",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "ae5ea350b463c5e65179df4dd6adb78aaf582ca96b78441b9e5128f30a3f1c8c",
+      "utteranceSha256": "803733aabf4600da02367bfaac02d6727aee0aa0495500cd9aa5951ac0c54d6c",
       "output": "audio/prompt-question-waves-zh.mp3",
       "status": "ready",
-      "fileSha256": "25b839111ba4c3180a790639c7d8ebadfca1165e1853a20182484f8679a5b72c",
+      "fileSha256": "1d4f3c6a82a7477e480e1a984a0c719dce004d0bb7d3c77eb247770fdae3c7e0",
       "conceptId": "particle-motion"
     },
     {
@@ -449,20 +449,20 @@
       "itemId": "question-waves",
       "kind": "prompt",
       "lang": "en",
-      "text": "Does the disturbance travel, or does this rock travel with it?",
+      "text": "Does travelling energy carry the rock all the way to the surface?",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Does the disturbance travel, or does this rock travel with it?",
-          "spokenText": "Does the disturbance travel, or does this rock travel with it?"
+          "sourceText": "Does travelling energy carry the rock all the way to the surface?",
+          "spokenText": "Does travelling energy carry the rock all the way to the surface?"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "49463728f335d406e845b97986a19c44c38743d08016e16d58862d02452371b1",
-      "utteranceSha256": "7a3d2f3fc3680f12c1ccff9c35aa6cab7d838ff5344cfbc38b751e7940330ae5",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "6bb5084fb7b2a03adc18052ebc6da943759bb5ae28941a34c56e141e5821113e",
+      "utteranceSha256": "f2c27b012a3626242f2ef76a85fef1928e87202cc09b3d548f88c166c7bd0e08",
       "output": "audio/prompt-question-waves-en.mp3",
       "status": "ready",
-      "fileSha256": "02defd3d283a00fdad12167f3d33e650cc36e3b3baa9aaf5dc2153aba076ff72",
+      "fileSha256": "a9d3c18b7ad7860133d702675dfe218b9a616889f916035c0c6396d96878c389",
       "conceptId": "particle-motion"
     },
     {
@@ -472,20 +472,20 @@
       "itemId": "result-initial",
       "kind": "result",
       "lang": "zh",
-      "text": "先看横跨接缝的深色标记线。",
+      "text": "先找棕色标记线和远端受力箭头；接缝还没有滑动。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "先看横跨接缝的深色标记线。",
-          "spokenText": "先看横跨接缝的深色标记线。"
+          "sourceText": "先找棕色标记线和远端受力箭头；接缝还没有滑动。",
+          "spokenText": "先找棕色标记线和远端受力箭头；接缝还没有滑动。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "b7aadb71e50b73cb49e4048f110add977aadcbfabab10c6ab75036d0e1605601",
-      "utteranceSha256": "5ec963819ffe7ade747ed0ad76c862ea0df2120276ad44e9f12712503a88cdc8",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "47451b3ff8b2b1307363c72453ed3a858318b6846f55acd81843eec6c6df6b24",
+      "utteranceSha256": "ff4edc197c969d9bf88df52566d59adc794e4aea8ad9134be71351f3aa5d311e",
       "output": "audio/result-result-initial-zh.mp3",
       "status": "ready",
-      "fileSha256": "9a32886765fb000fdcc24231fe69c5a27afecf4cf7c0de37bb0c6d667162bd79",
+      "fileSha256": "67a338c4500dfc6eba00ddb2ddecccaaa767f83113d2df7b13ab558bc04bc237",
       "conceptId": "fault"
     },
     {
@@ -495,20 +495,20 @@
       "itemId": "result-initial",
       "kind": "result",
       "lang": "en",
-      "text": "First, find the dark line crossing the seam.",
+      "text": "Find the brown marker and loading arrows. The fault has not slipped.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "First, find the dark line crossing the seam.",
-          "spokenText": "First, find the dark line crossing the seam."
+          "sourceText": "Find the brown marker and loading arrows. The fault has not slipped.",
+          "spokenText": "Find the brown marker and loading arrows. The fault has not slipped."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "3eb2f0244b3d7b171dad18a858eefd8805ec9569bad84ee5c3e82cabb7310ed5",
-      "utteranceSha256": "ed0aa22eb3ac1a7cb6f6749836cd7bc89118f3d2430d2bad6ca1b398864fde1d",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "06d24274d03f8c8a979d79e64242cbf77f6f60638d56bbffb932c14667c09a82",
+      "utteranceSha256": "874873d3569b726a7a4bfc489d3bf9df52542e0f6a5de739080a4e6924eec3a9",
       "output": "audio/result-result-initial-en.mp3",
       "status": "ready",
-      "fileSha256": "48d5d2a3bc655c9c6c9b524a8d2782f4d67e31b6b2f9b3a67a4dc91a134c24ed",
+      "fileSha256": "ef44b37fac84fb72b53b0a7c69c0409edc793a5026ec3e0f634591eeb2fae06e",
       "conceptId": "fault"
     },
     {
@@ -518,20 +518,20 @@
       "itemId": "result-locked",
       "kind": "result",
       "lang": "zh",
-      "text": "接缝暂时卡住，旁边却正在变形。",
+      "text": "接缝被摩擦锁住。远处仍受力，标记线弯了，岩石储存弹性能。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "接缝暂时卡住，旁边却正在变形。",
-          "spokenText": "接缝暂时卡住，旁边却正在变形。"
+          "sourceText": "接缝被摩擦锁住。远处仍受力，标记线弯了，岩石储存弹性能。",
+          "spokenText": "接缝被摩擦锁住。远处仍受力，标记线弯了，岩石储存弹性能。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "8f8d18a28e57378457f933b7bac0ad2b713c03b7adc51260d39eb49d8061deee",
-      "utteranceSha256": "0a626dfe636de23569e4c8a057f0027860c42a8bd13b70b59cc18a218fabece6",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "6d8255c068e0194573f4d9876d01608d8f2d62c5a3d33981f4b86205c6f29443",
+      "utteranceSha256": "67931061b1b5c29d448b6f147bf9545698e187d780a707c044b031328503ff8d",
       "output": "audio/result-result-locked-zh.mp3",
       "status": "ready",
-      "fileSha256": "e1b57f9b773ddfd9cd641b3be0c205cea8b7ff56dc07c3b8c7283112ee5c7d11",
+      "fileSha256": "de0b0726f235e53a11ed9431fc2d6a2634437e307b63daf150fea58054fb7bcc",
       "conceptId": "elastic-strain"
     },
     {
@@ -541,20 +541,20 @@
       "itemId": "result-locked",
       "kind": "result",
       "lang": "en",
-      "text": "The seam is locked, but nearby rock is changing shape.",
+      "text": "Friction locks the fault. Loading continues farther away; the marker bends as rock stores elastic energy.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The seam is locked, but nearby rock is changing shape.",
-          "spokenText": "The seam is locked, but nearby rock is changing shape."
+          "sourceText": "Friction locks the fault. Loading continues farther away; the marker bends as rock stores elastic energy.",
+          "spokenText": "Friction locks the fault. Loading continues farther away; the marker bends as rock stores elastic energy."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "4126bda18380bc5633d283c126af3fc5b251d454a7c737a16994b0530e230314",
-      "utteranceSha256": "299afeaf46d3f51415fd39ecc1e5085f0d8eb439c797929e22e78a77af4ff294",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "fd8bd88e97b800ea8bcebfd51c5dab0606a526678ae457c3c0becc1024c8e692",
+      "utteranceSha256": "8947e87ecd0d5fedd721cfeb8dbe82b47f16f0ffc669f0a4c2b924b15f426d3f",
       "output": "audio/result-result-locked-en.mp3",
       "status": "ready",
-      "fileSha256": "cdbbe38bcbab68051703fd0a5ac87b7be1bb9434f7353fa87edcd35043e48bac",
+      "fileSha256": "50f5f8a459b849f17e4575da6335f469e3d87bb8bd95821cc1afe500ff4bb29d",
       "conceptId": "elastic-strain"
     },
     {
@@ -564,20 +564,20 @@
       "itemId": "result-slipped",
       "kind": "result",
       "lang": "zh",
-      "text": "突然滑动了！弯曲回弹了一部分，标记线仍然错开。",
+      "text": "突然滑动后，弯曲减少、储能下降，但标记线留下错位。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "突然滑动了！弯曲回弹了一部分，标记线仍然错开。",
-          "spokenText": "突然滑动了！弯曲回弹了一部分，标记线仍然错开。"
+          "sourceText": "突然滑动后，弯曲减少、储能下降，但标记线留下错位。",
+          "spokenText": "突然滑动后，弯曲减少、储能下降，但标记线留下错位。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "9628b785b276dbcf97a148ceb6be7dd650478a8e53cec9d7836f97499c254c34",
-      "utteranceSha256": "c109a441e596ebf958496da0da5770f81230b1d8576fda2e0cf562875418e44d",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "836f28947f1aae4a833831f225aa939d845f1e602534a2b5949b06a3eb41f8bb",
+      "utteranceSha256": "28b593e1584c5641f07a4a6b6835d118d5b3f88489b77eb6f98f2338a402431c",
       "output": "audio/result-result-slipped-zh.mp3",
       "status": "ready",
-      "fileSha256": "cdad7087ee5f56d75740c697222d8d64dbd41cfeb98122f670e31c0b3a71d673",
+      "fileSha256": "9f95671025998cd16a6d19424bd0f278d5858b70603a694010b891fd1f8ea161",
       "conceptId": "slip"
     },
     {
@@ -587,20 +587,20 @@
       "itemId": "result-slipped",
       "kind": "result",
       "lang": "en",
-      "text": "It slipped! Some bending rebounds, but the marker stays offset.",
+      "text": "After sudden slip, bending and stored energy decrease, but the marker stays offset.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "It slipped! Some bending rebounds, but the marker stays offset.",
-          "spokenText": "It slipped! Some bending rebounds, but the marker stays offset."
+          "sourceText": "After sudden slip, bending and stored energy decrease, but the marker stays offset.",
+          "spokenText": "After sudden slip, bending and stored energy decrease, but the marker stays offset."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "3bd98fa45ae01ff2815e41185ee48c428402c267521f18348bd3d36237c392bd",
-      "utteranceSha256": "1e18a033045444f37195d7285b1571554e739484ef11c199f3ca9b3296bcdf59",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "b4527204e3d04350434f5644197b8468f2808880a9ab2d4219f70bfcb72d16fa",
+      "utteranceSha256": "3f2ad0b154f660b109b61157876a4022e8838b04c049de323f2bcbcd63f45baf",
       "output": "audio/result-result-slipped-en.mp3",
       "status": "ready",
-      "fileSha256": "608cb887cad1ee6de9400cfc7c8903babb5e5312f5f8f2e74356e1fe17b1bbdb",
+      "fileSha256": "45894cb322e831833e66733a6eb10465b2bb7906807d20bf27f819763db5c953",
       "conceptId": "slip"
     },
     {
@@ -610,20 +610,20 @@
       "itemId": "result-settled",
       "kind": "result",
       "lang": "zh",
-      "text": "安静下来后，永久错位没有消失。",
+      "text": "振动可以停下，错位却不会自动复原；回弹不等于两侧退回原位。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "安静下来后，永久错位没有消失。",
-          "spokenText": "安静下来后，永久错位没有消失。"
+          "sourceText": "振动可以停下，错位却不会自动复原；回弹不等于两侧退回原位。",
+          "spokenText": "振动可以停下，错位却不会自动复原；回弹不等于两侧退回原位。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "f28920db4bfeb06f219852c14db040f906d2412f8f2f008b0a682159d7617795",
-      "utteranceSha256": "d30c83f11eaa3c6bad54b7023591dfb60989418528e387e18a81dabaf5a1981f",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "62b694cd82fc9baf176aa776d7587386bc3a79938e21e06d6fbf8524c59e19d0",
+      "utteranceSha256": "d36e9dbc37cf10f223c05d523f5e308f2aa5e860f3e13bead0bc92f8c76484c1",
       "output": "audio/result-result-settled-zh.mp3",
       "status": "ready",
-      "fileSha256": "bab42b864ca85c4cef9207f29426e58adbd4030447b7c9ee10d774150510c671",
+      "fileSha256": "e462d770ea1a2ce0f318d1a0a54869d83d0a708cee671a739afcfa57894db1b9",
       "conceptId": "slip"
     },
     {
@@ -633,20 +633,20 @@
       "itemId": "result-settled",
       "kind": "result",
       "lang": "en",
-      "text": "After the motion settles, the lasting offset remains.",
+      "text": "Shaking can stop while the offset remains. Rebound does not undo the slip.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "After the motion settles, the lasting offset remains.",
-          "spokenText": "After the motion settles, the lasting offset remains."
+          "sourceText": "Shaking can stop while the offset remains. Rebound does not undo the slip.",
+          "spokenText": "Shaking can stop while the offset remains. Rebound does not undo the slip."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "83e2582d71631da8864538c0217398f5c924d647d31536e9584d4cb96dd136c3",
-      "utteranceSha256": "3eec9785765a41f055adb2798e4bbebcfbacead6a6a0017b9af061861c322662",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "231eb66536ddf4e0444b55f33e3b83ac4c21eb6ab8c241a66c9c973d9a329992",
+      "utteranceSha256": "bc35fc5ed4394b5135557617ea1dfe15d25f24eafe98fe10f974b0045f2e61c3",
       "output": "audio/result-result-settled-en.mp3",
       "status": "ready",
-      "fileSha256": "d7fba4197caaa6f06f19f8431acfab7e2f8680a357b56e17e65b0f4ce0bb0ef6",
+      "fileSha256": "46cf2d00d1fd882e37f81256389c7c4949d2060805d4df9da46ae58038cc255b",
       "conceptId": "slip"
     },
     {
@@ -656,20 +656,20 @@
       "itemId": "result-fault-types",
       "kind": "result",
       "lang": "zh",
-      "text": "比较的是两块岩石的相对方向，不是地震强弱。",
+      "text": "看远端受力箭头，再比同一层岩石的相对错位；类型不是强弱排名。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "比较的是两块岩石的相对方向，不是地震强弱。",
-          "spokenText": "比较的是两块岩石的相对方向，不是地震强弱。"
+          "sourceText": "看远端受力箭头，再比同一层岩石的相对错位；类型不是强弱排名。",
+          "spokenText": "看远端受力箭头，再比同一层岩石的相对错位；类型不是强弱排名。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "39e864e0fb2d759ea71a4c88ff4e8926f0fde696ace252a6df899f56203df60a",
-      "utteranceSha256": "1f6d61c7cfcc18d8dafc88a82f6ef37af1ac4326aafbacde1b0f251627e74b33",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "a0bb90d7a61147cc935d2299246c38fe26da1d4906d204a6f5a7a6192baa7e15",
+      "utteranceSha256": "8a1cfb8e7d088fe1e51e30e1632323c2204bf5723716a8525b0e5107a2308bb1",
       "output": "audio/result-result-fault-types-zh.mp3",
       "status": "ready",
-      "fileSha256": "5e042084aebf90da479802dd5233a8ebe6e4dc8defdb1cec87f7d50289a900ac",
+      "fileSha256": "0d7319e1bcb077c03c86eb370dd0b34077d7a6876c7052c0db43d13e7073dd69",
       "conceptId": "fault"
     },
     {
@@ -679,20 +679,20 @@
       "itemId": "result-fault-types",
       "kind": "result",
       "lang": "en",
-      "text": "Compare relative directions, not earthquake strength.",
+      "text": "Compare the loading arrows with the offset of the same rock layer. Fault types do not rank earthquake strength.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Compare relative directions, not earthquake strength.",
-          "spokenText": "Compare relative directions, not earthquake strength."
+          "sourceText": "Compare the loading arrows with the offset of the same rock layer. Fault types do not rank earthquake strength.",
+          "spokenText": "Compare the loading arrows with the offset of the same rock layer. Fault types do not rank earthquake strength."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "43b5c3e5a61f480251d6c18a48e1bdd8a5416981b36b7e674e527b6f4edc56f3",
-      "utteranceSha256": "ca51e765a989467216c66ba320dd063380459cc81dd0f834a4b206d6a81341b7",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "e63d2dc636cc88ff70495d9e470933a084d824a5ee06f2655f3b82b7bfc833bf",
+      "utteranceSha256": "a5907751ff173284101fc38dd7bee075fc3e761f046a72402534db1912af5b47",
       "output": "audio/result-result-fault-types-en.mp3",
       "status": "ready",
-      "fileSha256": "3044a7022289ed95b87eb8859a3dbe52a3780d4415b644ec21b9a24d866a2f01",
+      "fileSha256": "b15018a958f0f04b68a89c825b9e0e214f45e7c50c91dc0b53e871684ac6a75d",
       "conceptId": "fault"
     },
     {
@@ -702,20 +702,20 @@
       "itemId": "result-focus-hint",
       "kind": "result",
       "lang": "zh",
-      "text": "从地下红点沿竖直方向往上找。",
+      "text": "红点是破裂开始的位置。显示竖直投影，再换一个起点比较。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "从地下红点沿竖直方向往上找。",
-          "spokenText": "从地下红点沿竖直方向往上找。"
+          "sourceText": "红点是破裂开始的位置。显示竖直投影，再换一个起点比较。",
+          "spokenText": "红点是破裂开始的位置。显示竖直投影，再换一个起点比较。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "d5910220d6b94b956cb998e4d258f1b7de27722ae07ed305ed580749a999d727",
-      "utteranceSha256": "36604873d8c6fb44a7f3946c0a4708aab89c9b265f50b671bc19c9d5852c71c0",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "6ce3479c73e11b90fa4e0cfb223225e8862e3c3ad669eff42aebeb808e8aad4b",
+      "utteranceSha256": "c695921e1834ad735835d132ac7de79208ba08bc6dc6580a73e9fd1e51fea1e9",
       "output": "audio/result-result-focus-hint-zh.mp3",
       "status": "ready",
-      "fileSha256": "01b3357ecc250e348f9624643c8508aa6a136979f43bb75cf33edcfefbdaf61d",
+      "fileSha256": "3cd9aec2ed32622fcf0d519a09dbec360c521708cb79d1140a0bde22ab5a0ed0",
       "conceptId": "focus"
     },
     {
@@ -725,20 +725,20 @@
       "itemId": "result-focus-hint",
       "kind": "result",
       "lang": "en",
-      "text": "Look straight up from the red point underground.",
+      "text": "The red point marks where rupture starts. Show its vertical projection, then compare another start.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Look straight up from the red point underground.",
-          "spokenText": "Look straight up from the red point underground."
+          "sourceText": "The red point marks where rupture starts. Show its vertical projection, then compare another start.",
+          "spokenText": "The red point marks where rupture starts. Show its vertical projection, then compare another start."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "05e6218bd497b8f0019a0e30565c62b24a22ec81706501b53bd8234ebc373b46",
-      "utteranceSha256": "5b4efdd664ab8585abb8ec08903dd0a50c261a9d1f6eee03c419a535f142595b",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "82ef2bd6284424fbfd3cebf099c8d4eefcae934b0b83c8a9c0723bdd6e094016",
+      "utteranceSha256": "4377108e9debb892fec37622cb154dd52ad5fea3f73900ca0e1fce1aba823914",
       "output": "audio/result-result-focus-hint-en.mp3",
       "status": "ready",
-      "fileSha256": "d979fbfd9de8989f5a820695725cf1fd23ffe1d7ed3cf35ed435e6975a521e27",
+      "fileSha256": "3ea260bc7bb467a5a9970f20b78b744982247b7d81bbe53b54823c2b95e8eadc",
       "conceptId": "focus"
     },
     {
@@ -748,20 +748,20 @@
       "itemId": "result-focus-correct",
       "kind": "result",
       "lang": "zh",
-      "text": "找到了！地下起点是震源，正上方的地表点是震中。",
+      "text": "红点是震源；沿竖线到地表的圈是震中，不一定是摇得最强的地方。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "找到了！地下起点是震源，正上方的地表点是震中。",
-          "spokenText": "找到了！地下起点是震源，正上方的地表点是震中。"
+          "sourceText": "红点是震源；沿竖线到地表的圈是震中，不一定是摇得最强的地方。",
+          "spokenText": "红点是震源；沿竖线到地表的圈是震中，不一定是摇得最强的地方。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "67694cc27c1e80a336e750c30981ca664b056f584d84cb7976c6943fbdde7e71",
-      "utteranceSha256": "66278f1de3225c1a9518ec5a3e09d0da1dc51358d617592e3e5dcc72bbdf7ffe",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "6c877163c8f7236c4d68d805be75bd70ccc3e5cc9d5d82a0e3ccdf9047b7e3f3",
+      "utteranceSha256": "c2458348d8590de0e4cc379079fafb1daef9c08bb0bf4a6405946bf00f25fdab",
       "output": "audio/result-result-focus-correct-zh.mp3",
       "status": "ready",
-      "fileSha256": "7d1c5921fa26a70368a61a69f0fdf9dcbcee6b13b4e3afeebb3fb0083d8a2d31",
+      "fileSha256": "6d86a17cbca315eb6221859eb883031a7fbf30cfe39cab70ae0bb438209b10ec",
       "conceptId": "epicenter"
     },
     {
@@ -771,20 +771,20 @@
       "itemId": "result-focus-correct",
       "kind": "result",
       "lang": "en",
-      "text": "You found it! The underground start is the focus; its surface point is the epicenter.",
+      "text": "The red point is the focus. The surface ring directly above is the epicenter, not necessarily the strongest shaking.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "You found it! The underground start is the focus; its surface point is the epicenter.",
-          "spokenText": "You found it! The underground start is the focus; its surface point is the epicenter."
+          "sourceText": "The red point is the focus. The surface ring directly above is the epicenter, not necessarily the strongest shaking.",
+          "spokenText": "The red point is the focus. The surface ring directly above is the epicenter, not necessarily the strongest shaking."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "05c62594179f1d6b2836315db0a9821710cc00e9e9ad9e3d93661d4dd73dac66",
-      "utteranceSha256": "b9f8defd98162bf0adc9f195bf4d86e93fa6ab6d5e4f81962b7f93b6ea68e3e6",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "667e68a60cb0f0ae4657cacac7e2eb0ce2e290b46b4ba9eddc5fd63c1b328f95",
+      "utteranceSha256": "b01ea776f1391c73cd0a58f3e6ebfad50596119f145971a5b579a3f69bbc198d",
       "output": "audio/result-result-focus-correct-en.mp3",
       "status": "ready",
-      "fileSha256": "9649d366810884a1640f755344e1c2501132a9c7fdac63b7c29270d263b075c8",
+      "fileSha256": "f99334ee836beec9bc22565ea0e5b7bec27986dae2ae6ec61f5f62c92ef46802",
       "conceptId": "epicenter"
     },
     {
@@ -794,20 +794,20 @@
       "itemId": "result-waves",
       "kind": "result",
       "lang": "zh",
-      "text": "波前往外走，黄点只在原来的位置附近往复。",
+      "text": "波前传递能量，地下和地表黄点只在各自原位附近往复。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "波前往外走，黄点只在原来的位置附近往复。",
-          "spokenText": "波前往外走，黄点只在原来的位置附近往复。"
+          "sourceText": "波前传递能量，地下和地表黄点只在各自原位附近往复。",
+          "spokenText": "波前传递能量，地下和地表黄点只在各自原位附近往复。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "4af067dd499930190ccf29719e927dd99c14748cbc4943e74a784c47b32fff01",
-      "utteranceSha256": "23a6b9319c83e82af232891186fed5c5c9442315bb92bb6b91fd0e454f99a749",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "0c577b818b0a3d764f77921d89229c423a4f2250a49d01643a29e75cf870d10b",
+      "utteranceSha256": "8311b975e9a40793870cf0fd28e0eae8a8adc9bf9f8705486da05b9d7fb17194",
       "output": "audio/result-result-waves-zh.mp3",
       "status": "ready",
-      "fileSha256": "ca16eae70ca57bfce0a9b88bad9cc5579b16d71200fc3f65336278602b2d75db",
+      "fileSha256": "2c06c0f5c4aed27e09d182cd08870e809f2dd78e7127653511b6864992eb6528",
       "conceptId": "particle-motion"
     },
     {
@@ -817,20 +817,20 @@
       "itemId": "result-waves",
       "kind": "result",
       "lang": "en",
-      "text": "The wavefront travels outward; the yellow point moves only around its own spot.",
+      "text": "The front carries energy; underground and surface yellow points move around their own places.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The wavefront travels outward; the yellow point moves only around its own spot.",
-          "spokenText": "The wavefront travels outward; the yellow point moves only around its own spot."
+          "sourceText": "The front carries energy; underground and surface yellow points move around their own places.",
+          "spokenText": "The front carries energy; underground and surface yellow points move around their own places."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "01540eb80435160cd8cf1bacc3e4cf88ecd6d59d4f123edea21de81ea9034872",
-      "utteranceSha256": "0e8083aeb1adee53b4da0f62f23b8a53609aa40dd9042c56d63db7459bb9f621",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "17c74c417bfcd2f4209fa1ca9fb59c99dbce4f8322a175c9d010ec3774d2d7dd",
+      "utteranceSha256": "ca48b61777bae8712cbbde8724bd5f36b0c8f725e3559098c6a7c028e15829a0",
       "output": "audio/result-result-waves-en.mp3",
       "status": "ready",
-      "fileSha256": "97b49b6db5314729a1be45217535ea911599f372c7e775a9e9a0bf2fc2a901a5",
+      "fileSha256": "aa95ff0f14c4deef16e6e1530fe6117f06811712c28e5382a230ad47b14b6188",
       "conceptId": "particle-motion"
     },
     {
@@ -840,20 +840,20 @@
       "itemId": "result-arrival",
       "kind": "result",
       "lang": "zh",
-      "text": "近旗先收到同一种波；同一面旗上 P 波先于 S 波。",
+      "text": "同一观测点先收到 P、再收到 S；局部振动结束后，黄点回到原处。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "近旗先收到同一种波；同一面旗上 P 波先于 S 波。",
-          "spokenText": "近旗先收到同一种波；同一面旗上 P 波先于 S 波。"
+          "sourceText": "同一观测点先收到 P、再收到 S；局部振动结束后，黄点回到原处。",
+          "spokenText": "同一观测点先收到 P、再收到 S；局部振动结束后，黄点回到原处。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "c35820bddc4f548ac4fd9f8acf898b76453ff48593e36b426ad2b52a301a7cbe",
-      "utteranceSha256": "a21b40074263bcb22bd6f35ca9919c758fff7e9a7636faf6b7aeb556bca3502f",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "742502192905e49375c4ea7cfa9ae9d4d018356429d29889a2c69e4356024bdd",
+      "utteranceSha256": "5149e9faf0910601c83a1a1be9603657f8117f66142bed666e7f5fdd92620d01",
       "output": "audio/result-result-arrival-zh.mp3",
       "status": "ready",
-      "fileSha256": "a06e4beb95dce582bac500e4d1de9a69c001db2505f9e8f8a1cb1cc6ffc757fd",
+      "fileSha256": "75e3d8c06e6f2f1d46b4a3394254c174a3cee8be35883f49694bbd732851cd02",
       "conceptId": "wavefront"
     },
     {
@@ -863,20 +863,20 @@
       "itemId": "result-arrival",
       "kind": "result",
       "lang": "en",
-      "text": "The near flag receives the same wave first; P reaches one flag before S.",
+      "text": "At one observation point P arrives before S. After each pulse the yellow point returns to its place.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The near flag receives the same wave first; P reaches one flag before S.",
-          "spokenText": "The near flag receives the same wave first; P reaches one flag before S."
+          "sourceText": "At one observation point P arrives before S. After each pulse the yellow point returns to its place.",
+          "spokenText": "At one observation point P arrives before S. After each pulse the yellow point returns to its place."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "538fca9163de22c8859343063b5b5ed1eb3925a950e508526f1dcb3f6415f5b4",
-      "utteranceSha256": "6a9d3449d97a37d33062077bc4f1e9ef2ad0bfb49a83b81675a7cc7f956b056e",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "46baf8a5e1bec7aab50f4e0f9ac2d93ae629b0c146e7eac01f45ec0a61063ba2",
+      "utteranceSha256": "f99321ad88c7250db2a057a14370e98999e0ef62cc9557f37b723807c7419b26",
       "output": "audio/result-result-arrival-en.mp3",
       "status": "ready",
-      "fileSha256": "8de27b280824f761173775e554e959138e4eb37c9670838026b00a1bbfb96b87",
+      "fileSha256": "1b69382ddd855acb04d88f2b79025163113b6e2caf93eb710a42ebf01312c84f",
       "conceptId": "wavefront"
     },
     {
@@ -886,20 +886,20 @@
       "itemId": "fault-plane",
       "kind": "knowledge",
       "lang": "zh",
-      "text": "倾斜断层面",
+      "text": "断层是岩石中可发生相对滑移的面，不是空隙。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "倾斜断层面",
-          "spokenText": "倾斜断层面"
+          "sourceText": "断层是岩石中可发生相对滑移的面，不是空隙。",
+          "spokenText": "断层是岩石中可发生相对滑移的面，不是空隙。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "61f046854e793859148225c1ee7793b9954dd6526d73bf10c1aa11c912afbd9f",
-      "utteranceSha256": "8d414411931b10acf37c3e5921557f637b61e0b617348c8c2c20d3d35b118ad0",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "8ed8446e08e2be6dc20ee862db75641c062c6f9194bfe16929f09753a3abea2b",
+      "utteranceSha256": "6e78f7ad1fb65816153a2c9a4705677e5a8226af4306d254f8a378fe9e224a53",
       "output": "audio/knowledge-fault-plane-zh.mp3",
       "status": "ready",
-      "fileSha256": "62bad1fe562ae13f1cd9bcc15b4cd8fc1d7b10df0bacd0f5d81119481e348867",
+      "fileSha256": "b1269e5b072082998642ba271f4dfb316630a12f40382c446fa97cad55505921",
       "conceptId": "fault"
     },
     {
@@ -909,20 +909,20 @@
       "itemId": "fault-plane",
       "kind": "knowledge",
       "lang": "en",
-      "text": "Dipping fault plane",
+      "text": "A fault is a surface where rock can slip relatively, not an empty gap.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Dipping fault plane",
-          "spokenText": "Dipping fault plane"
+          "sourceText": "A fault is a surface where rock can slip relatively, not an empty gap.",
+          "spokenText": "A fault is a surface where rock can slip relatively, not an empty gap."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "36b143637a90ddfbb41d82bce9938c8536fcb0a70e271370e4871b94b5887db4",
-      "utteranceSha256": "afd6b0ea9ecf1aa71319be7a8eb36746a3949e24c2101517bb049c88752b9002",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "849cfdb5573b5374ba92f6d0d544ec9f8c641d31130faed1fcc5648691eefe60",
+      "utteranceSha256": "a4768f8befe1936a4fd37cbe03cb520b7db34e667dd0a6e6d3356a0ba6a16c2d",
       "output": "audio/knowledge-fault-plane-en.mp3",
       "status": "ready",
-      "fileSha256": "b1b21289122913683b8942c02751929ca86735e615d5690432d3ed8f7ca8c84a",
+      "fileSha256": "183e9e366fc325286e72a371a645e40a89b4a96a89ccd62586bc62f0a6d2b9e5",
       "conceptId": "fault"
     },
     {
@@ -932,20 +932,20 @@
       "itemId": "marker-line",
       "kind": "knowledge",
       "lang": "zh",
-      "text": "跨断层标记线",
+      "text": "标记线记录岩石先形变、后留下永久错位。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "跨断层标记线",
-          "spokenText": "跨断层标记线"
+          "sourceText": "标记线记录岩石先形变、后留下永久错位。",
+          "spokenText": "标记线记录岩石先形变、后留下永久错位。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "9cbb221a7538d4d1a0e61ed221769635acee4aa32a4ba6f942e15bca7014da82",
-      "utteranceSha256": "b1dd03b6748e591269f6a782ca28fc376da19c69a7a6b80634ede6aaa2161302",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "edb73e39f5245f0b6e8077cae3ad09c0aade27098c142e9d0ab8bea31318f06a",
+      "utteranceSha256": "cf8688c31ed222659118241989b25453f8acdcae5796a4ee7ea9304a18e88dd6",
       "output": "audio/knowledge-marker-line-zh.mp3",
       "status": "ready",
-      "fileSha256": "7299a7bef0ec85fc96556d7bbdfed8e49d1e1dec4bb6e9d987b4380ab43ceef4",
+      "fileSha256": "b64e7aecaa9b20de2f8cb493bb191e6802d0ae7065ccb81ff6b41d7218a6adf0",
       "conceptId": "slip"
     },
     {
@@ -955,20 +955,20 @@
       "itemId": "marker-line",
       "kind": "knowledge",
       "lang": "en",
-      "text": "Marker across the fault",
+      "text": "The marker records deformation followed by a lasting offset.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Marker across the fault",
-          "spokenText": "Marker across the fault"
+          "sourceText": "The marker records deformation followed by a lasting offset.",
+          "spokenText": "The marker records deformation followed by a lasting offset."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "5cb9c33f15bb21a5ec0a5f09f9d53b95f562bd07b2ce44c7558628fa731c84b8",
-      "utteranceSha256": "6a7049017efc00d9e8170a6f0fcf35eb84bf110fbc0f19871acf092c0b24a181",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "9d892f4b457aa59a8f0ea91ae2d6b115eaa7abaf1d0fe35bc1322b1615cc64b3",
+      "utteranceSha256": "0f06faf886e1eeaa8a9b464991424f7339faffeb0dffc69300e7a0b16075e645",
       "output": "audio/knowledge-marker-line-en.mp3",
       "status": "ready",
-      "fileSha256": "4f485ba6d637b6293216bfb69d38f2aa9c83584e4782e5998d87e0d66a8d0489",
+      "fileSha256": "ff921ab203ee3eed3cf9a4b8893c54441053988b58c12030c58345800233715c",
       "conceptId": "slip"
     },
     {
@@ -986,7 +986,7 @@
           "spokenText": "震源：地下起裂点"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
+      "contentVersion": "earthquake-lab-v2",
       "textSha256": "175147df8a359203e1643f9df164e7b01613b88828a7cedfaa83d91f0cffaa21",
       "utteranceSha256": "51bc7371afdf5d621a21a0bf846f0d2e80b96ed1faf338e6aefbaf0572c8cb59",
       "output": "audio/knowledge-focus-zh.mp3",
@@ -1009,7 +1009,7 @@
           "spokenText": "Focus: underground rupture start"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
+      "contentVersion": "earthquake-lab-v2",
       "textSha256": "8785d565fa5d0e9ffee469b89dbe4865c43d2310f78ee69c7c17c7e4c6d4c8ca",
       "utteranceSha256": "fbfb9b4365a89c214ba7d9d98e4d69b91f5cd490ea233218501f48f7b9fb2604",
       "output": "audio/knowledge-focus-en.mp3",
@@ -1032,7 +1032,7 @@
           "spokenText": "震中：震源正上方的地表点"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
+      "contentVersion": "earthquake-lab-v2",
       "textSha256": "04a74f489c1014ad6bdfcc1adc6eb44271da82aec9d597225f94db41ccdfba25",
       "utteranceSha256": "47d5e016cb16796e3f7c182d01bf54240071363df5d822548d3a3566abcb71f4",
       "output": "audio/knowledge-epicenter-zh.mp3",
@@ -1055,7 +1055,7 @@
           "spokenText": "Epicenter: the surface point above the focus"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
+      "contentVersion": "earthquake-lab-v2",
       "textSha256": "211b0757a30f6b3f6c24d2a965073702c22b823f02badab95eefda9d8d40dd6e",
       "utteranceSha256": "51fbda762fc1860f4b2cb52eb93c62971d44cd7cb3ae91da2f1c7a2fb5ced00d",
       "output": "audio/knowledge-epicenter-en.mp3",
@@ -1078,7 +1078,7 @@
           "spokenText": "向外传播的波前"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
+      "contentVersion": "earthquake-lab-v2",
       "textSha256": "e25ab1dbc8ad54b1d26965a53a988c3a682ffb06e9341806f74bb57f3d7632c7",
       "utteranceSha256": "fbf5e7b4c1bfd8434a477ea85da734e490f53737a4e0cef73d6f4eebaa88275e",
       "output": "audio/knowledge-wavefront-zh.mp3",
@@ -1101,7 +1101,7 @@
           "spokenText": "Outward travelling wavefront"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
+      "contentVersion": "earthquake-lab-v2",
       "textSha256": "4f2e987b91435e4d22e029a83d890c9ad4b120d795f1fd774e2e232e18bd8c52",
       "utteranceSha256": "17fe99e824621b981fec068d0968efbfcc587e093a1360e587c716184ab20683",
       "output": "audio/knowledge-wavefront-en.mp3",
@@ -1116,20 +1116,20 @@
       "itemId": "particle",
       "kind": "knowledge",
       "lang": "zh",
-      "text": "只在原处附近往复的黄点",
+      "text": "黄点代表一小块岩石，不是随波奔跑的球。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "只在原处附近往复的黄点",
-          "spokenText": "只在原处附近往复的黄点"
+          "sourceText": "黄点代表一小块岩石，不是随波奔跑的球。",
+          "spokenText": "黄点代表一小块岩石，不是随波奔跑的球。"
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "eb87996cf1f98e6199b04fe76bc917ed29ae7f189824f285b10e4a79e109c009",
-      "utteranceSha256": "b3211a4114130b4815a6a476f45bc9e5256f0a44dfe88a4644c00f8285ace9d0",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "ebb65d55a2312258492873841b2c17233053d2bd3117d56c7f9cee993d23e81a",
+      "utteranceSha256": "dced63585ce79337d0499589bbbadcbd46b2868b8616d88e37d4009103f976f8",
       "output": "audio/knowledge-particle-zh.mp3",
       "status": "ready",
-      "fileSha256": "b97ae70b33d4b8c687cac44cf82bb3be895d6f278a2a8f68b9079f87e51e1425",
+      "fileSha256": "25000d4ae1ee38744fb293a3cffaef59d6a470806de9df14fce16e219aaf8752",
       "conceptId": "particle-motion"
     },
     {
@@ -1139,21 +1139,527 @@
       "itemId": "particle",
       "kind": "knowledge",
       "lang": "en",
-      "text": "Yellow point moving around a fixed spot",
+      "text": "A yellow point stands for a small piece of rock, not a ball travelling with the wave.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Yellow point moving around a fixed spot",
-          "spokenText": "Yellow point moving around a fixed spot"
+          "sourceText": "A yellow point stands for a small piece of rock, not a ball travelling with the wave.",
+          "spokenText": "A yellow point stands for a small piece of rock, not a ball travelling with the wave."
         }
       ],
-      "contentVersion": "earthquake-lab-v1",
-      "textSha256": "c3d7516c90869ea7e2d698408fa24a5ae0ee88891fce464887e382f0703ab496",
-      "utteranceSha256": "ca99ea714082e6a359801f65747cac82ccba6341dd6cd56b21bb4158a1c2c302",
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "3b6d24c99fddac8be5a5e132af30b4614c6fa5a276e609cfb3675fa5cc1a15f8",
+      "utteranceSha256": "749771d16fdb713acf5f324b5e4ef2365ed4d4c7e3052ae4d544f6f66557a48c",
       "output": "audio/knowledge-particle-en.mp3",
       "status": "ready",
-      "fileSha256": "b67fe8c96e7655a80195d5c35c605770a3dff06a6962ffbd799aa8fffc00f63a",
+      "fileSha256": "2dcdd29df95894be756d38472dc82f4950a88d8ae29d193cc71c0e98160a06c0",
       "conceptId": "particle-motion"
+    },
+    {
+      "id": "knowledge-why-initial-zh",
+      "key": "lab:knowledge-why-initial-zh",
+      "owner": "lab",
+      "itemId": "why-initial",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "地球坚硬的外层由缓慢运动的板块组成，并不是松散漂浮的碎石。持续构造作用让岩石受力。接下来只观察其中一小段断层，不是把整块板块用手推动。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "地球坚硬的外层由缓慢运动的板块组成，并不是松散漂浮的碎石。持续构造作用让岩石受力。接下来只观察其中一小段断层，不是把整块板块用手推动。",
+          "spokenText": "地球坚硬的外层由缓慢运动的板块组成，并不是松散漂浮的碎石。持续构造作用让岩石受力。接下来只观察其中一小段断层，不是把整块板块用手推动。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "5c09fce190b8d23228b0d37c2239d6a7d2baa1886685c6cc41ad32db709e269f",
+      "utteranceSha256": "bf132517fcd529777670d58c5cc6ea8059fc10fc01db4d283c736c20f7695c96",
+      "output": "audio/knowledge-why-initial-zh.mp3",
+      "status": "ready",
+      "fileSha256": "4e6976a8849bf066db61f1af3d638b63c4695f6c67b69e19bc5186c7f0a48fd3",
+      "conceptId": "fault"
+    },
+    {
+      "id": "knowledge-why-initial-en",
+      "key": "lab:knowledge-why-initial-en",
+      "owner": "lab",
+      "itemId": "why-initial",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "Earth’s rigid outer layer forms slowly moving plates, not loose floating stones. Tectonic loading stresses rock. Here we inspect a small fault segment, not push an entire plate by hand.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "Earth’s rigid outer layer forms slowly moving plates, not loose floating stones. Tectonic loading stresses rock. Here we inspect a small fault segment, not push an entire plate by hand.",
+          "spokenText": "Earth’s rigid outer layer forms slowly moving plates, not loose floating stones. Tectonic loading stresses rock. Here we inspect a small fault segment, not push an entire plate by hand."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "e49d7ff0470e80fb2c79251bc872e81028a74cd4ab5a2f0842ede50ba0dced6a",
+      "utteranceSha256": "297f8d739a1ca07769ab910a3d2ce6d8430b822eccd07f7ceaf290cce2121e9f",
+      "output": "audio/knowledge-why-initial-en.mp3",
+      "status": "ready",
+      "fileSha256": "00bd95e3e566452fe278729bb827c6ec744746c778d50a68f4ce59d5798c562b",
+      "conceptId": "fault"
+    },
+    {
+      "id": "knowledge-why-locked-zh",
+      "key": "lab:knowledge-why-locked-zh",
+      "owner": "lab",
+      "itemId": "why-locked",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "断层两侧接触面的摩擦能让局部暂时卡住，远处却仍在受力。坚硬岩石也能产生很小的弹性形变，把能量储存在形变中。标记线和能量条把这件事放大给你看；真实积累可能很慢，不能据此倒数地震。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "断层两侧接触面的摩擦能让局部暂时卡住，远处却仍在受力。坚硬岩石也能产生很小的弹性形变，把能量储存在形变中。标记线和能量条把这件事放大给你看；真实积累可能很慢，不能据此倒数地震。",
+          "spokenText": "断层两侧接触面的摩擦能让局部暂时卡住，远处却仍在受力。坚硬岩石也能产生很小的弹性形变，把能量储存在形变中。标记线和能量条把这件事放大给你看；真实积累可能很慢，不能据此倒数地震。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "42931058fbdb5ba32799e3b3120262bd53a03eb7e02c2f0c766253e1d14c038d",
+      "utteranceSha256": "ea24a23c7da1d5861bca30136da761b31e1c544256520bf3403b762387af07a1",
+      "output": "audio/knowledge-why-locked-zh.mp3",
+      "status": "ready",
+      "fileSha256": "cdce31b78ee9ef8ee45566a9261425484a7d59cc5259bdcafc1232a8b0e1cc9f",
+      "conceptId": "elastic-strain"
+    },
+    {
+      "id": "knowledge-why-locked-en",
+      "key": "lab:knowledge-why-locked-en",
+      "owner": "lab",
+      "itemId": "why-locked",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "Friction can lock a local fault patch while loading continues farther away. Even hard rock deforms slightly and stores elastic energy. The marker and energy bar exaggerate this evidence; real loading can be slow and cannot provide an earthquake countdown.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "Friction can lock a local fault patch while loading continues farther away. Even hard rock deforms slightly and stores elastic energy. The marker and energy bar exaggerate this evidence; real loading can be slow and cannot provide an earthquake countdown.",
+          "spokenText": "Friction can lock a local fault patch while loading continues farther away. Even hard rock deforms slightly and stores elastic energy. The marker and energy bar exaggerate this evidence; real loading can be slow and cannot provide an earthquake countdown."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "6da2c73acb75eb9936c80bbb0c4cea120e2a16cb4feacdc57c06fda0a08719fa",
+      "utteranceSha256": "01ab450130f71aa5a25ace07b6605087e1e11956defaa2593392731a385987bc",
+      "output": "audio/knowledge-why-locked-en.mp3",
+      "status": "ready",
+      "fileSha256": "70f7a70e994249df0d37af13dc1195907605b187b94ca3d503efe141d5ffd7f3",
+      "conceptId": "elastic-strain"
+    },
+    {
+      "id": "knowledge-why-slipped-zh",
+      "key": "lab:knowledge-why-slipped-zh",
+      "owner": "lab",
+      "itemId": "why-slipped",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "本模型的驱动力越过静摩擦门槛后，断层开始滑移。附近岩石部分回弹，弹性储能减少，一部分能量以地震波传播。两块岩石已有相对错位，所以回弹不是把断层两侧退回最初位置。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "本模型的驱动力越过静摩擦门槛后，断层开始滑移。附近岩石部分回弹，弹性储能减少，一部分能量以地震波传播。两块岩石已有相对错位，所以回弹不是把断层两侧退回最初位置。",
+          "spokenText": "本模型的驱动力越过静摩擦门槛后，断层开始滑移。附近岩石部分回弹，弹性储能减少，一部分能量以地震波传播。两块岩石已有相对错位，所以回弹不是把断层两侧退回最初位置。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "1d4d73da176af659cdc40048a43dcc7755dcad49a4d6961ab7a8ed2d3436fd2d",
+      "utteranceSha256": "05f259e2da8f1832f28d7e743ba8c5f11d642638118e0b70aa6148fec210e9e2",
+      "output": "audio/knowledge-why-slipped-zh.mp3",
+      "status": "ready",
+      "fileSha256": "3b795bf9e9395fdcff70310c4225114e83b9991b48cb48321f98d70d4464c036",
+      "conceptId": "slip"
+    },
+    {
+      "id": "knowledge-why-slipped-en",
+      "key": "lab:knowledge-why-slipped-en",
+      "owner": "lab",
+      "itemId": "why-slipped",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "When this model crosses its static-friction threshold, the fault slips. Nearby rock partly rebounds, reducing stored elastic energy; some energy travels as seismic waves. The blocks remain offset, so rebound does not restore their original positions.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "When this model crosses its static-friction threshold, the fault slips. Nearby rock partly rebounds, reducing stored elastic energy; some energy travels as seismic waves. The blocks remain offset, so rebound does not restore their original positions.",
+          "spokenText": "When this model crosses its static-friction threshold, the fault slips. Nearby rock partly rebounds, reducing stored elastic energy; some energy travels as seismic waves. The blocks remain offset, so rebound does not restore their original positions."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "7ef3299633599ab379576e50aca29ee9cae4a509aec9701702d6f5efd3ee1d6b",
+      "utteranceSha256": "e18c1d64cfce5436134f21481262f701128ac1e5fd73526efe826b5c04e5a984",
+      "output": "audio/knowledge-why-slipped-en.mp3",
+      "status": "ready",
+      "fileSha256": "6fc08b4eb14c101d189ca5e1fc45c6a79914c9c9fa289b8426359ab88f90682f",
+      "conceptId": "slip"
+    },
+    {
+      "id": "knowledge-why-settled-zh",
+      "key": "lab:knowledge-why-settled-zh",
+      "owner": "lab",
+      "itemId": "why-settled",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "“没有继续摇”与“没有发生过滑动”不同。对比最初和现在的标记线：弯曲减小了，跨断层的错位仍在。真实地震还可能有余震；这个单次事件模型不计算它们。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "“没有继续摇”与“没有发生过滑动”不同。对比最初和现在的标记线：弯曲减小了，跨断层的错位仍在。真实地震还可能有余震；这个单次事件模型不计算它们。",
+          "spokenText": "“没有继续摇”与“没有发生过滑动”不同。对比最初和现在的标记线：弯曲减小了，跨断层的错位仍在。真实地震还可能有余震；这个单次事件模型不计算它们。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "71203a0f9551093eaabbd6ca84ff71f1002feeb21a00fdb4126031998b2ab321",
+      "utteranceSha256": "91bf3be4263db31c49766c374371e4bdc4a453a5dd5c0bcbcbce94876f44dc44",
+      "output": "audio/knowledge-why-settled-zh.mp3",
+      "status": "ready",
+      "fileSha256": "f3549b014d7ef29a9dc8790e5452c32a260e53c2a9a90e3df90810b32977be75",
+      "conceptId": "slip"
+    },
+    {
+      "id": "knowledge-why-settled-en",
+      "key": "lab:knowledge-why-settled-en",
+      "owner": "lab",
+      "itemId": "why-settled",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "No more shaking does not mean no slip occurred. Compare the marker before and after: bending decreases but offset remains. Real earthquakes may have aftershocks; this single-event model does not calculate them.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "No more shaking does not mean no slip occurred. Compare the marker before and after: bending decreases but offset remains. Real earthquakes may have aftershocks; this single-event model does not calculate them.",
+          "spokenText": "No more shaking does not mean no slip occurred. Compare the marker before and after: bending decreases but offset remains. Real earthquakes may have aftershocks; this single-event model does not calculate them."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "189ca799d2044a6027f8abf44addd0d569dd7f1fb726ee75d2871c2a7fa03797",
+      "utteranceSha256": "b05bc4361a82b4a94a770bf46e2da1c79290797834d27d94d0c18a7e23ba2a9b",
+      "output": "audio/knowledge-why-settled-en.mp3",
+      "status": "ready",
+      "fileSha256": "66c800fac8ac7bfabbdbcddb9187addc687f907125e4022b4fc9a7734f0731b9",
+      "conceptId": "slip"
+    },
+    {
+      "id": "knowledge-why-normal-zh",
+      "key": "lab:knowledge-why-normal-zh",
+      "owner": "lab",
+      "itemId": "why-normal",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "远端向外拉伸时，上盘相对下盘沿倾斜断层向下滑。青箭头是远端受力方向，橙箭头是相对滑动；它们不是同一件事。这里固定几何与错位大小，只比较方向。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "远端向外拉伸时，上盘相对下盘沿倾斜断层向下滑。青箭头是远端受力方向，橙箭头是相对滑动；它们不是同一件事。这里固定几何与错位大小，只比较方向。",
+          "spokenText": "远端向外拉伸时，上盘相对下盘沿倾斜断层向下滑。青箭头是远端受力方向，橙箭头是相对滑动；它们不是同一件事。这里固定几何与错位大小，只比较方向。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "ae0f38924abe9519b06750a204c815ef65a91a7733e09f069da3a1e0994a59b9",
+      "utteranceSha256": "8811f9603569814dab08b95682d9474ef3f24bbdfbee7266f45bd928c5d635d1",
+      "output": "audio/knowledge-why-normal-zh.mp3",
+      "status": "ready",
+      "fileSha256": "90618f9a0f8ac5406c31092754ec9b2f1c23d54a4332cc720cdd66aa2145277d",
+      "conceptId": "fault-normal"
+    },
+    {
+      "id": "knowledge-why-normal-en",
+      "key": "lab:knowledge-why-normal-en",
+      "owner": "lab",
+      "itemId": "why-normal",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "Under extension, the hanging wall slips down relative to the footwall along the dipping fault. Cyan arrows show remote loading; orange arrows show relative slip. With geometry and offset fixed here, compare directions only.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "Under extension, the hanging wall slips down relative to the footwall along the dipping fault. Cyan arrows show remote loading; orange arrows show relative slip. With geometry and offset fixed here, compare directions only.",
+          "spokenText": "Under extension, the hanging wall slips down relative to the footwall along the dipping fault. Cyan arrows show remote loading; orange arrows show relative slip. With geometry and offset fixed here, compare directions only."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "dee994b7a27beafc3c6eac1655455586a12adda9150bdabcf3d9dbc2eba7392e",
+      "utteranceSha256": "1c2f035c8b812c566a30804c144dc8a9f51bfaf5000145c06c4a8c913191ee74",
+      "output": "audio/knowledge-why-normal-en.mp3",
+      "status": "ready",
+      "fileSha256": "d68babcdf085bed13c921dc7c6bcd868287e501724467d2b2fead7fb3326d289",
+      "conceptId": "fault-normal"
+    },
+    {
+      "id": "knowledge-why-reverse-zh",
+      "key": "lab:knowledge-why-reverse-zh",
+      "owner": "lab",
+      "itemId": "why-reverse",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "远端挤压时，上盘相对下盘沿倾斜断层向上滑。上盘指断层面上方的岩体，并不保证它始终比另一侧高。颜色相同的岩层帮助你确认相对错位。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "远端挤压时，上盘相对下盘沿倾斜断层向上滑。上盘指断层面上方的岩体，并不保证它始终比另一侧高。颜色相同的岩层帮助你确认相对错位。",
+          "spokenText": "远端挤压时，上盘相对下盘沿倾斜断层向上滑。上盘指断层面上方的岩体，并不保证它始终比另一侧高。颜色相同的岩层帮助你确认相对错位。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "6708773a4cdf77bfde50b07f817e9461db4f42e99bc764b635f217f28c34dd69",
+      "utteranceSha256": "ae916cd1d308996deed2414b58398205ebe3c5bea3fbdb5fd9eb2dd25670dc02",
+      "output": "audio/knowledge-why-reverse-zh.mp3",
+      "status": "ready",
+      "fileSha256": "4eb089d83670bb1ecc99e1d4aa87cc33a580c058d95f4f6ba5f4442d00aaba1e",
+      "conceptId": "fault-reverse"
+    },
+    {
+      "id": "knowledge-why-reverse-en",
+      "key": "lab:knowledge-why-reverse-en",
+      "owner": "lab",
+      "itemId": "why-reverse",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "Under compression, the hanging wall slips up relative to the footwall along the dipping fault. Hanging wall means the block above the fault plane, not always the higher block. Matching rock layers reveal the relative offset.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "Under compression, the hanging wall slips up relative to the footwall along the dipping fault. Hanging wall means the block above the fault plane, not always the higher block. Matching rock layers reveal the relative offset.",
+          "spokenText": "Under compression, the hanging wall slips up relative to the footwall along the dipping fault. Hanging wall means the block above the fault plane, not always the higher block. Matching rock layers reveal the relative offset."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "8b3eed51e978209c298c109edf05822e23447202980dc5d5d04d96f9ae4a6cb6",
+      "utteranceSha256": "eac961d055e7fbd989b1841fd4a84d204e4025d1b2ab97f9efcc8d107a143c64",
+      "output": "audio/knowledge-why-reverse-en.mp3",
+      "status": "ready",
+      "fileSha256": "990143177b2f69ef666f98f05b6558aed6ea694bf73d0ae7aa03115899e678a4",
+      "conceptId": "fault-reverse"
+    },
+    {
+      "id": "knowledge-why-strike-slip-zh",
+      "key": "lab:knowledge-why-strike-slip-zh",
+      "owner": "lab",
+      "itemId": "why-strike-slip",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "两侧沿断层走向水平错开。用俯视看前后相反方向的箭头，再用同一条标记确认错位。真实断层可以混合水平与上下运动，这里分开展示三种理想方向。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "两侧沿断层走向水平错开。用俯视看前后相反方向的箭头，再用同一条标记确认错位。真实断层可以混合水平与上下运动，这里分开展示三种理想方向。",
+          "spokenText": "两侧沿断层走向水平错开。用俯视看前后相反方向的箭头，再用同一条标记确认错位。真实断层可以混合水平与上下运动，这里分开展示三种理想方向。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "167db0d307b904bce75b7de75731f3e91cf1f1b93750e93f074e39349bd37f88",
+      "utteranceSha256": "aa5f8220d34bf41e021c745fad4bf96f9cb0955a2bcb21d3960c510c8392ece6",
+      "output": "audio/knowledge-why-strike-slip-zh.mp3",
+      "status": "ready",
+      "fileSha256": "11e19b07e8dc04c1481f656fdc51743cc0fce0fc725b8fbf4410f645c06f211f",
+      "conceptId": "fault-strike-slip"
+    },
+    {
+      "id": "knowledge-why-strike-slip-en",
+      "key": "lab:knowledge-why-strike-slip-en",
+      "owner": "lab",
+      "itemId": "why-strike-slip",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "The sides slip horizontally along the fault’s strike. Use the top view to compare opposite arrows and the same marker. Real faults can combine horizontal and vertical motion; these are separate idealized directions.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "The sides slip horizontally along the fault’s strike. Use the top view to compare opposite arrows and the same marker. Real faults can combine horizontal and vertical motion; these are separate idealized directions.",
+          "spokenText": "The sides slip horizontally along the fault’s strike. Use the top view to compare opposite arrows and the same marker. Real faults can combine horizontal and vertical motion; these are separate idealized directions."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "8b58d4094351a49a0dc76222caf01c7307b5c22e88315cc0b5416af5dcce7c9b",
+      "utteranceSha256": "69d926dd011af8678224622182184007cd41eb314ee0a8daa98bc6eca6e76662",
+      "output": "audio/knowledge-why-strike-slip-en.mp3",
+      "status": "ready",
+      "fileSha256": "4e842a6d2b1a5f3cd753b2a488775efb4507522fd17a4f5e483e3a8bdc6c62d6",
+      "conceptId": "fault-strike-slip"
+    },
+    {
+      "id": "knowledge-why-focus-zh",
+      "key": "lab:knowledge-why-focus-zh",
+      "owner": "lab",
+      "itemId": "why-focus",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "震源是破裂最先开始的位置，震中是它的竖直地表投影。换起点会改变投影以及到各观测点的路程。破裂之后可以沿断层扩展，不是只有一个点在活动；这里没有求解有限破裂过程。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "震源是破裂最先开始的位置，震中是它的竖直地表投影。换起点会改变投影以及到各观测点的路程。破裂之后可以沿断层扩展，不是只有一个点在活动；这里没有求解有限破裂过程。",
+          "spokenText": "震源是破裂最先开始的位置，震中是它的竖直地表投影。换起点会改变投影以及到各观测点的路程。破裂之后可以沿断层扩展，不是只有一个点在活动；这里没有求解有限破裂过程。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "be4af0fe4215e5f006fcfa054d9a315e5d6d73f1c2269c553f402868e811e7a3",
+      "utteranceSha256": "ac57fc6487985697ff396f490955d9da402d6d54ac0b86e1b6989106378bcdfe",
+      "output": "audio/knowledge-why-focus-zh.mp3",
+      "status": "ready",
+      "fileSha256": "8ebe2d3d2212f0034ec822e80e30014c8bba84fb45dd755b3f611d1969a56eeb",
+      "conceptId": "focus"
+    },
+    {
+      "id": "knowledge-why-focus-en",
+      "key": "lab:knowledge-why-focus-en",
+      "owner": "lab",
+      "itemId": "why-focus",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "The focus is where rupture starts; the epicenter is its vertical surface projection. Changing the start changes the projection and paths to observation points. Rupture can spread along a fault, but this model does not solve finite rupture propagation.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "The focus is where rupture starts; the epicenter is its vertical surface projection. Changing the start changes the projection and paths to observation points. Rupture can spread along a fault, but this model does not solve finite rupture propagation.",
+          "spokenText": "The focus is where rupture starts; the epicenter is its vertical surface projection. Changing the start changes the projection and paths to observation points. Rupture can spread along a fault, but this model does not solve finite rupture propagation."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "e8391b782de0b7e70fbb1ee73b743877c89b86a4816de6851b6e554b850054b1",
+      "utteranceSha256": "fe9d9adb94cd5cce3de784445cc9f33198a681f14adc03655962ed70215dccf8",
+      "output": "audio/knowledge-why-focus-en.mp3",
+      "status": "ready",
+      "fileSha256": "31c6051a0e46916ec098104d3bd7962d8af6346c6e12f89280a5c0b594f69827",
+      "conceptId": "focus"
+    },
+    {
+      "id": "knowledge-why-p-zh",
+      "key": "lab:knowledge-why-p-zh",
+      "owner": "lab",
+      "itemId": "why-p",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "P 波传来时，邻近岩石沿传播方向交替压缩、伸展，恢复力把扰动继续传给下一处。跟着黄点看：它先向一边、再向另一边，最后回到原位；波前仍在向外走。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "P 波传来时，邻近岩石沿传播方向交替压缩、伸展，恢复力把扰动继续传给下一处。跟着黄点看：它先向一边、再向另一边，最后回到原位；波前仍在向外走。",
+          "spokenText": "P 波传来时，邻近岩石沿传播方向交替压缩、伸展，恢复力把扰动继续传给下一处。跟着黄点看：它先向一边、再向另一边，最后回到原位；波前仍在向外走。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "9a56decce1a1071c8f1ff4559eb5e8a120d3be2dd78e87c2db3281a2bfc7fbf3",
+      "utteranceSha256": "5cd147d1847a5d9e462fbe88e4471f064c7fe72c1c104980dfa9d441eb31c491",
+      "output": "audio/knowledge-why-p-zh.mp3",
+      "status": "ready",
+      "fileSha256": "4bbfb88a1de52bdf5a11378c1c5b9cf9f1aeeb694ddf8941b96dcf83b89a29da",
+      "conceptId": "p-wave"
+    },
+    {
+      "id": "knowledge-why-p-en",
+      "key": "lab:knowledge-why-p-en",
+      "owner": "lab",
+      "itemId": "why-p",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "In a P wave, nearby rock alternately compresses and stretches along the propagation direction. Restoring forces pass the disturbance onward. The yellow point moves one way, then back, returning to its origin while the front travels outward.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "In a P wave, nearby rock alternately compresses and stretches along the propagation direction. Restoring forces pass the disturbance onward. The yellow point moves one way, then back, returning to its origin while the front travels outward.",
+          "spokenText": "In a P wave, nearby rock alternately compresses and stretches along the propagation direction. Restoring forces pass the disturbance onward. The yellow point moves one way, then back, returning to its origin while the front travels outward."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "b0ec9c48452e88906435d98bf105d78484ec0d407af75cb14b5b1c2e887c692b",
+      "utteranceSha256": "52707c52eadd391441d0238ce641d019705295e259a4ecc532ee27e55b7c316f",
+      "output": "audio/knowledge-why-p-en.mp3",
+      "status": "ready",
+      "fileSha256": "e63d4a23b875a11b3bb8db2cf3b7751da89be4465e2ae50b98d5041492cea43d",
+      "conceptId": "p-wave"
+    },
+    {
+      "id": "knowledge-why-s-zh",
+      "key": "lab:knowledge-why-s-zh",
+      "owner": "lab",
+      "itemId": "why-s",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "S 波让邻近岩石沿垂直于传播方向的方向往复剪切。它传播较慢，但不是因为要等 P 波结束才出发。对照同一个观测点的到时：路程相同，速度不同，所以先后到达。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "S 波让邻近岩石沿垂直于传播方向的方向往复剪切。它传播较慢，但不是因为要等 P 波结束才出发。对照同一个观测点的到时：路程相同，速度不同，所以先后到达。",
+          "spokenText": "S 波让邻近岩石沿垂直于传播方向的方向往复剪切。它传播较慢，但不是因为要等 P 波结束才出发。对照同一个观测点的到时：路程相同，速度不同，所以先后到达。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "9791b649254a3f2f906ceabc71b5c65c4fd886fc45921a041e1d486ec6cc5754",
+      "utteranceSha256": "57dac6d4c4cb4c3fcf638400559b6bafb022cafaaa8a81527b61ce0c46b466ed",
+      "output": "audio/knowledge-why-s-zh.mp3",
+      "status": "ready",
+      "fileSha256": "4ff1a88c60cae372a8bc37b2dd482fd9d680ebe942caa036b97d4406e3724fef",
+      "conceptId": "s-wave"
+    },
+    {
+      "id": "knowledge-why-s-en",
+      "key": "lab:knowledge-why-s-en",
+      "owner": "lab",
+      "itemId": "why-s",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "An S wave produces back-and-forth shear perpendicular to its propagation direction. It is slower, not waiting for P to finish before starting. At the same observation point, equal path lengths and different speeds give different arrival times.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "An S wave produces back-and-forth shear perpendicular to its propagation direction. It is slower, not waiting for P to finish before starting. At the same observation point, equal path lengths and different speeds give different arrival times.",
+          "spokenText": "An S wave produces back-and-forth shear perpendicular to its propagation direction. It is slower, not waiting for P to finish before starting. At the same observation point, equal path lengths and different speeds give different arrival times."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "c589460f172d7f49912abbe5a6229559a5335a19c6e410817c7e426eea3a2bc8",
+      "utteranceSha256": "f21511132a1e387f1f3a4a4d356d988c7e6132c005f952a42947f1a7a5eb6184",
+      "output": "audio/knowledge-why-s-en.mp3",
+      "status": "ready",
+      "fileSha256": "f5a264e3148a59a7d0359049a2dd36ca65727c576b29a860ad4bdf4bdbcc8d8c",
+      "conceptId": "s-wave"
+    },
+    {
+      "id": "knowledge-why-waves-zh",
+      "key": "lab:knowledge-why-waves-zh",
+      "owner": "lab",
+      "itemId": "why-waves",
+      "kind": "knowledge",
+      "lang": "zh",
+      "text": "颜色表示两种波前；地下黄点和地表黄点表示岩石的局部运动，不是移动的能量球。先单看 P 或 S 的运动方向，再一起看它们的到时差。只有波经过的地方才在这次脉冲中振动。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "颜色表示两种波前；地下黄点和地表黄点表示岩石的局部运动，不是移动的能量球。先单看 P 或 S 的运动方向，再一起看它们的到时差。只有波经过的地方才在这次脉冲中振动。",
+          "spokenText": "颜色表示两种波前；地下黄点和地表黄点表示岩石的局部运动，不是移动的能量球。先单看 P 或 S 的运动方向，再一起看它们的到时差。只有波经过的地方才在这次脉冲中振动。"
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "b85e11bc2a2008ec2a285352e5a94290d773599a58b88c43ef97a1e217b774d9",
+      "utteranceSha256": "7c786858e1c7232692820917d8bd8703661c29c348c0dcbe7ec64fb121b34a8d",
+      "output": "audio/knowledge-why-waves-zh.mp3",
+      "status": "ready",
+      "fileSha256": "413a4f954795151e249f86c5bd995f88be1c5a181066f9efaff29b4a564306ec",
+      "conceptId": "wavefront"
+    },
+    {
+      "id": "knowledge-why-waves-en",
+      "key": "lab:knowledge-why-waves-en",
+      "owner": "lab",
+      "itemId": "why-waves",
+      "kind": "knowledge",
+      "lang": "en",
+      "text": "Colors show two wavefronts. Underground and surface yellow points represent local rock motion, not travelling energy balls. Inspect P or S motion first, then compare arrival times. A point moves during this pulse only as a wave passes it.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "Colors show two wavefronts. Underground and surface yellow points represent local rock motion, not travelling energy balls. Inspect P or S motion first, then compare arrival times. A point moves during this pulse only as a wave passes it.",
+          "spokenText": "Colors show two wavefronts. Underground and surface yellow points represent local rock motion, not travelling energy balls. Inspect P or S motion first, then compare arrival times. A point moves during this pulse only as a wave passes it."
+        }
+      ],
+      "contentVersion": "earthquake-lab-v2",
+      "textSha256": "d08193605b0c26beb04361d79236eae71d6c886e2a55a451679e1bfdc8d92c41",
+      "utteranceSha256": "23c2995229850906278f659a8bc4bdb93a173a4cc9270059d2ddc73fb5421458",
+      "output": "audio/knowledge-why-waves-en.mp3",
+      "status": "ready",
+      "fileSha256": "b42b0ce9700bb9b11850b79ef38ca5281147fd1d2be046346ff6316da6f44aeb",
+      "conceptId": "wavefront"
     }
   ]
 }

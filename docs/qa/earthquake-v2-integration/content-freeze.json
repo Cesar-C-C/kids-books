@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "topicId": "earthquake",
+  "createdAt": "2026-10-02",
+  "workspace": "C:/Users/Cesar/.codex/worktrees/earthquake-v2-integration/儿童绘本开发",
+  "branch": "codex/earthquake-v2-integration",
+  "baseCommit": "dce876b7d52c9c7554bda1aee42988c003aaf22e",
+  "jointContentFrozen": true,
+  "normalization": "NFC and CRLF-to-LF via tools/earthquake_audio_manifest.cjs normalize()",
+  "sources": {
+    "book": {
+      "path": "books/earthquake/story.json",
+      "contentVersion": "earthquake-story-v2",
+      "ownerConfirmed": true,
+      "sourceSha256": "7850516bab08c7cf1569e851a0418ac02727bf2929d2f987887477a090be700f",
+      "fileSha256": "227274ad8fa797eef3454f95ae39677d2e1e5f604201d7e76757eedff6aba10f",
+      "entries": 74,
+      "frozen": true
+    },
+    "lab": {
+      "path": "labs/earthquake/content.json",
+      "contentVersion": "earthquake-lab-v2",
+      "ownerConfirmed": true,
+      "sourceSha256": "62dbdd96fcd45e76714395f30bffa53018c740444406e8a930ae9328ae44383d",
+      "fileSha256": "456f0fbfd55cf4fc03bc2274731aa0403e89f356b6889d0f84f50efc4913254c",
+      "entries": 72,
+      "frozen": true
+    }
+  },
+  "files": [
+    {
+      "path": "books/earthquake/SOURCES.md",
+      "sha256": "d18e0085399a8341533bdec0e68556d1f7e38e29933ab9dbec98d8dcd79525ff",
+      "role": "internal-source-documentation",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": false,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "books/earthquake/book.js",
+      "sha256": "396b5ec23f662f007d7604cc3452ee54eaa473148a3171df24a3a955b760ede5",
+      "role": "book-runtime",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": true,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "books/earthquake/earthquake.css",
+      "sha256": "f6c577d6137685901c7e6765d600bdfe8907800c31d2691e9246a279d92ba049",
+      "role": "book-runtime",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": true,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "books/earthquake/exhibit-view.js",
+      "sha256": "5078c8909ae58e5bd71e42ddd714e9a90979c5269f1fda0f3b8afba7a111b9a2",
+      "role": "book-runtime",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": true,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "books/earthquake/fault-view.js",
+      "sha256": "bbb3357eb55b3bfeb2e1d897928e599f193f5e82aa60d0584e60c7286b76a01f",
+      "role": "book-runtime",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": true,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "books/earthquake/session.js",
+      "sha256": "57c130f81a240878ea5d0779aa43796e1bee48ab39e817ca0bb5aba6741f3de8",
+      "role": "book-runtime",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": true,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "books/earthquake/story.json",
+      "sha256": "227274ad8fa797eef3454f95ae39677d2e1e5f604201d7e76757eedff6aba10f",
+      "role": "book-runtime",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": true,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "books/earthquake/storyboard.md",
+      "sha256": "0ac0d79626ebe803205bf564090797a9b515c99aa928e6e2eb157d4758abb6ed",
+      "role": "internal-source-documentation",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": false,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "books/earthquake/wave-model.js",
+      "sha256": "de9943cf2f86a68aa6cc97e84fae61f56620f61535fb43f4d36e9e6f36ce8dc3",
+      "role": "book-runtime",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": true,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "books/earthquake/wave-view.js",
+      "sha256": "b5ec21d8000b3f144351c19000d75e7203221b54de1d3a8772ff378067ea145e",
+      "role": "book-runtime",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": true,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "tests/qa_earthquake_book_audio.cjs",
+      "sha256": "7fbd39bfdcbb14284755a5162c54c4b1100a7c3976d753a79bf453db6cb1c434",
+      "role": "private-test",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": false,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "tests/qa_earthquake_book_content.cjs",
+      "sha256": "7a26cff204e17d6b7159d986728129ab3d96e88c348f7f053ee350c9fb269e8f",
+      "role": "private-test",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": false,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "tests/qa_earthquake_book_models.cjs",
+      "sha256": "404e6b2a6e8627e9efcd2bffd93a61aad927bfeb536a1acbb834c406fcf8178d",
+      "role": "private-test",
+      "includeInSourceIntegration": true,
+      "pwaResourceCandidate": false,
+      "owner": "book",
+      "verified": true
+    },
+    {
+      "path": "labs/earthquake/content.json",
+      "sha256": "456f0fbfd55cf4fc03bc2274731aa0403e89f356b6889d0f84f50efc4913254c",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "labs/earthquake/index.html",
+      "sha256": "5158958fcd41065f1fdd16502afea5bdc2579a79a71e559eae9a41dc3929d1cb",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "labs/earthquake/v3/app.js",
+      "sha256": "eeee91e21a2d974660c6df9f30bb7ee2f88436269e979f4fc98199724f7e89fb",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "labs/earthquake/v3/earthquake.css",
+      "sha256": "4190ff37a613f4e73b7afe31516ddd29379426847fcbdda3c1c6f3282537b5d2",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "labs/earthquake/v3/fallback.js",
+      "sha256": "f3e9f72435cc474c22380c873431df90a8fd0138bba95a13986a3861d8ac123f",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "labs/earthquake/v3/geometry.js",
+      "sha256": "695d1d5a50a8e2e7d3839c07b1da64badb594405049fcc32382a2022348de7ef",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "labs/earthquake/v3/model.js",
+      "sha256": "70aac2bb9b95beef1feb94dbc4fdb40faf5ae058402cf80619d1ce8d61b81cdc",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "tests/qa_earthquake_lab_audio_browser.cjs",
+      "sha256": "9d20ad1564274a116f9bef407c4a44f3e321e8f02a409c28a2672419edfe70c9",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "tests/qa_earthquake_lab_browser.cjs",
+      "sha256": "aad4c82d67606a1564fff35f56b65ebceb0a0b24e20f2650f0c55fa6410cb869",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "tests/qa_earthquake_lab_geometry.cjs",
+      "sha256": "e8798b1d8adbb430636dd9e88bdfe369cd40a020a3c996165f6f13d34e4f59ea",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "tests/qa_earthquake_lab_scroll.cjs",
+      "sha256": "5413cb694151b1a9102ae2b49b16d23e87a55d9ac42b2fb8d349cebfa70973d1",
+      "owner": "lab",
+      "verified": true
+    },
+    {
+      "path": "tests/qa_earthquake_lab_depth.cjs",
+      "sha256": "d97827ac57c10a2e8df72719bfc251a5beb3d1ff999fd148ef5e417e81081b0c",
+      "owner": "lab",
+      "verified": true
+    }
+  ],
+  "counts": {
+    "book": 74,
+    "lab": 72,
+    "total": 146,
+    "newOrChanged": 126,
+    "reuseCandidates": 20,
+    "removedFromBookV2": 8
+  },
+  "narrationDiff": "docs/qa/earthquake-v2-integration/narration-diff.json",
+  "generation": {
+    "authorized": true,
+    "scope": "Only the exact joint book/lab v2 sources and target identities; reuse requires exact text, utterance, role, and provenance/recipe validation.",
+    "authorityEvidence": "Human-authorized cross-module workflow, coordinator handoff verified in project conversation; owner frozen deliveries plus QA hash-verified third tree.",
+    "reuseApprovalPending": true,
+    "deleteOldAudioAuthorized": false
+  },
+  "publication": {
+    "authorizedByUser": true,
+    "authorityEvidence": "Current direct user request in QA chat: 发布",
+    "ready": false,
+    "requiredGates": [
+      "complete hash-bound v2 narration manifests and actual MP3s",
+      "actual-entry bilingual playback and cancellation",
+      "PWA resource regeneration and consistency",
+      "download/offline and ordinary installed-cache upgrade",
+      "GitHub CI and Pages/public verification"
+    ]
+  },
+  "documentationPolicy": "SOURCES.md/storyboard.md and docs/qa locks are internal source/QA documentation, not required runtime/offline assets."
+}

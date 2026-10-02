@@ -1,4 +1,5 @@
 import importlib.util
+import os
 import base64
 import subprocess
 import tempfile
@@ -39,10 +40,33 @@ class PreparationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'sample'):
             self.api.validate_authority(approval, 'batch', 'a' * 64)
 
+    def test_v2_authorization_is_bound_to_joint_freeze_and_diff(self):
+        authorization = dict(topicId='earthquake', contentFreezeSha256='a' * 64,
+                             narrationDiffSha256='b' * 64, batchAuthorized=True,
+                             evidence='试听通过，开始批量生成', v2ContentHumanAuditioned=False,
+                             publicationAuthorized=False)
+        self.api.validate_v2_authorization(authorization, 'a' * 64, 'b' * 64)
+        with self.assertRaisesRegex(ValueError, 'joint freeze and diff'):
+            self.api.validate_v2_authorization(authorization, 'c' * 64, 'b' * 64)
+
+    def test_v2_batch_authority_does_not_claim_content_listening_or_publication(self):
+        authorization = dict(topicId='earthquake', contentFreezeSha256='a' * 64,
+                             narrationDiffSha256='b' * 64, batchAuthorized=True,
+                             evidence='试听通过，开始批量生成', v2ContentHumanAuditioned=False,
+                             publicationAuthorized=False)
+        audition_claim = dict(authorization, v2ContentHumanAuditioned=True)
+        with self.assertRaisesRegex(ValueError, 'human-auditioned'):
+            self.api.validate_v2_authorization(audition_claim, 'a' * 64, 'b' * 64)
+        publication = dict(authorization, publicationAuthorized=True)
+        with self.assertRaisesRegex(ValueError, 'authorize publication'):
+            self.api.validate_v2_authorization(publication, 'a' * 64, 'b' * 64)
+
     def test_encoded_powershell_command_preserves_unicode_and_quotes(self):
         command = "$value = 'quote''雪'; Write-Output $value"
         encoded = self.api.encode_powershell_command(command)
         self.assertEqual(base64.b64decode(encoded).decode('utf-16le'), command)
+        if os.name != 'nt':
+            return  # Linux CI checks the encoding; the native PowerShell run is Windows-only.
         result = subprocess.run(
             ['powershell.exe', '-NoLogo', '-NoProfile', '-NonInteractive', '-EncodedCommand', encoded],
             check=True, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=20)
