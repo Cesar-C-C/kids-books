@@ -1,0 +1,5 @@
+# Keep the raw hashes of the new QA handoff documents stable across Windows checkouts.
+docs/qa/earthquake-v2-integration/*.json text eol=lf
+docs/qa/earthquake-v2-integration/*.md text eol=lf
+tests/qa_earthquake_lab_depth.cjs text eol=lf
+tests/qa_earthquake_book_native_audio.cjs text eol=lf

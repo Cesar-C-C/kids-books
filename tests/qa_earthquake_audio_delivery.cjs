@@ -54,7 +54,18 @@ function verify(owner, manifestOverride) {
   }
   assert.deepEqual([...seen].sort(), [...expected.keys()].sort(), `${owner} missing or extra bilingual audio`);
   const actualFiles = fs.readdirSync(path.join(base, 'audio')).filter(name => name.endsWith('.mp3')).sort();
-  assert.deepEqual(actualFiles, [...seen].map(id => `${id}.mp3`).sort(), `${owner} unlisted MP3`);
+  const listedFiles = [...seen].map(id => `${id}.mp3`);
+  const retired = [];
+  if (source.scriptVersion === 'earthquake-story-v2' || source.contentVersion === 'earthquake-lab-v2') {
+    const diff = JSON.parse(fs.readFileSync(path.join(root, 'docs/qa/earthquake-v2-integration/narration-diff.json'), 'utf8'));
+    assert.equal(diff.sources[owner].sourceSha256, manifest.sourceSha256, 'retired inventory belongs to this frozen source');
+    for (const entry of diff.owners[owner].removed) {
+      assert.equal(entry.deleteAuthorized, false, 'retired clips are preserved, not silently deleted');
+      assert.equal(sha(fs.readFileSync(path.join(base, entry.output))), entry.fileSha256, 'retired clip bytes are unchanged');
+      retired.push(path.basename(entry.output));
+    }
+  }
+  assert.deepEqual(actualFiles, [...listedFiles, ...retired].sort(), `${owner} unexpected unlisted MP3`);
   return seen.size;
 }
 

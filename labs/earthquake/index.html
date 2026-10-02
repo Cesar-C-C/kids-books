@@ -23,51 +23,56 @@
 
     <nav class="card-nav" aria-label="Observation cards">
       <button id="card-elastic-rebound" type="button" data-card="elastic-rebound" data-i18n="card-elastic-rebound" aria-current="step">1 · 岩石先弯，再错开</button>
+      <button id="card-waves" type="button" data-card="waves" data-i18n="card-waves">2 · 能量如何传出去</button>
       <button id="card-fault-types" type="button" data-card="fault-types" data-i18n="card-fault-types">2 · 三种断层</button>
       <button id="card-focus-epicenter" type="button" data-card="focus-epicenter" data-i18n="card-focus-epicenter">3 · 地下起点</button>
-      <button id="card-waves" type="button" data-card="waves" data-i18n="card-waves">4 · 波往外走</button>
     </nav>
 
     <div class="lab-grid">
       <section class="scene-panel" aria-label="Interactive geology model">
         <div class="scene-top"><span class="scene-kicker">01 / GEOLOGY</span><span id="scene-mode">REVERSE FAULT</span></div>
-        <div id="viewport" role="img" aria-label="3D layered rock with a dipping fault, focus, flags and wavefronts">
+        <div id="viewport" role="region" aria-label="Geology model and its observed evidence">
           <div id="mobile-theater" class="mobile-theater"><p id="mobile-question"></p><p id="mobile-result"></p><button id="mobile-action" type="button"></button></div>
-          <div id="surface-choices" class="surface-choices" hidden><button id="surface-left" type="button" aria-label="地表 A">A</button><button id="surface-correct" type="button" aria-label="地表 B">B</button><button id="surface-right" type="button" aria-label="地表 C">C</button></div>
+          <div class="model-labels" aria-hidden="true"><span id="label-marker" data-i18n="label-marker"></span><span id="label-lock" data-i18n="label-lock"></span><span id="label-focus" data-i18n="label-focus"></span><span id="label-epicenter" data-i18n="label-epicenter"></span><span id="label-particle" data-i18n="label-particle"></span><span id="label-surface" data-i18n="label-surface"></span></div>
           <div class="scene-corner scene-corner--top"><span class="coord-cross">＋</span><span>MODEL SPACE</span></div>
           <div class="scene-corner scene-corner--bottom"><span class="scene-scale">0 —— 4</span><span>ILLUSTRATIVE SCALE</span></div>
           <div id="scene-error" class="scene-error" hidden>3D 暂时无法加载。<a href="../../books/earthquake/index.html?lang=zh">返回绘本</a></div>
         </div>
-        <div class="scene-toolbar" aria-label="Model views">
+        <div class="experiment-controls">
+          <div id="controls-fault" class="card-controls">
+            <button id="advance" class="primary-action" type="button" data-i18n="advance-initial">看锁定时怎样储能</button>
+            <button id="reset" type="button" data-i18n="reset">重新开始</button>
+            <details class="time-tools"><summary data-i18n="time-tools">逐步与慢放工具</summary><button id="drive" type="button" data-i18n="drive">按住持续加载</button><div class="control-row"><button id="step" type="button" data-i18n="step">加载一小步</button><button id="pause" type="button" data-i18n="pause">暂停</button><button id="replay" type="button" data-i18n="replay">慢放刚才的过程</button></div></details>
+          </div>
+          <div id="controls-types" class="card-controls" hidden><div class="control-row"><button id="type-normal" type="button" data-i18n="type-normal"></button><button id="type-reverse" type="button" data-i18n="type-reverse"></button><button id="type-strike-slip" type="button" data-i18n="type-strike-slip"></button></div><p id="type-context" class="control-note"></p></div>
+          <div id="controls-focus" class="card-controls" hidden><div class="control-row"><button id="focus-deep" type="button" data-i18n="focus-deep"></button><button id="focus-shallow" type="button" data-i18n="focus-shallow"></button></div><button id="focus-project" type="button" data-i18n="focus-project" aria-pressed="false"></button><p id="focus-status" class="control-note" role="status"></p></div>
+          <div id="controls-waves" class="card-controls" hidden><div class="control-row wave-modes"><button id="wave-p" type="button" data-i18n="wave-p"></button><button id="wave-s" type="button" data-i18n="wave-s"></button><button id="wave-combined" type="button" data-i18n="wave-combined"></button></div><button id="wave-play" class="primary-action" type="button" data-i18n="wave-play"></button><div class="control-row"><button id="wave-pause" type="button" disabled>暂停</button><button id="wave-reset" type="button" data-i18n="reset"></button></div><details class="time-tools"><summary data-i18n="time-tools"></summary><button id="wave-step" type="button" data-i18n="wave-step"></button></details></div>
+        </div>
+        <details class="view-tools"><summary data-i18n="view-tools">观察角度工具</summary><div class="scene-toolbar" aria-label="Model views">
           <button id="view-reset" type="button" data-i18n="view-reset">初始视角</button>
           <button id="view-side" type="button" data-i18n="view-side">侧面</button>
           <button id="view-top" type="button" data-i18n="view-top">俯视</button>
           <button id="zoom-in" type="button" data-i18n="zoom-in">放大 ＋</button>
           <button id="zoom-out" type="button" data-i18n="zoom-out">缩小 −</button>
           <button id="cutaway" type="button" data-i18n="cutaway" aria-pressed="false">剖开 / 合上</button>
-        </div>
+        </div></details>
       </section>
 
       <section class="lesson-panel" aria-label="Observation and experiment">
         <div class="lesson-topline"><span>OBSERVATION</span><span id="lesson-number">01 — 04</span></div>
         <h2 id="question" data-i18n="question-elastic-rebound">接缝还没动，旁边的岩石怎样了？</h2>
-        <div class="observe-label">LOOK AT THE MARKER LINE</div>
+        <div id="observe-label" class="observe-label" data-i18n="why-evidence">正在看的证据</div>
         <div id="status" class="status-pill" aria-live="polite"></div>
         <p id="result" class="result-text" data-i18n="result-initial">先看横跨接缝的深色标记线。</p>
         <div class="narration-line"><button id="listen" type="button" data-i18n="listen" hidden>听这一句</button><button id="audio-stop" type="button">停止朗读</button><span id="audio-status" role="status"></span></div>
 
-        <div id="controls-fault" class="card-controls">
-          <button id="drive" class="primary-action" type="button" data-i18n="drive">按住慢慢推动</button>
-          <div class="control-row"><button id="step" type="button" data-i18n="step">推一小步</button><button id="pause" type="button" data-i18n="pause">暂停</button></div>
-          <div class="control-row"><button id="replay" type="button" data-i18n="replay">慢放刚才的过程</button><button id="reset" type="button" data-i18n="reset">重新开始</button></div>
-        </div>
-        <div id="controls-types" class="card-controls" hidden><button id="type-normal" type="button" data-i18n="type-normal">正断层 · 上盘下移</button><button id="type-reverse" type="button" data-i18n="type-reverse">逆断层 · 上盘上移</button><button id="type-strike-slip" type="button" data-i18n="type-strike-slip">走滑断层 · 水平错开</button></div>
-        <div id="controls-focus" class="card-controls" hidden><div class="control-row"><button id="guess-left" type="button" data-i18n="guess-left">地表 A</button><button id="guess-correct" type="button" data-i18n="guess-correct">地表 B</button><button id="guess-right" type="button" data-i18n="guess-right">地表 C</button></div></div>
-        <div id="controls-waves" class="card-controls" hidden><button id="wave-play" class="primary-action" type="button" data-i18n="wave-play">播放并追踪黄点</button><div class="control-row"><button id="wave-pause" type="button" disabled>暂停</button><button id="wave-step" type="button" data-i18n="wave-step">波走一小步</button><button id="wave-reset" type="button" data-i18n="reset">重新开始</button></div><details class="wave-advanced"><summary>P / S</summary><div class="control-row"><button id="wave-combined" type="button" data-i18n="wave-combined">一起看</button><button id="wave-p" type="button" data-i18n="wave-p">只看 P</button><button id="wave-s" type="button" data-i18n="wave-s">只看 S</button></div></details></div>
+        <div id="energy-evidence"><span data-i18n="energy-label"></span><div id="energy-meter" role="meter" aria-label="Illustrative elastic energy" aria-valuemin="0" aria-valuemax="100"><span id="energy-value"></span></div><p id="energy-description"></p></div>
+        <details id="deep-explanation" class="deep-explanation" open><summary data-i18n="why-title">为什么会这样？</summary><p id="why-body"></p><button id="why-listen" type="button" data-i18n="listen" hidden>听这一句</button></details>
+        <details class="model-limit"><summary id="limit-title">模型没有模拟什么？</summary><p id="model-limit"></p><p class="source-links"><a href="https://www.usgs.gov/programs/earthquake-hazards/science-earthquakes" target="_blank" rel="noopener">USGS · Earthquakes</a> · <a href="https://earthquake.usgs.gov/earthquakes/events/1906calif/18april/reid.php" target="_blank" rel="noopener">Elastic rebound</a> · <a href="https://www.usgs.gov/faqs/what-a-fault-and-what-are-different-types" target="_blank" rel="noopener">Faults</a></p></details>
         <p id="caveat" class="lesson-caveat" data-i18n="toy-caveat">这是放大动作的教学模型，不是地震倒计时，也不能预测真实地震。</p>
       </section>
     </div>
-    <footer class="lab-footer"><span>MODEL / NOT A PREDICTION</span><span>FAULT · FOCUS · WAVES</span></footer>
+    <footer class="lab-footer"><span id="pending-audio" data-i18n="pending-audio"></span><span>MODEL / NOT A PREDICTION</span></footer>
   </main>
   <dialog id="narration-dialog" aria-labelledby="narration-heading">
     <div class="narration-dialog-header"><h2 id="narration-heading">点读小卡</h2><button id="narration-language" type="button" aria-label="Switch language">EN / 中</button><button id="narration-close" type="button">关闭</button></div>

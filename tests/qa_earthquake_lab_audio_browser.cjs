@@ -3,12 +3,18 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const { createHash } = require('node:crypto');
 
 module.exports = async function verifyRealAudio(browser, base, setNetworkAvailable) {
   const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '../labs/earthquake/audio-manifest.json'), 'utf8'));
-  assert.equal(manifest.entries.filter(entry => entry.status === 'ready').length, 50, 'all 50 formal lab clips are ready');
+  const contentRaw = fs.readFileSync(path.join(__dirname, '../labs/earthquake/content.json'), 'utf8');
+  const source = JSON.parse(contentRaw);
+  const narrated = source.entries.filter(item => item.narrationNeeded);
+  assert.equal(manifest.contentVersion, source.contentVersion, 'formal audio belongs to the frozen teaching version');
+  const sourceHash = createHash('sha256').update(contentRaw.normalize('NFC').replace(/\r\n/g, '\n')).digest('hex');
+  assert.equal(manifest.sourceSha256, sourceHash, 'formal audio is bound to this exact current source');
+  assert.equal(manifest.entries.filter(entry => entry.status === 'ready').length, narrated.length * 2, 'every current bilingual teaching item has a ready formal clip');
   const clips = ['zh', 'en'].map(lang => manifest.entries.find(entry => entry.itemId === 'result-initial' && entry.lang === lang));
-  const narrated = JSON.parse(fs.readFileSync(path.join(__dirname, '../labs/earthquake/content.json'), 'utf8')).entries.filter(item => item.narrationNeeded);
   const clipUrl = clip => base + '/labs/earthquake/' + clip.output + '?v=' + clip.fileSha256.toLowerCase();
   const contexts = [];
   const evidence = [];
@@ -68,10 +74,10 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
         await cache.put(url + '?v=' + '0'.repeat(64), new Response('older version bytes', { headers: { 'Content-Type': 'audio/mpeg' } }));
       }
     }, clips.map(clip => base + '/labs/earthquake/' + clip.output));
-    assert.equal(narrated.length, 25);
+    assert.ok(narrated.length > 0, 'current teaching source supplies the narration inventory');
     await warm.page.locator('#narration-open').click();
     assert.equal(await warm.page.evaluate(() => __nativeAudio.length), 0, 'opening the reading cards never autoplays');
-    assert.equal(await warm.page.locator('[data-narration-id]').count(), 25, 'every narrated item has an explicit reading control');
+    assert.equal(await warm.page.locator('[data-narration-id]').count(), narrated.length, 'every narrated item has an explicit reading control');
     let reachable = 0;
     for (const lang of ['zh', 'en']) {
       if (lang === 'en') {
@@ -99,8 +105,8 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
     }
     await warm.page.locator('#narration-close').click();
     await allStopped(warm.page, 'closing the reading cards stops the last line');
-    assert.equal(reachable, 50, '25 bilingual entries are both reachable and actually decoded/played');
-    evidence.push({ scenario: 'reading-cards', items: 25, languages: 2, nativePlays: reachable });
+    assert.equal(reachable, narrated.length * 2, 'all current bilingual entries are reachable and actually decoded/played');
+    evidence.push({ scenario: 'reading-cards', items: narrated.length, languages: 2, nativePlays: reachable });
     await warm.page.locator('#language').click();
     await warm.page.setViewportSize({ width: 390, height: 844 });
     await warm.page.locator('#narration-open').click();
@@ -117,6 +123,7 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
     evidence.push({ scenario: 'online-en', ...await play(warm.page, 'en') });
     await play(warm.page, 'en');
     assert.ok(await warm.page.evaluate(() => __nativeAudio.slice(0, -1).every(audio => audio.paused)), 'repeat click replaces the previous native player');
+    await warm.page.locator('#controls-fault .time-tools summary').click();
     await warm.page.locator('#pause').click();
     await allStopped(warm.page, 'pause control stops narration');
     await play(warm.page, 'en');

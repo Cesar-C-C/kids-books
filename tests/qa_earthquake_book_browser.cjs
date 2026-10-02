@@ -4,6 +4,7 @@ const path = require('node:path');
 const http = require('node:http');
 const assert = require('node:assert/strict');
 const pw = require(process.env.PLAYWRIGHT_MODULE || '../.qa-deps/node_modules/playwright');
+const nativeAudio = require('./qa_earthquake_book_native_audio.cjs');
 
 const root = path.resolve(__dirname, '..');
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
@@ -26,17 +27,20 @@ const server = http.createServer((request, response) => {
     browser = await pw.chromium.launch({ channel: 'chrome', headless: true });
     const base = 'http://127.0.0.1:' + server.address().port;
     const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    await nativeAudio.observe(context);
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(base + '/books/earthquake/index.html?lang=zh#fault-lab');
     await page.waitForFunction(() => window.EarthquakeBook?.snapshot().fault);
+    await page.waitForFunction(() => EarthquakeBook.snapshot().audioState === 'idle', null, { timeout: 15000 });
     assert.equal((await page.evaluate(() => EarthquakeBook.snapshot())).lang, 'zh');
     assert.equal(await page.locator('#fault-lab').count(), 1);
     assert.equal(await page.locator('#wave-lab').count(), 1);
     assert.equal(await page.locator('.scene-art:not([hidden])').count(), 4,
       'reviewed story art must load through the art manifest');
 
+    await page.locator('#fault-lab details.tools summary').click();
     for (let i = 0; i < 70; i++) {
       const phase = await page.evaluate(() => EarthquakeBook.snapshot().fault.phase);
       if (phase === 'settled') break;
@@ -53,7 +57,6 @@ const server = http.createServer((request, response) => {
     assert.equal((await page.evaluate(() => EarthquakeBook.snapshot().fault)).phase, 'settled',
       'narrating the result must not reset the completed fault model');
     await page.locator('#stop').click();
-    await page.locator('#fault-lab details.tools summary').click();
     await page.locator('#fault-reset').click();
     await page.locator('#fault-drive').dispatchEvent('pointercancel', { pointerId: 1, button: 0 });
     const cancelled = await page.evaluate(() => EarthquakeBook.snapshot().fault);
@@ -71,7 +74,12 @@ const server = http.createServer((request, response) => {
     assert.equal(await vocabListen.isEnabled(), true, 'English vocabulary narration must be available');
     await vocabListen.click();
     await page.waitForFunction(() => EarthquakeBook.snapshot().audioState === 'ended', null, { timeout: 30000 });
-    await page.locator('#exhibit-lab button').filter({ hasText: 'Let Yan-Yan arrange it' }).click();
+    assert.equal(await page.locator('#exhibit-lab .cause-step').count(), 3);
+    assert.equal((await page.evaluate(() => EarthquakeBook.snapshot().exhibit)).gated, false,
+      'cause and effect can be read directly without a sorting-game gate');
+    assert.equal(await page.locator('#exhibit-lab .cause-why summary').count(), 3);
+    await page.locator('#exhibit-lab .cause-why summary').first().click();
+    assert.equal(await page.locator('#exhibit-lab .cause-step .evidence-link').first().getAttribute('href'), '#fault-lab');
     const exhibitListen = page.locator('#exhibit-lab .result .listen');
     assert.equal(await exhibitListen.getAttribute('data-item-id'), 'exhibit-complete');
     await exhibitListen.click();
@@ -85,6 +93,7 @@ const server = http.createServer((request, response) => {
     assert.equal(await page.locator('#wave-lab .extension a').first().getAttribute('href'),
       '../../labs/earthquake/index.html?lang=en&from=earthquake-waves#waves');
 
+    await page.locator('#wave-lab details.tools summary').click();
     for (const width of [320, 390, 820, 1024]) {
       await page.setViewportSize({ width, height: 844 });
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
@@ -94,6 +103,7 @@ const server = http.createServer((request, response) => {
         assert(box && box.width >= 44 && box.height >= 44, `${id} hit area under 44px at ${width}`);
       }
       const smallListen = await page.locator('.listen:not([disabled])').evaluateAll(buttons => buttons
+        .filter(button => button.getClientRects().length > 0)
         .filter(button => button.getBoundingClientRect().width < 44 || button.getBoundingClientRect().height < 44)
         .map(button => button.dataset.itemId));
       assert.deepEqual(smallListen, [], `narration hit area under 44px at ${width}`);
@@ -138,6 +148,8 @@ const server = http.createServer((request, response) => {
 
     await page.goto(base + '/books/earthquake/index.html?lang=en#wave-lab');
     await page.waitForFunction(() => window.EarthquakeBook?.snapshot().lang === 'en');
+    await nativeAudio.verify(page, base, false);
+    if ((await page.evaluate(() => EarthquakeBook.snapshot().lang)) !== 'en') await page.locator('#language').click();
     await page.evaluate(async () => {
       for (const name of await caches.keys()) {
         if (!name.startsWith('kb-shell-')) continue;
@@ -156,6 +168,7 @@ const server = http.createServer((request, response) => {
     await context.close();
 
     const installed = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    await nativeAudio.observe(installed);
     const shelf = await installed.newPage();
     await shelf.goto(base + '/index.html');
     await shelf.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 90000 });
@@ -170,8 +183,12 @@ const server = http.createServer((request, response) => {
       navigator.serviceWorker.controller.postMessage({ type: 'KB_STATUS' }, [channel.port2]);
     }));
     assert.equal(cached.books.earthquake.cached, cached.books.earthquake.total);
-    assert.equal(cached.books.earthquake.complete, true, 'all 56 ready narrations belong in the complete package');
-    assert.equal(cached.books.earthquake.audioExpected, 56);
+    const source = JSON.parse(fs.readFileSync(path.join(root, 'books/earthquake/story.json'), 'utf8'));
+    const narratedCount = [...source.scenes, ...source.vocab, ...source.interactions]
+      .filter(item => item.narrationNeeded).length * 2;
+    assert.equal(narratedCount, 74, 'the frozen v2 story defines 74 bilingual clips');
+    assert.equal(cached.books.earthquake.complete, true, 'all current ready narrations belong in the complete package');
+    assert.equal(cached.books.earthquake.audioExpected, narratedCount);
     assert.equal(cached.books.earthquake.missingAudio, 0);
     await installed.setOffline(true);
     await shelf.goto(base + '/books/earthquake/index.html?lang=en#fault-lab');
@@ -186,6 +203,8 @@ const server = http.createServer((request, response) => {
     const offlineZhListen = shelf.locator('.listen[data-kind="vocab"][data-item-id="fault"]');
     await offlineZhListen.click();
     await shelf.waitForFunction(() => EarthquakeBook.snapshot().audioState === 'ended', null, { timeout: 30000 });
+    await nativeAudio.verify(shelf, base, true);
+    if ((await shelf.evaluate(() => EarthquakeBook.snapshot().lang)) !== 'zh') await shelf.locator('#language').click();
     assert.equal((await shelf.evaluate(() => KBOfflineLab.check('earthquake'))).ready, true,
       'current lab core shell should be offline-ready after full install');
     await shelf.evaluate(async version => {

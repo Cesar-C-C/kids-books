@@ -45,8 +45,20 @@ const server = http.createServer((req, res) => {
       await page.setViewportSize({ width: 1100, height: 760 });
     }
     let snapshot = await page.evaluate(() => earthquakeLab.snapshot());
-    await page.locator('#listen').waitFor({ state: 'visible' });
-    assert.equal(await page.locator('#listen').count(), 1, 'verified formal narration is available');
+    const candidate = process.env.EARTHQUAKE_CANDIDATE === '1';
+    if (candidate) {
+      await page.waitForFunction(() => !!document.querySelector('[data-narration-id]') && [...document.querySelectorAll('[data-narration-id]')].every(button => button.disabled));
+      assert.equal(await page.locator('#listen').isHidden(), true, 'v1 narration cannot advertise itself over v2 text');
+      assert.equal(await page.locator('#pending-audio').isVisible(), true, 'candidate explicitly labels pending narration');
+    } else {
+      await page.locator('#listen').waitFor({ state: 'visible' });
+      assert.equal(await page.locator('#listen').count(), 1, 'verified formal narration is available');
+    }
+    const currentContent = JSON.parse(fs.readFileSync(path.join(root, 'labs/earthquake/content.json'), 'utf8'));
+    const narrationIds = await page.locator('[data-narration-id]').evaluateAll(buttons => buttons.map(button => button.dataset.narrationId));
+    assert.equal(new Set(narrationIds).size, narrationIds.length, 'each narrated item appears once, not duplicated in the intro group');
+    assert.equal(narrationIds.length, currentContent.entries.filter(item => item.narrationNeeded).length, 'reading controls cover exactly the current source');
+    await page.locator('#controls-fault .time-tools summary').click();
     assert.equal(snapshot.language, 'zh');
     assert.equal(snapshot.model.slipOffset, 0);
     const samePhaseMutations = await page.evaluate(async () => {
@@ -77,6 +89,7 @@ const server = http.createServer((req, res) => {
     assert.ok(snapshot.model.slipOffset > 0, 'offset remains after driven slip');
     const modelBeforeView = snapshot.model;
     const beforeZoom = snapshot.view.distance;
+    await page.locator('.view-tools summary').click();
     await page.locator('#zoom-in').click();
     assert.ok(await page.evaluate(() => earthquakeLab.snapshot().view.distance) < beforeZoom, 'zoom in changes only the camera');
     await page.locator('#zoom-out').click();
@@ -87,6 +100,7 @@ const server = http.createServer((req, res) => {
     await page.locator('#card-waves').click();
     if (process.env.EARTHQUAKE_SHOTS === '1') await page.screenshot({ path: path.join(root, '.qa-labs/earthquake-lab-waves.png'), fullPage: true });
     assert.equal(await page.evaluate(() => earthquakeLab.snapshot().card), 'waves');
+    await page.locator('#controls-waves .time-tools summary').click();
     await page.locator('#wave-step').click();
     assert.equal(await page.evaluate(() => earthquakeLab.snapshot().model.tick), 1);
     await page.locator('#wave-play').click();
@@ -113,23 +127,22 @@ const server = http.createServer((req, res) => {
     await page.locator('#card-focus-epicenter').click();
     if (process.env.EARTHQUAKE_SHOTS === '1') await page.screenshot({ path: path.join(root, '.qa-labs/earthquake-lab-focus.png'), fullPage: true });
     assert.equal(await page.evaluate(() => earthquakeLab.snapshot().cutaway), true, 'focus card opens the rock so the underground origin is inspectable');
-    assert.equal(await page.locator('#surface-choices button').count(), 3, 'A/B/C are spatial choices on the model');
-    assert.equal(await page.locator('#surface-choices').isVisible(), true);
-    await page.waitForFunction(() => {
-      const viewport = document.querySelector('#viewport').getBoundingClientRect();
-      const boxes = ['left', 'correct', 'right'].map(id => document.querySelector('#surface-' + id).getBoundingClientRect());
-      return boxes.every(box => box.left >= viewport.left && box.right <= viewport.right) && boxes[0].right < boxes[1].left && boxes[1].right < boxes[2].left;
-    });
-    const choiceBoxes = [];
-    for (const id of ['left', 'correct', 'right']) {
-      const box = await page.locator('#surface-' + id).boundingBox();
-      const viewport = await page.locator('#viewport').boundingBox();
-      assert.ok(box && box.x >= viewport.x && box.x + box.width <= viewport.x + viewport.width, id + ' is placed on the visible surface');
-      choiceBoxes.push(box);
-    }
-    assert.ok(choiceBoxes[0].x + choiceBoxes[0].width < choiceBoxes[1].x && choiceBoxes[1].x + choiceBoxes[1].width < choiceBoxes[2].x, 'A/B/C remain visibly separated after changing from a side-view card');
-    await page.locator('#guess-correct').click();
+    assert.equal(await page.locator('#surface-choices').count(), 0, 'fixed A/B/C choices are retired');
+    await page.locator('#focus-shallow').click();
+    const shallow = await page.evaluate(() => earthquakeLab.snapshot());
+    assert.equal(shallow.focus.y, -1.4);
+    assert.equal(shallow.wave.tick, 0, 'source change restarts independent wave paths');
+    assert.notDeepEqual(shallow.wave.arrivalTicks, stoppedWave.arrivalTicks, 'arrival times are recomputed for the selected source');
+    await page.locator('#focus-project').click();
     assert.equal(await page.evaluate(() => earthquakeLab.snapshot().view.focusRevealed), true);
+    await page.locator('#card-elastic-rebound').click();
+    assert.deepEqual(await page.evaluate(() => earthquakeLab.snapshot().fault), modelBeforeView, 'chapter changes preserve the recorded loading event');
+    await page.locator('#reset').click();
+    for (let stage = 0; stage < 3; stage++) await page.locator('#advance').click();
+    assert.equal(await page.evaluate(() => earthquakeLab.snapshot().phase), 'settled');
+    assert.equal(await page.locator('#advance').isEnabled(), true, 'finished core observation has an onward action, not a dead end');
+    await page.locator('#advance').click();
+    assert.equal(await page.evaluate(() => earthquakeLab.snapshot().card), 'waves', 'core cause-to-propagation path is direct');
     const content = JSON.parse(fs.readFileSync(path.join(root, 'labs/earthquake/content.json'), 'utf8'));
     assert.ok(content.entries.length >= 20);
     for (const entry of content.entries) assert.ok(entry.id && entry.conceptId && entry.zh && entry.en && entry.contentVersion === content.contentVersion);
@@ -141,10 +154,11 @@ const server = http.createServer((req, res) => {
     assert.equal(await fallbackPage.locator('.scene-corner').first().isVisible(), false, '3D-only corner labels do not overlap the SVG lesson');
     if (process.env.EARTHQUAKE_SHOTS === '1') await fallbackPage.screenshot({ path: path.join(root, '.qa-labs/earthquake-lab-fallback-phone.png'), fullPage: true });
     assert.equal(await fallbackPage.locator('#model-fallback svg').count(), 1, 'semantic SVG replaces failed WebGL');
-    for (let i = 0; i < 3; i++) await fallbackPage.locator('#step').click();
+    await fallbackPage.locator('#advance').click();
     assert.equal(await fallbackPage.evaluate(() => earthquakeLab.snapshot().phase), 'locked');
     await fallbackPage.locator('#card-waves').click();
     assert.equal(await fallbackPage.evaluate(() => earthquakeLab.snapshot().cutaway), true);
+    await fallbackPage.locator('#controls-waves .time-tools summary').click();
     await fallbackPage.locator('#wave-step').click();
     assert.equal(await fallbackPage.evaluate(() => earthquakeLab.snapshot().model.tick), 1);
     const fallbackArrival = await fallbackPage.evaluate(() => {
@@ -159,7 +173,6 @@ const server = http.createServer((req, res) => {
     });
     assert.ok(fallbackArrival.radius >= fallbackArrival.nearDistance, 'SVG wavefront touches the near flag at its model arrival tick');
     assert.ok(fallbackArrival.radius < fallbackArrival.farDistance, 'far flag remains beyond this same wavefront');
-    await fallbackPage.locator('.wave-advanced summary').click();
     await fallbackPage.locator('#wave-s').click();
     assert.equal(await fallbackPage.locator('#fallback-near-p').isVisible(), false, 'S-only view cannot show P arrival');
     assert.equal(await fallbackPage.locator('#fallback-near-s').isVisible(), false, 'S has not arrived at the P tick');
@@ -172,9 +185,11 @@ const server = http.createServer((req, res) => {
     await fallbackPage.locator('#language').click();
     assert.match(await fallbackPage.locator('#fallback-note').textContent(), /3D is unavailable/, 'fallback note repaints in English');
     await fallbackPage.locator('#card-focus-epicenter').click();
-    assert.equal(await fallbackPage.locator('#fallback-candidates').isVisible(), true, 'A/B/C locations appear in the cutaway');
-    await fallbackPage.locator('#surface-correct').click();
-    assert.equal(await fallbackPage.evaluate(() => earthquakeLab.snapshot().view.focusRevealed), true, 'model-space choice uses the same answer state');
+    assert.equal(await fallbackPage.locator('#fallback-candidates').count(), 0, 'fallback also retires fixed answer choices');
+    await fallbackPage.locator('#focus-shallow').click();
+    await fallbackPage.locator('#focus-project').click();
+    assert.equal(await fallbackPage.evaluate(() => earthquakeLab.snapshot().view.focusRevealed), true, 'fallback uses the same selected source projection');
+    assert.equal(Number(await fallbackPage.locator('#fallback-focus').getAttribute('cy')), 252);
     for (const width of [320, 390, 820, 1024]) {
       await fallbackPage.setViewportSize({ width, height: 720 });
       assert.ok(await fallbackPage.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${width}px has no horizontal overflow`);
@@ -183,18 +198,23 @@ const server = http.createServer((req, res) => {
     const mobile = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await mobile.goto(`http://127.0.0.1:${server.address().port}/labs/earthquake/`);
     await mobile.waitForFunction(() => window.earthquakeLab?.snapshot().renderer === 'webgl');
-    for (const selector of ['#viewport', '#mobile-question', '#mobile-result', '#mobile-action']) {
+    for (const selector of ['#viewport', '#mobile-question', '#mobile-result', '#advance']) {
       const box = await mobile.locator(selector).boundingBox();
       assert.ok(box && box.y >= 0 && box.y + box.height <= 844, selector + ' is in the first phone viewport');
     }
-    assert.equal(await mobile.locator('#mobile-action').isVisible(), true, 'primary action remains with the model on a phone');
-    const action = await mobile.locator('#mobile-action').boundingBox();
+    assert.equal(await mobile.locator('#advance').isVisible(), true, 'observation action is directly below the phone model');
+    await mobile.locator('#advance').click();
+    assert.equal(await mobile.evaluate(() => earthquakeLab.snapshot().phase), 'locked');
+    await mobile.locator('#reset').click();
+    await mobile.locator('#controls-fault .time-tools summary').click();
+    await mobile.locator('#drive').scrollIntoViewIfNeeded();
+    const action = await mobile.locator('#drive').boundingBox();
     await mobile.mouse.move(action.x + action.width / 2, action.y + action.height / 2);
     await mobile.mouse.down();
     await mobile.waitForTimeout(280);
     await mobile.mouse.up();
     const releasedTick = await mobile.evaluate(() => earthquakeLab.snapshot().model.tick);
-    assert.ok(releasedTick >= 2, 'holding the model-side phone button drives multiple ticks');
+    assert.ok(releasedTick >= 2, 'optional hold-to-load tool drives multiple ticks');
     await mobile.waitForTimeout(250);
     assert.equal(await mobile.evaluate(() => earthquakeLab.snapshot().model.tick), releasedTick, 'pointer release stops driving');
     await mobile.locator('#step').click();
@@ -261,8 +281,10 @@ const server = http.createServer((req, res) => {
       assert.ok(await failed.locator('#scene-error a[href*="books/earthquake/index.html"]').isVisible(), `${blocked}: fixed book link remains`);
       await failed.close();
     }
-    await require('./qa_earthquake_lab_audio_browser.cjs')(browser, `http://127.0.0.1:${server.address().port}`, available => { networkAvailable = available; });
-    console.log('Earthquake lab browser: four cards, step/pause, view invariance, bilingual state, real online/offline audio PASS');
+    if (!candidate) await require('./qa_earthquake_lab_audio_browser.cjs')(browser, `http://127.0.0.1:${server.address().port}`, available => { networkAvailable = available; });
+    console.log(candidate
+      ? 'Earthquake v2 candidate browser: causal stages, persistent state, source recalculation, fallback, phone and stale-audio rejection PASS (formal/offline audio NOT tested)'
+      : 'Earthquake lab browser: four cards, step/pause, view invariance, bilingual state, real online/offline audio PASS');
   } finally {
     await browser.close();
     server.closeAllConnections();

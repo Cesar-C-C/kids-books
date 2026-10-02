@@ -8,7 +8,7 @@ const assert = require('node:assert/strict');
 const pw = require(process.env.PLAYWRIGHT_MODULE || '../.qa-deps/node_modules/playwright');
 
 const root = path.resolve(__dirname, '..');
-const OLD = '89e5a4ad332380e5c32f2b4bc1ce6d1733a508d5';
+const OLD = 'dce876b7d52c9c7554bda1aee42988c003aaf22e';
 const historical = file => cp.execFileSync('git', ['show', OLD + ':' + file], { cwd: root });
 const old = Object.fromEntries(['index.html', 'shared/pwa.js', 'sw.js', 'pwa-assets.js']
   .map(file => [file, historical(file)]));
@@ -32,6 +32,10 @@ const server = http.createServer((request, response) => {
   requests.push({ stage, path: pathname });
   response.setHeader('Content-Type', mime[path.extname(file)] || 'application/octet-stream');
   response.setHeader('Cache-Control', rel === 'pwa-assets.js' ? 'public,max-age=86400' : 'no-store');
+  if (stage === 'old' && /^(books|labs)\/earthquake\//.test(rel)) {
+    if (!old[rel]) old[rel] = historical(rel);
+    return response.end(old[rel]);
+  }
   if (stage === 'old' && old[rel]) return response.end(old[rel]);
   fs.readFile(file, (error, bytes) => error ? response.writeHead(404).end() : response.end(bytes));
 });
@@ -92,19 +96,21 @@ async function registrationState(page) {
     const page = await context.newPage();
     const base = 'http://127.0.0.1:' + server.address().port;
     await page.goto(base + '/index.html');
-    await page.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 60000 });
+    await page.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 120000 });
     assert.equal((await status(page)).version, previous.version);
 
     await page.locator('#kbFab').click();
-    for (const id of ['airplane', 'sound']) {
+    for (const id of ['airplane', 'sound', 'earthquake']) {
       await page.waitForFunction(id => document.querySelector('#obtn-' + id)?.textContent === '下载', id);
       await page.locator('#obtn-' + id).click();
       await page.waitForFunction(id => document.querySelector('#obtn-' + id)?.textContent === '删除', id,
-        { timeout: 60000 });
+        { timeout: 120000 });
     }
     const oldStatus = await status(page);
     assert.equal(oldStatus.books.airplane.cached, oldStatus.books.airplane.total);
     assert.equal(oldStatus.books.sound.cached, oldStatus.books.sound.total);
+    assert.equal(oldStatus.books.earthquake.cached, oldStatus.books.earthquake.total);
+    assert.equal(oldStatus.books.earthquake.audioExpected, 56, 'installed v1 has 56 book clips');
     const before = await assetHashes(page);
     assert(Object.keys(before).length >= previous.books.airplane.files.length);
 
@@ -143,11 +149,41 @@ async function registrationState(page) {
 
     assert.equal(upgraded.books.airplane.cached, upgraded.books.airplane.total);
     assert.equal(upgraded.books.sound.cached, upgraded.books.sound.total);
+    assert.equal(upgraded.books.earthquake.audioExpected, 74, 'ordinary upgrade reads the v2 catalog');
+    assert(upgraded.books.earthquake.cached < upgraded.books.earthquake.total,
+      'old v1 MP3 keys cannot masquerade as the updated v2 download');
     const after = await assetHashes(page);
     for (const [url, hash] of Object.entries(before))
       assert.equal(after[url], hash, 'old downloaded byte changed: ' + url);
+    await page.locator('#kbFab').click();
+    await page.waitForFunction(() => document.querySelector('#obtn-earthquake')?.textContent === '下载');
+    await page.locator('#obtn-earthquake').click();
+    await page.waitForFunction(() => document.querySelector('#obtn-earthquake')?.textContent === '删除', null,
+      { timeout: 120000 });
+    const downloaded = await status(page);
+    assert.equal(downloaded.books.earthquake.cached, downloaded.books.earthquake.total);
+    assert.equal(downloaded.books.earthquake.missingAudio, 0);
+    const manifest = JSON.parse(fs.readFileSync(path.join(root, 'books/earthquake/audio-manifest.json'), 'utf8'));
+    const expected = manifest.entries.map(entry => [
+      base + '/books/earthquake/' + entry.output + '?v=' + encodeURIComponent(manifest.contentVersion),
+      entry.fileSha256
+    ]);
+    const actual = await assetHashes(page);
+    for (const [url, hash] of expected) assert.equal(actual[url], hash, 'v2 cache has current clip bytes: ' + url);
+    for (const [url, hash] of Object.entries(before))
+      assert.equal(actual[url], hash, 'redownloading v2 must preserve old/unrelated downloaded bytes: ' + url);
+    await context.setOffline(true);
+    await page.goto(base + '/books/earthquake/index.html?lang=en#fault-lab');
+    await page.waitForFunction(() => window.EarthquakeBook?.snapshot().audioState === 'idle');
+    const currentSource = await page.evaluate(async () => (await fetch('story.json')).json());
+    assert.equal(currentSource.scriptVersion, 'earthquake-story-v2', 'offline ordinary upgrade serves v2 text');
+    await page.locator('.listen[data-kind="scene"][data-item-id="invitation"]').click();
+    await page.waitForFunction(() => EarthquakeBook.snapshot().audioState === 'playing');
+    await page.locator('#stop').click();
+    await page.waitForFunction(() => EarthquakeBook.snapshot().audioState === 'stopped');
+    assert.doesNotMatch(await page.locator('#edition').textContent(), /pending|待更新/i);
     console.log('EARTHQUAKE_UPGRADE_PASS old=' + previous.version + ' new=' + current.version +
-      ' preserved=' + Object.keys(before).length);
+      ' preserved=' + Object.keys(before).length + ' v2Clips=' + expected.length);
     await context.close();
   } finally {
     await browser?.close();
