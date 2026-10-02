@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "538cced34ed6aebed25c571666fafad6ca624d04",
+  "owner": "lab",
+  "ownerConfirmed": true,
+  "contentFreezeSha256": "f06b08850acd29228538116368106ae9a84c0b495dac7891ae6fa1d403e293ed",
+  "sourceUnchanged": true,
+  "reason": "Verify full binary MP3 transfer before native playback so production Range/206 responses cannot leave incomplete offline audio; distinguish runtime failure from unfinished teaching content.",
+  "files": [
+    { "path": "labs/earthquake/v3/audio.js", "sha256": "416b0604880618e3965451ebbdb791aa5f728f248c139278ded0a621be63220a" },
+    { "path": "labs/earthquake/v3/app.js", "sha256": "a4f97b9bd83f48d1c8b7e1a736f4618852434f1aa786d754cf0d2e6c10464cfd" },
+    { "path": "tests/qa_earthquake_lab_audio.cjs", "sha256": "3d3213c1340fe631cdc16a3032a128dc1ccacc0f1c5a29f96f829533e16b7e13" },
+    { "path": "tests/qa_earthquake_lab_audio_browser.cjs", "sha256": "42627e09875d4401c6635b5fde1fa5e49ed322cd6336ced7f05878273706e05f" },
+    { "path": "tests/qa_earthquake_lab_browser.cjs", "sha256": "c046e3c7f79090a2d67ce274e339132e6798f029b13f041e39389d02ca6b22e5" },
+    { "path": "tests/qa_earthquake_lab_audio_http.cjs", "sha256": "d6001c601dee9b9241418afdc7778aafe931db80d2b9b1d8af291aa44082492b" },
+    { "path": "tests/qa_earthquake_lab_audio_transfer.cjs", "sha256": "18944652ea93c954006559f8ecf18d922e7dcc3eb24d0d1f0dc3405450642808" }
+  ],
+  "verification": {
+    "qaIndependent": ["complete-transfer/binary-hash/cancellation unit", "real-MP3 HTTP 200/206/416 fixture", "lab depth", "lab geometry", "diff --check"],
+    "ownerBrowser": "Original v1 MP3 transport fixture: true server disconnection, warm bilingual native playback, cold 504, keyboard failures, model operation and restored-network retry.",
+    "formalV2NativeAudio": "Pending final v2 MP3 delivery; fixture evidence is not formal release acceptance.",
+    "localEvidence": "C:/Users/Cesar/Documents/ChatGPT/儿童绘本开发/.qa-labs/earthquake-range-2026-10-02/report.html"
+  }
+}

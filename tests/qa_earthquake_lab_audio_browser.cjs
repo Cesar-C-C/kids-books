@@ -5,7 +5,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
 
-module.exports = async function verifyRealAudio(browser, base, setNetworkAvailable) {
+module.exports = async function verifyRealAudio(browser, base, setNetworkAvailable, transportRequests) {
+  assert.ok(Array.isArray(transportRequests), 'audio QA requires the Range-aware server request journal');
   const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '../labs/earthquake/audio-manifest.json'), 'utf8'));
   const contentRaw = fs.readFileSync(path.join(__dirname, '../labs/earthquake/content.json'), 'utf8');
   const source = JSON.parse(contentRaw);
@@ -66,6 +67,20 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
   }
   try {
     const warm = await openContext();
+    const probeUrl = clipUrl(clips[0]) + '&qa-range-probe=1';
+    const rangeProbe = await warm.page.evaluate(async url => {
+      const response = await fetch(url, { headers: { Range: 'bytes=0-1023' } });
+      return { status: response.status, range: response.headers.get('content-range'), size: (await response.arrayBuffer()).byteLength };
+    }, probeUrl);
+    const probeSize = fs.statSync(path.join(__dirname, '../labs/earthquake', clips[0].output)).size;
+    assert.deepEqual(rangeProbe, { status: 206, range: `bytes 0-${Math.min(1023, probeSize - 1)}/${probeSize}`, size: Math.min(1024, probeSize) }, 'test hosting reproduces real partial media responses, not unconditional 200');
+    assert.equal(await warm.page.evaluate(async url => !!(await caches.match(url)), probeUrl), false, 'partial responses never become full cached clips');
+    assert.equal(await warm.page.evaluate(async urls => {
+      let count = 0;
+      for (const url of urls) if (await caches.match(url)) count++;
+      return count;
+    }, manifest.entries.filter(entry => entry.status === 'ready').map(clipUrl)), 0, 'metadata and a Range probe never warm versioned MP3s without a user play');
+    evidence.push({ scenario: 'http-range-probe', ...rangeProbe });
     // Simulate an installed version with stale unversioned and previous-hash bytes.
     await warm.page.evaluate(async urls => {
       const cache = await caches.open('kb-asset-v1');
@@ -106,6 +121,16 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
     await warm.page.locator('#narration-close').click();
     await allStopped(warm.page, 'closing the reading cards stops the last line');
     assert.equal(reachable, narrated.length * 2, 'all current bilingual entries are reachable and actually decoded/played');
+    for (const clip of manifest.entries.filter(entry => entry.status === 'ready')) {
+      const expected = new URL(clipUrl(clip));
+      const first = transportRequests.find(request => {
+        const url = new URL(request.url, base);
+        return url.pathname === expected.pathname && url.search === expected.search;
+      });
+      assert.ok(first, clip.id + ' has a recorded complete network transfer');
+      assert.equal(first.range, null, clip.id + ' verifies a non-Range fetch before native playback');
+      assert.equal(first.status, 200, clip.id + ' warms a full response, not 206');
+    }
     evidence.push({ scenario: 'reading-cards', items: narrated.length, languages: 2, nativePlays: reachable });
     await warm.page.locator('#language').click();
     await warm.page.setViewportSize({ width: 390, height: 844 });
@@ -181,7 +206,7 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
     await cold.page.locator('#listen').waitFor({ state: 'visible' });
     await cold.page.locator('#listen').click();
     try {
-      await cold.page.waitForFunction(() => __nativeAudio.at(-1)?.error && document.querySelector('#audio-status').textContent.length > 0, null, { timeout: 10000 });
+      await cold.page.waitForFunction(() => document.querySelector('#audio-status').textContent.length > 0, null, { timeout: 10000 });
     } catch (error) {
       console.error('Unwarmed offline diagnostic: ' + JSON.stringify(await cold.page.evaluate(() => ({
         online: navigator.onLine, hint: document.querySelector('#audio-status').textContent,
@@ -190,10 +215,20 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
       throw error;
     }
     await allStopped(cold.page, 'uncached offline media fails without an active player');
+    assert.equal(await cold.page.evaluate(() => __nativeAudio.length), 0, 'an unavailable complete transfer never constructs a native player');
     assert.match(await cold.page.locator('#audio-status').textContent(), /录音暂时不可用/);
+    assert.doesNotMatch(await cold.page.locator('#audio-status').textContent(), /待配音|尚未冻结/, 'a delivery/network error never masquerades as an unfinished teaching version');
+    const zhFailure = await cold.page.locator('#audio-status').textContent();
+    await cold.page.locator('#language').click();
+    await cold.page.locator('#listen').press('Enter');
+    await cold.page.waitForFunction(() => document.querySelector('#audio-status').textContent.includes('temporarily unavailable'));
+    assert.equal(await cold.page.evaluate(() => __nativeAudio.length), 0, 'English keyboard play also rejects unwarmed offline bytes');
+    const enFailure = await cold.page.locator('#audio-status').textContent();
+    await cold.page.locator('#language').click();
+    await cold.page.locator('#controls-fault .time-tools summary').click();
     await cold.page.locator('#step').click();
     assert.equal(await cold.page.evaluate(() => earthquakeLab.snapshot().model.tick), 1, 'model remains operable when uncached audio cannot play');
-    evidence.push({ scenario: 'offline-unwarmed', hint: await cold.page.locator('#audio-status').textContent(), cachedAudio });
+    evidence.push({ scenario: 'offline-unwarmed', hints: { zh: zhFailure, en: enFailure }, cachedAudio });
     setNetworkAvailable(true);
     await cold.context.setOffline(false);
     await cold.page.locator('#reset').click();

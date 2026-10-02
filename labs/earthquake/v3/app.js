@@ -89,8 +89,13 @@
       }
     }
   }
-  function audioStatus(status) {
-    const message = status === 'unavailable' ? t('audio-unavailable') : '';
+  function audioStatus(status, detail = {}) {
+    // Runtime transfer failures are different from missing/stale teaching-version audio.
+    const hasClip = audio?.available(detail.kind, detail.id, detail.lang || language);
+    const failure = language === 'zh'
+      ? '录音暂时不可用，可以继续阅读文字和操作模型。'
+      : 'Narration is temporarily unavailable. You can still read and explore the model.';
+    const message = status === 'unavailable' ? (hasClip ? failure : t('audio-unavailable')) : '';
     $('audio-status').textContent = message;
     $('narration-status').textContent = message;
   }
@@ -99,8 +104,8 @@
     if (!audio || !item?.narrationNeeded) return;
     stopMotion();
     audioStatus('loading');
-    const result = await audio.play(item.kind, item.id, language);
-    if (!result.ok && result.reason !== 'cancelled') audioStatus('unavailable');
+    // The adapter emits one current-ticket status; a late caller must not repaint it.
+    await audio.play(item.kind, item.id, language);
   }
   function stopMotion() {
     for (const timer of [driveTimer, waveTimer, replayTimer]) if (timer) clearInterval(timer);

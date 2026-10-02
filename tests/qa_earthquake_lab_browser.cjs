@@ -10,7 +10,8 @@ try { playwright = require('playwright'); }
 catch { playwright = require(process.env.PLAYWRIGHT_MODULE || '../.qa-deps/node_modules/playwright'); }
 const { chromium } = playwright;
 
-const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.mp3': 'audio/mpeg' };
+const { serveFile } = require('./qa_earthquake_lab_audio_http.cjs');
+const transportRequests = [];
 let networkAvailable = true;
 const server = http.createServer((req, res) => {
   if (!networkAvailable) return req.socket.destroy();
@@ -18,8 +19,8 @@ const server = http.createServer((req, res) => {
   if (file !== root && !file.startsWith(root + path.sep)) { res.writeHead(403); return res.end(); }
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
   if (!fs.existsSync(file)) { res.writeHead(404); return res.end(); }
-  res.writeHead(200, { 'Content-Type': mime[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store', 'Content-Length': fs.statSync(file).size });
-  fs.createReadStream(file).pipe(res);
+  const outcome = serveFile(req, res, file);
+  if (file.endsWith('.mp3')) transportRequests.push({ url: req.url, range: req.headers.range || null, ...outcome });
 });
 
 (async () => {
@@ -27,7 +28,7 @@ const server = http.createServer((req, res) => {
   const browser = await chromium.launch({ channel: 'chrome', headless: true, args: ['--enable-webgl', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
   try {
     if (process.env.EARTHQUAKE_AUDIO_ONLY === '1') {
-      await require('./qa_earthquake_lab_audio_browser.cjs')(browser, `http://127.0.0.1:${server.address().port}`, available => { networkAvailable = available; });
+      await require('./qa_earthquake_lab_audio_browser.cjs')(browser, `http://127.0.0.1:${server.address().port}`, available => { networkAvailable = available; }, transportRequests);
       return;
     }
     const page = await browser.newPage({ viewport: { width: 1100, height: 760 } });
@@ -281,7 +282,7 @@ const server = http.createServer((req, res) => {
       assert.ok(await failed.locator('#scene-error a[href*="books/earthquake/index.html"]').isVisible(), `${blocked}: fixed book link remains`);
       await failed.close();
     }
-    if (!candidate) await require('./qa_earthquake_lab_audio_browser.cjs')(browser, `http://127.0.0.1:${server.address().port}`, available => { networkAvailable = available; });
+    if (!candidate) await require('./qa_earthquake_lab_audio_browser.cjs')(browser, `http://127.0.0.1:${server.address().port}`, available => { networkAvailable = available; }, transportRequests);
     console.log(candidate
       ? 'Earthquake v2 candidate browser: causal stages, persistent state, source recalculation, fallback, phone and stale-audio rejection PASS (formal/offline audio NOT tested)'
       : 'Earthquake lab browser: four cards, step/pause, view invariance, bilingual state, real online/offline audio PASS');
