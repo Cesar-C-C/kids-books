@@ -7,10 +7,12 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || '../.qa-deps/node_modules/pl
 const nativeAudio = require('./qa_earthquake_book_native_audio.cjs');
 
 const root = path.resolve(__dirname, '..');
+let networkAvailable = true;
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
   '.json': 'application/json', '.webmanifest': 'application/manifest+json',
   '.webp': 'image/webp', '.png': 'image/png', '.mp3': 'audio/mpeg' };
 const server = http.createServer((request, response) => {
+  if (!networkAvailable) return request.socket.destroy();
   const pathname = decodeURIComponent(new URL(request.url, 'http://local').pathname);
   let file = path.resolve(root, '.' + pathname);
   if (file !== root && !file.startsWith(root + path.sep)) return response.writeHead(403).end();
@@ -35,6 +37,8 @@ const server = http.createServer((request, response) => {
     await page.goto(base + '/books/earthquake/index.html?lang=zh#fault-lab');
     await page.waitForFunction(() => window.EarthquakeBook?.snapshot().fault);
     await page.waitForFunction(() => EarthquakeBook.snapshot().audioState === 'idle', null, { timeout: 15000 });
+    await page.waitForFunction(() => document.querySelectorAll('.scene-art:not([hidden])').length === 4 &&
+      [...document.querySelectorAll('.scene-art')].every(image => image.complete && image.naturalWidth > 0));
     assert.equal((await page.evaluate(() => EarthquakeBook.snapshot())).lang, 'zh');
     assert.equal(await page.locator('#fault-lab').count(), 1);
     assert.equal(await page.locator('#wave-lab').count(), 1);
@@ -158,6 +162,7 @@ const server = http.createServer((request, response) => {
       }
     });
 
+    networkAvailable = false;
     await context.setOffline(true);
     const before = page.url();
     await page.locator('#fault-lab .extension a').first().click();
@@ -167,6 +172,7 @@ const server = http.createServer((request, response) => {
     assert.equal(await page.locator('#fault-lab .extension a').nth(1).getAttribute('href'), '#after-fault');
     assert.deepEqual(errors, []);
     await context.close();
+    networkAvailable = true;
 
     const installed = await browser.newContext({ viewport: { width: 390, height: 844 } });
     await nativeAudio.observe(installed);
@@ -191,7 +197,14 @@ const server = http.createServer((request, response) => {
     assert.equal(cached.books.earthquake.complete, true, 'all current ready narrations belong in the complete package');
     assert.equal(cached.books.earthquake.audioExpected, narratedCount);
     assert.equal(cached.books.earthquake.missingAudio, 0);
+    networkAvailable = false;
     await installed.setOffline(true);
+    const coldOfflineStatus = await shelf.evaluate(async () => {
+      const url = new URL('books/earthquake/images/opening.webp', location.href);
+      url.searchParams.set('qa-cold-offline', crypto.randomUUID());
+      return (await fetch(url)).status;
+    });
+    assert.equal(coldOfflineStatus, 504, 'the real worker cannot fetch an uncached valid image while offline');
     await shelf.goto(base + '/books/earthquake/index.html?lang=en#fault-lab');
     await shelf.waitForFunction(() => document.querySelectorAll('.scene-art:not([hidden])').length === 4);
     await shelf.waitForFunction(() => EarthquakeBook.snapshot().audioState === 'idle');
