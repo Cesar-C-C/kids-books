@@ -5,6 +5,7 @@ const path = require('node:path');
 const http = require('node:http');
 const cp = require('node:child_process');
 const assert = require('node:assert/strict');
+const { createHash } = require('node:crypto');
 const pw = require(process.env.PLAYWRIGHT_MODULE || '../.qa-deps/node_modules/playwright');
 
 const root = path.resolve(__dirname, '..');
@@ -170,8 +171,17 @@ async function registrationState(page) {
     ]);
     const actual = await assetHashes(page);
     for (const [url, hash] of expected) assert.equal(actual[url], hash, 'v2 cache has current clip bytes: ' + url);
-    for (const [url, hash] of Object.entries(before))
-      assert.equal(actual[url], hash, 'redownloading v2 must preserve old/unrelated downloaded bytes: ' + url);
+    for (const [url, hash] of Object.entries(before)) {
+      const relative = new URL(url).pathname.slice(1);
+      const mutableBookCore = relative.startsWith('books/earthquake/') &&
+        /\.(html|js|css|json)$/.test(relative);
+      if (mutableBookCore) {
+        const nextHash = createHash('sha256').update(fs.readFileSync(path.join(root, relative))).digest('hex');
+        assert.equal(actual[url], nextHash, 'redownload refreshes the current book core: ' + url);
+      } else {
+        assert.equal(actual[url], hash, 'unrelated downloads and immutable media survive: ' + url);
+      }
+    }
     await context.setOffline(true);
     await page.goto(base + '/books/earthquake/index.html?lang=en#fault-lab');
     await page.waitForFunction(() => window.EarthquakeBook?.snapshot().audioState === 'idle');

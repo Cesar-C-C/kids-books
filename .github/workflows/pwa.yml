@@ -138,6 +138,7 @@ jobs:
           node tests/qa_earthquake_audio_manifest.cjs
           node tests/qa_earthquake_audio_delivery.cjs
           node tests/qa_earthquake_integration.cjs
+          node tests/qa_pwa_mutable_book_core.cjs
 
       # 137 张 r2 插画的尺寸/体积契约，此前完全不在 CI 里
       - name: R2 illustration contract
