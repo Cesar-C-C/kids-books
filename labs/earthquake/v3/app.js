@@ -9,6 +9,8 @@
   let language = entry.lang;
   let card = entry.card;
   const source = entry.from;
+  // The validated return route must work even while teaching content is loading.
+  $('back-book').href = route.bookHref({ lang: language, from: source });
   let fault = model && model.createFault();
   let focusIndex = 0;
   let wave = model && model.createWave({ mode: 'p' });
