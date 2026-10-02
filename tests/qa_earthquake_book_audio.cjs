@@ -26,9 +26,15 @@ async function setup(m=fixtureManifest,options={}){const session=context.window.
 (async()=>{
  // Explicit old-version metadata fixture: the production manifest can now be v2.
  const staleManifest={...structuredClone(manifest),contentVersion:'earthquake-story-v1',scriptVersion:'earthquake-story-v1'};
- let x=await setup(staleManifest,{sourceRaw:raw});
- for(const e of staleManifest.entries)assert.equal(x.narrator.available(e.kind,e.itemId,e.lang),false,'old-version metadata must not play over v2: '+e.key);
- await x.narrator.play('scene','invitation','zh');assert.equal(x.requests.length,0);
+ const wrongSource={...structuredClone(manifest),sourceSha256:'0'.repeat(64),scriptSha256:'0'.repeat(64)};
+ let x;
+ for(const invalid of [staleManifest,wrongSource]){
+  x=await setup(invalid,{sourceRaw:raw});
+  for(const e of invalid.entries)assert.equal(x.narrator.available(e.kind,e.itemId,e.lang),false,'old-version or source-mismatched metadata must not play over v2: '+e.key);
+  await x.narrator.play('scene','invitation','zh');assert.equal(x.requests.length,0);
+ }
+ x=await setup(manifest,{sourceRaw:raw});
+ for(const e of manifest.entries)assert(x.narrator.available(e.kind,e.itemId,e.lang),'formal v2 metadata is accepted: '+e.key);
  x=await setup();assert.equal(x.narrator.available('scene','invitation','zh'),true);assert.equal(x.narrator.available('result','local-motion','en'),true);
  assert.equal(fixtureManifest.entries.length,6);for(const e of fixtureManifest.entries)assert(x.narrator.available(e.kind,e.itemId,e.lang),e.key);
  for(const mutate of [m=>m.sourceSha256='0'.repeat(64),m=>m.entries[0].textSha256='0'.repeat(64),m=>m.entries[0].utteranceSha256='0'.repeat(64),m=>m.entries[0].output='../escape.mp3',m=>m.entries[0].status='pending',m=>m.entries.push(m.entries[0])]){const m=structuredClone(fixtureManifest);mutate(m);x=await setup(m);assert.equal(x.narrator.available('scene','invitation','zh'),false);await x.narrator.play('scene','invitation','zh');assert.equal(x.requests.length,0);}

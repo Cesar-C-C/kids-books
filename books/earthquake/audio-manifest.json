@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "topicId": "earthquake",
   "owner": "book",
-  "contentVersion": "earthquake-story-v1",
-  "sourceSha256": "39a03730d0153610a07f39b3e337d420140f7a7b17e12ef86a907969ab95903e",
+  "contentVersion": "earthquake-story-v2",
+  "sourceSha256": "7850516bab08c7cf1569e851a0418ac02727bf2929d2f987887477a090be700f",
   "entries": [
     {
       "id": "scene-invitation-zh",
@@ -12,20 +12,20 @@
       "itemId": "invitation",
       "kind": "scene",
       "lang": "zh",
-      "text": "自然博物馆快开新展览了。小穿山甲岩岩收到一张任务卡：让大家看懂，地面为什么会摇？",
+      "text": "自然博物馆快开新展览了。小穿山甲岩岩接到任务：让大家看懂，平时很稳的地面为什么有时会摇？",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "自然博物馆快开新展览了。小穿山甲岩岩收到一张任务卡：让大家看懂，地面为什么会摇？",
-          "spokenText": "自然博物馆快开新展览了。小穿山甲岩岩收到一张任务卡：让大家看懂，地面为什么会摇？"
+          "sourceText": "自然博物馆快开新展览了。小穿山甲岩岩接到任务：让大家看懂，平时很稳的地面为什么有时会摇？",
+          "spokenText": "自然博物馆快开新展览了。小穿山甲岩岩接到任务：让大家看懂，平时很稳的地面为什么有时会摇？"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "191168d6b1b2052da9ed10ec832206d2140296d88bf32b5ae7be713f495504c4",
-      "utteranceSha256": "baee3ff24c439618fb0ef803b84e6fa91aca9e6549dde0f31ba389ec0bd818c9",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "7a14693d734e55be9493a99b76edba1604de8ed8f784d2539d579f73aafd5ed1",
+      "utteranceSha256": "865833e0aa10549364dba16ee9595fb67f78066c62e2c9b7648c2a417825015d",
       "output": "audio/scene-invitation-zh.mp3",
       "status": "ready",
-      "fileSha256": "ffc54dad3acf8c949de379464ed7175cf8fcafb809c25ad06881a53ad4d9964d",
+      "fileSha256": "09ff22fffe6ebfbcf8d30fd2cdb3dfcc0b5c845a29a439dbc255f97d2bfa6647",
       "sceneId": "invitation"
     },
     {
@@ -35,20 +35,20 @@
       "itemId": "invitation",
       "kind": "scene",
       "lang": "en",
-      "text": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: help visitors discover why the ground shakes.",
+      "text": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: explain why the ground, usually so steady, sometimes shakes.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: help visitors discover why the ground shakes.",
-          "spokenText": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: help visitors discover why the ground shakes."
+          "sourceText": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: explain why the ground, usually so steady, sometimes shakes.",
+          "spokenText": "A new exhibition was opening at the natural history museum. Yan-Yan the little pangolin had a job: explain why the ground, usually so steady, sometimes shakes."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "c85dd27d008ce9eb6d743cca43ded1b34a6cf441049ee607edd3403506c50575",
-      "utteranceSha256": "a35c6a26b501b8dfde87efa02e529960c8a247b6f9c1a3577504b90dcac3b3fe",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "5bbc725d2610c9fdd289f2373e158110806134c888bc44343962972bbc8e3987",
+      "utteranceSha256": "d1a3d5b21a54b7cba6bf18f9584a0766a1baa6256f0bbb0a2ccb9f7b6edfddb6",
       "output": "audio/scene-invitation-en.mp3",
       "status": "ready",
-      "fileSha256": "e4638a760ef8aafb969583d8eeab09e67025c940a462bb08da42b2abd50645c3",
+      "fileSha256": "c1c9e0e12ab03fc130002b8f94e63d1ba076801137861c36991914f72e7db0e1",
       "sceneId": "invitation"
     },
     {
@@ -58,20 +58,25 @@
       "itemId": "quiet-model",
       "kind": "scene",
       "lang": "zh",
-      "text": "岩岩摆好两块岩石模型。它们安安静静，一点也不摇。“先别急，”讲解员说，“我们在馆里，慢慢看看大地模型怎样动。”",
+      "text": "岩岩把两块岩石模型摆好。它们纹丝不动。他问：“大地也要有人推吗？”",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "岩岩摆好两块岩石模型。它们安安静静，一点也不摇。“先别急，”讲解员说，“我们在馆里，慢慢看看大地模型怎样动。”",
-          "spokenText": "岩岩摆好两块岩石模型。它们安安静静，一点也不摇。“先别急，”讲解员说，“我们在馆里，慢慢看看大地模型怎样动。”"
+          "sourceText": "岩岩把两块岩石模型摆好。它们纹丝不动。他问：",
+          "spokenText": "岩岩把两块岩石模型摆好。它们纹丝不动。他问："
+        },
+        {
+          "role": "yanyan",
+          "sourceText": "“大地也要有人推吗？”",
+          "spokenText": "“大地也要有人推吗？”"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "44c32296d85d3d6cbe81c0c42fbc7882c46918c88466c5b4a79ca89eb3878126",
-      "utteranceSha256": "5aac5f4f3558c9fc72a5fff7fe31158d32500471dd9e805dead48c5ee42871e6",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "15f73798186aa579bbd59f56d0af1dfafc917e6adcab940fe6d4e7519afaff2e",
+      "utteranceSha256": "7a7c15a37ce1174dd1247e6e6d1996ad1850503cd6dfa7b92bb883352c0090de",
       "output": "audio/scene-quiet-model-zh.mp3",
       "status": "ready",
-      "fileSha256": "91813a611ec04ee18ebd42bffad91d851720f6e9eaa9376c4a8485674d87a1c3",
+      "fileSha256": "9c00d3f98acd8f86c817f4a09f208e4e34feda2bca764a4f4bed2d6f3e36d972",
       "sceneId": "quiet-model"
     },
     {
@@ -81,21 +86,72 @@
       "itemId": "quiet-model",
       "kind": "scene",
       "lang": "en",
-      "text": "Yan-Yan set two model rock blocks in place. Nothing moved. “Take your time,” said the museum guide. “Here in the museum, we can watch our model Earth move slowly.”",
+      "text": "Yan-Yan set two model rock blocks in place. They stayed still. He asked, “Does someone have to push the Earth too?”",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Yan-Yan set two model rock blocks in place. Nothing moved. “Take your time,” said the museum guide. “Here in the museum, we can watch our model Earth move slowly.”",
-          "spokenText": "Yan-Yan set two model rock blocks in place. Nothing moved. “Take your time,” said the museum guide. “Here in the museum, we can watch our model Earth move slowly.”"
+          "sourceText": "Yan-Yan set two model rock blocks in place. They stayed still. He asked, ",
+          "spokenText": "Yan-Yan set two model rock blocks in place. They stayed still. He asked, "
+        },
+        {
+          "role": "yanyan",
+          "sourceText": "“Does someone have to push the Earth too?”",
+          "spokenText": "“Does someone have to push the Earth too?”"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "815bea647c28547394b81304e8428f64965f8863a45fc0ec76386b1cb8792c86",
-      "utteranceSha256": "011873be10a3b31cdebd665848aba8e40b985c01e12b82888638f3b1b6832c71",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "4531fd7e3ca534f28ed7464e1cab68754d7071eef38a2ddd89c5bd16e21852fe",
+      "utteranceSha256": "0e193b2fb473e546215fa8e2bdb3719bc9d38df1b9764ec5cc00d8c045007c8b",
       "output": "audio/scene-quiet-model-en.mp3",
       "status": "ready",
-      "fileSha256": "c97778623f93a4e1a2e871631f973560013c72d5ff9f444c52b2e1ac6939a2b4",
+      "fileSha256": "11c0bd007d5561673b4bc50fe4777cad981082be6afdd08f32b810e76df65408",
       "sceneId": "quiet-model"
+    },
+    {
+      "id": "scene-tectonic-load-zh",
+      "key": "book:scene-tectonic-load-zh",
+      "owner": "book",
+      "itemId": "tectonic-load",
+      "kind": "scene",
+      "lang": "zh",
+      "text": "讲解员带他看大地的地图。地球坚硬的外层分成许多板块，平时也在很慢地移动。它们的运动会让岩石受到挤压、拉伸或错开的作用。今天，岩岩先看向内挤压的一种情形。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "讲解员带他看大地的地图。地球坚硬的外层分成许多板块，平时也在很慢地移动。它们的运动会让岩石受到挤压、拉伸或错开的作用。今天，岩岩先看向内挤压的一种情形。",
+          "spokenText": "讲解员带他看大地的地图。地球坚硬的外层分成许多板块，平时也在很慢地移动。它们的运动会让岩石受到挤压、拉伸或错开的作用。今天，岩岩先看向内挤压的一种情形。"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "81241a690e1b563a9bc5fea89c63ba0336d6c73c5309fd3d5c7691d14c2c5265",
+      "utteranceSha256": "232dd333a1f30a683d8fd918b0a8e914b3f73aee13073f081fa2f84c241de755",
+      "output": "audio/scene-tectonic-load-zh.mp3",
+      "status": "ready",
+      "fileSha256": "8127566d8b9976107d890b3fa0b723fa11449613f054c5c508c61d71284271d8",
+      "sceneId": "tectonic-load"
+    },
+    {
+      "id": "scene-tectonic-load-en",
+      "key": "book:scene-tectonic-load-en",
+      "owner": "book",
+      "itemId": "tectonic-load",
+      "kind": "scene",
+      "lang": "en",
+      "text": "The guide showed him a map of Earth. Its hard outer shell is divided into plates that move very slowly, even on a quiet day. Their motion can squeeze, stretch, or shear rock. Today, Yan-Yan would watch one case of squeezing.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "The guide showed him a map of Earth. Its hard outer shell is divided into plates that move very slowly, even on a quiet day. Their motion can squeeze, stretch, or shear rock. Today, Yan-Yan would watch one case of squeezing.",
+          "spokenText": "The guide showed him a map of Earth. Its hard outer shell is divided into plates that move very slowly, even on a quiet day. Their motion can squeeze, stretch, or shear rock. Today, Yan-Yan would watch one case of squeezing."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "77657176d098b087011d9a42a55b728740cdb5db77d82ccc7c0122a011838f08",
+      "utteranceSha256": "6a22e784eddbc4273d09b66bd151c52ab141ff65e1b9e56e5b7ac511d5408d0c",
+      "output": "audio/scene-tectonic-load-en.mp3",
+      "status": "ready",
+      "fileSha256": "b164ed5e2f9f99c53a1632e8e8e5139e26920502bb07743c7c84f541c7a52ef7",
+      "sceneId": "tectonic-load"
     },
     {
       "id": "scene-stuck-zh",
@@ -104,25 +160,20 @@
       "itemId": "stuck",
       "kind": "scene",
       "lang": "zh",
-      "text": "岩岩轻轻推动模型的两边。接缝还卡着，旁边的纹路却弯了。“咦！这里没滑，那里已经变样了。”",
+      "text": "岩岩轻轻推动模型。岩石里原有的接缝叫断层。两边被压在一起，摩擦阻住了滑动；外面的作用还在继续，周围岩石却已经发生了很小的弹性形变。放大看，原本直直的纹路弯了。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "岩岩轻轻推动模型的两边。接缝还卡着，旁边的纹路却弯了。",
-          "spokenText": "岩岩轻轻推动模型的两边。接缝还卡着，旁边的纹路却弯了。"
-        },
-        {
-          "role": "yanyan",
-          "sourceText": "“咦！这里没滑，那里已经变样了。”",
-          "spokenText": "“咦！这里没滑，那里已经变样了。”"
+          "sourceText": "岩岩轻轻推动模型。岩石里原有的接缝叫断层。两边被压在一起，摩擦阻住了滑动；外面的作用还在继续，周围岩石却已经发生了很小的弹性形变。放大看，原本直直的纹路弯了。",
+          "spokenText": "岩岩轻轻推动模型。岩石里原有的接缝叫断层。两边被压在一起，摩擦阻住了滑动；外面的作用还在继续，周围岩石却已经发生了很小的弹性形变。放大看，原本直直的纹路弯了。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "5c6c50cbfb64dcc72feb7a349d409349ec92a7054adc8b538db5234692a8ebd3",
-      "utteranceSha256": "06e8fc797ccbf6e0f6fcd7248f83604eef9a6b4706ce3c46319cbdd913de3055",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "1c05c733635b73b6993520ce949e0ba0fe2711efa6a474089b5aa8a68166f80f",
+      "utteranceSha256": "921c7b4efbeae2d264ba5b3bdd54b5e086e8dbde01177ce0587ba01781b0b5bd",
       "output": "audio/scene-stuck-zh.mp3",
       "status": "ready",
-      "fileSha256": "af0318fc2fc214d18c7a54cd9559a6c832c01774675242273f6bc98d7a4ad006",
+      "fileSha256": "2a0692045adb8b09087d96ec585a0da2f0a4e4aa07f9b133f6fec79afef4b874",
       "sceneId": "stuck"
     },
     {
@@ -132,26 +183,87 @@
       "itemId": "stuck",
       "kind": "scene",
       "lang": "en",
-      "text": "Yan-Yan gently pushed the sides of the model toward each other. The seam stayed stuck, but the markings beside it bent. “This part has not slipped, but that part is changing!”",
+      "text": "Yan-Yan pushed gently. A fault is a break in rock along which its sides can slip. Here the sides were pressed together, and friction resisted sliding. The loading continued, so the surrounding rock deformed a little elastically. In the enlarged view, straight markings bent.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Yan-Yan gently pushed the sides of the model toward each other. The seam stayed stuck, but the markings beside it bent. ",
-          "spokenText": "Yan-Yan gently pushed the sides of the model toward each other. The seam stayed stuck, but the markings beside it bent. "
+          "sourceText": "Yan-Yan pushed gently. A fault is a break in rock along which its sides can slip. Here the sides were pressed together, and friction resisted sliding. The loading continued, so the surrounding rock deformed a little elastically. In the enlarged view, straight markings bent.",
+          "spokenText": "Yan-Yan pushed gently. A fault is a break in rock along which its sides can slip. Here the sides were pressed together, and friction resisted sliding. The loading continued, so the surrounding rock deformed a little elastically. In the enlarged view, straight markings bent."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "030029a4f26df5d0588704636a4acb8b50423937c68230a6a795e09a0f01bfcf",
+      "utteranceSha256": "53c3917f9782f7d89a8fc0ee65c53158a1c87388930aca4eb65680b6d1f66ade",
+      "output": "audio/scene-stuck-en.mp3",
+      "status": "ready",
+      "fileSha256": "1277ac9b7cd61f12e3da5d448278256d64d4dc29134a48b37ec47a4d3db54e50",
+      "sceneId": "stuck"
+    },
+    {
+      "id": "scene-stored-energy-zh",
+      "key": "book:scene-stored-energy-zh",
+      "owner": "book",
+      "itemId": "stored-energy",
+      "kind": "scene",
+      "lang": "zh",
+      "text": "岩岩盯着纹路：“接缝没滑，推过去的能量去哪了？”一部分能量储存在变形的岩石里，就像弹簧被压缩后能弹回来。岩石不是软软的弹簧，但也能发生很小的弹性形变。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "岩岩盯着纹路：",
+          "spokenText": "岩岩盯着纹路："
         },
         {
           "role": "yanyan",
-          "sourceText": "“This part has not slipped, but that part is changing!”",
-          "spokenText": "“This part has not slipped, but that part is changing!”"
+          "sourceText": "“接缝没滑，推过去的能量去哪了？”",
+          "spokenText": "“接缝没滑，推过去的能量去哪了？”"
+        },
+        {
+          "role": "narrator",
+          "sourceText": "一部分能量储存在变形的岩石里，就像弹簧被压缩后能弹回来。岩石不是软软的弹簧，但也能发生很小的弹性形变。",
+          "spokenText": "一部分能量储存在变形的岩石里，就像弹簧被压缩后能弹回来。岩石不是软软的弹簧，但也能发生很小的弹性形变。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "14100660468da27f88c303d9e07bb0a1ab1f5a276cd335b03a696e3adf0aa866",
-      "utteranceSha256": "f3e7cd1ed73e7c66ec6c79d0c1b48cb60b807fbde1c8b15ff9341c7abb433756",
-      "output": "audio/scene-stuck-en.mp3",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "5a950958393fcc41353f423b8d48b6d3a57d9294838397971b08e16986c4a464",
+      "utteranceSha256": "bf18341b2846d85269b4445f8a1a1ee673399e9745012d5fe09b15ef8c6206db",
+      "output": "audio/scene-stored-energy-zh.mp3",
       "status": "ready",
-      "fileSha256": "6b61ea18f4d25cce7d2b39957746e084da7d52fd6db3f01c621dfb5b7f6624f0",
-      "sceneId": "stuck"
+      "fileSha256": "8ad312fe657fcb4d0aaf90e63b3118e253fcb624e33494cf6afc47a78f9799ff",
+      "sceneId": "stored-energy"
+    },
+    {
+      "id": "scene-stored-energy-en",
+      "key": "book:scene-stored-energy-en",
+      "owner": "book",
+      "itemId": "stored-energy",
+      "kind": "scene",
+      "lang": "en",
+      "text": "Yan-Yan watched the markings. “If the fault has not slipped, where did the energy go?” Some energy was stored in the deformed rock, just as a compressed spring stores energy. Rock is not a soft spring, but it can deform elastically by a small amount.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "Yan-Yan watched the markings. ",
+          "spokenText": "Yan-Yan watched the markings. "
+        },
+        {
+          "role": "yanyan",
+          "sourceText": "“If the fault has not slipped, where did the energy go?”",
+          "spokenText": "“If the fault has not slipped, where did the energy go?”"
+        },
+        {
+          "role": "narrator",
+          "sourceText": " Some energy was stored in the deformed rock, just as a compressed spring stores energy. Rock is not a soft spring, but it can deform elastically by a small amount.",
+          "spokenText": " Some energy was stored in the deformed rock, just as a compressed spring stores energy. Rock is not a soft spring, but it can deform elastically by a small amount."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "80fa5aadb84729788f0b1c64c540ce37b4a22dedd6fd006d0a45378538de181e",
+      "utteranceSha256": "f935b74aeb23d2ab39d3401db583e6ec522ba085c5dfd703fe8b2f37378e2fef",
+      "output": "audio/scene-stored-energy-en.mp3",
+      "status": "ready",
+      "fileSha256": "3b7da6abd2544f8910acdcea433ba333391d6a4c7254cddfb4567fa57455c6d2",
+      "sceneId": "stored-energy"
     },
     {
       "id": "scene-slip-zh",
@@ -160,25 +272,20 @@
       "itemId": "slip",
       "kind": "scene",
       "lang": "zh",
-      "text": "突然，接缝两边滑动了！弯着的纹路松回来一些，却没有全回到老地方。岩岩指着错开的线：“这就是它动过的痕迹。”",
+      "text": "继续加载，岩石沿断层滑动的趋势终于超过了这里的阻力，接缝突然滑了！周围岩石部分回弹，弯曲减小了。两边却已换了位置：纹路仍然错开，没有回到最初的样子。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "突然，接缝两边滑动了！弯着的纹路松回来一些，却没有全回到老地方。岩岩指着错开的线：",
-          "spokenText": "突然，接缝两边滑动了！弯着的纹路松回来一些，却没有全回到老地方。岩岩指着错开的线："
-        },
-        {
-          "role": "yanyan",
-          "sourceText": "“这就是它动过的痕迹。”",
-          "spokenText": "“这就是它动过的痕迹。”"
+          "sourceText": "继续加载，岩石沿断层滑动的趋势终于超过了这里的阻力，接缝突然滑了！周围岩石部分回弹，弯曲减小了。两边却已换了位置：纹路仍然错开，没有回到最初的样子。",
+          "spokenText": "继续加载，岩石沿断层滑动的趋势终于超过了这里的阻力，接缝突然滑了！周围岩石部分回弹，弯曲减小了。两边却已换了位置：纹路仍然错开，没有回到最初的样子。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "efdeaacd98faed4d83e9e61f68d3609f810759772971b23611b947be324ccdf0",
-      "utteranceSha256": "c73401a01ef34de1703e0e95e1903c9c3b01a492ddde350ce1ec91a79b80bacd",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "f0c06aca381ee617b3b5383238dbf6ac3cd660102254ec0d680f60fac2530428",
+      "utteranceSha256": "83ea4bedaad67cd0f843e9ab905ed65a6c3c95f4d4b47d973ccf297f424a66da",
       "output": "audio/scene-slip-zh.mp3",
       "status": "ready",
-      "fileSha256": "b11ed8cb619a7dcb9c6f1933ddb00a5bf0e626d981403a1c777d68ae3cf31886",
+      "fileSha256": "583af693c5ac24a5cb57f0b54aa5feb6c47f503c1b38c2c77c270cf83994f477",
       "sceneId": "slip"
     },
     {
@@ -188,26 +295,87 @@
       "itemId": "slip",
       "kind": "scene",
       "lang": "en",
-      "text": "Suddenly, the rocks slipped along the seam! The bent markings sprang back a little, but not all the way. Yan-Yan pointed at the offset lines. “They show us where the rocks moved.”",
+      "text": "As loading continued, the tendency to slip overcame the resistance here. The fault slipped suddenly! The surrounding rock rebounded partly, and its bending decreased. But the sides were now in new positions. The markings stayed offset instead of returning to the beginning.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Suddenly, the rocks slipped along the seam! The bent markings sprang back a little, but not all the way. Yan-Yan pointed at the offset lines. ",
-          "spokenText": "Suddenly, the rocks slipped along the seam! The bent markings sprang back a little, but not all the way. Yan-Yan pointed at the offset lines. "
+          "sourceText": "As loading continued, the tendency to slip overcame the resistance here. The fault slipped suddenly! The surrounding rock rebounded partly, and its bending decreased. But the sides were now in new positions. The markings stayed offset instead of returning to the beginning.",
+          "spokenText": "As loading continued, the tendency to slip overcame the resistance here. The fault slipped suddenly! The surrounding rock rebounded partly, and its bending decreased. But the sides were now in new positions. The markings stayed offset instead of returning to the beginning."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "bb21d46ab00ee55235b51f1de4f75f09d9bc291822b1cc5ac8b2b3ff7392d4c9",
+      "utteranceSha256": "40c67235603373b3d780cb2f76157a915af14ee8672c29f4bef38fda5fc722e0",
+      "output": "audio/scene-slip-en.mp3",
+      "status": "ready",
+      "fileSha256": "5dc54fe83e005ccf5cdeb47be5d40db3b580d08c4dd4ee5dfec9b5d0ef8c399b",
+      "sceneId": "slip"
+    },
+    {
+      "id": "scene-released-energy-zh",
+      "key": "book:scene-released-energy-zh",
+      "owner": "book",
+      "itemId": "released-energy",
+      "kind": "scene",
+      "lang": "zh",
+      "text": "岩岩问：“那储存的能量呢？”一部分随着地震波向外传开，一部分变成了摩擦产生的热等。慢慢积累的能量，能在很短的时间里释放。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "岩岩问：",
+          "spokenText": "岩岩问："
         },
         {
           "role": "yanyan",
-          "sourceText": "“They show us where the rocks moved.”",
-          "spokenText": "“They show us where the rocks moved.”"
+          "sourceText": "“那储存的能量呢？”",
+          "spokenText": "“那储存的能量呢？”"
+        },
+        {
+          "role": "narrator",
+          "sourceText": "一部分随着地震波向外传开，一部分变成了摩擦产生的热等。慢慢积累的能量，能在很短的时间里释放。",
+          "spokenText": "一部分随着地震波向外传开，一部分变成了摩擦产生的热等。慢慢积累的能量，能在很短的时间里释放。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "953c5276a71f1817064209b82fc0dd1c14fdd6ba5184329c256641f556676fb2",
-      "utteranceSha256": "4d2a7880cbc951e21efd0d217083826a29815a522669180352472b48b4f67a55",
-      "output": "audio/scene-slip-en.mp3",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "8323db7030edae54314de2aa82a856ce148433f7992279c7882717144caffbc9",
+      "utteranceSha256": "79af6f44347c6bc3b808f4a6f45e1372c37caa0b38961dd7478af40eb9e8209c",
+      "output": "audio/scene-released-energy-zh.mp3",
       "status": "ready",
-      "fileSha256": "ca962a050804e85318d58e230dfe80e8e5e5738aaa36a48f76b660f0e1418556",
-      "sceneId": "slip"
+      "fileSha256": "2bb79930242f889187dead358ff48d5c2bd7c6ff7b16cb8add663d9b983347d1",
+      "sceneId": "released-energy"
+    },
+    {
+      "id": "scene-released-energy-en",
+      "key": "book:scene-released-energy-en",
+      "owner": "book",
+      "itemId": "released-energy",
+      "kind": "scene",
+      "lang": "en",
+      "text": "Yan-Yan asked, “What happened to the stored energy?” Some spread outward in seismic waves. Some became heat from friction and other changes. Energy that accumulated slowly could be released in a short time.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "Yan-Yan asked, ",
+          "spokenText": "Yan-Yan asked, "
+        },
+        {
+          "role": "yanyan",
+          "sourceText": "“What happened to the stored energy?”",
+          "spokenText": "“What happened to the stored energy?”"
+        },
+        {
+          "role": "narrator",
+          "sourceText": " Some spread outward in seismic waves. Some became heat from friction and other changes. Energy that accumulated slowly could be released in a short time.",
+          "spokenText": " Some spread outward in seismic waves. Some became heat from friction and other changes. Energy that accumulated slowly could be released in a short time."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "d265c3e9d15fb158e3cdc73826e7168ee6420b5844c36cfb1febdeb34bb6bcd0",
+      "utteranceSha256": "eb7b8a3b2657545f47fe4f4b66748ce752f443d4dc6ab056d815426d32bbe3f7",
+      "output": "audio/scene-released-energy-en.mp3",
+      "status": "ready",
+      "fileSha256": "7c1e3934ac5f1b5b197e86ab0956544361292cb1831525c0b0fcdb84ac4a17fb",
+      "sceneId": "released-energy"
     },
     {
       "id": "scene-flags-zh",
@@ -216,25 +384,20 @@
       "itemId": "flags",
       "kind": "scene",
       "lang": "zh",
-      "text": "“振动传到哪里了？”岩岩在地表摆好两面感应旗。你来帮他选位置，再猜猜，哪面旗先收到信号？",
+      "text": "岩岩在地下和地表各选了一个小标记，又留下近、远两面感应旗。他望着它们，等着看同一次振动怎样从地下传到地面。",
       "segments": [
         {
-          "role": "yanyan",
-          "sourceText": "“振动传到哪里了？”",
-          "spokenText": "“振动传到哪里了？”"
-        },
-        {
           "role": "narrator",
-          "sourceText": "岩岩在地表摆好两面感应旗。你来帮他选位置，再猜猜，哪面旗先收到信号？",
-          "spokenText": "岩岩在地表摆好两面感应旗。你来帮他选位置，再猜猜，哪面旗先收到信号？"
+          "sourceText": "岩岩在地下和地表各选了一个小标记，又留下近、远两面感应旗。他望着它们，等着看同一次振动怎样从地下传到地面。",
+          "spokenText": "岩岩在地下和地表各选了一个小标记，又留下近、远两面感应旗。他望着它们，等着看同一次振动怎样从地下传到地面。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "620194fd69e6b0e29f2685e483cbaa6fb066992e3c701090556d45533ced939d",
-      "utteranceSha256": "ce2018b50620624a9aaaec4ae3557097e0ad5239c0fd8aa352cd36183bab63f3",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "c8f520e18d1d66e2f06a45b4e521043a8949fadc04292bfbdadb1618c288fb4d",
+      "utteranceSha256": "a1803551dbd0e0a19627a7933bfbdc73505ae156fc113685a6efdb100d3ce36e",
       "output": "audio/scene-flags-zh.mp3",
       "status": "ready",
-      "fileSha256": "640e017a84c0581cd1fa11c8662195023b66b0c5293c1c47b1fde529a4bc2728",
+      "fileSha256": "c1e56d16a3c825380afa9246112f02ab5237aec8e8f2fd0d6f39cd813cc119c3",
       "sceneId": "flags"
     },
     {
@@ -244,25 +407,20 @@
       "itemId": "flags",
       "kind": "scene",
       "lang": "en",
-      "text": "“Where have the vibrations reached?” Yan-Yan placed two signal flags on the surface. Help him choose their positions. Which flag will receive the signal first?",
+      "text": "Yan-Yan chose one marker underground and another at the surface, and left a near and a far signal flag. He watched them to see how one disturbance traveled from underground toward the surface.",
       "segments": [
         {
-          "role": "yanyan",
-          "sourceText": "“Where have the vibrations reached?”",
-          "spokenText": "“Where have the vibrations reached?”"
-        },
-        {
           "role": "narrator",
-          "sourceText": " Yan-Yan placed two signal flags on the surface. Help him choose their positions. Which flag will receive the signal first?",
-          "spokenText": " Yan-Yan placed two signal flags on the surface. Help him choose their positions. Which flag will receive the signal first?"
+          "sourceText": "Yan-Yan chose one marker underground and another at the surface, and left a near and a far signal flag. He watched them to see how one disturbance traveled from underground toward the surface.",
+          "spokenText": "Yan-Yan chose one marker underground and another at the surface, and left a near and a far signal flag. He watched them to see how one disturbance traveled from underground toward the surface."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "231d61272b2fff1765812f34632f94c6094dc5350bd27d6a387c1309fdedbc44",
-      "utteranceSha256": "47eeb10dcd287a99b9f1fc1ffdec0ee9cc29f68bd53e13d23ae007535cc8f227",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "ea374e47600c418e8aa5c7e1ecce939a469255acae56923d0d776788105a5540",
+      "utteranceSha256": "18d2d75138f2a9dda732745ed24c1628bddd7a82da1adecca0a90c5768795969",
       "output": "audio/scene-flags-en.mp3",
       "status": "ready",
-      "fileSha256": "70b9b9ff8149252d8ee7538f0b7411371b4f575baf5d217ed2cf5d2c0d121cdc",
+      "fileSha256": "0ed2aec8ec4bd2bd084c690e75df50959c76680eb64e00ca0b8ee38257935d98",
       "sceneId": "flags"
     },
     {
@@ -272,20 +430,25 @@
       "itemId": "little-rock",
       "kind": "scene",
       "lang": "zh",
-      "text": "岩岩盯住地下的一颗小标记。振动传过去时，它在原来的位置附近来回动，并没有跟着波跑到旗子那里。",
+      "text": "波传过去时，地下的小标记在原位附近来回动。岩岩发现：“它没有一路跑到地面！传开的是振动和能量。”",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "岩岩盯住地下的一颗小标记。振动传过去时，它在原来的位置附近来回动，并没有跟着波跑到旗子那里。",
-          "spokenText": "岩岩盯住地下的一颗小标记。振动传过去时，它在原来的位置附近来回动，并没有跟着波跑到旗子那里。"
+          "sourceText": "波传过去时，地下的小标记在原位附近来回动。岩岩发现：",
+          "spokenText": "波传过去时，地下的小标记在原位附近来回动。岩岩发现："
+        },
+        {
+          "role": "yanyan",
+          "sourceText": "“它没有一路跑到地面！传开的是振动和能量。”",
+          "spokenText": "“它没有一路跑到地面！传开的是振动和能量。”"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "da5211f8be66b6473f474d65ec86160ae9125441fb38e98a334e1d45d2c1d99d",
-      "utteranceSha256": "c923d5193bb4567be8ca79a3cbae2a5b2e4436d0233e0001f01d1ef5fee94edf",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "97f7842929beb030d9e84e099c98a5fd31de9ff32a9898fe394e60d4ca8d9304",
+      "utteranceSha256": "e53e3998c79a832900ab8870b343a955de27e32c5e1b65ac1e9a46e96ba2526d",
       "output": "audio/scene-little-rock-zh.mp3",
       "status": "ready",
-      "fileSha256": "e12d20c79538ac0ba71e95ccc52d36b237d3deba16c1068b5dff20133c2f67db",
+      "fileSha256": "42a30c126235eec4c00226f72258c011e248d6ad2b68c01305731a4b5c14eaee",
       "sceneId": "little-rock"
     },
     {
@@ -295,21 +458,72 @@
       "itemId": "little-rock",
       "kind": "scene",
       "lang": "en",
-      "text": "Yan-Yan watched a little marker underground. As the vibration passed, it moved back and forth near its starting place. It did not travel with the wave to the flags.",
+      "text": "As the wave passed, the underground marker moved back and forth near its starting place. Yan-Yan noticed, “It did not run all the way to the surface! The vibration and energy are spreading.”",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Yan-Yan watched a little marker underground. As the vibration passed, it moved back and forth near its starting place. It did not travel with the wave to the flags.",
-          "spokenText": "Yan-Yan watched a little marker underground. As the vibration passed, it moved back and forth near its starting place. It did not travel with the wave to the flags."
+          "sourceText": "As the wave passed, the underground marker moved back and forth near its starting place. Yan-Yan noticed, ",
+          "spokenText": "As the wave passed, the underground marker moved back and forth near its starting place. Yan-Yan noticed, "
+        },
+        {
+          "role": "yanyan",
+          "sourceText": "“It did not run all the way to the surface! The vibration and energy are spreading.”",
+          "spokenText": "“It did not run all the way to the surface! The vibration and energy are spreading.”"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "1aee66ea30f46a31d90f7623b44212a222c7b8a048f64d4bd66db2d55f476e70",
-      "utteranceSha256": "574739eab806ca53fdc857d3edb760383b24fedc8af48a400aaeeb26569a7210",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "52f6d466009525ae6c74528f36acc9a36406e18f0aceab273b9b9372dd388b31",
+      "utteranceSha256": "66dbeb2cde0d52f505e4f2ffe3a66095cf9d0907354cf1b6b334d26fe3a27cea",
       "output": "audio/scene-little-rock-en.mp3",
       "status": "ready",
-      "fileSha256": "e099d8e883d257364d3f8ce4fbd4665e19568e7f83c7377f831c03656faa4c3b",
+      "fileSha256": "41bd75ee95d28061831398a0e1da632dfd17294606c6942bdf31786b04baf90a",
       "sceneId": "little-rock"
+    },
+    {
+      "id": "scene-surface-shakes-zh",
+      "key": "book:scene-surface-shakes-zh",
+      "owner": "book",
+      "itemId": "surface-shakes",
+      "kind": "scene",
+      "lang": "zh",
+      "text": "振动到达地表，地表的小标记也在原位附近动起来。这就是波引起的地面振动。断层滑动留下的错位，与波经过时的来回振动，是两种不同的变化。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "振动到达地表，地表的小标记也在原位附近动起来。这就是波引起的地面振动。断层滑动留下的错位，与波经过时的来回振动，是两种不同的变化。",
+          "spokenText": "振动到达地表，地表的小标记也在原位附近动起来。这就是波引起的地面振动。断层滑动留下的错位，与波经过时的来回振动，是两种不同的变化。"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "23998d1c7168f4b36fcf144f7dfe8714669697a34b17e85cd592b1073f75820f",
+      "utteranceSha256": "2625529d7998f6b0a62265e84e3abf823a7e2357c3d59eefcc68a91515f891aa",
+      "output": "audio/scene-surface-shakes-zh.mp3",
+      "status": "ready",
+      "fileSha256": "f7b707f91a45782d0184661df924116d4ca8704d2a528ae1e751b502befbd939",
+      "sceneId": "surface-shakes"
+    },
+    {
+      "id": "scene-surface-shakes-en",
+      "key": "book:scene-surface-shakes-en",
+      "owner": "book",
+      "itemId": "surface-shakes",
+      "kind": "scene",
+      "lang": "en",
+      "text": "When the disturbance reached the surface, the surface marker also moved near its starting place. This was ground motion caused by the wave. The offset left by fault slip and the back-and-forth motion as a wave passes are two different changes.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "When the disturbance reached the surface, the surface marker also moved near its starting place. This was ground motion caused by the wave. The offset left by fault slip and the back-and-forth motion as a wave passes are two different changes.",
+          "spokenText": "When the disturbance reached the surface, the surface marker also moved near its starting place. This was ground motion caused by the wave. The offset left by fault slip and the back-and-forth motion as a wave passes are two different changes."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "f058608d12244d15fd4d201f188b31905df58039bac3a651cc0922b0ea294c28",
+      "utteranceSha256": "6239709461dd541f75303c4543f10d58b0ab1ff0371b267fc547610ded603440",
+      "output": "audio/scene-surface-shakes-en.mp3",
+      "status": "ready",
+      "fileSha256": "0aa96cae397114cd7c3cbb1c8f5b7a7be3e824a325baa4207430f747dea60308",
+      "sceneId": "surface-shakes"
     },
     {
       "id": "scene-curator-zh",
@@ -318,20 +532,20 @@
       "itemId": "curator",
       "kind": "scene",
       "lang": "zh",
-      "text": "展览快准备好了！岩岩有三张会动的展卡：旁边变形、突然滑动、振动传开。怎样摆，能把刚才的发现讲清楚？",
+      "text": "岩岩把展览摆好了：持续作用让岩石变形并储能；断层突然滑动，周围岩石部分回弹；一部分能量随地震波传开，让经过的地方振动。每幅展图都连着一个“为什么”。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "展览快准备好了！岩岩有三张会动的展卡：旁边变形、突然滑动、振动传开。怎样摆，能把刚才的发现讲清楚？",
-          "spokenText": "展览快准备好了！岩岩有三张会动的展卡：旁边变形、突然滑动、振动传开。怎样摆，能把刚才的发现讲清楚？"
+          "sourceText": "岩岩把展览摆好了：持续作用让岩石变形并储能；断层突然滑动，周围岩石部分回弹；一部分能量随地震波传开，让经过的地方振动。每幅展图都连着一个“为什么”。",
+          "spokenText": "岩岩把展览摆好了：持续作用让岩石变形并储能；断层突然滑动，周围岩石部分回弹；一部分能量随地震波传开，让经过的地方振动。每幅展图都连着一个“为什么”。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "c510b47dce9921159dd04f01c1ca57c2390c3120140147585ddf015304d119cc",
-      "utteranceSha256": "978072475cbf61909612b32ad80db0611c648d74f474bc6bdf03246e991eefd3",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "896564f68af7e6afc5ebbcec1aa3997d338ca728129ec660d2852c2e470b9bc7",
+      "utteranceSha256": "ca5f2af227672f104d09b486e92d0a12a51fd27b11362d5ea1972cb3e9b3c020",
       "output": "audio/scene-curator-zh.mp3",
       "status": "ready",
-      "fileSha256": "bc763eb508bbf59116caa453e99e5334c53731e0f28937e0350955d4ce91880f",
+      "fileSha256": "0082fb3385d2a08a7feaf7911d0774c900e9dfc50d8d5aff9f0035234212117d",
       "sceneId": "curator"
     },
     {
@@ -341,20 +555,20 @@
       "itemId": "curator",
       "kind": "scene",
       "lang": "en",
-      "text": "The exhibition was almost ready! Yan-Yan had three moving display cards: rocks changing shape, sudden slipping, and vibrations spreading. How could he arrange them to tell the story?",
+      "text": "Yan-Yan finished the display. Continued loading deformed rock and stored energy. Sudden fault slip allowed surrounding rock to rebound partly. Some energy spread in seismic waves, making the places they passed vibrate. Each exhibit answered a “why.”",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The exhibition was almost ready! Yan-Yan had three moving display cards: rocks changing shape, sudden slipping, and vibrations spreading. How could he arrange them to tell the story?",
-          "spokenText": "The exhibition was almost ready! Yan-Yan had three moving display cards: rocks changing shape, sudden slipping, and vibrations spreading. How could he arrange them to tell the story?"
+          "sourceText": "Yan-Yan finished the display. Continued loading deformed rock and stored energy. Sudden fault slip allowed surrounding rock to rebound partly. Some energy spread in seismic waves, making the places they passed vibrate. Each exhibit answered a “why.”",
+          "spokenText": "Yan-Yan finished the display. Continued loading deformed rock and stored energy. Sudden fault slip allowed surrounding rock to rebound partly. Some energy spread in seismic waves, making the places they passed vibrate. Each exhibit answered a “why.”"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "f7a1dea79983630e1728a9a259d5213580b65c5004785fdc14a697885b3113bc",
-      "utteranceSha256": "f5edfac7d10f4b5f9312463b1f9a7243225a649d2ceb5269aecb36ce060edbdd",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "40663472eb2327f4509712a8edd24760eccab0fd5a2a08a9b4fc29e431faa966",
+      "utteranceSha256": "b47580805b7ea4f2104097a47fa446db74ce08d97b34a0d25f353190851e80eb",
       "output": "audio/scene-curator-en.mp3",
       "status": "ready",
-      "fileSha256": "613acc4a9c067b3e4395a54a5ac770301daba25cb32872b4138485a176972f49",
+      "fileSha256": "3be9c5876a518c89b0f54558f764aab748600b2d208b42e85c600947ffa530c3",
       "sceneId": "curator"
     },
     {
@@ -364,35 +578,25 @@
       "itemId": "opening-day",
       "kind": "scene",
       "lang": "zh",
-      "text": "小伙伴们来了。岩岩带大家看纹路、看接缝、看留在附近的小标记。“不是整块岩石跑远了，”他说，“是振动的变化传开了！”",
+      "text": "小伙伴们来了。岩岩指着纹路、断层和两个小标记：“先看慢慢积累，再看突然释放。地面摇，是振动传到了这里！”",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "小伙伴们来了。岩岩带大家看纹路、看接缝、看留在附近的小标记。",
-          "spokenText": "小伙伴们来了。岩岩带大家看纹路、看接缝、看留在附近的小标记。"
+          "sourceText": "小伙伴们来了。岩岩指着纹路、断层和两个小标记：",
+          "spokenText": "小伙伴们来了。岩岩指着纹路、断层和两个小标记："
         },
         {
           "role": "yanyan",
-          "sourceText": "“不是整块岩石跑远了，”",
-          "spokenText": "“不是整块岩石跑远了，”"
-        },
-        {
-          "role": "narrator",
-          "sourceText": "他说，",
-          "spokenText": "他说，"
-        },
-        {
-          "role": "yanyan",
-          "sourceText": "“是振动的变化传开了！”",
-          "spokenText": "“是振动的变化传开了！”"
+          "sourceText": "“先看慢慢积累，再看突然释放。地面摇，是振动传到了这里！”",
+          "spokenText": "“先看慢慢积累，再看突然释放。地面摇，是振动传到了这里！”"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "1820798e7156ef7effaf507bd14cbc373db2e809258d159df9e316fb208b9707",
-      "utteranceSha256": "25e12ff232eac44e7b7d3e6adf1952da6687cc15e849fb608e2030cc50bc4d76",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "9a6cc0bf18b9b94ea81e8813dba719ce4ed39124e70e4df9f9d4e123f093c85c",
+      "utteranceSha256": "1b1c207aabe6d43fb4949942eda7f6dfc5f1813439c5b0d6633664b8a5daf739",
       "output": "audio/scene-opening-day-zh.mp3",
       "status": "ready",
-      "fileSha256": "1533f0e940d1b30bbe5aaff6a3449d21ebaf53491c2935b253e8cbf1d63280e1",
+      "fileSha256": "02a55448da1a7187f4102116273eea67ee69984b8f1440370c424bf794db9d6e",
       "sceneId": "opening-day"
     },
     {
@@ -402,36 +606,210 @@
       "itemId": "opening-day",
       "kind": "scene",
       "lang": "en",
-      "text": "The visitors arrived. Yan-Yan showed them the markings, the seam, and the marker that stayed nearby. “The whole rock did not travel far away,” he said. “The vibrations spread!”",
+      "text": "The visitors arrived. Yan-Yan pointed to the markings, the fault, and the two markers. “First watch energy build slowly, then release suddenly. The ground shakes when the vibration reaches here!”",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The visitors arrived. Yan-Yan showed them the markings, the seam, and the marker that stayed nearby. ",
-          "spokenText": "The visitors arrived. Yan-Yan showed them the markings, the seam, and the marker that stayed nearby. "
+          "sourceText": "The visitors arrived. Yan-Yan pointed to the markings, the fault, and the two markers. ",
+          "spokenText": "The visitors arrived. Yan-Yan pointed to the markings, the fault, and the two markers. "
         },
         {
           "role": "yanyan",
-          "sourceText": "“The whole rock did not travel far away,”",
-          "spokenText": "“The whole rock did not travel far away,”"
-        },
-        {
-          "role": "narrator",
-          "sourceText": " he said. ",
-          "spokenText": " he said. "
-        },
-        {
-          "role": "yanyan",
-          "sourceText": "“The vibrations spread!”",
-          "spokenText": "“The vibrations spread!”"
+          "sourceText": "“First watch energy build slowly, then release suddenly. The ground shakes when the vibration reaches here!”",
+          "spokenText": "“First watch energy build slowly, then release suddenly. The ground shakes when the vibration reaches here!”"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "4ccebc00772223964fcb2f9a3b0973ee2e8df3f51f7b48191016be4b5886f7ad",
-      "utteranceSha256": "29f2afcf48c2f75261e8231cfe473894fc04152ffcb931115ceb1ec2d956bc14",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "0fdb4ec3054cd9e63fd175998a95823fb2b5b9fb5938f26c36af6d99165aca93",
+      "utteranceSha256": "f57451bac04c8de252711a125e3eb80474500f63b3f36fed93f720e8963a3e57",
       "output": "audio/scene-opening-day-en.mp3",
       "status": "ready",
-      "fileSha256": "2cd7fb6ecb7d9b9db60202742c502c81c14252c816790881f97cf8f54bdae8da",
+      "fileSha256": "b34e9945fc36eac82747462095fb4a3ca7520e6b20cb4f8cf88a5f772ee71e77",
       "sceneId": "opening-day"
+    },
+    {
+      "id": "scene-why-loading-zh",
+      "key": "book:scene-why-loading-zh",
+      "owner": "book",
+      "itemId": "why-loading",
+      "kind": "scene",
+      "lang": "zh",
+      "text": "板块不是等到地震才动。地球内部的热与重力等作用参与驱动板块缓慢运动。运动的板块可以把作用传到远处的岩石；一小段断层暂时锁住，并不意味着整个板块和周围岩石都停止变化。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "板块不是等到地震才动。地球内部的热与重力等作用参与驱动板块缓慢运动。运动的板块可以把作用传到远处的岩石；一小段断层暂时锁住，并不意味着整个板块和周围岩石都停止变化。",
+          "spokenText": "板块不是等到地震才动。地球内部的热与重力等作用参与驱动板块缓慢运动。运动的板块可以把作用传到远处的岩石；一小段断层暂时锁住，并不意味着整个板块和周围岩石都停止变化。"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "b8e85fb4d3c2866462308615bf90b8b46816d8fec802d1ca73e4e1780aaddcc9",
+      "utteranceSha256": "2473c1511da0693a267b317ae20592599cacc9f2a44bc533df3e259bdefdd84a",
+      "output": "audio/scene-why-loading-zh.mp3",
+      "status": "ready",
+      "fileSha256": "45ae9a7a519205c71c01c0437a77f811822ce83e719d0e8f85c00c3dc0bdf9fb",
+      "sceneId": "why-loading"
+    },
+    {
+      "id": "scene-why-loading-en",
+      "key": "book:scene-why-loading-en",
+      "owner": "book",
+      "itemId": "why-loading",
+      "kind": "scene",
+      "lang": "en",
+      "text": "Plates do not wait for an earthquake to move. Processes involving Earth’s internal heat and gravity help drive their slow motion. Moving plates can load rock farther away. A locally locked part of a fault does not mean that a whole plate and all nearby rock have stopped changing.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "Plates do not wait for an earthquake to move. Processes involving Earth’s internal heat and gravity help drive their slow motion. Moving plates can load rock farther away. A locally locked part of a fault does not mean that a whole plate and all nearby rock have stopped changing.",
+          "spokenText": "Plates do not wait for an earthquake to move. Processes involving Earth’s internal heat and gravity help drive their slow motion. Moving plates can load rock farther away. A locally locked part of a fault does not mean that a whole plate and all nearby rock have stopped changing."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "3cf67d31d996189904c7fa1602a279800a1d6e4e482c6d95aa622f06e8fc37d7",
+      "utteranceSha256": "3399c4cc1e08b86c74283dbd003991d5933b02d296fa8cafcc9289c02cda93a2",
+      "output": "audio/scene-why-loading-en.mp3",
+      "status": "ready",
+      "fileSha256": "500a7d00b787e7e2bbe04236c83e6aa4d33a012c519e38fef04372ec3da67c70",
+      "sceneId": "why-loading"
+    },
+    {
+      "id": "scene-why-locking-zh",
+      "key": "book:scene-why-locking-zh",
+      "owner": "book",
+      "itemId": "why-locking",
+      "kind": "scene",
+      "lang": "zh",
+      "text": "断层两边的岩石相互接触。被压在一起的接触部位会抵抗滑动，这种阻力与摩擦有关。周围仍受作用时，岩石中的微小弹性形变可以储存能量。它并不需要先出现一条肉眼可见的大弯。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "断层两边的岩石相互接触。被压在一起的接触部位会抵抗滑动，这种阻力与摩擦有关。周围仍受作用时，岩石中的微小弹性形变可以储存能量。它并不需要先出现一条肉眼可见的大弯。",
+          "spokenText": "断层两边的岩石相互接触。被压在一起的接触部位会抵抗滑动，这种阻力与摩擦有关。周围仍受作用时，岩石中的微小弹性形变可以储存能量。它并不需要先出现一条肉眼可见的大弯。"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "e89ed66cb9f9c190643b8bb0129b0caa3cf70b5f681d6323e5cbf0aae8f624b0",
+      "utteranceSha256": "aa3e3a4fe7c9f738b1c7b61dac2b86ef9a28e4df4e80e9562eb6f20a7db592fe",
+      "output": "audio/scene-why-locking-zh.mp3",
+      "status": "ready",
+      "fileSha256": "23bf3a35cedf88376dae0072a0c43e7571ebb2d677ea77ba3be5b2a8ddc4b6f8",
+      "sceneId": "why-locking"
+    },
+    {
+      "id": "scene-why-locking-en",
+      "key": "book:scene-why-locking-en",
+      "owner": "book",
+      "itemId": "why-locking",
+      "kind": "scene",
+      "lang": "en",
+      "text": "Rock on the two sides of a fault is in contact. Contact areas pressed together resist sliding through friction. While the surrounding rock remains loaded, tiny elastic deformation can store energy. No large, visible bend is needed.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "Rock on the two sides of a fault is in contact. Contact areas pressed together resist sliding through friction. While the surrounding rock remains loaded, tiny elastic deformation can store energy. No large, visible bend is needed.",
+          "spokenText": "Rock on the two sides of a fault is in contact. Contact areas pressed together resist sliding through friction. While the surrounding rock remains loaded, tiny elastic deformation can store energy. No large, visible bend is needed."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "b680cd9bfb25a376ba70772457f57e056bcb96e5c55953a0c2c344b1c598e420",
+      "utteranceSha256": "e8c7b28706c266f0157e78b7d20498e131daf99effb14c18c87a6ad116c89aa5",
+      "output": "audio/scene-why-locking-en.mp3",
+      "status": "ready",
+      "fileSha256": "b9bbc2276fcf35d25ec09347586f9f8e67d32ee1b479047729a09c3262a9d657",
+      "sceneId": "why-locking"
+    },
+    {
+      "id": "scene-why-rebound-zh",
+      "key": "book:scene-why-rebound-zh",
+      "owner": "book",
+      "itemId": "why-rebound",
+      "kind": "scene",
+      "lang": "zh",
+      "text": "在这种锁定后突然滑动的情形中，滑动开始后，阻力可能降低，使滑动很快发展。岩石的弹性形变减小，储存的部分能量释放；滑动停止后，两边仍可有永久错位，也可能仍有未释放的作用。另一些断层可以缓慢滑动，并不是每次板块移动都会发生地震。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "在这种锁定后突然滑动的情形中，滑动开始后，阻力可能降低，使滑动很快发展。岩石的弹性形变减小，储存的部分能量释放；滑动停止后，两边仍可有永久错位，也可能仍有未释放的作用。另一些断层可以缓慢滑动，并不是每次板块移动都会发生地震。",
+          "spokenText": "在这种锁定后突然滑动的情形中，滑动开始后，阻力可能降低，使滑动很快发展。岩石的弹性形变减小，储存的部分能量释放；滑动停止后，两边仍可有永久错位，也可能仍有未释放的作用。另一些断层可以缓慢滑动，并不是每次板块移动都会发生地震。"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "7a41114d3f8ea1850121db66aab31441611c262e9f1636f7522f84e95469e11e",
+      "utteranceSha256": "849fd26257acc564686bd2903fc7ccdedebec8ad35426394bd36bc87d534b0f4",
+      "output": "audio/scene-why-rebound-zh.mp3",
+      "status": "ready",
+      "fileSha256": "3936c665c90f4b52f14565941bcd751f4e8cd6091a6e770661f444622ffbf0da",
+      "sceneId": "why-rebound"
+    },
+    {
+      "id": "scene-why-rebound-en",
+      "key": "book:scene-why-rebound-en",
+      "owner": "book",
+      "itemId": "why-rebound",
+      "kind": "scene",
+      "lang": "en",
+      "text": "In this kind of sudden slip after locking, resistance can decrease once sliding starts, allowing slip to develop rapidly. Elastic deformation decreases and some stored energy is released. After motion stops, permanent offset and some remaining loading can persist. Other faults can creep slowly; not every movement of a plate produces an earthquake.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "In this kind of sudden slip after locking, resistance can decrease once sliding starts, allowing slip to develop rapidly. Elastic deformation decreases and some stored energy is released. After motion stops, permanent offset and some remaining loading can persist. Other faults can creep slowly; not every movement of a plate produces an earthquake.",
+          "spokenText": "In this kind of sudden slip after locking, resistance can decrease once sliding starts, allowing slip to develop rapidly. Elastic deformation decreases and some stored energy is released. After motion stops, permanent offset and some remaining loading can persist. Other faults can creep slowly; not every movement of a plate produces an earthquake."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "c0700b39005e9cd655c8acc1ff6eccdb0a9a3eaefb7d35d4cb19fcbf945f252a",
+      "utteranceSha256": "f39c42b77c6e2a74640d541a0dfbffe9d3237390ed4855e9cd63463afff2afb1",
+      "output": "audio/scene-why-rebound-en.mp3",
+      "status": "ready",
+      "fileSha256": "69270412afe8784599dcbc496d184aae07fc30870221fd9376bc5946be087f51",
+      "sceneId": "why-rebound"
+    },
+    {
+      "id": "scene-why-wave-zh",
+      "key": "book:scene-why-wave-zh",
+      "owner": "book",
+      "itemId": "why-wave",
+      "kind": "scene",
+      "lang": "zh",
+      "text": "波经过时，一处岩石的运动与变形影响相邻的岩石，变化接着传下去。单个小标记只在附近运动，能量却能传得更远。真实地震波有不同种类，地面可以向不同方向振动；图中选一个方向慢看，圆圈记录变化到达哪里，不是石头或能量的外壳。",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "波经过时，一处岩石的运动与变形影响相邻的岩石，变化接着传下去。单个小标记只在附近运动，能量却能传得更远。真实地震波有不同种类，地面可以向不同方向振动；图中选一个方向慢看，圆圈记录变化到达哪里，不是石头或能量的外壳。",
+          "spokenText": "波经过时，一处岩石的运动与变形影响相邻的岩石，变化接着传下去。单个小标记只在附近运动，能量却能传得更远。真实地震波有不同种类，地面可以向不同方向振动；图中选一个方向慢看，圆圈记录变化到达哪里，不是石头或能量的外壳。"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "7e1edf292699c5ea10fd44de6fc5727e011b8eecd2a8faebfcd4b547b78ff032",
+      "utteranceSha256": "80b62cae43823720550abacbac4a96ec7d74e24eeeb3effd0142823658f3a46b",
+      "output": "audio/scene-why-wave-zh.mp3",
+      "status": "ready",
+      "fileSha256": "8485c1249ea9079d01d50e61a6e37b9592cfd2ff7dea5afc12525cb7a0994316",
+      "sceneId": "why-wave"
+    },
+    {
+      "id": "scene-why-wave-en",
+      "key": "book:scene-why-wave-en",
+      "owner": "book",
+      "itemId": "why-wave",
+      "kind": "scene",
+      "lang": "en",
+      "text": "As a wave passes, motion and deformation at one place affect neighboring rock, carrying the disturbance onward. One marker moves locally, while energy can travel farther. Real seismic waves have different kinds of motion. This view slows one direction for observation; its circle marks where the disturbance has arrived, not a shell of rock or energy.",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "As a wave passes, motion and deformation at one place affect neighboring rock, carrying the disturbance onward. One marker moves locally, while energy can travel farther. Real seismic waves have different kinds of motion. This view slows one direction for observation; its circle marks where the disturbance has arrived, not a shell of rock or energy.",
+          "spokenText": "As a wave passes, motion and deformation at one place affect neighboring rock, carrying the disturbance onward. One marker moves locally, while energy can travel farther. Real seismic waves have different kinds of motion. This view slows one direction for observation; its circle marks where the disturbance has arrived, not a shell of rock or energy."
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "645a1262a57a081b318452ae001e91a7fc364f1bf968aea1063c55c09b643006",
+      "utteranceSha256": "f7e92e8e9a895a54bafb93bfc0917da0234acb743410eb100920264f8096e0c5",
+      "output": "audio/scene-why-wave-en.mp3",
+      "status": "ready",
+      "fileSha256": "8fbd5d990ee19ae40e2794766f5000c25725155668765d078b7444681ff514c0",
+      "sceneId": "why-wave"
     },
     {
       "id": "vocab-fault-zh",
@@ -448,7 +826,7 @@
           "spokenText": "断层"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "3b0f0fcfa45d76c6928988ff99d7ff868b813bc5a2b7493d91623088417567bc",
       "utteranceSha256": "8668ac854d350d2b7e31aab9f1faad2adab50eb66218d335e7d6b73a766d60ea",
       "output": "audio/vocab-fault-zh.mp3",
@@ -472,7 +850,7 @@
           "spokenText": "fault"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "f1c562eae32f9cc2a97dc9d768b89d1b3f937a2a95e812e94bdc033a075d7a1f",
       "utteranceSha256": "646834e2580d98e69c2bac9e8293d6af04336c710dfc077a0babaf4a0d03a5bb",
       "output": "audio/vocab-fault-en.mp3",
@@ -480,6 +858,102 @@
       "fileSha256": "a5c8c1be8d774f3487c48debd8a8343e204fc7f7194c7fff0fb9d5aecb85ab25",
       "conceptId": "fault",
       "termId": "fault"
+    },
+    {
+      "id": "vocab-tectonic-plates-zh",
+      "key": "book:vocab-tectonic-plates-zh",
+      "owner": "book",
+      "itemId": "tectonic-plates",
+      "kind": "vocab",
+      "lang": "zh",
+      "text": "板块",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "板块",
+          "spokenText": "板块"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "37e7edd15ff69fbc44775c5bd5272bf382d6aab210ee9519a2c2c89d80ad40f1",
+      "utteranceSha256": "56db278a1a5397bc1289dda44c7d551bca97eb727e84c9c6ce516af2190593e3",
+      "output": "audio/vocab-tectonic-plates-zh.mp3",
+      "status": "ready",
+      "fileSha256": "5a958cdc8a591a9a758444f83c0dbc3bc7476c45cc2aee8b3d0785b8bbb619fd",
+      "conceptId": "tectonic-plates",
+      "termId": "tectonic-plates"
+    },
+    {
+      "id": "vocab-tectonic-plates-en",
+      "key": "book:vocab-tectonic-plates-en",
+      "owner": "book",
+      "itemId": "tectonic-plates",
+      "kind": "vocab",
+      "lang": "en",
+      "text": "tectonic plates",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "tectonic plates",
+          "spokenText": "tectonic plates"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "d28185bf002a7916b5a44b6d7196bae02416ee9329b05489a5d423cbfc4d8cb0",
+      "utteranceSha256": "1d97402ddb3ec767dbe59d920d4bbc2dde763d873377eea2a273238a54ecf60e",
+      "output": "audio/vocab-tectonic-plates-en.mp3",
+      "status": "ready",
+      "fileSha256": "34041d0d80901cd9b2f0706baeacf8e5270d35e3683d1e7018424f3684cd9887",
+      "conceptId": "tectonic-plates",
+      "termId": "tectonic-plates"
+    },
+    {
+      "id": "vocab-friction-zh",
+      "key": "book:vocab-friction-zh",
+      "owner": "book",
+      "itemId": "friction",
+      "kind": "vocab",
+      "lang": "zh",
+      "text": "摩擦",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "摩擦",
+          "spokenText": "摩擦"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "6377f852de16aad07f300262ac1548a816a91c26495fa14e2761e1e04dbecae1",
+      "utteranceSha256": "594360e046020d0b5b77a5be43b25f0b590330597655e401fdcc8be51b959aa3",
+      "output": "audio/vocab-friction-zh.mp3",
+      "status": "ready",
+      "fileSha256": "a9b267ecd798ce261d3be99a5f6973f15ed3105a06fbbe1c3924fd0bfdfebb98",
+      "conceptId": "friction",
+      "termId": "friction"
+    },
+    {
+      "id": "vocab-friction-en",
+      "key": "book:vocab-friction-en",
+      "owner": "book",
+      "itemId": "friction",
+      "kind": "vocab",
+      "lang": "en",
+      "text": "friction",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "friction",
+          "spokenText": "friction"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "b0de598f2e8e4753650e26694d3e214cb1773986f4446f1efcc21dde93840511",
+      "utteranceSha256": "60ab67e37d4e198c1f741586d4545884cf34aaa2775725f9f03abd382218e95b",
+      "output": "audio/vocab-friction-en.mp3",
+      "status": "ready",
+      "fileSha256": "e588b4c34c86eea489b519c196a1c8b54974579be709ff0c2f49699339ec424b",
+      "conceptId": "friction",
+      "termId": "friction"
     },
     {
       "id": "vocab-elastic-strain-zh",
@@ -496,7 +970,7 @@
           "spokenText": "弹性形变"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "350f9259b9b3ec5bca737a0b1c323b7b8317c501cf9fb09d2dd890c8aabd9b7e",
       "utteranceSha256": "2edfa028ca32327bd02aa5cd6899026762cb832f9b878765e7c947c3dff488dd",
       "output": "audio/vocab-elastic-strain-zh.mp3",
@@ -520,7 +994,7 @@
           "spokenText": "elastic deformation"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "35b2e685c8439af86100b664a63ab39e79c50af4a25d21628769edd827a0549d",
       "utteranceSha256": "1c352659b2a79a75ff3c7428b87e91bca3f749646e674df934f7f374dead506b",
       "output": "audio/vocab-elastic-strain-en.mp3",
@@ -528,6 +1002,54 @@
       "fileSha256": "890f43ea7cf43044860a5c2637858ce532ce48d948f5992b4d0abde46fb676d3",
       "conceptId": "elastic-strain",
       "termId": "elastic-strain"
+    },
+    {
+      "id": "vocab-stored-energy-zh",
+      "key": "book:vocab-stored-energy-zh",
+      "owner": "book",
+      "itemId": "stored-energy",
+      "kind": "vocab",
+      "lang": "zh",
+      "text": "储存的能量",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "储存的能量",
+          "spokenText": "储存的能量"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "1befe4a37065448498270e272497cf164e2d3478425cc7482ebdd07d19050985",
+      "utteranceSha256": "e63a335343886f8062de23e3f0719f2e27f62daff668b97689dc0bedd94d9985",
+      "output": "audio/vocab-stored-energy-zh.mp3",
+      "status": "ready",
+      "fileSha256": "47391e3ec52671bd7c57db379d82cac13172fb29bd45bf376285fedb33d276cb",
+      "conceptId": "stored-energy",
+      "termId": "stored-energy"
+    },
+    {
+      "id": "vocab-stored-energy-en",
+      "key": "book:vocab-stored-energy-en",
+      "owner": "book",
+      "itemId": "stored-energy",
+      "kind": "vocab",
+      "lang": "en",
+      "text": "stored energy",
+      "segments": [
+        {
+          "role": "narrator",
+          "sourceText": "stored energy",
+          "spokenText": "stored energy"
+        }
+      ],
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "30bf7f2d5c263bfceb6b8168fe392e8f42575c73bffb8b3f5bc0ef628971329c",
+      "utteranceSha256": "1a77d57bfc2d7561b0f4af6dac1b00ad311214b41d3f0f4cc83c6c9f2365819a",
+      "output": "audio/vocab-stored-energy-en.mp3",
+      "status": "ready",
+      "fileSha256": "4679ff0d7b8f4c5b1158ab24f0ec0d2889254c7ac16c5d620bf58777357166b2",
+      "conceptId": "stored-energy",
+      "termId": "stored-energy"
     },
     {
       "id": "vocab-slip-zh",
@@ -544,7 +1066,7 @@
           "spokenText": "滑动"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "83e008eb7dc4eeff343c4b0e10e700ea0cadae6a3c90f7413b9b7b5927271660",
       "utteranceSha256": "6b4196c3eadbd404dca313d86197ae30cf3b2a7ad0eb24d46da889d1e5b0d42a",
       "output": "audio/vocab-slip-zh.mp3",
@@ -568,7 +1090,7 @@
           "spokenText": "slip"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "1c1480e67eee52c17293f3628a94874948eae6a2481044b13b6778db6c7dbeab",
       "utteranceSha256": "cdde32e2cb8bb2497a307352d86b98cd283fb7a60372b83608fb8acd50664759",
       "output": "audio/vocab-slip-en.mp3",
@@ -592,7 +1114,7 @@
           "spokenText": "震源"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "41e98f5e6603d0357e34feb1ac2f759d7faa934aa2dd40419f2fc27f4e60fa7d",
       "utteranceSha256": "96129ec0e6be9d1445f714029c7d971a85e2acaf4d72081c282020c0deaf7e10",
       "output": "audio/vocab-focus-zh.mp3",
@@ -616,7 +1138,7 @@
           "spokenText": "earthquake focus"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "1de7a4dd36a743773c303aa5357199964f359b82bb0caae6651fd729a68175d8",
       "utteranceSha256": "aca9b6fe8edbb19d51971131bddc9205f8cfd8f683019a3c5031b78f4adcd473",
       "output": "audio/vocab-focus-en.mp3",
@@ -640,7 +1162,7 @@
           "spokenText": "波前"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "1e59c3592b65d0688ef695c88c013ea05ead4629e37c1a2cb19d8b2bea11c9a4",
       "utteranceSha256": "c32066ed31924a8cff9667d82cfa3681bc6ba0572ca9feae543f919d8d675dfc",
       "output": "audio/vocab-wavefront-zh.mp3",
@@ -664,7 +1186,7 @@
           "spokenText": "wavefront"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "7f3f4a4c7bd75e11a3457030348df2517e39a64922f6894591264b512e99bf3d",
       "utteranceSha256": "32d6953da16c1e796c34611500e05d5532a9c5471e264c08d41f8aac8c7a9a90",
       "output": "audio/vocab-wavefront-en.mp3",
@@ -688,7 +1210,7 @@
           "spokenText": "原位附近的运动"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "f73e4b98215aa66a91f61581b2d171cc7cbfbd0b13071843036bf8f731ee108a",
       "utteranceSha256": "8cd0eea759bbeb9bb67b24ee44d1e7ed98dd7415c03a9739b40bdb2004dae4f4",
       "output": "audio/vocab-particle-motion-zh.mp3",
@@ -712,7 +1234,7 @@
           "spokenText": "local motion"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
+      "contentVersion": "earthquake-story-v2",
       "textSha256": "920fb5ead4c5fc8b97c79025b3d8b052a8276e87350ac1c034d8324d8955fc91",
       "utteranceSha256": "6cac484bfb7d9ae07eaa6b9b137fabb8a35252fc063c91dc5860ef2333554de5",
       "output": "audio/vocab-particle-motion-en.mp3",
@@ -728,20 +1250,20 @@
       "itemId": "fault-predict",
       "kind": "prompt",
       "lang": "zh",
-      "text": "接缝卡住时，旁边会怎样？",
+      "text": "接缝还没滑，周围岩石发生了什么？",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "接缝卡住时，旁边会怎样？",
-          "spokenText": "接缝卡住时，旁边会怎样？"
+          "sourceText": "接缝还没滑，周围岩石发生了什么？",
+          "spokenText": "接缝还没滑，周围岩石发生了什么？"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "1d9a8c2c267722a4f5322a84ed17415b1860bf323e44c80a5a3f887a66af1a38",
-      "utteranceSha256": "b74c465343e272a4488442d3b62d13b121ff89dea001e5650c42a1130cc103e8",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "e7ac3006f7a743c2ea346afce10d36133acdab2c4683aa3a613aced3f9a51635",
+      "utteranceSha256": "3768215593dc75b386405ab710f55d758905aaaf8763c912d47f518cd2475ce8",
       "output": "audio/prompt-fault-predict-zh.mp3",
       "status": "ready",
-      "fileSha256": "3025db82a4ef1255bd8ed6546e1150a77ec5fd489edf9da84423456e9175d90b",
+      "fileSha256": "c04f307ed0c9ee258ba9b5b6dc457b69e8ac9e4c291c3ffd33826bd6e1f92605",
       "conceptId": "elastic-strain"
     },
     {
@@ -751,20 +1273,20 @@
       "itemId": "fault-predict",
       "kind": "prompt",
       "lang": "en",
-      "text": "What happens beside a fault when it is stuck?",
+      "text": "What changes in the rock while the fault is still stuck?",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "What happens beside a fault when it is stuck?",
-          "spokenText": "What happens beside a fault when it is stuck?"
+          "sourceText": "What changes in the rock while the fault is still stuck?",
+          "spokenText": "What changes in the rock while the fault is still stuck?"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "1185e0c69d7869366e5a59db0221c061c222eda220cc6ef6e32095c8b96ca58a",
-      "utteranceSha256": "c00db6b5010cd5b3eccbaaf0ee1bff01cdb7a942b492b784bfd4c60eb5d1f1ee",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "1214a17ebfb23aa2b978f47109a0f47d27c9bafb623882fa3abb5f9b3e6de3db",
+      "utteranceSha256": "07e48a6a998acf9138e1e8102bd8d23833220b9fe46af7d9bc37c3f3248c9599",
       "output": "audio/prompt-fault-predict-en.mp3",
       "status": "ready",
-      "fileSha256": "30a2538f95cc890ddcfc2dfbb13094477b8b2b1aac35c995115c5f2ad2f81c96",
+      "fileSha256": "42ada4d226f78bcbb6c2c2f24ac3a3bd4bc432f1b2771e57a1fd7883c2214caf",
       "conceptId": "elastic-strain"
     },
     {
@@ -774,20 +1296,20 @@
       "itemId": "fault-initial",
       "kind": "result",
       "lang": "zh",
-      "text": "先看接缝和旁边的纹路，再轻轻推动。",
+      "text": "从原来的纹路开始看：先让外面的作用继续。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "先看接缝和旁边的纹路，再轻轻推动。",
-          "spokenText": "先看接缝和旁边的纹路，再轻轻推动。"
+          "sourceText": "从原来的纹路开始看：先让外面的作用继续。",
+          "spokenText": "从原来的纹路开始看：先让外面的作用继续。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "5e41c7ceb45eb28e4c3f1fbe4b19297bbdb198dc6717866e38eb692885110b54",
-      "utteranceSha256": "8eb281787b16b84780946c47cb5d233051f22838c361553478158f490057d7b7",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "5a89ca105e54a2ccf7aa116cbc7cffbfe35e44a4238f0503596aca8306b63dc2",
+      "utteranceSha256": "a6d827996e5bde4df1cd9ca0ec513380b090231f53f21f4eeef82ba51ceecba6",
       "output": "audio/result-fault-initial-zh.mp3",
       "status": "ready",
-      "fileSha256": "ce85bdca3438854162f579b26b6315169d3569cb93562749e2f8a07cbda12f77",
+      "fileSha256": "5f0c32f482f72c0f8b5fd8cf4ab95cb89b914639a42194f4653976a28f2b5385",
       "conceptId": "fault"
     },
     {
@@ -797,20 +1319,20 @@
       "itemId": "fault-initial",
       "kind": "result",
       "lang": "en",
-      "text": "Watch the seam and the markings beside it. Then push gently.",
+      "text": "Start with the original markings. Let loading continue.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Watch the seam and the markings beside it. Then push gently.",
-          "spokenText": "Watch the seam and the markings beside it. Then push gently."
+          "sourceText": "Start with the original markings. Let loading continue.",
+          "spokenText": "Start with the original markings. Let loading continue."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "43ff638576847ed60359534c0429c79c7d81b4753c316bd69454fe64fc6ee86c",
-      "utteranceSha256": "a5217c5e3b01f2b59b84ed25065e0c58ae74d26d7eaebb737b350b67ebf2bbe6",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "758adb772aa400114fcf51a481694e19562e6d2146d1b173f2ca3bc89327e8c9",
+      "utteranceSha256": "ca2c5b0213fa5762c5bfbf8ebfd0628854261c22ad11ced9a449af7539b80501",
       "output": "audio/result-fault-initial-en.mp3",
       "status": "ready",
-      "fileSha256": "e7f390aefec8a888c70a4010da81c2401cf52eaea00db028593949434f35db61",
+      "fileSha256": "371caaac7c427b58516e970c232b01e72f35ef638adf4b8c0350e77a7df6730c",
       "conceptId": "fault"
     },
     {
@@ -820,20 +1342,20 @@
       "itemId": "fault-locked",
       "kind": "result",
       "lang": "zh",
-      "text": "接缝还没滑，旁边的纹路已经弯了。",
+      "text": "接缝锁住，周围岩石形变并储能。灰色虚线留下了原来的纹路。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "接缝还没滑，旁边的纹路已经弯了。",
-          "spokenText": "接缝还没滑，旁边的纹路已经弯了。"
+          "sourceText": "接缝锁住，周围岩石形变并储能。灰色虚线留下了原来的纹路。",
+          "spokenText": "接缝锁住，周围岩石形变并储能。灰色虚线留下了原来的纹路。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "f216bb04d2b8fec178e1f1279845591f822dd750bd4406ef0930684c230ad11e",
-      "utteranceSha256": "24fdff8b3069b21759b6041300b146a224d53a59730d1f62913bccb8eca09900",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "4df27fcd5527d71961afeaaba010f06ba206b17abf4b4f94f8f5d7afd7acfdc3",
+      "utteranceSha256": "55f9e94579d3d8cab413f1f0caf6a0b30ba78ff4cf3e1870cba9c29b3c68a887",
       "output": "audio/result-fault-locked-zh.mp3",
       "status": "ready",
-      "fileSha256": "6cca62bad37104a96f008f5964a83d9e62c6cb4aeaa0545ee13a6e8897116ec3",
+      "fileSha256": "51b0a4f85d7efc18242e2eadc6aeec3bf8cb1d5f06a7abf07dbc82268329dd92",
       "conceptId": "elastic-strain"
     },
     {
@@ -843,20 +1365,20 @@
       "itemId": "fault-locked",
       "kind": "result",
       "lang": "en",
-      "text": "The fault is still stuck. The markings beside it have bent.",
+      "text": "The fault is locked. Surrounding rock deforms and stores energy. Gray dashed lines show the original markings.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The fault is still stuck. The markings beside it have bent.",
-          "spokenText": "The fault is still stuck. The markings beside it have bent."
+          "sourceText": "The fault is locked. Surrounding rock deforms and stores energy. Gray dashed lines show the original markings.",
+          "spokenText": "The fault is locked. Surrounding rock deforms and stores energy. Gray dashed lines show the original markings."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "045cd619e4bf3e562d6cf4cc000f314269a1497c5a49d7d140316bbc1c6e62db",
-      "utteranceSha256": "af9fd65405867d3552773d7038f3b91795be7f07a0ac66c6222b6811c3cdbde5",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "7d85432b63c242aed00781b20bb1a42f148ac43fc96c8c00dc6eeee9768f0809",
+      "utteranceSha256": "60ccf3fa45bc130ddec25cddef85daa20fadb0fdc08bcab4147b5bf7f553d8eb",
       "output": "audio/result-fault-locked-en.mp3",
       "status": "ready",
-      "fileSha256": "6da9668d75043d68352c957bf90a09fcfcafac3fec1af1127e097f2aed228bfc",
+      "fileSha256": "f6e72062b34516e279a0b2e4f8eb860b918867c664660dbf926acfa47355d644",
       "conceptId": "elastic-strain"
     },
     {
@@ -866,20 +1388,20 @@
       "itemId": "fault-slipped",
       "kind": "result",
       "lang": "zh",
-      "text": "这里突然滑了！看看两边的纹路。",
+      "text": "阻力被克服，断层开始滑动，周围岩石部分回弹。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "这里突然滑了！看看两边的纹路。",
-          "spokenText": "这里突然滑了！看看两边的纹路。"
+          "sourceText": "阻力被克服，断层开始滑动，周围岩石部分回弹。",
+          "spokenText": "阻力被克服，断层开始滑动，周围岩石部分回弹。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "53722cae090507599f707218458ce0d4d751a1423edcae416b23be314b0e7113",
-      "utteranceSha256": "f5d8d8a94c37175388e97d6eb111601a0ff720a0a7ca4273fe320e2c4b9ea64b",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "5570bd16b162a3aa77a39b6e269c7c33a7a0bace1001a3dccd50105e8e39d057",
+      "utteranceSha256": "822725b85d9b851839962832094c3ba3de2fcd4cd821b34ab1e5337d91707c97",
       "output": "audio/result-fault-slipped-zh.mp3",
       "status": "ready",
-      "fileSha256": "cf2822d19f14a301c2285082dad13e9b8c0dc3dccd55c8822169818bd05e9bb4",
+      "fileSha256": "37bdee8a184bc9671646f650420dc319e5ba483bc0be512b69f550c1264522f5",
       "conceptId": "slip"
     },
     {
@@ -889,20 +1411,20 @@
       "itemId": "fault-slipped",
       "kind": "result",
       "lang": "en",
-      "text": "It slipped suddenly here! Look at the markings on both sides.",
+      "text": "Resistance is overcome. The fault slips and surrounding rock rebounds partly.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "It slipped suddenly here! Look at the markings on both sides.",
-          "spokenText": "It slipped suddenly here! Look at the markings on both sides."
+          "sourceText": "Resistance is overcome. The fault slips and surrounding rock rebounds partly.",
+          "spokenText": "Resistance is overcome. The fault slips and surrounding rock rebounds partly."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "fa3742e40b57f1bee33b668d8f024daec03ddbd28670fd9f320adf66c0425b1f",
-      "utteranceSha256": "02e17f9685a8ee7dc7674b8d6339f72640905a8570b5737b7854e9605f74fa95",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "594e7f6584bcd0dcc727037531ed8d461b8e585288106a5e3b2e85260feed12a",
+      "utteranceSha256": "f5b67209f00bfda492f94c15a7ba90e874a3d3c5c82828b156a68ff0147cbd22",
       "output": "audio/result-fault-slipped-en.mp3",
       "status": "ready",
-      "fileSha256": "973be2939dc861aff9f1c32bf3a0e3e73ffa79e8087ca30d1820c7054747c8a0",
+      "fileSha256": "b697fa9d3def20219ba01d1c375af9cc55c517a5147fb555a0da757826b15422",
       "conceptId": "slip"
     },
     {
@@ -912,20 +1434,20 @@
       "itemId": "fault-settled",
       "kind": "result",
       "lang": "zh",
-      "text": "运动停了，纹路仍然错开。",
+      "text": "变形减小了，纹路却仍错开：回弹与永久错位可以同时留下。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "运动停了，纹路仍然错开。",
-          "spokenText": "运动停了，纹路仍然错开。"
+          "sourceText": "变形减小了，纹路却仍错开：回弹与永久错位可以同时留下。",
+          "spokenText": "变形减小了，纹路却仍错开：回弹与永久错位可以同时留下。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "9c202fee19db453aa194f8731214d8fd5844addf0b54de111d98e73df44cac5e",
-      "utteranceSha256": "185d951c9f9dd22898bf32d8b30b24fa8259d31b4472f9b2b8f878d0d875ca6e",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "ed9869b8e83c54ef65d9b58e0215067e3346cc802f0c4fd5b7402541b6553d9e",
+      "utteranceSha256": "9e61a283cb141941ceaaef4f762b7100032f159421a08bee461e65a95e582b8a",
       "output": "audio/result-fault-settled-zh.mp3",
       "status": "ready",
-      "fileSha256": "7036441de7009af962f3f3dcab0c9d9d0ce457b401b243054370d90c355126f2",
+      "fileSha256": "aed90ef07da16f4fc879697cc73a0e23b8c3520ca75a4dd2d9b48973e5a0f12d",
       "conceptId": "slip"
     },
     {
@@ -935,20 +1457,20 @@
       "itemId": "fault-settled",
       "kind": "result",
       "lang": "en",
-      "text": "The movement stopped. The markings are still offset.",
+      "text": "Deformation decreased, but the markings remain offset: rebound can leave permanent fault offset.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The movement stopped. The markings are still offset.",
-          "spokenText": "The movement stopped. The markings are still offset."
+          "sourceText": "Deformation decreased, but the markings remain offset: rebound can leave permanent fault offset.",
+          "spokenText": "Deformation decreased, but the markings remain offset: rebound can leave permanent fault offset."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "64b328c053c0cbde8fc5e0e348f5d5cbd17cfd5bff54bbf0f94744983429eb12",
-      "utteranceSha256": "079053ea30f3dbe6f7ad803a06c8a3ac732098837fff81ce450535b891ec80ed",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "3eb20fbadab2828a70bb3d6fd321aaab0b91446375e26fee13055713b1f97042",
+      "utteranceSha256": "2fe2c70d493c19f475343a35365a504dc8035f4be1a2c13e239ec7288c34b8f7",
       "output": "audio/result-fault-settled-en.mp3",
       "status": "ready",
-      "fileSha256": "2fdf294423aa1cd7d544baf7e456e38963860972ff24e0f38c7c426801878a6a",
+      "fileSha256": "41a1a3addfe8beaa63be14d74f4deb5db1f5ef04222ba68ab9aac2a5e842cda8",
       "conceptId": "slip"
     },
     {
@@ -958,21 +1480,21 @@
       "itemId": "wave-predict",
       "kind": "prompt",
       "lang": "zh",
-      "text": "同一次振动，哪面旗先收到信号？",
+      "text": "看振动传开，也看小标记留在哪里。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "同一次振动，哪面旗先收到信号？",
-          "spokenText": "同一次振动，哪面旗先收到信号？"
+          "sourceText": "看振动传开，也看小标记留在哪里。",
+          "spokenText": "看振动传开，也看小标记留在哪里。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "b08f07151ca3e9b34f219c098cabbe890eac2254158dcc42a93a53ee891751cd",
-      "utteranceSha256": "906e65cb13b35ed36a9e3a61f9c0a7a2697995bace4d5c11750e12630c514267",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "ad1823c4746e8a436d48ad0ab8e1916cb523ec135d49d7666a47014449b65d42",
+      "utteranceSha256": "feae6ffa26fd85af520df58242187ec2e1020f9c75a2a3a3d379f0125d26180c",
       "output": "audio/prompt-wave-predict-zh.mp3",
       "status": "ready",
-      "fileSha256": "2c8ed04c8285e489b860f1dc6a177375e21f744686a6c51798c8b31e5fa9d959",
-      "conceptId": "wavefront"
+      "fileSha256": "5eee70e0d1ed5681bf1b72fa36a05189cba0dd817341de357bb0e0e0a98adca8",
+      "conceptId": "particle-motion"
     },
     {
       "id": "prompt-wave-predict-en",
@@ -981,21 +1503,21 @@
       "itemId": "wave-predict",
       "kind": "prompt",
       "lang": "en",
-      "text": "Which flag will receive the signal first from this event?",
+      "text": "Watch the disturbance spread, and see where each marker stays.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Which flag will receive the signal first from this event?",
-          "spokenText": "Which flag will receive the signal first from this event?"
+          "sourceText": "Watch the disturbance spread, and see where each marker stays.",
+          "spokenText": "Watch the disturbance spread, and see where each marker stays."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "4fefa3124294362d7483ae71cf08e14a14479599042c6c6578e4cd66be8f4ae6",
-      "utteranceSha256": "c783415bdc7bae2e3b0d41a2d16be52eb2f41e5248def8f13a4a9779fa44663e",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "c88f0ae0ffd8075b398e5184188b73f2d6c98e8cc4d409343d4c834f452d933a",
+      "utteranceSha256": "75a8078318cf7e785a6236b2ec27665a017f90a0e61e4b09cd802bcc1d6a3525",
       "output": "audio/prompt-wave-predict-en.mp3",
       "status": "ready",
-      "fileSha256": "583480c965b10befd76951943626617e580c22d2e6ea235712740983f21498c5",
-      "conceptId": "wavefront"
+      "fileSha256": "36890fdf0b52e496c38e8fa1712a9572e75193327c9e7469d0a84a271a0fb4e1",
+      "conceptId": "particle-motion"
     },
     {
       "id": "result-wave-ready-zh",
@@ -1004,20 +1526,20 @@
       "itemId": "wave-ready",
       "kind": "result",
       "lang": "zh",
-      "text": "两面旗准备好了。先猜猜，也可以直接观察。",
+      "text": "地下与地表标记都在原位；同一次振动将依次到达。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "两面旗准备好了。先猜猜，也可以直接观察。",
-          "spokenText": "两面旗准备好了。先猜猜，也可以直接观察。"
+          "sourceText": "地下与地表标记都在原位；同一次振动将依次到达。",
+          "spokenText": "地下与地表标记都在原位；同一次振动将依次到达。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "4dd86087b4e8f50c97263d5d7eec334563ea8a372d6a850fb713b6307553c2f6",
-      "utteranceSha256": "3a0d125179371111894dcffb8371d49055350eeab919401fd83bea9206a6600a",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "713461a716b1d7b8b64d20735184ee72561a62c4405ed8806233f898a7ef3eef",
+      "utteranceSha256": "661ee4fcbd9f5ac75a3b89a66686302a8a9592492df889a1804704cc51c5a337",
       "output": "audio/result-wave-ready-zh.mp3",
       "status": "ready",
-      "fileSha256": "46758d6e5b25fa4df82e97659f70d2809b2c60591b4d6489b8a9fc8b0ced105f",
+      "fileSha256": "bc2f1cef698d09fe8ca2a794aa79f4bd36942cb033d702cc4666a76be45486be",
       "conceptId": "wavefront"
     },
     {
@@ -1027,20 +1549,20 @@
       "itemId": "wave-ready",
       "kind": "result",
       "lang": "en",
-      "text": "Both flags are ready. Make a prediction, or just watch.",
+      "text": "Both markers are at their starting places. One disturbance will reach them in turn.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "Both flags are ready. Make a prediction, or just watch.",
-          "spokenText": "Both flags are ready. Make a prediction, or just watch."
+          "sourceText": "Both markers are at their starting places. One disturbance will reach them in turn.",
+          "spokenText": "Both markers are at their starting places. One disturbance will reach them in turn."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "48fdc2e7534a7dd611883af97f1ffd28cf2ebcc3137b1585b978847cbb8f1128",
-      "utteranceSha256": "3f5f3055103dd713b04455584d43b306de2211e77210a7946417f82fb682e56e",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "235f85a2f56cf14295baecce869738228e1b1321ae6099270f0c7905c5cb1e28",
+      "utteranceSha256": "3ee01479c300beaeab423f2614ae9bf3ce9b13bbb6eb44365396ce3e6df5e9c6",
       "output": "audio/result-wave-ready-en.mp3",
       "status": "ready",
-      "fileSha256": "e3586b583c681b101172d09115d03009e2af09d1b428ecbfc5de6dcb2433ef1c",
+      "fileSha256": "1b9a62de0f3b242782cbbe5e624ffe04c0a6a67192226d7333110bcd1201e580",
       "conceptId": "wavefront"
     },
     {
@@ -1050,21 +1572,21 @@
       "itemId": "wave-moving",
       "kind": "result",
       "lang": "zh",
-      "text": "变化从地下传开了，留意两面旗。",
+      "text": "振动经过地下标记：标记在附近来回动，变化继续传向地表。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "变化从地下传开了，留意两面旗。",
-          "spokenText": "变化从地下传开了，留意两面旗。"
+          "sourceText": "振动经过地下标记：标记在附近来回动，变化继续传向地表。",
+          "spokenText": "振动经过地下标记：标记在附近来回动，变化继续传向地表。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "10ebf078753d37298cf0f8fec91f30f2b8aadc9a37d41892a94b542ee1d53122",
-      "utteranceSha256": "17ccb7b1944407d9f5f4ab02a0fe04659d25c44512e0c16114e2f9aa88843f60",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "e6b5ae9aef3330ebc42cc096f89817a9e69b26e1afb8d2f0c2318a042469443a",
+      "utteranceSha256": "9dd6a64fe534bc4e0d672625c91d7a9b8c9c5ff8332b6df2cf7497054772ffc7",
       "output": "audio/result-wave-moving-zh.mp3",
       "status": "ready",
-      "fileSha256": "e8c137cce8a2280c864153e101aa0540c6d8bba84fd7b50b64de6c768da21c0f",
-      "conceptId": "wavefront"
+      "fileSha256": "562acfb6736dccfd25eeb2e380988cfad6c34b348b1bdcceda91292f31a0a2df",
+      "conceptId": "particle-motion"
     },
     {
       "id": "result-wave-moving-en",
@@ -1073,159 +1595,113 @@
       "itemId": "wave-moving",
       "kind": "result",
       "lang": "en",
-      "text": "The disturbance is spreading from underground. Watch both flags.",
+      "text": "The disturbance passes the underground marker. It moves locally as the disturbance continues toward the surface.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The disturbance is spreading from underground. Watch both flags.",
-          "spokenText": "The disturbance is spreading from underground. Watch both flags."
+          "sourceText": "The disturbance passes the underground marker. It moves locally as the disturbance continues toward the surface.",
+          "spokenText": "The disturbance passes the underground marker. It moves locally as the disturbance continues toward the surface."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "bba64130a027054da18d3f04fe379c77717cbafb6174be3572cb937cd71911b3",
-      "utteranceSha256": "300831d4cab4ce2a9061040fde3af11b96ad0807026cd26f500f28801f283d9f",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "0050ceb31672bf59f25eeede2250855d57f2885978fd31b86fca905850f1bfc6",
+      "utteranceSha256": "fee778426d46e747c0e9c9b794489851db5ff895e739efe8718f009baf16fe0d",
       "output": "audio/result-wave-moving-en.mp3",
       "status": "ready",
-      "fileSha256": "e5cf937b6573c4fda515be09c57ed0721672af6f3c45cf71b3e970f4dcd7a98a",
-      "conceptId": "wavefront"
+      "fileSha256": "c3c96f5b1bc03f2194c97bcd5370a81cce4fca60c620bc941f603dbf8dcec7a3",
+      "conceptId": "particle-motion"
     },
     {
-      "id": "result-arrived-a-zh",
-      "key": "book:result-arrived-a-zh",
+      "id": "result-wave-surface-zh",
+      "key": "book:result-wave-surface-zh",
       "owner": "book",
-      "itemId": "arrived-a",
+      "itemId": "wave-surface",
       "kind": "result",
       "lang": "zh",
-      "text": "A先收到了信号。换个位置再看看？",
+      "text": "振动到达地表，地表标记也来回动起来；地下标记没有跑上来。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "A先收到了信号。换个位置再看看？",
-          "spokenText": "A先收到了信号。换个位置再看看？"
+          "sourceText": "振动到达地表，地表标记也来回动起来；地下标记没有跑上来。",
+          "spokenText": "振动到达地表，地表标记也来回动起来；地下标记没有跑上来。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "359bf7c78e57a1a6e0fd17c56f59600542a5c75f898704813e22013df27abb93",
-      "utteranceSha256": "74aab4fe28ffc4632cc1022234c20dbe88526cf687da2abc1b35a53e01862af4",
-      "output": "audio/result-arrived-a-zh.mp3",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "b57ea9542777413f3ba1ccc1f234232ba69e41e76aaa1a20052b86baa40704c9",
+      "utteranceSha256": "90a741bd914870aced10e08cb3b7ccae48084d5ebf60e66fa4715eeb9e3cb049",
+      "output": "audio/result-wave-surface-zh.mp3",
       "status": "ready",
-      "fileSha256": "c29a541ad812c39ec4fcb82010e3a4b0410ef8f689b6c1280701b585f64c6662",
-      "conceptId": "wavefront"
+      "fileSha256": "90692f7f840844af4fd39ac1cb7673d40399887a171e21a7df7714fd6002a915",
+      "conceptId": "particle-motion"
     },
     {
-      "id": "result-arrived-a-en",
-      "key": "book:result-arrived-a-en",
+      "id": "result-wave-surface-en",
+      "key": "book:result-wave-surface-en",
       "owner": "book",
-      "itemId": "arrived-a",
+      "itemId": "wave-surface",
       "kind": "result",
       "lang": "en",
-      "text": "A received the signal first. Try changing the positions.",
+      "text": "The disturbance reaches the surface marker and it moves locally too. The underground marker did not travel up here.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "A received the signal first. Try changing the positions.",
-          "spokenText": "A received the signal first. Try changing the positions."
+          "sourceText": "The disturbance reaches the surface marker and it moves locally too. The underground marker did not travel up here.",
+          "spokenText": "The disturbance reaches the surface marker and it moves locally too. The underground marker did not travel up here."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "afbba31e49d65b0ece8dffa85276bf65209dfd8c2faaac387ae2b7781172fd37",
-      "utteranceSha256": "f90052bbf57ff785ba8cb3400c5e4e5bfb025ecad90543fedfccd7aa673f94b9",
-      "output": "audio/result-arrived-a-en.mp3",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "1c7b638e5d947b6868a5c61f771974c411ad5848b764789d40514d3b90226e18",
+      "utteranceSha256": "ead5b22bd769d85bffc05dc77e63b0b4ac93380b2e8e76c7226a8edcc1a72941",
+      "output": "audio/result-wave-surface-en.mp3",
       "status": "ready",
-      "fileSha256": "f694b0b719d110c1e25e3575ee477db6d29d3099cc68d9f2ec346b680f429b27",
-      "conceptId": "wavefront"
+      "fileSha256": "a696f7e36d4b42a66ab73647d8e15115b68e5e25c96d99388087e5dd25c37d55",
+      "conceptId": "particle-motion"
     },
     {
-      "id": "result-arrived-b-zh",
-      "key": "book:result-arrived-b-zh",
+      "id": "result-wave-finished-zh",
+      "key": "book:result-wave-finished-zh",
       "owner": "book",
-      "itemId": "arrived-b",
+      "itemId": "wave-finished",
       "kind": "result",
       "lang": "zh",
-      "text": "B先收到了信号。换个位置再看看？",
+      "text": "脉冲已经过这两个标记，它们回到原位附近；到达记录留下了传播的先后。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "B先收到了信号。换个位置再看看？",
-          "spokenText": "B先收到了信号。换个位置再看看？"
+          "sourceText": "脉冲已经过这两个标记，它们回到原位附近；到达记录留下了传播的先后。",
+          "spokenText": "脉冲已经过这两个标记，它们回到原位附近；到达记录留下了传播的先后。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "c7b1d78c0b396e88585f9fb42d73cac2666321cd9302744f0cf2024ed3bd4891",
-      "utteranceSha256": "3617fb56a86db5fbdbc4bb8ee27f4bae46f18584ac18d62cf292f07a01039c31",
-      "output": "audio/result-arrived-b-zh.mp3",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "5ff11cd8c98e517655bf35f20035b2f10c04bc61f422c8b29b3aee5f76b9b269",
+      "utteranceSha256": "727c8096da224392705ff59d662acfc95e6e0da3ec794970c12a661ea33b0cf8",
+      "output": "audio/result-wave-finished-zh.mp3",
       "status": "ready",
-      "fileSha256": "4fd084990aa32eca72e54248520363e4a7a8a0fa2e0d5ace479407a48cb6487e",
-      "conceptId": "wavefront"
+      "fileSha256": "e6c8d13c61b9053297f7c5affc6c505247709ebd13d42969b702cb92935ab959",
+      "conceptId": "particle-motion"
     },
     {
-      "id": "result-arrived-b-en",
-      "key": "book:result-arrived-b-en",
+      "id": "result-wave-finished-en",
+      "key": "book:result-wave-finished-en",
       "owner": "book",
-      "itemId": "arrived-b",
+      "itemId": "wave-finished",
       "kind": "result",
       "lang": "en",
-      "text": "B received the signal first. Try changing the positions.",
+      "text": "The pulse has passed both markers. They are near their starting places; arrival records show the sequence of propagation.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "B received the signal first. Try changing the positions.",
-          "spokenText": "B received the signal first. Try changing the positions."
+          "sourceText": "The pulse has passed both markers. They are near their starting places; arrival records show the sequence of propagation.",
+          "spokenText": "The pulse has passed both markers. They are near their starting places; arrival records show the sequence of propagation."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "8674279dfb7bfb3d59d95d65252a34cf71d875715acca61a1f726c2fffced09a",
-      "utteranceSha256": "4a59a5dd08d8793cbb81ca35e8b8adbe6b3f72e6de6f724cb586dff0e6c4493c",
-      "output": "audio/result-arrived-b-en.mp3",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "fd22b078716b53aee1ca57c306a3e9c0134c788c4f57374a86792ca756e21e5d",
+      "utteranceSha256": "cf3e8f984df988877928e018fa306e9c30c5f5a6869ad9ed92c56aca3e156d45",
+      "output": "audio/result-wave-finished-en.mp3",
       "status": "ready",
-      "fileSha256": "8d67e539c109225bf3f89cb578acb67311cfd42b1953a2cd22c59e3f5eb79837",
-      "conceptId": "wavefront"
-    },
-    {
-      "id": "result-arrived-together-zh",
-      "key": "book:result-arrived-together-zh",
-      "owner": "book",
-      "itemId": "arrived-together",
-      "kind": "result",
-      "lang": "zh",
-      "text": "两面旗离起点一样远，一起收到了信号。",
-      "segments": [
-        {
-          "role": "narrator",
-          "sourceText": "两面旗离起点一样远，一起收到了信号。",
-          "spokenText": "两面旗离起点一样远，一起收到了信号。"
-        }
-      ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "4a133f0f41f3eb0d203c5e109d64629a022b042c0dd09dd680a341fc11289fe7",
-      "utteranceSha256": "c11e577b42d4b7cb43b4b23bf1e7b58962a1d37da6d45b52a051edfbd1db82af",
-      "output": "audio/result-arrived-together-zh.mp3",
-      "status": "ready",
-      "fileSha256": "8b48c6e80cb1a57755c6c643a61519813951878e19b0c4ba257546c476fbada9",
-      "conceptId": "wavefront"
-    },
-    {
-      "id": "result-arrived-together-en",
-      "key": "book:result-arrived-together-en",
-      "owner": "book",
-      "itemId": "arrived-together",
-      "kind": "result",
-      "lang": "en",
-      "text": "Both flags are the same distance from the source. They received the signal together.",
-      "segments": [
-        {
-          "role": "narrator",
-          "sourceText": "Both flags are the same distance from the source. They received the signal together.",
-          "spokenText": "Both flags are the same distance from the source. They received the signal together."
-        }
-      ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "db373c5f35d30a895d842f996a20ff41f3e92165d60add3f7c5b79e7a98ab0df",
-      "utteranceSha256": "7b0be746c418bbfe0014b6e4d4b8d838a534a9dacf4726491aefbbbac04d1d88",
-      "output": "audio/result-arrived-together-en.mp3",
-      "status": "ready",
-      "fileSha256": "1221b7ba2f51165f0d3ae744e34df2d0a2fe882c27141d2a4b7bcdd42540c736",
-      "conceptId": "wavefront"
+      "fileSha256": "1081285c8c9c5968169361f9e3887a8575c838dd962735264b3c75498fd40727",
+      "conceptId": "particle-motion"
     },
     {
       "id": "result-local-motion-zh",
@@ -1234,20 +1710,20 @@
       "itemId": "local-motion",
       "kind": "result",
       "lang": "zh",
-      "text": "小标记在原位附近动，没有跟着波跑走。",
+      "text": "灰色圈是原位，彩色点是现在：放大看往返，不随波跑走。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "小标记在原位附近动，没有跟着波跑走。",
-          "spokenText": "小标记在原位附近动，没有跟着波跑走。"
+          "sourceText": "灰色圈是原位，彩色点是现在：放大看往返，不随波跑走。",
+          "spokenText": "灰色圈是原位，彩色点是现在：放大看往返，不随波跑走。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "bdf1b6ab92f3d2d384ac56239e2b27e83ad8ed9b24be69fc39b7d76690500757",
-      "utteranceSha256": "291e3720b9adc7839041147f4d1fd76e270b98d0c4b547e8d92626a7cb1d77a0",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "9f1ef1708654329293d6312638cfe157b9764e55820cfe6e5314ecf015ba346e",
+      "utteranceSha256": "3668a4c2e4b538d80c6b5735c535700d8b93506164c22f345682fb638e0784f8",
       "output": "audio/result-local-motion-zh.mp3",
       "status": "ready",
-      "fileSha256": "34859c491b29ad966f3ca196664a1c101dd07f320592ec470189458929db16e6",
+      "fileSha256": "c34b5571407c09e0000ebf5d7389beecede594f81684fbaadc4914f058df9ed4",
       "conceptId": "particle-motion"
     },
     {
@@ -1257,67 +1733,21 @@
       "itemId": "local-motion",
       "kind": "result",
       "lang": "en",
-      "text": "The marker moves near its starting place. It does not travel with the wave.",
+      "text": "The gray ring is the starting place; the colored point is its current position. Enlarge the back-and-forth motion without following the wave.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The marker moves near its starting place. It does not travel with the wave.",
-          "spokenText": "The marker moves near its starting place. It does not travel with the wave."
+          "sourceText": "The gray ring is the starting place; the colored point is its current position. Enlarge the back-and-forth motion without following the wave.",
+          "spokenText": "The gray ring is the starting place; the colored point is its current position. Enlarge the back-and-forth motion without following the wave."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "23ee5b1c8732253240f53e958de7c4e4226409bf4833bef172e7892d17b2f595",
-      "utteranceSha256": "c9c9119f87dbc5c7f5029456eb315e5c8c3427ffb5fae5b683811e1644d49756",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "b9dfee7819a8feb9a179de26cbb2cff5376a9240a921ee8462b90f2cd0c2a639",
+      "utteranceSha256": "0c49d410fcce9e1495f8d8611bd1a4aae7951ffbc252ed1a82a293130ea2b903",
       "output": "audio/result-local-motion-en.mp3",
       "status": "ready",
-      "fileSha256": "09f3c02732d8731a2df9dc1425161b6cd7ced9f723c41c203abec7d7e264a6f1",
+      "fileSha256": "566a0a3359f65e7d5f7720ed72b8c796aee2d8e810463bb8b6ffc4a001c91c1f",
       "conceptId": "particle-motion"
-    },
-    {
-      "id": "prompt-exhibit-hint-zh",
-      "key": "book:prompt-exhibit-hint-zh",
-      "owner": "book",
-      "itemId": "exhibit-hint",
-      "kind": "prompt",
-      "lang": "zh",
-      "text": "先找旁边纹路慢慢弯的那张，再看哪里突然滑动。",
-      "segments": [
-        {
-          "role": "narrator",
-          "sourceText": "先找旁边纹路慢慢弯的那张，再看哪里突然滑动。",
-          "spokenText": "先找旁边纹路慢慢弯的那张，再看哪里突然滑动。"
-        }
-      ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "ac8acc45d7c8c9ce35e9a3ff1ce8421a32bbac7301a3eb7fa52535a0b6c445b6",
-      "utteranceSha256": "51fd983a4e06d18314689e3b611a825eb835ba75d21fa3d5baf15f69111601cd",
-      "output": "audio/prompt-exhibit-hint-zh.mp3",
-      "status": "ready",
-      "fileSha256": "ea16d7fc9a5eeb004858fb6881d897667c5890651cf22ee8ac47dfa947552be3",
-      "conceptId": "elastic-strain"
-    },
-    {
-      "id": "prompt-exhibit-hint-en",
-      "key": "book:prompt-exhibit-hint-en",
-      "owner": "book",
-      "itemId": "exhibit-hint",
-      "kind": "prompt",
-      "lang": "en",
-      "text": "Start with the card showing the markings bending. Then find the sudden slip.",
-      "segments": [
-        {
-          "role": "narrator",
-          "sourceText": "Start with the card showing the markings bending. Then find the sudden slip.",
-          "spokenText": "Start with the card showing the markings bending. Then find the sudden slip."
-        }
-      ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "7b16ff0f25c519f18230f11a09a99674ac69248a551bafde469e33e3dcd2621f",
-      "utteranceSha256": "ff1d92689953fe4007ce6f1aec836537a4d610da17c6dcf8bf81c5db3d067b58",
-      "output": "audio/prompt-exhibit-hint-en.mp3",
-      "status": "ready",
-      "fileSha256": "adfff5e1feebd1f3182058f4d38f07dadbd429918cb9f1a318cbaa794a81cb83",
-      "conceptId": "elastic-strain"
     },
     {
       "id": "result-exhibit-complete-zh",
@@ -1326,20 +1756,20 @@
       "itemId": "exhibit-complete",
       "kind": "result",
       "lang": "zh",
-      "text": "展览摆好了：旁边变形，突然滑动，振动传开。",
+      "text": "持续作用 → 形变储能 → 断层滑动与部分回弹 → 地震波传播 → 地面振动。",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "展览摆好了：旁边变形，突然滑动，振动传开。",
-          "spokenText": "展览摆好了：旁边变形，突然滑动，振动传开。"
+          "sourceText": "持续作用 → 形变储能 → 断层滑动与部分回弹 → 地震波传播 → 地面振动。",
+          "spokenText": "持续作用 → 形变储能 → 断层滑动与部分回弹 → 地震波传播 → 地面振动。"
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "2f798a4bd516a9fbebeb8038f123dd047840550e2054f02efc336438ff4d0801",
-      "utteranceSha256": "cfeab03130b93f286e3a6c65eb2fbe7c1468e9616d4ffd3bdfcc2bf3b8396132",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "62821a464253ca3918527994a2311302be12aeddf5c1c479041a3e414da21e9e",
+      "utteranceSha256": "151258b4a6d7143a2a79e34edab3cf46bed8c227978ddd3f9846041d80d134c8",
       "output": "audio/result-exhibit-complete-zh.mp3",
       "status": "ready",
-      "fileSha256": "dd5bc15dff83417d8d4cf9f0bcf35b37c92c251967ebc4c8c25b149176702ecf",
+      "fileSha256": "173d1105815241fd4912946af773abdd4f02c97c24cfebcb214d0d2b9b043219",
       "conceptId": "wavefront"
     },
     {
@@ -1349,24 +1779,24 @@
       "itemId": "exhibit-complete",
       "kind": "result",
       "lang": "en",
-      "text": "The display is ready: rocks change shape, slip suddenly, and vibrations spread.",
+      "text": "Continued loading → elastic deformation and stored energy → fault slip and partial rebound → seismic waves → ground motion.",
       "segments": [
         {
           "role": "narrator",
-          "sourceText": "The display is ready: rocks change shape, slip suddenly, and vibrations spread.",
-          "spokenText": "The display is ready: rocks change shape, slip suddenly, and vibrations spread."
+          "sourceText": "Continued loading → elastic deformation and stored energy → fault slip and partial rebound → seismic waves → ground motion.",
+          "spokenText": "Continued loading → elastic deformation and stored energy → fault slip and partial rebound → seismic waves → ground motion."
         }
       ],
-      "contentVersion": "earthquake-story-v1",
-      "textSha256": "f47374c7b861d0ebff595062a90f151e3f4a6c65fa826b0cd0db22a9b7665d5a",
-      "utteranceSha256": "7c85ad82a67f4baf51b28113b51bddc75bd1fdf6cb25f78e1c1ca7b996e833d2",
+      "contentVersion": "earthquake-story-v2",
+      "textSha256": "ccef00607c0a089b66e95978032a6011532bc8b7ae1fb84e3b7512de499ec5a0",
+      "utteranceSha256": "83610270a6d8e26d62a9393e1166db77cee52c73be6f7dd4f8f6e9d6083f310d",
       "output": "audio/result-exhibit-complete-en.mp3",
       "status": "ready",
-      "fileSha256": "775bd4ed85499579b4bf1f10d4c7b3998a132e2047b421d5207a0e164604cbd2",
+      "fileSha256": "a4815c81abf7dc1b3abb3d55f4e6b4de9f3e9149e6aa496513925785814adcfd",
       "conceptId": "wavefront"
     }
   ],
   "bookId": "earthquake",
-  "scriptVersion": "earthquake-story-v1",
-  "scriptSha256": "39a03730d0153610a07f39b3e337d420140f7a7b17e12ef86a907969ab95903e"
+  "scriptVersion": "earthquake-story-v2",
+  "scriptSha256": "7850516bab08c7cf1569e851a0418ac02727bf2929d2f987887477a090be700f"
 }

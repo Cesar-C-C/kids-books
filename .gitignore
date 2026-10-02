@@ -40,3 +40,8 @@ books/schoolbus/audio/narration/_pending.json
 # The release includes formal MP3s/manifests and the redacted per-file validation report.
 workbench/earthquake-audio-v1/*
 !workbench/earthquake-audio-v1/batch-validation.json
+
+# Earthquake v2 narration masters and local voice references stay on this machine.
+# Only the redacted per-file validation report is eligible for review/collection.
+workbench/earthquake-audio-v2/*
+!workbench/earthquake-audio-v2/batch-validation.json
