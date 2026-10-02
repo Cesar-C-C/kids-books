@@ -1,0 +1,33 @@
+{
+  "scope": "earthquake v2 final public-release acceptance",
+  "baseline": {
+    "merge": "220d61f4efe226323f69ef02f5dcb4fc013fbf50",
+    "pwaVersion": "0f47c7f02c40",
+    "publicBook74OnlineAndOffline": "PASS",
+    "publicCanonicalFiles156": "PASS",
+    "labBrowserRestartOffline": "FAIL: preflight worker200/hash correct, identity Range media worker504"
+  },
+  "cause": "GitHub Pages Vary: Accept-Encoding separates the full fetch variant from native identity Range requests.",
+  "fix": "Exact-URL complete audio fallback only when Vary is solely Accept-Encoding; no ignored version query, other variants, or partial promotion.",
+  "baselineRegression": "qa_pwa_audio_vary.cjs failed 504 != 200 before the worker fix",
+  "local": {
+    "encodingVaryRegression": "PASS",
+    "rangeHttp200206416": "PASS with production Vary header",
+    "labNativeOnline": 72,
+    "labNativeServerDisconnected": 72,
+    "httpCacheClearedOnlyInIsolatedBrowser": true,
+    "allOfflineResponsesWorker200": true,
+    "coldUnwarmedBilingualHintRetry": "PASS",
+    "formalDelivery": 146,
+    "pwaStatic": "6/6",
+    "mutableCoreRegression": "PASS"
+  },
+  "unchanged": [
+    "frozen teaching sources",
+    "146 formal MP3 bytes",
+    "both formal manifests",
+    "primary dirty checkout"
+  ],
+  "deployment": "pending PR CI and public restart verification",
+  "pwaVersionNote": "Manifest version unchanged because no content files changed and worker is excluded from its fingerprint. Worker bytes changed, so ordinary registration update installs and claims the fix."
+}
