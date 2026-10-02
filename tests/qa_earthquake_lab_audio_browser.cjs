@@ -167,7 +167,7 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
     await warm.page.locator('#listen').waitFor({ state: 'visible' });
     assert.equal(await warm.page.evaluate(() => sessionStorage.getItem('earthquake-audio-left-stopped')), 'true', 'real navigation runs the pagehide handler and pauses every native player');
     // Verify entire cached MP3 bytes, not just an HTTP partial response or metadata.
-    for (const clip of clips) {
+    for (const clip of manifest.entries.filter(entry => entry.status === 'ready')) {
       const url = clipUrl(clip);
       await warm.page.waitForFunction(async url => !!(await caches.match(url)), url);
       const hash = await warm.page.evaluate(async url => {
@@ -177,8 +177,10 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
         return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
       }, url);
       assert.equal(hash, clip.fileSha256, 'warmed MP3 cache exactly matches the verified manifest');
-      const staleBytes = await warm.page.evaluate(async url => (await caches.match(url)).text(), base + '/labs/earthquake/' + clip.output);
-      assert.equal(staleBytes, 'obsolete audio bytes', 'new playback bypasses rather than reuses the old unversioned cache key');
+      if (clips.some(original => original.id === clip.id)) {
+        const staleBytes = await warm.page.evaluate(async url => (await caches.match(url)).text(), base + '/labs/earthquake/' + clip.output);
+        assert.equal(staleBytes, 'obsolete audio bytes', 'new playback bypasses rather than reuses the old unversioned cache key');
+      }
     }
     setNetworkAvailable(false);
     await warm.context.setOffline(true);
@@ -190,6 +192,25 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
     await warm.page.locator('#language').click();
     await allStopped(warm.page, 'offline language switch stops previous narration');
     evidence.push({ scenario: 'offline-warmed-en', ...await play(warm.page, 'en') });
+    await warm.page.locator('#narration-open').click();
+    let offlineReachable = 0;
+    for (const lang of ['en', 'zh']) {
+      if (lang === 'zh') {
+        await warm.page.locator('#narration-language').click();
+        await allStopped(warm.page, 'offline reading language switch stops the previous line');
+      }
+      for (const item of narrated) {
+        const clip = manifest.entries.find(entry => entry.itemId === item.id && entry.lang === lang);
+        const played = await play(warm.page, lang, '[data-narration-id="' + item.id + '"]');
+        assert.equal(played.src, clipUrl(clip), item.id + '/' + lang + ' plays the exact complete cached clip offline');
+        await warm.page.locator('#narration-stop').click();
+        await allStopped(warm.page, 'offline stop works for every reading item');
+        offlineReachable++;
+      }
+    }
+    await warm.page.locator('#narration-close').click();
+    assert.equal(offlineReachable, narrated.length * 2, 'every formal bilingual lab clip is natively playable with the server disconnected');
+    evidence.push({ scenario: 'offline-all-reading-cards', nativePlays: offlineReachable });
     assert.ok(offlineResponses.length >= 2 && offlineResponses.every(response => response.worker && response.status === 200), 'offline native audio is served by the production Service Worker');
     console.log('Native online and warmed-offline playback passed: ' + JSON.stringify(evidence));
 
