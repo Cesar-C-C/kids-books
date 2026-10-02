@@ -252,9 +252,10 @@ const server = http.createServer((req, res) => {
     const narrated = sourceData.entries.find(entry => entry.id === 'result-initial');
     const sha = value => createHash('sha256').update(value.normalize('NFC').replace(/\r\n/g, '\n')).digest('hex');
     const audioId = 'result-result-initial-zh';
+    const fixtureClipHash = createHash('sha256').update(fs.readFileSync(path.join(root, 'labs/earthquake/audio', audioId + '.mp3'))).digest('hex');
     const audioText = narrated.zh;
     const segments = [{ role: 'narrator', sourceText: audioText, spokenText: audioText }];
-    const audioEntry = { id: audioId, key: `lab:${audioId}`, owner: 'lab', itemId: 'result-initial', kind: 'result', lang: 'zh', text: audioText, segments, contentVersion: sourceData.contentVersion, textSha256: sha(audioText), utteranceSha256: sha(JSON.stringify({ kind: 'result', id: 'result-initial', lang: 'zh', text: audioText, segments })), output: `audio/${audioId}.mp3`, status: 'ready', fileSha256: 'a'.repeat(64) };
+    const audioEntry = { id: audioId, key: `lab:${audioId}`, owner: 'lab', itemId: 'result-initial', kind: 'result', lang: 'zh', text: audioText, segments, contentVersion: sourceData.contentVersion, textSha256: sha(audioText), utteranceSha256: sha(JSON.stringify({ kind: 'result', id: 'result-initial', lang: 'zh', text: audioText, segments })), output: `audio/${audioId}.mp3`, status: 'ready', fileSha256: fixtureClipHash };
     const manifest = { schemaVersion: 2, topicId: 'earthquake', owner: 'lab', contentVersion: sourceData.contentVersion, sourceSha256: sha(contentRaw), entries: [audioEntry] };
     const audioPage = await browser.newPage();
     await audioPage.addInitScript(() => {
@@ -269,6 +270,7 @@ const server = http.createServer((req, res) => {
     await audioPage.goto(`http://127.0.0.1:${server.address().port}/labs/earthquake/`);
     await audioPage.locator('#listen').waitFor({ state: 'visible' });
     await audioPage.locator('#listen').click();
+    await audioPage.waitForFunction(() => __audioLog.some(item => item.event === 'play'));
     assert.equal(await audioPage.evaluate(() => __audioLog.filter(item => item.event === 'play').length), 1, 'verified narration plays only on click');
     await audioPage.locator('#language').click();
     assert.equal(await audioPage.locator('#listen').isHidden(), true, 'partial manifest does not advertise English');
