@@ -183,6 +183,12 @@ module.exports = async function verifyRealAudio(browser, base, setNetworkAvailab
       }
     }
     setNetworkAvailable(false);
+    // Only this isolated browser's HTTP cache is cleared; all full PWA clips stay.
+    // Native media must prove Cache Storage playback, not reuse online buffering.
+    const mediaNetwork = await warm.context.newCDPSession(warm.page);
+    await mediaNetwork.send('Network.enable');
+    await mediaNetwork.send('Network.clearBrowserCache');
+    await mediaNetwork.send('Network.setCacheDisabled', { cacheDisabled: true });
     await warm.context.setOffline(true);
     await warm.page.goto(base + '/labs/earthquake/index.html');
     await warm.page.locator('#listen').waitFor({ state: 'visible' });

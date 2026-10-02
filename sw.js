@@ -325,9 +325,9 @@ async function serve(req, url) {
   var primary = await caches.open(asset ? ASSET_CACHE : SHELL_CACHE);
   var secondary = await caches.open(asset ? SHELL_CACHE : ASSET_CACHE);
 
-  var hit = await primary.match(req);
+  var hit = await matchStatic(primary, req, url);
   if (hit) return hit;
-  hit = await secondary.match(req);
+  hit = await matchStatic(secondary, req, url);
   if (hit) return hit;
 
   try {
@@ -341,6 +341,20 @@ async function serve(req, url) {
     if (asset) return new Response('', { status: 504, statusText: 'offline' });
     return new Response('离线', { status: 504, headers: { 'content-type': 'text/plain; charset=utf-8' } });
   }
+}
+
+/* A full MP3 GET and native Range playback can send different Accept-Encoding.
+   Public hosts add Vary: Accept-Encoding even to uncompressed audio. Reuse only
+   a complete, encoding-only audio variant at the exact URL; never ignore a
+   content-version query, another Vary dimension, or a partial response. */
+async function matchStatic(cache, req, url) {
+  var hit = await cache.match(req);
+  if (hit) return hit;
+  if (!/\.(mp3|m4a|ogg)$/i.test(url.pathname)) return null;
+  var full = await cache.match(req, { ignoreVary: true });
+  if (full && full.status === 200 && !full.headers.has('content-range') &&
+      (full.headers.get('vary') || '').trim().toLowerCase() === 'accept-encoding') return full;
+  return null;
 }
 
 /* ============================================================

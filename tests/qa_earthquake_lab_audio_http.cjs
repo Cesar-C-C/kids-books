@@ -9,6 +9,7 @@ function serveFile(req, res, file) {
   let start = 0, end = size - 1, status = 200;
   if (ext === '.mp3') {
     headers['Accept-Ranges'] = 'bytes';
+    headers.Vary = 'Accept-Encoding'; // GitHub Pages: fetch vs identity native-media variants.
     if (req.headers.range) {
       const match = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range);
       if (match && (match[1] || match[2])) {
@@ -43,6 +44,7 @@ if (require.main === module) {
       const full = await fetch(url);
       assert.equal(full.status, 200);
       assert.equal(full.headers.get('content-range'), null);
+      assert.equal(full.headers.get('vary'), 'Accept-Encoding');
       assert.deepEqual(Buffer.from(await full.arrayBuffer()), expected);
       for (const [range, start, end] of [['bytes=0-1023', 0, 1023], ['bytes=0-', 0, expected.length - 1], ['bytes=-64', expected.length - 64, expected.length - 1]]) {
         const partial = await fetch(url, { headers: { Range: range } });
