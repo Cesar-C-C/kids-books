@@ -7,6 +7,7 @@ const cp = require('node:child_process');
 const assert = require('node:assert/strict');
 const { createHash } = require('node:crypto');
 const pw = require(process.env.PLAYWRIGHT_MODULE || '../.qa-deps/node_modules/playwright');
+const nativeAudio = require('./qa_earthquake_book_native_audio.cjs');
 
 const root = path.resolve(__dirname, '..');
 const OLD = 'dce876b7d52c9c7554bda1aee42988c003aaf22e';
@@ -20,11 +21,13 @@ const parseManifest = source => {
 const previous = parseManifest(old['pwa-assets.js']);
 const current = parseManifest(fs.readFileSync(path.join(root, 'pwa-assets.js')));
 let stage = 'old';
+let networkAvailable = true;
 const requests = [];
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
   '.json': 'application/json', '.webmanifest': 'application/manifest+json',
   '.webp': 'image/webp', '.png': 'image/png', '.mp3': 'audio/mpeg' };
 const server = http.createServer((request, response) => {
+  if (!networkAvailable) return request.socket.destroy();
   const pathname = decodeURIComponent(new URL(request.url, 'http://local').pathname);
   let file = path.resolve(root, '.' + pathname);
   if (file !== root && !file.startsWith(root + path.sep)) return response.writeHead(403).end();
@@ -89,6 +92,7 @@ async function registrationState(page) {
   try {
     browser = await pw.chromium.launch({ channel: 'chrome', headless: true });
     const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    await nativeAudio.observe(context);
     await context.addInitScript(() => {
       const native = window.matchMedia.bind(window);
       window.matchMedia = query => query === '(display-mode: standalone)'
@@ -182,13 +186,30 @@ async function registrationState(page) {
         assert.equal(actual[url], hash, 'unrelated downloads and immutable media survive: ' + url);
       }
     }
+    networkAvailable = false;
     await context.setOffline(true);
+    const coldOffline = await page.evaluate(async () => {
+      const response = await fetch('books/earthquake/images/opening.webp?qa-upgrade-cold=' + crypto.randomUUID());
+      return response.status;
+    });
+    assert.equal(coldOffline, 504, 'an uncached valid image proves the upgraded worker network is truly disconnected');
     await page.goto(base + '/books/earthquake/index.html?lang=en#fault-lab');
     await page.waitForFunction(() => window.EarthquakeBook?.snapshot().audioState === 'idle');
     const currentSource = await page.evaluate(async () => (await fetch('story.json')).json());
     assert.equal(currentSource.scriptVersion, 'earthquake-story-v2', 'offline ordinary upgrade serves v2 text');
+    const invitation = manifest.entries.find(entry => entry.kind === 'scene' && entry.itemId === 'invitation' && entry.lang === 'en');
+    const invitationUrl = base + '/books/earthquake/' + invitation.output + '?v=' + encodeURIComponent(manifest.contentVersion);
+    const responseReady = page.waitForResponse(response => response.url() === invitationUrl);
     await page.locator('.listen[data-kind="scene"][data-item-id="invitation"]').click();
-    await page.waitForFunction(() => EarthquakeBook.snapshot().audioState === 'playing');
+    const invitationResponse = await responseReady;
+    assert.equal(invitationResponse.status(), 200);
+    assert.equal(invitationResponse.fromServiceWorker(), true, 'upgraded offline audio comes from the production worker');
+    assert.equal(createHash('sha256').update(await invitationResponse.body()).digest('hex'), invitation.fileSha256);
+    await page.waitForFunction(() => {
+      const audio = __bookNativeAudio.at(-1);
+      return EarthquakeBook.snapshot().audioState === 'playing' && audio instanceof HTMLAudioElement &&
+        !audio.paused && !audio.error && audio.duration > 0 && audio.currentTime > .12;
+    });
     await page.locator('#stop').click();
     await page.waitForFunction(() => EarthquakeBook.snapshot().audioState === 'stopped');
     assert.doesNotMatch(await page.locator('#edition').textContent(), /pending|待更新/i);
