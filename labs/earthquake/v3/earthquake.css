@@ -1,7 +1,7 @@
 :root{color-scheme:dark;--ink:#edf4ef;--muted:#a9bdbb;--night:#10252d;--panel:#173039;--border:#3c5960;--accent:#f0bd71;--cyan:#72ced5}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(circle at 9% 4%,#2b4040 0,transparent 31%),linear-gradient(135deg,#0a1e27,#142b32 55%,#1b3235);color:var(--ink);font-family:Inter,"Noto Sans SC","Microsoft YaHei",sans-serif;min-width:0}
+body{margin:0;background:radial-gradient(circle at 9% 4%,#2b4040 0,transparent 31%),linear-gradient(135deg,#0a1e27,#142b32 55%,#1b3235);color:var(--ink);font-family:Inter,"Noto Sans SC","Microsoft YaHei",sans-serif;min-width:0;height:auto;overflow:visible}
 button,a{font:inherit}
 button{cursor:pointer}
 button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}

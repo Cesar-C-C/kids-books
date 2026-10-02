@@ -186,6 +186,7 @@ jobs:
         run: |
           node tests/qa_earthquake_book_browser.cjs
           node tests/qa_earthquake_lab_browser.cjs
+          node tests/qa_earthquake_lab_scroll.cjs
 
       - name: Offline panel does not strand the next PWA update
         env:
