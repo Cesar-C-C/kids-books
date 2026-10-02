@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "topicId": "earthquake",
+  "status": "local-acceptance-passed-awaiting-ci-and-pages",
+  "humanPublicationRequest": "发布",
+  "publicationAuthorizedByUser": true,
+  "audioOwnerPublicationAuthorized": false,
+  "contentFreezeSha256": "f06b08850acd29228538116368106ae9a84c0b495dac7891ae6fa1d403e293ed",
+  "narrationDiffSha256": "cbcc78c4f1ca273edaa2332fdbf6dbf7334b72cb7ed9020ba59b9893bd9c5e1e",
+  "sourceSha256": {
+    "book": "7850516bab08c7cf1569e851a0418ac02727bf2929d2f987887477a090be700f",
+    "lab": "62dbdd96fcd45e76714395f30bffa53018c740444406e8a930ae9328ae44383d"
+  },
+  "sourceRepresentation": "Original frozen Windows bytes and exact canonical NFC/LF Git bytes are separately checked. No text, spaces, IDs, roles or utterances changed after the freeze.",
+  "generation": {
+    "ownerCommit": "1fbc960c6680698522da785281c4b948e7622c36",
+    "integratedCommit": "7aa2379",
+    "ready": 146,
+    "book": 74,
+    "lab": 72,
+    "generatedOrReplaced": 126,
+    "provenanceMatchedReuse": 20,
+    "retiredClipsPreservedButExcluded": 8,
+    "manifestSetSha256": "309f4eec63f1e75d14e9b54b1b4d76a2b3d22a526aeb464b2fbf43c02b15eb48",
+    "generationLockSha256": "d1081c8389a815e1e45ca69ee8d64abea477e0ea4ed378c05e3200abd0ec58aa",
+    "canonicalValidationReportSha256": "fc9ab7ca25506b1f700a49c2b83c69faea05e48efec6c20485bb310d5342039e",
+    "priorVoiceProfileAuditioned": true,
+    "v2ContentHumanAuditioned": false,
+    "listeningBoundary": "Technical checks and native playback do not establish subjective naturalness or human pronunciation acceptance."
+  },
+  "pwaVersion": "a47a2ba0b122",
+  "localAcceptance": {
+    "staticAndSourceLocks": "PASS",
+    "bookNativeOnline": 74,
+    "bookNativeDownloadedOffline": 74,
+    "labNativeOnline": 72,
+    "labNativeWarmedOffline": 72,
+    "trueOffline": "Servers disconnect sockets; uncached valid resource fails with 504. No page-only offline state is counted as network isolation.",
+    "labTransport": "Real Range probe returns 206 and is not cached. User play first verifies a full non-Range 200 response and binary SHA before native media. All 72 cached clips match their formal hashes.",
+    "coldLabFailure": "No native player constructed; accurate bilingual unavailable hint; model remains operable; restored-network retry clears failure.",
+    "installedUpgrade": "Ordinary refresh from published v1 349172b60646 to a47a2ba0b122, no unregister/storage clearing/manual registration.update/forced skipWaiting.",
+    "existingCacheEntriesPreservedOnUpgrade": 239,
+    "updatedBookClipCacheHashes": 74,
+    "upgradeBoundary": "Independent Chrome profile with standalone display-mode simulation; not a physical-device installation claim.",
+    "nativeScrollAndGestures": "PASS: wheel 820/1100px, vertical touch scroll without orbit, horizontal orbit and dialog scrolling.",
+    "primaryDirtyCheckout": "Untouched. Only the isolated earthquake release scope was integrated."
+  },
+  "externalAcceptance": {
+    "githubCi": "pending",
+    "pagesDeployment": "pending",
+    "publicBytesAndBrowser": "pending"
+  }
+}
