@@ -21,6 +21,7 @@ on:
       - 'books/**'
       - 'labs/**/index.html'
       - 'labs/**/*.js'
+      - 'labs/earthquake/**'
       - 'labs/shared/**'
       - 'icons/**'
       - 'tools/**'
@@ -42,6 +43,7 @@ on:
       - 'books/**'
       - 'labs/**/index.html'
       - 'labs/**/*.js'
+      - 'labs/earthquake/**'
       - 'labs/shared/**'
       - 'icons/**'
       - 'tools/**'
@@ -122,6 +124,20 @@ jobs:
           node tests/qa_moon_geometry.cjs
           node --test tests/pwa_upgrade.test.mjs tests/pwa_offline_contract.test.mjs
 
+      - name: Earthquake story, lab, narration and offline contracts
+        run: |
+          node tests/qa_earthquake_book_content.cjs
+          node tests/qa_earthquake_book_models.cjs
+          node tests/qa_earthquake_book_routes.cjs
+          node tests/qa_earthquake_book_audio.cjs
+          node tests/qa_earthquake_lab_model.cjs
+          node tests/qa_earthquake_lab_geometry.cjs
+          node tests/qa_earthquake_lab_routes.cjs
+          node tests/qa_earthquake_lab_audio.cjs
+          node tests/qa_earthquake_audio_manifest.cjs
+          node tests/qa_earthquake_audio_delivery.cjs
+          node tests/qa_earthquake_integration.cjs
+
       # 137 张 r2 插画的尺寸/体积契约，此前完全不在 CI 里
       - name: R2 illustration contract
         run: python qa_library_r2_assets.py
@@ -163,6 +179,20 @@ jobs:
           node tests/qa_moon_content.cjs
           node tests/qa_moon_offline.cjs
           node tests/qa_moon_audio_offline.cjs
+
+      - name: Earthquake browser interaction and bilingual offline narration
+        env:
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/.qa-deps/node_modules/playwright
+        run: |
+          node tests/qa_earthquake_book_browser.cjs
+          node tests/qa_earthquake_lab_browser.cjs
+
+      - name: Offline panel does not strand the next PWA update
+        env:
+          PLAYWRIGHT_MODULE: ${{ github.workspace }}/.qa-deps/node_modules/playwright
+        run: |
+          git fetch --no-tags --depth=1 origin 89e5a4ad332380e5c32f2b4bc1ce6d1733a508d5
+          node tests/qa_pwa_panel_upgrade.cjs
 
       # 缓存命中率：离线包下完后，强制 KBCDN 走 CDN 优先（国内真实环境），
       # 断言插图仍然 100% 命中 SW 缓存、一条跨境请求都不发。

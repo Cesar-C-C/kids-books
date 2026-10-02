@@ -37,5 +37,12 @@ window.LABS_CATALOG = [
     description: '绕到太空站侧面，转动太阳能翼、弯起机械臂，探索舱段、对接端口与穹顶观察窗的 37 个内部细节。',
     icon: '🛰', status: 'ready', href: 'station/index.html', image: 'station/preview.png', bookId: 'station', age: '4–8 岁',
     features: ['自由观察', '37 个内部细节', '英文点读', '主动打开与演示']
+  },
+  {
+    id: 'earthquake', title: '地震 3D 实验室', englishTitle: 'Earthquake Lab',
+    description: '转动岩层模型，观察断层先形变再滑动、地下震源与向外传播的振动。',
+    icon: '◈', status: 'ready', href: 'earthquake/index.html',
+    image: 'earthquake/preview.png', bookId: 'earthquake', age: '4–8 岁',
+    features: ['四张观察卡', '逆断层与波', '中英双语点读']
   }
 ];

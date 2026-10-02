@@ -35,3 +35,8 @@ books/schoolbus/audio/narration/_pending.json
 
 # Isolated feature worktrees
 .worktrees/
+
+# Earthquake narration masters and local voice references stay on this machine.
+# The release includes formal MP3s/manifests and the redacted per-file validation report.
+workbench/earthquake-audio-v1/*
+!workbench/earthquake-audio-v1/batch-validation.json

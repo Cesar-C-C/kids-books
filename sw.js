@@ -30,7 +30,7 @@
 
 // Manifest URL is regenerated with the content fingerprint: old installed clients
 // may still register with updateViaCache=imports, so an unversioned import stays stale.
-importScripts('./pwa-assets.js?v=f8f85f14131b');
+importScripts('./pwa-assets.js?v=38ad63f33db6');
 
 var KB = self.KB_ASSETS || { version: 'dev', shell: [], books: {} };
 var VERSION = KB.version || 'dev';
@@ -104,6 +104,10 @@ self.addEventListener('message', function (event) {
     event.waitUntil(status().then(function (s) { reply(port, event, s); }));
     return;
   }
+  if (msg.type === 'KB_LAB_STATUS') {
+    event.waitUntil(labStatus(msg.labId).then(function (s) { reply(port, event, s); }));
+    return;
+  }
   if (msg.type === 'KB_DOWNLOAD') {
     event.waitUntil(downloadBook(msg.bookId, port));
     return;
@@ -155,6 +159,22 @@ async function status() {
 function urlPath(p) {
   var u = new URL(abs(p));
   return u.pathname + u.search;
+}
+
+/* A lab is offline-ready only when every required file is in this worker's
+   versioned shell cache. Book downloads live in a different persistent cache. */
+async function labStatus(labId) {
+  var result = { type: 'KB_LAB_STATUS', labId: labId, ready: false, version: VERSION };
+  if (labId !== 'earthquake') return result;
+  var lab = KB.labs && KB.labs[labId];
+  if (!lab || !Array.isArray(lab.files) || !lab.files.length) return result;
+  var cache = await caches.open(SHELL_CACHE);
+  for (var i = 0; i < lab.files.length; i++) {
+    var response = await cache.match(abs(lab.files[i]));
+    if (!response || response.status !== 200) return result;
+  }
+  result.ready = true;
+  return result;
 }
 
 /* ============================================================

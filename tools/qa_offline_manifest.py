@@ -49,10 +49,30 @@ def norm(p):
     return p.replace('\\', '/')
 
 
+def earthquake_lab_problems(manifest):
+    """Keep required lab pages cached, while narration remains on-demand."""
+    lab = manifest.get('labs', {}).get('earthquake')
+    if lab is None:
+        return ['[earthquake lab] missing core inventory'] if os.path.isdir(os.path.join(REPO, 'labs', 'earthquake')) else []
+    core = lab.get('files')
+    if not isinstance(core, list) or not core or 'labs/earthquake/index.html' not in core:
+        return ['[earthquake lab] invalid core inventory']
+    shell = set(manifest.get('shell', []))
+    result = ['[earthquake lab] core asset absent from shell: ' + item for item in core if item not in shell]
+    audio = lab.get('onDemandAudio', [])
+    for item in audio:
+        if not item.startswith('labs/earthquake/audio/') or not item.endswith('.mp3'):
+            result.append('[earthquake lab] invalid on-demand audio: ' + str(item))
+        if any(asset.split('?')[0] == item for asset in shell):
+            result.append('[earthquake lab] on-demand audio entered shell: ' + item)
+    return result
+
+
 def main():
     mf = load_manifest()
     books = mf.get('books', {})
     shell = set(norm(x) for x in mf.get('shell', []))
+    problems.extend(earthquake_lab_problems(mf))
 
     print('离线清单版本 %s（audioVer=%s），shell %d 项，books %d 本'
           % (mf.get('version'), mf.get('audioVer'), len(shell), len(books)))

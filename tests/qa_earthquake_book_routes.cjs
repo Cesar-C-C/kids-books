@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),fs=require('node:fs');
+assert(fs.existsSync(require('node:path').join(__dirname,'../books/earthquake/navigation.js')),'navigation not implemented');
+const N=require('../books/earthquake/navigation.js');
+assert.equal(N.buildLabHref('fault-lab','zh'),'../../labs/earthquake/index.html?lang=zh&from=earthquake-fault#elastic-rebound');
+assert.equal(N.buildLabHref('wave-lab','en'),'../../labs/earthquake/index.html?lang=en&from=earthquake-waves#waves');
+assert.deepEqual(N.parseBookLocation('?lang=en&returnUrl=https://evil.test','#fault-lab'),{lang:'en',chapter:'fault-lab'});
+assert.deepEqual(N.parseBookLocation('?lang=xx','#wrong'),{lang:'zh',chapter:null});
+assert.throws(()=>N.buildLabHref('https://evil.test','en'));
+for(const cached of [false,null,undefined])assert.equal(N.canEnterLab({online:false,cached}),false);
+assert.equal(N.canEnterLab({online:false,cached:true}),true);assert.equal(N.canEnterLab({online:true,cached:false}),true);
+console.log('EARTHQUAKE_ROUTES_PASS');
