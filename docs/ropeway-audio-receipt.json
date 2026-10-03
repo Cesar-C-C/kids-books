@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "subject": "ropeway-lab",
+  "status": "local-author-verified",
+  "published": false,
+  "sourceSha256": "04a80621f72d0ad316af6c2fd96d6990099b96750f4e5d927f4e477b66c53231",
+  "narrationLockSha256": "2362d349b3fda427294053bc6ad32d04a409064002165e47d364698b83a000f7",
+  "origin": {
+    "taskThreadId": "01a0a5bf-2836-74b3-8e26-0b7649a1da5a",
+    "generationLockSha256": "28b839846b769613258adb69ec6e206b27ddebe9329741d9a65a78aa2023e524",
+    "validationReportSha256": "8612cf43d344ee41c28ba711e45e0bde537f46f85ed005696ba8e9776aa7dd17",
+    "manifestRawSha256": "dfb27c83264259b29b117408bff63edc831a674f9864c8f585657a64d19b8177",
+    "manifestCanonicalSha256": "51e93ba600c764cb54dfb0db83a8780254c0a62926a0ea1467971ce7133ffbae"
+  },
+  "adoption": {
+    "tracks": 32,
+    "manifestSha256": "51e93ba600c764cb54dfb0db83a8780254c0a62926a0ea1467971ce7133ffbae",
+    "manifestChange": "CRLF to LF only; canonical contents equal to the delivered manifest.",
+    "mp3Changes": "None: all 32 copied byte-for-byte and SHA verified; no WAV masters adopted."
+  },
+  "engine": {
+    "name": "Fun-CosyVoice 3",
+    "actualInferenceMode": "inference_zero_shot",
+    "precision": "CUDA FP32",
+    "sampleRate": 24000,
+    "channels": 1,
+    "historicalProfileClarification": "Historical profile is labelled instruct2. This batch uses same-language zero-shot reference WAV/transcript pairs; direction strings were not applied."
+  },
+  "encoding": {
+    "codec": "MP3/MPEG_LAYER_III",
+    "uniformGain": 0.88,
+    "mastersUnchanged": true
+  },
+  "references": {
+    "zh": {
+      "sha256": "c7b31d6dbe7cc6a716dded00550db5b50940bf209e424e4ad207b12e657c8ff6",
+      "transcriptSha256": "4ff1a7dd8cb643e4f769735733e7547ff66aa5b29d99f674131f3fb448446efa",
+      "structuralPromptSha256": "399da23bed7f3e87de48b0db309a3c45b0c74d3d31dd8f06011caca6499591e2"
+    },
+    "en": {
+      "sha256": "e72a4a04b1090d86ba4bf8877cf76b1d7ef2bcf8a3a98e2a152e27a135083306",
+      "transcriptSha256": "f965e00b9710bc8a73daa73b955db41e21aa6cd04650e2f3e0f9430bbfd91f40",
+      "structuralPromptSha256": "d5fe9bfc753ee2ab4031ceda43666382e98bf32c5c533562c6a7a3f64642c280"
+    }
+  },
+  "playback": {
+    "status": "PASS",
+    "reportSha256": "3bad7cefe4d7dedc492cef9d8218dfea28f70571ed3b739474e619e9479245ee",
+    "runtimeSha256": "f42b6db649a819cd27883c98610450d6a0591302aac92ad7995b19ea84b67dae",
+    "formalAudio": "ready",
+    "online": 32,
+    "offline": 32,
+    "maxDecodedPeak": 0.9113863110542297,
+    "minDecodedRms": 0.05470817388785908,
+    "offlineCatalogEntry": true,
+    "coldOfflineBeforeAnyOnlineAudio": true,
+    "exactVersionedPrecacheKeys": 32,
+    "cache": [
+      "kb-shell-26916fbb893d",
+      "kb-asset-v1"
+    ],
+    "missingAssets": [],
+    "pageErrors": []
+  },
+  "humanListening": {
+    "acceptedAuditionsReusedExactly": [
+      "brakes-zh",
+      "types-en"
+    ],
+    "remainingTracksIndividuallyListened": false,
+    "technicalVerificationIsNotAClaimOfHumanListening": true
+  },
+  "qualityNotes": {
+    "observedShorterThanPromptWarnings": [
+      {
+        "track": "decelerate-zh",
+        "detail": "The exact source segment is shorter than the required structural zero-shot prompt; no transcript was altered."
+      },
+      {
+        "track": "auxiliary-en",
+        "detail": "The final sentence chunk is shorter than the prompt; combined track decodes to 21.88 seconds."
+      }
+    ],
+    "durationAudit": "All 32 decoded MP3s passed 0.5-120 second bounds, energy and peak headroom checks; no clipping, non-finite samples, or duration mismatch detected."
+  },
+  "limits": [
+    "Source contracts, decoding and UI playback do not establish naturalness or pronunciation acceptance for the remaining 30 clips.",
+    "Author browser/CDP evidence is not physical-device or original installed-PWA acceptance.",
+    "Independent QA and new-main integration are recorded separately; no ropeway publication authority inferred."
+  ]
+}
