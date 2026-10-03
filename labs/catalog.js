@@ -39,6 +39,12 @@ window.LABS_CATALOG = [
     features: ['自由观察', '37 个内部细节', '英文点读', '主动打开与演示']
   },
   {
+    id: 'ropeway', title: '索道 3D 实验室', englishTitle: 'Gondola Ropeway Lab',
+    description: '跟随一辆吊厢，近看站内脱挂、输送减速、重新夹紧和有条件的保护停机。',
+    icon: '🚡', status: 'ready', href: 'ropeway/index.html', image: 'ropeway/preview.png', age: '4–8 岁',
+    features: ['连续运行模型', '站内七步近看', '中英讲解', '安全机制与限制']
+  },
+  {
     id: 'earthquake', title: '地震 3D 实验室', englishTitle: 'Earthquake Lab',
     description: '转动岩层模型，观察断层先形变再滑动、地下震源与向外传播的振动。',
     icon: '◈', status: 'ready', href: 'earthquake/index.html',

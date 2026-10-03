@@ -98,6 +98,58 @@ def earthquake_lab_inventory(repo):
     }
 
 
+def ropeway_audio_inventory(repo):
+    """Precache the exact source-bound MP3 URLs, never unversioned substitutes."""
+    base = os.path.join(repo, 'labs', 'ropeway')
+    audio_dir = os.path.join(base, 'audio')
+    disk_files = ({name for name in os.listdir(audio_dir) if name.endswith('.mp3')}
+                  if os.path.isdir(audio_dir) else set())
+    manifest_path = os.path.join(base, 'audio-manifest.js')
+    if not os.path.isfile(manifest_path):
+        if disk_files:
+            raise ValueError('Ropeway audio exists without its runtime manifest')
+        return []
+    with open(manifest_path, encoding='utf-8') as source:
+        text = source.read().strip()
+    # The pre-narration placeholder is a fixed JS literal; never evaluate JS.
+    if re.fullmatch(r"window\.ROPEWAY_AUDIO_MANIFEST\s*=\s*\{status:'pending',sourceSha256:null,tracks:\{\}\};", text):
+        payload = {'status': 'pending', 'tracks': {}}
+    else:
+        match = re.fullmatch(r'window\.ROPEWAY_AUDIO_MANIFEST\s*=\s*(\{.*\});', text, re.S)
+        if not match:
+            raise ValueError('Unsupported ropeway audio manifest assignment')
+        payload = json.loads(match.group(1))
+    if payload.get('status') == 'pending' and not payload.get('tracks') and not disk_files:
+        return []
+    tracks = payload.get('tracks', {})
+    if (payload.get('status') != 'ready' or len(tracks) != 32
+            or not re.fullmatch(r'[a-f0-9]{64}', payload.get('sourceSha256', ''))):
+        raise ValueError('Expected the frozen 32-track ready ropeway audio manifest')
+    urls, names, pairs = [], set(), {}
+    for key, track in tracks.items():
+        identity = re.fullmatch(r'([a-z][a-z0-9-]*)-(zh|en)', key)
+        digest = track.get('sha256', '')
+        if not identity or not re.fullmatch(r'[a-f0-9]{64}', digest):
+            raise ValueError('Invalid ropeway track identity/hash: ' + key)
+        filename = key + '.mp3'
+        expected_url = 'audio/' + filename + '?v=' + digest[:12]
+        if track.get('file') != expected_url:
+            raise ValueError('Ropeway track URL must use its exact local hash version: ' + key)
+        path = os.path.join(audio_dir, filename)
+        if not os.path.isfile(path):
+            raise ValueError('Missing ropeway MP3: ' + filename)
+        with open(path, 'rb') as source:
+            raw = source.read()
+        if hashlib.sha256(raw).hexdigest() != digest or len(raw) != track.get('bytes'):
+            raise ValueError('Ropeway MP3 bytes do not match manifest: ' + key)
+        names.add(filename)
+        pairs.setdefault(identity.group(1), set()).add(identity.group(2))
+        urls.append('labs/ropeway/' + expected_url)
+    if names != disk_files or any(languages != {'zh', 'en'} for languages in pairs.values()):
+        raise ValueError('Ropeway MP3 inventory must contain exactly 16 bilingual pairs')
+    return sorted(urls)
+
+
 def rel_files(*dirs):
     """按目录列举仓库内文件（相对路径，正斜杠）。"""
     found = []
@@ -202,6 +254,9 @@ def main():
     if earthquake_lab is not None:
         lab_files = [f for f in lab_files if not f.startswith('labs/earthquake/')]
         lab_files.extend(earthquake_lab['files'])
+    ropeway_audio = ropeway_audio_inventory(REPO)
+    lab_files = [f for f in lab_files if not f.startswith('labs/ropeway/audio/')]
+    lab_files.extend(ropeway_audio)
 
     # 书架封面用的小派生图（480px，见 tools/gen_pwa_covers.py）必须进外壳预缓存：
     # 线上封面走 jsDelivr 是跨域请求，Service Worker 按设计放行不缓存；只靠

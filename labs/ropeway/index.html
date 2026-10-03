@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#146f75">
+<link rel="manifest" href="../../manifest.webmanifest"><link rel="icon" href="../../icons/favicon-32.png"><link rel="stylesheet" href="../../shared/pwa.css">
+<link rel="stylesheet" href="ropeway.css"><title>索道怎样带我们上山？ · 3D 实验室</title>
+<link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="小小探索家">
+</head>
+<body>
+<main>
+<header><a href="../index.html" data-ui="back">← 3D 实验室</a><button id="language" type="button">EN / 中</button></header>
+<div class="intro"><p class="eyebrow">MECHANISM FIELD NOTES / 08</p><h1 data-ui="title">索道怎样带我们上山？</h1><p data-ui="subtitle">跟着一辆珊瑚色吊厢，看它怎样换一种走法。</p><p class="scope" data-ui="scope">单线 · 可脱挂 · 循环吊厢｜机制示意，非操作指南</p></div>
+<nav class="modes" aria-label="Observation modes">
+<button type="button" data-mode="journey" aria-pressed="true" data-ui="journey">吊厢的一圈</button><button type="button" data-mode="safety" aria-pressed="false" data-ui="safety">停下来，也是保护</button><button type="button" data-mode="tension" aria-pressed="false" data-ui="tension">会移动的框架</button>
+</nav>
+<div class="workbench">
+<section class="theater" aria-label="Ropeway model">
+<div class="scene-heading"><span data-ui="cutawayLabel">山谷索道 / 透视观察</span><span id="motion-status" role="status"></span></div>
+<div id="stage" role="region" aria-label="Rotatable ropeway model"><div id="fallback" hidden></div><div class="scene-caption"><strong id="stage-lesson"></strong><span id="stage-clue"></span></div><p id="render-note" hidden data-ui="fallbackNote">3D 暂时不可用：下方俯视示意仍可操作同一机制。</p></div>
+<div class="legend"><span class="rope-dot" data-ui="ropeLegend">深色：环形钢索</span><span class="rail-dot" data-ui="railLegend">浅色：站内轨道</span><span class="car-dot" data-ui="carLegend">珊瑚色：跟随吊厢</span></div>
+<div class="transport"><button id="play" type="button" class="primary" data-ui="play">运行这一圈</button><button id="pause" type="button" data-ui="pause">暂停观察</button><button id="step" type="button" data-ui="step">走一小步</button><button id="reset" type="button" data-ui="reset">重置示意</button></div>
+<div id="journey-tools"><button id="follow" type="button" aria-pressed="false" data-ui="follow">跟随珊瑚色吊厢</button><details class="phase-tools"><summary data-ui="phaseTools">把站内过程暂停在一步</summary><div id="phase-buttons" class="phase-buttons" aria-label="Station mechanism phases"></div></details></div>
+<div id="safety-tools" hidden><div class="safety-actions"><button id="grip-fault" type="button" data-ui="gripFault">观察夹紧检查异常</button><button id="power-fault" type="button" data-ui="powerFault">观察主驱动不可用</button><button id="auxiliary" type="button" disabled data-ui="auxiliary">条件允许：辅助驱动示例</button></div><p data-ui="safetyLimit">不能用辅助驱动绕过夹紧异常。真实处置由专业人员按预案判断。</p></div>
+<div id="tension-tools" hidden><label for="stretch" data-ui="stretch">示意钢索长度变化</label><input id="stretch" type="range" min="0" max="1" step=".05" value="0"><p data-ui="stretchLimit">只观察框架位移，不计算实际温度、张力或液压参数。</p></div>
+<details class="view-tools"><summary data-ui="viewTools">观察角度与外壳</summary><div><button id="overview" type="button" data-ui="overview">整个山谷</button><button id="station-view" type="button" data-ui="stationView">站内近看</button><button id="drive-view" type="button" data-ui="driveView">驱动与制动</button><button id="top-view" type="button" data-ui="topView">俯视路线</button><button id="zoom-in" type="button" data-ui="zoomIn">放大 ＋</button><button id="zoom-out" type="button" data-ui="zoomOut">缩小 −</button><button id="roof" type="button" aria-pressed="true" data-ui="roof">显示外壳</button></div><p data-ui="gesture">鼠标拖动旋转；触屏横滑旋转、竖滑页面。也可以使用上面的视角按钮。</p></details>
+</section>
+<aside class="evidence">
+<p class="eyebrow" data-ui="evidence">正在看的线索</p><h2 id="lesson-title"></h2><p id="lesson-text"></p>
+<div class="measurements"><div><span data-ui="gripLabel">抱索器</span><strong id="grip-status"></strong></div><div><span data-ui="supportLabel">站内轨道</span><strong id="support-status"></strong></div><div><span data-ui="speedLabel">吊厢 / 钢索示意速度</span><strong id="speed-status"></strong></div><div><span data-ui="driveLabel">驱动 / 制动状态</span><strong id="drive-status"></strong></div></div>
+<div class="audio-row"><button id="listen" type="button" disabled data-ui="listen">听这一句</button><button id="audio-stop" type="button" data-ui="audioStop">停止朗读</button><span id="audio-status" role="status"></span></div>
+<details id="care"><summary data-ui="care">安全不只靠一个零件</summary><p id="care-text"></p><p id="brake-text"></p></details>
+<details id="types"><summary data-ui="types">这不是所有索道的样子</summary><p id="types-text"></p><div class="type-map" aria-hidden="true"><span>1S · 支撑 + 牵引</span><span>2S · 支撑 / 牵引</span><span>3S · 支撑 + 支撑 / 牵引</span><span>↔ 往复式 / Reversible</span></div></details>
+<details id="limits"><summary data-ui="limits">模型没有模拟什么？</summary><p id="limits-text"></p></details>
+</aside></div>
+<section class="reading"><h2 data-ui="reading">再找一条线索</h2><div id="reading-cards"></div></section>
+<details class="sources"><summary data-ui="sources">来源与适用范围</summary><p data-ui="sourceNote">制造商配置与运营案例分别标明。GB 12352-2018 仅核对官方题录，未作条款级符合性审核；所有比例和时间都是教学示意。</p><ol id="sources-list"></ol></details>
+<footer><p id="voice-note" data-ui="voicePending">本地模型候选 · 正式双语点读尚未接入 · 未上线</p></footer>
+</main><noscript>需要启用 JavaScript 才能操作模型。此模型不是设备操作指南。</noscript>
+<script src="../shared/vendor/three.min.js"></script><script src="model.js"></script><script src="content.js"></script><script src="scene.js"></script><script src="audio-manifest.js"></script><script src="audio.js"></script><script src="app.js"></script><script src="../../shared/pwa.js"></script>
+</body></html>

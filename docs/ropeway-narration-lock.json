@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "subject": "ropeway-lab",
+  "status": "frozen",
+  "source": "labs/ropeway/content.js",
+  "sourceSha256": "04a80621f72d0ad316af6c2fd96d6990099b96750f4e5d927f4e477b66c53231",
+  "reviewTurn": "01a0ff2d-3370-7242-97ad-84529b6cda16",
+  "engine": "Fun-CosyVoice 3",
+  "publicationAllowed": false,
+  "format": "MP3 runtime; finite-sample verified WAV masters outside labs/",
+  "tracks": [
+    {
+      "id": "loop-zh",
+      "lessonId": "loop",
+      "lang": "zh",
+      "title": "一根索，走一圈",
+      "text": "驱动轮带着一根环形钢索走。区间里的吊厢夹住这根索，一起前进。",
+      "textSha256": "1eb175fb8c46f0673d45077df4a7f22255980243b25fde401c235b72d358c7b8",
+      "runtimeFile": "labs/ropeway/audio/loop-zh.mp3"
+    },
+    {
+      "id": "loop-en",
+      "lessonId": "loop",
+      "lang": "en",
+      "title": "One rope, one loop",
+      "text": "A drive wheel moves one endless rope. On the line, each cabin grips that rope and travels with it.",
+      "textSha256": "774d738b93e97072bdfd83a30e9d0a1ab07d701f027f362f2fc61a63ec1a9146",
+      "runtimeFile": "labs/ropeway/audio/loop-en.mp3"
+    },
+    {
+      "id": "support-zh",
+      "lessonId": "support",
+      "lang": "zh",
+      "title": "先让轨道接住",
+      "text": "进站时，吊厢上方的运行轮先进入轨道。轨道接住吊厢，它才可以松开钢索。",
+      "textSha256": "f2f3e9163c11825dbc900083fd4d9575e91107fd40519d1d27b65aac3de68689",
+      "runtimeFile": "labs/ropeway/audio/support-zh.mp3"
+    },
+    {
+      "id": "support-en",
+      "lessonId": "support",
+      "lang": "en",
+      "title": "The rail supports it first",
+      "text": "As the cabin enters the station, the running wheels above it move onto the station rail. The rail supports the cabin before the grip opens.",
+      "textSha256": "36fd401ea20dc4f9eef851bc28af0ce71ae6114ca7ca61adfb2b45c43ceb24ea",
+      "runtimeFile": "labs/ropeway/audio/support-en.mp3"
+    },
+    {
+      "id": "detach-zh",
+      "lessonId": "detach",
+      "lang": "zh",
+      "title": "松开，但没有掉下来",
+      "text": "抱索器，就是抓住钢索的夹子。夹子打开后，轨道托着吊厢，输送轮胎带着它前进。",
+      "textSha256": "21775be2d3e8bf88025daaa9bab18e3623b703370fd0dadc78c8f6238998447a",
+      "runtimeFile": "labs/ropeway/audio/detach-zh.mp3"
+    },
+    {
+      "id": "detach-en",
+      "lessonId": "detach",
+      "lang": "en",
+      "title": "Released, but still supported",
+      "text": "The grip is the clamp that holds the rope. When it opens, the station rail supports the cabin and conveyor tires move it onward.",
+      "textSha256": "03babc85c173f107639522d4d6a76bb8e5828d345fc7e9eca0f070b8eecb9f01",
+      "runtimeFile": "labs/ropeway/audio/detach-en.mp3"
+    },
+    {
+      "id": "decelerate-zh",
+      "lessonId": "decelerate",
+      "lang": "zh",
+      "title": "钢索快，吊厢慢",
+      "text": "钢索继续走。吊厢松开钢索后，站内的输送轮胎让吊厢减速。",
+      "textSha256": "134e0a06ae27b9a27d25dbf0b5d044aed700eca6678da9edd134511e7a9834a6",
+      "runtimeFile": "labs/ropeway/audio/decelerate-zh.mp3"
+    },
+    {
+      "id": "decelerate-en",
+      "lessonId": "decelerate",
+      "lang": "en",
+      "title": "Fast rope, slower cabin",
+      "text": "The rope keeps moving. After the grip releases the rope, the station's conveyor tires slow the cabin down.",
+      "textSha256": "f5c962552f9d5da5d87c5c94190606d6d3343c53d3b871dec54a44ba6747f039",
+      "runtimeFile": "labs/ropeway/audio/decelerate-en.mp3"
+    },
+    {
+      "id": "board-zh",
+      "lessonId": "board",
+      "lang": "zh",
+      "title": "慢慢经过乘降区",
+      "text": "吊厢低速经过乘降区，方便乘客上下。真实乘坐时，要听从工作人员的指引。",
+      "textSha256": "4bfbfa1f55173254956bcc0e9ebd1ea98b2d9d9a332c4784a65e7ee93366b988",
+      "runtimeFile": "labs/ropeway/audio/board-zh.mp3"
+    },
+    {
+      "id": "board-en",
+      "lessonId": "board",
+      "lang": "en",
+      "title": "Through the boarding area",
+      "text": "The cabin passes the boarding area slowly, making it easier to get on and off. On a real ride, follow the staff's instructions.",
+      "textSha256": "eb54eadcd7e9021de78ce087107304e3b7c19923033d0e9f0a56dc1a05e28939",
+      "runtimeFile": "labs/ropeway/audio/board-en.mp3"
+    },
+    {
+      "id": "accelerate-zh",
+      "lessonId": "accelerate",
+      "lang": "zh",
+      "title": "加速到和钢索一样快",
+      "text": "离开乘降区后，输送轮胎让吊厢加速。吊厢对齐钢索，并达到和钢索一样的速度，然后再重新夹住它。",
+      "textSha256": "98645d7df3453cd13db573400ef8f5ef6f98b39b147a2420476364d9925aef10",
+      "runtimeFile": "labs/ropeway/audio/accelerate-zh.mp3"
+    },
+    {
+      "id": "accelerate-en",
+      "lessonId": "accelerate",
+      "lang": "en",
+      "title": "Speed up to match the rope",
+      "text": "After leaving the boarding area, conveyor tires speed up the cabin. It lines up with the rope and reaches the same speed before gripping it again.",
+      "textSha256": "30f2585cdcb492d470b6b2c0d58575c3a85c4374caff54af6cac8c420c7ca64b",
+      "runtimeFile": "labs/ropeway/audio/accelerate-en.mp3"
+    },
+    {
+      "id": "couple-zh",
+      "lessonId": "couple",
+      "lang": "zh",
+      "title": "重新夹住",
+      "text": "抱索器的钳口重新闭合，夹住钢索。夹住后，还要检查有没有正确夹紧。",
+      "textSha256": "791b36e8b91d0a51111928871e0d9e17b7b03c04bd6e08615864ed85f84df8dc",
+      "runtimeFile": "labs/ropeway/audio/couple-zh.mp3"
+    },
+    {
+      "id": "couple-en",
+      "lessonId": "couple",
+      "lang": "en",
+      "title": "Grip the rope again",
+      "text": "The grip's jaw closes around the rope again. Next, the system checks whether it has gripped correctly.",
+      "textSha256": "ae8f8d4593a3c1216d6125e8591f69b9fc82c18064a131834a258626b16828e6",
+      "runtimeFile": "labs/ropeway/audio/couple-en.mp3"
+    },
+    {
+      "id": "check-zh",
+      "lessonId": "check",
+      "lang": "zh",
+      "title": "检查后，才离站",
+      "text": "检测装置检查重新夹紧的过程。只有检查正常，吊厢才继续离站。",
+      "textSha256": "a55317e460417309344a4260a62280e78cc52088f2ed9617bb945fbb01e64da2",
+      "runtimeFile": "labs/ropeway/audio/check-zh.mp3"
+    },
+    {
+      "id": "check-en",
+      "lessonId": "check",
+      "lang": "en",
+      "title": "Checked before departure",
+      "text": "Monitoring equipment checks the coupling process. The cabin continues out only when the checks are normal.",
+      "textSha256": "ecf3e6c3b7426a0003d2e7eeae430d1ca164690a080cab2896a11078ea1709b5",
+      "runtimeFile": "labs/ropeway/audio/check-en.mp3"
+    },
+    {
+      "id": "rollers-zh",
+      "lessonId": "rollers",
+      "lang": "zh",
+      "title": "小轮子，引导钢索",
+      "text": "支架上的轮组托住、引导钢索。去程和回程的钢索方向相反，两侧轮子也向相反方向转。",
+      "textSha256": "fa53476c9283e7afc8d96f70ac3f92a09051b572e26389c545fed88457356969",
+      "runtimeFile": "labs/ropeway/audio/rollers-zh.mp3"
+    },
+    {
+      "id": "rollers-en",
+      "lessonId": "rollers",
+      "lang": "en",
+      "title": "Small wheels guide the rope",
+      "text": "Sheave assemblies on the towers support and guide the rope. Opposite rope directions turn the two sets of sheaves in opposite directions.",
+      "textSha256": "649c5854378fe911138598e26935a3f21bb995b12a48354f77da60395e116a79",
+      "runtimeFile": "labs/ropeway/audio/rollers-en.mp3"
+    },
+    {
+      "id": "tension-zh",
+      "lessonId": "tension",
+      "lang": "zh",
+      "title": "会移动的驱动框架",
+      "text": "这是一种可移动驱动框架的配置。钢索长度变化时，框架移动，用来补偿变化。",
+      "textSha256": "daedd61bd297439182017e6f63899d7901911c1f2249fe136a3283814bb28f26",
+      "runtimeFile": "labs/ropeway/audio/tension-zh.mp3"
+    },
+    {
+      "id": "tension-en",
+      "lessonId": "tension",
+      "lang": "en",
+      "title": "A sliding drive frame",
+      "text": "This example has a sliding drive frame. As rope length changes, the frame can move to compensate.",
+      "textSha256": "853ed17133e88a0c876821835806c4bd40bca08b623b4dc075abcd5f1f9eb9cb",
+      "runtimeFile": "labs/ropeway/audio/tension-en.mp3"
+    },
+    {
+      "id": "monitor-zh",
+      "lessonId": "monitor",
+      "lang": "zh",
+      "title": "检查未通过，先停下",
+      "text": "这个例子里，夹紧检查没有通过。主驱动和站内输送一起减速停下，不让这辆吊厢继续离站。",
+      "textSha256": "c4f617d6408b72a39e280f189794f32217b25eeaa021bf1366dcd04eca60600f",
+      "runtimeFile": "labs/ropeway/audio/monitor-zh.mp3"
+    },
+    {
+      "id": "monitor-en",
+      "lessonId": "monitor",
+      "lang": "en",
+      "title": "Failed check: stop first",
+      "text": "In this example, the coupling check fails. The main drive and station conveyor slow down and stop together, so the cabin does not continue out of the station.",
+      "textSha256": "946df654b4ad8a13c386415467156bf10fe163ea247e00e97da42aa1e332ecdd",
+      "runtimeFile": "labs/ropeway/audio/monitor-en.mp3"
+    },
+    {
+      "id": "brakes-zh",
+      "lessonId": "brakes",
+      "lang": "zh",
+      "title": "两处制动，不是吊厢刹车",
+      "text": "这个配置的工作制动器作用在减速器输入端的飞轮，安全制动器作用在驱动轮。它们不是装在每个吊厢上的刹车。",
+      "textSha256": "0b8076fe4202326a359fc519b6115830f2d25f29c1ae3b1b2e6708e3a13e49d7",
+      "runtimeFile": "labs/ropeway/audio/brakes-zh.mp3"
+    },
+    {
+      "id": "brakes-en",
+      "lessonId": "brakes",
+      "lang": "en",
+      "title": "Two brake locations, not cabin brakes",
+      "text": "In this configuration, the service brake acts on the flywheel at the gearbox input, and the safety brake acts on the drive wheel. They are not brakes on every cabin.",
+      "textSha256": "d471e2ea5f7a24b47ff14f5f832603824b34500b590586a7b1b4d4baba3717f8",
+      "runtimeFile": "labs/ropeway/audio/brakes-en.mp3"
+    },
+    {
+      "id": "auxiliary-zh",
+      "lessonId": "auxiliary",
+      "lang": "zh",
+      "title": "辅助驱动，有条件使用",
+      "text": "这个例子里，主驱动不能工作，但监测和控制仍可用，其他检查也正常。只有条件允许，辅助驱动才低速带回吊厢。这不代表可以恢复营业。真实处置由专业人员判断。",
+      "textSha256": "5f3194ce3b7531978f47658a1f4c3c4a4c48ed34cbc9b40d2614f99cd4bfdfb9",
+      "runtimeFile": "labs/ropeway/audio/auxiliary-zh.mp3"
+    },
+    {
+      "id": "auxiliary-en",
+      "lessonId": "auxiliary",
+      "lang": "en",
+      "title": "Auxiliary drive, with conditions",
+      "text": "In this example, the main drive cannot work, but monitoring and controls are still available and the other checks are normal. Only when conditions allow can the auxiliary drive bring cabins back slowly. This does not mean passenger service can restart. Trained staff decide how to respond on a real ropeway.",
+      "textSha256": "19418eaff98b83ae74f2e9b89d2b242b065be3022228d8dff16c667b38b8d23a",
+      "runtimeFile": "labs/ropeway/audio/auxiliary-en.mp3"
+    },
+    {
+      "id": "care-zh",
+      "lessonId": "care",
+      "lang": "zh",
+      "title": "安全，还需要人的工作",
+      "text": "安全不只靠传感器。专业人员还要检查、维护设备，并准备和演练救援预案。",
+      "textSha256": "6e41595cab4bf19ee734b7c2cf55a5aea7bb2e461805b5efbbab4637d19c2fa5",
+      "runtimeFile": "labs/ropeway/audio/care-zh.mp3"
+    },
+    {
+      "id": "care-en",
+      "lessonId": "care",
+      "lang": "en",
+      "title": "Safety also needs people",
+      "text": "Safety needs more than sensors. Professionals inspect and maintain the equipment, and prepare and practise rescue plans.",
+      "textSha256": "a66c3029be4d63f6d9280ef174533ceb9a6f3835d5b19d21832c4954ba61e67a",
+      "runtimeFile": "labs/ropeway/audio/care-en.mp3"
+    },
+    {
+      "id": "types-zh",
+      "lessonId": "types",
+      "lang": "zh",
+      "title": "钢索怎样分工？吊厢怎样走？",
+      "text": "本模型是单线循环式：同一根钢索既托住吊厢，又带着它走。双线用不同的索分担承载和牵引；三线用两根承载索和一根牵引索。“循环”和“往返”说的是另一件事：吊厢绕圈走，或在车站之间来回走。往复式也可以有不同的钢索配置。",
+      "textSha256": "f91b68d816c491cd4145d47420fc771d8c531c192761dda8b209d9736be8681b",
+      "runtimeFile": "labs/ropeway/audio/types-zh.mp3"
+    },
+    {
+      "id": "types-en",
+      "lessonId": "types",
+      "lang": "en",
+      "title": "Rope jobs and cabin routes",
+      "text": "This model is a monocable circulating gondola: the same rope both supports and pulls the cabin. Bicable systems use separate ropes for support and pulling; tricable systems use two carrying ropes and one haul rope. Circulating and reversible describe a different feature: cabins travel around a loop or shuttle between stations. Reversible ropeways can also use different rope arrangements.",
+      "textSha256": "2130ecef1d275fa3eb7b338b2d82ed9444f40397c835fe8cb84533d52f4d6c74",
+      "runtimeFile": "labs/ropeway/audio/types-en.mp3"
+    },
+    {
+      "id": "limits-zh",
+      "lessonId": "limits",
+      "lang": "zh",
+      "title": "这是机制示意",
+      "text": "模型放大了动作，省略了许多零件。它不计算真实载荷、张力、制动距离，也不是设备操作或救援指南。",
+      "textSha256": "c7922c395ed5173c8e809e1cb5292689623ea6c6ad88178688afb39b0da389e1",
+      "runtimeFile": "labs/ropeway/audio/limits-zh.mp3"
+    },
+    {
+      "id": "limits-en",
+      "lessonId": "limits",
+      "lang": "en",
+      "title": "A mechanism model",
+      "text": "This model enlarges movements and omits many parts. It does not calculate real loads, tension or stopping distance, and is not an operating or rescue guide.",
+      "textSha256": "20bedb5cb98d58efefef1c447c0ccbfc6ba7ea42bf65d4decd3454d104fdc006",
+      "runtimeFile": "labs/ropeway/audio/limits-en.mp3"
+    }
+  ]
+}

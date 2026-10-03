@@ -6,7 +6,24 @@ const fs = require('fs'), path = require('path'), assert = require('assert/stric
 // contract. This check keeps the two architectures from silently coexisting
 // again, and enforces that the studio stylesheet is not forked per lab.
 const root = __dirname, labs = path.join(root, 'labs');
-const ids = fs.readdirSync(labs).filter(id => fs.existsSync(path.join(labs, id, 'index.html')));
+const allIds = fs.readdirSync(labs).filter(id => fs.existsSync(path.join(labs, id, 'index.html')));
+// Ropeway teaches a continuous mechanism, not the retired explorer architecture.
+// Keep the seven studio contracts intact and explicitly validate this bespoke lab.
+const ids = allIds.filter(id => id !== 'ropeway');
+if (allIds.includes('ropeway')) {
+  const html = fs.readFileSync(path.join(labs, 'ropeway/index.html'), 'utf8');
+  for (const f of ['model.js', 'content.js', 'scene.js', 'audio.js', 'app.js', 'ropeway.css', 'preview.png']) {
+    assert.ok(fs.existsSync(path.join(labs, 'ropeway', f)), 'ropeway: missing ' + f);
+    assert.ok(html.includes(f) || f === 'preview.png', 'ropeway: unused runtime module ' + f);
+  }
+  const appAt = html.indexOf('src="app.js"');
+  for (const f of ['model.js', 'content.js', 'scene.js', 'audio.js']) assert.ok(html.indexOf('src="' + f + '"') < appAt, 'ropeway module load order: ' + f);
+  assert.ok(html.includes('../shared/vendor/three.min.js'));
+  const source = fs.readFileSync(path.join(labs, 'ropeway/model.js'), 'utf8');
+  assert.ok(!/LAB_CONFIG|buildLabModel/.test(source), 'ropeway must not restore retired explorer model');
+  assert.ok(/window\.RopewayLab\s*=/.test(fs.readFileSync(path.join(labs, 'ropeway/app.js'), 'utf8')));
+  console.log('PASS ropeway: bespoke continuous mechanism, local modules and explicit test surface; no retired explorer runtime.');
+}
 assert.ok(ids.length >= 5, `expected the full lab set, saw ${ids.length}`);
 
 // One lab (hsr) names its controller directory book-model/ rather than v3/, and
