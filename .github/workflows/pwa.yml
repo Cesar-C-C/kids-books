@@ -193,6 +193,7 @@ jobs:
           node tests/qa_earthquake_lab_startup.cjs
           node tests/qa_earthquake_lab_browser.cjs
           node tests/qa_earthquake_lab_scroll.cjs
+          node tests/qa_earthquake_lab_touch_lifecycle.cjs
           git fetch --no-tags --depth=1 origin dce876b7d52c9c7554bda1aee42988c003aaf22e
           node tests/qa_earthquake_upgrade.cjs
 

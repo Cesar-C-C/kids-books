@@ -342,9 +342,30 @@
     $('cutaway').addEventListener('click', () => { cutaway = !cutaway; if (geology) geology.setCutaway(cutaway); $('cutaway').setAttribute('aria-pressed', String(cutaway)); paintScene(); });
     const stage = $('viewport');
     let start = null;
-    stage.addEventListener('pointerdown', event => { if (event.target !== stage && event.target.tagName !== 'CANVAS') return; start = { x: event.clientX, y: event.clientY, yaw: view.yaw, pitch: view.pitch, pointerType: event.pointerType, axis: null }; });
+    const touchPointers = new Set();
+    let touchOrbitBlocked = false;
+    const clearOrbitGesture = () => { start = null; touchPointers.clear(); touchOrbitBlocked = false; };
+    // A second contact elsewhere on the page must also suspend an active model drag.
+    document.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'touch') return;
+      touchPointers.add(event.pointerId);
+      if (touchPointers.size > 1 || !event.isPrimary) { touchOrbitBlocked = true; start = null; }
+    }, { capture: true, passive: true });
+    const endOrbitPointer = event => {
+      if (start && start.pointerId === event.pointerId) start = null;
+      if (event.pointerType !== 'touch') return;
+      touchPointers.delete(event.pointerId);
+      if (touchPointers.size === 0) touchOrbitBlocked = false;
+    };
+    for (const name of ['pointerup', 'pointercancel']) document.addEventListener(name, endOrbitPointer, { capture: true, passive: true });
+    stage.addEventListener('pointerdown', event => {
+      if (event.button !== 0 || (event.target !== stage && event.target.tagName !== 'CANVAS')) return;
+      if (event.pointerType === 'touch' && (!event.isPrimary || touchOrbitBlocked || touchPointers.size !== 1)) return;
+      start = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, yaw: view.yaw, pitch: view.pitch, pointerType: event.pointerType, axis: null };
+    });
     stage.addEventListener('pointermove', event => {
-      if (!start || !(event.buttons & 1)) return;
+      if (!start || start.pointerId !== event.pointerId || !(event.buttons & 1)) return;
+      if (start.pointerType === 'touch' && (touchOrbitBlocked || touchPointers.size !== 1)) return;
       const dx = event.clientX - start.x, dy = event.clientY - start.y;
       if (start.pointerType === 'touch' && !start.axis) {
         if (Math.hypot(dx, dy) < 8) return;
@@ -356,10 +377,11 @@
       view.pitch = start.pointerType === 'touch' ? start.pitch : Math.max(-0.12, Math.min(1.48, start.pitch + dy * 0.005));
       setCamera();
     });
-    for (const name of ['pointerup', 'pointercancel', 'pointerleave']) stage.addEventListener(name, () => { start = null; });
-    window.addEventListener('blur', stopMotion);
-    window.addEventListener('pagehide', stopMotion);
-    document.addEventListener('visibilitychange', () => { if (document.hidden) stopMotion(); });
+    for (const name of ['pointerleave', 'lostpointercapture']) stage.addEventListener(name, event => { if (start && start.pointerId === event.pointerId) start = null; });
+    const leavePage = () => { clearOrbitGesture(); stopMotion(); };
+    window.addEventListener('blur', leavePage);
+    window.addEventListener('pagehide', leavePage);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) leavePage(); });
   }
 
   function initScene() {
