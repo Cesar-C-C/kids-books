@@ -29,7 +29,7 @@ h1{font-size:clamp(26px,3vw,43px);line-height:1.12;margin:8px 0 6px;font-weight:
 .surface-choices button{position:absolute;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;border:2px solid #ffe0aa;background:#223b43ec;color:#fff0d2;font-size:18px;font-weight:800;pointer-events:auto;box-shadow:0 2px 15px #0009}
 .surface-choices button:hover,.surface-choices button:focus-visible{background:#e3ae68;color:#17262a}
 .mobile-theater{display:none}
-#narration-dialog{width:min(680px,calc(100vw - 24px));max-height:85dvh;padding:0;border:1px solid var(--border);border-radius:16px;background:var(--panel);color:var(--ink);overflow:auto;box-shadow:0 24px 80px #0008}
+#narration-dialog{width:min(680px,calc(100vw - 24px));max-height:85dvh;padding:0;border:1px solid var(--border);border-radius:16px;background:var(--panel);color:var(--ink);overflow:auto;overscroll-behavior:contain;box-shadow:0 24px 80px #0008}
 #narration-dialog::backdrop{background:#06161dcc}
 .narration-dialog-header,.narration-dialog-footer{position:sticky;z-index:1;display:flex;align-items:center;gap:9px;padding:13px 16px;background:var(--panel)}
 .narration-dialog-header{top:0;border-bottom:1px solid var(--border)}.narration-dialog-header h2{margin:0 auto 0 0;font-size:21px}
