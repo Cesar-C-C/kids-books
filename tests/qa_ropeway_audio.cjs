@@ -3,6 +3,8 @@ const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('ass
 const root=path.resolve(process.env.ROPEWAY_ROOT||path.join(__dirname,'..')),ctx={window:{}};
 const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
 for(const f of ['content.js','audio-manifest.js'])vm.runInNewContext(fs.readFileSync(path.join(root,'labs/ropeway',f),'utf8'),ctx);
+const shippedLabels=['index.html','app.js'].map(f=>fs.readFileSync(path.join(root,'labs/ropeway',f),'utf8')).join('\n');
+assert.ok(!/本地模型候选|Local model candidate|未上线|Unpublished/.test(shippedLabels),'shipped runtime must not retain stale candidate/publication labels');
 const manifest=ctx.window.ROPEWAY_AUDIO_MANIFEST,content=ctx.window.ROPEWAY_CONTENT;
 const lock=JSON.parse(fs.readFileSync(path.join(root,'docs/ropeway-narration-lock.json'),'utf8'));
 const sourceSha=sha(fs.readFileSync(path.join(root,'labs/ropeway/content.js'),'utf8').replace(/\r\n/g,'\n'));
