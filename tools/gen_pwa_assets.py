@@ -28,6 +28,7 @@ import re
 import gen_pwa_covers
 from story_resources import discover as story_resources
 from pwa_fingerprint import content_sha256
+from animation_resources import inventory as animation_inventory
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, "pwa-assets.js")
@@ -247,8 +248,9 @@ def book_audio(name, audio_ver):
     return out
 
 
-def main():
+def main(output_dir=None):
     audio_ver = read_audio_ver()
+    animations = animation_inventory(REPO)
     lab_files = [f for f in rel_files("labs") if not f.lower().endswith(LAB_EXCLUDE) and "/_replica/" not in f]
     earthquake_lab = earthquake_lab_inventory(REPO)
     if earthquake_lab is not None:
@@ -281,7 +283,7 @@ def main():
                             lab_files.append(dep)
 
     shell, missing = [], []
-    for p in ROOT_FILES + SHARED_FILES + rel_files(ICON_DIR) + lab_files + cover_cards:
+    for p in ROOT_FILES + SHARED_FILES + rel_files(ICON_DIR) + lab_files + cover_cards + animations['core']:
         p = norm(p)
         if os.path.exists(os.path.join(REPO, p.split("?")[0])):
             shell.append(p)
@@ -319,7 +321,8 @@ def main():
                                complete=not structured['missingAudio'])
 
     shell = sorted(set(shell))
-    total = sum(size_of(f) for f in shell) + sum(b["bytes"] for b in books.values())
+    animation_extra = {f for package in animations['packages'].values() for f in package['files'] if f not in shell}
+    total = sum(size_of(f) for f in shell) + sum(b["bytes"] for b in books.values()) + sum(size_of(f) for f in animation_extra)
 
     # 版本指纹取「内容」而不是「大小」：同长度替换（改个错字、换个数值）也要能触发更新
     h = hashlib.sha256()
@@ -328,6 +331,9 @@ def main():
     for bid in sorted(books):
         for f in books[bid]["files"]:
             h.update(("%s:%s;" % (f, sha256_of(f.split("?")[0]))).encode())
+    for aid in sorted(animations['packages']):
+        for f in animations['packages'][aid]['files']:
+            h.update(("%s:%s;" % (f, sha256_of(f))).encode())
     version = h.hexdigest()[:12]
 
     payload = {
@@ -336,6 +342,9 @@ def main():
         "shell": shell,
         "books": books,
         "labs": {"earthquake": earthquake_lab} if earthquake_lab is not None else {},
+        "animations": animations['packages'],
+        "retiredAnimations": animations.get('retired', {}),
+        "films": animations.get('films', {}),
         "total": total,
     }
 
@@ -343,7 +352,11 @@ def main():
         "/* 自动生成，请勿手改 —— 重新生成：python tools/gen_pwa_assets.py */\n"
         "self.KB_ASSETS = " + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + ";\n"
     )
-    with open(OUT, "w", encoding="utf-8", newline="\n") as f:
+    output_path = OUT
+    if output_dir is not None:
+        os.makedirs(output_dir, exist_ok=True)
+        output_path = os.path.join(output_dir, 'pwa-assets.js')
+    with open(output_path, "w", encoding="utf-8", newline="\n") as f:
         f.write(body)
 
     # sw.js is not part of the content fingerprint (no circular dependency).
@@ -356,7 +369,8 @@ def main():
                            "importScripts('./pwa-assets.js?v=%s');" % version, worker)
     if count != 1:
         raise ValueError('Expected one generated PWA manifest import in sw.js')
-    with open(worker_path, 'w', encoding='utf-8', newline='\n') as f:
+    worker_output = os.path.join(output_dir, 'sw.js') if output_dir is not None else worker_path
+    with open(worker_output, 'w', encoding='utf-8', newline='\n') as f:
         f.write(worker)
 
     print("version = %s  (audioVer=%s)" % (version, audio_ver))
@@ -366,6 +380,9 @@ def main():
         if b.get('missingAudio'):
             print('    PENDING audio: %d/%d missing; visual-only package' % (len(b['missingAudio']), b['audioExpected']))
     print("total   = %.1f MB" % (total / 1048576))
+    for aid, package in animations['packages'].items():
+        print("animation %-20s %.2f MB, audio %d/%d, complete=%s" %
+              (aid, package['bytes'] / 1048576, package['audioCount'], package['audioExpected'], package['complete']))
     if missing:
         print("WARN 清单里缺失（已跳过）: %s" % ", ".join(missing))
     if missing_cards:
@@ -376,4 +393,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output-dir', help='Author evidence fixture only; does not change the working tree PWA files')
+    main(parser.parse_args().output_dir)

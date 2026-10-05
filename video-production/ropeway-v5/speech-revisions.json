@@ -1,0 +1,35 @@
+{
+  "beats": [
+    {
+      "id": "s12b0",
+      "text": "进站时，吊厢组件的行走轮驶上轨道。",
+      "original_text": "进站时，吊厢组件的行走轮驶上轨道。",
+      "original_subtitle": "吊厢进入车站时，吊厢组件上的行走轮驶上站内轨道。",
+      "subtitle": "吊厢进入车站时，吊厢组件上的行走轮驶上站内轨道。",
+      "start": 154.5374,
+      "next_start": 159.1823,
+      "keyword": "行走轮"
+    },
+    {
+      "id": "s31b1",
+      "text": "不故意摇晃吊厢，不探出身体，不强行打开厢门。",
+      "original_text": "不故意摇晃吊厢，不探出身体，不强行打开厢门。",
+      "original_subtitle": "不故意摇晃吊厢，不探出身体，不强行打开厢门。",
+      "subtitle": "不故意摇晃吊厢，不探出身体，不强行打开厢门。",
+      "start": 510.05896666666666,
+      "next_start": 514.7091666666666,
+      "keyword": "不故意"
+    },
+    {
+      "id": "s31b2",
+      "text": "如果担心，告诉大人，按标示的指引联系工作人员。",
+      "original_text": "担心什么？告诉大人，按标示的指引联系工作人员。",
+      "original_subtitle": "担心什么？告诉大人，按标示的指引联系工作人员。",
+      "subtitle": "如果担心，告诉大人，按标示的指引联系工作人员。",
+      "start": 514.7091666666666,
+      "next_start": 521.6001166666668,
+      "keyword": "如果担心"
+    }
+  ],
+  "scope": "Three Mandarin sentence replacements; one bilingual subtitle translation correction. All narration slots and scenes stay in place."
+}

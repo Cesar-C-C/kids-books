@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "status": "draft",
+  "identity": {
+    "workstreamId": "science-video-narration",
+    "sourceVariant": "__SET_SOURCE_VARIANT_BEFORE_FREEZE__",
+    "compositionId": "__SET_COMPOSITION_ID_BEFORE_FREEZE__",
+    "trackId": "__SET_STABLE_TRACK_ID_BEFORE_FREEZE__",
+    "language": "zh"
+  },
+  "source": {
+    "path": null,
+    "sha256": null
+  },
+  "textMap": {
+    "translationGroupId": null,
+    "sourceLanguage": "en",
+    "sourceText": "",
+    "sourceTextSha256": null,
+    "narrationLanguage": "zh",
+    "narrationText": "",
+    "narrationTextSha256": null,
+    "translationRelation": "not_assessed"
+  },
+  "reference": {
+    "mode": "pending",
+    "wavPath": null,
+    "wavSha256": null,
+    "transcript": null,
+    "transcriptSha256": null,
+    "sourceUrl": null,
+    "recordingPermission": "unknown",
+    "commercialDistributionPermission": "unknown"
+  },
+  "generation": {
+    "engine": "Fun-CosyVoice 3",
+    "checkpoint": null,
+    "runtimeVersion": null,
+    "runtimePython": null,
+    "torchVersion": null,
+    "runtimeScriptSha256": null,
+    "inferenceApi": "pending",
+    "precision": "pending",
+    "device": null,
+    "seed": null,
+    "seedStatus": "pending",
+    "structuralPrefix": null,
+    "parameters": {
+      "fp16": null,
+      "stream": null,
+      "batchSize": null,
+      "temperature": null
+    }
+  },
+  "rawAudio": {
+    "wavPath": null,
+    "sha256": null,
+    "bytes": null,
+    "sampleRateHz": null,
+    "channels": null,
+    "durationSec": null,
+    "rms": null,
+    "peak": null
+  },
+  "placement": {
+    "audioTargetWindow": { "startSec": null, "endSec": null },
+    "actualAudioWindow": { "startSec": null, "endSec": null },
+    "actualAudioDurationSec": null,
+    "captionWindows": []
+  },
+  "postProcessing": {
+    "trimStartSec": null,
+    "trimEndSec": null,
+    "tempoFactor": null,
+    "tempoAlgorithm": null,
+    "pitchPreservingTempo": null,
+    "targetRms": null,
+    "outputRms": null,
+    "gainDb": null,
+    "limiterCeiling": null,
+    "fadeMs": null
+  },
+  "patch": {
+    "enabled": false,
+    "parentTrackSha256": null,
+    "retainedCandidatePaths": [],
+    "contextCue": null,
+    "removedContextCue": null,
+    "measuredCropBoundarySec": null,
+    "outsideWindowPcmSha256Before": null,
+    "outsideWindowPcmSha256AfterBeforeFinalEncode": null,
+    "outsideWindowBitIdenticalBeforeFinalEncode": null,
+    "finalWholeTrackReencoded": null,
+    "finalCodec": null,
+    "lossyEncodingBoundaryNote": null
+  },
+  "delivery": {
+    "path": null,
+    "sha256": null,
+    "bytes": null,
+    "container": null,
+    "codec": null,
+    "sampleRateHz": null,
+    "channels": null,
+    "durationSec": null
+  },
+  "qa": {
+    "sourceBinding": "pending",
+    "decode": "not_run",
+    "asr": {
+      "status": "not_run",
+      "engine": null,
+      "recognizedText": null,
+      "textMatch": null
+    },
+    "captionSync": "not_checked",
+    "humanListening": {
+      "status": "not_performed",
+      "reviewedTrackIds": [],
+      "reviewer": null,
+      "reviewedDate": null,
+      "scope": null
+    },
+    "pronunciation": "not_listened",
+    "notes": []
+  }
+}

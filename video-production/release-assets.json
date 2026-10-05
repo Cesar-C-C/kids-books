@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "repository": "Cesar-C-C/kids-books",
+  "tag": "native-film-v3-20261005-75be379e",
+  "releaseId": 403553067,
+  "assets": [
+    {
+      "path": "animations/ropeway-adventure/media/browser-v5.mp4",
+      "name": "browser-v5.mp4",
+      "assetId": 612102371,
+      "bytes": 119325620,
+      "sha256": "5b5b15a142134d428c7b9f68d8eecbd7b7cfecf31753d58463b58ef194e55ed0",
+      "deploy": true
+    },
+    {
+      "path": "animations/ropeway-adventure/downloads/ropeway-v5.mp4",
+      "name": "ropeway-v5.mp4",
+      "assetId": 612102378,
+      "bytes": 126344341,
+      "sha256": "d34595e931844ee44622e16177b57dc659919ed61095d1de37cc8df9cd1964d5",
+      "deploy": true
+    },
+    {
+      "path": "animations/ropeway-adventure/downloads/ropeway-v5.html",
+      "name": "ropeway-v5.html",
+      "assetId": 612102363,
+      "bytes": 168613588,
+      "sha256": "ac8b6648e8617e3ad592e37f66997c22170d512cf7b3cda940ed72ae39b38258",
+      "deploy": true
+    },
+    {
+      "path": "animations/ropeway-adventure/downloads/ropeway-v5-project-offline-v3.html",
+      "name": "ropeway-v5-project-offline-v3.html",
+      "assetId": 612102364,
+      "bytes": 168617506,
+      "sha256": "85b80859bf8f92eac957c6f7e393f1c2b3c8d503d0d8213e7e6501417feec9fe",
+      "deploy": true
+    }
+  ]
+}

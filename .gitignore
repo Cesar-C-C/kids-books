@@ -45,3 +45,10 @@ workbench/earthquake-audio-v1/*
 # Only the redacted per-file validation report is eligible for review/collection.
 workbench/earthquake-audio-v2/*
 !workbench/earthquake-audio-v2/batch-validation.json
+
+# Byte-exact large film payloads are pinned in same-repository Release assets.
+# Hydrate them with tools/release_assets.mjs; never stage >100 MiB blobs.
+animations/ropeway-adventure/media/browser-v5.mp4
+animations/ropeway-adventure/downloads/ropeway-v5.mp4
+animations/ropeway-adventure/downloads/ropeway-v5.html
+animations/ropeway-adventure/downloads/ropeway-v5-project-offline-v3.html

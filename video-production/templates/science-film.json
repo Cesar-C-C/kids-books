@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "title": "新科普影片：先填孩子的一个问题",
+  "audience": "5–8",
+  "scope": "填写具体系统，不把例子写成通用规则",
+  "fps": 24,
+  "source": {"engine": "Blender 5.2", "speech": "Fun-CosyVoice3-0.5B CUDA FP32", "compositor": "FFmpeg libass/minterpolate/libx264 + Pillow", "fonts": ["Microsoft YaHei", "Segoe UI"]},
+  "referenceVoice": {"source": null, "license": null, "transcript": null, "sha256": null},
+  "claims": [{"id": "C1", "claim": "填入可由实际机制说明的事实", "sourceUrl": "https://example.org/replace-with-primary-source", "locator": "页码/段落/资料日期", "editorialInference": false}],
+  "scenes": [
+    {"id": "question", "question": "先让孩子观察什么？", "start": 0, "end": 6, "nativeFps": 24, "width": 1280, "samples": 16, "mechanism": "保持实际连接，提出可观察的疑问", "camera": "概览→连接处", "claimIds": ["C1"], "beats": [{"id": "question-0", "zh": "填写并冻结中文", "en": "Write and freeze the English line.", "start": 0.8, "end": 4.8, "audioSha256": null}], "marks": []},
+    {"id": "proof", "question": "用哪个动作回答？", "start": 6, "end": 12, "nativeFps": 24, "width": 1280, "samples": 16, "mechanism": "示例：先支撑，再释放；必须由实际几何发生", "camera": "靠近关键部件，必要时剖视", "claimIds": ["C1"], "beats": [{"id": "proof-0", "zh": "描述因果，不只说零件名", "en": "Explain the cause, not only the component name.", "start": 6.8, "end": 10.8, "audioSha256": null}], "marks": [{"purpose": "辨认关键部件", "worldAnchor": [0, 0, 1], "start": 7, "end": 10}]}
+  ],
+  "cacheKeyInputs": ["modelSha", "motionSha", "cameraSha", "narrationSha", "timingSha", "fontsSha", "versions", "nativeFps", "width", "samples"],
+  "narrationRecordTemplate": "narration-record.template.json",
+  "narrationRecordSchema": "narration-record.schema.json",
+  "gates": {"keyMotionProof": "NOT_RUN", "humanListening": "NOT_RUN", "fullRender": "NOT_RUN", "independentQA": "NOT_RUN", "publication": false}
+}

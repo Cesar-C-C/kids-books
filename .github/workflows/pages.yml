@@ -1,0 +1,69 @@
+name: Publish verified Pages runtime
+
+# Explicit main-only publishing after both real main validation workflows pass.
+# No pull_request/pull_request_target write-token execution.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.repository == 'Cesar-C-C/kids-books' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Bind latest main and successful PWA/lab CI
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tools/check_pages_gate.mjs
+      - name: Test fail-closed release distribution
+        run: node --test tests/release_distribution.test.mjs
+      - name: Restore exact public release bytes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tools/release_assets.mjs
+      - name: Verify restored media and explicit runtime payload
+        run: |
+          node tools/release_assets.mjs --verify
+          node tools/build_pages_payload.mjs _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Refuse stale or failing main before deployment
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tools/check_pages_gate.mjs
+      - name: Deploy approved artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -3,3 +3,18 @@ docs/qa/earthquake-v2-integration/*.json text eol=lf
 docs/qa/earthquake-v2-integration/*.md text eol=lf
 tests/qa_earthquake_lab_depth.cjs text eol=lf
 tests/qa_earthquake_book_native_audio.cjs text eol=lf
+
+# These frozen film/source-method artifacts are accepted by raw byte identity.
+# Preserve their original line endings across Windows and Linux; do not rewrite
+# subtitle/source hashes during Git staging or checkout.
+animations/** -text
+docs/video-production/** -text
+video-production/ropeway-v5/** -text
+video-production/templates/** -text
+video-production/offline/ropeway-offline-player-v3.js -text
+tools/science_video.py -text
+tools/animation_resources.py -text
+tools/check_narration_template.ps1 -text
+tests/test_pwa_animations.py -text
+tests/test_pwa_films.py -text
+tests/test_pwa_film_retirement_v3.py -text

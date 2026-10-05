@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "sourceThread": "01a10132-c939-74b0-be26-1d0a78d6bd0c",
+  "sourceTitle": "了解视频生成能力",
+  "sourceRoot": "C:/Users/Cesar/Documents/Codex/2026-10-03/new-chat-2",
+  "sourceManifest": {
+    "sha256": "8bb6ec844a9743a41ff7858d174393bee714b3b0ec49c7a036ce6678cd67d71a",
+    "bytes": 1615
+  },
+  "outputs": [
+    {
+      "path": "ropeway-3d-v5-bilingual.srt",
+      "bytes": 18440,
+      "sha256": "0f826a3ec8b50004b4a96d75a918288feab020049032d79b47e953aa4fa0fafa"
+    },
+    {
+      "path": "ropeway-3d-v5-corrections-preview.jpg",
+      "bytes": 110345,
+      "sha256": "05299e9d123501e68bc11f86b65cdce6d765c373fcdb2b3c774405b80f1944f7"
+    },
+    {
+      "path": "ropeway-3d-v5-corrections-preview.mp4",
+      "bytes": 4202227,
+      "sha256": "932bc737aeb4582b52a67cbd46dcd802c90756b2b0a3967454e2d50415995c86"
+    },
+    {
+      "path": "ropeway-3d-v5-cover.jpg",
+      "bytes": 159309,
+      "sha256": "477fc74831b1aed38638f7c4040a8ce8d859d017c85c4969a4cb43d4b485eae1"
+    },
+    {
+      "path": "ropeway-3d-v5-guide.html",
+      "bytes": 2278,
+      "sha256": "ffb03b0c36000546f03d1e8d58eb91797b27dfa332705825abfd37010786d80e"
+    },
+    {
+      "path": "ropeway-3d-v5-models.blend",
+      "bytes": 1427004,
+      "sha256": "ac63ca55947c472471aa2902e6a234b5ee78df1c5a7c23fdd447650b955570b8"
+    },
+    {
+      "path": "ropeway-3d-v5-qa.json",
+      "bytes": 13307,
+      "sha256": "79e149dd251677e0c5eecb7f4ca9ea70b70d57cd0a91a25ec263820b1bca9471"
+    },
+    {
+      "path": "ropeway-3d-v5-source.zip",
+      "bytes": 20556517,
+      "sha256": "d34b07c7d12811606c5db0bde18e3da1f52d956f03b5cf0fb5b8b0cc90d0e45f"
+    },
+    {
+      "path": "ropeway-3d-v5-subtitle-correction.jpg",
+      "bytes": 117524,
+      "sha256": "797fdbd35a0d3df8df98e7a4085d1b81956310248058777eb1ee5ea9debb2b84"
+    },
+    {
+      "path": "ropeway-3d-v5-watch.html",
+      "bytes": 168613588,
+      "sha256": "ac8b6648e8617e3ad592e37f66997c22170d512cf7b3cda940ed72ae39b38258"
+    },
+    {
+      "path": "ropeway-3d-v5.mp4",
+      "bytes": 126344341,
+      "sha256": "d34595e931844ee44622e16177b57dc659919ed61095d1de37cc8df9cd1964d5"
+    }
+  ],
+  "embedded": {
+    "film": {
+      "source": "work/ropeway-3d-v5/browser.mp4",
+      "sha256": "5b5b15a142134d428c7b9f68d8eecbd7b7cfecf31753d58463b58ef194e55ed0",
+      "bytes": 119325620
+    },
+    "mandarin": {
+      "source": "work/ropeway-3d-v5/narration-zh.m4a",
+      "sha256": "165cf06d7bce05b9cc2fb3c470f23d93691d471d6b4c58b83d24d0ee68353c52",
+      "bytes": 6963011
+    }
+  },
+  "copies": [
+    {
+      "path": "animations/ropeway-adventure/media/browser-v5.mp4",
+      "sha256": "5b5b15a142134d428c7b9f68d8eecbd7b7cfecf31753d58463b58ef194e55ed0",
+      "bytes": 119325620
+    },
+    {
+      "path": "animations/ropeway-adventure/media/mandarin-v5.m4a",
+      "sha256": "165cf06d7bce05b9cc2fb3c470f23d93691d471d6b4c58b83d24d0ee68353c52",
+      "bytes": 6963011
+    },
+    {
+      "path": "animations/ropeway-adventure/cover-v5.jpg",
+      "sha256": "477fc74831b1aed38638f7c4040a8ce8d859d017c85c4969a4cb43d4b485eae1",
+      "bytes": 159309
+    },
+    {
+      "path": "animations/ropeway-adventure/bilingual-v5.srt",
+      "sha256": "0f826a3ec8b50004b4a96d75a918288feab020049032d79b47e953aa4fa0fafa",
+      "bytes": 18440
+    },
+    {
+      "path": "animations/ropeway-adventure/downloads/ropeway-v5.html",
+      "sha256": "ac8b6648e8617e3ad592e37f66997c22170d512cf7b3cda940ed72ae39b38258",
+      "bytes": 168613588
+    },
+    {
+      "path": "animations/ropeway-adventure/downloads/ropeway-v5.mp4",
+      "sha256": "d34595e931844ee44622e16177b57dc659919ed61095d1de37cc8df9cd1964d5",
+      "bytes": 126344341
+    },
+    {
+      "path": "video-production/ropeway-v5/source.zip",
+      "sha256": "d34b07c7d12811606c5db0bde18e3da1f52d956f03b5cf0fb5b8b0cc90d0e45f",
+      "bytes": 20556517
+    },
+    {
+      "path": "video-production/ropeway-v5/source-manifest.json",
+      "sha256": "8bb6ec844a9743a41ff7858d174393bee714b3b0ec49c7a036ce6678cd67d71a",
+      "bytes": 1615
+    },
+    {
+      "path": "video-production/ropeway-v5/bilingual-player-template.html",
+      "sha256": "b481856b4b78028a99f061876c9106baa8e87166acb2e812132064ae281805bc",
+      "bytes": 15213
+    },
+    {
+      "path": "video-production/ropeway-v5/README.md",
+      "sha256": "52e8d9cb64ee75ddcff2405439d4d61d71515f9e0b535529a2ff3c540faeb9e6",
+      "bytes": 3863
+    },
+    {
+      "path": "video-production/ropeway-v5/EDITORIAL-REVIEW.md",
+      "sha256": "3153122558ed8b456ab3ce09139ed9384cf7a52add5f3422acb3ac29acf21a03",
+      "bytes": 6084
+    },
+    {
+      "path": "video-production/ropeway-v5/full-timing.json",
+      "sha256": "f004364571bf5d6b6e0d6ad747ef0371dafc9a89304e93ce67f728b36c399733",
+      "bytes": 59241
+    },
+    {
+      "path": "video-production/ropeway-v5/speech-revisions.json",
+      "sha256": "315996b25ade51032509aa45cdd900581c450e894c2e9c992fb47cc72baa54c5",
+      "bytes": 1672
+    },
+    {
+      "path": "video-production/ropeway-v5/zh-reference-provenance.json",
+      "sha256": "2fedc2ec989e3190cbf93ccf4767dff69d77d464f80b102696241a1e9ada70ee",
+      "bytes": 455
+    },
+    {
+      "path": "video-production/ropeway-v5/final-qa.json",
+      "sha256": "79e149dd251677e0c5eecb7f4ca9ea70b70d57cd0a91a25ec263820b1bca9471",
+      "bytes": 13307
+    },
+    {
+      "path": "video-production/ropeway-v5/annotations.py",
+      "sha256": "73b519246fb68b2d31ed342890790d424ad237ae54751affc4ed38b321e29b0e",
+      "bytes": 22924
+    },
+    {
+      "path": "video-production/ropeway-v5/render_project.py",
+      "sha256": "b7af428ed991e77f2a1fda2fc119c68a4b19e8eab228a6dce8a580852426337e",
+      "bytes": 1466
+    },
+    {
+      "path": "video-production/ropeway-v5/compose_film.py",
+      "sha256": "7914d69b6b235b81ee4ff098051f5c93c23d7ab4ae9c75ec74c635a5194a3501",
+      "bytes": 8617
+    },
+    {
+      "path": "video-production/ropeway-v5/render_animation.py",
+      "sha256": "64871d2d1bfd7ece7ad11aa3b26624da910b6ab30df00b0cd2e95d12c89c8187",
+      "bytes": 5559
+    },
+    {
+      "path": "video-production/ropeway-v5/render_baseline.py",
+      "sha256": "1ecf56115a7fcac8ef39227cc26aa3db576b8c1bcf1d5466cefc390b349a0195",
+      "bytes": 4960
+    },
+    {
+      "path": "video-production/ropeway-v5/motion.py",
+      "sha256": "ac624a46ff9c67f0b9d31dc036ec2abea7e89c7fd6f518932547d786e2bccb0f",
+      "bytes": 4867
+    }
+  ],
+  "timing": {
+    "scenes": 35,
+    "captionPairs": 104,
+    "duration": 597.5
+  },
+  "immutableMedia": true,
+  "newRender": "NOT_RUN",
+  "newSpeech": "NOT_RUN",
+  "humanListening": "NOT_RUN",
+  "publicationAllowed": false
+}

@@ -1,0 +1,46 @@
+{
+  "ropeway-3d-v5-bilingual.srt": {
+    "bytes": 18440,
+    "sha256": "0f826a3ec8b50004b4a96d75a918288feab020049032d79b47e953aa4fa0fafa"
+  },
+  "ropeway-3d-v5-corrections-preview.jpg": {
+    "bytes": 110345,
+    "sha256": "05299e9d123501e68bc11f86b65cdce6d765c373fcdb2b3c774405b80f1944f7"
+  },
+  "ropeway-3d-v5-corrections-preview.mp4": {
+    "bytes": 4202227,
+    "sha256": "932bc737aeb4582b52a67cbd46dcd802c90756b2b0a3967454e2d50415995c86"
+  },
+  "ropeway-3d-v5-cover.jpg": {
+    "bytes": 159309,
+    "sha256": "477fc74831b1aed38638f7c4040a8ce8d859d017c85c4969a4cb43d4b485eae1"
+  },
+  "ropeway-3d-v5-guide.html": {
+    "bytes": 2278,
+    "sha256": "ffb03b0c36000546f03d1e8d58eb91797b27dfa332705825abfd37010786d80e"
+  },
+  "ropeway-3d-v5-models.blend": {
+    "bytes": 1427004,
+    "sha256": "ac63ca55947c472471aa2902e6a234b5ee78df1c5a7c23fdd447650b955570b8"
+  },
+  "ropeway-3d-v5-qa.json": {
+    "bytes": 13307,
+    "sha256": "79e149dd251677e0c5eecb7f4ca9ea70b70d57cd0a91a25ec263820b1bca9471"
+  },
+  "ropeway-3d-v5-source.zip": {
+    "bytes": 20556517,
+    "sha256": "d34b07c7d12811606c5db0bde18e3da1f52d956f03b5cf0fb5b8b0cc90d0e45f"
+  },
+  "ropeway-3d-v5-subtitle-correction.jpg": {
+    "bytes": 117524,
+    "sha256": "797fdbd35a0d3df8df98e7a4085d1b81956310248058777eb1ee5ea9debb2b84"
+  },
+  "ropeway-3d-v5-watch.html": {
+    "bytes": 168613588,
+    "sha256": "ac8b6648e8617e3ad592e37f66997c22170d512cf7b3cda940ed72ae39b38258"
+  },
+  "ropeway-3d-v5.mp4": {
+    "bytes": 126344341,
+    "sha256": "d34595e931844ee44622e16177b57dc659919ed61095d1de37cc8df9cd1964d5"
+  }
+}
