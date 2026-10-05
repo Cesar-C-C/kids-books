@@ -1,0 +1,1587 @@
+{
+  "title": "The Little Cabin, Big Questions",
+  "title_zh": "小小吊厢，大大问题",
+  "audience": "5–8 years",
+  "scenes": [
+    {
+      "id": "s00",
+      "chapter": 0,
+      "kind": "landscape",
+      "title": "The little cabin, big questions",
+      "zh_title": "小小吊厢，大大问题",
+      "note": "A mountain discovery | 一场山间探索",
+      "beats": [
+        {
+          "id": "s00b0",
+          "en": "Hello, explorers! Let us ride this orange cable car.",
+          "zh": "小探险家们，你们好！我们坐上这台橙色吊厢吧。",
+          "audio_file": "audio-final/s00b0.wav",
+          "start": 0.8,
+          "end": 4.8101,
+          "audio_duration": 4.010125
+        },
+        {
+          "id": "s00b1",
+          "en": "Above the trees, with no wings and no road below!",
+          "zh": "飞过树梢，却没有翅膀，下面也没有公路！",
+          "audio_file": "audio-final/s00b1.wav",
+          "start": 5.0101,
+          "end": 8.6334,
+          "audio_duration": 3.62325
+        },
+        {
+          "id": "s00b2",
+          "en": "What moves it, what holds it up, and what helps keep us safe?",
+          "zh": "什么让它前进？什么把它托住？又有哪些办法保障安全？",
+          "audio_file": "audio-final/s00b2.wav",
+          "start": 8.8334,
+          "end": 13.841,
+          "audio_duration": 5.007583333333334
+        }
+      ],
+      "sources": [],
+      "pause": 0,
+      "start": 0,
+      "duration": 14.291
+    },
+    {
+      "id": "s02",
+      "chapter": 1,
+      "kind": "loop",
+      "title": "One rope, one big loop",
+      "zh_title": "一根绳索，一个大循环",
+      "note": "Top view, simplified | 简化俯视图",
+      "beats": [
+        {
+          "id": "s02b0",
+          "en": "From above, one rope forms a loop around two big wheels.",
+          "zh": "从上面看，一根绳索绕过两个大轮，组成一个环。",
+          "audio_file": "audio-final/s02b0.wav",
+          "start": 15.091,
+          "end": 18.5566,
+          "audio_duration": 3.465625
+        },
+        {
+          "id": "s02b1",
+          "en": "One side goes toward the mountain. The other returns.",
+          "zh": "一侧朝山上移动，另一侧向回程移动。",
+          "audio_file": "audio-final/s02b1.wav",
+          "start": 18.7566,
+          "end": 23.2204,
+          "audio_duration": 4.4638333333333335
+        },
+        {
+          "id": "s02b2",
+          "en": "The wheels turn, the loop moves, and the attached cabins travel with it.",
+          "zh": "大轮转动，绳环移动，夹在绳上的吊厢也跟着移动。",
+          "audio_file": "audio-final/s02b2.wav",
+          "start": 23.4204,
+          "end": 27.3712,
+          "audio_duration": 3.950833333333333
+        }
+      ],
+      "sources": [
+        "S1",
+        "S2"
+      ],
+      "pause": 0,
+      "start": 14.290958333333334,
+      "duration": 13.5303
+    },
+    {
+      "id": "s03",
+      "chapter": 1,
+      "kind": "drive",
+      "title": "The station does the pulling",
+      "zh_title": "动力来自车站",
+      "note": "Motor → wheel → rope → cabin | 电机 → 大轮 → 绳索 → 吊厢",
+      "beats": [
+        {
+          "id": "s03b0",
+          "en": "An electric motor in a station turns a large drive wheel.",
+          "zh": "车站里的电动机带动一个大驱动轮。",
+          "audio_file": "audio-final/s03b0.wav",
+          "start": 28.6212,
+          "end": 32.4057,
+          "audio_duration": 3.7844583333333333
+        },
+        {
+          "id": "s03b1",
+          "en": "The rope presses against the wheel. Friction helps the wheel move the rope.",
+          "zh": "钢丝绳压在大轮上，摩擦力帮助大轮带动绳索。",
+          "audio_file": "audio-final/s03b1.wav",
+          "start": 32.6057,
+          "end": 37.2606,
+          "audio_duration": 4.654916666666667
+        },
+        {
+          "id": "s03b2",
+          "en": "One drive moves many cabins. Each cabin does not need a driving engine.",
+          "zh": "一套驱动带动许多吊厢，每个吊厢无需各装一台驱动发动机。",
+          "audio_file": "audio-final/s03b2.wav",
+          "start": 37.4606,
+          "end": 42.7427,
+          "audio_duration": 5.282041666666666
+        }
+      ],
+      "sources": [
+        "S3",
+        "S4"
+      ],
+      "pause": 0,
+      "start": 27.82125,
+      "duration": 15.3714
+    },
+    {
+      "id": "s05",
+      "chapter": 1,
+      "kind": "roles",
+      "title": "Our rope has two jobs",
+      "zh_title": "这根绳索有两份工作",
+      "note": "Carry + pull | 承载 + 牵引",
+      "beats": [
+        {
+          "id": "s05b0",
+          "en": "Our example is a single-rope, circulating, detachable gondola. What a name!",
+          "zh": "我们的例子叫单线循环脱挂式吊厢索道。好长的名字！",
+          "audio_file": "audio-final/s05b0.wav",
+          "start": 43.9927,
+          "end": 52.4285,
+          "audio_duration": 8.435791666666667
+        },
+        {
+          "id": "s05b1",
+          "en": "Here, the same rope supports the cabins and pulls them along.",
+          "zh": "在这种索道里，同一根钢丝绳既承载吊厢，也牵引吊厢。",
+          "audio_file": "audio-final/s05b1.wav",
+          "start": 52.6285,
+          "end": 56.1908,
+          "audio_duration": 3.562375
+        },
+        {
+          "id": "s05b2",
+          "en": "Two jobs: carry the weight, and make the journey.",
+          "zh": "两份工作：承受重量，带着吊厢前进。",
+          "audio_file": "audio-final/s05b2.wav",
+          "start": 56.3908,
+          "end": 59.56,
+          "audio_duration": 3.1691666666666665
+        }
+      ],
+      "sources": [
+        "S1",
+        "S2"
+      ],
+      "pause": 0,
+      "start": 43.19266666666667,
+      "duration": 16.8173
+    },
+    {
+      "id": "s06",
+      "chapter": 1,
+      "kind": "rope",
+      "title": "A rope made of many wires",
+      "zh_title": "许多钢丝组成一根绳",
+      "note": "Wires → strands → rope | 钢丝 → 绳股 → 钢丝绳",
+      "beats": [
+        {
+          "id": "s06b0",
+          "en": "This is not a piece of string. Many steel wires twist into strands.",
+          "zh": "它不是普通细绳。许多钢丝拧成一股股绳股。",
+          "audio_file": "audio-final/s06b0.wav",
+          "start": 60.81,
+          "end": 65.8086,
+          "audio_duration": 4.998625
+        },
+        {
+          "id": "s06b1",
+          "en": "Strands surround a core, making a strong rope that can bend.",
+          "zh": "绳股围绕绳芯，组成结实又能弯曲的钢丝绳。",
+          "audio_file": "audio-final/s06b1.wav",
+          "start": 66.0086,
+          "end": 70.9382,
+          "audio_duration": 4.929625
+        },
+        {
+          "id": "s06b2",
+          "en": "Strong is not unbreakable. Experts must keep checking its condition.",
+          "zh": "结实不等于不会损坏，专业人员必须持续检查它的状态。",
+          "audio_file": "audio-final/s06b2.wav",
+          "start": 71.1382,
+          "end": 75.8313,
+          "audio_duration": 4.693083333333333
+        }
+      ],
+      "sources": [
+        "S5",
+        "S6"
+      ],
+      "pause": 0,
+      "start": 60.00999999999999,
+      "duration": 16.2713
+    },
+    {
+      "id": "s07",
+      "chapter": 1,
+      "kind": "tension",
+      "title": "Why is the rope a little curved?",
+      "zh_title": "绳索为什么有一点弯？",
+      "note": "Controlled tension, natural sag | 合适的张力，自然的垂度",
+      "beats": [
+        {
+          "id": "s07b0",
+          "en": "Weight curves the rope between supports. We call this sag.",
+          "zh": "重量让支点之间的绳索下弯，这叫垂度。",
+          "audio_file": "audio-final/s07b0.wav",
+          "start": 77.0813,
+          "end": 81.1787,
+          "audio_duration": 4.097333333333333
+        },
+        {
+          "id": "s07b1",
+          "en": "A tensioning system keeps the rope pulled within its designed range.",
+          "zh": "张紧系统把钢丝绳的拉紧程度保持在设计范围内。",
+          "audio_file": "audio-final/s07b1.wav",
+          "start": 81.3787,
+          "end": 85.9877,
+          "audio_duration": 4.609083333333333
+        },
+        {
+          "id": "s07b2",
+          "en": "Too loose or too tight causes problems. Engineers calculate the balance.",
+          "zh": "太松、太紧都有问题，工程师会计算合适的平衡。",
+          "audio_file": "audio-final/s07b2.wav",
+          "start": 86.1877,
+          "end": 92.2338,
+          "audio_duration": 6.0460416666666665
+        }
+      ],
+      "sources": [
+        "S4"
+      ],
+      "pause": 0,
+      "start": 76.28133333333334,
+      "duration": 16.4025
+    },
+    {
+      "id": "s08",
+      "chapter": 1,
+      "kind": "tower",
+      "title": "The towers lend a hand",
+      "zh_title": "支架来帮忙",
+      "note": "Turning sheaves guide the rope | 转动的托索轮引导钢丝绳",
+      "beats": [
+        {
+          "id": "s08b0",
+          "en": "Towers hold groups of small grooved wheels, called sheaves.",
+          "zh": "支架上装着一组组带凹槽的小轮，叫托索轮。",
+          "audio_file": "audio-final/s08b0.wav",
+          "start": 93.4838,
+          "end": 98.0241,
+          "audio_duration": 4.540333333333334
+        },
+        {
+          "id": "s08b1",
+          "en": "These support and guide the moving rope across the hillside.",
+          "zh": "这些小轮支撑并引导山坡上的移动钢丝绳。",
+          "audio_file": "audio-final/s08b1.wav",
+          "start": 98.2241,
+          "end": 102.0722,
+          "audio_duration": 3.8480416666666666
+        },
+        {
+          "id": "s08b2",
+          "en": "The wheels turn with the rope, reducing rubbing. The cabin hangs below its grip.",
+          "zh": "小轮随着绳索转动，减少滑动摩擦。吊厢悬挂在抱索器下面。",
+          "audio_file": "audio-final/s08b2.wav",
+          "start": 102.2722,
+          "end": 106.6432,
+          "audio_duration": 4.371041666666667
+        }
+      ],
+      "sources": [
+        "S7"
+      ],
+      "pause": 0,
+      "start": 92.68379166666666,
+      "duration": 14.4094
+    },
+    {
+      "id": "s09",
+      "chapter": 2,
+      "kind": "grip",
+      "title": "Meet the grip",
+      "zh_title": "认识抱索器",
+      "note": "A spring-loaded mechanical clamp | 用弹簧夹紧的机械夹具",
+      "beats": [
+        {
+          "id": "s09b0",
+          "en": "A mechanical clamp called a grip joins our cabin to the rope.",
+          "zh": "一种叫抱索器的机械夹具，把吊厢连到绳索上。",
+          "audio_file": "audio-final/s09b0.wav",
+          "start": 107.8932,
+          "end": 111.4849,
+          "audio_duration": 3.591666666666667
+        },
+        {
+          "id": "s09b1",
+          "en": "In our example, strong springs press the grip closed around the rope.",
+          "zh": "在我们的例子里，有力的弹簧让抱索器夹紧钢丝绳。",
+          "audio_file": "audio-final/s09b1.wav",
+          "start": 111.6849,
+          "end": 116.4682,
+          "audio_duration": 4.783291666666667
+        },
+        {
+          "id": "s09b2",
+          "en": "The closed grip moves with the rope. It stays closed outside the stations.",
+          "zh": "夹紧的抱索器随着绳索移动，在车站外保持夹紧。",
+          "audio_file": "audio-final/s09b2.wav",
+          "start": 116.6682,
+          "end": 122.4928,
+          "audio_duration": 5.824583333333333
+        }
+      ],
+      "sources": [
+        "S1",
+        "S8"
+      ],
+      "pause": 0,
+      "start": 107.09320833333334,
+      "duration": 15.8495
+    },
+    {
+      "id": "s10",
+      "chapter": 2,
+      "kind": "loadpath",
+      "title": "Where does the weight go?",
+      "zh_title": "重量传到哪里？",
+      "note": "Cabin → hanger → grip → rope → supports | 一条承载路径",
+      "beats": [
+        {
+          "id": "s10b0",
+          "en": "Earth's gravity pulls the cabin downward. Follow the path that supports its weight.",
+          "zh": "地球的重力把吊厢向下拉。来看看重量怎样被支撑。",
+          "audio_file": "audio-final/s10b0.wav",
+          "start": 123.7428,
+          "end": 128.2435,
+          "audio_duration": 4.500708333333334
+        },
+        {
+          "id": "s10b1",
+          "en": "From cabin to hanger, from hanger to grip, and from grip to rope.",
+          "zh": "从吊厢到吊杆，从吊杆到抱索器，再从抱索器到钢丝绳。",
+          "audio_file": "audio-final/s10b1.wav",
+          "start": 128.4435,
+          "end": 133.328,
+          "audio_duration": 4.8845
+        },
+        {
+          "id": "s10b2",
+          "en": "Forces pass to towers and stations, then through their foundations to the ground.",
+          "zh": "力传给支架和车站，再经它们的基础传到地面。",
+          "audio_file": "audio-final/s10b2.wav",
+          "start": 133.528,
+          "end": 138.0797,
+          "audio_duration": 4.55175
+        }
+      ],
+      "sources": [
+        "S4"
+      ],
+      "pause": 0,
+      "start": 122.94275000000002,
+      "duration": 15.587
+    },
+    {
+      "id": "s11",
+      "chapter": 2,
+      "kind": "station-question",
+      "title": "Fast outside, slow inside?",
+      "zh_title": "站外快，站内慢？",
+      "note": "Think about it! | 想一想！",
+      "beats": [
+        {
+          "id": "s11b0",
+          "en": "A puzzle! Cabins travel quickly outside, but slowly inside the station.",
+          "zh": "谜题来了！吊厢站外走得快，站内走得慢。",
+          "audio_file": "audio-final/s11b0.wav",
+          "start": 139.3297,
+          "end": 144.0751,
+          "audio_duration": 4.745416666666666
+        },
+        {
+          "id": "s11b1",
+          "en": "How can one cabin slow down while the rope keeps moving?",
+          "zh": "钢丝绳继续移动，一个吊厢怎么能单独慢下来？",
+          "audio_file": "audio-final/s11b1.wav",
+          "start": 144.2751,
+          "end": 147.4613,
+          "audio_duration": 3.186125
+        },
+        {
+          "id": "s11b2",
+          "en": "Watch the grip, and watch what supports the cabin.",
+          "zh": "盯住抱索器，也看看什么在支撑吊厢。",
+          "audio_file": "audio-final/s11b2.wav",
+          "start": 150.6612,
+          "end": 153.2874,
+          "audio_duration": 2.626125
+        }
+      ],
+      "sources": [
+        "S1"
+      ],
+      "pause": 3,
+      "start": 138.52970833333333,
+      "duration": 15.2077
+    },
+    {
+      "id": "s12",
+      "chapter": 2,
+      "kind": "arrival",
+      "title": "Support first, then release",
+      "zh_title": "先接住，再松开",
+      "note": "The station rail supports the carrier | 站内轨道接住吊厢组件",
+      "beats": [
+        {
+          "id": "s12b0",
+          "en": "As the cabin enters, its carrier wheels run onto a station rail.",
+          "zh": "吊厢进入车站时，吊厢组件上的行走轮驶上站内轨道。",
+          "audio_file": "audio-final/s12b0.wav",
+          "start": 154.5374,
+          "end": 158.9823,
+          "audio_duration": 4.444916666666667
+        },
+        {
+          "id": "s12b1",
+          "en": "That rail supports the cabin before a mechanism opens the grip.",
+          "zh": "轨道先支撑住吊厢，然后机械装置才打开抱索器。",
+          "audio_file": "audio-final/s12b1.wav",
+          "start": 159.1823,
+          "end": 163.333,
+          "audio_duration": 4.15075
+        },
+        {
+          "id": "s12b2",
+          "en": "It leaves the rope, but still has support. It never floats freely.",
+          "zh": "它离开绳索，但仍有支撑，绝不是自由悬空。",
+          "audio_file": "audio-final/s12b2.wav",
+          "start": 163.533,
+          "end": 169.5285,
+          "audio_duration": 5.995416666666666
+        }
+      ],
+      "sources": [
+        "S7",
+        "S8"
+      ],
+      "pause": 0,
+      "start": 153.737375,
+      "duration": 16.2411
+    },
+    {
+      "id": "s13",
+      "chapter": 2,
+      "kind": "conveyor",
+      "title": "Two speeds in one station",
+      "zh_title": "车站里，两种速度",
+      "note": "Fast rope / slow cabin | 绳索快，吊厢慢",
+      "beats": [
+        {
+          "id": "s13b0",
+          "en": "Rows of turning tires move the cabin along the station rail.",
+          "zh": "一排排转动的轮胎，带着吊厢沿站内轨道前进。",
+          "audio_file": "audio-final/s13b0.wav",
+          "start": 170.7785,
+          "end": 174.8264,
+          "audio_duration": 4.047916666666667
+        },
+        {
+          "id": "s13b1",
+          "en": "The tires move it slowly for boarding, while the steel rope keeps moving.",
+          "zh": "轮胎让吊厢慢慢移动，方便上下客；钢丝绳继续运行。",
+          "audio_file": "audio-final/s13b1.wav",
+          "start": 175.0264,
+          "end": 179.9569,
+          "audio_duration": 4.930541666666667
+        },
+        {
+          "id": "s13b2",
+          "en": "Inside this station, the cabin and the steel rope can move at different speeds.",
+          "zh": "在车站里，吊厢和钢丝绳可以以不同的速度移动。",
+          "audio_file": "audio-final/s13b2.wav",
+          "start": 180.1569,
+          "end": 184.1492,
+          "audio_duration": 3.99225
+        }
+      ],
+      "sources": [
+        "S7",
+        "S8"
+      ],
+      "pause": 0,
+      "start": 169.97845833333332,
+      "duration": 14.6207
+    },
+    {
+      "id": "s14",
+      "chapter": 2,
+      "kind": "departure",
+      "title": "Ready to join the rope again",
+      "zh_title": "准备重新夹住绳索",
+      "note": "Accelerate → clamp → check | 加速 → 夹紧 → 检查",
+      "beats": [
+        {
+          "id": "s14b0",
+          "en": "After boarding, the doors close and the tires speed the cabin up.",
+          "zh": "乘客上车后，厢门关闭，轮胎带着吊厢加速。",
+          "audio_file": "audio-final/s14b0.wav",
+          "start": 185.3992,
+          "end": 189.2842,
+          "audio_duration": 3.885
+        },
+        {
+          "id": "s14b1",
+          "en": "Near the rope speed, the grip closes onto the rope again.",
+          "zh": "接近钢丝绳的速度时，抱索器重新夹住绳索。",
+          "audio_file": "audio-final/s14b1.wav",
+          "start": 189.4842,
+          "end": 192.5771,
+          "audio_duration": 3.0929583333333333
+        },
+        {
+          "id": "s14b2",
+          "en": "Checks confirm correct gripping. If something is wrong, the system stops.",
+          "zh": "检查确认是否正确夹紧，发现问题，系统就停下。",
+          "audio_file": "audio-final/s14b2.wav",
+          "start": 192.7771,
+          "end": 197.7482,
+          "audio_duration": 4.9710833333333335
+        }
+      ],
+      "sources": [
+        "S1",
+        "S8"
+      ],
+      "pause": 0,
+      "start": 184.59916666666666,
+      "duration": 13.599
+    },
+    {
+      "id": "s14m",
+      "title": "A station along the way",
+      "zh_title": "途中还有一个站",
+      "chapter": 2,
+      "sources": [
+        "https://www.leitner.com/fileadmin//userdaten/00-home/Ordner-Facelift/PDF_s_Logo_neu/Station_sheets/The_LEITNER_Station_middle_station.pdf"
+      ],
+      "beats": [
+        {
+          "id": "midb0",
+          "en": "Some longer routes have an intermediate station: a stop partway along.",
+          "zh": "有些较长的索道，会在途中设中间站。",
+          "start": 198.99820833333337,
+          "audio_duration": 5.319791666666666,
+          "end": 204.318
+        },
+        {
+          "id": "midb1",
+          "en": "Rails support the cabin. Its grip opens, and tires move it slowly through the station.",
+          "zh": "轨道先接住吊厢。抱索器打开，轮胎带着它在站内慢慢走。",
+          "start": 204.51800000000003,
+          "audio_duration": 6.3625,
+          "end": 210.8805
+        },
+        {
+          "id": "midb2",
+          "en": "Here, a conveyor takes the same cabin between two separate rope loops.",
+          "zh": "这个例子有两段独立绳环。输送装置把同一吊厢送到下一段。",
+          "start": 211.08050000000003,
+          "audio_duration": 5.928625,
+          "end": 217.009125
+        },
+        {
+          "id": "midb3",
+          "en": "It speeds up, grips the next rope, and is checked before leaving.",
+          "zh": "吊厢加速，夹住下一段钢丝绳，检查合格后才出站。",
+          "start": 217.20912500000003,
+          "audio_duration": 4.339541666666666,
+          "end": 221.5486666666667
+        },
+        {
+          "id": "midb4",
+          "en": "Designs differ. Some stations share one rope; other routes require changing cabins.",
+          "zh": "设计也有不同：有的站共用一根绳环，有的线路需要换乘吊厢。",
+          "start": 221.74866666666668,
+          "audio_duration": 6.771708333333334,
+          "end": 228.520375
+        }
+      ],
+      "duration": 30.791666666666668,
+      "start": 198.19820833333335,
+      "note": "同一吊厢，跨两段绳环 | Same cabin, two rope sections"
+    },
+    {
+      "id": "s15",
+      "chapter": 2,
+      "kind": "quiz-grip",
+      "title": "Where may the grip open?",
+      "zh_title": "抱索器在哪里打开？",
+      "note": "A: on the line / B: in the station | A：站外线路 / B：站内",
+      "beats": [
+        {
+          "id": "s15b0",
+          "en": "Your turn! Does the grip open above the trees, or inside the station?",
+          "zh": "轮到你了！抱索器在树梢上方打开，还是在车站里打开？",
+          "audio_file": "audio-final/s15b0.wav",
+          "start": 229.78986666666665,
+          "end": 234.16156666666666,
+          "audio_duration": 4.371708333333333
+        },
+        {
+          "id": "s15b1",
+          "en": "Think about the support we just saw.",
+          "zh": "想一想，我们刚才看到了什么支撑。",
+          "audio_file": "audio-final/s15b1.wav",
+          "start": 234.36156666666665,
+          "end": 236.11916666666664,
+          "audio_duration": 1.7575416666666666
+        },
+        {
+          "id": "s15b2",
+          "en": "Inside the station! A rail supports the cabin before it leaves the rope.",
+          "zh": "在车站里！吊厢脱离绳索之前，轨道已经把它接住了。",
+          "audio_file": "audio-final/s15b2.wav",
+          "start": 240.31916666666666,
+          "end": 257.1913666666667,
+          "audio_duration": 16.872208333333333
+        }
+      ],
+      "sources": [
+        "S1",
+        "S7"
+      ],
+      "pause": 4,
+      "start": 228.989875,
+      "duration": 28.6515
+    },
+    {
+      "id": "s16",
+      "chapter": 2,
+      "kind": "types",
+      "title": "A family of different ropeways",
+      "zh_title": "索道是一个大家族",
+      "note": "Our example is only one type | 本片主角只是其中一种",
+      "beats": [
+        {
+          "id": "s16b0",
+          "en": "Other ropeways may use separate ropes for carrying and pulling.",
+          "zh": "其他索道可能用不同的绳索分别承载和牵引。",
+          "audio_file": "audio-final/s16b0.wav",
+          "start": 258.4413666666667,
+          "end": 261.95386666666667,
+          "audio_duration": 3.5125
+        },
+        {
+          "id": "s16b1",
+          "en": "Some large cars travel back and forth, instead of around a loop.",
+          "zh": "有些大车厢来回往返，而不是绕环循环。",
+          "audio_file": "audio-final/s16b1.wav",
+          "start": 262.15386666666666,
+          "end": 265.90956666666665,
+          "audio_duration": 3.755708333333333
+        },
+        {
+          "id": "s16b2",
+          "en": "Appearance cannot tell you everything. Each system has its own equipment and instructions.",
+          "zh": "外形不能说明一切，每个系统都有自己的设备和乘坐规定。",
+          "audio_file": "audio-final/s16b2.wav",
+          "start": 266.1095666666667,
+          "end": 272.9361666666667,
+          "audio_duration": 6.826666666666667
+        }
+      ],
+      "sources": [
+        "S2"
+      ],
+      "pause": 0,
+      "start": 257.64133333333336,
+      "duration": 15.7449
+    },
+    {
+      "id": "s17",
+      "chapter": 3,
+      "kind": "layers",
+      "title": "Safety is a team",
+      "zh_title": "安全靠大家一起工作",
+      "note": "Design · check · monitor · stop · respond | 多层保障",
+      "beats": [
+        {
+          "id": "s17b0",
+          "en": "Safety needs several layers working together, not one magic part.",
+          "zh": "安全需要多层措施一起工作，不是靠一个神奇零件。",
+          "audio_file": "audio-final/s17b0.wav",
+          "start": 274.1861666666667,
+          "end": 279.07146666666665,
+          "audio_duration": 4.885291666666666
+        },
+        {
+          "id": "s17b1",
+          "en": "Design, inspection, sensors, brakes, trained people, and emergency plans each help.",
+          "zh": "设计、检查、传感器、制动器、受训人员和应急计划，各有作用。",
+          "audio_file": "audio-final/s17b1.wav",
+          "start": 279.2714666666667,
+          "end": 287.1920666666667,
+          "audio_duration": 7.920583333333333
+        },
+        {
+          "id": "s17b2",
+          "en": "These reduce risk. Correct operation and maintenance are still essential.",
+          "zh": "它们降低风险，正确操作和维护仍然必不可少。",
+          "audio_file": "audio-final/s17b2.wav",
+          "start": 287.39206666666666,
+          "end": 292.47496666666666,
+          "audio_duration": 5.082916666666667
+        }
+      ],
+      "sources": [
+        "S9",
+        "S4"
+      ],
+      "pause": 0,
+      "start": 273.38620833333334,
+      "duration": 19.5388
+    },
+    {
+      "id": "s18",
+      "chapter": 3,
+      "kind": "limits",
+      "title": "Built for planned loads",
+      "zh_title": "按照设计载荷工作",
+      "note": "Respect the posted limits | 遵守现场限载规定",
+      "beats": [
+        {
+          "id": "s18b0",
+          "en": "Engineers calculate the forces from passengers, the rope, movement, and weather.",
+          "zh": "工程师计算乘客、绳索、运动和天气带来的力。",
+          "audio_file": "audio-final/s18b0.wav",
+          "start": 293.72496666666666,
+          "end": 298.30576666666667,
+          "audio_duration": 4.58075
+        },
+        {
+          "id": "s18b1",
+          "en": "Parts need extra strength beyond normal loads, following the rules for their system.",
+          "zh": "按该系统的要求，部件需要高于正常载荷的额外强度。",
+          "audio_file": "audio-final/s18b1.wav",
+          "start": 298.50576666666666,
+          "end": 303.7035666666667,
+          "audio_duration": 5.1978333333333335
+        },
+        {
+          "id": "s18b2",
+          "en": "Extra strength is no excuse to overload. Follow the posted loading limits.",
+          "zh": "额外强度不是超载的理由，要遵守现场限载规定。",
+          "audio_file": "audio-final/s18b2.wav",
+          "start": 303.9035666666667,
+          "end": 310.8547666666667,
+          "audio_duration": 6.951208333333334
+        }
+      ],
+      "sources": [
+        "S4",
+        "S5"
+      ],
+      "pause": 0,
+      "start": 292.92500000000007,
+      "duration": 18.3798
+    },
+    {
+      "id": "s19",
+      "chapter": 3,
+      "kind": "inspection",
+      "title": "Looking outside, looking inside",
+      "zh_title": "外面看，里面也检查",
+      "note": "Visual inspection + magnetic testing | 目视检查 + 磁性检测",
+      "beats": [
+        {
+          "id": "s19b0",
+          "en": "Trained inspectors look for wear, damage, corrosion, and changes in the rope.",
+          "zh": "受训检查人员寻找钢丝绳的磨损、损伤、锈蚀和变化。",
+          "audio_file": "audio-final/s19b0.wav",
+          "start": 312.1047666666667,
+          "end": 317.3009666666667,
+          "audio_duration": 5.196166666666667
+        },
+        {
+          "id": "s19b1",
+          "en": "Magnetic equipment helps find broken wires, including damage hidden inside.",
+          "zh": "磁性设备帮助发现断丝，包括内部隐藏的损伤。",
+          "audio_file": "audio-final/s19b1.wav",
+          "start": 317.50096666666667,
+          "end": 324.38416666666666,
+          "audio_duration": 6.88325
+        },
+        {
+          "id": "s19b2",
+          "en": "Results guide repairs and replacement. Looking strong is not enough.",
+          "zh": "结果帮助决定维修或更换，光看起来结实还不够。",
+          "audio_file": "audio-final/s19b2.wav",
+          "start": 324.5841666666667,
+          "end": 329.9947666666667,
+          "audio_duration": 5.410541666666667
+        }
+      ],
+      "sources": [
+        "S6",
+        "S10",
+        "S8"
+      ],
+      "pause": 0,
+      "start": 311.30479166666674,
+      "duration": 19.14
+    },
+    {
+      "id": "s20",
+      "chapter": 3,
+      "kind": "morning",
+      "title": "Checks before the first ride",
+      "zh_title": "第一趟运行前的检查",
+      "note": "Maintenance is part of the journey | 维护也是旅程的一部分",
+      "beats": [
+        {
+          "id": "s20b0",
+          "en": "Before passengers arrive, staff carry out the checks required for their ropeway.",
+          "zh": "乘客到来之前，工作人员按该索道的要求进行检查。",
+          "audio_file": "audio-final/s20b0.wav",
+          "start": 331.2447666666667,
+          "end": 336.1366666666667,
+          "audio_duration": 4.891916666666667
+        },
+        {
+          "id": "s20b1",
+          "en": "Grips, wheels, brakes, doors, and controls need regular checking and testing.",
+          "zh": "抱索器、轮子、制动器、厢门和控制设备都需定期检查、测试。",
+          "audio_file": "audio-final/s20b1.wav",
+          "start": 336.3366666666667,
+          "end": 341.5284666666667,
+          "audio_duration": 5.19175
+        },
+        {
+          "id": "s20b2",
+          "en": "Records help reveal changes. Maintenance is part of safety.",
+          "zh": "记录帮助发现变化，维护本身就是安全保障的一部分。",
+          "audio_file": "audio-final/s20b2.wav",
+          "start": 341.7284666666667,
+          "end": 346.7290666666667,
+          "audio_duration": 5.000625
+        }
+      ],
+      "sources": [
+        "S8",
+        "S9"
+      ],
+      "pause": 0,
+      "start": 330.4447500000001,
+      "duration": 16.7343
+    },
+    {
+      "id": "s21",
+      "chapter": 3,
+      "kind": "sensors",
+      "title": "The system has watchful helpers",
+      "zh_title": "系统有一群观察员",
+      "note": "Speed · grip · rope position | 速度 · 夹紧状态 · 绳索位置",
+      "beats": [
+        {
+          "id": "s21b0",
+          "en": "Sensors check rope speed, rope position, and correct gripping.",
+          "zh": "传感器检查绳速、绳索位置，以及是否正确夹紧。",
+          "audio_file": "audio-final/s21b0.wav",
+          "start": 347.9790666666667,
+          "end": 352.2236666666667,
+          "audio_duration": 4.244666666666666
+        },
+        {
+          "id": "s21b1",
+          "en": "Signals go to the controls. Staff also watch the information.",
+          "zh": "信号传到控制系统，工作人员也查看信息。",
+          "audio_file": "audio-final/s21b1.wav",
+          "start": 352.4236666666667,
+          "end": 356.7639666666667,
+          "audio_duration": 4.340208333333333
+        },
+        {
+          "id": "s21b2",
+          "en": "Sensors cannot do everything. Equipment and trained people work together.",
+          "zh": "传感器不能包办一切，设备和受训人员要共同配合。",
+          "audio_file": "audio-final/s21b2.wav",
+          "start": 356.9639666666667,
+          "end": 362.8400666666667,
+          "audio_duration": 5.876125
+        }
+      ],
+      "sources": [
+        "S8",
+        "S11"
+      ],
+      "pause": 0,
+      "start": 347.1790416666668,
+      "duration": 16.111
+    },
+    {
+      "id": "s22",
+      "chapter": 3,
+      "kind": "circuit",
+      "title": "A warning can mean STOP",
+      "zh_title": "出现异常，可以停车",
+      "note": "Detect → stop → investigate | 发现 → 停车 → 查明原因",
+      "beats": [
+        {
+          "id": "s22b0",
+          "en": "A safety problem can stop the drive and apply the brakes.",
+          "zh": "安全异常可以让驱动停止，并施加制动。",
+          "audio_file": "audio-final/s22b0.wav",
+          "start": 364.0900666666667,
+          "end": 367.8160666666667,
+          "audio_duration": 3.7260416666666667
+        },
+        {
+          "id": "s22b1",
+          "en": "For example, a grip that is not correctly closed must not leave the station.",
+          "zh": "例如抱索器没有正确夹紧，就不能让它出站。",
+          "audio_file": "audio-final/s22b1.wav",
+          "start": 368.0160666666667,
+          "end": 373.4351666666667,
+          "audio_duration": 5.419083333333333
+        },
+        {
+          "id": "s22b2",
+          "en": "Staff fix the cause before restarting. Stopping can protect passengers.",
+          "zh": "工作人员处理原因后才能重启，停车可以保护乘客。",
+          "audio_file": "audio-final/s22b2.wav",
+          "start": 373.6351666666667,
+          "end": 379.7796666666667,
+          "audio_duration": 6.144541666666667
+        }
+      ],
+      "sources": [
+        "S8",
+        "S4"
+      ],
+      "pause": 0,
+      "start": 363.2900416666668,
+      "duration": 16.9397
+    },
+    {
+      "id": "s23",
+      "chapter": 4,
+      "kind": "brakes",
+      "title": "What stops the moving loop?",
+      "zh_title": "什么让绳环停下来？",
+      "note": "Service brake + emergency brake | 工作制动 + 紧急制动",
+      "beats": [
+        {
+          "id": "s23b0",
+          "en": "The drive has brakes. A service brake controls stopping.",
+          "zh": "驱动装置设有制动器，工作制动控制停车。",
+          "audio_file": "audio-final/s23b0.wav",
+          "start": 381.0296666666667,
+          "end": 385.6014666666667,
+          "audio_duration": 4.5717083333333335
+        },
+        {
+          "id": "s23b1",
+          "en": "A separate emergency brake can act directly on the large drive wheel.",
+          "zh": "另有紧急制动器，可以直接作用在大驱动轮上。",
+          "audio_file": "audio-final/s23b1.wav",
+          "start": 385.80146666666667,
+          "end": 391.6034666666667,
+          "audio_duration": 5.802083333333333
+        },
+        {
+          "id": "s23b2",
+          "en": "Brakes control the loop. Not every cabin has its own rope brake.",
+          "zh": "制动器控制绳环，并非每个吊厢都有自己的绳索制动器。",
+          "audio_file": "audio-final/s23b2.wav",
+          "start": 391.8034666666667,
+          "end": 396.5661666666667,
+          "audio_duration": 4.762666666666667
+        }
+      ],
+      "sources": [
+        "S3",
+        "S4"
+      ],
+      "pause": 0,
+      "start": 380.22970833333346,
+      "duration": 16.7865
+    },
+    {
+      "id": "s24",
+      "chapter": 4,
+      "kind": "spring-brake",
+      "title": "A brake that wants to close",
+      "zh_title": "倾向于自动合上的制动器",
+      "note": "Spring applied / power released | 弹簧施加制动，动力保持释放",
+      "beats": [
+        {
+          "id": "s24b0",
+          "en": "Many ropeway brakes use springs to press the brake pads closed.",
+          "zh": "许多索道制动器用弹簧压紧制动垫。",
+          "audio_file": "audio-final/s24b0.wav",
+          "start": 397.8161666666667,
+          "end": 403.36806666666666,
+          "audio_duration": 5.551875
+        },
+        {
+          "id": "s24b1",
+          "en": "During operation, powered equipment holds the brake open.",
+          "zh": "运行时，动力设备把制动器保持在释放状态。",
+          "audio_file": "audio-final/s24b1.wav",
+          "start": 403.5680666666667,
+          "end": 407.4048666666667,
+          "audio_duration": 3.8367916666666666
+        },
+        {
+          "id": "s24b2",
+          "en": "Lose that releasing power, and the springs can apply the brake.",
+          "zh": "释放制动的动力消失时，弹簧就能施加制动。",
+          "audio_file": "audio-final/s24b2.wav",
+          "start": 407.6048666666667,
+          "end": 412.2579666666667,
+          "audio_duration": 4.653125
+        }
+      ],
+      "sources": [
+        "S4",
+        "S3"
+      ],
+      "pause": 0,
+      "start": 397.01616666666683,
+      "duration": 15.6918
+    },
+    {
+      "id": "s25",
+      "chapter": 4,
+      "kind": "stop",
+      "title": "Stopping is not falling",
+      "zh_title": "停下来，不等于掉下来",
+      "note": "The closed grip still supports the cabin | 抱索器仍然夹紧",
+      "beats": [
+        {
+          "id": "s25b0",
+          "en": "When the rope stops, the cabin is still supported by its closed grip and the rope.",
+          "zh": "钢丝绳停止时，吊厢仍由夹紧的抱索器和钢丝绳支撑。",
+          "audio_file": "audio-final/s25b0.wav",
+          "start": 413.5079666666667,
+          "end": 420.89886666666666,
+          "audio_duration": 7.390916666666667
+        },
+        {
+          "id": "s25b1",
+          "en": "A hanging cabin may sway a little as movement changes. Staff monitor the situation.",
+          "zh": "运动状态变化时，悬挂的吊厢可能轻微晃动，工作人员会监测情况。",
+          "audio_file": "audio-final/s25b1.wav",
+          "start": 421.0988666666667,
+          "end": 427.23446666666666,
+          "audio_duration": 6.135583333333333
+        },
+        {
+          "id": "s25b2",
+          "en": "Braking controls movement. It cannot replace checking the rope and other parts.",
+          "zh": "制动控制运动，不能代替检查绳索和其他部件。",
+          "audio_file": "audio-final/s25b2.wav",
+          "start": 427.4344666666667,
+          "end": 431.6663666666667,
+          "audio_duration": 4.231875
+        }
+      ],
+      "sources": [
+        "S1",
+        "S4"
+      ],
+      "pause": 0,
+      "start": 412.70795833333347,
+      "duration": 19.4084
+    },
+    {
+      "id": "s26",
+      "chapter": 4,
+      "kind": "wind",
+      "title": "When the mountain gets windy",
+      "zh_title": "山风变大时怎么办？",
+      "note": "Conditions change; limits vary | 天气会变化，不同系统限值不同",
+      "beats": [
+        {
+          "id": "s26b0",
+          "en": "Wind can push a cabin sideways. Operators monitor weather and wind along the route.",
+          "zh": "风会把吊厢向侧面推，运营人员要监测线路上的天气和风况。",
+          "audio_file": "audio-final/s26b0.wav",
+          "start": 432.9163666666667,
+          "end": 438.7717666666667,
+          "audio_duration": 5.855416666666667
+        },
+        {
+          "id": "s26b1",
+          "en": "They may slow down, stop boarding, or suspend operation when needed.",
+          "zh": "必要时，他们可能减速、停止上客，或暂停运行。",
+          "audio_file": "audio-final/s26b1.wav",
+          "start": 438.97176666666667,
+          "end": 443.0671666666667,
+          "audio_duration": 4.095375
+        },
+        {
+          "id": "s26b2",
+          "en": "Wind limits differ between systems. Follow staff, not a guessed limit.",
+          "zh": "不同系统的风速限值不同，要听从工作人员，不能自己猜。",
+          "audio_file": "audio-final/s26b2.wav",
+          "start": 443.2671666666667,
+          "end": 449.0291666666667,
+          "audio_duration": 5.762
+        }
+      ],
+      "sources": [
+        "S12"
+      ],
+      "pause": 0,
+      "start": 432.11633333333344,
+      "duration": 17.3628
+    },
+    {
+      "id": "s28",
+      "chapter": 4,
+      "kind": "backup",
+      "title": "What if the power goes out?",
+      "zh_title": "如果停电了呢？",
+      "note": "Assess first, then use the right plan | 先判断，再执行合适方案",
+      "beats": [
+        {
+          "id": "s28b0",
+          "en": "First, the system stops and the team checks what has happened.",
+          "zh": "首先，系统停下，团队检查发生了什么。",
+          "audio_file": "audio-final/s28b0.wav",
+          "start": 450.2791666666667,
+          "end": 454.3481666666667,
+          "audio_duration": 4.069
+        },
+        {
+          "id": "s28b1",
+          "en": "Many systems have a backup drive, used only when moving cabins is safe.",
+          "zh": "许多系统设有备用驱动，只能在确认吊厢能安全移动时使用。",
+          "audio_file": "audio-final/s28b1.wav",
+          "start": 454.5481666666667,
+          "end": 459.4170666666667,
+          "audio_duration": 4.8689583333333335
+        },
+        {
+          "id": "s28b2",
+          "en": "It cannot solve every problem. Staff choose the right emergency plan.",
+          "zh": "它不能解决所有问题，工作人员要选择正确的应急方案。",
+          "audio_file": "audio-final/s28b2.wav",
+          "start": 459.6170666666667,
+          "end": 464.9899666666667,
+          "audio_duration": 5.372916666666667
+        }
+      ],
+      "sources": [
+        "S3",
+        "S4"
+      ],
+      "pause": 0,
+      "start": 449.47912500000007,
+      "duration": 15.9609
+    },
+    {
+      "id": "s29",
+      "chapter": 4,
+      "kind": "rescue",
+      "title": "A plan, a team, and practice",
+      "zh_title": "计划、团队，还有演练",
+      "note": "Rescue methods depend on the installation | 救援方式取决于具体索道",
+      "beats": [
+        {
+          "id": "s29b0",
+          "en": "If moving the rope is unsafe, trained teams follow a planned rescue procedure.",
+          "zh": "如果移动绳索不安全，受训团队就执行预先制定的救援程序。",
+          "audio_file": "audio-final/s29b0.wav",
+          "start": 466.2399666666667,
+          "end": 471.7223666666667,
+          "audio_duration": 5.482333333333333
+        },
+        {
+          "id": "s29b1",
+          "en": "Methods depend on the system, terrain, and conditions. Teams practice for emergencies.",
+          "zh": "方式取决于系统、地形和现场情况，团队会进行应急演练。",
+          "audio_file": "audio-final/s29b1.wav",
+          "start": 471.9223666666667,
+          "end": 478.6894666666667,
+          "audio_duration": 6.767125
+        },
+        {
+          "id": "s29b2",
+          "en": "Passengers wait for instructions. Never try to climb out or rescue yourself.",
+          "zh": "乘客应等待指示，绝不能自行爬出或尝试自救。",
+          "audio_file": "audio-final/s29b2.wav",
+          "start": 478.8894666666667,
+          "end": 483.6201666666667,
+          "audio_duration": 4.730708333333333
+        }
+      ],
+      "sources": [
+        "S4"
+      ],
+      "pause": 0,
+      "start": 465.4400000000001,
+      "duration": 18.6302
+    },
+    {
+      "id": "s30",
+      "chapter": 5,
+      "kind": "boarding",
+      "title": "You are part of the safety team",
+      "zh_title": "你也是安全团队的一员",
+      "note": "Stay with your grown-up | 和大人一起行动",
+      "beats": [
+        {
+          "id": "s30b0",
+          "en": "Your job begins at the station. Stay with your grown-up, and follow the attendant.",
+          "zh": "你的任务从车站开始：跟紧大人，听从工作人员指引。",
+          "audio_file": "audio-final/s30b0.wav",
+          "start": 484.8701666666667,
+          "end": 490.6958666666667,
+          "audio_duration": 5.825708333333333
+        },
+        {
+          "id": "s30b1",
+          "en": "Wait your turn. Walk carefully, and keep hands away from doors and moving equipment.",
+          "zh": "按顺序等候，小心走动，双手远离厢门和运动设备。",
+          "audio_file": "audio-final/s30b1.wav",
+          "start": 490.8958666666667,
+          "end": 496.81666666666666,
+          "audio_duration": 5.92075
+        },
+        {
+          "id": "s30b2",
+          "en": "Follow loading instructions. Enjoy the adventure through the windows!",
+          "zh": "遵守上车和限载指引，透过窗户欣赏美景吧！",
+          "audio_file": "audio-final/s30b2.wav",
+          "start": 497.0166666666667,
+          "end": 502.3529666666667,
+          "audio_duration": 5.336291666666667
+        }
+      ],
+      "sources": [
+        "S13"
+      ],
+      "pause": 0,
+      "start": 484.0701666666668,
+      "duration": 18.7328
+    },
+    {
+      "id": "s31",
+      "chapter": 5,
+      "kind": "passengers",
+      "title": "A calm cabin is a happy cabin",
+      "zh_title": "安静乘坐，好好欣赏",
+      "note": "Do not rock or force the doors | 不故意摇晃，不强开厢门",
+      "beats": [
+        {
+          "id": "s31b0",
+          "en": "Inside, sit or stand as the operator instructs, and keep your body inside the cabin.",
+          "zh": "进厢后，按现场规定坐好或站稳，身体保持在吊厢内。",
+          "audio_file": "audio-final/s31b0.wav",
+          "start": 503.6029666666667,
+          "end": 509.8589666666667,
+          "audio_duration": 6.256
+        },
+        {
+          "id": "s31b1",
+          "en": "Do not rock the cabin, lean out, or force the doors open.",
+          "zh": "不故意摇晃吊厢，不探出身体，不强行打开厢门。",
+          "audio_file": "audio-final/s31b1.wav",
+          "start": 510.05896666666666,
+          "end": 514.5091666666666,
+          "audio_duration": 4.450291666666667
+        },
+        {
+          "id": "s31b2",
+          "en": "Worried? Tell your grown-up. Follow the posted instructions to contact staff.",
+          "zh": "如果担心，告诉大人，按标示的指引联系工作人员。",
+          "audio_file": "audio-final/s31b2.wav",
+          "start": 514.7091666666666,
+          "end": 521.1500666666667,
+          "audio_duration": 6.440875
+        }
+      ],
+      "sources": [
+        "S13"
+      ],
+      "pause": 0,
+      "start": 502.8029166666668,
+      "duration": 18.7972
+    },
+    {
+      "id": "s32",
+      "chapter": 5,
+      "kind": "wait",
+      "title": "If your cabin pauses",
+      "zh_title": "如果吊厢暂停了",
+      "note": "Stay calm · listen · wait | 保持冷静 · 留意通知 · 等待指示",
+      "beats": [
+        {
+          "id": "s32b0",
+          "en": "A pause alone cannot explain the cause. Listen for announcements.",
+          "zh": "单凭暂停不能解释原因，请留意通知。",
+          "audio_file": "audio-final/s32b0.wav",
+          "start": 522.4000666666667,
+          "end": 526.4035666666666,
+          "audio_duration": 4.0035
+        },
+        {
+          "id": "s32b1",
+          "en": "Stay with your grown-up, keep the doors closed, and wait for instructions.",
+          "zh": "和大人待在一起，保持厢门关闭，等待工作人员指示。",
+          "audio_file": "audio-final/s32b1.wav",
+          "start": 526.6035666666667,
+          "end": 530.3166666666666,
+          "audio_duration": 3.713041666666667
+        },
+        {
+          "id": "s32b2",
+          "en": "Need help? Use the posted emergency contact. Never jump or climb out.",
+          "zh": "需要帮助？使用标示的紧急联系方式，绝不能跳出或自行爬出。",
+          "audio_file": "audio-final/s32b2.wav",
+          "start": 530.5166666666667,
+          "end": 537.4887666666666,
+          "audio_duration": 6.972125
+        }
+      ],
+      "sources": [
+        "S13",
+        "S4"
+      ],
+      "pause": 0,
+      "start": 521.6000833333335,
+      "duration": 16.3387
+    },
+    {
+      "id": "s33",
+      "chapter": 5,
+      "kind": "quiz-stop",
+      "title": "What would you do?",
+      "zh_title": "换成你，会怎么做？",
+      "note": "A: climb out / B: wait and listen | A：爬出去 / B：等待并听通知",
+      "beats": [
+        {
+          "id": "s33b0",
+          "en": "Your cabin pauses. Do you climb out, or stay inside and listen?",
+          "zh": "吊厢暂停了，你是爬出去，还是留在里面听通知？",
+          "audio_file": "audio-final/s33b0.wav",
+          "start": 538.7387666666666,
+          "end": 543.0803666666666,
+          "audio_duration": 4.341625
+        },
+        {
+          "id": "s33b1",
+          "en": "Give your answer to your grown-up.",
+          "zh": "把你的答案告诉身边的大人。",
+          "audio_file": "audio-final/s33b1.wav",
+          "start": 543.2803666666666,
+          "end": 545.6543666666666,
+          "audio_duration": 2.374
+        },
+        {
+          "id": "s33b2",
+          "en": "Stay inside and listen! The trained team decides what should happen next.",
+          "zh": "留在里面听通知！接下来如何处理，由受训团队来判断。",
+          "audio_file": "audio-final/s33b2.wav",
+          "start": 549.8543666666666,
+          "end": 553.5195666666666,
+          "audio_duration": 3.6651666666666665
+        }
+      ],
+      "sources": [
+        "S13"
+      ],
+      "pause": 4,
+      "start": 537.9387500000001,
+      "duration": 16.0308
+    },
+    {
+      "id": "s34",
+      "chapter": 5,
+      "kind": "recap",
+      "title": "Six jobs behind the journey",
+      "zh_title": "旅程背后的六份工作",
+      "note": "Carry · pull · grip · guide · check · stop | 承载 · 牵引 · 夹紧 · 引导 · 检查 · 制动",
+      "beats": [
+        {
+          "id": "s34b0",
+          "en": "Let us put the story together. The rope carries and pulls. The grip connects the cabin.",
+          "zh": "把故事连起来：钢丝绳负责承载和牵引，抱索器把吊厢连上绳索。",
+          "audio_file": "audio-final/s34b0.wav",
+          "start": 554.7695666666666,
+          "end": 560.7277666666666,
+          "audio_duration": 5.95825
+        },
+        {
+          "id": "s34b1",
+          "en": "Towers guide the rope. Station rails and tires let cabins slow down for boarding.",
+          "zh": "支架引导绳索，站内轨道和轮胎让吊厢减速，方便上下客。",
+          "audio_file": "audio-final/s34b1.wav",
+          "start": 560.9277666666667,
+          "end": 566.4946666666666,
+          "audio_duration": 5.566833333333333
+        },
+        {
+          "id": "s34b2",
+          "en": "Checks, brakes, weather decisions, and trained teams help protect the whole journey.",
+          "zh": "检查、制动、天气判断和受训团队，共同保障整趟旅程。",
+          "audio_file": "audio-final/s34b2.wav",
+          "start": 566.6946666666666,
+          "end": 571.5261666666667,
+          "audio_duration": 4.8315
+        }
+      ],
+      "sources": [
+        "S1",
+        "S7",
+        "S9"
+      ],
+      "pause": 0,
+      "start": 553.9695416666668,
+      "duration": 18.0066
+    },
+    {
+      "id": "s35",
+      "chapter": 5,
+      "kind": "ending",
+      "title": "Now you can explain it!",
+      "zh_title": "现在，你也能讲明白啦！",
+      "note": "Keep asking good questions | 继续提出好问题",
+      "beats": [
+        {
+          "id": "s35b0",
+          "en": "Next time you see a cable car, look for the rope, towers, and station.",
+          "zh": "下次看到索道，找一找钢丝绳、支架和车站。",
+          "audio_file": "audio-final/s35b0.wav",
+          "start": 572.7761666666667,
+          "end": 577.6614666666667,
+          "audio_duration": 4.885291666666666
+        },
+        {
+          "id": "s35b1",
+          "en": "Can you explain what pulls the cabin, and why it slows in the station?",
+          "zh": "你能解释什么牵引吊厢，以及它为什么在站内减速吗？",
+          "audio_file": "audio-final/s35b1.wav",
+          "start": 577.8614666666666,
+          "end": 582.1292666666666,
+          "audio_duration": 4.267833333333333
+        },
+        {
+          "id": "s35b2",
+          "en": "You have discovered how this cable car works. Stay curious, follow the rules, and enjoy the view!",
+          "zh": "你已经发现了索道的运行秘密。保持好奇，遵守规定，欣赏风景吧！",
+          "audio_file": "audio-final/s35b2.wav",
+          "start": 582.3292666666666,
+          "end": 589.0435666666666,
+          "audio_duration": 6.714291666666667
+        }
+      ],
+      "sources": [],
+      "pause": 0,
+      "start": 571.9761250000001,
+      "duration": 17.5174
+    },
+    {
+      "id": "credits",
+      "chapter": 6,
+      "kind": "credits",
+      "title": "A few notes for grown-ups",
+      "zh_title": "给家长和老师的说明",
+      "note": "Sources and full bilingual script accompany this film | 完整资料与双语脚本随片提供",
+      "beats": [],
+      "start": 589.4935416666668,
+      "duration": 8,
+      "pause": 0,
+      "sources": []
+    }
+  ],
+  "sources": {
+    "S1": {
+      "title": "LEITNER: Detachable gondola lifts",
+      "url": "https://www.leitner.com/en/products/ropeway-systems/detail/detachable-gondola-lifts/",
+      "supports": "Monocable carrying/hauling rope; station detachment and lower station speed; normally closed LPA grip and departure checks."
+    },
+    "S2": {
+      "title": "LEITNER: Types of ropeway",
+      "url": "https://www.leitner.com/en/company/useful-information/types-of-ropeway/",
+      "supports": "Closed circulation vs reversible ropeways; monocable, bicable and tricable layouts."
+    },
+    "S3": {
+      "title": "LEITNER: Drive system",
+      "url": "https://www.leitner.com/en/products/ropeway-components/detail/leitner-drive-system/",
+      "supports": "Station motor, drive, two braking systems and emergency drive; smooth starts/stops."
+    },
+    "S4": {
+      "title": "EMSD: Design, manufacture and installation code (2018)",
+      "url": "https://www.emsd.gov.hk/filemanager/en/content_623/Code%20of%20Practice%20on%20the%20Design,%20Manufacture%20and%20Installation%20of%20Aerial%20Ropeways%202018.pdf",
+      "supports": "Loads and tension; service/emergency braking, spring application, safety trips, backup drives and planned rescue. Regional code used as a technical example, not a universal legal statement."
+    },
+    "S5": {
+      "title": "FATZER: Steel ropes and certification",
+      "url": "https://www.fatzer.com/en",
+      "supports": "Engineered steel ropes, testing, certification and maintenance."
+    },
+    "S6": {
+      "title": "FATZER: Rope monitoring",
+      "url": "https://www.fatzer.com/en/monitoring",
+      "supports": "Monitoring rope condition, planning inspection and maintenance."
+    },
+    "S7": {
+      "title": "Doppelmayr: Mechanical course, DT grips",
+      "url": "https://service.doppelmayr.com/training/course-list/detail/mechanical-course-ropeways-with-dt-grips-76/",
+      "supports": "Sheave assemblies, carriers, hangers, station opening/closing lines, tire conveyors, grip force tests and door operation."
+    },
+    "S8": {
+      "title": "Doppelmayr: Customer support services",
+      "url": "https://www.doppelmayr.com/en/customer-support/services/",
+      "supports": "Grip-force testing, station tires, rope tracking, grip opening/closing, inspections and maintenance."
+    },
+    "S9": {
+      "title": "EMSD: Aerial ropeways safety",
+      "url": "https://www.emsd.gov.hk/en/other_regulatory_services/aerial_ropeways/",
+      "supports": "Design, manufacture, installation, operation and maintenance oversight and regular inspections in Hong Kong."
+    },
+    "S10": {
+      "title": "FATZER: TRUscan",
+      "url": "https://www.fatzer.com/en/monitoring/truscan",
+      "supports": "Magnetic rope inspection for broken wires and hidden condition changes."
+    },
+    "S11": {
+      "title": "Doppelmayr: Detachable gondola lifts brochure",
+      "url": "https://www.doppelmayr.com/uploads/tx_vcs/Gondelbahnen2013_ENG-Doppelmayr.pdf",
+      "supports": "Electronic/mechanical monitoring of grip opening and closing; malfunctions trigger a stop."
+    },
+    "S12": {
+      "title": "EMSD: Electrical and Mechanical Safety, Book 4",
+      "url": "https://www.emsd.gov.hk/filemanager/en/content_61/Book_4_Electrical_and_MechanicalSafety.pdf",
+      "supports": "Adverse weather: reduce speed, stop boarding or suspend operation; strong winds, heavy rain and lightning."
+    },
+    "S13": {
+      "title": "Ocean Park: Passenger ropeway bylaw",
+      "url": "https://media.oceanpark.com.hk/files/s3fs-public/OP_Bylaw_Eng.pdf",
+      "supports": "No interference with cabin doors; no deliberate rocking or leaning out; follow authorized operator instructions. Child/adult and calm-waiting wording is editorial guidance consistent with operator control and planned rescue."
+    }
+  },
+  "duration": 597.5,
+  "version": "3d-v5-speech-corrections",
+  "fps": 24,
+  "insert": {
+    "start": 198.19820833333335,
+    "duration": 30.791666666666668
+  },
+  "credits_shortened_seconds": 2
+}

@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ropeway-video-audio-v5/handoff/receipt/narration-record.schema.json",
+  "title": "Frozen science-video narration record (limited)",
+  "description": "One record per narrated beat. Keep spoken text, translation/source mapping, and each displayed caption window separate. Unknown historical values stay null/unrecorded; never invent reference transcripts or word timings.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "identity",
+    "source",
+    "textMap",
+    "reference",
+    "generation",
+    "rawAudio",
+    "placement",
+    "postProcessing",
+    "patch",
+    "delivery",
+    "qa"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "status": {
+      "enum": ["draft", "frozen", "generated", "machine_checked", "human_accepted", "rejected"]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workstreamId", "sourceVariant", "compositionId", "trackId", "language"],
+      "properties": {
+        "workstreamId": { "type": "string", "minLength": 1 },
+        "sourceVariant": { "type": "string", "minLength": 1 },
+        "compositionId": { "type": "string", "minLength": 1 },
+        "trackId": { "type": "string", "minLength": 1 },
+        "language": { "enum": ["zh", "en"] }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": ["string", "null"] },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "textMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "translationGroupId",
+        "sourceLanguage",
+        "sourceText",
+        "sourceTextSha256",
+        "narrationLanguage",
+        "narrationText",
+        "narrationTextSha256",
+        "translationRelation"
+      ],
+      "properties": {
+        "translationGroupId": { "type": ["string", "null"] },
+        "sourceLanguage": { "enum": ["zh", "en"] },
+        "sourceText": { "type": "string" },
+        "sourceTextSha256": { "$ref": "#/$defs/sha256" },
+        "narrationLanguage": { "enum": ["zh", "en"] },
+        "narrationText": { "type": "string" },
+        "narrationTextSha256": { "$ref": "#/$defs/sha256" },
+        "translationRelation": {
+          "enum": ["same_text", "translated", "age_adapted", "independent_caption", "not_assessed"]
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "wavPath",
+        "wavSha256",
+        "transcript",
+        "transcriptSha256",
+        "sourceUrl",
+        "recordingPermission",
+        "commercialDistributionPermission"
+      ],
+      "properties": {
+        "mode": {
+          "enum": ["pending", "inference_zero_shot", "inference_cross_lingual"],
+          "description": "For inference_zero_shot, transcript and transcriptSha256 must be exact, non-empty values. For inference_cross_lingual, both must be null. Pending records may leave both null."
+        },
+        "wavPath": { "type": ["string", "null"] },
+        "wavSha256": { "$ref": "#/$defs/sha256" },
+        "transcript": { "type": ["string", "null"] },
+        "transcriptSha256": { "$ref": "#/$defs/sha256" },
+        "sourceUrl": { "type": ["string", "null"] },
+        "recordingPermission": {
+          "enum": ["unknown", "inference_only_confirmed", "redistribution_confirmed", "not_reviewed"]
+        },
+        "commercialDistributionPermission": {
+          "enum": ["unknown", "confirmed", "restricted", "not_reviewed"]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "mode": { "const": "pending" },
+            "transcript": { "type": "null" },
+            "transcriptSha256": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "mode": { "const": "inference_zero_shot" },
+            "transcript": { "type": "string", "minLength": 1 },
+            "transcriptSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        },
+        {
+          "properties": {
+            "mode": { "const": "inference_cross_lingual" },
+            "transcript": { "type": "null" },
+            "transcriptSha256": { "type": "null" }
+          }
+        }
+      ]
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engine",
+        "checkpoint",
+        "runtimeVersion",
+        "runtimePython",
+        "torchVersion",
+        "runtimeScriptSha256",
+        "inferenceApi",
+        "precision",
+        "device",
+        "seed",
+        "seedStatus",
+        "structuralPrefix",
+        "parameters"
+      ],
+      "properties": {
+        "engine": { "type": ["string", "null"] },
+        "checkpoint": { "type": ["string", "null"] },
+        "runtimeVersion": { "type": ["string", "null"] },
+        "runtimePython": { "type": ["string", "null"] },
+        "torchVersion": { "type": ["string", "null"] },
+        "runtimeScriptSha256": { "$ref": "#/$defs/sha256" },
+        "inferenceApi": {
+          "enum": ["pending", "inference_zero_shot", "inference_cross_lingual"]
+        },
+        "precision": { "enum": ["pending", "CUDA_FP32", "CPU_FP32", "FP16", "other"] },
+        "device": { "type": ["string", "null"] },
+        "seed": { "type": ["integer", "null"] },
+        "seedStatus": {
+          "enum": ["pending", "recorded", "not_recorded"],
+          "description": "Use an integer seed only when recorded. Keep seed null when pending or not recorded."
+        },
+        "structuralPrefix": { "type": ["string", "null"] },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fp16", "stream", "batchSize", "temperature"],
+          "properties": {
+            "fp16": { "type": ["boolean", "null"] },
+            "stream": { "type": ["boolean", "null"] },
+            "batchSize": { "type": ["integer", "null"], "minimum": 1 },
+            "temperature": { "type": ["number", "null"], "minimum": 0 }
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "seedStatus": { "const": "pending" },
+            "seed": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "seedStatus": { "const": "not_recorded" },
+            "seed": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "seedStatus": { "const": "recorded" },
+            "seed": { "type": "integer" }
+          }
+        }
+      ]
+    },
+    "rawAudio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wavPath", "sha256", "bytes", "sampleRateHz", "channels", "durationSec", "rms", "peak"],
+      "properties": {
+        "wavPath": { "type": ["string", "null"] },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": ["integer", "null"], "minimum": 0 },
+        "sampleRateHz": { "type": ["integer", "null"], "minimum": 1 },
+        "channels": { "type": ["integer", "null"], "minimum": 1 },
+        "durationSec": { "$ref": "#/$defs/nonNegativeNumber" },
+        "rms": { "$ref": "#/$defs/nonNegativeNumber" },
+        "peak": { "$ref": "#/$defs/nonNegativeNumber" }
+      }
+    },
+    "placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audioTargetWindow", "actualAudioWindow", "actualAudioDurationSec", "captionWindows"],
+      "properties": {
+        "audioTargetWindow": { "$ref": "#/$defs/window" },
+        "actualAudioWindow": { "$ref": "#/$defs/window" },
+        "actualAudioDurationSec": { "$ref": "#/$defs/nonNegativeNumber" },
+        "captionWindows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["language", "text", "textSha256", "startSec", "endSec"],
+            "properties": {
+              "language": { "enum": ["zh", "en"] },
+              "text": { "type": "string" },
+              "textSha256": { "$ref": "#/$defs/sha256" },
+              "startSec": { "$ref": "#/$defs/nonNegativeNumber" },
+              "endSec": { "$ref": "#/$defs/nonNegativeNumber" }
+            }
+          }
+        }
+      }
+    },
+    "postProcessing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trimStartSec",
+        "trimEndSec",
+        "tempoFactor",
+        "tempoAlgorithm",
+        "pitchPreservingTempo",
+        "targetRms",
+        "outputRms",
+        "gainDb",
+        "limiterCeiling",
+        "fadeMs"
+      ],
+      "properties": {
+        "trimStartSec": { "$ref": "#/$defs/nonNegativeNumber" },
+        "trimEndSec": { "$ref": "#/$defs/nonNegativeNumber" },
+        "tempoFactor": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "tempoAlgorithm": { "type": ["string", "null"] },
+        "pitchPreservingTempo": { "type": ["boolean", "null"] },
+        "targetRms": { "$ref": "#/$defs/nonNegativeNumber" },
+        "outputRms": { "$ref": "#/$defs/nonNegativeNumber" },
+        "gainDb": { "type": ["number", "null"] },
+        "limiterCeiling": { "type": ["number", "null"], "minimum": 0 },
+        "fadeMs": { "$ref": "#/$defs/nonNegativeNumber" }
+      }
+    },
+    "patch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "parentTrackSha256",
+        "retainedCandidatePaths",
+        "contextCue",
+        "removedContextCue",
+        "measuredCropBoundarySec",
+        "outsideWindowPcmSha256Before",
+        "outsideWindowPcmSha256AfterBeforeFinalEncode",
+        "outsideWindowBitIdenticalBeforeFinalEncode",
+        "finalWholeTrackReencoded",
+        "finalCodec",
+        "lossyEncodingBoundaryNote"
+      ],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "parentTrackSha256": { "$ref": "#/$defs/sha256" },
+        "retainedCandidatePaths": { "type": "array", "items": { "type": "string" } },
+        "contextCue": { "type": ["string", "null"] },
+        "removedContextCue": { "type": ["string", "null"] },
+        "measuredCropBoundarySec": { "$ref": "#/$defs/nonNegativeNumber" },
+        "outsideWindowPcmSha256Before": { "$ref": "#/$defs/sha256" },
+        "outsideWindowPcmSha256AfterBeforeFinalEncode": { "$ref": "#/$defs/sha256" },
+        "outsideWindowBitIdenticalBeforeFinalEncode": { "type": ["boolean", "null"] },
+        "finalWholeTrackReencoded": { "type": ["boolean", "null"] },
+        "finalCodec": { "type": ["string", "null"] },
+        "lossyEncodingBoundaryNote": { "type": ["string", "null"] }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes", "container", "codec", "sampleRateHz", "channels", "durationSec"],
+      "properties": {
+        "path": { "type": ["string", "null"] },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": ["integer", "null"], "minimum": 0 },
+        "container": { "type": ["string", "null"] },
+        "codec": { "type": ["string", "null"] },
+        "sampleRateHz": { "type": ["integer", "null"], "minimum": 1 },
+        "channels": { "type": ["integer", "null"], "minimum": 1 },
+        "durationSec": { "$ref": "#/$defs/nonNegativeNumber" }
+      }
+    },
+    "qa": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceBinding", "decode", "asr", "captionSync", "humanListening", "pronunciation", "notes"],
+      "properties": {
+        "sourceBinding": { "enum": ["pending", "pass", "fail"] },
+        "decode": { "enum": ["not_run", "pass", "fail"] },
+        "asr": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "engine", "recognizedText", "textMatch"],
+          "properties": {
+            "status": { "enum": ["not_run", "machine_only", "flagged", "failed"] },
+            "engine": { "type": ["string", "null"] },
+            "recognizedText": { "type": ["string", "null"] },
+            "textMatch": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+          }
+        },
+        "captionSync": { "enum": ["not_checked", "machine_timing_checked", "human_checked", "failed"] },
+        "humanListening": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "reviewedTrackIds", "reviewer", "reviewedDate", "scope"],
+          "properties": {
+            "status": { "enum": ["not_performed", "pending", "approved", "rejected"] },
+            "reviewedTrackIds": { "type": "array", "items": { "type": "string" } },
+            "reviewer": { "type": ["string", "null"] },
+            "reviewedDate": { "type": ["string", "null"], "format": "date" },
+            "scope": { "type": ["string", "null"] }
+          }
+        },
+        "pronunciation": { "enum": ["not_listened", "human_pass", "human_flagged"] },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nonNegativeNumber": {
+      "type": ["number", "null"],
+      "minimum": 0
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["startSec", "endSec"],
+      "properties": {
+        "startSec": { "$ref": "#/$defs/nonNegativeNumber" },
+        "endSec": { "$ref": "#/$defs/nonNegativeNumber" }
+      }
+    }
+  }
+}

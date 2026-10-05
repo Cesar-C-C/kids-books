@@ -18,6 +18,10 @@ on:
   pull_request:
     paths:
       - 'shared/**'
+      - 'animations/**'
+      - 'video-production/**'
+      - 'docs/video-production/**'
+      - '.github/workflows/pages.yml'
       - 'books/**'
       - 'labs/**/index.html'
       - 'labs/**/*.js'
@@ -42,6 +46,10 @@ on:
     branches: [main]
     paths:
       - 'shared/**'
+      - 'animations/**'
+      - 'video-production/**'
+      - 'docs/video-production/**'
+      - '.github/workflows/pages.yml'
       - 'books/**'
       - 'labs/**/index.html'
       - 'labs/**/*.js'
@@ -77,12 +85,28 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Restore checksum-pinned public film assets (read-only)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tools/release_assets.mjs
+
+      - name: Distribution safety and exact media identities
+        run: |
+          node --test tests/release_distribution.test.mjs
+          node tools/release_assets.mjs --verify
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Install Pillow
         run: pip install --quiet pillow
+
+      - name: Byte-exact native film, subtitle timing and reusable source preflight
+        run: |
+          node --test tests/native_film_static.test.mjs
+          node tools/qa_native_film.mjs
+          python tools/science_video.py --template video-production/templates/science-film.json --source-zip video-production/ropeway-v5/source.zip --source-lock video-production/ropeway-v5/generation-lock.json
 
       # 语法：这些脚本都跑在浏览器里，node 只做解析不执行
       - name: Syntax check (browser scripts)
@@ -171,6 +195,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+
+      - name: Restore checksum-pinned public film assets (read-only)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tools/release_assets.mjs
 
       # ubuntu-latest 自带 google-chrome-stable；脚本自己会找到它
       - name: Install browser test driver

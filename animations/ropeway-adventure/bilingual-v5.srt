@@ -1,0 +1,519 @@
+1
+00:00:00,800 --> 00:00:05,010
+Hello, explorers! Let us ride this orange cable car.
+小探险家们，你们好！我们坐上这台橙色吊厢吧。
+
+2
+00:00:05,010 --> 00:00:08,833
+Above the trees, with no wings and no road below!
+飞过树梢，却没有翅膀，下面也没有公路！
+
+3
+00:00:08,833 --> 00:00:14,291
+What moves it, what holds it up, and what helps keep us safe?
+什么让它前进？什么把它托住？又有哪些办法保障安全？
+
+4
+00:00:15,091 --> 00:00:18,757
+From above, one rope forms a loop around two big wheels.
+从上面看，一根绳索绕过两个大轮，组成一个环。
+
+5
+00:00:18,757 --> 00:00:23,420
+One side goes toward the mountain. The other returns.
+一侧朝山上移动，另一侧向回程移动。
+
+6
+00:00:23,420 --> 00:00:27,821
+The wheels turn, the loop moves, and the attached cabins travel with it.
+大轮转动，绳环移动，夹在绳上的吊厢也跟着移动。
+
+7
+00:00:28,621 --> 00:00:32,606
+An electric motor in a station turns a large drive wheel.
+车站里的电动机带动一个大驱动轮。
+
+8
+00:00:32,606 --> 00:00:37,461
+The rope presses against the wheel. Friction helps the wheel move the rope.
+钢丝绳压在大轮上，摩擦力帮助大轮带动绳索。
+
+9
+00:00:37,461 --> 00:00:43,193
+One drive moves many cabins. Each cabin does not need a driving engine.
+一套驱动带动许多吊厢，每个吊厢无需各装一台驱动发动机。
+
+10
+00:00:43,993 --> 00:00:52,628
+Our example is a single-rope, circulating, detachable gondola. What a name!
+我们的例子叫单线循环脱挂式吊厢索道。好长的名字！
+
+11
+00:00:52,628 --> 00:00:56,391
+Here, the same rope supports the cabins and pulls them along.
+在这种索道里，同一根钢丝绳既承载吊厢，也牵引吊厢。
+
+12
+00:00:56,391 --> 00:01:00,010
+Two jobs: carry the weight, and make the journey.
+两份工作：承受重量，带着吊厢前进。
+
+13
+00:01:00,810 --> 00:01:06,009
+This is not a piece of string. Many steel wires twist into strands.
+它不是普通细绳。许多钢丝拧成一股股绳股。
+
+14
+00:01:06,009 --> 00:01:11,138
+Strands surround a core, making a strong rope that can bend.
+绳股围绕绳芯，组成结实又能弯曲的钢丝绳。
+
+15
+00:01:11,138 --> 00:01:16,281
+Strong is not unbreakable. Experts must keep checking its condition.
+结实不等于不会损坏，专业人员必须持续检查它的状态。
+
+16
+00:01:17,081 --> 00:01:21,379
+Weight curves the rope between supports. We call this sag.
+重量让支点之间的绳索下弯，这叫垂度。
+
+17
+00:01:21,379 --> 00:01:26,188
+A tensioning system keeps the rope pulled within its designed range.
+张紧系统把钢丝绳的拉紧程度保持在设计范围内。
+
+18
+00:01:26,188 --> 00:01:32,684
+Too loose or too tight causes problems. Engineers calculate the balance.
+太松、太紧都有问题，工程师会计算合适的平衡。
+
+19
+00:01:33,484 --> 00:01:38,224
+Towers hold groups of small grooved wheels, called sheaves.
+支架上装着一组组带凹槽的小轮，叫托索轮。
+
+20
+00:01:38,224 --> 00:01:42,272
+These support and guide the moving rope across the hillside.
+这些小轮支撑并引导山坡上的移动钢丝绳。
+
+21
+00:01:42,272 --> 00:01:47,093
+The wheels turn with the rope, reducing rubbing. The cabin hangs below its grip.
+小轮随着绳索转动，减少滑动摩擦。吊厢悬挂在抱索器下面。
+
+22
+00:01:47,893 --> 00:01:51,685
+A mechanical clamp called a grip joins our cabin to the rope.
+一种叫抱索器的机械夹具，把吊厢连到绳索上。
+
+23
+00:01:51,685 --> 00:01:56,668
+In our example, strong springs press the grip closed around the rope.
+在我们的例子里，有力的弹簧让抱索器夹紧钢丝绳。
+
+24
+00:01:56,668 --> 00:02:02,943
+The closed grip moves with the rope. It stays closed outside the stations.
+夹紧的抱索器随着绳索移动，在车站外保持夹紧。
+
+25
+00:02:03,743 --> 00:02:08,444
+Earth's gravity pulls the cabin downward. Follow the path that supports its weight.
+地球的重力把吊厢向下拉。来看看重量怎样被支撑。
+
+26
+00:02:08,444 --> 00:02:13,528
+From cabin to hanger, from hanger to grip, and from grip to rope.
+从吊厢到吊杆，从吊杆到抱索器，再从抱索器到钢丝绳。
+
+27
+00:02:13,528 --> 00:02:18,530
+Forces pass to towers and stations, then through their foundations to the ground.
+力传给支架和车站，再经它们的基础传到地面。
+
+28
+00:02:19,330 --> 00:02:24,275
+A puzzle! Cabins travel quickly outside, but slowly inside the station.
+谜题来了！吊厢站外走得快，站内走得慢。
+
+29
+00:02:24,275 --> 00:02:30,661
+How can one cabin slow down while the rope keeps moving?
+钢丝绳继续移动，一个吊厢怎么能单独慢下来？
+
+30
+00:02:30,661 --> 00:02:33,737
+Watch the grip, and watch what supports the cabin.
+盯住抱索器，也看看什么在支撑吊厢。
+
+31
+00:02:34,537 --> 00:02:39,182
+As the cabin enters, its carrier wheels run onto a station rail.
+吊厢进入车站时，吊厢组件上的行走轮驶上站内轨道。
+
+32
+00:02:39,182 --> 00:02:43,533
+That rail supports the cabin before a mechanism opens the grip.
+轨道先支撑住吊厢，然后机械装置才打开抱索器。
+
+33
+00:02:43,533 --> 00:02:49,978
+It leaves the rope, but still has support. It never floats freely.
+它离开绳索，但仍有支撑，绝不是自由悬空。
+
+34
+00:02:50,778 --> 00:02:55,026
+Rows of turning tires move the cabin along the station rail.
+一排排转动的轮胎，带着吊厢沿站内轨道前进。
+
+35
+00:02:55,026 --> 00:03:00,157
+The tires move it slowly for boarding, while the steel rope keeps moving.
+轮胎让吊厢慢慢移动，方便上下客；钢丝绳继续运行。
+
+36
+00:03:00,157 --> 00:03:04,599
+Inside this station, the cabin and the steel rope can move at different speeds.
+在车站里，吊厢和钢丝绳可以以不同的速度移动。
+
+37
+00:03:05,399 --> 00:03:09,484
+After boarding, the doors close and the tires speed the cabin up.
+乘客上车后，厢门关闭，轮胎带着吊厢加速。
+
+38
+00:03:09,484 --> 00:03:12,777
+Near the rope speed, the grip closes onto the rope again.
+接近钢丝绳的速度时，抱索器重新夹住绳索。
+
+39
+00:03:12,777 --> 00:03:18,198
+Checks confirm correct gripping. If something is wrong, the system stops.
+检查确认是否正确夹紧，发现问题，系统就停下。
+
+40
+00:03:18,998 --> 00:03:24,518
+Some longer routes have an intermediate station: a stop partway along.
+有些较长的索道，会在途中设中间站。
+
+41
+00:03:24,518 --> 00:03:31,081
+Rails support the cabin. Its grip opens, and tires move it slowly through the station.
+轨道先接住吊厢。抱索器打开，轮胎带着它在站内慢慢走。
+
+42
+00:03:31,081 --> 00:03:37,209
+Here, a conveyor takes the same cabin between two separate rope loops.
+这个例子有两段独立绳环。输送装置把同一吊厢送到下一段。
+
+43
+00:03:37,209 --> 00:03:41,749
+It speeds up, grips the next rope, and is checked before leaving.
+吊厢加速，夹住下一段钢丝绳，检查合格后才出站。
+
+44
+00:03:41,749 --> 00:03:48,990
+Designs differ. Some stations share one rope; other routes require changing cabins.
+设计也有不同：有的站共用一根绳环，有的线路需要换乘吊厢。
+
+45
+00:03:49,790 --> 00:03:54,362
+Your turn! Does the grip open above the trees, or inside the station?
+轮到你了！抱索器在树梢上方打开，还是在车站里打开？
+
+46
+00:03:54,362 --> 00:04:00,319
+Think about the support we just saw.
+想一想，我们刚才看到了什么支撑。
+
+47
+00:04:00,319 --> 00:04:17,641
+Inside the station! A rail supports the cabin before it leaves the rope.
+在车站里！吊厢脱离绳索之前，轨道已经把它接住了。
+
+48
+00:04:18,441 --> 00:04:22,154
+Other ropeways may use separate ropes for carrying and pulling.
+其他索道可能用不同的绳索分别承载和牵引。
+
+49
+00:04:22,154 --> 00:04:26,110
+Some large cars travel back and forth, instead of around a loop.
+有些大车厢来回往返，而不是绕环循环。
+
+50
+00:04:26,110 --> 00:04:33,386
+Appearance cannot tell you everything. Each system has its own equipment and instructions.
+外形不能说明一切，每个系统都有自己的设备和乘坐规定。
+
+51
+00:04:34,186 --> 00:04:39,271
+Safety needs several layers working together, not one magic part.
+安全需要多层措施一起工作，不是靠一个神奇零件。
+
+52
+00:04:39,271 --> 00:04:47,392
+Design, inspection, sensors, brakes, trained people, and emergency plans each help.
+设计、检查、传感器、制动器、受训人员和应急计划，各有作用。
+
+53
+00:04:47,392 --> 00:04:52,925
+These reduce risk. Correct operation and maintenance are still essential.
+它们降低风险，正确操作和维护仍然必不可少。
+
+54
+00:04:53,725 --> 00:04:58,506
+Engineers calculate the forces from passengers, the rope, movement, and weather.
+工程师计算乘客、绳索、运动和天气带来的力。
+
+55
+00:04:58,506 --> 00:05:03,904
+Parts need extra strength beyond normal loads, following the rules for their system.
+按该系统的要求，部件需要高于正常载荷的额外强度。
+
+56
+00:05:03,904 --> 00:05:11,305
+Extra strength is no excuse to overload. Follow the posted loading limits.
+额外强度不是超载的理由，要遵守现场限载规定。
+
+57
+00:05:12,105 --> 00:05:17,501
+Trained inspectors look for wear, damage, corrosion, and changes in the rope.
+受训检查人员寻找钢丝绳的磨损、损伤、锈蚀和变化。
+
+58
+00:05:17,501 --> 00:05:24,584
+Magnetic equipment helps find broken wires, including damage hidden inside.
+磁性设备帮助发现断丝，包括内部隐藏的损伤。
+
+59
+00:05:24,584 --> 00:05:30,445
+Results guide repairs and replacement. Looking strong is not enough.
+结果帮助决定维修或更换，光看起来结实还不够。
+
+60
+00:05:31,245 --> 00:05:36,337
+Before passengers arrive, staff carry out the checks required for their ropeway.
+乘客到来之前，工作人员按该索道的要求进行检查。
+
+61
+00:05:36,337 --> 00:05:41,728
+Grips, wheels, brakes, doors, and controls need regular checking and testing.
+抱索器、轮子、制动器、厢门和控制设备都需定期检查、测试。
+
+62
+00:05:41,728 --> 00:05:47,179
+Records help reveal changes. Maintenance is part of safety.
+记录帮助发现变化，维护本身就是安全保障的一部分。
+
+63
+00:05:47,979 --> 00:05:52,424
+Sensors check rope speed, rope position, and correct gripping.
+传感器检查绳速、绳索位置，以及是否正确夹紧。
+
+64
+00:05:52,424 --> 00:05:56,964
+Signals go to the controls. Staff also watch the information.
+信号传到控制系统，工作人员也查看信息。
+
+65
+00:05:56,964 --> 00:06:03,290
+Sensors cannot do everything. Equipment and trained people work together.
+传感器不能包办一切，设备和受训人员要共同配合。
+
+66
+00:06:04,090 --> 00:06:08,016
+A safety problem can stop the drive and apply the brakes.
+安全异常可以让驱动停止，并施加制动。
+
+67
+00:06:08,016 --> 00:06:13,635
+For example, a grip that is not correctly closed must not leave the station.
+例如抱索器没有正确夹紧，就不能让它出站。
+
+68
+00:06:13,635 --> 00:06:20,230
+Staff fix the cause before restarting. Stopping can protect passengers.
+工作人员处理原因后才能重启，停车可以保护乘客。
+
+69
+00:06:21,030 --> 00:06:25,801
+The drive has brakes. A service brake controls stopping.
+驱动装置设有制动器，工作制动控制停车。
+
+70
+00:06:25,801 --> 00:06:31,803
+A separate emergency brake can act directly on the large drive wheel.
+另有紧急制动器，可以直接作用在大驱动轮上。
+
+71
+00:06:31,803 --> 00:06:37,016
+Brakes control the loop. Not every cabin has its own rope brake.
+制动器控制绳环，并非每个吊厢都有自己的绳索制动器。
+
+72
+00:06:37,816 --> 00:06:43,568
+Many ropeway brakes use springs to press the brake pads closed.
+许多索道制动器用弹簧压紧制动垫。
+
+73
+00:06:43,568 --> 00:06:47,605
+During operation, powered equipment holds the brake open.
+运行时，动力设备把制动器保持在释放状态。
+
+74
+00:06:47,605 --> 00:06:52,708
+Lose that releasing power, and the springs can apply the brake.
+释放制动的动力消失时，弹簧就能施加制动。
+
+75
+00:06:53,508 --> 00:07:01,099
+When the rope stops, the cabin is still supported by its closed grip and the rope.
+钢丝绳停止时，吊厢仍由夹紧的抱索器和钢丝绳支撑。
+
+76
+00:07:01,099 --> 00:07:07,434
+A hanging cabin may sway a little as movement changes. Staff monitor the situation.
+运动状态变化时，悬挂的吊厢可能轻微晃动，工作人员会监测情况。
+
+77
+00:07:07,434 --> 00:07:12,116
+Braking controls movement. It cannot replace checking the rope and other parts.
+制动控制运动，不能代替检查绳索和其他部件。
+
+78
+00:07:12,916 --> 00:07:18,972
+Wind can push a cabin sideways. Operators monitor weather and wind along the route.
+风会把吊厢向侧面推，运营人员要监测线路上的天气和风况。
+
+79
+00:07:18,972 --> 00:07:23,267
+They may slow down, stop boarding, or suspend operation when needed.
+必要时，他们可能减速、停止上客，或暂停运行。
+
+80
+00:07:23,267 --> 00:07:29,479
+Wind limits differ between systems. Follow staff, not a guessed limit.
+不同系统的风速限值不同，要听从工作人员，不能自己猜。
+
+81
+00:07:30,279 --> 00:07:34,548
+First, the system stops and the team checks what has happened.
+首先，系统停下，团队检查发生了什么。
+
+82
+00:07:34,548 --> 00:07:39,617
+Many systems have a backup drive, used only when moving cabins is safe.
+许多系统设有备用驱动，只能在确认吊厢能安全移动时使用。
+
+83
+00:07:39,617 --> 00:07:45,440
+It cannot solve every problem. Staff choose the right emergency plan.
+它不能解决所有问题，工作人员要选择正确的应急方案。
+
+84
+00:07:46,240 --> 00:07:51,922
+If moving the rope is unsafe, trained teams follow a planned rescue procedure.
+如果移动绳索不安全，受训团队就执行预先制定的救援程序。
+
+85
+00:07:51,922 --> 00:07:58,889
+Methods depend on the system, terrain, and conditions. Teams practice for emergencies.
+方式取决于系统、地形和现场情况，团队会进行应急演练。
+
+86
+00:07:58,889 --> 00:08:04,070
+Passengers wait for instructions. Never try to climb out or rescue yourself.
+乘客应等待指示，绝不能自行爬出或尝试自救。
+
+87
+00:08:04,870 --> 00:08:10,896
+Your job begins at the station. Stay with your grown-up, and follow the attendant.
+你的任务从车站开始：跟紧大人，听从工作人员指引。
+
+88
+00:08:10,896 --> 00:08:17,017
+Wait your turn. Walk carefully, and keep hands away from doors and moving equipment.
+按顺序等候，小心走动，双手远离厢门和运动设备。
+
+89
+00:08:17,017 --> 00:08:22,803
+Follow loading instructions. Enjoy the adventure through the windows!
+遵守上车和限载指引，透过窗户欣赏美景吧！
+
+90
+00:08:23,603 --> 00:08:30,059
+Inside, sit or stand as the operator instructs, and keep your body inside the cabin.
+进厢后，按现场规定坐好或站稳，身体保持在吊厢内。
+
+91
+00:08:30,059 --> 00:08:34,709
+Do not rock the cabin, lean out, or force the doors open.
+不故意摇晃吊厢，不探出身体，不强行打开厢门。
+
+92
+00:08:34,709 --> 00:08:41,600
+Worried? Tell your grown-up. Follow the posted instructions to contact staff.
+如果担心，告诉大人，按标示的指引联系工作人员。
+
+93
+00:08:42,400 --> 00:08:46,604
+A pause alone cannot explain the cause. Listen for announcements.
+单凭暂停不能解释原因，请留意通知。
+
+94
+00:08:46,604 --> 00:08:50,517
+Stay with your grown-up, keep the doors closed, and wait for instructions.
+和大人待在一起，保持厢门关闭，等待工作人员指示。
+
+95
+00:08:50,517 --> 00:08:57,939
+Need help? Use the posted emergency contact. Never jump or climb out.
+需要帮助？使用标示的紧急联系方式，绝不能跳出或自行爬出。
+
+96
+00:08:58,739 --> 00:09:03,280
+Your cabin pauses. Do you climb out, or stay inside and listen?
+吊厢暂停了，你是爬出去，还是留在里面听通知？
+
+97
+00:09:03,280 --> 00:09:09,854
+Give your answer to your grown-up.
+把你的答案告诉身边的大人。
+
+98
+00:09:09,854 --> 00:09:13,970
+Stay inside and listen! The trained team decides what should happen next.
+留在里面听通知！接下来如何处理，由受训团队来判断。
+
+99
+00:09:14,770 --> 00:09:20,928
+Let us put the story together. The rope carries and pulls. The grip connects the cabin.
+把故事连起来：钢丝绳负责承载和牵引，抱索器把吊厢连上绳索。
+
+100
+00:09:20,928 --> 00:09:26,695
+Towers guide the rope. Station rails and tires let cabins slow down for boarding.
+支架引导绳索，站内轨道和轮胎让吊厢减速，方便上下客。
+
+101
+00:09:26,695 --> 00:09:31,976
+Checks, brakes, weather decisions, and trained teams help protect the whole journey.
+检查、制动、天气判断和受训团队，共同保障整趟旅程。
+
+102
+00:09:32,776 --> 00:09:37,861
+Next time you see a cable car, look for the rope, towers, and station.
+下次看到索道，找一找钢丝绳、支架和车站。
+
+103
+00:09:37,861 --> 00:09:42,329
+Can you explain what pulls the cabin, and why it slows in the station?
+你能解释什么牵引吊厢，以及它为什么在站内减速吗？
+
+104
+00:09:42,329 --> 00:09:49,494
+You have discovered how this cable car works. Stay curious, follow the rules, and enjoy the view!
+你已经发现了索道的运行秘密。保持好奇，遵守规定，欣赏风景吧！

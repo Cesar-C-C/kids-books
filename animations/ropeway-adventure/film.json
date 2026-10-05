@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "ropeway-adventure",
+  "kind": "native-bilingual-film",
+  "sourceVersion": "3d-v5-speech-corrections",
+  "title": "索道小探险",
+  "duration": 597.5,
+  "fps": 24,
+  "captionPairs": 104,
+  "chapters": [
+    {
+      "id": 0,
+      "scene": "s00",
+      "start": 0,
+      "zh": "出发",
+      "en": "Departure"
+    },
+    {
+      "id": 1,
+      "scene": "s02",
+      "start": 14.290958333333334,
+      "zh": "绳索运行",
+      "en": "Moving rope"
+    },
+    {
+      "id": 2,
+      "scene": "s11",
+      "start": 138.52970833333333,
+      "zh": "进站与脱挂",
+      "en": "Inside the station"
+    },
+    {
+      "id": 3,
+      "scene": "s14m",
+      "start": 198.19820833333335,
+      "zh": "中间站",
+      "en": "Intermediate station"
+    },
+    {
+      "id": 4,
+      "scene": "s17",
+      "start": 273.38620833333334,
+      "zh": "安全保障",
+      "en": "Safety layers"
+    },
+    {
+      "id": 5,
+      "scene": "s30",
+      "start": 484.0701666666668,
+      "zh": "乘坐指引",
+      "en": "Your journey"
+    },
+    {
+      "id": 6,
+      "scene": "s34",
+      "start": 553.9695416666668,
+      "zh": "回顾",
+      "en": "Look back"
+    }
+  ],
+  "core": [
+    "index.html",
+    "player.css",
+    "player.js",
+    "film.json",
+    "cover-v5.jpg",
+    "bilingual-v5.srt"
+  ],
+  "media": {
+    "video": {
+      "url": "media/browser-v5.mp4?v=5b5b15a14213",
+      "sha256": "5b5b15a142134d428c7b9f68d8eecbd7b7cfecf31753d58463b58ef194e55ed0",
+      "bytes": 119325620
+    },
+    "mandarin": {
+      "url": "media/mandarin-v5.m4a?v=165cf06d7bce",
+      "sha256": "165cf06d7bce05b9cc2fb3c470f23d93691d471d6b4c58b83d24d0ee68353c52",
+      "bytes": 6963011
+    }
+  },
+  "offline": {
+    "mode": "explicit-standalone-download",
+    "identity": "project-adapted-offline-v3",
+    "file": "downloads/ropeway-v5-project-offline-v3.html",
+    "bytes": 168617506,
+    "sha256": "85b80859bf8f92eac957c6f7e393f1c2b3c8d503d0d8213e7e6501417feec9fe",
+    "original": {
+      "identity": "original-source-v5-unaltered",
+      "file": "downloads/ropeway-v5.html",
+      "bytes": 168613588,
+      "sha256": "ac8b6648e8617e3ad592e37f66997c22170d512cf7b3cda940ed72ae39b38258"
+    }
+  },
+  "download": {
+    "file": "downloads/ropeway-v5.mp4",
+    "bytes": 126344341,
+    "sha256": "d34595e931844ee44622e16177b57dc659919ed61095d1de37cc8df9cd1964d5"
+  },
+  "renderingDisclosure": "Key motion scenes use native 24fps; some 720p/8fps explanatory scenes are motion-interpolated to 1080p/24fps. Not all frames are native 1080p/24fps."
+}

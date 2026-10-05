@@ -1,0 +1,8 @@
+{
+  "reference_url": "https://raw.githubusercontent.com/FunAudioLLM/CosyVoice/main/asset/zero_shot_prompt.wav",
+  "reference_sha256": "c7b31d6dbe7cc6a716dded00550db5b50940bf209e424e4ad207b12e657c8ff6",
+  "transcript": "希望你以后能够做的比我还好呦。",
+  "example_url": "https://github.com/FunAudioLLM/CosyVoice/blob/main/example.py",
+  "license_url": "https://github.com/FunAudioLLM/CosyVoice/blob/main/LICENSE",
+  "checked": "2026-10-03"
+}

@@ -1,0 +1,45 @@
+{
+  "sourceReceiptRoot": "C:/Users/Cesar/.codex/worktrees/ropeway-audio/儿童绘本开发/workbench/ropeway-video-audio-v5/handoff/receipt",
+  "sourceReceiptSha256": "578c0e08a7ae7b7ab61cdf7b6a2c0f0edfae29254c3fac994aff5b04def6a69d",
+  "sourceRoot": "C:/Users/Cesar/Documents/Codex/2026-10-03/new-chat-2",
+  "checkedSourceRecords": 23,
+  "files": [
+    {
+      "source": "audio-method.md",
+      "path": "docs/video-production/audio/audio-method.md",
+      "sha256": "acfdb8518e773d1e6aea3ff1062d45ddd96a5941e2d3fb62cca7ff77b8d6697a",
+      "bytes": 10069
+    },
+    {
+      "source": "narration-record.schema.json",
+      "path": "docs/video-production/audio/narration-record.schema.json",
+      "sha256": "39d3b72665ba2ee3fb8abca7d40c39babc5743f52ffec8d3b80f33ddf64580ac",
+      "bytes": 13666
+    },
+    {
+      "source": "narration-record.schema.json",
+      "path": "video-production/templates/narration-record.schema.json",
+      "sha256": "39d3b72665ba2ee3fb8abca7d40c39babc5743f52ffec8d3b80f33ddf64580ac",
+      "bytes": 13666
+    },
+    {
+      "source": "narration-record.template.json",
+      "path": "docs/video-production/audio/narration-record.template.json",
+      "sha256": "44d51f0d02222748fc90871ebd390b07bc3c31053984d9099030e084e107081e",
+      "bytes": 3122
+    },
+    {
+      "source": "narration-record.template.json",
+      "path": "video-production/templates/narration-record.template.json",
+      "sha256": "44d51f0d02222748fc90871ebd390b07bc3c31053984d9099030e084e107081e",
+      "bytes": 3122
+    },
+    {
+      "source": "receipt.json",
+      "path": "docs/video-production/audio/receipt.json",
+      "sha256": "578c0e08a7ae7b7ab61cdf7b6a2c0f0edfae29254c3fac994aff5b04def6a69d",
+      "bytes": 8512
+    }
+  ],
+  "scope": "Existing read-only method module; no new audio generation, reference copies, human listening or publication"
+}

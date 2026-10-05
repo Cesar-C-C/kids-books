@@ -1,0 +1,223 @@
+{
+  "receiptVersion": 1,
+  "status": "local-read-only-method-handoff",
+  "createdLocalDate": "2026-10-04",
+  "sourceRoot": "C:/Users/Cesar/Documents/Codex/2026-10-03/new-chat-2",
+  "sourceConversationId": "01a10132-c939-74b0-be26-1d0a78d6bd0c",
+  "planningConversationId": "01a0a5be-d32f-7621-a0b4-ccf01639caef",
+  "subjectVariant": "work/ropeway-3d-v5",
+  "explicitlyNotVariant": "animation-content-v5",
+  "projectFactsFromSource": {
+    "durationSeconds": 597.5,
+    "width": 1920,
+    "height": 1080,
+    "frameRate": 24,
+    "bilingualCaptionGroups": 104,
+    "narrationMasters": ["work/ropeway-3d-v5/narration-zh.m4a", "work/ropeway-3d-v5/narration-en.m4a"]
+  },
+  "auditedInputRawSha256": [
+    {
+      "path": "work/ropeway-3d-v5/README.md",
+      "bytes": 3863,
+      "sha256": "52e8d9cb64ee75ddcff2405439d4d61d71515f9e0b535529a2ff3c540faeb9e6"
+    },
+    {
+      "path": "work/ropeway-3d-v5/speech-revisions.json",
+      "bytes": 1672,
+      "sha256": "315996b25ade51032509aa45cdd900581c450e894c2e9c992fb47cc72baa54c5"
+    },
+    {
+      "path": "work/ropeway-3d-v5/zh-reference-provenance.json",
+      "bytes": 455,
+      "sha256": "2fedc2ec989e3190cbf93ccf4767dff69d77d464f80b102696241a1e9ada70ee"
+    },
+    {
+      "path": "work/ropeway-3d-v5/tts_bootstrap.py",
+      "bytes": 1399,
+      "sha256": "c339189be0f019bde483972846193f18798cf696e579663e1188811717710e2a"
+    },
+    {
+      "path": "work/ropeway-3d-v5/synthesize_revisions.py",
+      "bytes": 1826,
+      "sha256": "3922004c8595bb2a440d07b885c48899b3fd68e6a98f1bda968f8d3011fb3716"
+    },
+    {
+      "path": "work/ropeway-3d-v5/refine_compound.py",
+      "bytes": 1447,
+      "sha256": "5755f0b1d2a02b5cbb198fabf3547ebff9311f90118fd84202e3dd3c64628d25"
+    },
+    {
+      "path": "work/ropeway-3d-v5/patch_audio.py",
+      "bytes": 5223,
+      "sha256": "35a4dbf71eea6fb0898213fb1a9cc6ce382935d62fe638a49a18bdd522a2d990"
+    },
+    {
+      "path": "work/ropeway-3d-v5/audio-patch-qa.json",
+      "bytes": 3515,
+      "sha256": "cf2c79eb81844f59c1898d8b40da281a881643c512cde342fcee1aff39602eac"
+    },
+    {
+      "path": "work/ropeway-3d-v5/new-audio-qa.json",
+      "bytes": 3164,
+      "sha256": "8e0de19ca15c4b3abdd61ffb086041bb56ced5cebd0a2ca72901daf007b77720"
+    },
+    {
+      "path": "work/ropeway-3d-v5/speech-asr-final.json",
+      "bytes": 7749,
+      "sha256": "cacc2803c1bf532b308d02a77fd9aa1371a737bc554167d38c454d98c71c9ac8"
+    },
+    {
+      "path": "work/ropeway-explorer/README.md",
+      "bytes": 1869,
+      "sha256": "49fd4c4c3b1029717092c7b5be59af0ca02dadb4fea2a91375c060a99a0c3fc2"
+    }
+  ],
+  "supportingEvidenceRawSha256": [
+    {
+      "path": "work/synthesize_batch.py",
+      "bytes": 3754,
+      "sha256": "252a5d80c6fb66e0022e56ffbea9211407257bd37dc13fd79c5f0929402df680"
+    },
+    {
+      "path": "work/ropeway-3d-v2/synthesize_new.py",
+      "bytes": 2269,
+      "sha256": "4a645a954d1dcfba802329d87f8879512869b094a98ed945ecfa00c73318ddcb"
+    },
+    {
+      "path": "work/tts-revisions.log",
+      "bytes": 3923,
+      "sha256": "0725877fd4efa4f28170ee5b333333c197c52c664783252d9d99c427f996573d"
+    },
+    {
+      "path": "work/audio-qa.json",
+      "bytes": 36682,
+      "sha256": "50647369bca31efd11149ee0231d2b317d7a176fe4a926612ffd61ef3acceb9f"
+    },
+    {
+      "path": "work/ropeway-explorer/script.json",
+      "bytes": 38154,
+      "sha256": "083c602bb69dc4bdc5f2df4d30e8841aa4285004aebfb5b04902ca4dcbfce33b"
+    },
+    {
+      "path": "work/ropeway-3d-v5/full-timing.json",
+      "bytes": 59241,
+      "sha256": "f004364571bf5d6b6e0d6ad747ef0371dafc9a89304e93ce67f728b36c399733"
+    },
+    {
+      "path": "work/ropeway-3d-v5/context-candidate.json",
+      "bytes": 972,
+      "sha256": "556ade7b109d35c27aecc75b02a59dc9342d162c523e00199adfe62eedd207cf"
+    },
+    {
+      "path": "outputs/ropeway-3d-v5-manifest.json",
+      "bytes": 1615,
+      "sha256": "8bb6ec844a9743a41ff7858d174393bee714b3b0ec49c7a036ce6678cd67d71a"
+    },
+    {
+      "path": "outputs/ropeway-3d-v5-bilingual.srt",
+      "bytes": 18440,
+      "sha256": "0f826a3ec8b50004b4a96d75a918288feab020049032d79b47e953aa4fa0fafa"
+    }
+  ],
+  "subjectArtifactRawSha256": [
+    {
+      "path": "outputs/ropeway-3d-v5.mp4",
+      "bytes": 126344341,
+      "sha256": "d34595e931844ee44622e16177b57dc659919ed61095d1de37cc8df9cd1964d5"
+    },
+    {
+      "path": "work/ropeway-3d-v5/narration-zh.m4a",
+      "bytes": 6963011,
+      "sha256": "165cf06d7bce05b9cc2fb3c470f23d93691d471d6b4c58b83d24d0ee68353c52"
+    },
+    {
+      "path": "work/ropeway-3d-v5/narration-en.m4a",
+      "bytes": 7257896,
+      "sha256": "311e03421db4ecafdf7fd93dda2a7344fe4a8a9ab49beef4c76982ce437609d6"
+    }
+  ],
+  "referenceSummary": [
+    {
+      "language": "en",
+      "api": "inference_cross_lingual",
+      "referenceAsset": "C:/ProgramData/FunCosyVoice3/CosyVoice/asset/cross_lingual_prompt.wav",
+      "referenceSha256": "353a7715c2e4811f4045658b29d1ce67ecad5120e09de10ce890f1763aab486c",
+      "transcript": null,
+      "permissionStatus": "unverified"
+    },
+    {
+      "language": "zh",
+      "api": "inference_zero_shot",
+      "referenceAsset": "C:/ProgramData/FunCosyVoice3/CosyVoice/asset/zero_shot_prompt.wav",
+      "referenceSha256": "c7b31d6dbe7cc6a716dded00550db5b50940bf209e424e4ad207b12e657c8ff6",
+      "transcript": "希望你以后能够做的比我还好呦。",
+      "permissionStatus": "unverified"
+    }
+  ],
+  "reviewFindings": {
+    "v5Identity": "Confirmed as work/ropeway-3d-v5; not animation-content-v5.",
+    "corrections": ["s12b0", "s31b1", "s31b2"],
+    "contextPrefixCase": {
+      "trackId": "s31b1",
+      "firstDirectCandidateSha256": "bfb27795254e1b56110e97921ed792918442b66e5863795b8a512f4b645bf39e",
+      "contextCandidateSha256": "5ec730a8cf470f40cbb85671c6a0f7e0ecde1fb6038637b85501c1014b31530d",
+      "removedPrefix": "我们",
+      "measuredCropSeconds": 0.51,
+      "preparedSentenceSha256": "4bf9d5a2459b7f148ccecb392e1e219ab7015258d80db398728cf63f980e8346",
+      "machineAsrContainsPrefix": false,
+      "reusableRule": false
+    },
+    "humanListening": "No new human listening was performed; the source README says no new human listening was done for this v5 QA.",
+    "asr": "Existing machine ASR only; homophone substitutions are present and are not a naturalness verdict.",
+    "permissions": "Repository software license and example do not establish speaker consent or recording/commercial-output rights."
+  },
+  "officialSourcesChecked": [
+    {
+      "url": "https://github.com/FunAudioLLM/CosyVoice/blob/main/example.py",
+      "currentRedirect": "https://github.com/QwenAudio/CosyVoice/blob/main/example.py",
+      "checkedDate": "2026-10-04",
+      "finding": "Current official example shows zero-shot WAV plus exact reference transcript and a separate cross-lingual call without a reference-transcript argument."
+    },
+    {
+      "url": "https://github.com/FunAudioLLM/CosyVoice/blob/main/LICENSE",
+      "currentRedirect": "https://github.com/QwenAudio/CosyVoice/blob/main/LICENSE",
+      "checkedDate": "2026-10-04",
+      "finding": "Current repository LICENSE is Apache-2.0; this is not evidence of rights for an individual reference recording or voice."
+    }
+  ],
+  "reviewLimits": {
+    "sourceTreeWritten": false,
+    "existingAudioGeneratedOrEdited": false,
+    "videoDecodedOrPlayed": false,
+    "newAsrRun": false,
+    "newHumanListening": false,
+    "referenceWavCopied": false,
+    "runtimeInstalledOrModified": false,
+    "commercialOrSpeakerRightsCleared": false,
+    "commitPushPullRequestPublishOrVideoExport": false,
+    "notes": [
+      "Only a local method handoff was created in the audio-owned worktree.",
+      "Historical versions, PyTorch build, and English seed were not fully pinned by the source reports; missing values remain unrecorded.",
+      "SRT display windows are read from the shipped SRT; actual replacement audio windows come separately from audio-patch-qa.json."
+    ]
+  },
+  "handoffFiles": [
+    {
+      "path": "audio-method.md",
+      "sha256": "acfdb8518e773d1e6aea3ff1062d45ddd96a5941e2d3fb62cca7ff77b8d6697a"
+    },
+    {
+      "path": "narration-record.schema.json",
+      "sha256": "39d3b72665ba2ee3fb8abca7d40c39babc5743f52ffec8d3b80f33ddf64580ac"
+    },
+    {
+      "path": "narration-record.template.json",
+      "sha256": "44d51f0d02222748fc90871ebd390b07bc3c31053984d9099030e084e107081e"
+    },
+    {
+      "path": "receipt.json",
+      "sha256": null,
+      "note": "This receipt does not self-embed its hash."
+    }
+  ]
+}

@@ -30,7 +30,7 @@
 
 // Manifest URL is regenerated with the content fingerprint: old installed clients
 // may still register with updateViaCache=imports, so an unversioned import stays stale.
-importScripts('./pwa-assets.js?v=fa785ef7c7aa');
+importScripts('./pwa-assets.js?v=8ebafe9b487f');
 
 var KB = self.KB_ASSETS || { version: 'dev', shell: [], books: {} };
 var VERSION = KB.version || 'dev';
@@ -41,6 +41,27 @@ var OFFLINE_PAGE = 'offline.html';
 
 var ROOT_URL = new URL('./', self.location);
 function abs(p) { return new URL(p, ROOT_URL).href; }
+// Only the exact user-approved retired short paths; query variants are retired
+// together. No book/lab paths, CacheStorage wipe, or localStorage changes.
+var RETIRED_PATHS = {};
+Object.keys(KB.retiredAnimations || {}).forEach(function (id) {
+  (KB.retiredAnimations[id].paths || []).forEach(function (p) { RETIRED_PATHS[p] = true; });
+});
+function isRetiredAnimationUrl(url) {
+  if (url.origin !== ROOT_URL.origin || url.pathname.indexOf(ROOT_URL.pathname) !== 0) return false;
+  var p = url.pathname.slice(ROOT_URL.pathname.length);
+  if (RETIRED_PATHS[p + '/index.html']) p += '/index.html';
+  else if (p.slice(-1) === '/') p += 'index.html';
+  return RETIRED_PATHS[p] === true;
+}
+async function pruneRetiredAnimationAssets() {
+  var names = await caches.keys();
+  for (var i = 0; i < names.length; i++) {
+    if (names[i] !== ASSET_CACHE && names[i].indexOf('kb-shell-') !== 0) continue;
+    var cache = await caches.open(names[i]), keys = await cache.keys();
+    for (var j = 0; j < keys.length; j++) if (isRetiredAnimationUrl(new URL(keys[j].url))) await cache.delete(keys[j]);
+  }
+}
 function isSameOrigin(url) { return url.origin === self.location.origin; }
 function isCacheableAsset(pathname) {
   return /\.(webp|png|jpe?g|gif|svg|avif|mp3|m4a|ogg|woff2?|ttf|ico)$/i.test(pathname);
@@ -84,6 +105,7 @@ self.addEventListener('install', function (event) {
 self.addEventListener('activate', function (event) {
   event.waitUntil((async function () {
     var names = await caches.keys();
+    await pruneRetiredAnimationAssets();
     await Promise.all(names.map(function (n) {
       if (n.indexOf('kb-shell-') === 0 && n !== SHELL_CACHE) return caches.delete(n);
       return null;
@@ -106,6 +128,21 @@ self.addEventListener('message', function (event) {
   }
   if (msg.type === 'KB_LAB_STATUS') {
     event.waitUntil(labStatus(msg.labId).then(function (s) { reply(port, event, s); }));
+    return;
+  }
+  if (msg.type === 'KB_ANIMATION_STATUS') {
+    event.waitUntil(animationStatus(msg.animationId).then(function (s) { reply(port, event, s); }).catch(function () { reply(port, event, {state: 'error'}); }));
+    return;
+  }
+  if (msg.type === 'KB_ANIMATION_DOWNLOAD') {
+    event.waitUntil(downloadAnimation(msg.animationId, port).catch(function () {
+      delete animationDownloads[msg.animationId]; reply(port, event, {type: 'KB_ANIMATION_PROGRESS', state: 'error'});
+    }));
+    return;
+  }
+  if (msg.type === 'KB_ANIMATION_CANCEL') {
+    var job = animationDownloads[msg.animationId];
+    if (job) { job.cancelled = true; if (job.abort) job.abort.abort(); }
     return;
   }
   if (msg.type === 'KB_DOWNLOAD') {
@@ -159,6 +196,79 @@ async function status() {
 function urlPath(p) {
   var u = new URL(abs(p));
   return u.pathname + u.search;
+}
+
+/* Animation packages are explicit and hash-checked. Never normalize query keys. */
+async function animationResponseMatches(response, expected) {
+  if (!response || response.status !== 200 || response.headers.has('content-range')) return false;
+  var body = await response.clone().arrayBuffer();
+  if (body.byteLength !== expected.bytes) return false;
+  var digest = await crypto.subtle.digest('SHA-256', body);
+  var hash = Array.from(new Uint8Array(digest)).map(function (n) { return n.toString(16).padStart(2, '0'); }).join('');
+  return hash === expected.sha256;
+}
+async function animationStatus(id) {
+  var pkg = KB.animations && KB.animations[id];
+  var result = { type: 'KB_ANIMATION_STATUS', animationId: id, ready: false, version: VERSION, cached: 0, total: 0, bytes: 0, complete: false };
+  if (KB.retiredAnimations && KB.retiredAnimations[id]) { await pruneRetiredAnimationAssets(); result.state = 'retired'; return result; }
+  if (!pkg) return result;
+  result.total = pkg.files.length; result.bytes = pkg.bytes; result.complete = pkg.complete;
+  var shell = await caches.open(SHELL_CACHE), assets = await caches.open(ASSET_CACHE);
+  for (var i = 0; i < pkg.files.length; i++) {
+    var url = abs(pkg.files[i]);
+    var expected = pkg.hashes[pkg.files[i]], audio = /\.mp3\?/.test(pkg.files[i]);
+    // Navigation reads the shell, so a downloaded HTML file in assets alone
+    // must not be advertised as usable offline. Core images may be shadowed by
+    // an older asset entry; check that actual serving precedence as well.
+    var response = await (audio ? assets : shell).match(url);
+    var shadow = !audio && isCacheableAsset(new URL(url).pathname) ? await assets.match(url) : null;
+    if (await animationResponseMatches(response, expected) &&
+        (!shadow || await animationResponseMatches(shadow, expected))) result.cached++;
+  }
+  result.ready = pkg.complete && result.cached === result.total;
+  return result;
+}
+var animationDownloads = {};
+async function downloadAnimation(id, port) {
+  var pkg = KB.animations && KB.animations[id];
+  var post = function (value) { if (port) { try { port.postMessage(value); } catch (e) {} } };
+  if (KB.retiredAnimations && KB.retiredAnimations[id]) { await pruneRetiredAnimationAssets(); post({type: 'KB_ANIMATION_PROGRESS', state: 'retired'}); return; }
+  if (!pkg || !pkg.complete) { post({type: 'KB_ANIMATION_PROGRESS', state: 'unavailable'}); return; }
+  if (animationDownloads[id]) { post({type: 'KB_ANIMATION_PROGRESS', state: 'busy'}); return; }
+  var job = {cancelled: false, abort: null}; animationDownloads[id] = job;
+  var assets = await caches.open(ASSET_CACHE), shell = await caches.open(SHELL_CACHE), failed = 0;
+  post({type: 'KB_ANIMATION_PROGRESS', state: 'running', done: 0, total: pkg.files.length});
+  for (var i = 0; i < pkg.files.length; i++) {
+    if (job.cancelled) break;
+    var rel = pkg.files[i], url = abs(rel), expected = pkg.hashes[rel];
+    try {
+      var audio = /\.mp3\?/.test(rel), target = audio ? assets : shell;
+      var verified = await target.match(url);
+      if (!await animationResponseMatches(verified, expected)) {
+        var secondary = await (audio ? shell : assets).match(url);
+        if (await animationResponseMatches(secondary, expected)) verified = secondary;
+        else {
+        job.abort = new AbortController();
+        var timer = setTimeout(function () { job.abort.abort(); }, 25000);
+        try {
+          var response = await fetch(new Request(url, {cache: 'no-store', signal: job.abort.signal}));
+          if (!await animationResponseMatches(response, expected)) throw new Error('Animation asset hash mismatch: ' + rel);
+          verified = response;
+        } finally { clearTimeout(timer); job.abort = null; }
+        }
+        if (!job.cancelled) await target.put(url, verified.clone());
+      }
+      if (!audio && isCacheableAsset(new URL(url).pathname) && !job.cancelled) {
+        var shadow = await assets.match(url);
+        if (shadow && !await animationResponseMatches(shadow, expected)) await assets.put(url, verified.clone());
+      }
+    } catch (e) { failed++; }
+    post({type: 'KB_ANIMATION_PROGRESS', state: 'running', done: i+1, total: pkg.files.length, failed: failed});
+  }
+  delete animationDownloads[id];
+  if (job.cancelled) { post({type: 'KB_ANIMATION_PROGRESS', state: 'cancelled'}); return; }
+  var status = await animationStatus(id);
+  post({type: 'KB_ANIMATION_PROGRESS', state: failed || !status.ready ? 'error' : 'done', failed: failed, status: status});
 }
 
 /* A lab is offline-ready only when every required file is in this worker's
@@ -287,6 +397,17 @@ self.addEventListener('fetch', function (event) {
   }
   /* Service Worker 自身与清单：永远走网络，避免自锁 */
   if (url.pathname.indexOf('/sw.js') >= 0 || url.pathname.indexOf('/pwa-assets.js') >= 0) return;
+
+  // Native full films use explicit standalone downloads for offline viewing.
+  // Keep large film media/downloads (and production bundles) out of both caches.
+  // Existing narration exact-query, Range, Vary and 200-only rules are unchanged.
+  var rel = url.pathname.slice(ROOT_URL.pathname.length);
+  if (isRetiredAnimationUrl(url)) { event.respondWith(Promise.resolve(new Response('This short film has been retired.', {status: 410, headers: {'cache-control': 'no-store', 'content-type': 'text/plain; charset=utf-8'}}))); return; }
+  if (rel.indexOf('video-production/') === 0 ||
+      Object.keys(KB.films || {}).some(function (id) {
+        return rel.indexOf('animations/' + id + '/media/') === 0 ||
+               rel.indexOf('animations/' + id + '/downloads/') === 0;
+      })) return;
 
   if (req.mode === 'navigate') { event.respondWith(navigate(req)); return; }
   event.respondWith(serve(req, url));
